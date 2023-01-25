@@ -1,0 +1,48 @@
+site_name: Ultimate Starter Kit
+site_url: https://hfjooste.github.io/UltimateStarterKit
+repo_url: https://github.com/hfjooste/UltimateStarterKit
+repo_name: hfjooste/UltimateStarterKit
+extra_css: [styles.css]
+extra:
+  social:
+    - name: Mastodon
+      icon: fontawesome/brands/mastodon
+      link: https://mastodon.social/@hfjooste
+    - name: Twitter
+      icon: fontawesome/brands/twitter 
+      link: https://twitter.com/HenryJoosteDev
+    - name: GitHub
+      icon: fontawesome/brands/github
+      link: https://github.com/hfjooste
+    - name: Email
+      icon: fontawesome/solid/envelope
+      link: mailto:henryjooste95@gmail.com
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.top
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: red
+      accent: pink
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: red
+      accent: pink
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+nav:
+  - Getting Started: index.md
+  - Logger: logger.md
+  - Save Data: savedata.md
+  - Currency:
+    - Currency Overview: currency.md
+    - Currency Manager: currencymanager.md
+    - Currency Component: currencycomponent.md
