@@ -2,6 +2,7 @@ site_name: Ultimate Starter Kit
 site_url: https://hfjooste.github.io/UltimateStarterKit
 repo_url: https://github.com/hfjooste/UltimateStarterKit
 repo_name: hfjooste/UltimateStarterKit
+remote_branch: docs
 extra_css: [styles.css]
 extra:
   social:
