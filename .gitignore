@@ -1,8 +1,8 @@
-# Documentation
-site/
-
 # Visual Studio 2015 user specific files
 .vs/
+
+# Jetbrains Rider
+.idea/
 
 # Compiled Object files
 *.slo
@@ -75,3 +75,9 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+# Documentation
+site/
+
+# Logs
+Logs/

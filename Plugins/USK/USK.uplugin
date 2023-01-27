@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0.0",
+	"FriendlyName": "Ultimate Starter Kit",
+	"Description": "The Ultimate Starter Kit plugin to speed up development of Unreal Engine 5 games",
+	"Category": "Other",
+	"CreatedBy": "Henry Jooste",
+	"CreatedByURL": "https://mastodon.gamedev.place/@hfjooste",
+	"DocsURL": "https://hfjooste.github.io/UltimateStarterKit",
+	"MarketplaceURL": "",
+	"SupportURL": "https://github.com/hfjooste/UltimateStarterKit",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "USK",
+			"Type": "Runtime",
+			"LoadingPhase": "PreLoadingScreen"
+		}
+	]
+}

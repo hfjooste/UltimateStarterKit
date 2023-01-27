@@ -1,5 +1,5 @@
 ## Introduction
-The Logger Plugin for Unreal Engine allows you to easily log info to file and via on-screen messages
+A system used to easily log info to file and via on-screen messages
 
 ## Log Levels
 This plugin supports the following log types:
