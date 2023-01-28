@@ -22,6 +22,7 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><strong>Logger</strong>: A system used to easily log info to file and via on-screen messages</li>
     <li><strong>Save data management</strong>: A system used to easily save/load game data with support for multiple save slots</li>
     <li><strong>Currency</strong>: A system that is used to easily manage different types of currency</li>
+    <li><strong>Audio</strong>: A system used to manage the basic properties of audio files</li>
 </ul>
 
 ## Documentation
@@ -32,7 +33,6 @@ The Ultimate Starter Kit plugin comes with the following features:
 
 ## Roadmap
 I'm planning on expanding this plugin and adding a bunch of new features. This includes:
-- Basic preconfigured audio classes
 - Player stats system with save data integration
 - Input indicators with support for different controllers/platforms
 - Settings system with save data integration

@@ -4,6 +4,12 @@ repo_url: https://github.com/hfjooste/UltimateStarterKit
 repo_name: hfjooste/UltimateStarterKit
 remote_branch: docs
 extra_css: [styles.css]
+plugins:
+  - with-pdf:
+      author: Henry Jooste
+      cover: true
+      cover_title: Ultimate Starter Kit
+      cover_subtitle: Documentation
 extra:
   social:
     - name: Mastodon
@@ -47,3 +53,7 @@ nav:
     - Currency Overview: currency.md
     - Currency Manager: currencymanager.md
     - Currency Component: currencycomponent.md
+  - Audio:
+    - Audio Overview: audio.md
+    - Audio Utils: audioutils.md
+    - Music Player: music.md

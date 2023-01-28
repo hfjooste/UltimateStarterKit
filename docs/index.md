@@ -13,10 +13,19 @@ The Ultimate Starter Kit plugin is only available for Unreal Engine 5.0.3 and ne
     <li>Restart Unreal Engine</li>
 </ol>
 
+## Plugin Content
+The Ultimate Starter Kit plugin includes content that can be used in your Blueprints. You might need to enable this first:
+<ol>
+    <li>Open the <code>Content Browser</code></li>
+    <li>Click on the settings button</li>
+    <li>Enable the <code>Show Plugin Content</code> setting</li>
+</ol>
+
 ## Features
 The Ultimate Starter Kit plugin comes with the following features:
 <ul>
     <li><a href="logger">Logger</a>: A system used to easily log info to file and via on-screen messages</li>
     <li><a href="savedata">Save data management</a>: A system used to easily save/load game data with support for multiple save slots</li>
     <li><a href="currency">Currency</a>: A system that is used to easily manage different types of currency</li>
+    <li><a href="audio">Audio</a>: A system used to manage the basic properties of audio files</li>
 </ul>

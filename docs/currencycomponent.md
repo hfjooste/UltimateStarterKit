@@ -93,6 +93,7 @@ PublicDependencyModuleNames.Add("USK");
 The currency system can now be used in any of your C++ files:
 ```c++
 #include "USK/Currency/CurrencyManager.h"
+#include "USK/Currency/CurrencyManagerComponent.h"
 
 void ATestActor::Test()
 {
