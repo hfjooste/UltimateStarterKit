@@ -11,6 +11,8 @@ The currency system relies on other components of this plugin to work:
 ## Stat Component
 Before you can manage stats, you need to add a <code>Stat Component</code> to the actor/character containing the stat. The stat can be configured by changing the properties on the <code>Stat Component</code>
 
+<i><strong>NB:</strong> Adding the <code>Save Manager</code> to the level is required if you want the currency system to automatically save/load the currency values</i>
+
 ## API Reference
 ### Properties
 <table>
