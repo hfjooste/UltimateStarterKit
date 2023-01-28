@@ -57,3 +57,4 @@ nav:
     - Audio Overview: audio.md
     - Audio Utils: audioutils.md
     - Music Player: music.md
+  - Stats: stats.md

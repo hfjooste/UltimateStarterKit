@@ -19,4 +19,10 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit")
 	TMap<FString, int> Currency;
+
+	/**
+	 * @brief A map of all the stats that is currently saved
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit")
+	TMap<FString, float> Stats;
 };
