@@ -14,9 +14,8 @@ class USK_API UStatsComponent : public UActorComponent
 {
 	GENERATED_BODY()
 	
-	DECLARE_DYNAMIC_MULTICAST_SPARSE_DELEGATE(FValueZeroEvent, UStatsComponent, OnValueZero);
-	DECLARE_DYNAMIC_MULTICAST_SPARSE_DELEGATE_TwoParams(FValueUpdatedEvent, UStatsComponent, OnValueUpdated,
-		float, Value, float, ValuePercentage);
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FValueZeroEvent);
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FValueUpdatedEvent, float, Value, float, ValuePercentage);
 
 public:
 	/**

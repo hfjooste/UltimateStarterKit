@@ -24,7 +24,7 @@ void UStatsComponent::BeginPlay()
 	LoadValue();
 	if (SaveManager != nullptr)
 	{
-		SaveManager->AddOnDataLoadedEventBinding(this, &UStatsComponent::LoadValue);
+		SaveManager->OnDataLoadedEvent.AddDynamic(this, &UStatsComponent::LoadValue);
 	}	
 }
 

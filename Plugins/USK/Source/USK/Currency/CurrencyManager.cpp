@@ -28,7 +28,7 @@ void ACurrencyManager::BeginPlay()
 	Initialize();
 	if (SaveManager != nullptr)
 	{
-		SaveManager->AddOnDataLoadedEventBinding(this, &ACurrencyManager::Initialize);
+		SaveManager->OnDataLoadedEvent.AddDynamic(this, &ACurrencyManager::Initialize);
 	}
 }
 

@@ -68,7 +68,7 @@ void ASaveManager::LoadData(const int Index)
 				FString("Creating new save data in slot ").Append(FString::FromInt(Index)));
 		USaveGame* NewData = UGameplayStatics::CreateSaveGameObject(SaveGameClass);
 		CurrentSaveGame = dynamic_cast<UUSKSaveGame*>(NewData);
-		OnDataLoadedEvent.ExecuteIfBound();
+		OnDataLoadedEvent.Broadcast();
 		return;
 	}
 
@@ -76,7 +76,7 @@ void ASaveManager::LoadData(const int Index)
 				FString("Loading data from slot ").Append(FString::FromInt(Index)));
 	USaveGame* LoadedData = UGameplayStatics::LoadGameFromSlot(GetSaveSlotName(Index), 0); 
 	CurrentSaveGame = dynamic_cast<UUSKSaveGame*>(LoadedData);
-	OnDataLoadedEvent.ExecuteIfBound();
+	OnDataLoadedEvent.Broadcast();
 }
 
 /**

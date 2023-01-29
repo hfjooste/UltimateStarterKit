@@ -6,15 +6,15 @@
 #include "GameFramework/Actor.h"
 #include "SaveManager.generated.h"
 
-DECLARE_DELEGATE(FSaveManagerOnDataLoadedDelegate);
-
 /**
  * @brief Responsible for saving/loading game data
  */
 UCLASS()
 class USK_API ASaveManager final : public AActor
-{
+{	
 	GENERATED_BODY()
+
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSaveManagerOnDataLoadedDelegate);
 	
 public:
 	/**
@@ -52,20 +52,12 @@ public:
 	bool IsSaveSlotUsed(int Index);
 
 	/**
-	 * @brief Add a binding to the OnDataLoaded event
-	 * @tparam T The class type that is adding the bindings
-	 * @param Object The object that is adding the bindings
-	 * @param OnDataLoadedFunction The function called after the data is loaded
-	 */
-	template <class T>
-	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Save Manager")
-	void AddOnDataLoadedEventBinding(T* Object, void(T::*OnDataLoadedFunction)());
-
-private:
-	/**
 	 * @brief Event used to notify other classes when the save data is loaded
 	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Stats|Events")
 	FSaveManagerOnDataLoadedDelegate OnDataLoadedEvent;
+
+private:
 	
 	/**
 	 * @brief A reference to the loaded save data
@@ -91,15 +83,3 @@ private:
 	 */
 	FString GetSaveSlotName(int Index);
 };
-
-/**
- * @brief Add a binding to the OnDataLoaded event
- * @tparam T The class type that is adding the bindings
- * @param Object The object that is adding the bindings
- * @param OnDataLoadedFunction The function called after the data is loaded
- */
-template <class T>
-FORCEINLINE void ASaveManager::AddOnDataLoadedEventBinding(T* Object, void(T::*OnDataLoadedFunction)())
-{
-	OnDataLoadedEvent.BindUObject(Object, OnDataLoadedFunction);
-}
