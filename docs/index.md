@@ -28,5 +28,5 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><a href="savedata">Save data management</a>: A system used to easily save/load game data with support for multiple save slots</li>
     <li><a href="currency">Currency</a>: A system that is used to easily manage different types of currency</li>
     <li><a href="audio">Audio</a>: A system used to manage the basic properties of audio files</li>
-    <li><a href="stats">Stats</a>: A system used to easily manage character stats</li>
+    <li><a href="stats">Stats</a>: A system used to easily manage character stats with an optional regenerate ability</li>
 </ul>
