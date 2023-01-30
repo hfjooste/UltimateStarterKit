@@ -1,31 +1,14 @@
 ﻿// Created by Henry Jooste
 
 #include "USK/Stats/StatsComponent.h"
-
-#include "USK/Data/SaveManager.h"
 #include "USK/Logger/Log.h"
 
 /**
- * @brief Create a new instance of the stats component
+ * @brief Create a new UStatsComponent instance
  */
 UStatsComponent::UStatsComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
-}
-
-/**
- * @brief Begins Play for the component
- */
-void UStatsComponent::BeginPlay()
-{
-	Super::BeginPlay();
-	ULog::Info("StatsComponent::BeginPlay", "Initializing Stats component");
-
-	LoadValue();
-	if (SaveManager != nullptr)
-	{
-		SaveManager->OnDataLoadedEvent.AddDynamic(this, &UStatsComponent::LoadValue);
-	}	
 }
 
 /**
@@ -37,131 +20,175 @@ void UStatsComponent::BeginPlay()
 void UStatsComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	if (Regenerate <= 0.0f || Value >= MaxValue)
+
+	TArray<FName> Keys;
+	Stats.GetKeys(Keys);
+	for (FName Key : Keys)
 	{
+		if (Stats[Key].RegenerateAmount <= 0.0f || Stats[Key].Value >= Stats[Key].MaxValue)
+		{
+			continue;
+		}
+
+		if (Stats[Key].CurrentRegenerateDelay > 0.0f)
+		{
+			ULog::Info("StatsComponent::TickComponent",
+				FString("Reducing regenerate delay for ").Append(Key.ToString()));
+			Stats[Key].CurrentRegenerateDelay -= DeltaTime;
+			continue;
+		}
+
+		Add(Key, Stats[Key].RegenerateAmount * DeltaTime);
+	}
+}
+
+/**
+ * @brief Load the data managed by this component
+ */
+void UStatsComponent::LoadData()
+{
+	if (GameInstance == nullptr)
+	{
+		ULog::Error("StatsComponent::LoadValues", "GameInstance is nullptr");
 		return;
 	}
 
-	if (CurrentRegenerateDelay > 0.0f)
-	{
-		ULog::Info("StatsComponent::TickComponent", "Reducing regenerate delay");
-		CurrentRegenerateDelay -= DeltaTime;
-		return;
-	}
-
-	ULog::Info("StatsComponent::TickComponent", "Regenerating value");
-	UpdateValue(Regenerate * DeltaTime);
-}
-
-/**
- * @brief Get the current stat value
- * @return The current stat value
- */
-float UStatsComponent::GetValue() const
-{
-	return Value;
-}
-
-/**
- * @brief Get the current stat value as a percentage of the max value
- * @return The current stat value as a percentage of the max value
- */
-float UStatsComponent::GetValuePercentage() const
-{
-	return Value / MaxValue;
-}
-
-/**
- * @brief Update the current stat value
- * @param Amount The amount to add to the stat value
- * @return The new stat value
- */
-float UStatsComponent::UpdateValue(const float Amount)
-{
-	const float PreviousValue = Value;
-	Value = FMath::Clamp(Value + Amount, 0.0f, MaxValue);
-	OnValueUpdated.Broadcast(Value, GetValuePercentage());
-	SaveValue();
-	
-	ULog::Info("StatsComponent::UpdateValue", FString("Value updated: ").Append(FString::FromInt(Value)));
-	if (Regenerate > 0.0f && PreviousValue > Value)
-	{
-		ULog::Info("StatsComponent::UpdateValue", "Resetting regenerate delay");
-		CurrentRegenerateDelay = RegenerateDelay;
-	}
-
-	if (Value == 0.0f)
-	{
-		ULog::Info("StatsComponent::UpdateValue", "Value is zero");
-		OnValueZero.Broadcast();
-	}
-	
-	return Value;
-}
-
-/**
- * @brief Load the saved value for the stat using the save manager
- */
-void UStatsComponent::LoadValue()
-{
-	if (SaveManager == nullptr)
-	{
-		ULog::Info("StatsComponent::LoadValue",
-			FString("Not loading value for ").Append(ID).Append(". Save manager not set"));
-		UpdateValue(InitialValue);
-		return;
-	}
-
-	ULog::Info("StatsComponent::LoadValue", FString("Loading value for ").Append(ID));
-	UUSKSaveGame* SaveGame = SaveManager->GetSaveData();
+	UUSKSaveGame* SaveGame = GameInstance->GetSaveData();
 	if (SaveGame == nullptr)
 	{
-		ULog::Error("StatsComponent::LoadValue",
-			FString("Failed to load value for ").Append(ID).Append(". Save game is nullptr"));
-		UpdateValue(InitialValue);
+		ULog::Error("StatsComponent::LoadValues", "SaveGame is nullptr");
 		return;
 	}
 
-	if (SaveGame->Stats.Contains(ID))
+	TArray<FName> StatsKeys;
+	Stats.GetKeys(StatsKeys);
+	for (FName Key : StatsKeys)
 	{
-		UpdateValue(SaveGame->Stats[ID]);
-		return;
-	}
+		if (!Stats[Key].AutoSave || !SaveGame->Stats.Contains(Key))
+		{
+			ULog::Info("StatsComponent::LoadValues",
+				FString("Resetting ").Append(Key.ToString()).Append(" to initial value"));
+			Stats[Key].Value = Stats[Key].InitialValue;
+			continue;
+		}
 
-	ULog::Info("StatsComponent::LoadValue", FString("No saved value for ").Append(ID));
-	UpdateValue(InitialValue);
+		ULog::Info("StatsComponent::LoadValues",
+				FString("Loading saved value for ").Append(Key.ToString()));
+		Stats[Key].Value = SaveGame->Stats[Key];
+	}
 }
 
 /**
- * @brief Save the stat value using the save manager
+ * @brief Get the value of a stat
+ * @param StatName The name of the stat
+ * @return The current value of the stat
  */
-void UStatsComponent::SaveValue()
+float UStatsComponent::GetValue(const FName StatName) const
 {
-	if (SaveManager == nullptr)
+	if (!Stats.Contains(StatName))
+	{
+		ULog::Error("StatsComponent::GetAmount", "Stat not added to map");
+		return 0;
+	}
+
+	return Stats[StatName].Value;
+}
+
+/**
+ * @brief Get the value of a stat as a percentage of to the max value
+ * @param StatName The name of the stat
+ * @return The value of a stat as a percentage of to the max value
+ */
+float UStatsComponent::GetValuePercentage(const FName StatName) const
+{
+	if (!Stats.Contains(StatName))
+	{
+		ULog::Error("StatsComponent::GetValuePercentage", "Stat not added to map");
+		return 0;
+	}
+
+	return Stats[StatName].Value / Stats[StatName].MaxValue;
+}
+
+/**
+ * @brief Add a value to the stat
+ * @param StatName The name of the stat
+ * @param Amount The amount to add
+ * @return The new value of the stat
+ */
+float UStatsComponent::Add(const FName StatName, const float Amount)
+{
+	if (!Stats.Contains(StatName))
+	{
+		ULog::Error("StatsComponent::Add", "Stat not added to map");
+		return 0.0f;
+	}
+
+	Stats[StatName].Value = FMath::Clamp(Stats[StatName].Value + Amount, 0.0f, Stats[StatName].MaxValue);	
+	const float NewValue = Stats[StatName].Value;
+	OnValueUpdated.Broadcast(StatName, NewValue, NewValue / Stats[StatName].MaxValue);
+
+	if (NewValue == 0.0f)
+	{
+		ULog::Info("StatsComponent::Add", FString("Value is zero for ").Append(StatName.ToString()));
+		OnValueZero.Broadcast(StatName);
+	}
+
+	if (Amount < 0.0f)
+	{
+		ULog::Info("StatsComponent::Add",
+			FString("Resetting regenerate delay for ").Append(StatName.ToString()));
+		Stats[StatName].CurrentRegenerateDelay = Stats[StatName].RegenerateDelay;
+	}
+	
+	SaveValue(StatName, NewValue);
+	return NewValue;
+}
+
+/**
+ * @brief Remove a value from the stat
+ * @param StatName The name of the stat
+ * @param Amount The amount to remove
+ * @return The new value of the stat
+ */
+float UStatsComponent::Remove(const FName StatName, const float Amount)
+{
+	return Add(StatName, -Amount);
+}
+
+/**
+ * @brief Save the value of a stat
+ * @param StatName The name of the stat
+ * @param Value The current value to save
+ */
+void UStatsComponent::SaveValue(const FName StatName, const float Value) const
+{
+	if (!Stats[StatName].AutoSave)
 	{
 		return;
 	}
 
-	ULog::Info("StatsComponent::SaveValue", FString("Saving value for ").Append(ID));
-	UUSKSaveGame* SaveGame = SaveManager->GetSaveData();
+	if (GameInstance == nullptr)
+	{
+		ULog::Error("StatsComponent::SaveValue", "GameInstance is nullptr");
+		return;
+	}
+
+	UUSKSaveGame* SaveGame = GameInstance->GetSaveData();
 	if (SaveGame == nullptr)
 	{
-		ULog::Error("StatsComponent::SaveValue",
-			FString("Failed to save value for ").Append(ID).Append(". Save game is nullptr"));
+		ULog::Error("StatsComponent::SaveValue", "GameInstance is nullptr");
 		return;
 	}
 
-	if (SaveGame->Stats.Contains(ID))
+	if (SaveGame->Stats.Contains(StatName))
 	{
-		ULog::Info("StatsComponent::SaveValue", FString("Updating value for ").Append(ID));
-		SaveGame->Stats[ID] = GetValue();	
+		SaveGame->Stats[StatName] = Value;	
 	}
 	else
 	{
-		ULog::Info("StatsComponent::SaveValue", FString("Setting initial value for ").Append(ID));
-		SaveGame->Stats.Add(ID, GetValue());
+		SaveGame->Stats.Add(StatName, Value);
 	}
 
-	SaveManager->SaveData();
-	ULog::Info("StatsComponent::SaveValue", FString("Value saved for ").Append(ID));
+	GameInstance->SaveData();
 }

@@ -2,66 +2,66 @@
 
 #pragma once
 
-#include "Components/ActorComponent.h"
-#include "USK/Data/SaveManager.h"
+#include "Stat.h"
+#include "USK/Core/USKBaseComponent.h"
 #include "StatsComponent.generated.h"
 
 /**
  * @brief Actor component responsible for managing a character stat
  */
 UCLASS(ClassGroup=("UltimateStarterKit"), DisplayName="Stat Component", meta=(BlueprintSpawnableComponent))
-class USK_API UStatsComponent : public UActorComponent
+class USK_API UStatsComponent : public UUSKBaseComponent
 {
 	GENERATED_BODY()
 	
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FValueZeroEvent);
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FValueUpdatedEvent, float, Value, float, ValuePercentage);
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FValueZeroEvent, FName, Name);
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FValueUpdatedEvent, FName, Name, float, Value, float, ValuePercentage);
 
 public:
 	/**
-	 * @brief A reference to the save manager used to automatically save the value
+	 * @brief A map of all stats managed by this component
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats|Save Data")
-	ASaveManager* SaveManager;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TMap<FName, FStat> Stats;
 
 	/**
-	 * @brief The unique ID associated with the stat being managed
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats|Save Data")
-	FString ID;
-	
-	/**
-	 * @brief Create a new instance of the stats component
+	 * @brief Create a new UStatsComponent instance
 	 */
 	UStatsComponent();
-	
-	/**
-	 * @brief Get the current stat value
-	 * @return The current stat value
-	 */
-	UFUNCTION(BlueprintPure, Category = "Ultimate Starter Kit|Stats")
-	float GetValue() const;
 
 	/**
-	 * @brief Get the current stat value as a percentage of the max value
-	 * @return The current stat value as a percentage of the max value
+	 * @brief Get the value of a stat
+	 * @param StatName The name of the stat
+	 * @return The current value of the stat
 	 */
 	UFUNCTION(BlueprintPure, Category = "Ultimate Starter Kit|Stats")
-	float GetValuePercentage() const;
-	
-	/**
-	 * @brief Update the current stat value
-	 * @param Amount The amount to add to the stat value
-	 * @return The new stat value
-	 */
-	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Stats")
-	float UpdateValue(float Amount);
+	float GetValue(FName StatName) const;
 
 	/**
-	 * @brief Load the saved value for the stat using the save manager
+	 * @brief Get the value of a stat as a percentage of to the max value
+	 * @param StatName The name of the stat
+	 * @return The value of a stat as a percentage of to the max value
+	 */
+	UFUNCTION(BlueprintPure, Category = "Ultimate Starter Kit|Stats")
+	float GetValuePercentage(FName StatName) const;
+
+	/**
+	 * @brief Add a value to the stat
+	 * @param StatName The name of the stat
+	 * @param Amount The amount to add
+	 * @return The new value of the stat
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Stats")
-	void LoadValue();
+	float Add(FName StatName, float Amount);
+
+	/**
+	 * @brief Remove a value from the stat
+	 * @param StatName The name of the stat
+	 * @param Amount The amount to remove
+	 * @return The new value of the stat
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Stats")
+	float Remove(FName StatName, float Amount);
 
 	/**
 	 * @brief Event that is broadcasted every time the stat value is updated
@@ -77,35 +77,6 @@ public:
 
 protected:
 	/**
-	 * @brief The initial value of the stat 
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats");
-	float InitialValue = 100.0f;
-	
-	/**
-	 * @brief The maximum value of the stat 
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats");
-	float MaxValue = 100.0f;
-
-	/**
-	 * @brief The amount of value that is regenerated every second
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats");
-	float Regenerate;
-
-	/**
-	 * @brief The delay before the value is regenerated
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats");
-	float RegenerateDelay;
-	
-	/**
-	 * @brief Begins Play for the component
-	 */
-	virtual void BeginPlay() override;
-
-	/**
 	 * @brief Function called every frame on this ActorComponent
 	 * @param DeltaTime The time since the last tick
 	 * @param TickType The kind of tick this is, for example, are we paused, or 'simulating' in the editor
@@ -113,19 +84,16 @@ protected:
 	 */
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-private:	
 	/**
-	 * @brief The current stat value
+	 * @brief Load the data managed by this component
 	 */
-	float Value;
-
+	virtual void LoadData() override;
+	
+private:
 	/**
-	 * @brief The current delay before regenerating the value
+	 * @brief Save the value of a stat
+	 * @param StatName The name of the stat
+	 * @param Value The current value to save
 	 */
-	float CurrentRegenerateDelay;
-
-	/**
-	 * @brief Save the stat value using the save manager
-	 */
-	void SaveValue();
+	void SaveValue(const FName StatName, const float Value) const;
 };

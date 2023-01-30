@@ -6,7 +6,7 @@
 #include "USKSaveGame.generated.h"
 
 /**
- * @brief Base class for all data saved using the save manager
+ * @brief Base class for all data saved using the game instance
  */
 UCLASS()
 class USK_API UUSKSaveGame : public USaveGame
@@ -15,14 +15,14 @@ class USK_API UUSKSaveGame : public USaveGame
 	
 public:
 	/**
-	 * @brief A map of all the currencies that is handled by the currency manager
+	 * @brief A map of all the currencies that are currently saved
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit")
-	TMap<FString, int> Currency;
+	TMap<FName, int> Currency;
 
 	/**
-	 * @brief A map of all the stats that is currently saved
+	 * @brief A map of all the stats that are currently saved
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit")
-	TMap<FString, float> Stats;
+	TMap<FName, float> Stats;
 };
