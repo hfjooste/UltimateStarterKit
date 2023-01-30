@@ -19,6 +19,14 @@ AMusicPlayer::AMusicPlayer()
 void AMusicPlayer::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (!PlayOnStart)
+	{
+		AudioPlayer->Stop();
+		return;
+	}
+
+	ULog::Info("MusicPlayer::BeginPlay", "Automatically playing music");
 	AudioPlayer->Play();
 }
 

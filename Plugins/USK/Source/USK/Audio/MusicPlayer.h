@@ -19,7 +19,13 @@ class USK_API AMusicPlayer final : public AActor
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Audio", meta=(AllowPrivateAccess = "true"))
 	class UAudioComponent* AudioPlayer;
 	
-public:	
+public:
+	/**
+	 * @brief Should the music automatically play when the actor is spawned?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool PlayOnStart = true;
+	
 	/**
 	 * @brief Create a new instance of the MusicPlayer class 
 	 */
