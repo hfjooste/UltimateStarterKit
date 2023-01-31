@@ -26,7 +26,7 @@ void AMusicPlayer::BeginPlay()
 		return;
 	}
 
-	ULog::Info("MusicPlayer::BeginPlay", "Automatically playing music");
+	USK_LOG_INFO("Automatically playing music");
 	AudioPlayer->Play();
 }
 
@@ -38,13 +38,12 @@ void AMusicPlayer::SetVolume(const float Volume) const
 {
 	if (AudioPlayer == nullptr)
 	{
-		ULog::Error("MusicPlayer::SetVolume", "AudioPlayer is nullptr");
+		USK_LOG_ERROR("AudioPlayer is nullptr");
 		return;
 	}
 
-	AudioPlayer->SetVolumeMultiplier(Volume);
-	ULog::Info("MusicPlayer::SetVolume",
-		FString("Volume changed to ").Append(FString::SanitizeFloat(Volume, 5)));
+	AudioPlayer->SetVolumeMultiplier(Volume);	
+	USK_LOG_INFO(*FString::Format(TEXT("Volume changed to {0}"), { FString::SanitizeFloat(Volume, 5) }));
 }
 
 /**
@@ -54,25 +53,25 @@ void AMusicPlayer::Play() const
 {
 	if (AudioPlayer == nullptr)
 	{
-		ULog::Error("MusicPlayer::Play", "AudioPlayer is nullptr");
+		USK_LOG_ERROR("AudioPlayer is nullptr");
 		return;
 	}
 
 	if (AudioPlayer->bIsPaused)
 	{
 		AudioPlayer->SetPaused(false);
-		ULog::Info("MusicPlayer::Play", "Music resumed");
+		USK_LOG_INFO("Music resumed");
 		return;
 	}
 
 	if (!AudioPlayer->IsPlaying())
 	{
 		AudioPlayer->Play();
-		ULog::Info("MusicPlayer::Play", "Music played");
+		USK_LOG_INFO("Music played");
 		return;
 	}
 
-	ULog::Warning("MusicPlayer::Play", "Music already playing and is not paused");
+	USK_LOG_WARNING("Music already playing and is not paused");
 }
 
 /**
@@ -82,24 +81,24 @@ void AMusicPlayer::Pause() const
 {
 	if (AudioPlayer == nullptr)
 	{
-		ULog::Error("MusicPlayer::Pause", "AudioPlayer is nullptr");
+		USK_LOG_ERROR("AudioPlayer is nullptr");
 		return;
 	}
 
 	if (AudioPlayer->bIsPaused)
 	{
-		ULog::Warning("MusicPlayer::Pause", "Music already paused");
+		USK_LOG_WARNING("Music already paused");
 		return;
 	}
 
 	if (!AudioPlayer->IsPlaying())
 	{
-		ULog::Warning("MusicPlayer::Pause", "Music is not playing");
+		USK_LOG_WARNING("Music is not playing");
 		return;
 	}
 
 	AudioPlayer->SetPaused(true);
-	ULog::Info("MusicPlayer::Pause", "Music paused");
+	USK_LOG_INFO("Music paused");
 }
 /**
  * @brief Stop the music
@@ -108,16 +107,16 @@ void AMusicPlayer::Stop() const
 {
 	if (AudioPlayer == nullptr)
 	{
-		ULog::Error("MusicPlayer::Stop", "AudioPlayer is nullptr");
+		USK_LOG_ERROR("AudioPlayer is nullptr");
 		return;
 	}
 
 	if (!AudioPlayer->bIsPaused && !AudioPlayer->IsPlaying())
 	{
-		ULog::Warning("MusicPlayer::Stop", "Music already stopped");
+		USK_LOG_WARNING("Music already stopped");
 		return;
 	}
 
 	AudioPlayer->Stop();
-	ULog::Info("MusicPlayer::Stop", "Music stopped");
+	USK_LOG_INFO("Music stopped");
 }

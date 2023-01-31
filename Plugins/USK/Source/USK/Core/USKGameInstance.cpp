@@ -12,7 +12,7 @@ UUSKSaveGame* UUSKGameInstance::GetSaveData() const
 {
 	if (CurrentSaveGame == nullptr)
 	{
-		ULog::Warning("USKSaveGame::GetSaveData", "Save Game is nullptr");
+		USK_LOG_WARNING("Save Game is nullptr");
 	}
 
 	return CurrentSaveGame;
@@ -25,11 +25,11 @@ void UUSKGameInstance::SaveData()
 {
 	if (CurrentSaveGame == nullptr)
 	{
-		ULog::Error("USKSaveGame::SaveData", "Save Game is nullptr");
+		USK_LOG_ERROR("Save Game is nullptr");
 		return;
 	}
 
-	ULog::Info("USKSaveGame::SaveData", "Saving data");
+	USK_LOG_INFO("Saving data");
 	UGameplayStatics::SaveGameToSlot(CurrentSaveGame, GetSaveSlotName(CurrentSaveSlot), 0);
 }
 
@@ -38,9 +38,8 @@ void UUSKGameInstance::SaveData()
  * @param Index The index of the save slot
  */
 void UUSKGameInstance::SetCurrentSaveSlot(const int Index)
-{
-	ULog::Info("USKSaveGame::SetCurrentSaveSlot",
-		FString("Changing save slot index to ").Append(FString::FromInt(Index)));
+{	
+	USK_LOG_INFO(*FString::Format(TEXT("Changing save slot index to {0}"), { FString::FromInt(Index) }));
 	
 	CurrentSaveSlot = Index;
 	LoadData(Index);
@@ -64,16 +63,14 @@ void UUSKGameInstance::LoadData(const int Index)
 {
 	if (!IsSaveSlotUsed(Index))
 	{
-		ULog::Info("USKSaveGame::LoadData",
-				FString("Creating new save data in slot ").Append(FString::FromInt(Index)));
+		USK_LOG_INFO(*FString::Format(TEXT("Creating new save data in slot {0}"), { FString::FromInt(Index) }));
 		USaveGame* NewData = UGameplayStatics::CreateSaveGameObject(SaveGameClass);
 		CurrentSaveGame = dynamic_cast<UUSKSaveGame*>(NewData);
 		OnDataLoadedEvent.Broadcast();
 		return;
 	}
 
-	ULog::Info("USKSaveGame::LoadData",
-				FString("Loading data from slot ").Append(FString::FromInt(Index)));
+	USK_LOG_INFO(*FString::Format(TEXT("Loading data from slot {0}"), { FString::FromInt(Index) }));
 	USaveGame* LoadedData = UGameplayStatics::LoadGameFromSlot(GetSaveSlotName(Index), 0); 
 	CurrentSaveGame = dynamic_cast<UUSKSaveGame*>(LoadedData);
 	OnDataLoadedEvent.Broadcast();
@@ -84,7 +81,7 @@ void UUSKGameInstance::LoadData(const int Index)
  * @param Index The index of the save slot
  * @return The file name of the save slot at the specified index
  */
-FString UUSKGameInstance::GetSaveSlotName(const int Index)
+FString UUSKGameInstance::GetSaveSlotName(const int Index) const
 {
-	return FString("SaveData").Append(FString::FromInt(Index));
+	return *FString::Format(TEXT("SaveData{0}"), { FString::FromInt(Index) });
 }

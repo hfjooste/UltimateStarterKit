@@ -80,5 +80,5 @@ private:
 	 * @param Index The index of the save slot
 	 * @return The file name of the save slot at the specified index
 	 */
-	FString GetSaveSlotName(int Index);
+	FString GetSaveSlotName(int Index) const;
 };

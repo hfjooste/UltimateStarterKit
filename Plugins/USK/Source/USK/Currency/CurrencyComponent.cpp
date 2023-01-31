@@ -14,7 +14,7 @@ int UCurrencyComponent::GetAmount(const FName CurrencyName)
 {
 	if (!Currencies.Contains(CurrencyName))
 	{
-		ULog::Error("CurrencyComponent::GetAmount", "Currency not added to map");
+		USK_LOG_ERROR("Currency not added to map");
 		return 0;
 	}
 
@@ -31,7 +31,7 @@ int UCurrencyComponent::Add(const FName CurrencyName, const int Amount)
 {
 	if (!Currencies.Contains(CurrencyName))
 	{
-		ULog::Error("CurrencyComponent::Add", "Currency not added to map");
+		USK_LOG_ERROR("Currency not added to map");
 		return 0;
 	}
 
@@ -59,14 +59,14 @@ void UCurrencyComponent::LoadData()
 {	
 	if (GameInstance == nullptr)
 	{
-		ULog::Error("CurrencyComponent::LoadValues", "GameInstance is nullptr");
+		USK_LOG_ERROR("GameInstance is nullptr");
 		return;
 	}
 
 	UUSKSaveGame* SaveGame = GameInstance->GetSaveData();
 	if (SaveGame == nullptr)
 	{
-		ULog::Error("CurrencyComponent::LoadValues", "SaveGame is nullptr");
+		USK_LOG_ERROR("SaveGame is nullptr");
 		return;
 	}
 
@@ -76,14 +76,12 @@ void UCurrencyComponent::LoadData()
 	{
 		if (!Currencies[Key].AutoSave || !SaveGame->Currency.Contains(Key))
 		{
-			ULog::Info("CurrencyComponent::LoadValues",
-				FString("Resetting ").Append(Key.ToString()).Append(" to initial value"));
+			USK_LOG_INFO(*FString::Format(TEXT("Resetting {0} to initial value"), { Key.ToString() }));
 			Currencies[Key].Amount = Currencies[Key].InitialAmount;
 			continue;
 		}
 
-		ULog::Info("CurrencyComponent::LoadValues",
-				FString("Loading saved value for ").Append(Key.ToString()));
+		USK_LOG_INFO(*FString::Format(TEXT("Loading saved value for {0}"), { Key.ToString() }));
 		Currencies[Key].Amount = SaveGame->Currency[Key];
 	}
 }
@@ -102,14 +100,14 @@ void UCurrencyComponent::SaveValue(const FName CurrencyName, const int Amount) c
 
 	if (GameInstance == nullptr)
 	{
-		ULog::Error("CurrencyComponent::SaveValue", "GameInstance is nullptr");
+		USK_LOG_ERROR("GameInstance is nullptr");
 		return;
 	}
 
 	UUSKSaveGame* SaveGame = GameInstance->GetSaveData();
 	if (SaveGame == nullptr)
 	{
-		ULog::Error("CurrencyComponent::SaveValue", "GameInstance is nullptr");
+		USK_LOG_ERROR("GameInstance is nullptr");
 		return;
 	}
 

@@ -28,5 +28,6 @@ protected:
 	/**
 	 * @brief Load the data managed by this component
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Component")
 	virtual void LoadData();
 };

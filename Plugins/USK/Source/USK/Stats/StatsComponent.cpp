@@ -32,8 +32,7 @@ void UStatsComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 
 		if (Stats[Key].CurrentRegenerateDelay > 0.0f)
 		{
-			ULog::Info("StatsComponent::TickComponent",
-				FString("Reducing regenerate delay for ").Append(Key.ToString()));
+			USK_LOG_TRACE(*FString::Format(TEXT("Reducing regenerate delay for {0}"), { Key.ToString() }));
 			Stats[Key].CurrentRegenerateDelay -= DeltaTime;
 			continue;
 		}
@@ -49,14 +48,14 @@ void UStatsComponent::LoadData()
 {
 	if (GameInstance == nullptr)
 	{
-		ULog::Error("StatsComponent::LoadValues", "GameInstance is nullptr");
+		USK_LOG_ERROR("GameInstance is nullptr");
 		return;
 	}
 
 	UUSKSaveGame* SaveGame = GameInstance->GetSaveData();
 	if (SaveGame == nullptr)
 	{
-		ULog::Error("StatsComponent::LoadValues", "SaveGame is nullptr");
+		USK_LOG_ERROR("SaveGame is nullptr");
 		return;
 	}
 
@@ -66,14 +65,12 @@ void UStatsComponent::LoadData()
 	{
 		if (!Stats[Key].AutoSave || !SaveGame->Stats.Contains(Key))
 		{
-			ULog::Info("StatsComponent::LoadValues",
-				FString("Resetting ").Append(Key.ToString()).Append(" to initial value"));
+			USK_LOG_INFO(*FString::Format(TEXT("Resetting {0} to initial value"), { Key.ToString() }));
 			Stats[Key].Value = Stats[Key].InitialValue;
 			continue;
 		}
 
-		ULog::Info("StatsComponent::LoadValues",
-				FString("Loading saved value for ").Append(Key.ToString()));
+		USK_LOG_INFO(*FString::Format(TEXT("Loading saved value for {0}"), { Key.ToString() }));
 		Stats[Key].Value = SaveGame->Stats[Key];
 	}
 }
@@ -87,7 +84,7 @@ float UStatsComponent::GetValue(const FName StatName) const
 {
 	if (!Stats.Contains(StatName))
 	{
-		ULog::Error("StatsComponent::GetAmount", "Stat not added to map");
+		USK_LOG_ERROR("Stat not added to map");
 		return 0;
 	}
 
@@ -103,7 +100,7 @@ float UStatsComponent::GetValuePercentage(const FName StatName) const
 {
 	if (!Stats.Contains(StatName))
 	{
-		ULog::Error("StatsComponent::GetValuePercentage", "Stat not added to map");
+		USK_LOG_ERROR("Stat not added to map");
 		return 0;
 	}
 
@@ -120,7 +117,7 @@ float UStatsComponent::Add(const FName StatName, const float Amount)
 {
 	if (!Stats.Contains(StatName))
 	{
-		ULog::Error("StatsComponent::Add", "Stat not added to map");
+		USK_LOG_ERROR("Stat not added to map");
 		return 0.0f;
 	}
 
@@ -130,14 +127,13 @@ float UStatsComponent::Add(const FName StatName, const float Amount)
 
 	if (NewValue == 0.0f)
 	{
-		ULog::Info("StatsComponent::Add", FString("Value is zero for ").Append(StatName.ToString()));
+		USK_LOG_INFO(*FString::Format(TEXT("Value is zero for {0}"), { StatName.ToString() }));
 		OnValueZero.Broadcast(StatName);
 	}
 
 	if (Amount < 0.0f)
 	{
-		ULog::Info("StatsComponent::Add",
-			FString("Resetting regenerate delay for ").Append(StatName.ToString()));
+		USK_LOG_INFO(*FString::Format(TEXT("Resetting regenerate delay for {0}"), { StatName.ToString() }));
 		Stats[StatName].CurrentRegenerateDelay = Stats[StatName].RegenerateDelay;
 	}
 	
@@ -170,14 +166,14 @@ void UStatsComponent::SaveValue(const FName StatName, const float Value) const
 
 	if (GameInstance == nullptr)
 	{
-		ULog::Error("StatsComponent::SaveValue", "GameInstance is nullptr");
+		USK_LOG_ERROR("GameInstance is nullptr");
 		return;
 	}
 
 	UUSKSaveGame* SaveGame = GameInstance->GetSaveData();
 	if (SaveGame == nullptr)
 	{
-		ULog::Error("StatsComponent::SaveValue", "GameInstance is nullptr");
+		USK_LOG_ERROR("GameInstance is nullptr");
 		return;
 	}
 
