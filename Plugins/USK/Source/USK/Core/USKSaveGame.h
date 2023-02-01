@@ -18,11 +18,5 @@ public:
 	 * @brief A map of all the currencies that are currently saved
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit")
-	TMap<FName, int> Currency;
-
-	/**
-	 * @brief A map of all the stats that are currently saved
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit")
-	TMap<FName, float> Stats;
+	TMap<FName, float> TrackableData;
 };
