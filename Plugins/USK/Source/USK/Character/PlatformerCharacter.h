@@ -273,5 +273,6 @@ private:
 	/**
 	 * @brief Reset the coyote jump values
 	 */
+	UFUNCTION()
 	void ResetCoyoteJump();
 };

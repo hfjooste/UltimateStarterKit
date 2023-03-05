@@ -140,7 +140,10 @@ void APlatformerCharacter::OnMovementModeChanged(EMovementMode PrevMovementMode,
 
 	USK_LOG_TRACE("Starting latent reset coyote jump action");
 	FLatentActionInfo LatentAction;
-	LatentAction.ExecutionFunction = TEXT("ResetCoyoteJump");
+	LatentAction.Linkage = 0;
+	LatentAction.CallbackTarget = this;
+	LatentAction.UUID = GetUniqueID();
+	LatentAction.ExecutionFunction = "ResetCoyoteJump";
 	UKismetSystemLibrary::RetriggerableDelay(GetWorld(), CoyoteJumpTime, LatentAction);
 }
 
@@ -149,33 +152,82 @@ void APlatformerCharacter::OnMovementModeChanged(EMovementMode PrevMovementMode,
  */
 void APlatformerCharacter::Jump()
 {
-	if ((!CanJump() && !CanPerformCoyoteJump) || JumpCurrentCount >= 2)
+	if (!CanJump() && !CanPerformCoyoteJump)
 	{
-		if (JumpMaxCount > 0 && JumpCurrentCount == 1 && CoyoteJumpPerformed)
-		{
-			IsDoubleJumping = true;
-			PerformCoyoteJump();
-			return;
-		}
-
 		USK_LOG_TRACE("Can't jump");
 		return;
 	}
-	
-	Super::Jump();
-	UAudioUtils::PlayRandomSound(this, JumpSoundEffects);
-	USK_LOG_TRACE(*FString::Format(TEXT("Current Jump: {0}"), { FString::FromInt(JumpCurrentCount) }));
-	
-	JumpMaxCount = CanDoubleJump ? 2 : 1;
-	USK_LOG_TRACE(*FString::Format(TEXT("Max jump count set to {0}"), { FString::FromInt(JumpMaxCount) }));
 
-	IsDoubleJumping = JumpMaxCount - JumpCurrentCount > 0 && (CoyoteJumpPerformed || JumpCurrentCount > 0);
-	USK_LOG_TRACE(*FString::Format(TEXT("Is Double Jumping: {0}"), { IsDoubleJumping ? "Yes" : "No" }));
-	
-	if (JumpCurrentCount == 0 && CanPerformCoyoteJump)
+	bool WasRegularJump = false;
+	if (CanJump())
 	{
-		PerformCoyoteJump();
+		WasRegularJump = true;
+		Super::Jump();
 	}
+	else
+	{		
+		LaunchCharacter(FVector(0.0f, 0.0f, CoyoteJumpVelocity), false, true);
+		CoyoteJumpPerformed = true;
+		CanPerformCoyoteJump = false;
+		USK_LOG_TRACE("Coyote jump performed");
+	}
+
+	JumpMaxCount = CanDoubleJump ? 2 : 1;
+	IsDoubleJumping = WasRegularJump && (CoyoteJumpPerformed || JumpCurrentCount > 0);
+	UAudioUtils::PlayRandomSound(this, JumpSoundEffects);
+	
+	// ================================================================================
+	// if (CanJump())
+	// {
+	// 	USK_LOG_ERROR("HENRY 1");
+	// 	Super::Jump();
+	// 	JumpMaxCount = CanDoubleJump ? 2 : 1;
+	// 	IsDoubleJumping = CoyoteJumpPerformed || JumpCurrentCount > 0;
+	// 	UAudioUtils::PlayRandomSound(this, JumpSoundEffects);
+	// 	return;
+	// }
+	//
+	// if (!CanPerformCoyoteJump)
+	// {
+	// 	return;
+	// }
+	//
+	// USK_LOG_ERROR("HENRY 2");
+	// LaunchCharacter(FVector(0.0f, 0.0f, CoyoteJumpVelocity), false, true);
+	// JumpMaxCount = CanDoubleJump ? 2 : 1;
+	// IsDoubleJumping = CoyoteJumpPerformed || JumpCurrentCount > 0;
+	// UAudioUtils::PlayRandomSound(this, JumpSoundEffects);
+	// CoyoteJumpPerformed = true;
+	// CanPerformCoyoteJump = false;
+	// ================================================================================
+	
+	// if (!CanJump() && !CanPerformCoyoteJump)
+	// {
+	// 	if (JumpMaxCount > 0 && CoyoteJumpPerformed)
+	// 	{
+	// 		IsDoubleJumping = true;
+	// 		PerformCoyoteJump();
+	// 		return;
+	// 	}
+	//
+	// 	USK_LOG_TRACE("Can't jump");
+	// 	return;
+	// }
+	//
+	// Super::Jump();
+	// UAudioUtils::PlayRandomSound(this, JumpSoundEffects);
+	// USK_LOG_TRACE(*FString::Format(TEXT("Current Jump: {0}"), { FString::FromInt(JumpCurrentCount) }));
+	//
+	// IsDoubleJumping = JumpMaxCount - JumpCurrentCount > 0 && (CoyoteJumpPerformed || JumpCurrentCount > 0);
+	// USK_LOG_TRACE(*FString::Format(TEXT("Is Double Jumping: {0}"), { IsDoubleJumping ? "Yes" : "No" }));
+	//
+	// if (JumpCurrentCount == 0 && CanPerformCoyoteJump)
+	// {
+	// 	PerformCoyoteJump();
+	// }
+	//
+	// JumpMaxCount = CanDoubleJump ? 2 : 1;
+	// USK_LOG_TRACE(*FString::Format(TEXT("Max jump count set to {0}"), { FString::FromInt(JumpMaxCount) }));
 }
 
 /**
@@ -217,19 +269,6 @@ void APlatformerCharacter::AdjustCameraPosition(const float DeltaSeconds)
 	CurrentArmLength = TargetArmLength + ArmAdjustment;
 	GetSpringArmComponent()->TargetArmLength = FMath::Lerp(GetSpringArmComponent()->TargetArmLength,
 		CurrentArmLength, DeltaSeconds * CameraAdjustmentSpeed);
-}
-
-/**
- * @brief Perform a coyote jump
- */
-void APlatformerCharacter::PerformCoyoteJump()
-{
-	USK_LOG_TRACE("Performing coyote jump");
-    JumpMaxCount--;
-    LaunchCharacter(FVector(0.0f, 0.0f, CoyoteJumpVelocity), false, true);
-    CoyoteJumpPerformed = true;
-    CanPerformCoyoteJump = false;
-	UAudioUtils::PlayRandomSound(this, JumpSoundEffects);
 }
 
 /**
