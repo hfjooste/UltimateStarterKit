@@ -175,59 +175,6 @@ void APlatformerCharacter::Jump()
 	JumpMaxCount = CanDoubleJump ? 2 : 1;
 	IsDoubleJumping = WasRegularJump && (CoyoteJumpPerformed || JumpCurrentCount > 0);
 	UAudioUtils::PlayRandomSound(this, JumpSoundEffects);
-	
-	// ================================================================================
-	// if (CanJump())
-	// {
-	// 	USK_LOG_ERROR("HENRY 1");
-	// 	Super::Jump();
-	// 	JumpMaxCount = CanDoubleJump ? 2 : 1;
-	// 	IsDoubleJumping = CoyoteJumpPerformed || JumpCurrentCount > 0;
-	// 	UAudioUtils::PlayRandomSound(this, JumpSoundEffects);
-	// 	return;
-	// }
-	//
-	// if (!CanPerformCoyoteJump)
-	// {
-	// 	return;
-	// }
-	//
-	// USK_LOG_ERROR("HENRY 2");
-	// LaunchCharacter(FVector(0.0f, 0.0f, CoyoteJumpVelocity), false, true);
-	// JumpMaxCount = CanDoubleJump ? 2 : 1;
-	// IsDoubleJumping = CoyoteJumpPerformed || JumpCurrentCount > 0;
-	// UAudioUtils::PlayRandomSound(this, JumpSoundEffects);
-	// CoyoteJumpPerformed = true;
-	// CanPerformCoyoteJump = false;
-	// ================================================================================
-	
-	// if (!CanJump() && !CanPerformCoyoteJump)
-	// {
-	// 	if (JumpMaxCount > 0 && CoyoteJumpPerformed)
-	// 	{
-	// 		IsDoubleJumping = true;
-	// 		PerformCoyoteJump();
-	// 		return;
-	// 	}
-	//
-	// 	USK_LOG_TRACE("Can't jump");
-	// 	return;
-	// }
-	//
-	// Super::Jump();
-	// UAudioUtils::PlayRandomSound(this, JumpSoundEffects);
-	// USK_LOG_TRACE(*FString::Format(TEXT("Current Jump: {0}"), { FString::FromInt(JumpCurrentCount) }));
-	//
-	// IsDoubleJumping = JumpMaxCount - JumpCurrentCount > 0 && (CoyoteJumpPerformed || JumpCurrentCount > 0);
-	// USK_LOG_TRACE(*FString::Format(TEXT("Is Double Jumping: {0}"), { IsDoubleJumping ? "Yes" : "No" }));
-	//
-	// if (JumpCurrentCount == 0 && CanPerformCoyoteJump)
-	// {
-	// 	PerformCoyoteJump();
-	// }
-	//
-	// JumpMaxCount = CanDoubleJump ? 2 : 1;
-	// USK_LOG_TRACE(*FString::Format(TEXT("Max jump count set to {0}"), { FString::FromInt(JumpMaxCount) }));
 }
 
 /**
