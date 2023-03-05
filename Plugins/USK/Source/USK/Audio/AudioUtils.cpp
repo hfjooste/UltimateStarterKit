@@ -28,6 +28,12 @@ void UAudioUtils::PlaySound2D(const UObject* WorldContext, USoundBase* SoundFX)
  */
 void UAudioUtils::PlayRandomSound2D(const UObject* WorldContext, TArray<USoundBase*> SoundFX)
 {
+	if (SoundFX.IsEmpty())
+	{
+		USK_LOG_ERROR("Trying to play a random sound with an empty array");
+		return;
+	}
+
 	USK_LOG_INFO("Playing random 2D sound");
 	const int Index = FMath::RandRange(0, SoundFX.Num() - 1);
 	PlaySound2D(WorldContext, SoundFX[Index]);
@@ -57,6 +63,12 @@ void UAudioUtils::PlaySound(AActor* Actor, USoundBase* SoundFX)
  */
 void UAudioUtils::PlayRandomSound(AActor* Actor, TArray<USoundBase*> SoundFX)
 {
+	if (SoundFX.IsEmpty())
+	{
+		USK_LOG_ERROR("Trying to play a random sound with an empty array");
+		return;
+	}
+	
 	USK_LOG_INFO("Playing random sound at actor location");
 	const int Index = FMath::RandRange(0, SoundFX.Num() - 1);
 	PlaySound(Actor, SoundFX[Index]);
