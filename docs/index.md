@@ -1,5 +1,9 @@
 ## Requirements
-The Ultimate Starter Kit plugin is only available for Unreal Engine 5.0.3 and newer
+The Ultimate Starter Kit plugin is only available for Unreal Engine 5.0.3 and newer. The plugin also depends on the following plugins:
+<ol>
+    <li>Niagara</li>
+    <li>Enchanced Input</li>
+</ol>
 
 ## Installation
 <ol>
@@ -29,4 +33,5 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><a href="currency">Currency</a>: A system that is used to easily manage different types of currency</li>
     <li><a href="audio">Audio</a>: A system used to manage the basic properties of audio files</li>
     <li><a href="stats">Stats</a>: A system used to easily manage character stats with an optional regenerate ability</li>
+    <li><a href="platformer">3D platformer character</a>: Basic 3D platformer character and animation template</li>
 </ul>

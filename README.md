@@ -2,7 +2,11 @@
 The Ultimate Starter Kit plugin to speed up development of Unreal Engine 5 games
 
 ## Requirements
-This plugin is only available for Unreal Engine 5.0.3 and newer
+The Ultimate Starter Kit plugin is only available for Unreal Engine 5.0.3 and newer. The plugin also depends on the following plugins:
+<ol>
+    <li>Niagara</li>
+    <li>Enchanced Input</li>
+</ol>
 
 ## Installation
 <ol>
@@ -19,11 +23,12 @@ This plugin is only available for Unreal Engine 5.0.3 and newer
 ## Features
 The Ultimate Starter Kit plugin comes with the following features:
 <ul>
-    <li><strong>Logger</strong>: A system used to easily log info to file and via on-screen messages</li>
-    <li><strong>Save data management</strong>: A system used to easily save/load game data with support for multiple save slots</li>
-    <li><strong>Currency</strong>: A system that is used to easily manage different types of currency</li>
-    <li><strong>Audio</strong>: A system used to manage the basic properties of audio files</li>
-    <li><strong>Stats</strong>: A system used to easily manage character stats with an optional regenerate ability</li>
+    <li><a href="logger">Logger</a>: A system used to easily log info to file and via on-screen messages</li>
+    <li><a href="savedata">Save data management</a>: A system used to easily save/load game data with support for multiple save slots</li>
+    <li><a href="currency">Currency</a>: A system that is used to easily manage different types of currency</li>
+    <li><a href="audio">Audio</a>: A system used to manage the basic properties of audio files</li>
+    <li><a href="stats">Stats</a>: A system used to easily manage character stats with an optional regenerate ability</li>
+    <li><a href="platformer">3D platformer character</a>: Basic 3D platformer character and animation template</li>
 </ul>
 
 ## Documentation
@@ -37,7 +42,6 @@ I'm planning on expanding this plugin and adding a bunch of new features. This i
 - Input indicators with support for different controllers/platforms
 - Settings system with save data integration
 - Menu system with support for controllers
-- 3D Platformer character controller
 - Inventory management
 - Basic dialogue system
 

@@ -1,25 +1,27 @@
 ## Introduction
-A system used to easily save/load game data with support for multiple save slots
+A base game instance with support for saving and loading game data using multiple save slots
 
 ## Dependencies
-The save system relies on other components of this plugin to work:
+The game instance relies on other components of this plugin to work:
 <ul>
     <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
 </ul>
 
+## Using the Game Instance
+You need to create a blueprint using the `USKGameInstance` as a parent before using the game instance. After creating your own game instance blueprint, set this as the default game instance:
+<ol>
+    <li>Open the Project Settings</li>
+    <li>Go to Project > Maps & Modes</li>
+    <li>Change the <code>Game Instance Class</code> value to your own blueprint</li>
+</ol>
+
 ## Save Data
-You need to create a <code>USK Save Game</code> object before you can save/load data. This object contains all the data that you want to save. Just add the data you want to save as variables to the blueprint. The <code>Save Manager</code> will handle the rest
-
-## Setting up the level
-Before you can save/load data, you need to add the <code>Save Manager</code> actor to your level. This actor is responsible for managing all the save data and should be placed in every level where you use the save system
-
-## Save Manager
-The <code>Save Manager</code> is used to save and load the data specified in the <code>USK Save Game</code> object. You need to set the following properties before you can use the Save Manager:
+You need to create a <code>USK Save Game</code> object before you can save/load data. This object contains all the data that you want to save. Just add the data you want to save as variables to the blueprint. The <code>Game Instance</code> will handle the rest. You also need to set the following properties before you can save/load data:
 <ul>
     <li><strong>Save Game Class:</strong> A reference to the <code>USK Save Game</code> class that contains the data you want to save</li>
 </ul>
 
-<i><strong>NB:</strong> You are required to set the save slot before using the save manager. If not, you will get a <code>nullptr</code> and might cause your game to crash</i>
+<i><strong>NB:</strong> You are required to set the save slot before you can save/load data. If not, you will get a <code>nullptr</code> and might cause your game to crash</i>
 
 ## API Reference
 ### Properties
@@ -35,6 +37,20 @@ The <code>Save Manager</code> is used to save and load the data specified in the
         <td>The class that holds the data that should be saved/loaded</td>
         <td>TSubclassOf&lt;USaveGame&gt;</td>
         <td><code>nullptr</code></td>
+    </tr>
+</table>
+
+### Events
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Params</th>
+    </tr>
+    <tr>
+        <td>OnDataLoadedEvent</td>
+        <td>Event used to notify other classes when the save data is loaded</td>
+        <td></td>
     </tr>
 </table>
 
@@ -70,21 +86,15 @@ The <code>Save Manager</code> is used to save and load the data specified in the
         <td><strong>Index (int)</strong><br/>The index of the save slot to check</td>
         <td><strong>bool</strong><br/>A boolean value indicating if the save slot is used</td>
     </tr>
-    <tr>
-        <td>AddOnDataLoadedEventBinding</td>
-        <td>Add a binding to the OnDataLoaded event</td>
-        <td><strong>OnDataLoadedFunction (Delegate)</strong><br/>The function called after the data is loaded</td>
-        <td></td>
-    </tr>
 </table>
 
 ## Blueprint Usage
-You can save/load data using Blueprints by adding one of the following nodes (requires a reference to the <code>Save Manager</code> actor):
+You can save/load data using Blueprints by adding one of the following nodes (requires a reference to the <code>USK Game Instance</code>):
 <ul>
-    <li>Ultimate Starter Kit > Save Manager > Set Current Save Slot</li>
-    <li>Ultimate Starter Kit > Save Manager > Get Save Data</li>
-    <li>Ultimate Starter Kit > Save Manager > Save Data</li>
-    <li>Ultimate Starter Kit > Save Manager > Is Save Slot Used</li>
+    <li>Ultimate Starter Kit > Save Data > Set Current Save Slot</li>
+    <li>Ultimate Starter Kit > Save Data > Get Save Data</li>
+    <li>Ultimate Starter Kit > Save Data > Save Data</li>
+    <li>Ultimate Starter Kit > Save Data > Is Save Slot Used</li>
 </ul>
 
 ## C++ Usage
@@ -93,22 +103,23 @@ Before you can use the plugin, you first need to enable the plugin in your <code
 PublicDependencyModuleNames.Add("USK");
 ```
 
-The save data plugin can now be used in any of your C++ files:
+The game instance can now be used in any of your C++ files:
 ```c++
-#include "USK/Data/SaveManager.h"
+#include "USK/Core/USKGameInstance.h"
 
 void ATestActor::Test()
 {
-    // SaveManager is a pointer to the ASaveManager actor in the map
+    UGameInstance* CurrentGameInstance = UGameplayStatics::GetGameInstance(GetWorld());
+	UUSKGameInstance* GameInstance = dynamic_cast&lt;UUSKGameInstance*&gt;(CurrentGameInstance);
 
-    bool IsSlotInUse = SaveManager->IsSaveSlotUsed(0);
+    bool IsSlotInUse = GameInstance->IsSaveSlotUsed(0);
     if (IsSlotInUse)
     {
-        SaveManager->SetCurrentSaveSlot(0);
-        USaveGame* SaveGame = SaveManager->GetSaveData();
+        GameInstance->SetCurrentSaveSlot(0);
+        USaveGame* SaveGame = GameInstance->GetSaveData();
         UMySaveGame* MySaveGame = dynamic_cast&lt;UMySaveGame*&gt;(SaveGame);
         MySaveGame->CurrentLevel++;
-        SaveManager->SaveData();
+        GameInstance->SaveData();
     }
 }
 ```
