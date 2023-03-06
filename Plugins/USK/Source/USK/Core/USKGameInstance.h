@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Engine/GameInstance.h"
 #include "USKSaveGame.h"
 #include "USKGameInstance.generated.h"
 

@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Engine/LocalPlayer.h"
 #include "NiagaraFunctionLibrary.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Logger/Log.h"

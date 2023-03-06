@@ -2,6 +2,7 @@
 
 #include "AudioUtils.h"
 #include "Kismet/GameplayStatics.h"
+#include "Sound/SoundCue.h"
 #include "USK/Logger/Log.h"
 
 /**

@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Components/ActorComponent.h"
 #include "TrackableData.h"
 #include "USK/Core/USKGameInstance.h"
 #include "TrackableDataComponent.generated.h"

@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Animation/AnimInstance.h"
 #include "PlatformerCharacter.h"
 #include "PlatformerAnimationInstance.generated.h"
 
