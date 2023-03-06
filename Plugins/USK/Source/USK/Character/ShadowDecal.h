@@ -23,6 +23,7 @@ public:
 	 * @brief Initialize the shadow decal
 	 * @param OwnerCharacter The character owning this shadow decal
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Shadow Decal")
 	void Initialize(ACharacter* OwnerCharacter);
 
 protected:

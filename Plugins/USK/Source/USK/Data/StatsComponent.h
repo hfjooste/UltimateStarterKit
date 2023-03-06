@@ -8,7 +8,7 @@
 /**
  * @brief Actor Component responsible for tracking different character stats
  */
-UCLASS(ClassGroup=("UltimateStarterKit"), DisplayName="Stat Component", meta=(BlueprintSpawnableComponent))
+UCLASS(ClassGroup=("UltimateStarterKit"), DisplayName="Stats Component", meta=(BlueprintSpawnableComponent))
 class USK_API UStatsComponent : public UTrackableDataComponent
 {
 	GENERATED_BODY()

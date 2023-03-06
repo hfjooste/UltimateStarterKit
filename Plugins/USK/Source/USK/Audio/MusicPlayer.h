@@ -23,7 +23,7 @@ public:
 	/**
 	 * @brief Should the music automatically play when the actor is spawned?
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit")
 	bool PlayOnStart = true;
 	
 	/**
