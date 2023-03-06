@@ -13,7 +13,8 @@ public class USK : ModuleRules
 		PublicDependencyModuleNames.AddRange(new[]
 		{
 			"Core",
-			"EnhancedInput"
+			"EnhancedInput",
+			"Niagara"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new[]

@@ -4,6 +4,7 @@
 
 #include "ShadowDecal.h"
 #include "InputActionValue.h"
+#include "NiagaraCommon.h"
 #include "GameFramework/Character.h"
 #include "PlatformerCharacter.generated.h"
 
@@ -93,10 +94,34 @@ protected:
 	TArray<USoundBase*> JumpSoundEffects;
 
 	/**
+	 * @brief The particle effects spawned when jumping
+	 */
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump|Effects")
+	UNiagaraSystem* JumpParticleFx;
+
+	/**
+	 * @brief The offset applied to the location of the jump particles when spawning
+	 */
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump|Effects")
+	FVector JumpParticleFxSpawnOffset;
+
+	/**
 	 * @brief An array of sound effects played when landing
 	 */
 	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Jump|Effects")
 	TArray<USoundBase*> LandedSoundEffects;
+
+	/**
+	 * @brief The particle effects spawned when landing
+	 */
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump|Effects")
+	UNiagaraSystem* LandParticleFx;
+
+	/**
+	 * @brief The offset applied to the location of the land particles when spawning
+	 */
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump|Effects")
+	FVector LandParticleFxSpawnOffset;
 
 	/**
 	 * @brief Does the character support variable jump height?

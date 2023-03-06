@@ -11,6 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "NiagaraFunctionLibrary.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Logger/Log.h"
 
@@ -119,6 +120,12 @@ void APlatformerCharacter::Landed(const FHitResult& Hit)
 	JumpMaxCount = 1;
 	CoyoteJumpPerformed = false;
 	UAudioUtils::PlayRandomSound(this, LandedSoundEffects);
+
+	if (LandParticleFx != nullptr)
+	{
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), LandParticleFx,
+			Hit.Location + LandParticleFxSpawnOffset);
+	}
 }
 
 /**
@@ -175,6 +182,12 @@ void APlatformerCharacter::Jump()
 	JumpMaxCount = CanDoubleJump ? 2 : 1;
 	IsDoubleJumping = WasRegularJump && (CoyoteJumpPerformed || JumpCurrentCount > 0);
 	UAudioUtils::PlayRandomSound(this, JumpSoundEffects);
+
+	if (JumpParticleFx != nullptr)
+	{
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), JumpParticleFx,
+			GetActorLocation() + JumpParticleFxSpawnOffset);
+	}
 }
 
 /**
