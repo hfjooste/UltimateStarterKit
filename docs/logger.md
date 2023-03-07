@@ -21,6 +21,34 @@ This plugin supports the following log types:
     </li>
 </ol>
 
+The log levels corresponds to the following verbosity level in Unreal Engine:
+<table>
+    <tr>
+        <th>Log Level</th>
+        <th>Log Verbosity</th>
+    </tr>
+    <tr>
+        <td>Trace</td>
+        <td>VeryVerbose</td>
+    </tr>
+    <tr>
+        <td>Debug</td>
+        <td>Verbose</td>
+    </tr>
+    <tr>
+        <td>Information</td>
+        <td>Display</td>
+    </tr>
+    <tr>
+        <td>Warning</td>
+        <td>Warning</td>
+    </tr>
+    <tr>
+        <td>Error</td>
+        <td>Error</td>
+    </tr>
+</table>
+
 The plugin will automatically ignore certain log levels based on the type of build:
 <table>
     <tr>
@@ -59,23 +87,57 @@ The plugin will automatically ignore certain log levels based on the type of bui
 There are 2 different logging methods. Both of these are used each time you log something:
 <ul>
     <li><strong>On-screen messages:</strong> These messages will appear on-screen for 5 seconds (only used when running the game through the editor)</li>
-    <li><strong>Log File:</strong> Everything you log is also written to a file. The file name is the current date and a new file is created each day the game is played. All log files are stored in the root of the project under the <code>Logs</code> directory</li>
+    <li><strong>Log File:</strong> Everything you log is also written to a file using the Unreal Engine logging feature
 </ul>
 
 ## API Reference
-### Properties
+### Macros
 <table>
     <tr>
-        <th>Property</th>
+        <th>Name</th>
         <th>Description</th>
-        <th>Type</th>
-        <th>Default Value</th>
+        <th>Params</th>
+        <th>Return</th>
     </tr>
     <tr>
-        <td>MaxFileSize</td>
-        <td>The maximum size of a log file in bytes before a new file is created</td>
-        <td>int</td>
-        <td>10485760 (10MB)</td>
+        <td>USK_LOG_TRACE</td>
+        <td>Log trace information using the current function name as the tag</td>
+        <td>
+            <strong>Text (FString)</strong><br/>The text that should be logged out
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>USK_LOG_DEBUG</td>
+        <td>Log debug information using the current function name as the tag</td>
+        <td>
+            <strong>Text (FString)</strong><br/>The text that should be logged out
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>USK_LOG_INFO</td>
+        <td>Log information using the current function name as the tag</td>
+        <td>
+            <strong>Text (FString)</strong><br/>The text that should be logged out
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>USK_LOG_WARNING</td>
+        <td>Log a warning using the current function name as the tag</td>
+        <td>
+            <strong>Text (FString)</strong><br/>The text that should be logged out
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>USK_LOG_ERROR</td>
+        <td>Log an error using the current function name as the tag</td>
+        <td>
+            <strong>Text (FString)</strong><br/>The text that should be logged out
+        </td>
+        <td></td>
     </tr>
 </table>
 
@@ -92,7 +154,7 @@ There are 2 different logging methods. Both of these are used each time you log 
         <td>Log trace information</td>
         <td>
             <strong>Tag (FString)</strong><br/>The category of the log entry. This is usually the function or class name. It allows you to find out exactly where this is being logged<br/><br/>
-            <strong>Text (FString)</strong><br/>The actual text that should be logged out
+            <strong>Text (FString)</strong><br/>The text that should be logged out
         </td>
         <td></td>
     </tr>
@@ -101,7 +163,7 @@ There are 2 different logging methods. Both of these are used each time you log 
         <td>Log debug information</td>
         <td>
             <strong>Tag (FString)</strong><br/>The category of the log entry. This is usually the function or class name. It allows you to find out exactly where this is being logged<br/><br/>
-            <strong>Text (FString)</strong><br/>The actual text that should be logged out
+            <strong>Text (FString)</strong><br/>The text that should be logged out
         </td>
         <td></td>
     </tr>
@@ -110,7 +172,7 @@ There are 2 different logging methods. Both of these are used each time you log 
         <td>Log information</td>
         <td>
             <strong>Tag (FString)</strong><br/>The category of the log entry. This is usually the function or class name. It allows you to find out exactly where this is being logged<br/><br/>
-            <strong>Text (FString)</strong><br/>The actual text that should be logged out
+            <strong>Text (FString)</strong><br/>The text that should be logged out
         </td>
         <td></td>
     </tr>
@@ -119,7 +181,7 @@ There are 2 different logging methods. Both of these are used each time you log 
         <td>Log a warning</td>
         <td>
             <strong>Tag (FString)</strong><br/>The category of the log entry. This is usually the function or class name. It allows you to find out exactly where this is being logged<br/><br/>
-            <strong>Text (FString)</strong><br/>The actual text that should be logged out
+            <strong>Text (FString)</strong><br/>The text that should be logged out
         </td>
         <td></td>
     </tr>
@@ -128,7 +190,7 @@ There are 2 different logging methods. Both of these are used each time you log 
         <td>Log an error</td>
         <td>
             <strong>Tag (FString)</strong><br/>The category of the log entry. This is usually the function or class name. It allows you to find out exactly where this is being logged<br/><br/>
-            <strong>Text (FString)</strong><br/>The actual text that should be logged out
+            <strong>Text (FString)</strong><br/>The text that should be logged out
         </td>
         <td></td>
     </tr>
@@ -156,10 +218,16 @@ The logger can now be used in any of your C++ files:
 
 void ATestActor::Test()
 {
-    ULog::Trace("TestActor::Test", "Testing trace logging");
-    ULog::Debug("TestActor::Test", "Testing debug logging");
-    ULog::Info("TestActor::Test", "Testing info logging");
-    ULog::Warning("TestActor::Test", "Testing warning logging");
-    ULog::Error("TestActor::Test", "Testing error logging");
+    USK_LOG_TRACE("Testing trace logging");
+    USK_LOG_DEBUG("Testing debug logging");
+    USK_LOG_INFO("Testing info logging");
+    USK_LOG_WARNING("Testing warning logging");
+    USK_LOG_ERROR("Testing error logging");
+
+    ULog::Trace("Custom Tag", "Testing trace logging");
+    ULog::Debug("Custom Tag", "Testing debug logging");
+    ULog::Info("Custom Tag", "Testing info logging");
+    ULog::Warning("Custom Tag", "Testing warning logging");
+    ULog::Error("Custom Tag", "Testing error logging");
 }
 ```

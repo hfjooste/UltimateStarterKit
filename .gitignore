@@ -4,6 +4,11 @@
 # Jetbrains Rider
 .idea/
 
+# Visual Studio Code
+.ignore
+.vscode
+USKPlugin.code-workspace
+
 # Compiled Object files
 *.slo
 *.lo
@@ -78,6 +83,3 @@ DerivedDataCache/*
 
 # Documentation
 site/
-
-# Logs
-Logs/

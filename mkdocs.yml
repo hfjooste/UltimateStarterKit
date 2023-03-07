@@ -47,14 +47,18 @@ theme:
         name: Switch to dark mode
 nav:
   - Getting Started: index.md
+  - Game Instance: gameinstance.md
   - Logger: logger.md
-  - Save Data: savedata.md
-  - Currency:
-    - Currency Overview: currency.md
-    - Currency Manager: currencymanager.md
-    - Currency Component: currencycomponent.md
+  - Trackable Data:
+    - Overview: trackabledataoverview.md
+    - Data: trackabledata.md
+    - Component: trackabledatacomponent.md
   - Audio:
     - Audio Overview: audio.md
     - Audio Utils: audioutils.md
     - Music Player: music.md
-  - Stats: stats.md
+  - 3D Platformer:
+    - Overview: platformer.md
+    - Character: platformercharacter.md
+    - Animation Instance: platformeranimation.md
+    - Shadow Decal: platformershadow.md

@@ -16,6 +16,22 @@ The music player can be used to play, pause and stop music. It also allows you t
     </tr>
 </table>
 
+### Properties
+<table>
+    <tr>
+        <th>Property</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Default Value</th>
+    </tr>
+    <tr>
+        <td>PlayOnStart</td>
+        <td>Should the music automatically play when the actor is spawned?</td>
+        <td>bool</td>
+        <td>true</td>
+    </tr>
+</table>
+
 ### Functions
 <table>
     <tr>
