@@ -3,6 +3,7 @@ site_url: https://hfjooste.github.io/UltimateStarterKit
 repo_url: https://github.com/hfjooste/UltimateStarterKit
 repo_name: hfjooste/UltimateStarterKit
 remote_branch: docs
+remote_name: git@github.com:hfjooste/UltimateStarterKit.git
 extra_css: [styles.css]
 plugins:
   - with-pdf:
@@ -14,7 +15,7 @@ extra:
   social:
     - name: Mastodon
       icon: fontawesome/brands/mastodon
-      link: https://mastodon.gamedev.place/@hfjooste
+      link: https://mastodon.social/@hfjooste
     - name: Twitter
       icon: fontawesome/brands/twitter 
       link: https://twitter.com/HenryJoosteDev

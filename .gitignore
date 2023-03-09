@@ -83,3 +83,6 @@ DerivedDataCache/*
 
 # Documentation
 site/
+
+# Packaged Builds
+Release/
