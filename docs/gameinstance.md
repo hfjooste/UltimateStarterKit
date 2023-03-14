@@ -8,7 +8,7 @@ The game instance relies on other components of this plugin to work:
 </ul>
 
 ## Using the Game Instance
-You need to create a blueprint using the `USKGameInstance` as a parent before using the game instance. After creating your own game instance blueprint, set this as the default game instance:
+You need to create a blueprint using the `USKGameInstance_Implementation` as a parent before using the game instance. The input indicators feature is already configured if you use this base class. If you prefer to set this up manually, you can use `USKGameInstance` instead. After creating your own game instance blueprint, set this as the default game instance:
 <ol>
     <li>Open the Project Settings</li>
     <li>Go to Project > Maps & Modes</li>
@@ -22,6 +22,9 @@ You need to create a <code>USK Save Game</code> object before you can save/load 
 </ul>
 
 <i><strong>NB:</strong> You are required to set the save slot before you can save/load data. If not, you will get a <code>nullptr</code> and might cause your game to crash</i>
+
+## Input Indicators
+The Game Instance will automatically detect input events and update the current input device if needed. If the input device is changed, other classes will be notified through the <code>OnInputDeviceUpdated</code> event
 
 ## API Reference
 ### Properties
@@ -38,6 +41,42 @@ You need to create a <code>USK Save Game</code> object before you can save/load 
         <td>TSubclassOf&lt;USaveGame&gt;</td>
         <td><code>nullptr</code></td>
     </tr>
+    <tr>
+        <td>InputMappingContext</td>
+        <td>The input mapping context used to extract the keys based on specific input actions</td>
+        <td>UInputMappingContext*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>KeyboardMouseInputMappings</td>
+        <td>A map of all keyboard/mouse keys and the texture displayed in the indicator</td>
+        <td>TMap&lt;FKey, UTexture2D*&gt;</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>GenericControllerInputMappings</td>
+        <td>A map of all generic controller keys and the texture displayed in the indicator</td>
+        <td>TMap&lt;FKey, UTexture2D*&gt;</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>XboxControllerInputMappings</td>
+        <td>A map of all Xbox controller keys and the texture displayed in the indicator</td>
+        <td>TMap&lt;FKey, UTexture2D*&gt;</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>PlaystationControllerInputMappings</td>
+        <td>A map of all Playstation controller keys and the texture displayed in the indicator</td>
+        <td>TMap&lt;FKey, UTexture2D*&gt;</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>SwitchControllerInputMappings</td>
+        <td>A map of all Switch controller keys and the texture displayed in the indicator</td>
+        <td>TMap&lt;FKey, UTexture2D*&gt;</td>
+        <td></td>
+    </tr>
 </table>
 
 ### Events
@@ -50,6 +89,11 @@ You need to create a <code>USK Save Game</code> object before you can save/load 
     <tr>
         <td>OnDataLoadedEvent</td>
         <td>Event used to notify other classes when the save data is loaded</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>OnInputDeviceUpdated</td>
+        <td> Event used to notify other classes when the current input device is updated</td>
         <td></td>
     </tr>
 </table>
@@ -86,6 +130,12 @@ You need to create a <code>USK Save Game</code> object before you can save/load 
         <td><strong>Index (int)</strong><br/>The index of the save slot to check</td>
         <td><strong>bool</strong><br/>A boolean value indicating if the save slot is used</td>
     </tr>
+    <tr>
+        <td>GetInputIndicatorIcon</td>
+        <td>Get the input indicator icon for a specific action</td>
+        <td><strong>InputAction (UInputAction*)</strong><br/>The input action<br/><br/><strong>Amount (int)</strong><br/>The amount of icons to retrieve</td>
+        <td><strong>TArray&lt;UTexture2D*&gt;</strong><br/>An array of input indicator icons for the specified action</td>
+    </tr>
 </table>
 
 ## Blueprint Usage
@@ -95,6 +145,7 @@ You can save/load data using Blueprints by adding one of the following nodes (re
     <li>Ultimate Starter Kit > Save Data > Get Save Data</li>
     <li>Ultimate Starter Kit > Save Data > Save Data</li>
     <li>Ultimate Starter Kit > Save Data > Is Save Slot Used</li>
+    <li>Ultimate Starter Kit > Input > Get Input Indicator Icon</li>
 </ul>
 
 ## C++ Usage
@@ -107,7 +158,7 @@ The game instance can now be used in any of your C++ files:
 ```c++
 #include "USK/Core/USKGameInstance.h"
 
-void ATestActor::Test()
+void ATestActor::Test(UInputAction* JumpAction)
 {
     UGameInstance* CurrentGameInstance = UGameplayStatics::GetGameInstance(GetWorld());
 	UUSKGameInstance* GameInstance = dynamic_cast&lt;UUSKGameInstance*&gt;(CurrentGameInstance);
@@ -121,5 +172,7 @@ void ATestActor::Test()
         MySaveGame->CurrentLevel++;
         GameInstance->SaveData();
     }
+
+    TArray<UTexture2D*> JumpIcons = GameInstance->GetInputIndicatorIcon(JumpAction, 1);
 }
 ```

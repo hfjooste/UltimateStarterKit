@@ -48,7 +48,9 @@ theme:
         name: Switch to dark mode
 nav:
   - Getting Started: index.md
-  - Game Instance: gameinstance.md
+  - Core Functionality:
+    - Input Devices: inputdevice.md
+    - Game Instance: gameinstance.md
   - Logger: logger.md
   - Trackable Data:
     - Overview: trackabledataoverview.md
@@ -63,3 +65,6 @@ nav:
     - Character: platformercharacter.md
     - Animation Instance: platformeranimation.md
     - Shadow Decal: platformershadow.md
+  - UI & Widgets:
+    - Input Indicator: inputindicator.md
+    - Input Indicator Icon: inputindicatoricon.md

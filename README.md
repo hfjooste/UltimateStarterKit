@@ -23,27 +23,28 @@ The Ultimate Starter Kit plugin is only available for Unreal Engine 5.0.3 and ne
 ## Features
 The Ultimate Starter Kit plugin comes with the following features:
 <ul>
-    <li><a href="logger">Logger</a>: A system used to easily log info to file and via on-screen messages</li>
-    <li><a href="savedata">Save data management</a>: A system used to easily save/load game data with support for multiple save slots</li>
-    <li><a href="currency">Currency</a>: A system that is used to easily manage different types of currency</li>
-    <li><a href="audio">Audio</a>: A system used to manage the basic properties of audio files</li>
-    <li><a href="stats">Stats</a>: A system used to easily manage character stats with an optional regenerate ability</li>
-    <li><a href="platformer">3D platformer character</a>: Basic 3D platformer character and animation template</li>
+    <li><strong>Logger</strong>: A system used to easily log info to file and via on-screen messages</li>
+    <li><strong>Save data management</strong>: A system used to easily save/load game data with support for multiple save slots</li>
+    <li><strong>Input Indicators</strong>: A system used to easily detect different input devices and update the UI to display the correct indicators</li>
+    <li><strong>Currency</strong>: A system that is used to easily manage different types of currency</li>
+    <li><strong>Audio</strong>: A system used to manage the basic properties of audio files</li>
+    <li><strong>Stats</strong>: A system used to easily manage character stats with an optional regenerate ability</li>
+    <li><strong>3D platformer character</strong>: Basic 3D platformer character and animation template</li>
 </ul>
 
 ## Documentation
 - The full documentation is available <a href="https://hfjooste.github.io/UltimateStarterKit" target="_blank">here</a>
 - The Markdown documentation is also included in the repo under the <code>docs</code> directory for offline use. Or checkout the <code>docs</code> branch for the full HTML documentation
+- Each release contains the full HTML documentation and a PDF for that specific version
 - Each function is fully documented in the C++ source code
 - The demo project contains an example of each system in Blueprints
 
 ## Roadmap
 I'm planning on expanding this plugin and adding a bunch of new features. This includes:
-- Input indicators with support for different controllers/platforms
 - Settings system with save data integration
 - Menu system with support for controllers
 - Inventory management
 - Basic dialogue system
 
 ## Support
-If you have any questions, feel free to contact me through <a href="https://mastodon.gamedev.place/@hfjooste" target="_blank">Mastodon</a> or <a href="https://twitter.com/HenryJoosteDev" target="_blank">Twitter</a>. You can also use the Discussions or Issues tab on GitHub to discuss problems/features or report any issues
+If you have any questions, feel free to contact me through <a href="https://mastodon.social/@hfjooste" target="_blank">Mastodon</a> or <a href="https://twitter.com/HenryJoosteDev" target="_blank">Twitter</a>. You can also use the Discussions or Issues tab on GitHub to discuss problems/features or report any issues
