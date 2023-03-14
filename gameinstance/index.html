@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://hfjooste.github.io/UltimateStarterKit/gameinstance/">
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../inputdevice/">
       
       
         <link rel="next" href="../logger/">
@@ -221,6 +221,49 @@
     
   
   
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="true">
+          Core Functionality
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Core Functionality" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Core Functionality
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inputdevice/" class="md-nav__link">
+        Input Devices
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
@@ -278,6 +321,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#input-indicators" class="md-nav__link">
+    Input Indicators
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#api-reference" class="md-nav__link">
     API Reference
   </a>
@@ -329,6 +379,13 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -593,6 +650,69 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="false">
+          UI & Widgets
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="UI & Widgets" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          UI & Widgets
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inputindicator/" class="md-nav__link">
+        Input Indicator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inputindicatoricon/" class="md-nav__link">
+        Input Indicator Icon
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -641,6 +761,13 @@
         <li class="md-nav__item">
   <a href="#save-data" class="md-nav__link">
     Save Data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-indicators" class="md-nav__link">
+    Input Indicators
   </a>
   
 </li>
@@ -723,7 +850,7 @@
 </ul>
 
 <h2 id="using-the-game-instance">Using the Game Instance</h2>
-<p>You need to create a blueprint using the <code>USKGameInstance</code> as a parent before using the game instance. After creating your own game instance blueprint, set this as the default game instance:</p>
+<p>You need to create a blueprint using the <code>USKGameInstance_Implementation</code> as a parent before using the game instance. The input indicators feature is already configured if you use this base class. If you prefer to set this up manually, you can use <code>USKGameInstance</code> instead. After creating your own game instance blueprint, set this as the default game instance:</p>
 <ol>
     <li>Open the Project Settings</li>
     <li>Go to Project > Maps & Modes</li>
@@ -737,6 +864,8 @@
 </ul>
 
 <p><i><strong>NB:</strong> You are required to set the save slot before you can save/load data. If not, you will get a <code>nullptr</code> and might cause your game to crash</i></p>
+<h2 id="input-indicators">Input Indicators</h2>
+<p>The Game Instance will automatically detect input events and update the current input device if needed. If the input device is changed, other classes will be notified through the <code>OnInputDeviceUpdated</code> event</p>
 <h2 id="api-reference">API Reference</h2>
 <h3 id="properties">Properties</h3>
 <table>
@@ -752,6 +881,42 @@
         <td>TSubclassOf&lt;USaveGame&gt;</td>
         <td><code>nullptr</code></td>
     </tr>
+    <tr>
+        <td>InputMappingContext</td>
+        <td>The input mapping context used to extract the keys based on specific input actions</td>
+        <td>UInputMappingContext*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>KeyboardMouseInputMappings</td>
+        <td>A map of all keyboard/mouse keys and the texture displayed in the indicator</td>
+        <td>TMap&lt;FKey, UTexture2D*&gt;</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>GenericControllerInputMappings</td>
+        <td>A map of all generic controller keys and the texture displayed in the indicator</td>
+        <td>TMap&lt;FKey, UTexture2D*&gt;</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>XboxControllerInputMappings</td>
+        <td>A map of all Xbox controller keys and the texture displayed in the indicator</td>
+        <td>TMap&lt;FKey, UTexture2D*&gt;</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>PlaystationControllerInputMappings</td>
+        <td>A map of all Playstation controller keys and the texture displayed in the indicator</td>
+        <td>TMap&lt;FKey, UTexture2D*&gt;</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>SwitchControllerInputMappings</td>
+        <td>A map of all Switch controller keys and the texture displayed in the indicator</td>
+        <td>TMap&lt;FKey, UTexture2D*&gt;</td>
+        <td></td>
+    </tr>
 </table>
 
 <h3 id="events">Events</h3>
@@ -764,6 +929,11 @@
     <tr>
         <td>OnDataLoadedEvent</td>
         <td>Event used to notify other classes when the save data is loaded</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>OnInputDeviceUpdated</td>
+        <td> Event used to notify other classes when the current input device is updated</td>
         <td></td>
     </tr>
 </table>
@@ -800,6 +970,12 @@
         <td><strong>Index (int)</strong><br/>The index of the save slot to check</td>
         <td><strong>bool</strong><br/>A boolean value indicating if the save slot is used</td>
     </tr>
+    <tr>
+        <td>GetInputIndicatorIcon</td>
+        <td>Get the input indicator icon for a specific action</td>
+        <td><strong>InputAction (UInputAction*)</strong><br/>The input action<br/><br/><strong>Amount (int)</strong><br/>The amount of icons to retrieve</td>
+        <td><strong>TArray&lt;UTexture2D*&gt;</strong><br/>An array of input indicator icons for the specified action</td>
+    </tr>
 </table>
 
 <h2 id="blueprint-usage">Blueprint Usage</h2>
@@ -809,6 +985,7 @@
     <li>Ultimate Starter Kit > Save Data > Get Save Data</li>
     <li>Ultimate Starter Kit > Save Data > Save Data</li>
     <li>Ultimate Starter Kit > Save Data > Is Save Slot Used</li>
+    <li>Ultimate Starter Kit > Input > Get Input Indicator Icon</li>
 </ul>
 
 <h2 id="c-usage">C++ Usage</h2>
@@ -818,7 +995,7 @@
 <p>The game instance can now be used in any of your C++ files:</p>
 <pre><code class="language-c++">#include &quot;USK/Core/USKGameInstance.h&quot;
 
-void ATestActor::Test()
+void ATestActor::Test(UInputAction* JumpAction)
 {
     UGameInstance* CurrentGameInstance = UGameplayStatics::GetGameInstance(GetWorld());
     UUSKGameInstance* GameInstance = dynamic_cast&amp;lt;UUSKGameInstance*&amp;gt;(CurrentGameInstance);
@@ -832,6 +1009,8 @@ void ATestActor::Test()
         MySaveGame-&gt;CurrentLevel++;
         GameInstance-&gt;SaveData();
     }
+
+    TArray&lt;UTexture2D*&gt; JumpIcons = GameInstance-&gt;GetInputIndicatorIcon(JumpAction, 1);
 }
 </code></pre>
 
