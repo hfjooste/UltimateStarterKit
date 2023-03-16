@@ -131,7 +131,7 @@ private:
 	/**
 	 * @brief The delay before initializing the input indicators
 	 */
-	float InitializeInputIndicatorsDelay = 0.1f;
+	float InitializeInputIndicatorsDelay = 0.2f;
 	
 	/**
 	 * @brief The index of the save slot currently loaded
@@ -160,11 +160,6 @@ private:
 	 * @return The file name of the save slot at the specified index
 	 */
 	FString GetSaveSlotName(int Index) const;
-
-	/**
-	 * @brief Initialize the input indicators after a delay
-	 */
-	void InitializeInputIndicatorsAfterDelay();
 	
 	/**
 	 * @brief Set the default input device and add an any key binding to keep the input device updated

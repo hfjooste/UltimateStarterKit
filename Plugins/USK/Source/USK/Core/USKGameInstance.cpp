@@ -14,7 +14,16 @@
 void UUSKGameInstance::Init()
 {
 	Super::Init();
-	GetWorld()->OnWorldBeginPlay.AddUObject(this, &UUSKGameInstance::InitializeInputIndicatorsAfterDelay);
+
+	USK_LOG_INFO(*FString::Format(TEXT("Delaying input indicator initialization by {0} seconds"),
+			{ FString::SanitizeFloat(InitializeInputIndicatorsDelay, 5) }));
+
+	FLatentActionInfo LatentAction;
+	LatentAction.Linkage = 0;
+	LatentAction.CallbackTarget = this;
+	LatentAction.UUID = GetUniqueID();
+	LatentAction.ExecutionFunction = "InitializeInputIndicators";
+	UKismetSystemLibrary::Delay(GetWorld(), InitializeInputIndicatorsDelay, LatentAction);
 }
 
 /**
@@ -134,22 +143,6 @@ void UUSKGameInstance::LoadData(const int Index)
 FString UUSKGameInstance::GetSaveSlotName(const int Index) const
 {
 	return *FString::Format(TEXT("SaveData{0}"), { FString::FromInt(Index) });
-}
-
-/**
- * @brief Initialize the input indicators after a delay
- */
-void UUSKGameInstance::InitializeInputIndicatorsAfterDelay()
-{
-	USK_LOG_INFO(*FString::Format(TEXT("Delaying input indicator initialization by {0} seconds"),
-		{ FString::SanitizeFloat(InitializeInputIndicatorsDelay, 5) }));
-	
-	FLatentActionInfo LatentAction;
-	LatentAction.Linkage = 0;
-	LatentAction.CallbackTarget = this;
-	LatentAction.UUID = GetUniqueID();
-	LatentAction.ExecutionFunction = "InitializeInputIndicators";
-	UKismetSystemLibrary::RetriggerableDelay(GetWorld(), InitializeInputIndicatorsDelay, LatentAction);
 }
 
 /**
