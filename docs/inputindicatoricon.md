@@ -2,7 +2,7 @@
 A widget used to display a single input indicator image 
 
 ## Dependencies
-The game instance relies on other components of this plugin to work:
+The input indicator icon relies on other components of this plugin to work:
 <ul>
     <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
 </ul>

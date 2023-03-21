@@ -2,7 +2,7 @@
 A widget used to display input indicators based on the current input device 
 
 ## Dependencies
-The game instance relies on other components of this plugin to work:
+The input indicator relies on other components of this plugin to work:
 <ul>
     <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
     <li><a href="../gameinstance">Game Instance</a>: Used to monitor for input device changes and update the icons automatically</li>

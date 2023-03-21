@@ -210,19 +210,19 @@ public:
 	 * @brief The default value of the menu item
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Navigation|Value")
-	int DefaultValue;
+	int DefaultValue = 100;
 
 	/**
 	 * @brief The minimum value of the menu item
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Navigation|Value")
-	int MinValue;
+	int MinValue = 0;
 
 	/**
 	 * @brief The maximum value of the menu item
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Navigation|Value")
-	int MaxValue;
+	int MaxValue = 100;
 
 	/**
 	 * @brief The type of navigation used by the menu item when pressing the up or down key

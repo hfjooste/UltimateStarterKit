@@ -28,13 +28,13 @@ public:
 	class UScrollBox* ScrollContainer;
 
 	/**
-	 * @brief Should the input binding automatically be added as soon as the widget is loaded
+	 * @brief Should the input binding automatically be added as soon as the widget is loaded?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|General")
 	bool AddInputBindingOnLoad;
 
 	/**
-	 * @brief Should the game automatically be paused/resumed based on the visibility of the menu
+	 * @brief Should the game automatically be paused/resumed based on the visibility of the menu?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|General")
 	bool PauseGameWhileVisible;

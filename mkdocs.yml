@@ -13,12 +13,12 @@ plugins:
       cover_subtitle: Documentation
 extra:
   social:
+    - name: Twitter
+      icon: fontawesome/brands/twitter 
+      link: https://twitter.com/hfjooste
     - name: Mastodon
       icon: fontawesome/brands/mastodon
       link: https://mastodon.social/@hfjooste
-    - name: Twitter
-      icon: fontawesome/brands/twitter 
-      link: https://twitter.com/HenryJoosteDev
     - name: GitHub
       icon: fontawesome/brands/github
       link: https://github.com/hfjooste
@@ -68,3 +68,7 @@ nav:
   - UI & Widgets:
     - Input Indicator: inputindicator.md
     - Input Indicator Icon: inputindicatoricon.md
+    - Menu: menu.md
+    - Menu Item:
+      - Menu Navigation: menunavigation.md
+      - Menu Item Widget: menuitem.md
