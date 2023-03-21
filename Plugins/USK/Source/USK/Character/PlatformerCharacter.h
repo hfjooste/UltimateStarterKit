@@ -291,11 +291,6 @@ private:
 	void AdjustCameraPosition(const float DeltaSeconds);
 
 	/**
-	 * @brief Perform a coyote jump
-	 */
-	void PerformCoyoteJump();
-
-	/**
 	 * @brief Reset the coyote jump values
 	 */
 	UFUNCTION()

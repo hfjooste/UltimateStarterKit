@@ -89,7 +89,7 @@ void APlatformerCharacter::PawnClientRestart()
 	const APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	UEnhancedInputLocalPlayerSubsystem* Subsystem =
 		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
-	Subsystem->ClearAllMappings();
+	Subsystem->RemoveMappingContext(InputMappingContext);
 	Subsystem->AddMappingContext(InputMappingContext, 0);
 }
 

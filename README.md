@@ -30,6 +30,7 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><strong>Audio</strong>: A system used to manage the basic properties of audio files</li>
     <li><strong>Stats</strong>: A system used to easily manage character stats with an optional regenerate ability</li>
     <li><strong>3D platformer character</strong>: Basic 3D platformer character and animation template</li>
+    <li><strong>Menu system</strong>: A customizable menu system with support for controllers and complex menu layouts</li>
 </ul>
 
 ## Documentation
@@ -42,9 +43,14 @@ The Ultimate Starter Kit plugin comes with the following features:
 ## Roadmap
 I'm planning on expanding this plugin and adding a bunch of new features. This includes:
 - Settings system with save data integration
-- Menu system with support for controllers
 - Inventory management
 - Basic dialogue system
 
+## Credits
+<ul>
+    <li><a href="https://www.dafont.com/comic-helvetic.font" target="_blank">Comic Helvetic Font by Alexander Pravdin</a></li>
+    <li><a href="https://freesound.org/people/broumbroum/" target="_blank">Sound Effects by Broumbroum</a></li>
+</ul>
+
 ## Support
-If you have any questions, feel free to contact me through <a href="https://mastodon.social/@hfjooste" target="_blank">Mastodon</a> or <a href="https://twitter.com/HenryJoosteDev" target="_blank">Twitter</a>. You can also use the Discussions or Issues tab on GitHub to discuss problems/features or report any issues
+If you have any questions, feel free to contact me through <a href="https://twitter.com/hfjooste" target="_blank">Twitter</a> or <a href="https://mastodon.social/@hfjooste" target="_blank">Mastodon</a>. You can also send me an email at <a href="mailto:henryjooste95@gmail.com">henryjooste95@gmail.com</a>. The Discussions or Issues tab on GitHub can also be used to discuss problems/features or report any issues
