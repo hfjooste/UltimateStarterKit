@@ -120,6 +120,13 @@ protected:
 	 * @brief Virtual function to allow custom GameInstances an opportunity to set up what it needs
 	 */
 	virtual void Init() override;
+
+	/**
+	 * @brief Virtual function called after a map is loaded
+	 * @param LoadTime The amount of time it took to load the map
+	 * @param MapName The name of the map that was loaded
+	 */
+	virtual void LoadComplete(const float LoadTime, const FString& MapName) override;
 	
 private:	
 	/**
@@ -160,6 +167,11 @@ private:
 	 * @return The file name of the save slot at the specified index
 	 */
 	FString GetSaveSlotName(int Index) const;
+
+	/**
+	 * @brief Start a timer to initialize the input indicators
+	 */
+	void InitializeInputIndicatorsAfterDelay();
 	
 	/**
 	 * @brief Set the default input device and add an any key binding to keep the input device updated

@@ -14,16 +14,18 @@
 void UUSKGameInstance::Init()
 {
 	Super::Init();
+	InitializeInputIndicatorsAfterDelay();
+}
 
-	USK_LOG_INFO(*FString::Format(TEXT("Delaying input indicator initialization by {0} seconds"),
-			{ FString::SanitizeFloat(InitializeInputIndicatorsDelay, 5) }));
-
-	FLatentActionInfo LatentAction;
-	LatentAction.Linkage = 0;
-	LatentAction.CallbackTarget = this;
-	LatentAction.UUID = GetUniqueID();
-	LatentAction.ExecutionFunction = "InitializeInputIndicators";
-	UKismetSystemLibrary::Delay(GetWorld(), InitializeInputIndicatorsDelay, LatentAction);
+/**
+ * @brief Virtual function called after a map is loaded
+ * @param LoadTime The amount of time it took to load the map
+ * @param MapName The name of the map that was loaded
+ */
+void UUSKGameInstance::LoadComplete(const float LoadTime, const FString& MapName)
+{
+	Super::LoadComplete(LoadTime, MapName);
+	InitializeInputIndicatorsAfterDelay();
 }
 
 /**
@@ -146,6 +148,22 @@ FString UUSKGameInstance::GetSaveSlotName(const int Index) const
 }
 
 /**
+ * @brief Start a timer to initialize the input indicators
+ */
+void UUSKGameInstance::InitializeInputIndicatorsAfterDelay()
+{
+	USK_LOG_INFO(*FString::Format(TEXT("Delaying input indicator initialization by {0} seconds"),
+			{ FString::SanitizeFloat(InitializeInputIndicatorsDelay, 5) }));
+
+	FLatentActionInfo LatentAction;
+	LatentAction.Linkage = 0;
+	LatentAction.CallbackTarget = this;
+	LatentAction.UUID = GetUniqueID();
+	LatentAction.ExecutionFunction = "InitializeInputIndicators";
+	UKismetSystemLibrary::Delay(GetWorld(), InitializeInputIndicatorsDelay, LatentAction);
+}
+
+/**
  * @brief Set the default input device and add an any key binding to keep the input device updated
  */
 void UUSKGameInstance::InitializeInputIndicators()
@@ -168,7 +186,7 @@ void UUSKGameInstance::InitializeInputIndicators()
 		USK_LOG_ERROR("Failed to add input binding. PlayerController is nullptr");
 		return;
 	}
-	
+
 	PlayerController->InputComponent->BindKey(EKeys::AnyKey, IE_Pressed,
 		this, &UUSKGameInstance::UpdateInputDevice);
 }
