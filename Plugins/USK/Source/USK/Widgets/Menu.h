@@ -102,31 +102,37 @@ public:
 	/**
 	 * @brief Navigate up
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void OnMenuUp();
 
 	/**
 	 * @brief Navigate down
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void OnMenuDown();
 
 	/**
 	 * @brief Navigate left
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void OnMenuLeft();
 
 	/**
 	 * @brief Navigate right
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void OnMenuRight();
 
 	/**
 	 * @brief Select the current menu item
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void OnMenuSelected();
 
 	/**
 	 * @brief Go back to a previous menu or close the menu
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void OnMenuBack();
 
 protected:
