@@ -7,6 +7,7 @@
 #include "InputMappingContext.h"
 #include "Kismet/GameplayStatics.h"
 #include "USK/Logger/Log.h"
+#include "USK/Utils/PlatformUtils.h"
 
 /**
  * @brief Virtual function to allow custom GameInstances an opportunity to set up what it needs
@@ -171,11 +172,14 @@ void UUSKGameInstance::InitializeInputIndicators()
 	USK_LOG_INFO("Setting default input device");
 
 	CurrentInputDevice = EInputDevice::Unknown;
-#if PLATFORM_DESKTOP || PLATFORM_WINDOWS || PLATFORM_LINUX || PLATFORM_MAC
-	UpdateInputDevice(EKeys::SpaceBar);
-#else
-	UpdateInputDevice(EKeys::Gamepad_FaceButton_Bottom);
-#endif
+	if (UPlatformUtils::IsDesktop())
+	{
+		UpdateInputDevice(EKeys::SpaceBar);	
+	}
+	else
+	{
+		UpdateInputDevice(EKeys::Gamepad_FaceButton_Bottom);
+	}
 
 	OnInputDeviceUpdated.Broadcast();
 
@@ -252,18 +256,17 @@ EInputDevice UUSKGameInstance::GetInputDevice(const FKey Key)
 		return EInputDevice::KeyboardMouse;
 	}
 
-	const FString Platform = UGameplayStatics::GetPlatformName();
-	if (Platform.Contains("xbox"))
+	if (UPlatformUtils::IsXbox())
 	{
 		return EInputDevice::XboxController;
 	}
 
-	if (Platform.Contains("ps") || Platform.Contains("station"))
+	if (UPlatformUtils::IsPlaystation())
 	{
 		return EInputDevice::PlaystationController;
 	}
 
-	if (Platform.Contains("nintendo") || Platform.Contains("switch"))
+	if (UPlatformUtils::IsSwitch())
 	{
 		return EInputDevice::SwitchController;
 	}

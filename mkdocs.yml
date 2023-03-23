@@ -72,3 +72,7 @@ nav:
     - Menu Item:
       - Menu Navigation: menunavigation.md
       - Menu Item Widget: menuitem.md
+  - Utils:
+    - Platform:
+      - Platform Type: platformtype.md
+      - Platform Utils: platformutils.md
