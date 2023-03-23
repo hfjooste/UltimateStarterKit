@@ -7,6 +7,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Logger/Log.h"
+#include "USK/Utils/PlatformUtils.h"
 
 /**
  * @brief Overridable native event for when the widget has been constructed in the editor
@@ -33,15 +34,13 @@ void UMenuItem::NativeConstruct()
 	USK_LOG_TRACE("Setting default value");
 	CurrentValue = FMath::Clamp(DefaultValue, MinValue, MaxValue);
 	
-	if (!HideOnConsoles)
+	if (!HideOnConsoles || !UPlatformUtils::IsConsole())
 	{
 		return;
 	}
 
-#if !PLATFORM_WINDOWS && !PLATFORM_MAC && !PLATFORM_LINUX
 	USK_LOG_INFO("Hiding menu item on console");
 	SetVisibility(ESlateVisibility::Collapsed);
-#endif
 }
 
 /**
