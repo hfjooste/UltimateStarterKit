@@ -16,7 +16,7 @@ All the supported menu navigation types
 		<td>Highlight a different menu item</td>
 	</tr>
 	<tr>
-		<td>IncreaseDecreaseValu</td>
+		<td>IncreaseDecreaseValue</td>
 		<td>Increase or decrease the value</td>
 	</tr>
 </table>

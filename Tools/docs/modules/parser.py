@@ -1,3 +1,5 @@
+# Created by Henry Jooste
+
 import os
 import re
 
@@ -88,7 +90,9 @@ class Parser:
         html = "\n## Values\n<table>\n\t<tr>\n\t\t<th>Value</th>\n\t\t<th>Description</th>\n\t</tr>"
         enum_sections = self.content.replace("};", "").split("/*")[2:]
         for section in enum_sections:
-            value = section.split("*/")[1].strip()[:-1]
+            value = section.split("*/")[1].strip()
+            if value.endswith(","):
+                value = value[:-1]
             description = section.split("@brief")[1].split("*")[0].strip()
             html += "\n\t<tr>"
             html += f"\n\t\t<td>{value}</td>"

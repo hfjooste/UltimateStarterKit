@@ -40,7 +40,7 @@ The types of supported platform types
 		<td>Android (any architecture)</td>
 	</tr>
 	<tr>
-		<td>IO</td>
+		<td>IOS</td>
 		<td>iOS</td>
 	</tr>
 </table>
