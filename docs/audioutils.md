@@ -19,13 +19,13 @@ The <code>AudioUtils</code> relies on other components of this plugin to work:
 	<tr>
 		<td>PlaySound2D</td>
 		<td>Play a 2D sound</td>
-		<td><strong>WorldContext (const UObject*)</strong><br/>The top level object representing a map<br/><br/><strong>SoundFX (USoundBase*)</strong><br/>The USoundBase to play</td>
+		<td><strong>WorldContext (UObject*)</strong><br/>The top level object representing a map<br/><br/><strong>SoundFX (USoundBase*)</strong><br/>The USoundBase to play</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>PlayRandomSound2D</td>
 		<td>Play a random 2D sound</td>
-		<td><strong>WorldContext (const UObject*)</strong><br/>The top level object representing a map<br/><br/><strong>SoundFX (TArray<USoundBase*>)</strong><br/>The array of USoundBase to select the random sound from</td>
+		<td><strong>WorldContext (UObject*)</strong><br/>The top level object representing a map<br/><br/><strong>SoundFX (TArray<USoundBase*>)</strong><br/>The array of USoundBase to select the random sound from</td>
 		<td></td>
 	</tr>
 	<tr>

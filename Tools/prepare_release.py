@@ -16,8 +16,11 @@ os.system(f"python \"{docs}\" --input \"Core\\USKGameInstance\" --output gameins
 os.system(f"python \"{docs}\" --input \"Data\\TrackableData\" --output trackabledata")
 os.system(f"python \"{docs}\" --input \"Data\\TrackableDataComponent\" --output trackabledatacomponent")
 
+os.system(f"python \"{docs}\" --input \"Utils\\ConfigUtils\" --output configutils")
 os.system(f"python \"{docs}\" --input \"Utils\\Platform\" --output platformtype")
 os.system(f"python \"{docs}\" --input \"Utils\\PlatformUtils\" --output platformutils")
+os.system(f"python \"{docs}\" --input \"Utils\\ProjectUtils\" --output projectutils")
+
 
 os.system(f"python \"{docs}\" --input \"Widgets\\InputIndicator\" --output inputindicator --widget InputIndicator_Implementation")
 os.system(f"python \"{docs}\" --input \"Widgets\\InputIndicatorIcon\" --output inputindicatoricon --widget InputIndicatorIcon_Implementation")

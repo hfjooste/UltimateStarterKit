@@ -360,10 +360,12 @@ class Parser:
             for line in lines:
                 if "@param" in line:
                     param_name = line.strip().split("@param ")[1].split(" ")[0].strip()
-                    param_type = lines[len(lines) - 1].split(f" {param_name}")[0]
+                    param_type = lines[len(lines) - 1].split(f" {param_name}")[0].replace("const", "").strip()
+                    if " " in param_type:
+                        param_type = param_type.split(" ")[-1].strip()
                     if "," in param_type:
                         param_type = param_type.split(",")[1].strip()
-                    else:
+                    elif "(" in param_type:
                         param_type = param_type.split("(")[1].strip()
                     params.append({
                         "name": param_name,
