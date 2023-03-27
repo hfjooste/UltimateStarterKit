@@ -11,13 +11,16 @@
 class UMenuItem;
 
 /**
- * @brief Base class for all menus
+ * @brief A widget used to display menu items and handle navigation between the items
  */
 UCLASS()
 class USK_API UMenu : public UUserWidget
 {
 	GENERATED_BODY()
-	
+
+	/**
+	 * @brief Event used to handle the back/close action of the menu
+	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMenuOnBack);
 	
 public:

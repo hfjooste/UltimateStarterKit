@@ -86,3 +86,6 @@ site/
 
 # Packaged Builds
 Release/
+
+# Python Scripts
+__pycache__

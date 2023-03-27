@@ -10,7 +10,7 @@
 #include "InputIndicator.generated.h"
 
 /**
- * @brief Widget used to display input indicators based on the current input device 
+ * @brief A widget used to display input indicators based on the current input device and input action
  */
 UCLASS()
 class USK_API UInputIndicator : public UUserWidget

@@ -5,6 +5,9 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "AudioUtils.generated.h"
 
+/**
+ * @brief The audio utils class is used to easily play sound effects
+ */
 UCLASS()
 class USK_API UAudioUtils : public UBlueprintFunctionLibrary
 {

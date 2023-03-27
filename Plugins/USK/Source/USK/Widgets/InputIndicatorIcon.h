@@ -7,7 +7,7 @@
 #include "InputIndicatorIcon.generated.h"
 
 /**
- * @brief An input indicator displaying a single image 
+ * @brief A widget used to display a single input indicator image 
  */
 UCLASS()
 class USK_API UInputIndicatorIcon : public UUserWidget
