@@ -12,14 +12,21 @@ class UInputAction;
 class UInputMappingContext;
 
 /**
- * @brief Game instance with support for saving/loading data
+ * @brief A base game instance with support for saving and loading game data using multiple save slots
  */
 UCLASS()
 class USK_API UUSKGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 
+	/**
+	 * @brief Event used to notify other classes when the save data is loaded
+	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameInstanceOnDataLoadedDelegate);
+
+	/**
+	 * @brief Event used to notify other classes when the current input device is updated
+	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameInstanceOnInputDeviceUpdatedDelegate);
 	
 public:

@@ -8,14 +8,22 @@
 #include "MenuItem.generated.h"
 
 /**
- * @brief Base class for all menu items 
+ * @brief A widget used to display a title, text and value in the form of a menu item
  */
 UCLASS()
 class USK_API UMenuItem : public UUserWidget
 {
 	GENERATED_BODY()
 
+	/**
+	 * @brief Event used to notify other classes that the menu item was selected
+	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMenuItemOnSelected);
+
+	/**
+	 * @brief Event used to notify other classes that the menu item was selected
+	 * @param Value The new value of the menu item
+	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMenuItemOnValueChanged, int, Value);
 
 public:

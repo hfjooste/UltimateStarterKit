@@ -6,7 +6,7 @@
 #include "MenuNavigation.generated.h"
 
 /**
- * @brief The types of supported menu navigation 
+ * @brief All the supported menu navigation types
  */
 UENUM(BlueprintType)
 enum class EMenuNavigation : uint8

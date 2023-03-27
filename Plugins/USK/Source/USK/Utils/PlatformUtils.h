@@ -7,7 +7,7 @@
 #include "PlatformUtils.generated.h"
 
 /**
- * @brief Utils class used for platform detection 
+ * @brief A Blueprint Function Library class used for platform detection
  */
 UCLASS()
 class USK_API UPlatformUtils : public UBlueprintFunctionLibrary
