@@ -58,25 +58,25 @@ The data to track is configured by adding items to the <code>Data</code> map. Th
 	<tr>
 		<td>GetValue</td>
 		<td>Get the amount of the data</td>
-		<td><strong>Name (const FName)</strong><br/>The name of the data item</td>
+		<td><strong>Name (FName)</strong><br/>The name of the data item</td>
 		<td><strong>float</strong><br/>The current amount of the data item</td>
 	</tr>
 	<tr>
 		<td>GetValuePercentage</td>
 		<td>Get the value of the data as a percentage of to the max value</td>
-		<td><strong>Name (const FName)</strong><br/>The name of the data item</td>
+		<td><strong>Name (FName)</strong><br/>The name of the data item</td>
 		<td><strong>float</strong><br/>The value of the data as a percentage of to the max value</td>
 	</tr>
 	<tr>
 		<td>Add</td>
 		<td>Add an amount to the data</td>
-		<td><strong>Name (const FName)</strong><br/>The name of the data item<br/><br/><strong>Amount (const float)</strong><br/>The amount to add</td>
+		<td><strong>Name (FName)</strong><br/>The name of the data item<br/><br/><strong>Amount (float)</strong><br/>The amount to add</td>
 		<td><strong>float</strong><br/>The new amount of the data item</td>
 	</tr>
 	<tr>
 		<td>Remove</td>
 		<td>Remove an amount from the data</td>
-		<td><strong>Name (const FName)</strong><br/>The name of the data item<br/><br/><strong>Amount (const float)</strong><br/>The amount to remove</td>
+		<td><strong>Name (FName)</strong><br/>The name of the data item<br/><br/><strong>Amount (float)</strong><br/>The amount to remove</td>
 		<td><strong>float</strong><br/>The new amount of the data item</td>
 	</tr>
 </table>

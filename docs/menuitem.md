@@ -318,7 +318,7 @@ You can add the following widgets to enable extra functionality:
 	<tr>
 		<td>SetHighlightedState</td>
 		<td>Set the highlighted state of the menu item</td>
-		<td><strong>IsHighlighted (bool)</strong><br/>Is the menu item highlighted?<br/><br/><strong>PlayHighlightedSound (const bool)</strong><br/>Should the highlighted sound effect be played?</td>
+		<td><strong>IsHighlighted (bool)</strong><br/>Is the menu item highlighted?<br/><br/><strong>PlayHighlightedSound (bool)</strong><br/>Should the highlighted sound effect be played?</td>
 		<td></td>
 	</tr>
 	<tr>

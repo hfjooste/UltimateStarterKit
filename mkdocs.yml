@@ -73,6 +73,8 @@ nav:
       - Menu Navigation: menunavigation.md
       - Menu Item Widget: menuitem.md
   - Utils:
+    - Config Utils: configutils.md
     - Platform:
       - Platform Type: platformtype.md
       - Platform Utils: platformutils.md
+    - Project Utils: projectutils.md
