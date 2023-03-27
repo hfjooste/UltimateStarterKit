@@ -532,6 +532,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#features" class="md-nav__link">
     Features
   </a>
@@ -541,33 +548,6 @@
         <li class="md-nav__item">
   <a href="#components" class="md-nav__link">
     Components
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api-reference" class="md-nav__link">
-    API Reference
-  </a>
-  
-    <nav class="md-nav" aria-label="API Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blueprint-usage" class="md-nav__link">
-    Blueprint Usage
   </a>
   
 </li>
@@ -883,6 +863,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#features" class="md-nav__link">
     Features
   </a>
@@ -892,33 +879,6 @@
         <li class="md-nav__item">
   <a href="#components" class="md-nav__link">
     Components
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api-reference" class="md-nav__link">
-    API Reference
-  </a>
-  
-    <nav class="md-nav" aria-label="API Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blueprint-usage" class="md-nav__link">
-    Blueprint Usage
   </a>
   
 </li>
@@ -945,7 +905,13 @@
   <h1>Character</h1>
 
 <h2 id="introduction">Introduction</h2>
-<p>The 3D platformer character extends the base character class and adds some features used by popular 3D platformers</p>
+<p>Base character that can be used for 3D platformer games</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>The <code>PlatformerCharacter</code> relies on other components of this plugin to work:</p>
+<ul>
+    <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+</ul>
+
 <h2 id="features">Features</h2>
 <p>The following features are included in the 3D platformer character class:</p>
 <ol>
@@ -959,14 +925,27 @@
 
 <p>All these features can be configured to meet your needs and can also be disabled</p>
 <h2 id="components">Components</h2>
-<p>The 3D platformer character adds the following components compared to the base character class:</p>
-<ul>
-    <li>SpringArmComponent: The spring arm component responsible for controlling the distance of the camera</li>
-    <li>CameraComponent: The camera used by the character</li>
-</ul>
+<p>The <code>PlatformerCharacter</code> uses the following components:</p>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+    </tr>
+    <tr>
+        <td>SpringArmComponent</td>
+        <td>Base character that can be used for 3D platformer games</td>
+        <td>USpringArmComponent*</td>
+    </tr>
+    <tr>
+        <td>CameraComponent</td>
+        <td>The camera used by the character</td>
+        <td>UCameraComponent*</td>
+    </tr>
+<table>
 
-<h2 id="api-reference">API Reference</h2>
-<h3 id="properties">Properties</h3>
+## API Reference
+### Properties
 <table>
     <tr>
         <th>Property</th>
@@ -1007,7 +986,7 @@
     <tr>
         <td>JumpSoundEffects</td>
         <td>An array of sound effects played when jumping</td>
-        <td>TArray&lt;USoundBase&gt;</td>
+        <td>TArray&lt;USoundBase*&gt;</td>
         <td></td>
     </tr>
     <tr>
@@ -1020,12 +999,12 @@
         <td>JumpParticleFxSpawnOffset</td>
         <td>The offset applied to the location of the jump particles when spawning</td>
         <td>FVector</td>
-        <td>(0.0f, 0.0f, 0.0f)</td>
+        <td></td>
     </tr>
     <tr>
         <td>LandedSoundEffects</td>
         <td>An array of sound effects played when landing</td>
-        <td>TArray&lt;USoundBase&gt;</td>
+        <td>TArray&lt;USoundBase*&gt;</td>
         <td></td>
     </tr>
     <tr>
@@ -1038,7 +1017,7 @@
         <td>LandParticleFxSpawnOffset</td>
         <td>The offset applied to the location of the land particles when spawning</td>
         <td>FVector</td>
-        <td>(0.0f, 0.0f, 0.0f)</td>
+        <td></td>
     </tr>
     <tr>
         <td>VariableJumpHeight</td>
@@ -1081,12 +1060,6 @@
         <td>Can the character perform a double jump?</td>
         <td>bool</td>
         <td>true</td>
-    </tr>
-    <tr>
-        <td>IsDoubleJumping</td>
-        <td>Is the character double jumping?</td>
-        <td>bool</td>
-        <td>false</td>
     </tr>
     <tr>
         <td>CanCoyoteJump</td>
@@ -1138,8 +1111,8 @@
     </tr>
 </table>
 
-<h2 id="blueprint-usage">Blueprint Usage</h2>
-<p>There is no additional functions exposed to Blueprints. Just create the character and add it to your level</p>
+## Blueprint Usage
+There is no additional functions exposed to Blueprints. Just create the character and add it to your level
 
 
 

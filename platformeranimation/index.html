@@ -546,6 +546,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#api-reference" class="md-nav__link">
     API Reference
   </a>
@@ -869,6 +876,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#api-reference" class="md-nav__link">
     API Reference
   </a>
@@ -917,7 +931,13 @@
   <h1>Animation Instance</h1>
 
 <h2 id="introduction">Introduction</h2>
-<p>The plugin includes an animation template that can be used on your 3D platformer characters</p>
+<p>Base animation instance for a 3D platformer character</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>The <code>PlatformerAnimationInstance</code> relies on other components of this plugin to work:</p>
+<ul>
+    <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+</ul>
+
 <h2 id="api-reference">API Reference</h2>
 <h3 id="properties">Properties</h3>
 <table>
@@ -926,24 +946,6 @@
         <th>Description</th>
         <th>Type</th>
         <th>Default Value</th>
-    </tr>
-    <tr>
-        <td>MovementSpeed</td>
-        <td>The movement speed fo the character</td>
-        <td>float</td>
-        <td>0.0f</td>
-    </tr>
-    <tr>
-        <td>IsInAir</td>
-        <td>Is the character currently in the air?</td>
-        <td>bool</td>
-        <td>false</td>
-    </tr>
-    <tr>
-        <td>IsDoubleJumping</td>
-        <td>Is the character double jumping?</td>
-        <td>bool</td>
-        <td>false</td>
     </tr>
     <tr>
         <td>IdleAnimation</td>
@@ -986,6 +988,24 @@
         <td>The animation used when the character is landing</td>
         <td>UAnimSequence*</td>
         <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>MovementSpeed</td>
+        <td>The movement speed fo the character</td>
+        <td>float</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>IsInAir</td>
+        <td>Is the character currently in the air?</td>
+        <td>bool</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>IsDoubleJumping</td>
+        <td>Is the character double jumping?</td>
+        <td>bool</td>
+        <td></td>
     </tr>
 </table>
 

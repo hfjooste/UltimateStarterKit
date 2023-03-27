@@ -560,11 +560,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-usage" class="md-nav__link">
-    API Usage
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
   </a>
   
-    <nav class="md-nav" aria-label="API Usage">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-reference" class="md-nav__link">
+    API Reference
+  </a>
+  
+    <nav class="md-nav" aria-label="API Reference">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -876,11 +883,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-usage" class="md-nav__link">
-    API Usage
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
   </a>
   
-    <nav class="md-nav" aria-label="API Usage">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-reference" class="md-nav__link">
+    API Reference
+  </a>
+  
+    <nav class="md-nav" aria-label="API Reference">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -931,8 +945,14 @@
   <h1>Shadow Decal</h1>
 
 <h2 id="introduction">Introduction</h2>
-<p>A decal used as a shadow to indicate where the character will land</p>
-<h2 id="api-usage">API Usage</h2>
+<p>Decal used to draw a shadow beneath a character when the character is in the air</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>The <code>ShadowDecal</code> relies on other components of this plugin to work:</p>
+<ul>
+    <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+</ul>
+
+<h2 id="api-reference">API Reference</h2>
 <h3 id="functions">Functions</h3>
 <table>
     <tr>
@@ -950,7 +970,7 @@
 </table>
 
 <h2 id="blueprint-usage">Blueprint Usage</h2>
-<p>You can initialize a shadow decal using Blueprints by adding the following node (requires a reference to the <code>Shadow Decal Instance</code>):</p>
+<p>You can use the <code>ShadowDecal</code> using Blueprints by adding one of the following nodes:</p>
 <ul>
     <li>Ultimate Starter Kit > Shadow Decal > Initialize</li>
 </ul>
@@ -959,13 +979,13 @@
 <p>Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:</p>
 <pre><code class="language-c++">PublicDependencyModuleNames.Add(&quot;USK&quot;);
 </code></pre>
-<p>The shadow decal can now be initialized in any of your C++ files:</p>
+<p>The <code>ShadowDecal</code> can now be used in any of your C++ files:</p>
 <pre><code class="language-c++">#include &quot;USK/Character/ShadowDecal.h&quot;
 
-void ATestCharacter::Test()
+void ATestActor::Test()
 {
-    // ShadowDecal is a pointer to the AShadowDecal actor
-    ShadowDecal-&gt;Initialize(this);
+    // ShadowDecal is a pointer to the AShadowDecal
+    ShadowDecal-&gt;Initialize(OwnerCharacter);
 }
 </code></pre>
 

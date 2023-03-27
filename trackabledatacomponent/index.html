@@ -392,6 +392,20 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    Data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#api-reference" class="md-nav__link">
     API Reference
   </a>
@@ -890,6 +904,20 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    Data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#api-reference" class="md-nav__link">
     API Reference
   </a>
@@ -959,7 +987,16 @@
   <h1>Component</h1>
 
 <h2 id="introduction">Introduction</h2>
-<p>A component that is used to easily manage different types of actor data. The data to track is configured by adding items to the <code>Data</code> map. The component should be added to the actor/character containing the data</p>
+<p>A component that is used to easily manage/track different types of actor data</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>The <code>TrackableDataComponent</code> relies on other components of this plugin to work:</p>
+<ul>
+    <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+    <li><a href="../gameinstance">Game Instance</a>: Used to monitor for input device changes and handle saving/loading game data</li>
+</ul>
+
+<h2 id="data">Data</h2>
+<p>The data to track is configured by adding items to the <code>Data</code> map. The component should be added to the actor/character containing the data</p>
 <h2 id="api-reference">API Reference</h2>
 <h3 id="properties">Properties</h3>
 <table>
@@ -986,20 +1023,13 @@
     </tr>
     <tr>
         <td>OnValueZero</td>
-        <td>Event that is broadcasted every time the data value reaches 0</td>
-        <td>
-            <strong>Name (FName)</strong><br/>The name of the data item
-        </td>
+        <td>Event used to notify other classes every time the data value reaches 0</td>
+        <td><strong>Name (FName)</strong><br/>The name of the data item</td>
     </tr>
     <tr>
         <td>OnValueUpdated</td>
-        <td>Event that is broadcasted every time the data value reaches 0</td>
-        <td>
-            <strong>Name (FName)</strong><br/>The name of the data item<br/><br/>
-            <strong>Value (float)</strong><br/>The current value of the data item
-            <br/><br/>
-            <strong>ValuePercentage (float)</strong><br/>The percentage of the current value compared to the max value of the data item
-        </td>
+        <td>Event used to notify other classes every time the data value is updated</td>
+        <td><strong>Name (FName)</strong><br/>The name of the data item<br/><br/><strong>Value (FName)</strong><br/>The current value of the data item<br/><br/><strong>ValuePercentage (FName)</strong><br/>The percentage of the current value compared to the max value of the data item</td>
     </tr>
 </table>
 
@@ -1014,37 +1044,31 @@
     <tr>
         <td>GetValue</td>
         <td>Get the amount of the data</td>
-        <td><strong>Name (FName)</strong><br/>The name of the data item</td>
+        <td><strong>Name (const FName)</strong><br/>The name of the data item</td>
         <td><strong>float</strong><br/>The current amount of the data item</td>
     </tr>
     <tr>
         <td>GetValuePercentage</td>
         <td>Get the value of the data as a percentage of to the max value</td>
-        <td><strong>Name (FName)</strong><br/>The name of the data item</td>
+        <td><strong>Name (const FName)</strong><br/>The name of the data item</td>
         <td><strong>float</strong><br/>The value of the data as a percentage of to the max value</td>
     </tr>
     <tr>
         <td>Add</td>
         <td>Add an amount to the data</td>
-        <td>
-            <strong>Name (FName)</strong><br/>The name of the data item<br/><br/>
-            <strong>Amount (float)</strong><br/>The amount to add
-        </td>
+        <td><strong>Name (const FName)</strong><br/>The name of the data item<br/><br/><strong>Amount (const float)</strong><br/>The amount to add</td>
         <td><strong>float</strong><br/>The new amount of the data item</td>
     </tr>
     <tr>
         <td>Remove</td>
         <td>Remove an amount from the data</td>
-        <td>
-            <strong>Name (FName)</strong><br/>The name of the data item<br/><br/>
-            <strong>Amount (float)</strong><br/>The amount to remove
-        </td>
+        <td><strong>Name (const FName)</strong><br/>The name of the data item<br/><br/><strong>Amount (const float)</strong><br/>The amount to remove</td>
         <td><strong>float</strong><br/>The new amount of the data item</td>
     </tr>
 </table>
 
 <h2 id="blueprint-usage">Blueprint Usage</h2>
-<p>You can easily manage the data using Blueprints by adding one of the following nodes:</p>
+<p>You can use the <code>TrackableDataComponent</code> using Blueprints by adding one of the following nodes:</p>
 <ul>
     <li>Ultimate Starter Kit > Trackable Data > Get Value</li>
     <li>Ultimate Starter Kit > Trackable Data > Get Value Percentage</li>
@@ -1056,17 +1080,16 @@
 <p>Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:</p>
 <pre><code class="language-c++">PublicDependencyModuleNames.Add(&quot;USK&quot;);
 </code></pre>
-<p>The <code>Trackable Data Component</code> can now be used in any of your C++ files:</p>
-<pre><code>#include &quot;USK/Logger/Log.h&quot;
+<p>The <code>TrackableDataComponent</code> can now be used in any of your C++ files:</p>
+<pre><code class="language-c++">#include &quot;USK/Data/TrackableDataComponent.h&quot;
 
 void ATestActor::Test()
 {
-    // StatsTracker is a pointer to the UStatsComponent
-
-    float Health = StatsTracker-&gt;GetValue(&quot;HEALTH&quot;);
-    Health = StatsTracker-&gt;Add(&quot;HEALTH&quot;, 50.0f);
-    Health = StatsTracker-&gt;Remove(&quot;HEALTH&quot;, 75.0f);
-    float HealthPercentage = StatsTracker-&gt;GetValuePercentage(&quot;HEALTH&quot;);
+    // TrackableDataComponent is a pointer to the UTrackableDataComponent
+    float Value = TrackableDataComponent-&gt;GetValue(Name);
+    float ValuePercentage = TrackableDataComponent-&gt;GetValuePercentage(Name);
+    float AddValue = TrackableDataComponent-&gt;Add(Name, Amount);
+    float RemoveValue = TrackableDataComponent-&gt;Remove(Name, Amount);
 }
 </code></pre>
 

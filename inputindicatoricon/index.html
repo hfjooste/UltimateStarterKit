@@ -636,40 +636,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#api-reference" class="md-nav__link">
-    API Reference
-  </a>
-  
-    <nav class="md-nav" aria-label="API Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blueprint-usage" class="md-nav__link">
-    Blueprint Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#c-usage" class="md-nav__link">
-    C++ Usage
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -903,40 +869,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#api-reference" class="md-nav__link">
-    API Reference
-  </a>
-  
-    <nav class="md-nav" aria-label="API Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blueprint-usage" class="md-nav__link">
-    Blueprint Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#c-usage" class="md-nav__link">
-    C++ Usage
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -959,9 +891,9 @@
   <h1>Input Indicator Icon</h1>
 
 <h2 id="introduction">Introduction</h2>
-<p>A widget used to display a single input indicator image </p>
+<p>A widget used to display a single input indicator image</p>
 <h2 id="dependencies">Dependencies</h2>
-<p>The input indicator icon relies on other components of this plugin to work:</p>
+<p>The <code>InputIndicatorIcon</code> relies on other components of this plugin to work:</p>
 <ul>
     <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
 </ul>
@@ -977,24 +909,34 @@
     <tr>
         <td>Container</td>
         <td>The size box container used to resize the image</td>
-        <td>USizeBox</td>
+        <td>USizeBox*</td>
     </tr>
     <tr>
         <td>Image</td>
         <td>The image used to display the input indicator</td>
-        <td>UImage</td>
+        <td>UImage*</td>
+    </tr>
+<table>
+
+## API Reference
+### Properties
+<table>
+    <tr>
+        <th>Property</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Default Value</th>
     </tr>
 </table>
 
-<h2 id="api-reference">API Reference</h2>
-<h3 id="functions">Functions</h3>
+### Functions
 <table>
     <tr>
         <th>Name</th>
         <th>Description</th>
         <th>Params</th>
         <th>Return</th>
-    </tr>    
+    </tr>
     <tr>
         <td>UpdateIcon</td>
         <td>Update the icon</td>
@@ -1003,23 +945,27 @@
     </tr>
 </table>
 
-<h2 id="blueprint-usage">Blueprint Usage</h2>
-<p>You can update the widget using Blueprints by adding one of the following nodes (requires a reference to the <code>Input Indicator Icon</code>):</p>
+## Blueprint Usage
+You can use the <code>InputIndicatorIcon</code> using Blueprints by adding one of the following nodes:
 <ul>
     <li>Ultimate Starter Kit > UI > Update Icon</li>
 </ul>
 
-<h2 id="c-usage">C++ Usage</h2>
-<p>Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:</p>
+## C++ Usage
+Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:
+
 <pre><code class="language-c++">PublicDependencyModuleNames.Add(&quot;USK&quot;);
 </code></pre>
-<p>The input indicator icon can now be used in any of your C++ files:</p>
+
+
+The <code>InputIndicatorIcon</code> can now be used in any of your C++ files:
+
 <pre><code class="language-c++">#include &quot;USK/Widgets/InputIndicatorIcon.h&quot;
 
-void ATestActor::Test(UTexture2D* JumpIndicatorIcon)
+void ATestActor::Test()
 {
-    //InputIndicatorIcon is a reference to a UInputIndicatorIcon widget
-    InputIndicatorIcon-&gt;UpdateIcon(100.0f, JumpIndicatorIcon);
+    // InputIndicatorIcon is a pointer to the UInputIndicatorIcon
+    InputIndicatorIcon-&gt;UpdateIcon(Size, Icon);
 }
 </code></pre>
 

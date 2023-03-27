@@ -469,49 +469,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-reference" class="md-nav__link">
-    API Reference
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
   </a>
   
-    <nav class="md-nav" aria-label="API Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#components" class="md-nav__link">
     Components
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blueprint-usage" class="md-nav__link">
-    Blueprint Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#c-usage" class="md-nav__link">
-    C++ Usage
   </a>
   
 </li>
@@ -890,49 +856,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-reference" class="md-nav__link">
-    API Reference
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
   </a>
   
-    <nav class="md-nav" aria-label="API Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#components" class="md-nav__link">
     Components
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blueprint-usage" class="md-nav__link">
-    Blueprint Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#c-usage" class="md-nav__link">
-    C++ Usage
   </a>
   
 </li>
@@ -959,23 +891,30 @@
   <h1>Music Player</h1>
 
 <h2 id="introduction">Introduction</h2>
-<p>The music player can be used to play, pause and stop music. It also allows you to easily adjust the volume of the music</p>
-<h2 id="api-reference">API Reference</h2>
-<h3 id="components">Components</h3>
+<p>Actor responsible for playing, pausing and stopping music. It also allows you to adjust music volume</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>The <code>inal</code> relies on other components of this plugin to work:</p>
+<ul>
+    <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+</ul>
+
+<h2 id="components">Components</h2>
+<p>The <code>inal</code> uses the following components:</p>
 <table>
     <tr>
         <th>Name</th>
-        <th>Type</th>
         <th>Description</th>
+        <th>Type</th>
     </tr>
     <tr>
         <td>AudioPlayer</td>
+        <td>Actor responsible for playing, pausing and stopping music. It also allows you to adjust music volume</td>
         <td>UAudioComponent*</td>
-        <td>The audio player component is responsible for the music playback</td>
     </tr>
-</table>
+<table>
 
-<h3 id="properties">Properties</h3>
+## API Reference
+### Properties
 <table>
     <tr>
         <th>Property</th>
@@ -991,7 +930,7 @@
     </tr>
 </table>
 
-<h3 id="functions">Functions</h3>
+### Functions
 <table>
     <tr>
         <th>Name</th>
@@ -1001,7 +940,7 @@
     </tr>
     <tr>
         <td>SetVolume</td>
-        <td>Adjust the playback volume of the music </td>
+        <td>Adjust the playback volume of the music</td>
         <td><strong>Volume (float)</strong><br/>The new volume of the music</td>
         <td></td>
     </tr>
@@ -1025,8 +964,8 @@
     </tr>
 </table>
 
-<h2 id="blueprint-usage">Blueprint Usage</h2>
-<p>You can play sounds using Blueprints by adding one of the following nodes (requires a reference to a <code>Music Player</code> actor):</p>
+## Blueprint Usage
+You can use the <code>inal</code> using Blueprints by adding one of the following nodes:
 <ul>
     <li>Ultimate Starter Kit > Audio > Set Volume</li>
     <li>Ultimate Starter Kit > Audio > Play</li>
@@ -1034,20 +973,24 @@
     <li>Ultimate Starter Kit > Audio > Stop</li>
 </ul>
 
-<h2 id="c-usage">C++ Usage</h2>
-<p>Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:</p>
+## C++ Usage
+Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:
+
 <pre><code class="language-c++">PublicDependencyModuleNames.Add(&quot;USK&quot;);
 </code></pre>
-<p>The currency system can now be used in any of your C++ files:</p>
+
+
+The <code>inal</code> can now be used in any of your C++ files:
+
 <pre><code class="language-c++">#include &quot;USK/Audio/MusicPlayer.h&quot;
 
 void ATestActor::Test()
 {
-    // MusicPlayer is a pointer to a Music Player actor
-    MusicPlayer-&gt;SetVolume(2.0f);
-    MusicPlayer-&gt;Pause();
-    MusicPlayer-&gt;Play();
-    MusicPlayer-&gt;Stop();
+    // inal is a pointer to the final
+    inal-&gt;SetVolume(Volume);
+    inal-&gt;Play();
+    inal-&gt;Pause();
+    inal-&gt;Stop();
 }
 </code></pre>
 

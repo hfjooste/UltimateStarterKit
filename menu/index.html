@@ -650,54 +650,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#api-reference" class="md-nav__link">
-    API Reference
-  </a>
-  
-    <nav class="md-nav" aria-label="API Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blueprint-usage" class="md-nav__link">
-    Blueprint Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#c-usage" class="md-nav__link">
-    C++ Usage
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -917,54 +869,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#api-reference" class="md-nav__link">
-    API Reference
-  </a>
-  
-    <nav class="md-nav" aria-label="API Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blueprint-usage" class="md-nav__link">
-    Blueprint Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#c-usage" class="md-nav__link">
-    C++ Usage
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -987,9 +891,9 @@
   <h1>Menu</h1>
 
 <h2 id="introduction">Introduction</h2>
-<p>A widget used to display menu items and handle navigation between the items. There's also an optional scrolling feature that can be enabled by adding an optional scroll box to the widget</p>
+<p>A widget used to display menu items and handle navigation between the items</p>
 <h2 id="dependencies">Dependencies</h2>
-<p>The menu relies on other components of this plugin to work:</p>
+<p>The <code>Menu</code> relies on other components of this plugin to work:</p>
 <ul>
     <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
 </ul>
@@ -1005,12 +909,12 @@
     <tr>
         <td>ScrollContainer</td>
         <td>Scroll container used for large menus with many items</td>
-        <td>UScrollBox</td>
+        <td>UScrollBox*</td>
     </tr>
-</table>
+<table>
 
-<h2 id="api-reference">API Reference</h2>
-<h3 id="properties">Properties</h3>
+## API Reference
+### Properties
 <table>
     <tr>
         <th>Property</th>
@@ -1022,13 +926,13 @@
         <td>AddInputBindingOnLoad</td>
         <td>Should the input binding automatically be added as soon as the widget is loaded?</td>
         <td>bool</td>
-        <td>false</td>
+        <td></td>
     </tr>
     <tr>
         <td>PauseGameWhileVisible</td>
         <td>Should the game automatically be paused/resumed based on the visibility of the menu?</td>
         <td>bool</td>
-        <td>false</td>
+        <td></td>
     </tr>
     <tr>
         <td>SelectedSFX</td>
@@ -1086,7 +990,7 @@
     </tr>
 </table>
 
-<h3 id="events">Events</h3>
+### Events
 <table>
     <tr>
         <th>Name</th>
@@ -1100,14 +1004,14 @@
     </tr>
 </table>
 
-<h3 id="functions">Functions</h3>
+### Functions
 <table>
     <tr>
         <th>Name</th>
         <th>Description</th>
         <th>Params</th>
         <th>Return</th>
-    </tr>    
+    </tr>
     <tr>
         <td>OnMenuUp</td>
         <td>Navigate up</td>
@@ -1146,8 +1050,8 @@
     </tr>
 </table>
 
-<h2 id="blueprint-usage">Blueprint Usage</h2>
-<p>You can update the widget using Blueprints by adding one of the following nodes (requires a reference to the <code>Menu</code>):</p>
+## Blueprint Usage
+You can use the <code>Menu</code> using Blueprints by adding one of the following nodes:
 <ul>
     <li>Ultimate Starter Kit > UI > On Menu Up</li>
     <li>Ultimate Starter Kit > UI > On Menu Down</li>
@@ -1157,16 +1061,20 @@
     <li>Ultimate Starter Kit > UI > On Menu Back</li>
 </ul>
 
-<h2 id="c-usage">C++ Usage</h2>
-<p>Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:</p>
+## C++ Usage
+Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:
+
 <pre><code class="language-c++">PublicDependencyModuleNames.Add(&quot;USK&quot;);
 </code></pre>
-<p>The menu can now be used in any of your C++ files:</p>
+
+
+The <code>Menu</code> can now be used in any of your C++ files:
+
 <pre><code class="language-c++">#include &quot;USK/Widgets/Menu.h&quot;
 
 void ATestActor::Test()
 {
-    //Menu is a reference to a UMenu widget
+    // Menu is a pointer to the UMenu
     Menu-&gt;OnMenuUp();
     Menu-&gt;OnMenuDown();
     Menu-&gt;OnMenuLeft();

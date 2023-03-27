@@ -622,47 +622,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#api-reference" class="md-nav__link">
-    API Reference
-  </a>
-  
-    <nav class="md-nav" aria-label="API Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blueprint-usage" class="md-nav__link">
-    Blueprint Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#c-usage" class="md-nav__link">
-    C++ Usage
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -910,47 +869,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#api-reference" class="md-nav__link">
-    API Reference
-  </a>
-  
-    <nav class="md-nav" aria-label="API Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blueprint-usage" class="md-nav__link">
-    Blueprint Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#c-usage" class="md-nav__link">
-    C++ Usage
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -973,12 +891,12 @@
   <h1>Input Indicator</h1>
 
 <h2 id="introduction">Introduction</h2>
-<p>A widget used to display input indicators based on the current input device </p>
+<p>A widget used to display input indicators based on the current input device and input action</p>
 <h2 id="dependencies">Dependencies</h2>
-<p>The input indicator relies on other components of this plugin to work:</p>
+<p>The <code>InputIndicator</code> relies on other components of this plugin to work:</p>
 <ul>
     <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
-    <li><a href="../gameinstance">Game Instance</a>: Used to monitor for input device changes and update the icons automatically</li>
+    <li><a href="../gameinstance">Game Instance</a>: Used to monitor for input device changes and handle saving/loading game data</li>
 </ul>
 
 <h2 id="required-widgets">Required Widgets</h2>
@@ -992,12 +910,12 @@
     <tr>
         <td>Container</td>
         <td>The container used to display multiple images</td>
-        <td>UHorizontalBox</td>
+        <td>UHorizontalBox*</td>
     </tr>
-</table>
+<table>
 
-<h2 id="api-reference">API Reference</h2>
-<h3 id="properties">Properties</h3>
+## API Reference
+### Properties
 <table>
     <tr>
         <th>Property</th>
@@ -1031,14 +949,14 @@
     </tr>
 </table>
 
-<h3 id="functions">Functions</h3>
+### Functions
 <table>
     <tr>
         <th>Name</th>
         <th>Description</th>
         <th>Params</th>
         <th>Return</th>
-    </tr>    
+    </tr>
     <tr>
         <td>UpdateAction</td>
         <td>Update the input action displayed by the widget</td>
@@ -1047,23 +965,27 @@
     </tr>
 </table>
 
-<h2 id="blueprint-usage">Blueprint Usage</h2>
-<p>You can update the widget using Blueprints by adding one of the following nodes (requires a reference to the <code>Input Indicator</code>):</p>
+## Blueprint Usage
+You can use the <code>InputIndicator</code> using Blueprints by adding one of the following nodes:
 <ul>
     <li>Ultimate Starter Kit > UI > Update Action</li>
 </ul>
 
-<h2 id="c-usage">C++ Usage</h2>
-<p>Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:</p>
+## C++ Usage
+Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:
+
 <pre><code class="language-c++">PublicDependencyModuleNames.Add(&quot;USK&quot;);
 </code></pre>
-<p>The input indicator can now be used in any of your C++ files:</p>
+
+
+The <code>InputIndicator</code> can now be used in any of your C++ files:
+
 <pre><code class="language-c++">#include &quot;USK/Widgets/InputIndicator.h&quot;
 
-void ATestActor::Test(UInputAction* JumpAction)
+void ATestActor::Test()
 {
-    //InputIndicator is a reference to a UInputIndicator widget
-    InputIndicator-&gt;UpdateAction(JumpAction, 100.0f);
+    // InputIndicator is a pointer to the UInputIndicator
+    InputIndicator-&gt;UpdateAction(NewAction, NewAmount);
 }
 </code></pre>
 

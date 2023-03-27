@@ -707,68 +707,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#optional-widgets" class="md-nav__link">
-    Optional Widgets
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#optional-animations" class="md-nav__link">
-    Optional Animations
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api-reference" class="md-nav__link">
-    API Reference
-  </a>
-  
-    <nav class="md-nav" aria-label="API Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blueprint-usage" class="md-nav__link">
-    Blueprint Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#c-usage" class="md-nav__link">
-    C++ Usage
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -933,68 +871,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#optional-widgets" class="md-nav__link">
-    Optional Widgets
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#optional-animations" class="md-nav__link">
-    Optional Animations
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api-reference" class="md-nav__link">
-    API Reference
-  </a>
-  
-    <nav class="md-nav" aria-label="API Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blueprint-usage" class="md-nav__link">
-    Blueprint Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#c-usage" class="md-nav__link">
-    C++ Usage
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1017,15 +893,15 @@
   <h1>Menu Item Widget</h1>
 
 <h2 id="introduction">Introduction</h2>
-<p>A widget used to display text in the form of a menu item. It contains different states and can also be used to adjust values (e.g. in settings)</p>
+<p>A widget used to display a title, text and value in the form of a menu item</p>
 <h2 id="dependencies">Dependencies</h2>
-<p>The menu relies on other components of this plugin to work:</p>
+<p>The <code>MenuItem</code> relies on other components of this plugin to work:</p>
 <ul>
     <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
 </ul>
 
 <h2 id="required-widgets">Required Widgets</h2>
-<p>You need to add the following before you can compile a menu item widget:</p>
+<p>You need to add the following before you can compile the <code>MenuItem</code> widget:</p>
 <table>
     <tr>
         <th>Name</th>
@@ -1035,12 +911,12 @@
     <tr>
         <td>NormalText</td>
         <td>The TextBlock used to display the text of the menu item while not highlighted</td>
-        <td>UTextBlock</td>
+        <td>UTextBlock*</td>
     </tr>
-</table>
+<table>
 
-<h2 id="optional-widgets">Optional Widgets</h2>
-<p>The following can be added to a menu item widget to enable extra functionality:</p>
+## Optional Widgets
+You can add the following widgets to enable extra functionality:
 <table>
     <tr>
         <th>Name</th>
@@ -1050,47 +926,47 @@
     <tr>
         <td>Title</td>
         <td>The TextBlock used to display the title of the menu item</td>
-        <td>UTextBlock</td>
+        <td>UTextBlock*</td>
     </tr>
     <tr>
         <td>HighlightedText</td>
         <td>The TextBlock used to display the text of the menu item while highlighted</td>
-        <td>UTextBlock</td>
+        <td>UTextBlock*</td>
     </tr>
     <tr>
         <td>BorderLeft</td>
         <td>The border displayed on the left of the menu item</td>
-        <td>UImage</td>
+        <td>UImage*</td>
     </tr>
     <tr>
         <td>BorderRight</td>
         <td>The border displayed on the right of the menu item</td>
-        <td>UImage</td>
+        <td>UImage*</td>
     </tr>
     <tr>
         <td>BorderBackground</td>
         <td>The background border display in the menu item</td>
-        <td>UImage</td>
+        <td>UImage*</td>
     </tr>
     <tr>
         <td>ButtonLeft</td>
         <td>The button displayed on the left of the menu item</td>
-        <td>UImage</td>
+        <td>UImage*</td>
     </tr>
     <tr>
         <td>ButtonRight</td>
         <td>The button displayed on the right of the menu item</td>
-        <td>UImage</td>
+        <td>UImage*</td>
     </tr>
     <tr>
         <td>ButtonBackground</td>
         <td>The background button display in the menu item</td>
-        <td>UImage</td>
+        <td>UImage*</td>
     </tr>
-</table>
+<table>
 
-<h2 id="optional-animations">Optional Animations</h2>
-<p>The following animations can be added to a menu item widget:</p>
+## Optional Animations
+You can add the following widgets to enable extra functionality:
 <table>
     <tr>
         <th>Name</th>
@@ -1100,10 +976,10 @@
         <td>HighlightedAnimation</td>
         <td>The animation played when the menu item is highlighted</td>
     </tr>
-</table>
+<table>
 
-<h2 id="api-reference">API Reference</h2>
-<h3 id="properties">Properties</h3>
+## API Reference
+### Properties
 <table>
     <tr>
         <th>Property</th>
@@ -1112,16 +988,22 @@
         <th>Default Value</th>
     </tr>
     <tr>
+        <td>HighlightedAnimation</td>
+        <td>The animation played when the menu item is highlighted</td>
+        <td>UWidgetAnimation*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
         <td>FocusByDefault</td>
         <td>Should the menu item be focused by default?</td>
         <td>bool</td>
-        <td>false</td>
+        <td></td>
     </tr>
     <tr>
         <td>HideOnConsoles</td>
         <td>Should the menu item be hidden on consoles?</td>
         <td>bool</td>
-        <td>false</td>
+        <td></td>
     </tr>
     <tr>
         <td>TitleText</td>
@@ -1145,13 +1027,13 @@
         <td>BorderNormalColor</td>
         <td>The color of the border when not highlighted</td>
         <td>FLinearColor</td>
-        <td>Transparent Black (#00000000)</td>
+        <td></td>
     </tr>
     <tr>
         <td>BorderHighlightedColor</td>
         <td>The color of the border when highlighted</td>
         <td>FLinearColor</td>
-        <td>Transparent Black (#00000000)</td>
+        <td></td>
     </tr>
     <tr>
         <td>BorderNormalImage</td>
@@ -1193,13 +1075,13 @@
         <td>BackgroundNormalColor</td>
         <td>The color of the button when not highlighted</td>
         <td>FLinearColor</td>
-        <td>Transparent Black (#00000000)</td>
+        <td></td>
     </tr>
     <tr>
         <td>BackgroundHighlightedColor</td>
         <td>The color of the button when highlighted</td>
         <td>FLinearColor</td>
-        <td>Transparent Black (#00000000)</td>
+        <td></td>
     </tr>
     <tr>
         <td>BackgroundNormalImage</td>
@@ -1256,10 +1138,10 @@
         <td>100</td>
     </tr>
     <tr>
-        <td>VerticalNavigation</td>
+        <td>VerticalNavigation </td>
         <td>The type of navigation used by the menu item when pressing the up or down key</td>
         <td>EMenuNavigation</td>
-        <td>HighlightItem</td>
+        <td></td>
     </tr>
     <tr>
         <td>MenuItemUp</td>
@@ -1274,10 +1156,10 @@
         <td><code>nullptr</code></td>
     </tr>
     <tr>
-        <td>HorizontalNavigation</td>
+        <td>HorizontalNavigation </td>
         <td>The type of navigation used by the menu item when pressing the left or right key</td>
         <td>EMenuNavigation</td>
-        <td>HighlightItem</td>
+        <td></td>
     </tr>
     <tr>
         <td>MenuItemLeft</td>
@@ -1293,7 +1175,7 @@
     </tr>
 </table>
 
-<h3 id="events">Events</h3>
+### Events
 <table>
     <tr>
         <th>Name</th>
@@ -1308,18 +1190,18 @@
     <tr>
         <td>OnValueChanged</td>
         <td>Event used to notify other classes that the menu item's value was updated</td>
-        <td><strong>Value (int)</strong><br/>The current value of the menu item</td>
+        <td><strong>Value (int)</strong><br/>The new value of the menu item</td>
     </tr>
 </table>
 
-<h3 id="functions">Functions</h3>
+### Functions
 <table>
     <tr>
         <th>Name</th>
         <th>Description</th>
         <th>Params</th>
         <th>Return</th>
-    </tr>    
+    </tr>
     <tr>
         <td>SetText</td>
         <td>Set the text display in the menu item</td>
@@ -1329,7 +1211,7 @@
     <tr>
         <td>SetHighlightedState</td>
         <td>Set the highlighted state of the menu item</td>
-        <td><strong>IsHighlighted (bool)</strong><br/>Is the menu item highlighted?<br/><br/><strong>PlayHighlightedSound (bool)</strong><br/>Should the highlighted sound effect be played?</td>
+        <td><strong>IsHighlighted (bool)</strong><br/>Is the menu item highlighted?<br/><br/><strong>PlayHighlightedSound (const bool)</strong><br/>Should the highlighted sound effect be played?</td>
         <td></td>
     </tr>
     <tr>
@@ -1346,8 +1228,8 @@
     </tr>
 </table>
 
-<h2 id="blueprint-usage">Blueprint Usage</h2>
-<p>You can update the widget using Blueprints by adding one of the following nodes (requires a reference to the <code>Menu Item</code>):</p>
+## Blueprint Usage
+You can use the <code>MenuItem</code> using Blueprints by adding one of the following nodes:
 <ul>
     <li>Ultimate Starter Kit > UI > Set Text</li>
     <li>Ultimate Starter Kit > UI > Set Highlighted State</li>
@@ -1355,20 +1237,24 @@
     <li>Ultimate Starter Kit > UI > Update Value</li>
 </ul>
 
-<h2 id="c-usage">C++ Usage</h2>
-<p>Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:</p>
+## C++ Usage
+Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:
+
 <pre><code class="language-c++">PublicDependencyModuleNames.Add(&quot;USK&quot;);
 </code></pre>
-<p>The menu item can now be used in any of your C++ files:</p>
-<pre><code class="language-c++">#include &quot;USK/Widgets/Menu.h&quot;
+
+
+The <code>MenuItem</code> can now be used in any of your C++ files:
+
+<pre><code class="language-c++">#include &quot;USK/Widgets/MenuItem.h&quot;
 
 void ATestActor::Test()
 {
-    //MenuItem is a reference to a UMenuItem widget
-    MenuItem-&gt;SetText(&quot;Play Game&quot;);
-    MenuItem-&gt;SetHighlightedState(true, true);
+    // MenuItem is a pointer to the UMenuItem
+    MenuItem-&gt;SetText(Text);
+    MenuItem-&gt;SetHighlightedState(IsHighlighted, PlayHighlightedSound);
     int Value = MenuItem-&gt;GetValue();
-    MenuItem-&gt;UpdateValue(true);
+    MenuItem-&gt;UpdateValue(IncreaseValue);
 }
 </code></pre>
 

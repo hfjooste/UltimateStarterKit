@@ -1017,7 +1017,7 @@
 <h2 id="introduction">Introduction</h2>
 <p>A base game instance with support for saving and loading game data using multiple save slots</p>
 <h2 id="dependencies">Dependencies</h2>
-<p>The game instance relies on other components of this plugin to work:</p>
+<p>The <code>USKGameInstance</code> relies on other components of this plugin to work:</p>
 <ul>
     <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
 </ul>
@@ -1051,8 +1051,8 @@
     <tr>
         <td>SaveGameClass</td>
         <td>The class that holds the data that should be saved/loaded</td>
-        <td>TSubclassOf&lt;USaveGame&gt;</td>
-        <td><code>nullptr</code></td>
+        <td>TSubclassOf&lt;UUSKSaveGame&gt;</td>
+        <td></td>
     </tr>
     <tr>
         <td>InputMappingContext</td>
@@ -1106,7 +1106,7 @@
     </tr>
     <tr>
         <td>OnInputDeviceUpdated</td>
-        <td> Event used to notify other classes when the current input device is updated</td>
+        <td>Event used to notify other classes when the current input device is updated</td>
         <td></td>
     </tr>
 </table>
@@ -1121,25 +1121,25 @@
     </tr>
     <tr>
         <td>GetSaveData</td>
-        <td>Return the save data from the current save slot. You will need to cast this to your specific save game class before you can access the data</td>
+        <td>Get the save data that is currently loaded</td>
         <td></td>
-        <td><strong>USaveGame*</strong><br/>A reference to the current save data</td>
+        <td><strong>UUSKSaveGame*</strong><br/>A reference to the current save data</td>
     </tr>
     <tr>
         <td>SaveData</td>
-        <td>Save the data to the current save slot</td>
+        <td>Save the modified data currently in memory</td>
         <td></td>
         <td></td>
     </tr>
     <tr>
         <td>SetCurrentSaveSlot</td>
-        <td>Set the current save slot used to save/load data. You are required to set the save slot before using the save manager. If not, you will get a <code>nullptr</code> and might cause your game to crash</td>
-        <td><strong>Index (int)</strong><br/>The index of the save slot to use</td>
+        <td>Set the current save slot</td>
+        <td><strong>Index (int)</strong><br/>The index of the save slot</td>
         <td></td>
     </tr>
     <tr>
         <td>IsSaveSlotUsed</td>
-        <td>Returns a boolean value indicating if the specified save slot is in use (contains data)</td>
+        <td>Check if a save slot is used</td>
         <td><strong>Index (int)</strong><br/>The index of the save slot to check</td>
         <td><strong>bool</strong><br/>A boolean value indicating if the save slot is used</td>
     </tr>
@@ -1152,11 +1152,11 @@
 </table>
 
 <h2 id="blueprint-usage">Blueprint Usage</h2>
-<p>You can save/load data using Blueprints by adding one of the following nodes (requires a reference to the <code>USK Game Instance</code>):</p>
+<p>You can use the <code>USKGameInstance</code> using Blueprints by adding one of the following nodes:</p>
 <ul>
-    <li>Ultimate Starter Kit > Save Data > Set Current Save Slot</li>
     <li>Ultimate Starter Kit > Save Data > Get Save Data</li>
     <li>Ultimate Starter Kit > Save Data > Save Data</li>
+    <li>Ultimate Starter Kit > Save Data > Set Current Save Slot</li>
     <li>Ultimate Starter Kit > Save Data > Is Save Slot Used</li>
     <li>Ultimate Starter Kit > Input > Get Input Indicator Icon</li>
 </ul>
@@ -1165,25 +1165,17 @@
 <p>Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:</p>
 <pre><code class="language-c++">PublicDependencyModuleNames.Add(&quot;USK&quot;);
 </code></pre>
-<p>The game instance can now be used in any of your C++ files:</p>
+<p>The <code>USKGameInstance</code> can now be used in any of your C++ files:</p>
 <pre><code class="language-c++">#include &quot;USK/Core/USKGameInstance.h&quot;
 
-void ATestActor::Test(UInputAction* JumpAction)
+void ATestActor::Test()
 {
-    UGameInstance* CurrentGameInstance = UGameplayStatics::GetGameInstance(GetWorld());
-    UUSKGameInstance* GameInstance = dynamic_cast&amp;lt;UUSKGameInstance*&amp;gt;(CurrentGameInstance);
-
-    bool IsSlotInUse = GameInstance-&gt;IsSaveSlotUsed(0);
-    if (IsSlotInUse)
-    {
-        GameInstance-&gt;SetCurrentSaveSlot(0);
-        USaveGame* SaveGame = GameInstance-&gt;GetSaveData();
-        UMySaveGame* MySaveGame = dynamic_cast&amp;lt;UMySaveGame*&amp;gt;(SaveGame);
-        MySaveGame-&gt;CurrentLevel++;
-        GameInstance-&gt;SaveData();
-    }
-
-    TArray&lt;UTexture2D*&gt; JumpIcons = GameInstance-&gt;GetInputIndicatorIcon(JumpAction, 1);
+    // USKGameInstance is a pointer to the UUSKGameInstance
+    UUSKSaveGame* SaveData = USKGameInstance-&gt;GetSaveData();
+    USKGameInstance-&gt;SaveData();
+    USKGameInstance-&gt;SetCurrentSaveSlot(Index);
+    bool IsSaveSlotUsedValue = USKGameInstance-&gt;IsSaveSlotUsed(Index);
+    TArray&lt;UTexture2D*&gt; InputIndicatorIcon = USKGameInstance-&gt;GetInputIndicatorIcon(InputAction, Amount);
 }
 </code></pre>
 

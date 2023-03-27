@@ -455,6 +455,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#api-reference" class="md-nav__link">
     API Reference
   </a>
@@ -876,6 +883,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#api-reference" class="md-nav__link">
     API Reference
   </a>
@@ -932,6 +946,12 @@
 
 <h2 id="introduction">Introduction</h2>
 <p>The audio utils class is used to easily play sound effects</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>The <code>AudioUtils</code> relies on other components of this plugin to work:</p>
+<ul>
+    <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+</ul>
+
 <h2 id="api-reference">API Reference</h2>
 <h3 id="functions">Functions</h3>
 <table>
@@ -944,13 +964,13 @@
     <tr>
         <td>PlaySound2D</td>
         <td>Play a 2D sound</td>
-        <td><strong>SoundFX (USoundBase*)</strong><br/>The USoundBase to play</td>
+        <td><strong>WorldContext (const UObject*)</strong><br/>The top level object representing a map<br/><br/><strong>SoundFX (USoundBase*)</strong><br/>The USoundBase to play</td>
         <td></td>
     </tr>
     <tr>
         <td>PlayRandomSound2D</td>
         <td>Play a random 2D sound</td>
-        <td><strong>SoundFX (TArray&lt;USoundBase*&gt;)</strong><br/>The array of USoundBase to select the random sound from</td>
+        <td><strong>WorldContext (const UObject*)</strong><br/>The top level object representing a map<br/><br/><strong>SoundFX (TArray<USoundBase*>)</strong><br/>The array of USoundBase to select the random sound from</td>
         <td></td>
     </tr>
     <tr>
@@ -962,16 +982,16 @@
     <tr>
         <td>PlayRandomSound</td>
         <td>Play a random sound at the specified actor's location</td>
-        <td><strong>Actor (AActor*)</strong><br/>The actor where the sound will be played<br/><br/><strong>SoundFX (TArray&lt;USoundBase*&gt;)</strong><br/>The array of USoundBase to select the random sound from</td>
+        <td><strong>Actor (AActor*)</strong><br/>The actor where the sound will be played<br/><br/><strong>SoundFX (TArray<USoundBase*>)</strong><br/>The array of USoundBase to select the random sound from</td>
         <td></td>
     </tr>
 </table>
 
 <h2 id="blueprint-usage">Blueprint Usage</h2>
-<p>You can play sounds using Blueprints by adding one of the following nodes:</p>
+<p>You can use the <code>AudioUtils</code> using Blueprints by adding one of the following nodes:</p>
 <ul>
-    <li>Ultimate Starter Kit > Audio > Play Sound 2D</li>
-    <li>Ultimate Starter Kit > Audio > Play Random Sound 2D</li>
+    <li>Ultimate Starter Kit > Audio > Play Sound2D</li>
+    <li>Ultimate Starter Kit > Audio > Play Random Sound2D</li>
     <li>Ultimate Starter Kit > Audio > Play Sound</li>
     <li>Ultimate Starter Kit > Audio > Play Random Sound</li>
 </ul>
@@ -980,24 +1000,15 @@
 <p>Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:</p>
 <pre><code class="language-c++">PublicDependencyModuleNames.Add(&quot;USK&quot;);
 </code></pre>
-<p>The currency system can now be used in any of your C++ files:</p>
+<p>The <code>AudioUtils</code> can now be used in any of your C++ files:</p>
 <pre><code class="language-c++">#include &quot;USK/Audio/AudioUtils.h&quot;
 
-void ATestActor::Test(const UObject* WorldContext)
+void ATestActor::Test()
 {
-    // SoundFx is a pointer to a USoundBase
-    UAudioUtils::PlaySound2D(WorldContext, SoundFx);
-
-    // SoundFxArray is an array of pointers to a USoundBase
-    UAudioUtils::PlayRandomSound2D(WorldContext, SoundFxArray);
-
-    // Player is a pointer to an Actor
-    // SoundFx is a pointer to a USoundBase
-    UAudioUtils::PlaySound(Player, SoundFx);
-
-    // Player is a pointer to an Actor
-    // SoundFxArray is an array of pointers to a USoundBase
-    UAudioUtils::PlayRandomSound(Player, SoundFx);
+    UAudioUtils::PlaySound2D(WorldContext, SoundFX);
+    UAudioUtils::PlayRandomSound2D(WorldContext, SoundFX);
+    UAudioUtils::PlaySound(Actor, SoundFX);
+    UAudioUtils::PlayRandomSound(Actor, SoundFX);
 }
 </code></pre>
 

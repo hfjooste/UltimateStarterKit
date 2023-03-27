@@ -1058,7 +1058,7 @@
 </table>
 
 <h2 id="blueprint-usage">Blueprint Usage</h2>
-<p>You can use the Platform Utils using Blueprints by adding one of the following nodes:</p>
+<p>You can use the <code>PlatformUtils</code> using Blueprints by adding one of the following nodes:</p>
 <ul>
     <li>Ultimate Starter Kit > Utils > Platform > Get Platform</li>
     <li>Ultimate Starter Kit > Utils > Platform > Is In Editor</li>
@@ -1085,14 +1085,30 @@
 <p>Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:</p>
 <pre><code class="language-c++">PublicDependencyModuleNames.Add(&quot;USK&quot;);
 </code></pre>
-<p>The currency system can now be used in any of your C++ files:</p>
+<p>The <code>PlatformUtils</code> can now be used in any of your C++ files:</p>
 <pre><code class="language-c++">#include &quot;USK/Utils/PlatformUtils.h&quot;
 
 void ATestActor::Test()
 {
-    EPlatform PlatformType = UPlatformUtils::GetPlatform();
-    bool IsDesktop = UPlatformUtils::IsDesktop();
-    bool IsConsole = UPlatformUtils::IsConsole();
+    EPlatform Platform = UPlatformUtils::GetPlatform();
+    bool IsInEditorValue = UPlatformUtils::IsInEditor();
+    bool IsDesktopValue = UPlatformUtils::IsDesktop();
+    bool IsWindowsValue = UPlatformUtils::IsWindows();
+    bool IsMacOSValue = UPlatformUtils::IsMacOS();
+    bool IsMacOSx86Value = UPlatformUtils::IsMacOSx86();
+    bool IsMacOSArmValue = UPlatformUtils::IsMacOSArm();
+    bool IsLinuxValue = UPlatformUtils::IsLinux();
+    bool IsConsoleValue = UPlatformUtils::IsConsole();
+    bool IsXboxValue = UPlatformUtils::IsXbox();
+    bool IsPlaystationValue = UPlatformUtils::IsPlaystation();
+    bool IsSwitchValue = UPlatformUtils::IsSwitch();
+    bool IsMobileValue = UPlatformUtils::IsMobile();
+    bool IsAndroidValue = UPlatformUtils::IsAndroid();
+    bool IsAndroidx86Value = UPlatformUtils::IsAndroidx86();
+    bool IsAndroidx64Value = UPlatformUtils::IsAndroidx64();
+    bool IsAndroidArmValue = UPlatformUtils::IsAndroidArm();
+    bool IsAndroidArm64Value = UPlatformUtils::IsAndroidArm64();
+    bool IsIOSValue = UPlatformUtils::IsIOS();
 }
 </code></pre>
 
