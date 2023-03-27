@@ -16,6 +16,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/configutils/</loc>
+         <lastmod>2023-03-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/gameinstance/</loc>
          <lastmod>2023-03-27</lastmod>
          <changefreq>daily</changefreq>
@@ -87,6 +92,11 @@
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/platformutils/</loc>
+         <lastmod>2023-03-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/projectutils/</loc>
          <lastmod>2023-03-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
