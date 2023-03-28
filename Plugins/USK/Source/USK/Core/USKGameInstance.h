@@ -43,40 +43,52 @@ public:
 	FGameInstanceOnDataLoadedDelegate OnDataLoadedEvent;
 
 	/**
+	 * @brief Is the input indicators feature enabled?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input")
+	bool IsInputIndicatorsEnabled = true;
+
+	/**
 	 * @brief The input mapping context used to extract the keys based on specific input actions
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input",
-		DisplayName = "Input Mapping Context (Optional)")
+		DisplayName = "Input Mapping Context (Optional)",
+		meta=(EditCondition = "IsInputIndicatorsEnabled", EditConditionHides))
 	UInputMappingContext* InputMappingContext;
 
 	/**
 	 * @brief A map of all keyboard/mouse keys and the texture displayed in the indicator
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input",
+		meta=(EditCondition = "IsInputIndicatorsEnabled", EditConditionHides))
 	TMap<FKey, UTexture2D*> KeyboardMouseInputMappings;
 
 	/**
 	 * @brief A map of all generic controller keys and the texture displayed in the indicator
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input",
+		meta=(EditCondition = "IsInputIndicatorsEnabled", EditConditionHides))
 	TMap<FKey, UTexture2D*> GenericControllerInputMappings;
 
 	/**
 	 * @brief A map of all Xbox controller keys and the texture displayed in the indicator
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input",
+		meta=(EditCondition = "IsInputIndicatorsEnabled", EditConditionHides))
 	TMap<FKey, UTexture2D*> XboxControllerInputMappings;
 
 	/**
 	 * @brief A map of all Playstation controller keys and the texture displayed in the indicator
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input",
+		meta=(EditCondition = "IsInputIndicatorsEnabled", EditConditionHides))
 	TMap<FKey, UTexture2D*> PlaystationControllerInputMappings;
 
 	/**
 	 * @brief A map of all Switch controller keys and the texture displayed in the indicator
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input",
+		meta=(EditCondition = "IsInputIndicatorsEnabled", EditConditionHides))
 	TMap<FKey, UTexture2D*> SwitchControllerInputMappings;
 
 	/**
@@ -112,6 +124,18 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Save Data")
 	bool IsSaveSlotUsed(int Index);
+
+	/**
+	 * @brief Enable the input indicators feature
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
+	void EnableInputIndicators();
+
+	/**
+	 * @brief Disable the input indicators feature
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
+	void DisableInputIndicators();
 
 	/**
 	 * @brief Get the input indicator icon for a specific action

@@ -42,6 +42,12 @@ The Game Instance will automatically detect input events and update the current 
 		<td></td>
 	</tr>
 	<tr>
+		<td>IsInputIndicatorsEnabled</td>
+		<td>Is the input indicators feature enabled?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
 		<td>InputMappingContext</td>
 		<td>The input mapping context used to extract the keys based on specific input actions</td>
 		<td>UInputMappingContext*</td>
@@ -131,6 +137,18 @@ The Game Instance will automatically detect input events and update the current 
 		<td><strong>bool</strong><br/>A boolean value indicating if the save slot is used</td>
 	</tr>
 	<tr>
+		<td>EnableInputIndicators</td>
+		<td>Enable the input indicators feature</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>DisableInputIndicators</td>
+		<td>Disable the input indicators feature</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>GetInputIndicatorIcon</td>
 		<td>Get the input indicator icon for a specific action</td>
 		<td><strong>InputAction (UInputAction*)</strong><br/>The input action<br/><br/><strong>Amount (int)</strong><br/>The amount of icons to retrieve</td>
@@ -145,6 +163,8 @@ You can use the <code>USKGameInstance</code> using Blueprints by adding one of t
 	<li>Ultimate Starter Kit > Save Data > Save Data</li>
 	<li>Ultimate Starter Kit > Save Data > Set Current Save Slot</li>
 	<li>Ultimate Starter Kit > Save Data > Is Save Slot Used</li>
+	<li>Ultimate Starter Kit > Input > Enable Input Indicators</li>
+	<li>Ultimate Starter Kit > Input > Disable Input Indicators</li>
 	<li>Ultimate Starter Kit > Input > Get Input Indicator Icon</li>
 </ul>
 
@@ -165,6 +185,8 @@ void ATestActor::Test()
 	USKGameInstance->SaveData();
 	USKGameInstance->SetCurrentSaveSlot(Index);
 	bool IsSaveSlotUsedValue = USKGameInstance->IsSaveSlotUsed(Index);
+	USKGameInstance->EnableInputIndicators();
+	USKGameInstance->DisableInputIndicators();
 	TArray<UTexture2D*> InputIndicatorIcon = USKGameInstance->GetInputIndicatorIcon(InputAction, Amount);
 }
 ```
