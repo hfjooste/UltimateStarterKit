@@ -81,6 +81,39 @@ bool UUSKGameInstance::IsSaveSlotUsed(const int Index)
 }
 
 /**
+ * @brief Enable the input indicators feature
+ */
+void UUSKGameInstance::EnableInputIndicators()
+{
+	if (IsInputIndicatorsEnabled)
+	{
+		USK_LOG_WARNING("Input indicators are already enabled");
+		return;
+	}
+
+	USK_LOG_INFO("Enabling input indicators");
+	IsInputIndicatorsEnabled = true;
+	InitializeInputIndicatorsAfterDelay();
+}
+
+/**
+ * @brief Disable the input indicators feature
+ */
+void UUSKGameInstance::DisableInputIndicators()
+{
+	if (!IsInputIndicatorsEnabled)
+	{
+		USK_LOG_WARNING("Input indicators are not enabled");
+		return;
+	}
+
+	USK_LOG_INFO("Disabling input indicators");
+	IsInputIndicatorsEnabled = false;
+	CurrentInputDevice = EInputDevice::Unknown;
+	OnInputDeviceUpdated.Broadcast();
+}
+
+/**
  * @brief Get the input indicator icon for a specific action
  * @param InputAction The input action
  * @param Amount The amount of icons to retrieve
@@ -153,6 +186,11 @@ FString UUSKGameInstance::GetSaveSlotName(const int Index) const
  */
 void UUSKGameInstance::InitializeInputIndicatorsAfterDelay()
 {
+	if (!IsInputIndicatorsEnabled)
+	{
+		USK_LOG_INFO("Input indicators are disabled");
+	}
+	
 	USK_LOG_INFO(*FString::Format(TEXT("Delaying input indicator initialization by {0} seconds"),
 			{ FString::SanitizeFloat(InitializeInputIndicatorsDelay, 5) }));
 
@@ -201,6 +239,11 @@ void UUSKGameInstance::InitializeInputIndicators()
  */
 void UUSKGameInstance::UpdateInputDevice(const FKey Key)
 {
+	if (!IsInputIndicatorsEnabled)
+	{
+		return;
+	}
+	
 	const EInputDevice NewInputDevice = GetInputDevice(Key);
 	if (NewInputDevice == CurrentInputDevice)
 	{
@@ -281,6 +324,11 @@ EInputDevice UUSKGameInstance::GetInputDevice(const FKey Key)
  */
 UTexture2D* UUSKGameInstance::GetInputIndicatorIconForKey(const FKey Key) const
 {
+	if (!IsInputIndicatorsEnabled)
+	{
+		return nullptr;
+	}
+	
 	switch (CurrentInputDevice)
 	{
 	case EInputDevice::KeyboardMouse:

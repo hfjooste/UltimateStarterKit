@@ -31,6 +31,9 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><strong>Stats</strong>: A system used to easily manage character stats with an optional regenerate ability</li>
     <li><strong>3D platformer character</strong>: Basic 3D platformer character and animation template</li>
     <li><strong>Menu system</strong>: A customizable menu system with support for controllers and complex menu layouts</li>
+    <li><strong>Config Utils</strong>: Extract information from different config files</li>
+    <li><strong>Platform Utils</strong>: Easily detect different platform types and architectures</li>
+    <li><strong>Project Utils</strong>: Extract project information like name, description and version</li>
 </ul>
 
 ## Documentation
