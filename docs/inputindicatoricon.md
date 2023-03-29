@@ -25,7 +25,7 @@ There is already a <code>InputIndicatorIcon_Implementation</code> that you can u
 		<td>The image used to display the input indicator</td>
 		<td>UImage*</td>
 	</tr>
-<table>
+</table>
 
 ## API Reference
 ### Properties

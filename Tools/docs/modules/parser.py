@@ -136,7 +136,7 @@ class Parser:
             html += f"\nThe {self.name} uses the following components:"
             html += "\n<table>\n\t<tr>\n\t\t<th>Name</th>\n\t\t<th>Description</th>\n\t\t<th>Type</th>\n\t</tr>"
             html += component_html
-            html += "\n<table>\n"
+            html += "\n</table>\n"
             self.output += html
         self.extract_sections(self.content)
 
@@ -161,7 +161,7 @@ class Parser:
                 html += f"You need to add the following before you can compile the {self.name} widget:"
             html += "\n<table>\n\t<tr>\n\t\t<th>Name</th>\n\t\t<th>Description</th>\n\t\t<th>Type</th>\n\t</tr>"
             html += widget_html
-            html += "\n<table>\n"
+            html += "\n</table>\n"
             self.output += html
 
     
@@ -181,7 +181,7 @@ class Parser:
             html += "\nYou can add the following widgets to enable extra functionality:"
             html += "\n<table>\n\t<tr>\n\t\t<th>Name</th>\n\t\t<th>Description</th>\n\t\t<th>Type</th>\n\t</tr>"
             html += widget_html
-            html += "\n<table>\n"
+            html += "\n</table>\n"
             self.output += html
 
 
@@ -200,7 +200,7 @@ class Parser:
             html += "\nYou can add the following widgets to enable extra functionality:"
             html += "\n<table>\n\t<tr>\n\t\t<th>Name</th>\n\t\t<th>Description</th>\n\t</tr>"
             html += anim_html
-            html += "\n<table>\n"
+            html += "\n</table>\n"
             self.output += html
 
 

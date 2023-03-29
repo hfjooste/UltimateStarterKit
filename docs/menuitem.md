@@ -20,7 +20,7 @@ You need to add the following before you can compile the <code>MenuItem</code> w
 		<td>The TextBlock used to display the text of the menu item while not highlighted</td>
 		<td>UTextBlock*</td>
 	</tr>
-<table>
+</table>
 
 ## Optional Widgets
 You can add the following widgets to enable extra functionality:
@@ -70,7 +70,7 @@ You can add the following widgets to enable extra functionality:
 		<td>The background button display in the menu item</td>
 		<td>UImage*</td>
 	</tr>
-<table>
+</table>
 
 ## Optional Animations
 You can add the following widgets to enable extra functionality:
@@ -83,7 +83,7 @@ You can add the following widgets to enable extra functionality:
 		<td>HighlightedAnimation</td>
 		<td>The animation played when the menu item is highlighted</td>
 	</tr>
-<table>
+</table>
 
 ## API Reference
 ### Properties

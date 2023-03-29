@@ -20,7 +20,7 @@ The <code>inal</code> uses the following components:
 		<td>Actor responsible for playing, pausing and stopping music. It also allows you to adjust music volume</td>
 		<td>UAudioComponent*</td>
 	</tr>
-<table>
+</table>
 
 ## API Reference
 ### Properties

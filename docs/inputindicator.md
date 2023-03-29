@@ -21,7 +21,7 @@ There is already a <code>InputIndicator_Implementation</code> that you can use i
 		<td>The container used to display multiple images</td>
 		<td>UHorizontalBox*</td>
 	</tr>
-<table>
+</table>
 
 ## API Reference
 ### Properties
