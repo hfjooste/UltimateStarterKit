@@ -572,6 +572,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../fpscounter/" class="md-nav__link">
+        FPS Counter
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../inputindicator/" class="md-nav__link">
         Input Indicator
       </a>
@@ -636,6 +650,47 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#api-reference" class="md-nav__link">
+    API Reference
+  </a>
+  
+    <nav class="md-nav" aria-label="API Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blueprint-usage" class="md-nav__link">
+    Blueprint Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-usage" class="md-nav__link">
+    C++ Usage
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -670,17 +725,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_4" type="checkbox" id="__nav_7_4" >
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7_5" type="checkbox" id="__nav_7_5" >
       
       
       
-        <label class="md-nav__link" for="__nav_7_4" tabindex="0" aria-expanded="false">
+        <label class="md-nav__link" for="__nav_7_5" tabindex="0" aria-expanded="false">
           Menu Item
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Menu Item" data-md-level="2">
-        <label class="md-nav__title" for="__nav_7_4">
+        <label class="md-nav__title" for="__nav_7_5">
           <span class="md-nav__icon md-icon"></span>
           Menu Item
         </label>
@@ -897,6 +952,47 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#api-reference" class="md-nav__link">
+    API Reference
+  </a>
+  
+    <nav class="md-nav" aria-label="API Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blueprint-usage" class="md-nav__link">
+    Blueprint Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-usage" class="md-nav__link">
+    C++ Usage
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -944,10 +1040,10 @@
         <td>The image used to display the input indicator</td>
         <td>UImage*</td>
     </tr>
-<table>
+</table>
 
-## API Reference
-### Properties
+<h2 id="api-reference">API Reference</h2>
+<h3 id="properties">Properties</h3>
 <table>
     <tr>
         <th>Property</th>
@@ -957,7 +1053,7 @@
     </tr>
 </table>
 
-### Functions
+<h3 id="functions">Functions</h3>
 <table>
     <tr>
         <th>Name</th>
@@ -973,21 +1069,17 @@
     </tr>
 </table>
 
-## Blueprint Usage
-You can use the <code>InputIndicatorIcon</code> using Blueprints by adding one of the following nodes:
+<h2 id="blueprint-usage">Blueprint Usage</h2>
+<p>You can use the <code>InputIndicatorIcon</code> using Blueprints by adding one of the following nodes:</p>
 <ul>
     <li>Ultimate Starter Kit > UI > Update Icon</li>
 </ul>
 
-## C++ Usage
-Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:
-
+<h2 id="c-usage">C++ Usage</h2>
+<p>Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:</p>
 <pre><code class="language-c++">PublicDependencyModuleNames.Add(&quot;USK&quot;);
 </code></pre>
-
-
-The <code>InputIndicatorIcon</code> can now be used in any of your C++ files:
-
+<p>The <code>InputIndicatorIcon</code> can now be used in any of your C++ files:</p>
 <pre><code class="language-c++">#include &quot;USK/Widgets/InputIndicatorIcon.h&quot;
 
 void ATestActor::Test()
