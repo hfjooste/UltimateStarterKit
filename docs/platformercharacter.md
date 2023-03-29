@@ -38,7 +38,7 @@ The <code>PlatformerCharacter</code> uses the following components:
 		<td>The camera used by the character</td>
 		<td>UCameraComponent*</td>
 	</tr>
-<table>
+</table>
 
 ## API Reference
 ### Properties

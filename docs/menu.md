@@ -20,7 +20,7 @@ You can add the following widgets to enable extra functionality:
 		<td>Scroll container used for large menus with many items</td>
 		<td>UScrollBox*</td>
 	</tr>
-<table>
+</table>
 
 ## API Reference
 ### Properties

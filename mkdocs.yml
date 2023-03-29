@@ -66,6 +66,7 @@ nav:
     - Animation Instance: platformeranimation.md
     - Shadow Decal: platformershadow.md
   - UI & Widgets:
+    - FPS Counter: fpscounter.md
     - Input Indicator: inputindicator.md
     - Input Indicator Icon: inputindicatoricon.md
     - Menu: menu.md
