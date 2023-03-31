@@ -5,6 +5,7 @@ A widget used to display a title, text and value in the form of a menu item
 The <code>MenuItem</code> relies on other components of this plugin to work:
 <ul>
 	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+	<li><a href="../audio">Audio</a>: Used to play sound effects either 2D or at a specified location</li>
 </ul>
 
 ## Required Widgets
@@ -245,10 +246,10 @@ You can add the following widgets to enable extra functionality:
 		<td>100</td>
 	</tr>
 	<tr>
-		<td>VerticalNavigation </td>
+		<td>VerticalNavigation</td>
 		<td>The type of navigation used by the menu item when pressing the up or down key</td>
 		<td>EMenuNavigation</td>
-		<td></td>
+		<td>EMenuNavigation::HighlightItem</td>
 	</tr>
 	<tr>
 		<td>MenuItemUp</td>
@@ -263,10 +264,10 @@ You can add the following widgets to enable extra functionality:
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
-		<td>HorizontalNavigation </td>
+		<td>HorizontalNavigation</td>
 		<td>The type of navigation used by the menu item when pressing the left or right key</td>
 		<td>EMenuNavigation</td>
-		<td></td>
+		<td>EMenuNavigation::HighlightItem</td>
 	</tr>
 	<tr>
 		<td>MenuItemLeft</td>

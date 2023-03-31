@@ -5,6 +5,7 @@ A widget used to display menu items and handle navigation between the items
 The <code>Menu</code> relies on other components of this plugin to work:
 <ul>
 	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+	<li><a href="../audio">Audio</a>: Used to play sound effects either 2D or at a specified location</li>
 </ul>
 
 ## Optional Widgets

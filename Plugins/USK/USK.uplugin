@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
-	"Version": 9,
-	"VersionName": "3.0.0-alpha4",
+	"Version": 10,
+	"VersionName": "3.0.0-alpha5",
 	"FriendlyName": "Ultimate Starter Kit",
 	"Description": "The Ultimate Starter Kit plugin to speed up development of Unreal Engine 5 games",
 	"Category": "Other",

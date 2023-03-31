@@ -111,9 +111,12 @@ class Parser:
         dependency_docs = ""
         if "USK/Logger/Log.h" in self.cpp_content and self.class_name != "ULog":
             dependency_docs += "\n\t<li><a href=\"../logger\">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>"
-        if "USKGameInstance" in self.file_content or "USKGameInstance" in self.cpp_content:
+        if ("USKGameInstance" in self.file_content or "USKGameInstance" in self.cpp_content) and self.class_name != "UUSKGameInstance":
             if self.class_name != "UUSKGameInstance":
                 dependency_docs += "\n\t<li><a href=\"../gameinstance\">Game Instance</a>: Used to monitor for input device changes and handle saving/loading game data</li>"
+        if "UAudioUtils" in self.cpp_content and self.class_name != "UAudioUtils":
+            if self.class_name != "UUSKGameInstance":
+                dependency_docs += "\n\t<li><a href=\"../audio\">Audio</a>: Used to play sound effects either 2D or at a specified location</li>"
         if dependency_docs != "":
             self.output += "\n## Dependencies\n"
             self.output += f"The {self.name} relies on other components of this plugin to work:\n<ul>{dependency_docs}\n</ul>\n"
@@ -223,7 +226,7 @@ class Parser:
                     continue
                 break
             type = type.replace(",", ", ")
-            name = lines[len(lines) - 1].split(type)[1].split("(")[0].strip()[:-1]
+            name = lines[len(lines) - 1].split(f"{type} ")[1].split("(")[0].strip()[:-1]
             default = ""
             if "=" in name:
                 default = name.split("=")[1].strip()
