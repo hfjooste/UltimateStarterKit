@@ -44,21 +44,21 @@ There is already a <code>FpsCounter_Implementation</code> that you can use in yo
 		<td>30</td>
 	</tr>
 	<tr>
-		<td>HighColor </td>
+		<td>HighColor</td>
 		<td>The color used to display high framerates</td>
 		<td>FLinearColor</td>
-		<td></td>
+		<td>FLinearColor::Green</td>
 	</tr>
 	<tr>
-		<td>MediumColor </td>
+		<td>MediumColor</td>
 		<td>The color used to display medium framerates</td>
 		<td>FLinearColor</td>
-		<td></td>
+		<td>FLinearColor::Yellow</td>
 	</tr>
 	<tr>
-		<td>LowColor </td>
+		<td>LowColor</td>
 		<td>The color used to display low framerates</td>
 		<td>FLinearColor</td>
-		<td></td>
+		<td>FLinearColor::Red</td>
 	</tr>
 </table>

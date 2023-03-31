@@ -1,0 +1,2 @@
+## Collision
+The item requires an actor to overlap with the item before it can be collected. Make sure you have some collider on the actor and that the intended collector can overlap with the item/collider

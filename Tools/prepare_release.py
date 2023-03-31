@@ -16,6 +16,9 @@ os.system(f"python \"{docs}\" --input \"Core\\USKGameInstance\" --output gameins
 os.system(f"python \"{docs}\" --input \"Data\\TrackableData\" --output trackabledata")
 os.system(f"python \"{docs}\" --input \"Data\\TrackableDataComponent\" --output trackabledatacomponent")
 
+os.system(f"python \"{docs}\" --input \"Items\\AllowedCollector\" --output allowedcollector")
+os.system(f"python \"{docs}\" --input \"Items\\CollectableItem\" --output collectableitem")
+
 os.system(f"python \"{docs}\" --input \"Utils\\ConfigUtils\" --output configutils")
 os.system(f"python \"{docs}\" --input \"Utils\\Platform\" --output platformtype")
 os.system(f"python \"{docs}\" --input \"Utils\\PlatformUtils\" --output platformutils")

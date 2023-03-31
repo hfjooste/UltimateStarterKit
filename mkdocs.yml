@@ -65,6 +65,9 @@ nav:
     - Character: platformercharacter.md
     - Animation Instance: platformeranimation.md
     - Shadow Decal: platformershadow.md
+  - Items:
+    - Allowed Collector: allowedcollector.md
+    - Collectable Item: collectableitem.md
   - UI & Widgets:
     - FPS Counter: fpscounter.md
     - Input Indicator: inputindicator.md

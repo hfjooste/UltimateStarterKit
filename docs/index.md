@@ -39,4 +39,6 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><a href="configutils">Config Utils</a>: Extract information from different config files</li>
     <li><a href="platformutils">Platform Utils</a>: Easily detect different platform types and architectures</li>
     <li><a href="projectutils">Project Utils</a>: Extract project information like name, description and version</li>
+    <li><a href="fpscounter">FPS Counter</a>: A widget used to display the current framerate</li>
+    <li><a href="collectableitem">Collectable Item</a>: An item that can be collected by an actor</li>
 </ul>
