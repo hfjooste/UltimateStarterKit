@@ -18,14 +18,15 @@ void ACollectableItem::NotifyActorBeginOverlap(AActor* OtherActor)
 	Super::NotifyActorBeginOverlap(OtherActor);
 	if (ShouldBeCollected(OtherActor))
 	{
-		CollectItem();
+		CollectItem(OtherActor);
 	}
 }
 
 /**
  * @brief Collect the item
+ * @param Collector A pointer to the actor that collected the item
  */
-void ACollectableItem::CollectItem()
+void ACollectableItem::CollectItem(AActor* Collector)
 {
 	USK_LOG_INFO("Collecting item");
 	
@@ -36,7 +37,7 @@ void ACollectableItem::CollectItem()
 			GetActorLocation() + CollectedParticleFxSpawnOffset);
 	}
 	
-	OnItemCollected();
+	OnItemCollected(Collector);
 	if (DestroyOnCollected)
 	{
 		Destroy();
@@ -45,8 +46,9 @@ void ACollectableItem::CollectItem()
 
 /**
  * @brief Called after the item is collected
+ * @param Collector A pointer to the actor that collected the item
  */
-void ACollectableItem::OnItemCollected_Implementation() { }
+void ACollectableItem::OnItemCollected_Implementation(AActor* Collector) { }
 
 /**
  * @brief Should the item be collected?

@@ -54,15 +54,17 @@ public:
 
 	/**
 	 * @brief Collect the item
+	 * @param Collector A pointer to the actor that collected the item
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Item")
-	void CollectItem();
+	void CollectItem(AActor* Collector);
 
 	/**
 	 * @brief Called after the item is collected
+	 * @param Collector A pointer to the actor that collected the item
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Ultimate Starter Kit|Item")
-	void OnItemCollected();
+	void OnItemCollected(AActor* Collector);
 
 protected:
 	/**
