@@ -115,8 +115,7 @@ class Parser:
             if self.class_name != "UUSKGameInstance":
                 dependency_docs += "\n\t<li><a href=\"../gameinstance\">Game Instance</a>: Used to monitor for input device changes and handle saving/loading game data</li>"
         if "UAudioUtils" in self.cpp_content and self.class_name != "UAudioUtils":
-            if self.class_name != "UUSKGameInstance":
-                dependency_docs += "\n\t<li><a href=\"../audio\">Audio</a>: Used to play sound effects either 2D or at a specified location</li>"
+            dependency_docs += "\n\t<li><a href=\"../audio\">Audio</a>: Used to play sound effects either 2D or at a specified location</li>"
         if dependency_docs != "":
             self.output += "\n## Dependencies\n"
             self.output += f"The {self.name} relies on other components of this plugin to work:\n<ul>{dependency_docs}\n</ul>\n"
