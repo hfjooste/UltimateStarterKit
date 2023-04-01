@@ -69,13 +69,13 @@ The item requires an actor to overlap with the item before it can be collected. 
 	<tr>
 		<td>CollectItem</td>
 		<td>Collect the item</td>
-		<td></td>
+		<td><strong>Collector (AActor*)</strong><br/>A pointer to the actor that collected the item</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>OnItemCollected</td>
 		<td>Called after the item is collected</td>
-		<td></td>
+		<td><strong>Collector (AActor*)</strong><br/>A pointer to the actor that collected the item</td>
 		<td></td>
 	</tr>
 </table>
@@ -100,7 +100,7 @@ The <code>CollectableItem</code> can now be used in any of your C++ files:
 void ATestActor::Test()
 {
 	// CollectableItem is a pointer to the ACollectableItem
-	CollectableItem->CollectItem();
-	CollectableItem->OnItemCollected();
+	CollectableItem->CollectItem(Collector);
+	CollectableItem->OnItemCollected(Collector);
 }
 ```
