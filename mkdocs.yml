@@ -13,6 +13,9 @@ plugins:
       cover_subtitle: Documentation
 extra:
   social:
+    - name: Sponsor Development
+      icon: fontawesome/solid/dollar-sign
+      link: https://github.com/sponsors/hfjooste
     - name: Twitter
       icon: fontawesome/brands/twitter 
       link: https://twitter.com/hfjooste
@@ -48,6 +51,8 @@ theme:
         name: Switch to dark mode
 nav:
   - Getting Started: index.md
+  - Support the Project: support.md
+  - Special Thanks: specialthanks.md
   - Core Functionality:
     - Input Devices: inputdevice.md
     - Game Instance: gameinstance.md
@@ -69,6 +74,7 @@ nav:
     - Allowed Collector: allowedcollector.md
     - Collectable Item: collectableitem.md
   - UI & Widgets:
+    - Collectable Item Icon: collectableitemicon.md
     - FPS Counter: fpscounter.md
     - Input Indicator: inputindicator.md
     - Input Indicator Icon: inputindicatoricon.md
