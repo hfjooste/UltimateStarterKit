@@ -103,172 +103,172 @@ public:
 	/**
 	 * @brief The title text displayed in the menu item
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|General")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|General")
 	FText TitleText;
 
 	/**
 	 * @brief The text displayed in the menu item
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|General")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|General")
 	FText MenuItemText;
 
 	/**
 	 * @brief The sound effect played when the menu item is highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|General")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|General")
 	USoundBase* HighlightedSFX;
 
 	/**
 	 * @brief The color of the border when not highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Border")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Border")
 	FLinearColor BorderNormalColor;
 
 	/**
 	 * @brief The color of the border when highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Border")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Border")
 	FLinearColor BorderHighlightedColor;
 
 	/**
 	 * @brief The image of the border when not highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Border")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Border")
 	UTexture2D* BorderNormalImage;
 
 	/**
 	 * @brief The image of the border when highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Border")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Border")
 	UTexture2D* BorderHighlightedImage;
 
 	/**
 	 * @brief The image of the left border when not highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Border")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Border")
 	UTexture2D* BorderLeftNormalImage;
 
 	/**
 	 * @brief The image of the left border when highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Border")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Border")
 	UTexture2D* BorderLeftHighlightedImage;
 
 	/**
 	 * @brief The image of the right border when not highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Border")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Border")
 	UTexture2D* BorderRightNormalImage;
 
 	/**
 	 * @brief The image of the right border when highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Border")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Border")
 	UTexture2D* BorderRightHighlightedImage;
 
 	/**
 	 * @brief The color of the button when not highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Background")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Background")
 	FLinearColor BackgroundNormalColor;
 
 	/**
 	 * @brief The color of the button when highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Background")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Background")
 	FLinearColor BackgroundHighlightedColor;
 
 	/**
 	 * @brief The image of the button when not highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Background")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Background")
 	UTexture2D* BackgroundNormalImage;
 
 	/**
 	 * @brief The image of the button when highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Background")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Background")
 	UTexture2D* BackgroundHighlightedImage;
 
 	/**
 	 * @brief The image of the left button when not highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Background")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Background")
 	UTexture2D* BackgroundLeftNormalImage;
 
 	/**
 	 * @brief The image of the left button when highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Background")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Background")
 	UTexture2D* BackgroundLeftHighlightedImage;
 
 	/**
 	 * @brief The image of the right button when not highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Background")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Background")
 	UTexture2D* BackgroundRightNormalImage;
 
 	/**
 	 * @brief The image of the right button when highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Background")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Background")
 	UTexture2D* BackgroundRightHighlightedImage;
 
 	/**
 	 * @brief The default value of the menu item
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Navigation|Value")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value")
 	int DefaultValue = 100;
 
 	/**
 	 * @brief The minimum value of the menu item
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Navigation|Value")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value")
 	int MinValue = 0;
 
 	/**
 	 * @brief The maximum value of the menu item
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Navigation|Value")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value")
 	int MaxValue = 100;
 
 	/**
 	 * @brief The type of navigation used by the menu item when pressing the up or down key
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Navigation")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation")
 	EMenuNavigation VerticalNavigation = EMenuNavigation::HighlightItem;
 
 	/**
 	 * @brief The menu item highlighted when the up key is pressed
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Navigation",
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation",
 		meta=(EditCondition = "VerticalNavigation == EMenuNavigation::HighlightItem", EditConditionHides))
 	UMenuItem* MenuItemUp;
 
 	/**
 	 * @brief The menu item highlighted when the down key is pressed
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Navigation",
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation",
     		meta=(EditCondition = "VerticalNavigation == EMenuNavigation::HighlightItem", EditConditionHides))
     UMenuItem* MenuItemDown;
 
 	/**
 	 * @brief The type of navigation used by the menu item when pressing the left or right key
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Navigation")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation")
 	EMenuNavigation HorizontalNavigation = EMenuNavigation::HighlightItem;
 
 	/**
 	 * @brief The menu item highlighted when the left key is pressed
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Navigation",
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation",
 		meta=(EditCondition = "HorizontalNavigation == EMenuNavigation::HighlightItem", EditConditionHides))
 	UMenuItem* MenuItemLeft;
 
 	/**
 	 * @brief The menu item highlighted when the right key is pressed
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Navigation",
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation",
 			meta=(EditCondition = "HorizontalNavigation == EMenuNavigation::HighlightItem", EditConditionHides))
 	UMenuItem* MenuItemRight;
 

@@ -25,6 +25,8 @@ os.system(f"python \"{docs}\" --input \"Utils\\PlatformUtils\" --output platform
 os.system(f"python \"{docs}\" --input \"Utils\\ProjectUtils\" --output projectutils")
 
 os.system(f"python \"{docs}\" --input \"Widgets\\CollectableItemIcon\" --output collectableitemicon")
+os.system(f"python \"{docs}\" --input \"Widgets\\CreditsEntry\" --output creditsentry")
+os.system(f"python \"{docs}\" --input \"Widgets\\CreditsWidget\" --output creditswidget")
 os.system(f"python \"{docs}\" --input \"Widgets\\FpsCounter\" --output fpscounter --widget FpsCounter_Implementation")
 os.system(f"python \"{docs}\" --input \"Widgets\\InputIndicator\" --output inputindicator --widget InputIndicator_Implementation")
 os.system(f"python \"{docs}\" --input \"Widgets\\InputIndicatorIcon\" --output inputindicatoricon --widget InputIndicatorIcon_Implementation")

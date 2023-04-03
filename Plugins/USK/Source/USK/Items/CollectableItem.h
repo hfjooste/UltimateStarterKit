@@ -18,26 +18,26 @@ public:
 	/**
 	 * @brief Should the item be destroyed after it has been collected
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Item")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Item")
 	bool DestroyOnCollected = true;
 
 	/**
 	 * @brief The type of actor that can collect the item
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Item")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Item")
 	EAllowedCollector AllowedCollector = EAllowedCollector::PossessedPawn;
 
 	/**
 	 * @brief The array of actor types that can collect the item
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Item",
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Item",
 		meta=(EditCondition = "AllowedCollector == EAllowedCollector::Custom", EditConditionHides))
 	TArray<TSubclassOf<AActor>> AllowedCollectorTypes;
 
 	/**
 	 * @brief An array of sound effects played when collecting the item
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Item|Effects")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Item|Effects")
 	TArray<USoundBase*> CollectedSoundEffects;
 	
 	/**

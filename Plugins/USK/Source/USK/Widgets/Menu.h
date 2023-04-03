@@ -33,67 +33,67 @@ public:
 	/**
 	 * @brief Should the input binding automatically be added as soon as the widget is loaded?
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|General")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|General")
 	bool AddInputBindingOnLoad;
 
 	/**
 	 * @brief Should the game automatically be paused/resumed based on the visibility of the menu?
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|General")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|General")
 	bool PauseGameWhileVisible;
 
 	/**
 	 * @brief The sound effect played when a menu item is selected
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Menu Items")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Menu Items")
 	USoundBase* SelectedSFX;
 
 	/**
 	 * @brief The sound effect played when trying to go back to a previous menu or closing the menu through the back button
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ultimate Starter Kit|UI|Menu Items")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Menu Items")
 	USoundBase* BackSFX;
 
 	/**
 	 * @brief The input mapping context used to navigate the menu
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|UI|Input")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|UI|Input")
 	UInputMappingContext* InputMappingContext;
 
 	/**
 	 * @brief The input action used to navigate up
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|UI|Input")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|UI|Input")
 	UInputAction* MenuUpInputAction;
 
 	/**
 	 * @brief The input action used to navigate down
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|UI|Input")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|UI|Input")
 	UInputAction* MenuDownInputAction;
 
 	/**
 	 * @brief The input action used to navigate left
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|UI|Input")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|UI|Input")
 	UInputAction* MenuLeftInputAction;
 
 	/**
 	 * @brief The input action used to navigate right
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|UI|Input")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|UI|Input")
     UInputAction* MenuRightInputAction;
 
 	/**
 	 * @brief The input action used to select a menu item
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|UI|Input")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|UI|Input")
 	UInputAction* MenuSelectInputAction;
 
 	/**
 	 * @brief The input action used to go back to a previous menu or close the menu
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|UI|Input")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|UI|Input")
 	UInputAction* MenuBackInputAction;
 
 	/**
