@@ -75,6 +75,9 @@ nav:
     - Collectable Item: collectableitem.md
   - UI & Widgets:
     - Collectable Item Icon: collectableitemicon.md
+    - Credits:
+      - Credits Entry: creditsentry.md
+      - Credits Widget: creditswidget.md
     - FPS Counter: fpscounter.md
     - Input Indicator: inputindicator.md
     - Input Indicator Icon: inputindicatoricon.md

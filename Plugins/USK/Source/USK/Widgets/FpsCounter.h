@@ -24,19 +24,19 @@ public:
 	/**
 	 * @brief The delay in seconds between each update
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|UI")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|UI")
 	float UpdateDelay = 0.125f;
 
 	/**
 	 * @brief A framerate that is considered high and will use the high color
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|UI")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|UI")
 	int HighFramerate = 60;
 
 	/**
 	 * @brief A framerate that is considered medium and will use the medium color
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|UI")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|UI")
 	int MediumFramerate = 30;
 
 	/**
