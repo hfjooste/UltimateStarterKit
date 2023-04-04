@@ -6,12 +6,47 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/allowedcollector/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/audio/</loc>
          <lastmod>2023-04-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/audioutils/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/collectableitem/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/collectableitemicon/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/configutils/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/creditsentry/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/creditswidget/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/fpscounter/</loc>
          <lastmod>2023-04-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -77,6 +112,31 @@
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/platformershadow/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/platformtype/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/platformutils/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/projectutils/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/specialthanks/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/support/</loc>
          <lastmod>2023-04-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
