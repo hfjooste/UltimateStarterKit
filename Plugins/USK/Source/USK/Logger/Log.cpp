@@ -1,6 +1,7 @@
 ﻿// Created by Henry Jooste
 
 #include "Log.h"
+#include "Engine.h"
 
 DEFINE_LOG_CATEGORY(LogUSK);
 
