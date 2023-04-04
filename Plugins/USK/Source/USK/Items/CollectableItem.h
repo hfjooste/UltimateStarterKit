@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "GameFramework/Actor.h"
 #include "AllowedCollector.h"
 #include "NiagaraCommon.h"
 #include "CollectableItem.generated.h"

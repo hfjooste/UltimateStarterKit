@@ -33,7 +33,7 @@ void UCreditsWidget::NativeConstruct()
  */
 void UCreditsWidget::Start()
 {
-	if (Credits.IsEmpty())
+	if (Credits.Num() <= 0)
 	{
 		USK_LOG_ERROR("Unable to show credits. No entries specified");
 		return;

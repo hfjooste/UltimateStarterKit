@@ -1,9 +1,9 @@
 {
 	"FileVersion": 3,
-	"Version": 12,
-	"VersionName": "3.0.0-alpha7",
+	"Version": 13,
+	"VersionName": "3.0.0-alpha8",
 	"FriendlyName": "Ultimate Starter Kit",
-	"Description": "The Ultimate Starter Kit plugin to speed up development of Unreal Engine 5 games",
+	"Description": "The Ultimate Starter Kit plugin to speed up development of Unreal Engine games",
 	"Category": "Other",
 	"CreatedBy": "Henry Jooste",
 	"CreatedByURL": "https://twitter.com/hfjooste",

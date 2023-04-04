@@ -133,7 +133,7 @@ bool UPlatformUtils::IsMacOSArm()
  */
 bool UPlatformUtils::IsLinux()
 {
-#if PLATFORM_LINUX || PLATFORM_LINUXARM64
+#if PLATFORM_LINUX
 	return true;
 #else
 	return false;

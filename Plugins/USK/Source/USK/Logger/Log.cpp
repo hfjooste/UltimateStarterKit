@@ -1,7 +1,7 @@
 ﻿// Created by Henry Jooste
 
 #include "Log.h"
-
+#include "Engine.h"
 #include "USK/Utils/PlatformUtils.h"
 
 DEFINE_LOG_CATEGORY(LogUSK);
