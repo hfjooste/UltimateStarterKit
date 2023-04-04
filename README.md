@@ -1,8 +1,8 @@
 # Ultimate Starter Kit
-The Ultimate Starter Kit plugin to speed up development of Unreal Engine 5 games
+The Ultimate Starter Kit plugin to speed up development of Unreal Engine games
 
 ## Requirements
-The Ultimate Starter Kit plugin is only available for Unreal Engine 5.0.3 and newer. The plugin also depends on the following plugins:
+The Ultimate Starter Kit plugin is only available for Unreal Engine 4.27 and newer. The plugin also depends on the following plugins:
 <ol>
     <li>Niagara</li>
     <li>Enchanced Input</li>

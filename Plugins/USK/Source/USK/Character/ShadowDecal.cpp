@@ -27,7 +27,7 @@ void AShadowDecal::Initialize(ACharacter* OwnerCharacter)
 
 	const FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget,
 		EAttachmentRule::KeepRelative, EAttachmentRule::KeepWorld, true);
-	AttachToActor(Owner, AttachmentRules);
+	AttachToActor(OwnerCharacter, AttachmentRules);
 	GetDecal()->SetVisibility(false, true);
 }
 
