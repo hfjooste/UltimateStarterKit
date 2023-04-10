@@ -60,4 +60,4 @@ I'm planning on expanding this plugin and adding a bunch of new features. This i
 </ul>
 
 ## Support
-If you have any questions, feel free to contact me through <a href="https://twitter.com/hfjooste" target="_blank">Twitter</a> or <a href="https://mastodon.social/@hfjooste" target="_blank">Mastodon</a>. You can also send me an email at <a href="mailto:henryjooste95@gmail.com">henryjooste95@gmail.com</a>. The Discussions or Issues tab on GitHub can also be used to discuss problems/features or report any issues
+If you have any questions, feel free to contact me through <a href="https://mastodon.gamedev.place/@hfjooste" target="_blank">Mastodon</a> or <a href="https://twitter.com/hfjooste" target="_blank">Twitter</a>. You can also send me an email at <a href="mailto:henryjooste95@gmail.com">henryjooste95@gmail.com</a>. The Discussions or Issues tab on GitHub can also be used to discuss problems/features or report any issues
