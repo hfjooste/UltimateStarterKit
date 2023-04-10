@@ -3,6 +3,7 @@
 
 # Jetbrains Rider
 .idea/
+Plugins/Developer/RiderLink
 
 # Visual Studio Code
 .ignore

@@ -8,21 +8,6 @@ The <code>MenuItem</code> relies on other components of this plugin to work:
 	<li><a href="../audio">Audio</a>: Used to play sound effects either 2D or at a specified location</li>
 </ul>
 
-## Required Widgets
-You need to add the following before you can compile the <code>MenuItem</code> widget:
-<table>
-	<tr>
-		<th>Name</th>
-		<th>Description</th>
-		<th>Type</th>
-	</tr>
-	<tr>
-		<td>NormalText</td>
-		<td>The TextBlock used to display the text of the menu item while not highlighted</td>
-		<td>UTextBlock*</td>
-	</tr>
-</table>
-
 ## Optional Widgets
 You can add the following widgets to enable extra functionality:
 <table>
@@ -37,8 +22,23 @@ You can add the following widgets to enable extra functionality:
 		<td>UTextBlock*</td>
 	</tr>
 	<tr>
+		<td>NormalText</td>
+		<td>The TextBlock used to display the text of the menu item while not highlighted</td>
+		<td>UTextBlock*</td>
+	</tr>
+	<tr>
 		<td>HighlightedText</td>
 		<td>The TextBlock used to display the text of the menu item while highlighted</td>
+		<td>UTextBlock*</td>
+	</tr>
+	<tr>
+		<td>ValueText</td>
+		<td>The TextBlock used to display the current value of the menu item</td>
+		<td>UTextBlock*</td>
+	</tr>
+	<tr>
+		<td>HighlightedValueText</td>
+		<td>The TextBlock used to display the current value of the menu item while highlighted</td>
 		<td>UTextBlock*</td>
 	</tr>
 	<tr>
@@ -228,6 +228,30 @@ You can add the following widgets to enable extra functionality:
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>ValueUpdateMethod</td>
+		<td>The method used to update the value of the menu item</td>
+		<td>EMenuItemValueUpdateMethod</td>
+		<td>EMenuItemValueUpdateMethod::SinglePress</td>
+	</tr>
+	<tr>
+		<td>IncrementSinglePress</td>
+		<td>The increment used when updating the value when the key is pressed</td>
+		<td>float</td>
+		<td>1.0f</td>
+	</tr>
+	<tr>
+		<td>IncrementHold</td>
+		<td>The increment used when updating the value when the key is held down</td>
+		<td>float</td>
+		<td>0.15f</td>
+	</tr>
+	<tr>
+		<td>ValueMapping</td>
+		<td>A mapping of possible values to text</td>
+		<td>TMap&lt;int, FText&gt;</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>DefaultValue</td>
 		<td>The default value of the menu item</td>
 		<td>int</td>
@@ -313,7 +337,7 @@ You can add the following widgets to enable extra functionality:
 	<tr>
 		<td>SetText</td>
 		<td>Set the text display in the menu item</td>
-		<td><strong>Text (FText)</strong><br/>The new text displayed in the menu item</td>
+		<td><strong>Text (FText&)</strong><br/>The new text displayed in the menu item</td>
 		<td></td>
 	</tr>
 	<tr>
@@ -331,7 +355,7 @@ You can add the following widgets to enable extra functionality:
 	<tr>
 		<td>UpdateValue</td>
 		<td>Update the value of the menu item</td>
-		<td><strong>IncreaseValue (bool)</strong><br/>Should the value be increased?</td>
+		<td><strong>Increment (float)</strong><br/>The amount added to the current value of the menu item</td>
 		<td></td>
 	</tr>
 </table>
@@ -361,6 +385,6 @@ void ATestActor::Test()
 	MenuItem->SetText(Text);
 	MenuItem->SetHighlightedState(IsHighlighted, PlayHighlightedSound);
 	int Value = MenuItem->GetValue();
-	MenuItem->UpdateValue(IncreaseValue);
+	MenuItem->UpdateValue(Increment);
 }
 ```

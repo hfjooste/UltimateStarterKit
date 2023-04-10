@@ -16,9 +16,12 @@ extra:
     - name: Sponsor Development
       icon: fontawesome/solid/heart
       link: https://github.com/sponsors/hfjooste
+    - name: Linktree
+      icon: fontawesome/solid/link
+      link: https://linktr.ee/hfjooste
     - name: Mastodon
       icon: fontawesome/brands/mastodon
-      link: https://mastodon.social/@hfjooste
+      link: https://mastodon.gamedev.place/@hfjooste
     - name: Reddit
       icon: fontawesome/brands/reddit
       link: https://www.reddit.com/user/HenryJooste
@@ -86,7 +89,8 @@ nav:
     - Input Indicator Icon: inputindicatoricon.md
     - Menu: menu.md
     - Menu Item:
-      - Menu Navigation: menunavigation.md
+      - Navigation: menunavigation.md
+      - Value Update Method: menuitemvalueupdatemethod.md
       - Menu Item Widget: menuitem.md
   - Utils:
     - Config Utils: configutils.md

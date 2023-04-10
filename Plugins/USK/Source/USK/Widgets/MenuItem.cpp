@@ -4,7 +4,6 @@
 
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
-#include "Kismet/GameplayStatics.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Logger/Log.h"
 #include "USK/Utils/PlatformUtils.h"
@@ -33,6 +32,7 @@ void UMenuItem::NativeConstruct()
 
 	USK_LOG_TRACE("Setting default value");
 	CurrentValue = FMath::Clamp(DefaultValue, MinValue, MaxValue);
+	UpdateValueText();
 	
 	if (!HideOnConsoles || !UPlatformUtils::IsConsole())
 	{
@@ -47,7 +47,7 @@ void UMenuItem::NativeConstruct()
  * @brief Set the text display in the menu item
  * @param Text The new text displayed in the menu item
  */
-void UMenuItem::SetText(const FText Text) const
+void UMenuItem::SetText(const FText& Text) const
 {
 	USK_LOG_INFO("Setting menu item text");
 	if (NormalText != nullptr)
@@ -73,12 +73,28 @@ void UMenuItem::SetHighlightedState(const bool IsHighlighted, const bool PlayHig
 	USK_LOG_TRACE("Setting highlighted state");
 	const FLinearColor BorderColor = IsHighlighted ? BorderHighlightedColor : BorderNormalColor;
 	const FLinearColor BackgroundColor = IsHighlighted ? BackgroundHighlightedColor : BackgroundNormalColor;
-	NormalText->SetVisibility(IsHighlighted ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
+
+	if (NormalText != nullptr)
+	{
+		NormalText->SetVisibility(IsHighlighted ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);	
+	}
 	
 	if (HighlightedText != nullptr)
 	{
 		USK_LOG_TRACE("Updating highlighted text");
 		HighlightedText->SetVisibility(IsHighlighted ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);	
+	}
+
+	if (ValueText != nullptr)
+	{
+		USK_LOG_TRACE("Updating value text");
+		ValueText->SetVisibility(IsHighlighted ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
+	}
+
+	if (HighlightedValueText != nullptr)
+	{
+		USK_LOG_TRACE("Updating highlighted value text");
+		HighlightedValueText->SetVisibility(IsHighlighted ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
 	}
 
 	if (BorderLeft != nullptr)
@@ -142,20 +158,55 @@ void UMenuItem::SetHighlightedState(const bool IsHighlighted, const bool PlayHig
  */
 int UMenuItem::GetValue() const
 {
-	return CurrentValue;
+	return FMath::RoundToInt(CurrentValue);
 }
 
 /**
  * @brief Update the value of the menu item
- * @param IncreaseValue Should the value be increased?
+ * @param Increment The amount added to the current value of the menu item 
  */
-void UMenuItem::UpdateValue(const bool IncreaseValue)
+void UMenuItem::UpdateValue(const float Increment)
 {
 	USK_LOG_TRACE("Updating menu item value");
-	CurrentValue = IncreaseValue
-		? FMath::Min(CurrentValue + 1, MaxValue)
-		: FMath::Max(CurrentValue - 1, MinValue);
+	CurrentValue = FMath::Clamp(CurrentValue + Increment, MinValue, MaxValue);
+	UpdateValueText();
 
 	USK_LOG_TRACE("Menu item value updated. Notifying other classes");
 	OnValueChanged.Broadcast(CurrentValue);	
+}
+
+/**
+ * @brief Update the value text of the menu item 
+ */
+void UMenuItem::UpdateValueText() const
+{
+	if (HorizontalNavigation != EMenuNavigation::IncreaseDecreaseValue &&
+		VerticalNavigation != EMenuNavigation::IncreaseDecreaseValue)
+	{
+		if (ValueText != nullptr)
+		{
+			ValueText->SetText(FText::GetEmpty());
+		}
+
+		if (HighlightedValueText != nullptr)
+		{
+			HighlightedValueText->SetText(FText::GetEmpty());
+		}
+		
+		return;
+	}
+	
+	const FText Text = ValueMapping.Contains(GetValue())
+		? ValueMapping[CurrentValue]
+		: FText::FromString(FString::FromInt(GetValue()));
+
+	if (ValueText != nullptr)
+	{
+		ValueText->SetText(Text);
+	}
+
+	if (HighlightedValueText != nullptr)
+	{
+		HighlightedValueText->SetText(Text);
+	}
 }

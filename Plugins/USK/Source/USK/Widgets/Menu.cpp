@@ -51,43 +51,107 @@ void UMenu::NativeOnInitialized()
 }
 
 /**
- * @brief Navigate up
+ * @brief Navigate up or increase the value
  */
 void UMenu::OnMenuUp()
 {
 	USK_LOG_TRACE("Navigating up");
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemUp,
-		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->VerticalNavigation, true);
+		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->VerticalNavigation,
+		true, false);
 }
 
 /**
- * @brief Navigate down
+ * @brief Increase the value while holding the menu up key
+ */
+void UMenu::OnMenuUpHold()
+{
+	if (CurrentMenuItem == nullptr || CurrentMenuItem->ValueUpdateMethod != EMenuItemValueUpdateMethod::Hold ||
+		CurrentMenuItem->VerticalNavigation != EMenuNavigation::IncreaseDecreaseValue)
+	{
+		return;
+	}
+	
+	USK_LOG_TRACE("Increasing value (hold)");
+	UpdateHighlightedItem(nullptr, EMenuNavigation::IncreaseDecreaseValue, true, true);
+}
+
+/**
+ * @brief Navigate down or decrease the value
  */
 void UMenu::OnMenuDown()
 {
 	USK_LOG_TRACE("Navigating down");
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemDown,
-		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->VerticalNavigation, false);
+		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->VerticalNavigation,
+		false, false);
 }
 
 /**
- * @brief Navigate left
+ * @brief Decrease the value while holding the menu down key
+ */
+void UMenu::OnMenuDownHold()
+{
+	if (CurrentMenuItem == nullptr || CurrentMenuItem->ValueUpdateMethod != EMenuItemValueUpdateMethod::Hold ||
+		CurrentMenuItem->VerticalNavigation != EMenuNavigation::IncreaseDecreaseValue)
+	{
+		return;
+	}
+	
+	USK_LOG_TRACE("Decreasing value (hold)");
+	UpdateHighlightedItem(nullptr, EMenuNavigation::IncreaseDecreaseValue, false, true);
+}
+
+/**
+ * @brief Navigate left or decrease the value
  */
 void UMenu::OnMenuLeft()
 {
 	USK_LOG_TRACE("Navigating left");
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemLeft,
-		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->HorizontalNavigation, true);
+		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->HorizontalNavigation,
+		false, false);
 }
 
 /**
- * @brief Navigate right
+ * @brief Decrease the value while holding the menu left key
+ */
+void UMenu::OnMenuLeftHold()
+{
+	if (CurrentMenuItem == nullptr || CurrentMenuItem->ValueUpdateMethod != EMenuItemValueUpdateMethod::Hold ||
+		CurrentMenuItem->HorizontalNavigation != EMenuNavigation::IncreaseDecreaseValue)
+	{
+		return;
+	}
+	
+	USK_LOG_TRACE("Decreasing value (hold)");
+	UpdateHighlightedItem(nullptr, EMenuNavigation::IncreaseDecreaseValue, false, true);
+}
+
+/**
+ * @brief Navigate right or increase the value
  */
 void UMenu::OnMenuRight()
 {
 	USK_LOG_TRACE("Navigating right");
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemRight,
-		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->HorizontalNavigation, false);
+		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->HorizontalNavigation,
+		true, false);
+}
+
+/**
+ * @brief Increase the value while holding the menu right key
+ */
+void UMenu::OnMenuRightHold()
+{
+	if (CurrentMenuItem == nullptr || CurrentMenuItem->ValueUpdateMethod != EMenuItemValueUpdateMethod::Hold ||
+		CurrentMenuItem->HorizontalNavigation != EMenuNavigation::IncreaseDecreaseValue)
+	{
+		return;
+	}
+	
+	USK_LOG_TRACE("Increasing value (hold)");
+	UpdateHighlightedItem(nullptr, EMenuNavigation::IncreaseDecreaseValue, true, true);
 }
 
 /**
@@ -225,9 +289,13 @@ void UMenu::InitializeActionBindings(const APlayerController* PlayerController)
 
 	USK_LOG_TRACE("Adding input action bindings");
 	EnhancedInput->BindAction(MenuUpInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuUp);
+	EnhancedInput->BindAction(MenuUpInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuUpHold);
 	EnhancedInput->BindAction(MenuDownInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuDown);
+	EnhancedInput->BindAction(MenuDownInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuDownHold);
 	EnhancedInput->BindAction(MenuLeftInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuLeft);
+	EnhancedInput->BindAction(MenuLeftInputAction, ETriggerEvent::Triggered, this, &UMenu::OnMenuLeftHold);
 	EnhancedInput->BindAction(MenuRightInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuRight);
+	EnhancedInput->BindAction(MenuRightInputAction, ETriggerEvent::Triggered, this, &UMenu::OnMenuRightHold);
 	EnhancedInput->BindAction(MenuSelectInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuSelected);
 	EnhancedInput->BindAction(MenuBackInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuBack);
 	bIsActionBindingsInitialized = true;
@@ -277,8 +345,10 @@ void UMenu::InitializeDefaultItem()
  * @param NewItem The new item that should be highlighted
  * @param MenuNavigation The type of navigation used
  * @param IncreaseValue Should the value of the menu item be increased?
+ * @param IsHolding Is the key being held down?
  */
-void UMenu::UpdateHighlightedItem(UMenuItem* NewItem, const EMenuNavigation MenuNavigation, const bool IncreaseValue)
+void UMenu::UpdateHighlightedItem(UMenuItem* NewItem, const EMenuNavigation MenuNavigation, const bool IncreaseValue,
+	const bool IsHolding)
 {
 	if (CurrentMenuItem == nullptr)
 	{
@@ -303,7 +373,12 @@ void UMenu::UpdateHighlightedItem(UMenuItem* NewItem, const EMenuNavigation Menu
 		}
 		break;
 	case EMenuNavigation::IncreaseDecreaseValue:
-		CurrentMenuItem->UpdateValue(IncreaseValue);
+		if (CurrentMenuItem->ValueUpdateMethod != EMenuItemValueUpdateMethod::Hold ||
+			(CurrentMenuItem->ValueUpdateMethod == EMenuItemValueUpdateMethod::Hold && IsHolding))
+		{
+			const float Value = IsHolding ? CurrentMenuItem->IncrementHold : CurrentMenuItem->IncrementSinglePress;
+			CurrentMenuItem->UpdateValue(IncreaseValue ? Value : -Value);
+		}
 		break;
 	}
 }
