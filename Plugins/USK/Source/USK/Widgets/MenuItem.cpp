@@ -168,7 +168,8 @@ int UMenuItem::GetValue() const
 void UMenuItem::UpdateValue(const float Increment)
 {
 	USK_LOG_TRACE("Updating menu item value");
-	CurrentValue = FMath::Clamp(CurrentValue + Increment, MinValue, MaxValue);
+	CurrentValue = FMath::Clamp(CurrentValue + Increment,
+		static_cast<float>(MinValue), static_cast<float>(MaxValue));
 	UpdateValueText();
 
 	USK_LOG_TRACE("Menu item value updated. Notifying other classes");
