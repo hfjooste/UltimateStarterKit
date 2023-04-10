@@ -124,25 +124,49 @@ You can add the following widgets to enable extra functionality:
 	</tr>
 	<tr>
 		<td>OnMenuUp</td>
-		<td>Navigate up</td>
+		<td>Navigate up or increase the value</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>OnMenuUpHold</td>
+		<td>Increase the value while holding the menu up key</td>
 		<td></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>OnMenuDown</td>
-		<td>Navigate down</td>
+		<td>Navigate down or decrease the value</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>OnMenuDownHold</td>
+		<td>Decrease the value while holding the menu down key</td>
 		<td></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>OnMenuLeft</td>
-		<td>Navigate left</td>
+		<td>Navigate left or decrease the value</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>OnMenuLeftHold</td>
+		<td>Decrease the value while holding the menu left key</td>
 		<td></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>OnMenuRight</td>
-		<td>Navigate right</td>
+		<td>Navigate right or increase the value</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>OnMenuRightHold</td>
+		<td>Increase the value while holding the menu right key</td>
 		<td></td>
 		<td></td>
 	</tr>
@@ -164,9 +188,13 @@ You can add the following widgets to enable extra functionality:
 You can use the <code>Menu</code> using Blueprints by adding one of the following nodes:
 <ul>
 	<li>Ultimate Starter Kit > UI > On Menu Up</li>
+	<li>Ultimate Starter Kit > UI > On Menu Up Hold</li>
 	<li>Ultimate Starter Kit > UI > On Menu Down</li>
+	<li>Ultimate Starter Kit > UI > On Menu Down Hold</li>
 	<li>Ultimate Starter Kit > UI > On Menu Left</li>
+	<li>Ultimate Starter Kit > UI > On Menu Left Hold</li>
 	<li>Ultimate Starter Kit > UI > On Menu Right</li>
+	<li>Ultimate Starter Kit > UI > On Menu Right Hold</li>
 	<li>Ultimate Starter Kit > UI > On Menu Selected</li>
 	<li>Ultimate Starter Kit > UI > On Menu Back</li>
 </ul>
@@ -185,9 +213,13 @@ void ATestActor::Test()
 {
 	// Menu is a pointer to the UMenu
 	Menu->OnMenuUp();
+	Menu->OnMenuUpHold();
 	Menu->OnMenuDown();
+	Menu->OnMenuDownHold();
 	Menu->OnMenuLeft();
+	Menu->OnMenuLeftHold();
 	Menu->OnMenuRight();
+	Menu->OnMenuRightHold();
 	Menu->OnMenuSelected();
 	Menu->OnMenuBack();
 }

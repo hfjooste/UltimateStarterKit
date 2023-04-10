@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "MenuItemValueUpdateMethod.h"
 #include "MenuNavigation.h"
 #include "Blueprint/UserWidget.h"
 #include "MenuItem.generated.h"
@@ -36,7 +37,7 @@ public:
 	/**
 	 * @brief The TextBlock used to display the text of the menu item while not highlighted
 	 */
-	UPROPERTY(meta = (BindWidget), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
 	class UTextBlock* NormalText;
 
 	/**
@@ -44,6 +45,18 @@ public:
 	 */
 	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
 	class UTextBlock* HighlightedText;
+
+	/**
+	 * @brief The TextBlock used to display the current value of the menu item
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class UTextBlock* ValueText;
+
+	/**
+	 * @brief The TextBlock used to display the current value of the menu item while highlighted
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class UTextBlock* HighlightedValueText;
 
 	/**
 	 * @brief The border displayed on the left of the menu item
@@ -215,6 +228,32 @@ public:
 	UTexture2D* BackgroundRightHighlightedImage;
 
 	/**
+	 * @brief The method used to update the value of the menu item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value")
+	EMenuItemValueUpdateMethod ValueUpdateMethod = EMenuItemValueUpdateMethod::SinglePress;
+
+	/**
+	 * @brief The increment used when updating the value when the key is pressed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value",
+		meta=(EditCondition = "ValueUpdateMethod ==  EMenuItemValueUpdateMethod::SinglePress", EditConditionHides))
+	float IncrementSinglePress = 1.0f;
+
+	/**
+	 * @brief The increment used when updating the value when the key is held down
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value",
+		meta=(EditCondition = "ValueUpdateMethod ==  EMenuItemValueUpdateMethod::Hold", EditConditionHides))
+	float IncrementHold = 0.15f;
+
+	/**
+	 * @brief A mapping of possible values to text
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value")
+	TMap<int, FText> ValueMapping;
+
+	/**
 	 * @brief The default value of the menu item
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value")
@@ -289,7 +328,7 @@ public:
 	 * @param Text The new text displayed in the menu item
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
-	void SetText(FText Text) const;
+	void SetText(const FText& Text) const;
 
 	/**
 	 * @brief Set the highlighted state of the menu item
@@ -308,10 +347,10 @@ public:
 
 	/**
 	 * @brief Update the value of the menu item
-	 * @param IncreaseValue Should the value be increased?
+	 * @param Increment The amount added to the current value of the menu item 
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
-	void UpdateValue(bool IncreaseValue);
+	void UpdateValue(float Increment);
 
 protected:
 	/**
@@ -328,5 +367,10 @@ private:
 	/**
 	 * @brief The current value of the menu item
 	 */
-	int CurrentValue;
+	float CurrentValue;
+
+	/**
+	 * @brief Update the value text of the menu item 
+	 */
+	void UpdateValueText() const;
 };

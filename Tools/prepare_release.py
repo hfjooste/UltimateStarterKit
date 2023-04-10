@@ -33,3 +33,4 @@ os.system(f"python \"{docs}\" --input \"Widgets\\InputIndicatorIcon\" --output i
 os.system(f"python \"{docs}\" --input \"Widgets\\Menu\" --output menu")
 os.system(f"python \"{docs}\" --input \"Widgets\\MenuItem\" --output menuitem")
 os.system(f"python \"{docs}\" --input \"Widgets\\MenuNavigation\" --output menunavigation")
+os.system(f"python \"{docs}\" --input \"Widgets\\MenuItemValueUpdateMethod\" --output menuitemvalueupdatemethod")

@@ -103,28 +103,52 @@ public:
 	FMenuOnBack OnBackEvent;
 
 	/**
-	 * @brief Navigate up
+	 * @brief Navigate up or increase the value
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void OnMenuUp();
 
 	/**
-	 * @brief Navigate down
+	 * @brief Increase the value while holding the menu up key
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void OnMenuUpHold();
+
+	/**
+	 * @brief Navigate down or decrease the value
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void OnMenuDown();
 
 	/**
-	 * @brief Navigate left
+	 * @brief Decrease the value while holding the menu down key
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void OnMenuDownHold();
+
+	/**
+	 * @brief Navigate left or decrease the value
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void OnMenuLeft();
 
 	/**
-	 * @brief Navigate right
+	 * @brief Decrease the value while holding the menu left key
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void OnMenuLeftHold();
+
+	/**
+	 * @brief Navigate right or increase the value
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void OnMenuRight();
+
+	/**
+	 * @brief Increase the value while holding the menu right key
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void OnMenuRightHold();
 
 	/**
 	 * @brief Select the current menu item
@@ -199,6 +223,7 @@ private:
 	 * @param NewItem The new item that should be highlighted
 	 * @param MenuNavigation The type of navigation used
 	 * @param IncreaseValue Should the value of the menu item be increased?
+	 * @param IsHolding Is the key being held down?
 	 */
-	void UpdateHighlightedItem(UMenuItem* NewItem, EMenuNavigation MenuNavigation, bool IncreaseValue);
+	void UpdateHighlightedItem(UMenuItem* NewItem, EMenuNavigation MenuNavigation, bool IncreaseValue, bool IsHolding);
 };
