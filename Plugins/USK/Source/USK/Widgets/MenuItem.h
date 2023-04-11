@@ -59,6 +59,12 @@ public:
 	class UTextBlock* HighlightedValueText;
 
 	/**
+	 * @brief The slider used to display and update the current value of the menu item
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class USlider* ValueSlider;
+
+	/**
 	 * @brief The border displayed on the left of the menu item
 	 */
 	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
@@ -248,6 +254,12 @@ public:
 	float IncrementHold = 0.15f;
 
 	/**
+	 * @brief Should the value slider be shown for this menu item?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value")
+	bool ShowValueSlider = false;
+
+	/**
 	 * @brief A mapping of possible values to text
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value")
@@ -373,4 +385,17 @@ private:
 	 * @brief Update the value text of the menu item 
 	 */
 	void UpdateValueText() const;
+
+	/**
+	 * @brief Can the value of the menu item be changed?
+	 * @return A boolean value indicating if the value of the menu item can be changed
+	 */
+	bool CanValueChange() const;
+
+	/**
+	 * @brief Called after the value of the slider is manually changed
+	 * @param Value The new value of the slider
+	 */
+	UFUNCTION()
+	void OnSliderValueChanged(float Value);
 };
