@@ -42,6 +42,11 @@ You can add the following widgets to enable extra functionality:
 		<td>UTextBlock*</td>
 	</tr>
 	<tr>
+		<td>ValueSlider</td>
+		<td>The slider used to display and update the current value of the menu item</td>
+		<td>USlider*</td>
+	</tr>
+	<tr>
 		<td>BorderLeft</td>
 		<td>The border displayed on the left of the menu item</td>
 		<td>UImage*</td>
@@ -244,6 +249,12 @@ You can add the following widgets to enable extra functionality:
 		<td>The increment used when updating the value when the key is held down</td>
 		<td>float</td>
 		<td>0.15f</td>
+	</tr>
+	<tr>
+		<td>ShowValueSlider</td>
+		<td>Should the value slider be shown for this menu item?</td>
+		<td>bool</td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>ValueMapping</td>
