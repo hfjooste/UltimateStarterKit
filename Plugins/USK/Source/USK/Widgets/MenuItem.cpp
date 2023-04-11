@@ -3,6 +3,7 @@
 #include "MenuItem.h"
 
 #include "Components/Image.h"
+#include "Components/Slider.h"
 #include "Components/TextBlock.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Logger/Log.h"
@@ -14,12 +15,19 @@
 void UMenuItem::NativePreConstruct()
 {
 	Super::NativePreConstruct();
-
 	SetText(MenuItemText);
+	
 	if (Title != nullptr)
 	{
 		Title->SetText(TitleText);
 		Title->SetVisibility(TitleText.IsEmpty() ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);	
+	}
+
+	if (ValueSlider != nullptr)
+	{
+		ValueSlider->SetVisibility(CanValueChange() && ShowValueSlider
+			? ESlateVisibility::Visible
+			: ESlateVisibility::Collapsed);
 	}
 }
 
@@ -31,8 +39,19 @@ void UMenuItem::NativeConstruct()
 	Super::NativeConstruct();
 
 	USK_LOG_TRACE("Setting default value");
-	CurrentValue = FMath::Clamp(DefaultValue, MinValue, MaxValue);
-	UpdateValueText();
+	UpdateValue(DefaultValue);
+
+	if (ValueSlider != nullptr)
+	{
+		ValueSlider->SetVisibility(CanValueChange() && ShowValueSlider
+			? ESlateVisibility::Visible
+			: ESlateVisibility::Collapsed);
+		ValueSlider->IsFocusable = false;
+		ValueSlider->SetMinValue(MinValue);
+		ValueSlider->SetMaxValue(MaxValue);
+		ValueSlider->SetValue(GetValue());
+		ValueSlider->OnValueChanged.AddDynamic(this, &UMenuItem::OnSliderValueChanged);
+	}
 	
 	if (!HideOnConsoles || !UPlatformUtils::IsConsole())
 	{
@@ -172,8 +191,16 @@ void UMenuItem::UpdateValue(const float Increment)
 		static_cast<float>(MinValue), static_cast<float>(MaxValue));
 	UpdateValueText();
 
+	if (ValueSlider != nullptr)
+	{
+		ValueSlider->SetVisibility(CanValueChange() && ShowValueSlider
+			? ESlateVisibility::Visible
+			: ESlateVisibility::Collapsed);
+		ValueSlider->SetValue(GetValue());
+	}
+
 	USK_LOG_TRACE("Menu item value updated. Notifying other classes");
-	OnValueChanged.Broadcast(CurrentValue);	
+	OnValueChanged.Broadcast(CurrentValue);
 }
 
 /**
@@ -181,8 +208,7 @@ void UMenuItem::UpdateValue(const float Increment)
  */
 void UMenuItem::UpdateValueText() const
 {
-	if (HorizontalNavigation != EMenuNavigation::IncreaseDecreaseValue &&
-		VerticalNavigation != EMenuNavigation::IncreaseDecreaseValue)
+	if (!CanValueChange())
 	{
 		if (ValueText != nullptr)
 		{
@@ -210,4 +236,26 @@ void UMenuItem::UpdateValueText() const
 	{
 		HighlightedValueText->SetText(Text);
 	}
+}
+
+/**
+ * @brief Can the value of the menu item be changed?
+ * @return A boolean value indicating if the value of the menu item can be changed
+ */
+bool UMenuItem::CanValueChange() const
+{
+	return HorizontalNavigation == EMenuNavigation::IncreaseDecreaseValue ||
+		VerticalNavigation == EMenuNavigation::IncreaseDecreaseValue;
+}
+
+/**
+ * @brief Called after the value of the slider is manually changed
+ * @param Value The new value of the slider
+ */
+void UMenuItem::OnSliderValueChanged(const float Value)
+{
+	USK_LOG_TRACE(*FString::Format(TEXT("Value slider updated ({0})"), { FString::SanitizeFloat(Value) }));
+
+	CurrentValue = 0;
+	UpdateValue(Value);
 }
