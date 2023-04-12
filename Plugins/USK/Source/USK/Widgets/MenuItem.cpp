@@ -239,6 +239,17 @@ void UMenuItem::SetHighlightedState(const bool IsHighlighted,
 		USK_LOG_TRACE("Playing highlighted sound effect");
 		UAudioUtils::PlaySound2D(GetWorld(), HighlightedSFX);
 	}
+
+	if (IsHighlighted)
+	{
+		USK_LOG_TRACE("Broadcasting OnHighlighted event");
+		OnHighlighted.Broadcast();
+	}
+	else
+	{
+		USK_LOG_TRACE("Broadcasting OnHighlightRemoved event");
+		OnHighlightRemoved.Broadcast();
+	}
 }
 
 /**
@@ -341,7 +352,7 @@ void UMenuItem::OnSelectButtonClicked()
 		return;
 	}
 
-	OnSelectedEvent.Broadcast();
+	OnSelected.Broadcast();
 }
 
 /**

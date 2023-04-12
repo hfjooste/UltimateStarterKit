@@ -24,6 +24,16 @@ class USK_API UMenuItem : public UUserWidget
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMenuItemOnSelected);
 
 	/**
+	 * @brief Event used to notify other classes that the menu item was highlighted
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMenuItemOnHighlighted);
+
+	/**
+	 * @brief Event used to notify other classes that the menu item's highlighted state was removed
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMenuItemOnHighlightRemoved);
+
+	/**
 	 * @brief Event used to notify other classes that the menu item was selected
 	 * @param Value The new value of the menu item
 	 */
@@ -359,7 +369,19 @@ public:
 	 * @brief Event used to notify other classes that the menu item was selected
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
-	FMenuItemOnSelected OnSelectedEvent;
+	FMenuItemOnSelected OnSelected;
+
+	/**
+	 * @brief Event used to notify other classes that the menu item was highlighted
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
+	FMenuItemOnHighlighted OnHighlighted;
+
+	/**
+	 * @brief Event used to notify other classes that the menu item's highlighted state was removed
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
+	FMenuItemOnHighlightRemoved OnHighlightRemoved;
 
 	/**
 	 * @brief Event used to notify other classes that the menu item's value was updated

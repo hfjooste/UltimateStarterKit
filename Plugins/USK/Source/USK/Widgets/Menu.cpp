@@ -167,7 +167,7 @@ void UMenu::OnMenuSelected()
 	if (CurrentMenuItem != nullptr && CurrentMenuItem->AllowSelection)
 	{
 		UAudioUtils::PlaySound2D(GetWorld(), SelectedSFX);
-		CurrentMenuItem->OnSelectedEvent.Broadcast();
+		CurrentMenuItem->OnSelected.Broadcast();
 	}
 }
 
