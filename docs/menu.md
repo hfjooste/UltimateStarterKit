@@ -182,6 +182,18 @@ You can add the following widgets to enable extra functionality:
 		<td></td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>RequestHighlight</td>
+		<td>Request to highlight a specific menu item</td>
+		<td><strong>MenuItem (UMenuItem*)</strong><br/>The menu item to highlight</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>RemoveHighlight</td>
+		<td>Request to remove the highlighted state from a specific menu item</td>
+		<td><strong>MenuItem (UMenuItem*)</strong><br/>The menu item to remove the highlighted state from</td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -197,6 +209,8 @@ You can use the <code>Menu</code> using Blueprints by adding one of the followin
 	<li>Ultimate Starter Kit > UI > On Menu Right Hold</li>
 	<li>Ultimate Starter Kit > UI > On Menu Selected</li>
 	<li>Ultimate Starter Kit > UI > On Menu Back</li>
+	<li>Ultimate Starter Kit > UI > Request Highlight</li>
+	<li>Ultimate Starter Kit > UI > Remove Highlight</li>
 </ul>
 
 ## C++ Usage
@@ -222,5 +236,7 @@ void ATestActor::Test()
 	Menu->OnMenuRightHold();
 	Menu->OnMenuSelected();
 	Menu->OnMenuBack();
+	Menu->RequestHighlight(MenuItem);
+	Menu->RemoveHighlight(MenuItem);
 }
 ```

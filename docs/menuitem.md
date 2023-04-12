@@ -42,9 +42,24 @@ You can add the following widgets to enable extra functionality:
 		<td>UTextBlock*</td>
 	</tr>
 	<tr>
+		<td>SelectButton</td>
+		<td>The button used to select the menu item</td>
+		<td>UButton*</td>
+	</tr>
+	<tr>
 		<td>ValueSlider</td>
 		<td>The slider used to display and update the current value of the menu item</td>
 		<td>USlider*</td>
+	</tr>
+	<tr>
+		<td>IncreaseValueButton</td>
+		<td>The button used to increase the value of the menu item</td>
+		<td>UButton*</td>
+	</tr>
+	<tr>
+		<td>DecreaseValueButton</td>
+		<td>The button used to decrease the value of the menu item</td>
+		<td>UButton*</td>
 	</tr>
 	<tr>
 		<td>BorderLeft</td>
@@ -257,6 +272,12 @@ You can add the following widgets to enable extra functionality:
 		<td>false</td>
 	</tr>
 	<tr>
+		<td>ShowValueButtons</td>
+		<td>Should the increase/decrease value buttons be shown for this menu item?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
 		<td>ValueMapping</td>
 		<td>A mapping of possible values to text</td>
 		<td>TMap&lt;int, FText&gt;</td>
@@ -279,6 +300,12 @@ You can add the following widgets to enable extra functionality:
 		<td>The maximum value of the menu item</td>
 		<td>int</td>
 		<td>100</td>
+	</tr>
+	<tr>
+		<td>AllowSelection</td>
+		<td>Can the menu item be selected?</td>
+		<td>bool</td>
+		<td>true</td>
 	</tr>
 	<tr>
 		<td>VerticalNavigation</td>
@@ -314,6 +341,12 @@ You can add the following widgets to enable extra functionality:
 		<td>MenuItemRight</td>
 		<td>The menu item highlighted when the right key is pressed</td>
 		<td>UMenuItem*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>Menu</td>
+		<td>A reference to the menu that contains this menu item</td>
+		<td>UMenu*</td>
 		<td><code>nullptr</code></td>
 	</tr>
 </table>
@@ -354,7 +387,7 @@ You can add the following widgets to enable extra functionality:
 	<tr>
 		<td>SetHighlightedState</td>
 		<td>Set the highlighted state of the menu item</td>
-		<td><strong>IsHighlighted (bool)</strong><br/>Is the menu item highlighted?<br/><br/><strong>PlayHighlightedSound (bool)</strong><br/>Should the highlighted sound effect be played?</td>
+		<td><strong>IsHighlighted (bool)</strong><br/>Is the menu item highlighted?<br/><br/><strong>PlayHighlightedAnimation (bool)</strong><br/>Should the highlighted animation be played?<br/><br/><strong>PlayHighlightedSound (bool)</strong><br/>Should the highlighted sound effect be played?</td>
 		<td></td>
 	</tr>
 	<tr>
@@ -394,7 +427,7 @@ void ATestActor::Test()
 {
 	// MenuItem is a pointer to the UMenuItem
 	MenuItem->SetText(Text);
-	MenuItem->SetHighlightedState(IsHighlighted, PlayHighlightedSound);
+	MenuItem->SetHighlightedState(IsHighlighted, PlayHighlightedAnimation, PlayHighlightedSound);
 	int Value = MenuItem->GetValue();
 	MenuItem->UpdateValue(Increment);
 }
