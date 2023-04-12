@@ -1395,6 +1395,18 @@
         <td></td>
         <td></td>
     </tr>
+    <tr>
+        <td>RequestHighlight</td>
+        <td>Request to highlight a specific menu item</td>
+        <td><strong>MenuItem (UMenuItem*)</strong><br/>The menu item to highlight</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>RemoveHighlight</td>
+        <td>Request to remove the highlighted state from a specific menu item</td>
+        <td><strong>MenuItem (UMenuItem*)</strong><br/>The menu item to remove the highlighted state from</td>
+        <td></td>
+    </tr>
 </table>
 
 <h2 id="blueprint-usage">Blueprint Usage</h2>
@@ -1410,6 +1422,8 @@
     <li>Ultimate Starter Kit > UI > On Menu Right Hold</li>
     <li>Ultimate Starter Kit > UI > On Menu Selected</li>
     <li>Ultimate Starter Kit > UI > On Menu Back</li>
+    <li>Ultimate Starter Kit > UI > Request Highlight</li>
+    <li>Ultimate Starter Kit > UI > Remove Highlight</li>
 </ul>
 
 <h2 id="c-usage">C++ Usage</h2>
@@ -1432,6 +1446,8 @@ void ATestActor::Test()
     Menu-&gt;OnMenuRightHold();
     Menu-&gt;OnMenuSelected();
     Menu-&gt;OnMenuBack();
+    Menu-&gt;RequestHighlight(MenuItem);
+    Menu-&gt;RemoveHighlight(MenuItem);
 }
 </code></pre>
 
