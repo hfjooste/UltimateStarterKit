@@ -19,10 +19,10 @@ void UMenu::NativeConstruct()
 {
 	Super::NativeConstruct();
 	
-	InitializeDefaultItem();
+	InitializeMenuItems();
 	if (CurrentMenuItem != nullptr)
 	{
-		CurrentMenuItem->SetHighlightedState(true, false);
+		CurrentMenuItem->SetHighlightedState(true, false, false);
 	}
 
 	USK_LOG_TRACE("Adding binding to visibility changed event");
@@ -56,6 +56,7 @@ void UMenu::NativeOnInitialized()
 void UMenu::OnMenuUp()
 {
 	USK_LOG_TRACE("Navigating up");
+	UpdateHighlightedItemBeforeNavigation(true);
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemUp,
 		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->VerticalNavigation,
 		true, false);
@@ -82,6 +83,7 @@ void UMenu::OnMenuUpHold()
 void UMenu::OnMenuDown()
 {
 	USK_LOG_TRACE("Navigating down");
+	UpdateHighlightedItemBeforeNavigation(true);
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemDown,
 		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->VerticalNavigation,
 		false, false);
@@ -108,6 +110,7 @@ void UMenu::OnMenuDownHold()
 void UMenu::OnMenuLeft()
 {
 	USK_LOG_TRACE("Navigating left");
+	UpdateHighlightedItemBeforeNavigation(false);
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemLeft,
 		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->HorizontalNavigation,
 		false, false);
@@ -134,6 +137,7 @@ void UMenu::OnMenuLeftHold()
 void UMenu::OnMenuRight()
 {
 	USK_LOG_TRACE("Navigating right");
+	UpdateHighlightedItemBeforeNavigation(false);
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemRight,
 		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->HorizontalNavigation,
 		true, false);
@@ -159,11 +163,10 @@ void UMenu::OnMenuRightHold()
  */
 void UMenu::OnMenuSelected()
 {
-	USK_LOG_TRACE("Selecting menu item");
-	UAudioUtils::PlaySound2D(GetWorld(), SelectedSFX);
-	
-	if (CurrentMenuItem != nullptr)
+	USK_LOG_TRACE("Selecting menu item");	
+	if (CurrentMenuItem != nullptr && CurrentMenuItem->AllowSelection)
 	{
+		UAudioUtils::PlaySound2D(GetWorld(), SelectedSFX);
 		CurrentMenuItem->OnSelectedEvent.Broadcast();
 	}
 }
@@ -176,6 +179,39 @@ void UMenu::OnMenuBack()
 	USK_LOG_TRACE("Going back");
 	UAudioUtils::PlaySound2D(GetWorld(), BackSFX);
 	OnBackEvent.Broadcast();
+}
+
+/**
+ * @brief Request to highlight a specific menu item
+ * @param MenuItem The menu item to highlight
+ */
+void UMenu::RequestHighlight(UMenuItem* MenuItem)
+{
+	if (CurrentMenuItem == MenuItem)
+	{
+		USK_LOG_TRACE("Menu item already highlighted");
+		return;
+	}
+
+	USK_LOG_TRACE("Handling highlight request");
+	UpdateHighlightedItem(MenuItem, EMenuNavigation::HighlightItem, false, false);
+}
+
+/**
+ * @brief Request to remove the highlighted state from a specific menu item
+ * @param MenuItem The menu item to remove the highlighted state from
+ */
+void UMenu::RemoveHighlight(UMenuItem* MenuItem)
+{
+	if (CurrentMenuItem != MenuItem)
+	{
+		USK_LOG_TRACE("Menu item not highlighted");
+		return;
+	}
+
+	USK_LOG_TRACE("Removing highlight from menu item");
+	HighlightedMenuItemBeforeRemoval = CurrentMenuItem;
+	UpdateHighlightedItem(nullptr, EMenuNavigation::HighlightItem, false, false);
 }
 
 /**
@@ -302,9 +338,9 @@ void UMenu::InitializeActionBindings(const APlayerController* PlayerController)
 }
 
 /**
- * @brief Initialize the default item in the menu
+ * @brief Initialize the menu items and highlight the default item
  */
-void UMenu::InitializeDefaultItem()
+void UMenu::InitializeMenuItems()
 {
 	USK_LOG_TRACE("Initializing default menu item");
 	TArray<UWidget*> Children;
@@ -317,20 +353,30 @@ void UMenu::InitializeDefaultItem()
 		{
 			continue;
 		}
-
+		
 		UMenuItem* MenuItem = dynamic_cast<UMenuItem*>(Widget);
+		if (MenuItem == nullptr)
+		{
+			continue;
+		}
+
+		MenuItem->Menu = this;
+		if (CurrentMenuItem != nullptr)
+		{
+			continue;
+		}
+		
 		if (FallbackMenuItem == nullptr)
 		{
 			FallbackMenuItem = MenuItem;
 		}
 		
-		if (MenuItem == nullptr || !MenuItem->FocusByDefault)
+		if (!MenuItem->FocusByDefault)
 		{
 			continue;
 		}
 
 		CurrentMenuItem = MenuItem;
-		break;
 	}
 
 	if (CurrentMenuItem == nullptr)
@@ -350,22 +396,25 @@ void UMenu::InitializeDefaultItem()
 void UMenu::UpdateHighlightedItem(UMenuItem* NewItem, const EMenuNavigation MenuNavigation, const bool IncreaseValue,
 	const bool IsHolding)
 {
-	if (CurrentMenuItem == nullptr)
-	{
-		return;
-	}
-
 	switch (MenuNavigation)
 	{
 	case EMenuNavigation::Disabled:
 		break;
 	case EMenuNavigation::HighlightItem:
-		if (NewItem != nullptr && NewItem->IsVisible())
+		if (NewItem != nullptr && !NewItem->IsVisible())
 		{
-			CurrentMenuItem->SetHighlightedState(false, false);
-			NewItem->SetHighlightedState(true, true);
-			CurrentMenuItem = NewItem;
+			break;
+		}
 
+		if (CurrentMenuItem != nullptr)
+		{
+			CurrentMenuItem->SetHighlightedState(false, false, false);	
+		}
+		
+		CurrentMenuItem = NewItem;
+		if (NewItem != nullptr)
+		{
+			NewItem->SetHighlightedState(true, true, true);
 			if (ScrollContainer != nullptr)
 			{
 				ScrollContainer->ScrollWidgetIntoView(CurrentMenuItem);
@@ -373,12 +422,37 @@ void UMenu::UpdateHighlightedItem(UMenuItem* NewItem, const EMenuNavigation Menu
 		}
 		break;
 	case EMenuNavigation::IncreaseDecreaseValue:
-		if (CurrentMenuItem->ValueUpdateMethod != EMenuItemValueUpdateMethod::Hold ||
-			(CurrentMenuItem->ValueUpdateMethod == EMenuItemValueUpdateMethod::Hold && IsHolding))
+		if (CurrentMenuItem != nullptr &&
+			(CurrentMenuItem->ValueUpdateMethod != EMenuItemValueUpdateMethod::Hold ||
+			(CurrentMenuItem->ValueUpdateMethod == EMenuItemValueUpdateMethod::Hold && IsHolding)))
 		{
 			const float Value = IsHolding ? CurrentMenuItem->IncrementHold : CurrentMenuItem->IncrementSinglePress;
 			CurrentMenuItem->UpdateValue(IncreaseValue ? Value : -Value);
 		}
 		break;
 	}
+}
+
+/**
+ * @brief Update the highlighted menu item before the navigation event
+ * @param IsVerticalNavigation Is this called because of a vertical navigation event?
+ */
+void UMenu::UpdateHighlightedItemBeforeNavigation(const bool IsVerticalNavigation)
+{
+	if (CurrentMenuItem != nullptr || HighlightedMenuItemBeforeRemoval == nullptr)
+	{
+		return;
+	}
+
+	const EMenuNavigation ItemNavigation = IsVerticalNavigation
+		? HighlightedMenuItemBeforeRemoval->VerticalNavigation
+		: HighlightedMenuItemBeforeRemoval->HorizontalNavigation;
+	if (ItemNavigation != EMenuNavigation::HighlightItem)
+	{
+		return;
+	}
+
+	CurrentMenuItem = HighlightedMenuItemBeforeRemoval;
+	CurrentMenuItem->SetHighlightedState(true, false, false);
+	HighlightedMenuItemBeforeRemoval = nullptr;
 }
