@@ -5,6 +5,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputDevice.h"
 #include "InputMappingContext.h"
+#include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
 #include "USK/Logger/Log.h"
 #include "USK/Utils/PlatformUtils.h"

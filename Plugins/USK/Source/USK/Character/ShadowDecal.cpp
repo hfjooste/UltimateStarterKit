@@ -3,6 +3,7 @@
 #include "ShadowDecal.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/DecalComponent.h"
+#include "Engine/World.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/PawnMovementComponent.h"
 #include "Kismet/KismetSystemLibrary.h"

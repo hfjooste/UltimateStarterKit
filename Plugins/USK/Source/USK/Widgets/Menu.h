@@ -9,6 +9,8 @@
 #include "Menu.generated.h"
 
 class UMenuItem;
+class UInputAction;
+class UInputMappingContext;
 
 /**
  * @brief A widget used to display menu items and handle navigation between the items

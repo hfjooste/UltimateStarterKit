@@ -3,6 +3,7 @@
 #include "TrackableDataComponent.h"
 
 #include "Kismet/GameplayStatics.h"
+#include "Engine/World.h"
 #include "USK/Core/USKGameInstance.h"
 #include "USK/Logger/Log.h"
 

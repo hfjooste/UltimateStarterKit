@@ -5,6 +5,7 @@
 #include "NiagaraFunctionLibrary.h"
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
+#include "Engine/World.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Character/PlatformerCharacter.h"
 #include "USK/Logger/Log.h"
