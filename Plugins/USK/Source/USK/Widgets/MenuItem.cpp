@@ -2,6 +2,8 @@
 
 #include "MenuItem.h"
 
+#include "Menu.h"
+#include "Components/Button.h"
 #include "Components/Image.h"
 #include "Components/Slider.h"
 #include "Components/TextBlock.h"
@@ -29,6 +31,20 @@ void UMenuItem::NativePreConstruct()
 			? ESlateVisibility::Visible
 			: ESlateVisibility::Collapsed);
 	}
+
+	if (IncreaseValueButton != nullptr)
+	{
+		IncreaseValueButton->SetVisibility(CanValueChange() && ShowValueButtons
+			? ESlateVisibility::Visible
+			: ESlateVisibility::Collapsed);
+	}
+
+	if (DecreaseValueButton != nullptr)
+	{
+		DecreaseValueButton->SetVisibility(CanValueChange() && ShowValueButtons
+			? ESlateVisibility::Visible
+			: ESlateVisibility::Collapsed);
+	}
 }
 
 /**
@@ -41,6 +57,13 @@ void UMenuItem::NativeConstruct()
 	USK_LOG_TRACE("Setting default value");
 	UpdateValue(DefaultValue);
 
+	if (SelectButton != nullptr)
+	{
+		SelectButton->SetVisibility(AllowSelection ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
+		SelectButton->IsFocusable = false;
+		SelectButton->OnClicked.AddDynamic(this, &UMenuItem::OnSelectButtonClicked);
+	}
+
 	if (ValueSlider != nullptr)
 	{
 		ValueSlider->SetVisibility(CanValueChange() && ShowValueSlider
@@ -52,6 +75,24 @@ void UMenuItem::NativeConstruct()
 		ValueSlider->SetValue(GetValue());
 		ValueSlider->OnValueChanged.AddDynamic(this, &UMenuItem::OnSliderValueChanged);
 	}
+
+	if (IncreaseValueButton != nullptr)
+	{
+		IncreaseValueButton->SetVisibility(CanValueChange() && ShowValueButtons
+			? ESlateVisibility::Visible
+			: ESlateVisibility::Collapsed);
+		IncreaseValueButton->IsFocusable = false;
+		IncreaseValueButton->OnClicked.AddDynamic(this, &UMenuItem::OnIncreaseValueButtonClicked);
+	}
+
+	if (DecreaseValueButton != nullptr)
+	{
+		DecreaseValueButton->SetVisibility(CanValueChange() && ShowValueButtons
+			? ESlateVisibility::Visible
+			: ESlateVisibility::Collapsed);
+		DecreaseValueButton->IsFocusable = false;
+		DecreaseValueButton->OnClicked.AddDynamic(this, &UMenuItem::OnDecreaseValueButtonClicked);
+	}
 	
 	if (!HideOnConsoles || !UPlatformUtils::IsConsole())
 	{
@@ -60,6 +101,33 @@ void UMenuItem::NativeConstruct()
 
 	USK_LOG_INFO("Hiding menu item on console");
 	SetVisibility(ESlateVisibility::Collapsed);
+}
+
+/**
+ * @brief Overridable native event for when the cursor has entered the widget
+ * @param InGeometry The Geometry of the widget receiving the event
+ * @param InMouseEvent Information about the input event
+ */
+void UMenuItem::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
+{
+	Super::NativeOnMouseEnter(InGeometry, InMouseEvent);
+	if (Menu != nullptr)
+	{
+		Menu->RequestHighlight(this);
+	}
+}
+
+/**
+ * @brief Overridable native event for when the cursor has left the widget
+ * @param InMouseEvent Information about the input event
+ */
+void UMenuItem::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
+{
+	Super::NativeOnMouseLeave(InMouseEvent);
+	if (Menu != nullptr)
+	{
+		Menu->RemoveHighlight(this);
+	}
 }
 
 /**
@@ -85,9 +153,11 @@ void UMenuItem::SetText(const FText& Text) const
 /**
  * @brief Set the highlighted state of the menu item
  * @param IsHighlighted Is the menu item highlighted?
+ * @param PlayHighlightedAnimation Should the highlighted animation be played?
  * @param PlayHighlightedSound Should the highlighted sound effect be played?
  */
-void UMenuItem::SetHighlightedState(const bool IsHighlighted, const bool PlayHighlightedSound)
+void UMenuItem::SetHighlightedState(const bool IsHighlighted,
+	const bool PlayHighlightedAnimation, const bool PlayHighlightedSound)
 {
 	USK_LOG_TRACE("Setting highlighted state");
 	const FLinearColor BorderColor = IsHighlighted ? BorderHighlightedColor : BorderNormalColor;
@@ -158,7 +228,7 @@ void UMenuItem::SetHighlightedState(const bool IsHighlighted, const bool PlayHig
 		ButtonBackground->SetColorAndOpacity(BackgroundColor);
 	}
 	
-	if (IsHighlighted && HighlightedAnimation != nullptr)
+	if (IsHighlighted && HighlightedAnimation != nullptr && PlayHighlightedAnimation)
 	{
 		USK_LOG_TRACE("Playing highlighted animation");
 		PlayAnimation(HighlightedAnimation);
@@ -258,4 +328,34 @@ void UMenuItem::OnSliderValueChanged(const float Value)
 
 	CurrentValue = 0;
 	UpdateValue(Value);
+}
+
+/**
+ * @brief Called after the select button is clicked
+ */
+void UMenuItem::OnSelectButtonClicked()
+{
+	if (Menu != nullptr)
+	{
+		Menu->OnMenuSelected();
+		return;
+	}
+
+	OnSelectedEvent.Broadcast();
+}
+
+/**
+ * @brief Called after the increase value button is clicked
+ */
+void UMenuItem::OnIncreaseValueButtonClicked()
+{
+	UpdateValue(IncrementSinglePress);
+}
+
+/**
+ * @brief Called after the decrease value button is clicked
+ */
+void UMenuItem::OnDecreaseValueButtonClicked()
+{
+	UpdateValue(-IncrementSinglePress);
 }

@@ -8,6 +8,8 @@
 #include "Blueprint/UserWidget.h"
 #include "MenuItem.generated.h"
 
+class UMenu;
+
 /**
  * @brief A widget used to display a title, text and value in the form of a menu item
  */
@@ -59,10 +61,28 @@ public:
 	class UTextBlock* HighlightedValueText;
 
 	/**
+	 * @brief The button used to select the menu item
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class UButton* SelectButton;
+
+	/**
 	 * @brief The slider used to display and update the current value of the menu item
 	 */
 	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
 	class USlider* ValueSlider;
+
+	/**
+	 * @brief The button used to increase the value of the menu item
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class UButton* IncreaseValueButton;
+
+	/**
+	 * @brief The button used to decrease the value of the menu item
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class UButton* DecreaseValueButton;
 
 	/**
 	 * @brief The border displayed on the left of the menu item
@@ -260,6 +280,12 @@ public:
 	bool ShowValueSlider = false;
 
 	/**
+	 * @brief Should the increase/decrease value buttons be shown for this menu item?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value")
+	bool ShowValueButtons = false;
+
+	/**
 	 * @brief A mapping of possible values to text
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value")
@@ -283,6 +309,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value")
 	int MaxValue = 100;
 
+	/**
+	 * @brief Can the menu item be selected?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation")
+	bool AllowSelection = true;
+	
 	/**
 	 * @brief The type of navigation used by the menu item when pressing the up or down key
 	 */
@@ -336,6 +368,12 @@ public:
 	FMenuItemOnValueChanged OnValueChanged;
 
 	/**
+	 * @brief A reference to the menu that contains this menu item
+	 */
+	UPROPERTY(BlueprintReadOnly, Category = "Ultimate Starter Kit|UI")
+	UMenu* Menu;
+
+	/**
 	 * @brief Set the text display in the menu item
 	 * @param Text The new text displayed in the menu item
 	 */
@@ -345,10 +383,11 @@ public:
 	/**
 	 * @brief Set the highlighted state of the menu item
 	 * @param IsHighlighted Is the menu item highlighted?
+	 * @param PlayHighlightedAnimation Should the highlighted animation be played?
 	 * @param PlayHighlightedSound Should the highlighted sound effect be played?
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
-	void SetHighlightedState(bool IsHighlighted, const bool PlayHighlightedSound);
+	void SetHighlightedState(bool IsHighlighted, const bool PlayHighlightedAnimation, const bool PlayHighlightedSound);
 
 	/**
 	 * @brief Get the current value of the menu item
@@ -375,6 +414,19 @@ protected:
 	 */
 	virtual void NativeConstruct() override;
 
+	/**
+	 * @brief Overridable native event for when the cursor has entered the widget
+	 * @param InGeometry The Geometry of the widget receiving the event
+	 * @param InMouseEvent Information about the input event
+	 */
+	virtual void NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
+
+	/**
+	 * @brief Overridable native event for when the cursor has left the widget
+	 * @param InMouseEvent Information about the input event
+	 */
+	virtual void NativeOnMouseLeave(const FPointerEvent& InMouseEvent) override;
+	
 private:
 	/**
 	 * @brief The current value of the menu item
@@ -398,4 +450,22 @@ private:
 	 */
 	UFUNCTION()
 	void OnSliderValueChanged(float Value);
+
+	/**
+	 * @brief Called after the select button is clicked
+	 */
+	UFUNCTION()
+	void OnSelectButtonClicked();
+
+	/**
+	 * @brief Called after the increase value button is clicked
+	 */
+	UFUNCTION()
+	void OnIncreaseValueButtonClicked();
+
+	/**
+	 * @brief Called after the decrease value button is clicked
+	 */
+	UFUNCTION()
+	void OnDecreaseValueButtonClicked();
 };

@@ -162,6 +162,20 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void OnMenuBack();
 
+	/**
+	 * @brief Request to highlight a specific menu item
+	 * @param MenuItem The menu item to highlight
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void RequestHighlight(UMenuItem* MenuItem);
+
+	/**
+	 * @brief Request to remove the highlighted state from a specific menu item
+	 * @param MenuItem The menu item to remove the highlighted state from
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void RemoveHighlight(UMenuItem* MenuItem);
+
 protected:
 	/**
 	 * @brief Overridable native event for when the widget has been constructed
@@ -184,6 +198,12 @@ private:
 	 */
 	UPROPERTY()
 	UMenuItem* CurrentMenuItem;
+
+	/**
+	 * @brief A reference to the highlighted menu item before the highlight state was removed
+	 */
+	UPROPERTY()
+	UMenuItem* HighlightedMenuItemBeforeRemoval;
 
 	/**
 	 * @brief Has the action bindings been initialized?
@@ -214,9 +234,9 @@ private:
 	void InitializeActionBindings(const APlayerController* PlayerController);
 
 	/**
-	 * @brief Initialize the default item in the menu
+	 * @brief Initialize the menu items and highlight the default item
 	 */
-	void InitializeDefaultItem();
+	void InitializeMenuItems();
 
 	/**
 	 * @brief Update the highlighted item
@@ -226,4 +246,10 @@ private:
 	 * @param IsHolding Is the key being held down?
 	 */
 	void UpdateHighlightedItem(UMenuItem* NewItem, EMenuNavigation MenuNavigation, bool IncreaseValue, bool IsHolding);
+
+	/**
+	 * @brief Update the highlighted menu item before the navigation event
+	 * @param IsVerticalNavigation Is this called because of a vertical navigation event?
+	 */
+	void UpdateHighlightedItemBeforeNavigation(bool IsVerticalNavigation);
 };
