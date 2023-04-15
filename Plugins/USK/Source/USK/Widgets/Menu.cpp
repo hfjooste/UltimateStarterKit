@@ -55,6 +55,11 @@ void UMenu::NativeOnInitialized()
  */
 void UMenu::OnMenuUp()
 {
+	if (!IsInputAllowed())
+	{
+		return;
+	}
+
 	USK_LOG_TRACE("Navigating up");
 	UpdateHighlightedItemBeforeNavigation(true);
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemUp,
@@ -67,7 +72,8 @@ void UMenu::OnMenuUp()
  */
 void UMenu::OnMenuUpHold()
 {
-	if (CurrentMenuItem == nullptr || CurrentMenuItem->ValueUpdateMethod != EMenuItemValueUpdateMethod::Hold ||
+	if (!IsInputAllowed() || CurrentMenuItem == nullptr ||
+		CurrentMenuItem->ValueUpdateMethod != EMenuItemValueUpdateMethod::Hold ||
 		CurrentMenuItem->VerticalNavigation != EMenuNavigation::IncreaseDecreaseValue)
 	{
 		return;
@@ -82,6 +88,11 @@ void UMenu::OnMenuUpHold()
  */
 void UMenu::OnMenuDown()
 {
+	if (!IsInputAllowed())
+	{
+		return;
+	}
+	
 	USK_LOG_TRACE("Navigating down");
 	UpdateHighlightedItemBeforeNavigation(true);
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemDown,
@@ -94,7 +105,8 @@ void UMenu::OnMenuDown()
  */
 void UMenu::OnMenuDownHold()
 {
-	if (CurrentMenuItem == nullptr || CurrentMenuItem->ValueUpdateMethod != EMenuItemValueUpdateMethod::Hold ||
+	if (!IsInputAllowed() || CurrentMenuItem == nullptr ||
+		CurrentMenuItem->ValueUpdateMethod != EMenuItemValueUpdateMethod::Hold ||
 		CurrentMenuItem->VerticalNavigation != EMenuNavigation::IncreaseDecreaseValue)
 	{
 		return;
@@ -109,6 +121,11 @@ void UMenu::OnMenuDownHold()
  */
 void UMenu::OnMenuLeft()
 {
+	if (!IsInputAllowed())
+	{
+		return;
+	}
+	
 	USK_LOG_TRACE("Navigating left");
 	UpdateHighlightedItemBeforeNavigation(false);
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemLeft,
@@ -121,7 +138,8 @@ void UMenu::OnMenuLeft()
  */
 void UMenu::OnMenuLeftHold()
 {
-	if (CurrentMenuItem == nullptr || CurrentMenuItem->ValueUpdateMethod != EMenuItemValueUpdateMethod::Hold ||
+	if (!IsInputAllowed() || CurrentMenuItem == nullptr ||
+		CurrentMenuItem->ValueUpdateMethod != EMenuItemValueUpdateMethod::Hold ||
 		CurrentMenuItem->HorizontalNavigation != EMenuNavigation::IncreaseDecreaseValue)
 	{
 		return;
@@ -136,6 +154,11 @@ void UMenu::OnMenuLeftHold()
  */
 void UMenu::OnMenuRight()
 {
+	if (!IsInputAllowed())
+	{
+		return;
+	}
+	
 	USK_LOG_TRACE("Navigating right");
 	UpdateHighlightedItemBeforeNavigation(false);
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemRight,
@@ -148,7 +171,8 @@ void UMenu::OnMenuRight()
  */
 void UMenu::OnMenuRightHold()
 {
-	if (CurrentMenuItem == nullptr || CurrentMenuItem->ValueUpdateMethod != EMenuItemValueUpdateMethod::Hold ||
+	if (!IsInputAllowed() || CurrentMenuItem == nullptr ||
+		CurrentMenuItem->ValueUpdateMethod != EMenuItemValueUpdateMethod::Hold ||
 		CurrentMenuItem->HorizontalNavigation != EMenuNavigation::IncreaseDecreaseValue)
 	{
 		return;
@@ -163,11 +187,16 @@ void UMenu::OnMenuRightHold()
  */
 void UMenu::OnMenuSelected()
 {
+	if (!IsInputAllowed())
+	{
+		return;
+	}
+	
 	USK_LOG_TRACE("Selecting menu item");	
 	if (CurrentMenuItem != nullptr && CurrentMenuItem->AllowSelection)
 	{
 		UAudioUtils::PlaySound2D(GetWorld(), SelectedSFX);
-		CurrentMenuItem->OnSelected.Broadcast();
+		CurrentMenuItem->SelectItem();
 	}
 }
 
@@ -176,6 +205,11 @@ void UMenu::OnMenuSelected()
  */
 void UMenu::OnMenuBack()
 {
+	if (!IsInputAllowed())
+	{
+		return;
+	}
+	
 	USK_LOG_TRACE("Going back");
 	UAudioUtils::PlaySound2D(GetWorld(), BackSFX);
 	OnBackEvent.Broadcast();
@@ -302,6 +336,17 @@ void UMenu::RemoveInputBindings() const
 
 	USK_LOG_TRACE("Removing menu input mapping context");
 	Subsystem->RemoveMappingContext(InputMappingContext);
+}
+
+/**
+ * @brief Is input allowed for the menu?
+ * @return A boolean value indicating if input is allowed
+ */
+bool UMenu::IsInputAllowed() const
+{
+	return Visibility != ESlateVisibility::Collapsed &&
+		Visibility != ESlateVisibility::Hidden &&
+		!HasAnyFlags(RF_BeginDestroyed);
 }
 
 /**

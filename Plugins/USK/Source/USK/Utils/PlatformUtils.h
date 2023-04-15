@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Platform.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "PlatformUtils.generated.h"
 
 /**

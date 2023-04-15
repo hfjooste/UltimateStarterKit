@@ -25,6 +25,7 @@ The Ultimate Starter Kit plugin comes with the following features:
 <ul>
     <li><strong>Logger</strong>: A system used to easily log info to file and via on-screen messages</li>
     <li><strong>Save data management</strong>: A system used to easily save/load game data with support for multiple save slots</li>
+    <li><strong>Settings</strong>: A full settings system including both the UI and save/load logic</li>
     <li><strong>Input Indicators</strong>: A system used to easily detect different input devices and update the UI to display the correct indicators</li>
     <li><strong>Currency</strong>: A system that is used to easily manage different types of currency</li>
     <li><strong>Audio</strong>: A system used to manage the basic properties of audio files</li>
@@ -51,12 +52,11 @@ I'm planning on expanding this plugin and adding a bunch of new features. This i
 
 ## Credits
 <ul>
-    <li><a href="https://www.dafont.com/comic-helvetic.font" target="_blank">Comic Helvetic Font by Alexander Pravdin</a></li>
+    <li><a href="https://www.behance.net/pravdin" target="_blank">Comic Helvetic Font by Alexander Pravdin</a></li>
     <li><a href="https://freesound.org/people/broumbroum/" target="_blank">Menu Sound Effects by Broumbroum</a></li>
     <li><a href="https://freesound.org/people/felixyadomi/" target="_blank">Land & Jump Sound Effects by Felixyadomi</a></li>
     <li><a href="https://freesound.org/people/Scrampunk/" target="_blank">Item Sound Effects by Scrampunk</a></li>
-    <li><a href="https://www.youtube.com/@Viraj7011" target="_blank">3D Platformer Background Music by Viraj Chavda</a></li>
-    <li><a href="https://www.youtube.com/@Infraction" target="_blank">Audio Demo Background Music by Infraction</a></li>
+    <li><a href="https://inaudio.org" target="_blank">Music by InAudio</a></li>
 </ul>
 
 ## Support
