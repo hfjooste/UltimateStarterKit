@@ -14,7 +14,7 @@
         <link rel="prev" href="../menuitemvalueupdatemethod/">
       
       
-        <link rel="next" href="../configutils/">
+        <link rel="next" href="../settingsdata/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
@@ -1001,12 +1001,151 @@
       
       
         <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
-          Utils
+          Settings
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          Settings
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../settingsdata/" class="md-nav__link">
+        Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../settingsconfig/" class="md-nav__link">
+        Config
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11_3" id="__nav_11_3_label" tabindex="0">
+          Items
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_11_3">
+          <span class="md-nav__icon md-icon"></span>
+          Items
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../settingsitemtype/" class="md-nav__link">
+        Types
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../settingsitem/" class="md-nav__link">
+        Logic
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../settingsutils/" class="md-nav__link">
+        Utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+          Utils
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_12">
           <span class="md-nav__icon md-icon"></span>
           Utils
         </label>
@@ -1037,17 +1176,17 @@
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_2" >
       
       
       
-        <label class="md-nav__link" for="__nav_11_2" id="__nav_11_2_label" tabindex="0">
+        <label class="md-nav__link" for="__nav_12_2" id="__nav_12_2_label" tabindex="0">
           Platform
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_11_2">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_12_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_12_2">
           <span class="md-nav__icon md-icon"></span>
           Platform
         </label>
@@ -1495,6 +1634,30 @@
         <td>0.15f</td>
     </tr>
     <tr>
+        <td>SettingsItemType</td>
+        <td>The type of setting item managed by this menu item (changing this will overwrite other settings)</td>
+        <td>ESettingsItemType</td>
+        <td>ESettingsItemType::None</td>
+    </tr>
+    <tr>
+        <td>AutoSaveSettingsOnValueChanged</td>
+        <td>Should the settings managed by this menu item automatically be saved when the value is changed?</td>
+        <td>bool</td>
+        <td>true</td>
+    </tr>
+    <tr>
+        <td>AutoSaveSettingsOnHighlightRemoved</td>
+        <td>Should the settings managed by this menu item automatically be saved when the highlight state is removed?</td>
+        <td>bool</td>
+        <td>true</td>
+    </tr>
+    <tr>
+        <td>AutoSaveSettingsOnSelected</td>
+        <td>Should the settings managed by this menu item automatically be saved when the menu item is selected?</td>
+        <td>bool</td>
+        <td>true</td>
+    </tr>
+    <tr>
         <td>ShowValueSlider</td>
         <td>Should the value slider be shown for this menu item?</td>
         <td>bool</td>
@@ -1619,8 +1782,14 @@
     </tr>
     <tr>
         <td>SetText</td>
-        <td>Set the text display in the menu item</td>
+        <td>Set the text displayed in the menu item</td>
         <td><strong>Text (FText&)</strong><br/>The new text displayed in the menu item</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>SetTitle</td>
+        <td>Set the title displayed in the menu item</td>
+        <td><strong>Text (FText&)</strong><br/>The new title displayed in the menu item</td>
         <td></td>
     </tr>
     <tr>
@@ -1641,15 +1810,37 @@
         <td><strong>Increment (float)</strong><br/>The amount added to the current value of the menu item</td>
         <td></td>
     </tr>
+    <tr>
+        <td>SelectItem</td>
+        <td>Select the menu item</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>SaveSettings</td>
+        <td>Save the settings managed by this menu item</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>ApplySettings</td>
+        <td>Apply the settings managed by this menu item</td>
+        <td></td>
+        <td></td>
+    </tr>
 </table>
 
 <h2 id="blueprint-usage">Blueprint Usage</h2>
 <p>You can use the <code>MenuItem</code> using Blueprints by adding one of the following nodes:</p>
 <ul>
     <li>Ultimate Starter Kit > UI > Set Text</li>
+    <li>Ultimate Starter Kit > UI > Set Title</li>
     <li>Ultimate Starter Kit > UI > Set Highlighted State</li>
     <li>Ultimate Starter Kit > UI > Get Value</li>
     <li>Ultimate Starter Kit > UI > Update Value</li>
+    <li>Ultimate Starter Kit > UI > Select Item</li>
+    <li>Ultimate Starter Kit > UI > Save Settings</li>
+    <li>Ultimate Starter Kit > UI > Apply Settings</li>
 </ul>
 
 <h2 id="c-usage">C++ Usage</h2>
@@ -1663,9 +1854,13 @@ void ATestActor::Test()
 {
     // MenuItem is a pointer to the UMenuItem
     MenuItem-&gt;SetText(Text);
+    MenuItem-&gt;SetTitle(Text);
     MenuItem-&gt;SetHighlightedState(IsHighlighted, PlayHighlightedAnimation, PlayHighlightedSound);
     int Value = MenuItem-&gt;GetValue();
     MenuItem-&gt;UpdateValue(Increment);
+    MenuItem-&gt;SelectItem();
+    MenuItem-&gt;SaveSettings();
+    MenuItem-&gt;ApplySettings();
 }
 </code></pre>
 
