@@ -8,6 +8,7 @@
 #include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
 #include "USK/Logger/Log.h"
+#include "USK/Settings/SettingsUtils.h"
 #include "USK/Utils/PlatformUtils.h"
 
 /**
@@ -16,7 +17,7 @@
 void UUSKGameInstance::Init()
 {
 	Super::Init();
-	InitializeInputIndicatorsAfterDelay();
+	InitializeFeaturesAfterDelay();
 }
 
 /**
@@ -27,7 +28,10 @@ void UUSKGameInstance::Init()
 void UUSKGameInstance::LoadComplete(const float LoadTime, const FString& MapName)
 {
 	Super::LoadComplete(LoadTime, MapName);
-	InitializeInputIndicatorsAfterDelay();
+	if (bIsFeaturesInitialized)
+	{
+		InitializeInputIndicatorsAfterDelay();
+	}
 }
 
 /**
@@ -147,7 +151,7 @@ TArray<UTexture2D*> UUSKGameInstance::GetInputIndicatorIcon(UInputAction* InputA
 			return InputIndicators;
 		}
 	}
-
+ 
 	return InputIndicators;
 }
 
@@ -183,6 +187,34 @@ FString UUSKGameInstance::GetSaveSlotName(const int Index) const
 }
 
 /**
+ * @brief Initialize the features of the game instance after a delay
+ */
+void UUSKGameInstance::InitializeFeaturesAfterDelay()
+{	
+	USK_LOG_INFO(*FString::Format(TEXT("Delaying feature initialization by {0} seconds"),
+			{ FString::SanitizeFloat(InitializeFeaturesDelay, 5) }));
+
+	FLatentActionInfo LatentAction;
+	LatentAction.Linkage = 0;
+	LatentAction.CallbackTarget = this;
+	LatentAction.UUID = GetUniqueID();
+	LatentAction.ExecutionFunction = "InitializeFeatures";
+	UKismetSystemLibrary::Delay(GetWorld(), InitializeFeaturesDelay, LatentAction);
+}
+
+/**
+ * @brief Initialize the features of the game instance
+ */
+void UUSKGameInstance::InitializeFeatures()
+{
+	InitializeInputIndicators();
+
+	USK_LOG_INFO("Initializing settings");
+    USettingsUtils::Initialize(this);
+	bIsFeaturesInitialized = true;
+}
+
+/**
  * @brief Start a timer to initialize the input indicators
  */
 void UUSKGameInstance::InitializeInputIndicatorsAfterDelay()
@@ -190,6 +222,7 @@ void UUSKGameInstance::InitializeInputIndicatorsAfterDelay()
 	if (!IsInputIndicatorsEnabled)
 	{
 		USK_LOG_INFO("Input indicators are disabled");
+		return;
 	}
 	
 	USK_LOG_INFO(*FString::Format(TEXT("Delaying input indicator initialization by {0} seconds"),

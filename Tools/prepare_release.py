@@ -19,6 +19,12 @@ os.system(f"python \"{docs}\" --input \"Data\\TrackableDataComponent\" --output 
 os.system(f"python \"{docs}\" --input \"Items\\AllowedCollector\" --output allowedcollector")
 os.system(f"python \"{docs}\" --input \"Items\\CollectableItem\" --output collectableitem")
 
+os.system(f"python \"{docs}\" --input \"Settings\\SettingsData\" --output settingsdata")
+os.system(f"python \"{docs}\" --input \"Settings\\SettingsConfig\" --output settingsconfig")
+os.system(f"python \"{docs}\" --input \"Settings\\SettingsItemType\" --output settingsitemtype")
+os.system(f"python \"{docs}\" --input \"Settings\\SettingsItem\" --output settingsitem")
+os.system(f"python \"{docs}\" --input \"Settings\\SettingsUtils\" --output settingsutils")
+
 os.system(f"python \"{docs}\" --input \"Utils\\ConfigUtils\" --output configutils")
 os.system(f"python \"{docs}\" --input \"Utils\\Platform\" --output platformtype")
 os.system(f"python \"{docs}\" --input \"Utils\\PlatformUtils\" --output platformutils")

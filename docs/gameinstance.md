@@ -42,6 +42,12 @@ The Game Instance will automatically detect input events and update the current 
 		<td></td>
 	</tr>
 	<tr>
+		<td>SettingsConfig</td>
+		<td>The configuration for the settings</td>
+		<td>USettingsConfig*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>IsInputIndicatorsEnabled</td>
 		<td>Is the input indicators feature enabled?</td>
 		<td>bool</td>

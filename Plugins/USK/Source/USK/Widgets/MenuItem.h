@@ -6,6 +6,7 @@
 #include "MenuItemValueUpdateMethod.h"
 #include "MenuNavigation.h"
 #include "Blueprint/UserWidget.h"
+#include "USK/Settings/SettingsItemType.h"
 #include "MenuItem.generated.h"
 
 class UMenu;
@@ -284,6 +285,30 @@ public:
 	float IncrementHold = 0.15f;
 
 	/**
+	 * @brief The type of setting item managed by this menu item (changing this will overwrite other settings)
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings")
+	ESettingsItemType SettingsItemType = ESettingsItemType::None;
+
+	/**
+	 * @brief Should the settings managed by this menu item automatically be saved when the value is changed?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings")
+	bool AutoSaveSettingsOnValueChanged = true;
+
+	/**
+	 * @brief Should the settings managed by this menu item automatically be saved when the highlight state is removed?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings")
+	bool AutoSaveSettingsOnHighlightRemoved = true;
+
+	/**
+	 * @brief Should the settings managed by this menu item automatically be saved when the menu item is selected?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings")
+	bool AutoSaveSettingsOnSelected = true;
+	
+	/**
 	 * @brief Should the value slider be shown for this menu item?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value")
@@ -396,11 +421,18 @@ public:
 	UMenu* Menu;
 
 	/**
-	 * @brief Set the text display in the menu item
+	 * @brief Set the text displayed in the menu item
 	 * @param Text The new text displayed in the menu item
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void SetText(const FText& Text) const;
+
+	/**
+	 * @brief Set the title displayed in the menu item
+	 * @param Text The new title displayed in the menu item
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void SetTitle(const FText& Text) const;
 
 	/**
 	 * @brief Set the highlighted state of the menu item
@@ -424,6 +456,24 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void UpdateValue(float Increment);
+
+	/**
+	 * @brief Select the menu item
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void SelectItem();
+
+	/**
+	 * @brief Save the settings managed by this menu item
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void SaveSettings();
+
+	/**
+	 * @brief Apply the settings managed by this menu item
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void ApplySettings();
 
 protected:
 	/**
@@ -490,4 +540,10 @@ private:
 	 */
 	UFUNCTION()
 	void OnDecreaseValueButtonClicked();
+
+	/**
+	 * @brief Automatically save the settings managed by this menu item
+	 * @param SaveFlag The flag used to enable/disable auto saving
+	 */
+	void AutoSaveSettings(bool SaveFlag) const;
 };

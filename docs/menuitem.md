@@ -266,6 +266,30 @@ You can add the following widgets to enable extra functionality:
 		<td>0.15f</td>
 	</tr>
 	<tr>
+		<td>SettingsItemType</td>
+		<td>The type of setting item managed by this menu item (changing this will overwrite other settings)</td>
+		<td>ESettingsItemType</td>
+		<td>ESettingsItemType::None</td>
+	</tr>
+	<tr>
+		<td>AutoSaveSettingsOnValueChanged</td>
+		<td>Should the settings managed by this menu item automatically be saved when the value is changed?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>AutoSaveSettingsOnHighlightRemoved</td>
+		<td>Should the settings managed by this menu item automatically be saved when the highlight state is removed?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>AutoSaveSettingsOnSelected</td>
+		<td>Should the settings managed by this menu item automatically be saved when the menu item is selected?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
 		<td>ShowValueSlider</td>
 		<td>Should the value slider be shown for this menu item?</td>
 		<td>bool</td>
@@ -390,8 +414,14 @@ You can add the following widgets to enable extra functionality:
 	</tr>
 	<tr>
 		<td>SetText</td>
-		<td>Set the text display in the menu item</td>
+		<td>Set the text displayed in the menu item</td>
 		<td><strong>Text (FText&)</strong><br/>The new text displayed in the menu item</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>SetTitle</td>
+		<td>Set the title displayed in the menu item</td>
+		<td><strong>Text (FText&)</strong><br/>The new title displayed in the menu item</td>
 		<td></td>
 	</tr>
 	<tr>
@@ -412,15 +442,37 @@ You can add the following widgets to enable extra functionality:
 		<td><strong>Increment (float)</strong><br/>The amount added to the current value of the menu item</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>SelectItem</td>
+		<td>Select the menu item</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>SaveSettings</td>
+		<td>Save the settings managed by this menu item</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>ApplySettings</td>
+		<td>Apply the settings managed by this menu item</td>
+		<td></td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
 You can use the <code>MenuItem</code> using Blueprints by adding one of the following nodes:
 <ul>
 	<li>Ultimate Starter Kit > UI > Set Text</li>
+	<li>Ultimate Starter Kit > UI > Set Title</li>
 	<li>Ultimate Starter Kit > UI > Set Highlighted State</li>
 	<li>Ultimate Starter Kit > UI > Get Value</li>
 	<li>Ultimate Starter Kit > UI > Update Value</li>
+	<li>Ultimate Starter Kit > UI > Select Item</li>
+	<li>Ultimate Starter Kit > UI > Save Settings</li>
+	<li>Ultimate Starter Kit > UI > Apply Settings</li>
 </ul>
 
 ## C++ Usage
@@ -437,8 +489,12 @@ void ATestActor::Test()
 {
 	// MenuItem is a pointer to the UMenuItem
 	MenuItem->SetText(Text);
+	MenuItem->SetTitle(Text);
 	MenuItem->SetHighlightedState(IsHighlighted, PlayHighlightedAnimation, PlayHighlightedSound);
 	int Value = MenuItem->GetValue();
 	MenuItem->UpdateValue(Increment);
+	MenuItem->SelectItem();
+	MenuItem->SaveSettings();
+	MenuItem->ApplySettings();
 }
 ```

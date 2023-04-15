@@ -230,6 +230,12 @@ private:
 	void RemoveInputBindings() const;
 
 	/**
+	 * @brief Is input allowed for the menu?
+	 * @return A boolean value indicating if input is allowed
+	 */
+	bool IsInputAllowed() const;
+
+	/**
 	 * @brief Initialize the action input bindings for the menu
 	 * @param PlayerController A reference to the current player controller
 	 */

@@ -92,6 +92,13 @@ nav:
       - Navigation: menunavigation.md
       - Value Update Method: menuitemvalueupdatemethod.md
       - Menu Item Widget: menuitem.md
+  - Settings:
+    - Data: settingsdata.md
+    - Config: settingsconfig.md
+    - Items:
+      - Types: settingsitemtype.md
+      - Logic: settingsitem.md
+    - Utils: settingsutils.md
   - Utils:
     - Config Utils: configutils.md
     - Platform:

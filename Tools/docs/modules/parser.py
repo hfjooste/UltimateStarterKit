@@ -29,8 +29,11 @@ class Parser:
         if not self.enum and not self.struct:
             if "public:" not in self.file_content:
                 raise Exception("File is not supported. There are no public functions in this header file")
-            with open(input_file[:-2] + ".cpp", 'r') as f:
-                self.cpp_content = f.read()
+            cpp_name = input_file[:-2] + ".cpp"
+            self.cpp_content = ""
+            if os.path.exists(cpp_name):
+                with open(cpp_name, 'r') as f:
+                    self.cpp_content = f.read()
             self.content = self.file_content.split("public:")[1].split("private:")[0].split("};")[0]
         else:
             self.cpp_content = ""
@@ -83,7 +86,7 @@ class Parser:
 
 
     def extract_sections(self, text):
-        self.sections = re.findall(r'(/\*\*[\s\S]*?\*/[\s\S]*?;)', text)
+        self.sections = re.findall(r'(/\*\*[\s\S]*?\*/[\s\S]*?;)', text.replace(") { return nullptr; }", ");").replace(") { }", ");"))
 
 
     def generate_enum_values(self):

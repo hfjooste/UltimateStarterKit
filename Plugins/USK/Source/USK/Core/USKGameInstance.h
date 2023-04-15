@@ -6,6 +6,7 @@
 #include "Engine/GameInstance.h"
 #include "USKSaveGame.h"
 #include "USK/Character/PlatformerAnimationInstance.h"
+#include "USK/Settings/SettingsConfig.h"
 #include "USKGameInstance.generated.h"
 
 class UInputAction;
@@ -35,6 +36,12 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Save Data")
 	TSubclassOf<UUSKSaveGame> SaveGameClass;
+
+	/**
+	 * @brief The configuration for the settings
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	USettingsConfig* SettingsConfig;
 
 	/**
 	 * @brief Event used to notify other classes when the save data is loaded
@@ -167,6 +174,16 @@ private:
 	UUSKSaveGame* CurrentSaveGame;
 
 	/**
+	 * @brief A boolean flag used to check if the features of the game instance was initialized
+	 */
+	bool bIsFeaturesInitialized = false;
+
+	/**
+	 * @brief The delay before initializing the features of the game instance
+	 */
+	float InitializeFeaturesDelay = 0.2f;
+
+	/**
 	 * @brief The delay before initializing the input indicators
 	 */
 	float InitializeInputIndicatorsDelay = 0.2f;
@@ -198,6 +215,17 @@ private:
 	 * @return The file name of the save slot at the specified index
 	 */
 	FString GetSaveSlotName(int Index) const;
+
+	/**
+	 * @brief Initialize the features of the game instance after a delay
+	 */
+	void InitializeFeaturesAfterDelay();
+
+	/**
+	 * @brief Initialize the features of the game instance
+	 */
+	UFUNCTION()
+	void InitializeFeatures();
 
 	/**
 	 * @brief Start a timer to initialize the input indicators

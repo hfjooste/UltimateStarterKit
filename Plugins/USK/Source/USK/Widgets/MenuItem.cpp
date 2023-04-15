@@ -9,6 +9,7 @@
 #include "Components/TextBlock.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Logger/Log.h"
+#include "USK/Settings/SettingsUtils.h"
 #include "USK/Utils/PlatformUtils.h"
 
 /**
@@ -18,12 +19,7 @@ void UMenuItem::NativePreConstruct()
 {
 	Super::NativePreConstruct();
 	SetText(MenuItemText);
-	
-	if (Title != nullptr)
-	{
-		Title->SetText(TitleText);
-		Title->SetVisibility(TitleText.IsEmpty() ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);	
-	}
+	SetTitle(TitleText);
 
 	if (ValueSlider != nullptr)
 	{
@@ -53,6 +49,12 @@ void UMenuItem::NativePreConstruct()
 void UMenuItem::NativeConstruct()
 {
 	Super::NativeConstruct();
+
+	if (SettingsItemType != ESettingsItemType::None)
+	{
+		USK_LOG_TRACE("Configuring menu item");
+		USettingsUtils::ConfigureMenuItem(this);
+	}
 
 	USK_LOG_TRACE("Setting default value");
 	UpdateValue(DefaultValue);
@@ -131,7 +133,7 @@ void UMenuItem::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
 }
 
 /**
- * @brief Set the text display in the menu item
+ * @brief Set the text displayed in the menu item
  * @param Text The new text displayed in the menu item
  */
 void UMenuItem::SetText(const FText& Text) const
@@ -148,6 +150,21 @@ void UMenuItem::SetText(const FText& Text) const
 		USK_LOG_TRACE("Setting highlighted text");
 		HighlightedText->SetText(Text);
 	}
+}
+
+/**
+ * @brief Set the title displayed in the menu item
+ * @param Text The new title displayed in the menu item
+ */
+void UMenuItem::SetTitle(const FText& Text) const
+{
+	if (Title == nullptr)
+	{
+		return;	
+	}
+
+	Title->SetText(Text);
+	Title->SetVisibility(Text.IsEmpty() ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
 }
 
 /**
@@ -249,6 +266,7 @@ void UMenuItem::SetHighlightedState(const bool IsHighlighted,
 	{
 		USK_LOG_TRACE("Broadcasting OnHighlightRemoved event");
 		OnHighlightRemoved.Broadcast();
+		AutoSaveSettings(AutoSaveSettingsOnHighlightRemoved);
 	}
 }
 
@@ -282,6 +300,42 @@ void UMenuItem::UpdateValue(const float Increment)
 
 	USK_LOG_TRACE("Menu item value updated. Notifying other classes");
 	OnValueChanged.Broadcast(CurrentValue);
+	AutoSaveSettings(AutoSaveSettingsOnValueChanged);
+}
+
+/**
+ * @brief elect the menu item
+ */
+void UMenuItem::SelectItem()
+{
+	OnSelected.Broadcast();
+	AutoSaveSettings(AutoSaveSettingsOnSelected);
+}
+
+/**
+ * @brief Save the settings managed by this menu item
+ */
+void UMenuItem::SaveSettings()
+{
+	if (SettingsItemType == ESettingsItemType::None)
+	{
+		return;
+	}
+
+	USettingsUtils::SaveMenuItemSettings(this, false);
+}
+
+/**
+ * @brief Apply the settings managed by this menu item
+ */
+void UMenuItem::ApplySettings()
+{
+	if (SettingsItemType == ESettingsItemType::None)
+	{
+		return;
+	}
+
+	USettingsUtils::ApplyMenuItemSettings(this);
 }
 
 /**
@@ -352,7 +406,7 @@ void UMenuItem::OnSelectButtonClicked()
 		return;
 	}
 
-	OnSelected.Broadcast();
+	SelectItem();
 }
 
 /**
@@ -369,4 +423,19 @@ void UMenuItem::OnIncreaseValueButtonClicked()
 void UMenuItem::OnDecreaseValueButtonClicked()
 {
 	UpdateValue(-IncrementSinglePress);
+}
+
+/**
+ * @brief Automatically save the settings managed by this menu item
+ * @param SaveFlag The flag used to enable/disable auto saving
+ */
+void UMenuItem::AutoSaveSettings(const bool SaveFlag) const
+{
+	if (SettingsItemType == ESettingsItemType::None || !SaveFlag)
+	{
+		return;
+	}
+
+	USK_LOG_TRACE("Updating settings");
+	USettingsUtils::SaveMenuItemSettings(this, true);
 }
