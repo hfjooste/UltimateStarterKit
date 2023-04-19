@@ -780,6 +780,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#required-widgets" class="md-nav__link">
     Required Widgets
   </a>
@@ -801,8 +808,29 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blueprint-usage" class="md-nav__link">
+    Blueprint Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-usage" class="md-nav__link">
+    C++ Usage
+  </a>
   
 </li>
       
@@ -1235,6 +1263,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#required-widgets" class="md-nav__link">
     Required Widgets
   </a>
@@ -1256,8 +1291,29 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blueprint-usage" class="md-nav__link">
+    Blueprint Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-usage" class="md-nav__link">
+    C++ Usage
+  </a>
   
 </li>
       
@@ -1283,6 +1339,13 @@
 
 <h2 id="introduction">Introduction</h2>
 <p>A widget used to display the current framerate</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>The <code>FpsCounter</code> relies on other components of this plugin to work:</p>
+<ul>
+    <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+    <li><a href="../gameinstance">Game Instance</a>: Used to monitor for input device changes and handle saving/loading game data</li>
+</ul>
+
 <h2 id="required-widgets">Required Widgets</h2>
 <p>There is already a <code>FpsCounter_Implementation</code> that you can use in your projects. But if you create your own instance of this widget, you need to add the following before you can compile:</p>
 <table>
@@ -1344,6 +1407,42 @@
         <td>FLinearColor::Red</td>
     </tr>
 </table>
+
+<h3 id="functions">Functions</h3>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Params</th>
+        <th>Return</th>
+    </tr>
+    <tr>
+        <td>UpdateVisibility</td>
+        <td>Update the visibility of the widget</td>
+        <td><strong>IsVisible (bool)</strong><br/>Is the widget visible?</td>
+        <td></td>
+    </tr>
+</table>
+
+<h2 id="blueprint-usage">Blueprint Usage</h2>
+<p>You can use the <code>FpsCounter</code> using Blueprints by adding one of the following nodes:</p>
+<ul>
+    <li>Ultimate Starter Kit > UI > Update Visibility</li>
+</ul>
+
+<h2 id="c-usage">C++ Usage</h2>
+<p>Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:</p>
+<pre><code class="language-c++">PublicDependencyModuleNames.Add(&quot;USK&quot;);
+</code></pre>
+<p>The <code>FpsCounter</code> can now be used in any of your C++ files:</p>
+<pre><code class="language-c++">#include &quot;USK/Widgets/FpsCounter.h&quot;
+
+void ATestActor::Test()
+{
+    // FpsCounter is a pointer to the UFpsCounter
+    FpsCounter-&gt;UpdateVisibility(IsVisible);
+}
+</code></pre>
 
 
 
