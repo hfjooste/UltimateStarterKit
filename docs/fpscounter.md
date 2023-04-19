@@ -1,6 +1,13 @@
 ## Introduction
 A widget used to display the current framerate
 
+## Dependencies
+The <code>FpsCounter</code> relies on other components of this plugin to work:
+<ul>
+	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+	<li><a href="../gameinstance">Game Instance</a>: Used to monitor for input device changes and handle saving/loading game data</li>
+</ul>
+
 ## Required Widgets
 There is already a <code>FpsCounter_Implementation</code> that you can use in your projects. But if you create your own instance of this widget, you need to add the following before you can compile:
 <table>
@@ -62,3 +69,42 @@ There is already a <code>FpsCounter_Implementation</code> that you can use in yo
 		<td>FLinearColor::Red</td>
 	</tr>
 </table>
+
+### Functions
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Params</th>
+		<th>Return</th>
+	</tr>
+	<tr>
+		<td>UpdateVisibility</td>
+		<td>Update the visibility of the widget</td>
+		<td><strong>IsVisible (bool)</strong><br/>Is the widget visible?</td>
+		<td></td>
+	</tr>
+</table>
+
+## Blueprint Usage
+You can use the <code>FpsCounter</code> using Blueprints by adding one of the following nodes:
+<ul>
+	<li>Ultimate Starter Kit > UI > Update Visibility</li>
+</ul>
+
+## C++ Usage
+Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:
+```c++
+PublicDependencyModuleNames.Add("USK");
+```
+
+The <code>FpsCounter</code> can now be used in any of your C++ files:
+```c++
+#include "USK/Widgets/FpsCounter.h"
+
+void ATestActor::Test()
+{
+	// FpsCounter is a pointer to the UFpsCounter
+	FpsCounter->UpdateVisibility(IsVisible);
+}
+```

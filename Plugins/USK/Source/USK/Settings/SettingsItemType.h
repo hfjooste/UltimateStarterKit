@@ -39,5 +39,60 @@ enum class ESettingsItemType : uint8
 	/**
 	 * @brief The voice audio volume setting
 	 */
-	AudioVoice	
-};	
+	AudioVoice,
+
+	/**
+	 * @brief The graphics resolution setting
+	 */
+	GraphicsResolution,
+
+	/**
+	 * @brief The graphics fullscreen setting
+	 */
+	GraphicsFullscreen,
+
+	/**
+	 * @brief The graphics view distance setting
+	 */
+	GraphicsViewDistance,
+
+	/**
+	 * @brief The graphics anti-aliasing setting
+	 */
+	GraphicsAntiAliasing,
+
+	/**
+	 * @brief The graphics post processing setting
+	 */
+	GraphicsPostProcessing,
+
+	/**
+	 * @brief The graphics shadow quality setting
+	 */
+	GraphicsShadowQuality,
+
+	/**
+	 * @brief The graphics texture quality setting
+	 */
+	GraphicsTextureQuality,
+
+	/**
+	 * @brief The graphics visual effects setting
+	 */
+	GraphicsVisualEffects,
+
+	/**
+	 * @brief The graphics shading quality setting
+	 */
+	GraphicsShadingQuality,
+
+	/**
+	 * @brief The graphics vsync setting
+	 */
+	GraphicsVSync,
+
+	/**
+	 * @brief The graphics FPS indicator setting
+	 */
+	GraphicsFpsIndicator
+};

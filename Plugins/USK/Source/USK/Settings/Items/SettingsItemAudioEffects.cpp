@@ -41,7 +41,7 @@ USettingsData* USettingsItemAudioEffects::SaveSettings(USettingsData* Settings, 
  * @param Config The settings config specified in the game instance
  * @param Settings The current settings data
  */
-void USettingsItemAudioEffects::ApplySettings(const UObject* World, const USettingsConfig* Config,
+void USettingsItemAudioEffects::ApplySettings(UObject* World, const USettingsConfig* Config,
                                               const USettingsData* Settings)
 {
 	const float Master = Settings->AudioMasterModified ? Settings->AudioMaster : Config->AudioMasterDefault;

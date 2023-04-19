@@ -41,7 +41,7 @@ USettingsData* USettingsItemAudioMaster::SaveSettings(USettingsData* Settings, c
  * @param Config The settings config specified in the game instance
  * @param Settings The current settings data
  */
-void USettingsItemAudioMaster::ApplySettings(const UObject* World, const USettingsConfig* Config,
+void USettingsItemAudioMaster::ApplySettings(UObject* World, const USettingsConfig* Config,
 	const USettingsData* Settings)
 {
 	USettingsUtils::GetSettingsItem(ESettingsItemType::AudioMusic, Config)->ApplySettings(World, Config, Settings);

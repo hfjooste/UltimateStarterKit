@@ -3,13 +3,13 @@
 #pragma once
 
 #include "USK/Settings/SettingsItem.h"
-#include "SettingsItemAudioVoice.generated.h"
+#include "SettingsItemGraphicsAntiAliasing.generated.h"
 
 /**
- * @brief An implementation for the audio voice settings item
+ * @brief An implementation for the graphics anti-aliasing settings item
  */
 UCLASS()
-class USettingsItemAudioVoice : public USettingsItem
+class USettingsItemGraphicsAntiAliasing : public USettingsItem
 {
 	GENERATED_BODY()
 	

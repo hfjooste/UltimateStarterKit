@@ -21,7 +21,7 @@ void USettingsUtils::Initialize(const UUSKGameInstance* GameInstance)
 
 	if (GameInstance->SettingsConfig == nullptr)
 	{
-		USK_LOG_ERROR("Unable to initialize settings.SettingsConfig is nullptr");
+		USK_LOG_ERROR("Unable to initialize settings. SettingsConfig is nullptr");
 		return;
 	}
 	
@@ -91,7 +91,7 @@ void USettingsUtils::ApplySettings(const UUSKGameInstance* GameInstance, const U
 
 	USK_LOG_INFO("Applying settings");
 	for (int Index = static_cast<int32>(ESettingsItemType::AudioMaster);
-		Index <= static_cast<int32>(ESettingsItemType::AudioVoice);
+		Index <= static_cast<int32>(ESettingsItemType::GraphicsFpsIndicator);
 		++Index)
 	{
 		const ESettingsItemType SettingsItemType = static_cast<ESettingsItemType>(Index);
@@ -257,6 +257,28 @@ USettingsItem* USettingsUtils::GetSettingsItem(const ESettingsItemType SettingsI
 		return Config->AudioUiImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::AudioVoice:
 		return Config->AudioVoiceImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GraphicsResolution:
+		return Config->GraphicsResolutionImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GraphicsFullscreen:
+		return Config->GraphicsFullscreenImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GraphicsViewDistance:
+		return Config->GraphicsViewDistanceImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GraphicsAntiAliasing:
+		return Config->GraphicsAntiAliasingImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GraphicsPostProcessing:
+		return Config->GraphicsPostProcessingImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GraphicsShadowQuality:
+		return Config->GraphicsShadowQualityImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GraphicsTextureQuality:
+		return Config->GraphicsTextureQualityImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GraphicsVisualEffects:
+		return Config->GraphicsVisualEffectsImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GraphicsShadingQuality:
+		return Config->GraphicsShadingQualityImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GraphicsVSync:
+		return Config->GraphicsVsyncImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GraphicsFpsIndicator:
+		return Config->GraphicsFpsIndicatorImplementation->GetDefaultObject<USettingsItem>();
 	default:
 		USK_LOG_WARNING("Settings item type not yet implemented");
 		return nullptr;

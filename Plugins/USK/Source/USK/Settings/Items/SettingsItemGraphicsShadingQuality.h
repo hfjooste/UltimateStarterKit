@@ -3,13 +3,13 @@
 #pragma once
 
 #include "USK/Settings/SettingsItem.h"
-#include "SettingsItemAudioVoice.generated.h"
+#include "SettingsItemGraphicsShadingQuality.generated.h"
 
 /**
- * @brief An implementation for the audio voice settings item
+ * @brief An implementation for the graphics shading quality settings item
  */
 UCLASS()
-class USettingsItemAudioVoice : public USettingsItem
+class USettingsItemGraphicsShadingQuality : public USettingsItem
 {
 	GENERATED_BODY()
 	
