@@ -57,6 +57,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
 	FLinearColor LowColor = FLinearColor::Red;
 
+	/**
+	 * @brief Update the visibility of the widget
+	 * @param IsVisible Is the widget visible?
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void UpdateVisibility(bool IsVisible);
+
 protected:
 	/**
 	 * @brief Overridable native event for when the widget has been constructed
@@ -64,6 +71,10 @@ protected:
 	virtual void NativeConstruct() override;
 
 private:
+	/**
+	 * @brief Initialize the visibility of the widget by checking the settings
+	 */
+	void InitializeVisibility();
 	/**
 	 * @brief Update the framerate after a delay
 	 */

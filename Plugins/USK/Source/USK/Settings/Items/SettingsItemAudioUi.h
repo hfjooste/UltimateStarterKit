@@ -36,5 +36,5 @@ public:
 	 * @param Config The settings config specified in the game instance
 	 * @param Settings The current settings data
 	 */
-	virtual void ApplySettings(const UObject* World, const USettingsConfig* Config, const USettingsData* Settings) override;
+	virtual void ApplySettings(UObject* World, const USettingsConfig* Config, const USettingsData* Settings) override;
 };

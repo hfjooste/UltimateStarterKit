@@ -44,5 +44,5 @@ public:
 	 * @param Settings The current settings data
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintCosmetic, Category = "Ultimate Starter Kit|Settings", meta=(WorldContext="World"))
-	virtual void ApplySettings(const UObject* World, const USettingsConfig* Config, const USettingsData* Settings) { }
+	virtual void ApplySettings(UObject* World, const USettingsConfig* Config, const USettingsData* Settings) { }
 };
