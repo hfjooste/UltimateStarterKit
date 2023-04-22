@@ -205,4 +205,16 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
 	bool GraphicsFpsIndicator;
+
+	/**
+	 * @brief The color blind mode
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	int AccessibilityColorBlindMode;
+
+	/**
+	 * @brief The severity of the color blind mode
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	float AccessibilityColorBlindModeSeverity = 100.0f;
 };

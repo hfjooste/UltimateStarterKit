@@ -89,22 +89,17 @@ void USettingsUtils::ApplySettings(const UUSKGameInstance* GameInstance, const U
 		return;
 	}
 
-	USK_LOG_INFO("Applying settings");
-	for (int Index = static_cast<int32>(ESettingsItemType::AudioMaster);
-		Index <= static_cast<int32>(ESettingsItemType::GraphicsFpsIndicator);
-		++Index)
-	{
-		const ESettingsItemType SettingsItemType = static_cast<ESettingsItemType>(Index);
-		USettingsItem* SettingsItem = GetSettingsItem(SettingsItemType, GameInstance->SettingsConfig);
-		if (SettingsItem == nullptr)
-		{
-			USK_LOG_WARNING(*FString::Format(TEXT("Setting not implemented (Index: {0})"), { FString::FromInt(Index) }));
-			continue;
-		}
+	USK_LOG_INFO("Applying audio settings");
+	ApplySettingsInRange(GameInstance, Settings,
+		ESettingsItemType::AudioMaster, ESettingsItemType::AudioVoice);
 
-		USK_LOG_INFO(*FString::Format(TEXT("Applying setting (Index: {0})"), { FString::FromInt(Index) }));
-		SettingsItem->ApplySettings(GameInstance->GetWorld(), GameInstance->SettingsConfig, Settings);
-	}
+	USK_LOG_INFO("Applying graphics settings");
+	ApplySettingsInRange(GameInstance, Settings,
+		ESettingsItemType::GraphicsResolution, ESettingsItemType::GraphicsFpsIndicator);
+
+	USK_LOG_INFO("Applying accessibility settings");
+	ApplySettingsInRange(GameInstance, Settings,
+		ESettingsItemType::AccessibilityColorBlindMode, ESettingsItemType::AccessibilityColorBlindModeSeverity);
 }
 
 /**
@@ -279,8 +274,37 @@ USettingsItem* USettingsUtils::GetSettingsItem(const ESettingsItemType SettingsI
 		return Config->GraphicsVsyncImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::GraphicsFpsIndicator:
 		return Config->GraphicsFpsIndicatorImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::AccessibilityColorBlindMode:
+		return Config->AccessibilityColorBlindModeImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::AccessibilityColorBlindModeSeverity:
+		return Config->AccessibilityColorBlindModeSeverityImplementation->GetDefaultObject<USettingsItem>();
 	default:
 		USK_LOG_WARNING("Settings item type not yet implemented");
 		return nullptr;
+	}
+}
+
+/**
+ * @brief Apply multiple settings from a specified range
+ * @param GameInstance A reference to the game instance
+ * @param Settings The current settings
+ * @param Start The first (inclusive) setting type in the range
+ * @param End The last (inclusive) setting type in the range
+ */
+void USettingsUtils::ApplySettingsInRange(const UUSKGameInstance* GameInstance, const USettingsData* Settings,
+                                          ESettingsItemType Start, ESettingsItemType End)
+{
+	for (int Index = static_cast<int32>(Start); Index <= static_cast<int32>(End); ++Index)
+	{
+		const ESettingsItemType SettingsItemType = static_cast<ESettingsItemType>(Index);
+		USettingsItem* SettingsItem = GetSettingsItem(SettingsItemType, GameInstance->SettingsConfig);
+		if (SettingsItem == nullptr)
+		{
+			USK_LOG_WARNING(*FString::Format(TEXT("Setting not implemented (Index: {0})"), { FString::FromInt(Index) }));
+			continue;
+		}
+
+		USK_LOG_INFO(*FString::Format(TEXT("Applying setting (Index: {0})"), { FString::FromInt(Index) }));
+		SettingsItem->ApplySettings(GameInstance->GetWorld(), GameInstance->SettingsConfig, Settings);
 	}
 }

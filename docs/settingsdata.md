@@ -202,4 +202,16 @@ The settings data that is saved/loaded
 		<td>bool</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>AccessibilityColorBlindMode</td>
+		<td>The color blind mode</td>
+		<td>int</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>AccessibilityColorBlindModeSeverity</td>
+		<td>The severity of the color blind mode</td>
+		<td>float</td>
+		<td>100.0f</td>
+	</tr>
 </table>

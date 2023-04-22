@@ -75,4 +75,12 @@ An enum of all supported settings items
 		<td>GraphicsFpsIndicator</td>
 		<td>The graphics FPS indicator setting</td>
 	</tr>
+	<tr>
+		<td>AccessibilityColorBlindMode</td>
+		<td>The accessibility color blind mode setting</td>
+	</tr>
+	<tr>
+		<td>AccessibilityColorBlindModeSeverity</td>
+		<td>The accessibility color blind mode severity setting</td>
+	</tr>
 </table>

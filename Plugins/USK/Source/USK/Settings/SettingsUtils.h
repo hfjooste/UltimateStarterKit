@@ -97,4 +97,15 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Settings")
 	static USettingsItem* GetSettingsItem(const ESettingsItemType SettingsItemType, const USettingsConfig* Config);
+
+private:
+	/**
+	 * @brief Apply multiple settings from a specified range
+	 * @param GameInstance A reference to the game instance
+	 * @param Settings The current settings
+	 * @param Start The first (inclusive) setting type in the range
+	 * @param End The last (inclusive) setting type in the range
+	 */
+	static void ApplySettingsInRange(const UUSKGameInstance* GameInstance, const USettingsData* Settings,
+	                                 ESettingsItemType Start, ESettingsItemType End);
 };
