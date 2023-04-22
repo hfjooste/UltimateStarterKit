@@ -96,6 +96,8 @@ class Parser:
             value = section.split("*/")[1].strip()
             if value.endswith(","):
                 value = value[:-1]
+            if "=" in value:
+                value = value.split("=")[0].strip()
             description = section.split("@brief")[1].split("*")[0].strip()
             html += "\n\t<tr>"
             html += f"\n\t\t<td>{value}</td>"

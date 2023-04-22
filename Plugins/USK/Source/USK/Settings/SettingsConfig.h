@@ -6,6 +6,8 @@
 #include "Engine/DataAsset.h"
 #include "Engine/Classes/Sound/SoundMix.h"
 #include "Engine/Classes/Sound/SoundClass.h"
+#include "Items/SettingsItemAccessibilityColorBlindMode.h"
+#include "Items/SettingsItemAccessibilityColorBlindModeSeverity.h"
 #include "Items/SettingsItemAudioMaster.h"
 #include "Items/SettingsItemAudioMusic.h"
 #include "Items/SettingsItemAudioEffects.h"
@@ -753,4 +755,81 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|FPS Indicator",
 		DisplayName = "Default Value")
 	bool GraphicsFpsIndicatorDefault;
+
+	/**
+	 * @brief The implementation for the accessibility color blind mode settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Accessibility|Color Blind Mode",
+		DisplayName = "Implementation")
+	TSubclassOf<USettingsItem> AccessibilityColorBlindModeImplementation = USettingsItemAccessibilityColorBlindMode::StaticClass();
+
+	/**
+	 * @brief The text displayed in the accessibility color blind mode settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Accessibility|Color Blind Mode",
+		DisplayName = "Title")
+	FText AccessibilityColorBlindModeText;
+
+	/**
+	 * @brief The text displayed when the normal vision value is used for the accessibility color blind mode setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Accessibility|Color Blind Mode",
+		DisplayName = "Normal Vision Text")
+	FText AccessibilityColorBlindModeNormalVisionText;
+
+	/**
+	 * @brief The text displayed when the deuteranopia value is used for the accessibility color blind mode setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Accessibility|Color Blind Mode",
+		DisplayName = "Deuteranopia Text")
+	FText AccessibilityColorBlindModeDeuteranopiaText;
+	
+	/**
+	 * @brief The text displayed when the deuteranomaly value is used for the accessibility color blind mode setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Accessibility|Color Blind Mode",
+		DisplayName = "Deuteranomaly Text")
+	FText AccessibilityColorBlindModeDeuteranomalyText;
+
+	/**
+	 * @brief The text displayed when the protanopia value is used for the accessibility color blind mode setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Accessibility|Color Blind Mode",
+		DisplayName = "Protanopia Text")
+	FText AccessibilityColorBlindModeProtanopiaText;
+	
+	/**
+	 * @brief The text displayed when the protanomaly value is used for the accessibility color blind mode setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Accessibility|Color Blind Mode",
+		DisplayName = "Protanomaly Text")
+	FText AccessibilityColorBlindModeProtanomalyText;
+
+	/**
+	 * @brief The text displayed when the tritanopia value is used for the accessibility color blind mode setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Accessibility|Color Blind Mode",
+		DisplayName = "Tritanopia Text")
+	FText AccessibilityColorBlindModeTritanopiaText;
+
+	/**
+	 * @brief The text displayed when the tritanomaly value is used for the accessibility color blind mode setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Accessibility|Color Blind Mode",
+		DisplayName = "Tritanomaly Text")
+	FText AccessibilityColorBlindModeTritanomalyText;
+
+	/**
+	 * @brief The implementation for the accessibility color blind mode severity settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Accessibility|Color Blind Mode Severity",
+		DisplayName = "Implementation")
+	TSubclassOf<USettingsItem> AccessibilityColorBlindModeSeverityImplementation = USettingsItemAccessibilityColorBlindModeSeverity::StaticClass();
+
+	/**
+	 * @brief The text displayed in the accessibility color blind mode severity settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Accessibility|Color Blind Mode Severity",
+		DisplayName = "Title")
+	FText AccessibilityColorBlindModeSeverityText;
 };
