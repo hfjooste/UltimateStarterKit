@@ -2,6 +2,7 @@
 
 #include "ConfigUtils.h"
 
+#include "Misc/ConfigCacheIni.h"
 #include "USK/Logger/Log.h"
 
 /**
