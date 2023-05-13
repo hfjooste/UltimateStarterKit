@@ -62,7 +62,6 @@ void UMenuItem::NativeConstruct()
 	if (SelectButton != nullptr)
 	{
 		SelectButton->SetVisibility(AllowSelection ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
-		SelectButton->IsFocusable = false;
 		SelectButton->OnClicked.AddDynamic(this, &UMenuItem::OnSelectButtonClicked);
 	}
 
@@ -83,7 +82,6 @@ void UMenuItem::NativeConstruct()
 		IncreaseValueButton->SetVisibility(CanValueChange() && ShowValueButtons
 			? ESlateVisibility::Visible
 			: ESlateVisibility::Collapsed);
-		IncreaseValueButton->IsFocusable = false;
 		IncreaseValueButton->OnClicked.AddDynamic(this, &UMenuItem::OnIncreaseValueButtonClicked);
 	}
 
@@ -92,7 +90,6 @@ void UMenuItem::NativeConstruct()
 		DecreaseValueButton->SetVisibility(CanValueChange() && ShowValueButtons
 			? ESlateVisibility::Visible
 			: ESlateVisibility::Collapsed);
-		DecreaseValueButton->IsFocusable = false;
 		DecreaseValueButton->OnClicked.AddDynamic(this, &UMenuItem::OnDecreaseValueButtonClicked);
 	}
 	

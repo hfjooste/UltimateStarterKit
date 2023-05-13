@@ -344,8 +344,8 @@ void UMenu::RemoveInputBindings() const
  */
 bool UMenu::IsInputAllowed() const
 {
-	return Visibility != ESlateVisibility::Collapsed &&
-		Visibility != ESlateVisibility::Hidden &&
+	return GetVisibility() != ESlateVisibility::Collapsed &&
+		GetVisibility() != ESlateVisibility::Hidden &&
 		!HasAnyFlags(RF_BeginDestroyed);
 }
 
