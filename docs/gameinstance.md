@@ -160,6 +160,24 @@ The Game Instance will automatically detect input events and update the current 
 		<td><strong>InputAction (UInputAction*)</strong><br/>The input action<br/><br/><strong>Amount (int)</strong><br/>The amount of icons to retrieve</td>
 		<td><strong>TArray&lt;UTexture2D*&gt;</strong><br/>An array of input indicator icons for the specified action</td>
 	</tr>
+	<tr>
+		<td>GetInputIndicatorIconForKey</td>
+		<td>Get the input indicator icon for a specific key</td>
+		<td><strong>Key (FKey)</strong><br/>The key used to retrieve the input indicator icon</td>
+		<td><strong>UTexture2D*</strong><br/>The input indicator icon for the specified key</td>
+	</tr>
+	<tr>
+		<td>GetKeyForInputAction</td>
+		<td>Get the key used by a specific input action</td>
+		<td><strong>Context (UInputMappingContext*)</strong><br/>The input mapping context<br/><br/><strong>InputAction (UInputAction*)</strong><br/>The input action<br/><br/><strong>MappableName (FName)</strong><br/>The player mappable name for the action</td>
+		<td><strong>FKey</strong><br/>The key used by the specified input action</td>
+	</tr>
+	<tr>
+		<td>UpdateKeyBindings</td>
+		<td>Update the key bindings that was changed by the player</td>
+		<td></td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -172,6 +190,9 @@ You can use the <code>USKGameInstance</code> using Blueprints by adding one of t
 	<li>Ultimate Starter Kit > Input > Enable Input Indicators</li>
 	<li>Ultimate Starter Kit > Input > Disable Input Indicators</li>
 	<li>Ultimate Starter Kit > Input > Get Input Indicator Icon</li>
+	<li>Ultimate Starter Kit > Input > Get Input Indicator Icon For Key</li>
+	<li>Ultimate Starter Kit > Input > Get Key For Input Action</li>
+	<li>Ultimate Starter Kit > Input > Update Key Bindings</li>
 </ul>
 
 ## C++ Usage
@@ -194,5 +215,8 @@ void ATestActor::Test()
 	USKGameInstance->EnableInputIndicators();
 	USKGameInstance->DisableInputIndicators();
 	TArray<UTexture2D*> InputIndicatorIcon = USKGameInstance->GetInputIndicatorIcon(InputAction, Amount);
+	UTexture2D* InputIndicatorIconForKey = USKGameInstance->GetInputIndicatorIconForKey(Key);
+	FKey KeyForInputAction = USKGameInstance->GetKeyForInputAction(Context, InputAction, MappableName);
+	USKGameInstance->UpdateKeyBindings();
 }
 ```

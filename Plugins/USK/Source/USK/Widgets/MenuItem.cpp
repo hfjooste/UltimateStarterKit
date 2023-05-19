@@ -544,6 +544,13 @@ void UMenuItem::UpdateInputIndicator()
 		return;
 	}
 
+	if (GameInstance->SettingsConfig == nullptr)
+	{
+		USK_LOG_ERROR("Unable to update input indicator. Settings config not specified");
+		InputIndicator->SetVisibility(ESlateVisibility::Collapsed);
+		return;
+	}
+
 	if (CurrentKey == EKeys::Invalid)
 	{
 		ControlsWaitingForKeyPressText = GameInstance->SettingsConfig->ControlsWaitingForKeyPressText;

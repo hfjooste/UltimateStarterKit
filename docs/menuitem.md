@@ -5,6 +5,7 @@ A widget used to display a title, text and value in the form of a menu item
 The <code>MenuItem</code> relies on other components of this plugin to work:
 <ul>
 	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+	<li><a href="../gameinstance">Game Instance</a>: Used to monitor for input device changes and handle saving/loading game data</li>
 	<li><a href="../audio">Audio</a>: Used to play sound effects either 2D or at a specified location</li>
 </ul>
 
@@ -88,6 +89,11 @@ You can add the following widgets to enable extra functionality:
 	</tr>
 	<tr>
 		<td>ButtonBackground</td>
+		<td>The background button display in the menu item</td>
+		<td>UImage*</td>
+	</tr>
+	<tr>
+		<td>InputIndicator</td>
 		<td>The background button display in the menu item</td>
 		<td>UImage*</td>
 	</tr>
@@ -290,6 +296,24 @@ You can add the following widgets to enable extra functionality:
 		<td>true</td>
 	</tr>
 	<tr>
+		<td>InputMappingContext</td>
+		<td>The input mapping context containing the action to rebind</td>
+		<td>UInputMappingContext*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>InputAction</td>
+		<td>The input action to rebind</td>
+		<td>UInputAction*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>MappableName</td>
+		<td>The player mappable name for the action to rebind</td>
+		<td>FName</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>ShowValueSlider</td>
 		<td>Should the value slider be shown for this menu item?</td>
 		<td>bool</td>
@@ -460,6 +484,30 @@ You can add the following widgets to enable extra functionality:
 		<td></td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>GetInputActionKey</td>
+		<td>Get the key used by the specified input action</td>
+		<td></td>
+		<td><strong>FKey</strong><br/>The key used by the specified input action</td>
+	</tr>
+	<tr>
+		<td>OnMenuBack</td>
+		<td>Called when trying to go back in the menu</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the back event was handled</td>
+	</tr>
+	<tr>
+		<td>AnyKeyPressed</td>
+		<td>Called after any key is pressed by the player (used to remap controls)</td>
+		<td><strong>Key (FKey)</strong><br/>The key pressed by the player</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>ApplyKeyBinding</td>
+		<td>Apply the key binding for the input action</td>
+		<td></td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -473,6 +521,10 @@ You can use the <code>MenuItem</code> using Blueprints by adding one of the foll
 	<li>Ultimate Starter Kit > UI > Select Item</li>
 	<li>Ultimate Starter Kit > UI > Save Settings</li>
 	<li>Ultimate Starter Kit > UI > Apply Settings</li>
+	<li>Ultimate Starter Kit > UI > Get Input Action Key</li>
+	<li>Ultimate Starter Kit > UI > On Menu Back</li>
+	<li>Ultimate Starter Kit > UI > Any Key Pressed</li>
+	<li>Ultimate Starter Kit > UI > Apply Key Binding</li>
 </ul>
 
 ## C++ Usage
@@ -496,5 +548,9 @@ void ATestActor::Test()
 	MenuItem->SelectItem();
 	MenuItem->SaveSettings();
 	MenuItem->ApplySettings();
+	FKey InputActionKey = MenuItem->GetInputActionKey();
+	bool OnMenuBackValue = MenuItem->OnMenuBack();
+	MenuItem->AnyKeyPressed(Key);
+	MenuItem->ApplyKeyBinding();
 }
 ```

@@ -6,7 +6,7 @@
 #include "SettingsItemControlsRemap.generated.h"
 
 /**
- * @brief An implementation for the accessibility color blind mode settings item
+ * @brief An implementation for the controls settings item
  */
 UCLASS()
 class USettingsItemControlsRemap : public USettingsItem
