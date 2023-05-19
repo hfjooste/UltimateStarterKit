@@ -278,6 +278,8 @@ USettingsItem* USettingsUtils::GetSettingsItem(const ESettingsItemType SettingsI
 		return Config->AccessibilityColorBlindModeImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::AccessibilityColorBlindModeSeverity:
 		return Config->AccessibilityColorBlindModeSeverityImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::ControlsRemap:
+		return Config->ControlsRemapImplementation->GetDefaultObject<USettingsItem>();
 	default:
 		USK_LOG_WARNING("Settings item type not yet implemented");
 		return nullptr;

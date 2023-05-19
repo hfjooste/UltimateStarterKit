@@ -260,4 +260,11 @@ private:
 	 * @param IsVerticalNavigation Is this called because of a vertical navigation event?
 	 */
 	void UpdateHighlightedItemBeforeNavigation(bool IsVerticalNavigation);
+
+	/**
+	 * @brief Called after any key is pressed by the player (used to remap controls)
+	 * @param Key The key pressed by the player
+	 */
+	UFUNCTION()
+	void AnyKeyPressed(const FKey Key);
 };

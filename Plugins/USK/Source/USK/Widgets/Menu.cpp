@@ -193,7 +193,8 @@ void UMenu::OnMenuSelected()
 	}
 	
 	USK_LOG_TRACE("Selecting menu item");	
-	if (CurrentMenuItem != nullptr && CurrentMenuItem->AllowSelection)
+	if (CurrentMenuItem != nullptr && (CurrentMenuItem->AllowSelection ||
+		CurrentMenuItem->SettingsItemType == ESettingsItemType::ControlsRemap))
 	{
 		UAudioUtils::PlaySound2D(GetWorld(), SelectedSFX);
 		CurrentMenuItem->SelectItem();
@@ -206,6 +207,11 @@ void UMenu::OnMenuSelected()
 void UMenu::OnMenuBack()
 {
 	if (!IsInputAllowed())
+	{
+		return;
+	}
+
+	if (CurrentMenuItem != nullptr && CurrentMenuItem->OnMenuBack())
 	{
 		return;
 	}
@@ -300,6 +306,8 @@ void UMenu::AddInputBindings()
 	Subsystem->RemoveMappingContext(InputMappingContext);
 	Subsystem->AddMappingContext(InputMappingContext, 0);
 	InitializeActionBindings(PlayerController);
+
+	PlayerController->InputComponent->BindKey(EKeys::AnyKey, IE_Pressed, this, &UMenu::AnyKeyPressed);
 }
 
 /**
@@ -500,4 +508,16 @@ void UMenu::UpdateHighlightedItemBeforeNavigation(const bool IsVerticalNavigatio
 	CurrentMenuItem = HighlightedMenuItemBeforeRemoval;
 	CurrentMenuItem->SetHighlightedState(true, false, false);
 	HighlightedMenuItemBeforeRemoval = nullptr;
+}
+
+/**
+ * @brief Called after any key is pressed by the player (used to remap controls)
+ * @param Key The key pressed by the player
+ */
+void UMenu::AnyKeyPressed(const FKey Key)
+{
+	if (CurrentMenuItem != nullptr)
+	{
+		CurrentMenuItem->AnyKeyPressed(Key);
+	}
 }
