@@ -461,7 +461,12 @@ void UMenu::UpdateHighlightedItem(UMenuItem* NewItem, const EMenuNavigation Menu
 
 		if (CurrentMenuItem != nullptr)
 		{
-			CurrentMenuItem->SetHighlightedState(false, false, false);	
+			if (CurrentMenuItem->IsWaitingForKeyPress())
+			{
+				break;
+			}
+			
+			CurrentMenuItem->SetHighlightedState(false, false, false);
 		}
 		
 		CurrentMenuItem = NewItem;

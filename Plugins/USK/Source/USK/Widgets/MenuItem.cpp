@@ -382,10 +382,11 @@ bool UMenuItem::OnMenuBack()
  */
 void UMenuItem::AnyKeyPressed(const FKey Key)
 {
-	if (!WaitingForKeyPress)
+	if (!WaitingForKeyPress || CurrentKey.IsGamepadKey() != Key.IsGamepadKey())
 	{
 		return;
 	}
+
 	
 	QueuedKey = Key;
 	FLatentActionInfo LatentAction;
@@ -414,6 +415,15 @@ void UMenuItem::ApplyKeyBinding()
 	UpdateInputIndicator();
 	
 	SaveSettings();
+}
+
+/**
+ * @brief Is the menu item waiting for a key press?
+ * @return A boolean value indicating if the menu item is waiting for a key press
+ */
+bool UMenuItem::IsWaitingForKeyPress()
+{
+	return WaitingForKeyPress;
 }
 
 /**
@@ -528,7 +538,7 @@ void UMenuItem::UpdateInputIndicator()
 		return;
 	}
 	
-	if (SettingsItemType != ESettingsItemType::ControlsRemap ||
+	if (SettingsItemType != ESettingsItemType::ControlsRemap || InputDevice == EInputDevice::Unknown ||
 		InputMappingContext == nullptr || InputAction == nullptr)
 	{
 		InputIndicator->SetVisibility(ESlateVisibility::Collapsed);
@@ -561,6 +571,6 @@ void UMenuItem::UpdateInputIndicator()
 	}
 
 	USK_LOG_TRACE("Updating input indicator icon");
-	InputIndicator->SetBrushFromTexture(GameInstance->GetInputIndicatorIconForKey(CurrentKey));
+	InputIndicator->SetBrushFromTexture(GameInstance->GetInputIndicatorIconForKey(CurrentKey, InputDevice));
 	InputIndicator->SetVisibility(ESlateVisibility::Visible);
 }

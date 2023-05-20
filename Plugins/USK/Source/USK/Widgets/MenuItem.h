@@ -6,6 +6,7 @@
 #include "MenuItemValueUpdateMethod.h"
 #include "MenuNavigation.h"
 #include "Blueprint/UserWidget.h"
+#include "USK/Core/InputDevice.h"
 #include "USK/Settings/SettingsItemType.h"
 #include "MenuItem.generated.h"
 
@@ -321,6 +322,13 @@ public:
 	bool AutoSaveSettingsOnSelected = true;
 
 	/**
+	 * @brief The input device associated with the action to rebind
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings",
+		meta=(EditCondition = "SettingsItemType == ESettingsItemType::ControlsRemap", EditConditionHides))
+	EInputDevice InputDevice = EInputDevice::Unknown;
+
+	/**
 	 * @brief The input mapping context containing the action to rebind
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings",
@@ -534,6 +542,13 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void ApplyKeyBinding();
+
+	/**
+	 * @brief Is the menu item waiting for a key press?
+	 * @return A boolean value indicating if the menu item is waiting for a key press
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	bool IsWaitingForKeyPress();
 
 protected:
 	/**

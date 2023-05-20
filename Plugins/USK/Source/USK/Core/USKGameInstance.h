@@ -156,10 +156,11 @@ public:
 	/**
 	 * @brief Get the input indicator icon for a specific key
 	 * @param Key The key used to retrieve the input indicator icon
+	 * @param InputDevice The input device used to retrieve the input indicator icon
 	 * @return The input indicator icon for the specified key
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
-	UTexture2D* GetInputIndicatorIconForKey(FKey Key) const;
+	UTexture2D* GetInputIndicatorIconForKey(FKey Key, EInputDevice InputDevice) const;
 
 	/**
 	 * @brief Get the key used by a specific input action

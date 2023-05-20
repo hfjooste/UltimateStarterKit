@@ -158,16 +158,17 @@ TArray<UTexture2D*> UUSKGameInstance::GetInputIndicatorIcon(UInputAction* InputA
 /**
  * @brief Get the input indicator icon for a specific key
  * @param Key The key used to retrieve the input indicator icon
+ * @param InputDevice The input device used to retrieve the input indicator icon
  * @return The input indicator icon for the specified key
  */
-UTexture2D* UUSKGameInstance::GetInputIndicatorIconForKey(const FKey Key) const
+UTexture2D* UUSKGameInstance::GetInputIndicatorIconForKey(const FKey Key, const EInputDevice InputDevice) const
 {
 	if (!IsInputIndicatorsEnabled)
 	{
 		return nullptr;
 	}
 	
-	switch (CurrentInputDevice)
+	switch (InputDevice)
 	{
 	case EInputDevice::KeyboardMouse:
 		return KeyboardMouseInputMappings.FindRef(Key);
@@ -425,7 +426,7 @@ bool UUSKGameInstance::MapActionKeyToInputIndicator(TArray<UTexture2D*>& InputIn
 		return false;
 	}
 
-	UTexture2D* InputIndicator = GetInputIndicatorIconForKey(Key);
+	UTexture2D* InputIndicator = GetInputIndicatorIconForKey(Key, CurrentInputDevice);
 	if (InputIndicator == nullptr)
 	{
 		USK_LOG_WARNING("Unable to add input indicator to array. InputIndicator is nullptr");
