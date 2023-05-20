@@ -13,6 +13,7 @@
 #include "Items/SettingsItemAudioEffects.h"
 #include "Items/SettingsItemAudioUi.h"
 #include "Items/SettingsItemAudioVoice.h"
+#include "Items/SettingsItemControlsRemap.h"
 #include "Items/SettingsItemGraphicsAntiAliasing.h"
 #include "Items/SettingsItemGraphicsFpsIndicator.h"
 #include "Items/SettingsItemGraphicsResolution.h"
@@ -832,4 +833,18 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Accessibility|Color Blind Mode Severity",
 		DisplayName = "Title")
 	FText AccessibilityColorBlindModeSeverityText;
+
+	/**
+	 * @brief The implementation for the controls remap settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Controls",
+		DisplayName = "Implementation")
+	TSubclassOf<USettingsItem> ControlsRemapImplementation = USettingsItemControlsRemap::StaticClass();
+
+	/**
+	 * @brief The text displayed in the menu item while waiting for the user to press a new key
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Controls",
+		DisplayName = "Waiting for key press text")
+	FText ControlsWaitingForKeyPressText;
 };

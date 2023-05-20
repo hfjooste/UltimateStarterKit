@@ -105,4 +105,9 @@ enum class ESettingsItemType : uint8
 	 * @brief The accessibility color blind mode severity setting
 	 */
 	AccessibilityColorBlindModeSeverity = 151,
+
+	/**
+	 * @brief Remap the controls
+	 */
+	ControlsRemap = 200,
 };

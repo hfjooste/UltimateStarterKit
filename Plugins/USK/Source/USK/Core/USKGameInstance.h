@@ -152,6 +152,31 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
 	TArray<UTexture2D*> GetInputIndicatorIcon(UInputAction* InputAction, int Amount);
+	
+	/**
+	 * @brief Get the input indicator icon for a specific key
+	 * @param Key The key used to retrieve the input indicator icon
+	 * @param InputDevice The input device used to retrieve the input indicator icon
+	 * @return The input indicator icon for the specified key
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
+	UTexture2D* GetInputIndicatorIconForKey(FKey Key, EInputDevice InputDevice) const;
+
+	/**
+	 * @brief Get the key used by a specific input action
+	 * @param Context The input mapping context
+	 * @param InputAction The input action
+	 * @param MappableName The player mappable name for the action
+	 * @return The key used by the specified input action
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
+	FKey GetKeyForInputAction(UInputMappingContext* Context, UInputAction* InputAction, FName MappableName) const;
+
+	/**
+	 * @brief Update the key bindings that was changed by the player 
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
+	void UpdateKeyBindings() const;
 
 protected:
 	/**
@@ -262,11 +287,4 @@ private:
 	 * @return The input device based on the specified key
 	 */
 	EInputDevice GetInputDevice(FKey Key);
-
-	/**
-	 * @brief Get the input indicator icon for a specific key
-	 * @param Key The key used to retrieve the input indicator icon
-	 * @return The input indicator icon for the specified key
-	 */
-	UTexture2D* GetInputIndicatorIconForKey(FKey Key) const;
 };

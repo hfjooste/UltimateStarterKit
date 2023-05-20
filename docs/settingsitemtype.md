@@ -83,4 +83,8 @@ An enum of all supported settings items
 		<td>AccessibilityColorBlindModeSeverity</td>
 		<td>The accessibility color blind mode severity setting</td>
 	</tr>
+	<tr>
+		<td>ControlsRemap</td>
+		<td>Remap the controls</td>
+	</tr>
 </table>

@@ -97,4 +97,9 @@ There is already implementations for all settings items. But you can expand this
         <td>SettingsItemAccessibilityColorBlindModeSeverity</td>
         <td>An implementation for the accessibility color blind mode severity settings item</td>
     </tr>
+    <tr>
+        <td>Controls</td>
+        <td>SettingsItemControlsRemap</td>
+        <td>An implementation for the controls settings item</td>
+    </tr>
 </table>

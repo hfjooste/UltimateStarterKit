@@ -131,7 +131,7 @@ TArray<UTexture2D*> UUSKGameInstance::GetInputIndicatorIcon(UInputAction* InputA
 	{
 		TArray<FEnhancedActionKeyMapping> Mappings = InputMappingContext->GetMappings();
 		for (FEnhancedActionKeyMapping Mapping : Mappings)
-		{
+		{			
 			if (MapActionKeyToInputIndicator(InputIndicators, Mapping.Action, Mapping.Key, InputAction, Amount))
 			{
 				return InputIndicators;
@@ -142,7 +142,7 @@ TArray<UTexture2D*> UUSKGameInstance::GetInputIndicatorIcon(UInputAction* InputA
 	const APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	const UEnhancedInputLocalPlayerSubsystem* Subsystem =
 		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
-
+	
 	TArray<FKey> Keys = Subsystem->QueryKeysMappedToAction(InputAction);
 	for (const FKey Key : Keys)
 	{
@@ -153,6 +153,122 @@ TArray<UTexture2D*> UUSKGameInstance::GetInputIndicatorIcon(UInputAction* InputA
 	}
  
 	return InputIndicators;
+}
+
+/**
+ * @brief Get the input indicator icon for a specific key
+ * @param Key The key used to retrieve the input indicator icon
+ * @param InputDevice The input device used to retrieve the input indicator icon
+ * @return The input indicator icon for the specified key
+ */
+UTexture2D* UUSKGameInstance::GetInputIndicatorIconForKey(const FKey Key, const EInputDevice InputDevice) const
+{
+	if (!IsInputIndicatorsEnabled)
+	{
+		return nullptr;
+	}
+	
+	switch (InputDevice)
+	{
+	case EInputDevice::KeyboardMouse:
+		return KeyboardMouseInputMappings.FindRef(Key);
+	case EInputDevice::GenericController:
+		return GenericControllerInputMappings.FindRef(Key);
+	case EInputDevice::XboxController:
+		return XboxControllerInputMappings.FindRef(Key);
+	case EInputDevice::PlaystationController:
+		return PlaystationControllerInputMappings.FindRef(Key);
+	case EInputDevice::SwitchController:
+		return SwitchControllerInputMappings.FindRef(Key);
+	default:
+		USK_LOG_ERROR("Unsupported input device");
+		return nullptr;
+	}
+}
+
+/**
+ * @brief Get the key used by a specific input action
+ * @param Context The input mapping context
+ * @param InputAction The input action
+ * @param MappableName The player mappable name for the action
+ * @return The key used by the specified input action
+ */
+FKey UUSKGameInstance::GetKeyForInputAction(UInputMappingContext* Context, UInputAction* InputAction,
+                                            const FName MappableName) const
+{
+	if (Context == nullptr || InputAction == nullptr)
+	{
+		return EKeys::Invalid;
+	}
+	
+	const APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	if (PlayerController == nullptr)
+	{
+		USK_LOG_WARNING("Unable to update player mappable input. PlayerController is nullptr");
+		return EKeys::Invalid;
+	}
+	
+	const UEnhancedInputLocalPlayerSubsystem* Subsystem =
+		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
+	if (Subsystem == nullptr)
+	{
+		USK_LOG_WARNING("Unable to update player mappable input. Subsystem is nullptr");
+		return EKeys::Invalid;
+	}
+
+	TArray<FEnhancedActionKeyMapping> Mappings = Context->GetMappings();
+	for (FEnhancedActionKeyMapping Mapping : Mappings)
+	{
+		if (Mapping.Action == InputAction && Mapping.IsPlayerMappable() &&
+			Mapping.PlayerMappableOptions.Name == MappableName)
+		{
+			return Mapping.Key;
+		}
+	}	
+	
+	return EKeys::Invalid;
+}
+
+/**
+ * @brief Update the key bindings that was changed by the player
+ */
+void UUSKGameInstance::UpdateKeyBindings() const
+{
+	if (SettingsConfig == nullptr)
+	{
+		return;
+	}
+
+	const USettingsData* Settings = USettingsUtils::LoadSettings();
+	if (Settings == nullptr || Settings->KeyBindings.IsEmpty())
+	{
+		return;
+	}
+	
+	const APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	if (PlayerController == nullptr)
+	{
+		USK_LOG_WARNING("Unable to update player mappable input. PlayerController is nullptr");
+		return;
+	}
+	
+	UEnhancedInputLocalPlayerSubsystem* Subsystem =
+		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
+	if (Subsystem == nullptr)
+	{
+		USK_LOG_WARNING("Unable to update player mappable input. Subsystem is nullptr");
+		return;
+	}
+
+	USK_LOG_TRACE("Adding player mappable input configs to subsystem");
+	
+	TArray<FName> Keys;
+	Settings->KeyBindings.GetKeys(Keys);
+	for (const FName Key : Keys)
+	{
+		Subsystem->RemovePlayerMappedKeyInSlot(Key);
+		Subsystem->AddPlayerMappedKeyInSlot(Key, Settings->KeyBindings[Key]);
+	}
 }
 
 /**
@@ -241,8 +357,9 @@ void UUSKGameInstance::InitializeInputIndicatorsAfterDelay()
  */
 void UUSKGameInstance::InitializeInputIndicators()
 {
+	UpdateKeyBindings();
+	
 	USK_LOG_INFO("Setting default input device");
-
 	CurrentInputDevice = EInputDevice::Unknown;
 	if (UPlatformUtils::IsDesktop())
 	{
@@ -309,7 +426,7 @@ bool UUSKGameInstance::MapActionKeyToInputIndicator(TArray<UTexture2D*>& InputIn
 		return false;
 	}
 
-	UTexture2D* InputIndicator = GetInputIndicatorIconForKey(Key);
+	UTexture2D* InputIndicator = GetInputIndicatorIconForKey(Key, CurrentInputDevice);
 	if (InputIndicator == nullptr)
 	{
 		USK_LOG_WARNING("Unable to add input indicator to array. InputIndicator is nullptr");
@@ -349,34 +466,4 @@ EInputDevice UUSKGameInstance::GetInputDevice(const FKey Key)
 	}
 	
 	return EInputDevice::GenericController;
-}
-
-/**
- * @brief Get the input indicator icon for a specific key
- * @param Key The key used to retrieve the input indicator icon
- * @return The input indicator icon for the specified key
- */
-UTexture2D* UUSKGameInstance::GetInputIndicatorIconForKey(const FKey Key) const
-{
-	if (!IsInputIndicatorsEnabled)
-	{
-		return nullptr;
-	}
-	
-	switch (CurrentInputDevice)
-	{
-	case EInputDevice::KeyboardMouse:
-		return KeyboardMouseInputMappings.FindRef(Key);
-	case EInputDevice::GenericController:
-		return GenericControllerInputMappings.FindRef(Key);
-	case EInputDevice::XboxController:
-		return XboxControllerInputMappings.FindRef(Key);
-	case EInputDevice::PlaystationController:
-		return PlaystationControllerInputMappings.FindRef(Key);
-	case EInputDevice::SwitchController:
-		return SwitchControllerInputMappings.FindRef(Key);
-	default:
-		USK_LOG_ERROR("Unsupported input device");
-		return nullptr;
-	}
 }

@@ -214,4 +214,10 @@ The settings data that is saved/loaded
 		<td>float</td>
 		<td>100.0f</td>
 	</tr>
+	<tr>
+		<td>KeyBindings</td>
+		<td>A map of all key bindings changed by the player</td>
+		<td>TMap&lt;FName, FKey&gt;</td>
+		<td></td>
+	</tr>
 </table>

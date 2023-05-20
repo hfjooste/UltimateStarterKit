@@ -6,6 +6,7 @@
 #include "MenuItemValueUpdateMethod.h"
 #include "MenuNavigation.h"
 #include "Blueprint/UserWidget.h"
+#include "USK/Core/InputDevice.h"
 #include "USK/Settings/SettingsItemType.h"
 #include "MenuItem.generated.h"
 
@@ -130,6 +131,12 @@ public:
 	 */
 	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
 	class UImage* ButtonBackground;
+
+	/**
+	 * @brief The background button display in the menu item
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class UImage* InputIndicator;
 
 	/**
 	 * @brief The animation played when the menu item is highlighted
@@ -293,20 +300,54 @@ public:
 	/**
 	 * @brief Should the settings managed by this menu item automatically be saved when the value is changed?
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings",
+		meta=(EditCondition = "SettingsItemType != ESettingsItemType::None && SettingsItemType != ESettingsItemType::ControlsRemap",
+			EditConditionHides))
 	bool AutoSaveSettingsOnValueChanged = true;
 
 	/**
 	 * @brief Should the settings managed by this menu item automatically be saved when the highlight state is removed?
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings",
+		meta=(EditCondition = "SettingsItemType != ESettingsItemType::None && SettingsItemType != ESettingsItemType::ControlsRemap",
+			EditConditionHides))		
 	bool AutoSaveSettingsOnHighlightRemoved = true;
 
 	/**
 	 * @brief Should the settings managed by this menu item automatically be saved when the menu item is selected?
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings",
+		meta=(EditCondition = "SettingsItemType != ESettingsItemType::None && SettingsItemType != ESettingsItemType::ControlsRemap",
+			EditConditionHides))
 	bool AutoSaveSettingsOnSelected = true;
+
+	/**
+	 * @brief The input device associated with the action to rebind
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings",
+		meta=(EditCondition = "SettingsItemType == ESettingsItemType::ControlsRemap", EditConditionHides))
+	EInputDevice InputDevice = EInputDevice::Unknown;
+
+	/**
+	 * @brief The input mapping context containing the action to rebind
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings",
+		meta=(EditCondition = "SettingsItemType == ESettingsItemType::ControlsRemap", EditConditionHides))
+	class UInputMappingContext* InputMappingContext;
+
+	/**
+	 * @brief The input action to rebind
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings",
+		meta=(EditCondition = "SettingsItemType == ESettingsItemType::ControlsRemap", EditConditionHides))
+	class UInputAction* InputAction;
+
+	/**
+	 * @brief The player mappable name for the action to rebind
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings",
+		meta=(EditCondition = "SettingsItemType == ESettingsItemType::ControlsRemap", EditConditionHides))
+	FName MappableName;
 	
 	/**
 	 * @brief Should the value slider be shown for this menu item?
@@ -475,6 +516,40 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void ApplySettings();
 
+	/**
+	 * @brief Get the key used by the specified input action
+	 * @return The key used by the specified input action
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	FKey GetInputActionKey() const;
+
+	/**
+	 * @brief Called when trying to go back in the menu
+	 * @return A boolean value indicating if the back event was handled
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	bool OnMenuBack();
+
+	/**
+	 * @brief Called after any key is pressed by the player (used to remap controls)
+	 * @param Key The key pressed by the player
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void AnyKeyPressed(const FKey Key);
+
+	/**
+	 * @brief Apply the key binding for the input action
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void ApplyKeyBinding();
+
+	/**
+	 * @brief Is the menu item waiting for a key press?
+	 * @return A boolean value indicating if the menu item is waiting for a key press
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	bool IsWaitingForKeyPress();
+
 protected:
 	/**
 	 * @brief Overridable native event for when the widget has been constructed in the editor
@@ -504,6 +579,31 @@ private:
 	 * @brief The current value of the menu item
 	 */
 	float CurrentValue;
+
+	/**
+	 * @brief The text displayed in the menu item while waiting for a key press
+	 */
+	FText ControlsWaitingForKeyPressText;
+
+	/**
+	 * @brief The current key used by the input action
+	 */
+	FKey CurrentKey = EKeys::Invalid;
+
+	/**
+	 * @brief The key that should be applied to the input action
+	 */
+	FKey QueuedKey = EKeys::Invalid;
+
+	/**
+	 * @brief The delay before the key binding is applied
+	 */
+	float ApplyKeyBindingDelay = 0.05f;
+
+	/**
+	 * @brief Is the menu item waiting for a key press?
+	 */
+	bool WaitingForKeyPress;
 
 	/**
 	 * @brief Update the value text of the menu item 
@@ -546,4 +646,9 @@ private:
 	 * @param SaveFlag The flag used to enable/disable auto saving
 	 */
 	void AutoSaveSettings(bool SaveFlag) const;
+
+	/**
+	 * @brief Update the input indicator icon
+	 */
+	void UpdateInputIndicator();
 };

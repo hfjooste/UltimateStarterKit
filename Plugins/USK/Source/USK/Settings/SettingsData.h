@@ -217,4 +217,10 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
 	float AccessibilityColorBlindModeSeverity = 100.0f;
+
+	/**
+	 * @brief A map of all key bindings changed by the player
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	TMap<FName, FKey> KeyBindings;
 };

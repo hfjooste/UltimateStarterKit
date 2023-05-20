@@ -2,11 +2,13 @@
 
 #include "MenuItem.h"
 
+#include "InputIndicator.h"
 #include "Menu.h"
 #include "Components/Button.h"
 #include "Components/Image.h"
 #include "Components/Slider.h"
 #include "Components/TextBlock.h"
+#include "Kismet/GameplayStatics.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Logger/Log.h"
 #include "USK/Settings/SettingsUtils.h"
@@ -50,6 +52,7 @@ void UMenuItem::NativeConstruct()
 {
 	Super::NativeConstruct();
 
+	UpdateInputIndicator();
 	if (SettingsItemType != ESettingsItemType::None)
 	{
 		USK_LOG_TRACE("Configuring menu item");
@@ -305,8 +308,20 @@ void UMenuItem::UpdateValue(const float Increment)
  */
 void UMenuItem::SelectItem()
 {
-	OnSelected.Broadcast();
-	AutoSaveSettings(AutoSaveSettingsOnSelected);
+	if (SettingsItemType != ESettingsItemType::ControlsRemap)
+	{
+		OnSelected.Broadcast();
+		AutoSaveSettings(AutoSaveSettingsOnSelected);
+		return;
+	}
+
+	if (InputIndicator != nullptr)
+	{
+		InputIndicator->SetVisibility(ESlateVisibility::Collapsed);
+	}
+
+	WaitingForKeyPress = true;
+	SetText(ControlsWaitingForKeyPressText);
 }
 
 /**
@@ -333,6 +348,82 @@ void UMenuItem::ApplySettings()
 	}
 
 	USettingsUtils::ApplyMenuItemSettings(this);
+}
+
+/**
+ * @brief Get the key used by the specified input action
+ * @return The key used by the specified input action
+ */
+FKey UMenuItem::GetInputActionKey() const
+{
+	return CurrentKey;
+}
+
+/**
+ * @brief Called when trying to go back in the menu
+ * @return A boolean value indicating if the back event was handled
+ */
+bool UMenuItem::OnMenuBack()
+{
+	if (!WaitingForKeyPress)
+	{
+		return false;		
+	}
+
+	WaitingForKeyPress = false;
+	SetText(FText::GetEmpty());
+	UpdateInputIndicator();
+	return true;
+}
+
+/**
+ * @brief Called after any key is pressed by the player (used to remap controls)
+ * @param Key The key pressed by the player
+ */
+void UMenuItem::AnyKeyPressed(const FKey Key)
+{
+	if (!WaitingForKeyPress || CurrentKey.IsGamepadKey() != Key.IsGamepadKey())
+	{
+		return;
+	}
+
+	
+	QueuedKey = Key;
+	FLatentActionInfo LatentAction;
+	LatentAction.Linkage = 0;
+	LatentAction.CallbackTarget = this;
+	LatentAction.UUID = GetUniqueID();
+	LatentAction.ExecutionFunction = "ApplyKeyBinding";
+	UKismetSystemLibrary::RetriggerableDelay(GetWorld(), ApplyKeyBindingDelay, LatentAction);
+}
+
+/**
+ * @brief Apply the key binding for the input action
+ */
+void UMenuItem::ApplyKeyBinding()
+{
+	if (!WaitingForKeyPress)
+	{
+		QueuedKey = EKeys::Invalid;
+		return;
+	}
+
+	WaitingForKeyPress = false;
+	CurrentKey = QueuedKey;
+	QueuedKey = EKeys::Invalid;
+	SetText(FText::GetEmpty());
+	UpdateInputIndicator();
+	
+	SaveSettings();
+}
+
+/**
+ * @brief Is the menu item waiting for a key press?
+ * @return A boolean value indicating if the menu item is waiting for a key press
+ */
+bool UMenuItem::IsWaitingForKeyPress()
+{
+	return WaitingForKeyPress;
 }
 
 /**
@@ -435,4 +526,51 @@ void UMenuItem::AutoSaveSettings(const bool SaveFlag) const
 
 	USK_LOG_TRACE("Updating settings");
 	USettingsUtils::SaveMenuItemSettings(this, true);
+}
+
+/**
+ * @brief Update the input indicator icon
+ */
+void UMenuItem::UpdateInputIndicator()
+{
+	if (InputIndicator == nullptr)
+	{
+		return;
+	}
+	
+	if (SettingsItemType != ESettingsItemType::ControlsRemap || InputDevice == EInputDevice::Unknown ||
+		InputMappingContext == nullptr || InputAction == nullptr)
+	{
+		InputIndicator->SetVisibility(ESlateVisibility::Collapsed);
+		return;
+	}
+
+	UGameInstance* CurrentGameInstance = UGameplayStatics::GetGameInstance(GetWorld());
+	const UUSKGameInstance* GameInstance = dynamic_cast<UUSKGameInstance*>(CurrentGameInstance);
+	if (GameInstance == nullptr)
+	{
+		USK_LOG_ERROR("Unable to update input indicator. GameInstance is not UUSKGameInstance");
+		InputIndicator->SetVisibility(ESlateVisibility::Collapsed);
+		return;
+	}
+
+	if (GameInstance->SettingsConfig == nullptr)
+	{
+		USK_LOG_ERROR("Unable to update input indicator. Settings config not specified");
+		InputIndicator->SetVisibility(ESlateVisibility::Collapsed);
+		return;
+	}
+
+	if (CurrentKey == EKeys::Invalid)
+	{
+		ControlsWaitingForKeyPressText = GameInstance->SettingsConfig->ControlsWaitingForKeyPressText;
+		USettingsData* Settings = USettingsUtils::LoadSettings();
+		CurrentKey = Settings->KeyBindings.Contains(MappableName)
+			? Settings->KeyBindings[MappableName]
+			: GameInstance->GetKeyForInputAction(InputMappingContext, InputAction, MappableName); 
+	}
+
+	USK_LOG_TRACE("Updating input indicator icon");
+	InputIndicator->SetBrushFromTexture(GameInstance->GetInputIndicatorIconForKey(CurrentKey, InputDevice));
+	InputIndicator->SetVisibility(ESlateVisibility::Visible);
 }
