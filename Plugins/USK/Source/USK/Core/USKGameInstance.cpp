@@ -266,7 +266,10 @@ void UUSKGameInstance::UpdateKeyBindings() const
 	Settings->KeyBindings.GetKeys(Keys);
 	for (const FName Key : Keys)
 	{
+#if ENGINE_MAJOR_VERSION >= 5
 		Subsystem->RemovePlayerMappedKeyInSlot(Key);
+#endif
+		
 		Subsystem->AddPlayerMappedKeyInSlot(Key, Settings->KeyBindings[Key]);
 	}
 }
