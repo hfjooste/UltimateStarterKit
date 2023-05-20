@@ -11,6 +11,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Logger/Log.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 /**
  * @brief Overridable native event for when the widget has been constructed
@@ -192,9 +193,15 @@ void UMenu::OnMenuSelected()
 		return;
 	}
 	
-	USK_LOG_TRACE("Selecting menu item");	
-	if (CurrentMenuItem != nullptr && (CurrentMenuItem->AllowSelection ||
-		CurrentMenuItem->SettingsItemType == ESettingsItemType::ControlsRemap))
+	USK_LOG_TRACE("Selecting menu item");
+	bool ValidSettingsItemType = true;
+
+#if ENGINE_MAJOR_VERSION >= 5
+	ValidSettingsItemType = CurrentMenuItem != nullptr &&
+		CurrentMenuItem->SettingsItemType != ESettingsItemType::ControlsRemap;
+#endif
+	
+	if (CurrentMenuItem != nullptr && (CurrentMenuItem->AllowSelection || ValidSettingsItemType))
 	{
 		UAudioUtils::PlaySound2D(GetWorld(), SelectedSFX);
 		CurrentMenuItem->SelectItem();

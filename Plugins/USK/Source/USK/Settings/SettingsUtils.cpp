@@ -6,6 +6,7 @@
 #include "USK/Core/USKGameInstance.h"
 #include "USK/Logger/Log.h"
 #include "USK/Widgets/MenuItem.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 /**
  * @brief Initialize the settings
@@ -278,8 +279,10 @@ USettingsItem* USettingsUtils::GetSettingsItem(const ESettingsItemType SettingsI
 		return Config->AccessibilityColorBlindModeImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::AccessibilityColorBlindModeSeverity:
 		return Config->AccessibilityColorBlindModeSeverityImplementation->GetDefaultObject<USettingsItem>();
+#if ENGINE_MAJOR_VERSION >= 5
 	case ESettingsItemType::ControlsRemap:
 		return Config->ControlsRemapImplementation->GetDefaultObject<USettingsItem>();
+#endif
 	default:
 		USK_LOG_WARNING("Settings item type not yet implemented");
 		return nullptr;

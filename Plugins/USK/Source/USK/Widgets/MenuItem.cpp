@@ -13,6 +13,7 @@
 #include "USK/Logger/Log.h"
 #include "USK/Settings/SettingsUtils.h"
 #include "USK/Utils/PlatformUtils.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 /**
  * @brief Overridable native event for when the widget has been constructed in the editor
@@ -52,7 +53,10 @@ void UMenuItem::NativeConstruct()
 {
 	Super::NativeConstruct();
 
+#if ENGINE_MAJOR_VERSION >= 5
 	UpdateInputIndicator();
+#endif
+	
 	if (SettingsItemType != ESettingsItemType::None)
 	{
 		USK_LOG_TRACE("Configuring menu item");
@@ -308,20 +312,22 @@ void UMenuItem::UpdateValue(const float Increment)
  */
 void UMenuItem::SelectItem()
 {
-	if (SettingsItemType != ESettingsItemType::ControlsRemap)
+#if ENGINE_MAJOR_VERSION >= 5
+	if (SettingsItemType == ESettingsItemType::ControlsRemap)
 	{
-		OnSelected.Broadcast();
-		AutoSaveSettings(AutoSaveSettingsOnSelected);
+		if (InputIndicator != nullptr)
+		{
+			InputIndicator->SetVisibility(ESlateVisibility::Collapsed);
+		}
+
+		WaitingForKeyPress = true;
+		SetText(ControlsWaitingForKeyPressText);	
 		return;
 	}
+#endif
 
-	if (InputIndicator != nullptr)
-	{
-		InputIndicator->SetVisibility(ESlateVisibility::Collapsed);
-	}
-
-	WaitingForKeyPress = true;
-	SetText(ControlsWaitingForKeyPressText);
+	OnSelected.Broadcast();
+    AutoSaveSettings(AutoSaveSettingsOnSelected);
 }
 
 /**
@@ -365,6 +371,7 @@ FKey UMenuItem::GetInputActionKey() const
  */
 bool UMenuItem::OnMenuBack()
 {
+#if ENGINE_MAJOR_VERSION >= 5
 	if (!WaitingForKeyPress)
 	{
 		return false;		
@@ -374,6 +381,9 @@ bool UMenuItem::OnMenuBack()
 	SetText(FText::GetEmpty());
 	UpdateInputIndicator();
 	return true;
+#endif
+
+	return false;
 }
 
 /**
@@ -382,6 +392,7 @@ bool UMenuItem::OnMenuBack()
  */
 void UMenuItem::AnyKeyPressed(const FKey Key)
 {
+#if ENGINE_MAJOR_VERSION >= 5
 	if (!WaitingForKeyPress || CurrentKey.IsGamepadKey() != Key.IsGamepadKey())
 	{
 		return;
@@ -395,6 +406,7 @@ void UMenuItem::AnyKeyPressed(const FKey Key)
 	LatentAction.UUID = GetUniqueID();
 	LatentAction.ExecutionFunction = "ApplyKeyBinding";
 	UKismetSystemLibrary::RetriggerableDelay(GetWorld(), ApplyKeyBindingDelay, LatentAction);
+#endif
 }
 
 /**
@@ -402,6 +414,7 @@ void UMenuItem::AnyKeyPressed(const FKey Key)
  */
 void UMenuItem::ApplyKeyBinding()
 {
+#if ENGINE_MAJOR_VERSION >= 5
 	if (!WaitingForKeyPress)
 	{
 		QueuedKey = EKeys::Invalid;
@@ -415,6 +428,7 @@ void UMenuItem::ApplyKeyBinding()
 	UpdateInputIndicator();
 	
 	SaveSettings();
+#endif
 }
 
 /**
@@ -533,6 +547,7 @@ void UMenuItem::AutoSaveSettings(const bool SaveFlag) const
  */
 void UMenuItem::UpdateInputIndicator()
 {
+#if ENGINE_MAJOR_VERSION >= 5
 	if (InputIndicator == nullptr)
 	{
 		return;
@@ -573,4 +588,5 @@ void UMenuItem::UpdateInputIndicator()
 	USK_LOG_TRACE("Updating input indicator icon");
 	InputIndicator->SetBrushFromTexture(GameInstance->GetInputIndicatorIconForKey(CurrentKey, InputDevice));
 	InputIndicator->SetVisibility(ESlateVisibility::Visible);
+#endif
 }

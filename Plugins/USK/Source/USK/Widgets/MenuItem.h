@@ -327,7 +327,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Settings",
 		meta=(EditCondition = "SettingsItemType == ESettingsItemType::ControlsRemap", EditConditionHides))
 	EInputDevice InputDevice = EInputDevice::Unknown;
-
+	
 	/**
 	 * @brief The input mapping context containing the action to rebind
 	 */
@@ -646,7 +646,7 @@ private:
 	 * @param SaveFlag The flag used to enable/disable auto saving
 	 */
 	void AutoSaveSettings(bool SaveFlag) const;
-
+	
 	/**
 	 * @brief Update the input indicator icon
 	 */

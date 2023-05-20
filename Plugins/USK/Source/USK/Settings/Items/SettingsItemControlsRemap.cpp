@@ -6,6 +6,7 @@
 #include "USK/Core/USKGameInstance.h"
 #include "USK/Logger/Log.h"
 #include "USK/Settings/SettingsUtils.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 /**
  * @brief Configure the menu item
@@ -16,6 +17,7 @@
 void USettingsItemControlsRemap::ConfigureMenuItem(const USettingsConfig* Config, const USettingsData* Settings,
 	UMenuItem* MenuItem)
 {
+#if ENGINE_MAJOR_VERSION >= 5
 	MenuItem->ValueMapping.Empty();
 	MenuItem->VerticalNavigation = MenuItem->VerticalNavigation == EMenuNavigation::IncreaseDecreaseValue
 		? EMenuNavigation::Disabled
@@ -27,6 +29,7 @@ void USettingsItemControlsRemap::ConfigureMenuItem(const USettingsConfig* Config
 	MenuItem->AutoSaveSettingsOnValueChanged = false;
 	MenuItem->AutoSaveSettingsOnHighlightRemoved = false;
 	MenuItem->AutoSaveSettingsOnSelected = false;
+#endif
 }
 
 /**
@@ -37,9 +40,12 @@ void USettingsItemControlsRemap::ConfigureMenuItem(const USettingsConfig* Config
  */
 USettingsData* USettingsItemControlsRemap::SaveSettings(USettingsData* Settings, const UMenuItem* MenuItem)
 {
+#if ENGINE_MAJOR_VERSION >= 5	
 	Settings->KeyBindings.Remove(MenuItem->MappableName);
 	Settings->KeyBindings.Add(MenuItem->MappableName, MenuItem->GetInputActionKey());
 	USettingsUtils::SaveSettings(Settings);
+#endif
+	
 	return Settings;
 } 
 
@@ -52,6 +58,7 @@ USettingsData* USettingsItemControlsRemap::SaveSettings(USettingsData* Settings,
 void USettingsItemControlsRemap::ApplySettings(UObject* World, const USettingsConfig* Config,
 	const USettingsData* Settings)
 {
+#if ENGINE_MAJOR_VERSION >= 5
 	UGameInstance* CurrentGameInstance = UGameplayStatics::GetGameInstance(World);
 	const UUSKGameInstance* GameInstance = dynamic_cast<UUSKGameInstance*>(CurrentGameInstance);
 	if (GameInstance == nullptr)
@@ -61,4 +68,5 @@ void USettingsItemControlsRemap::ApplySettings(UObject* World, const USettingsCo
 	}
 
 	GameInstance->UpdateKeyBindings();
+#endif
 }

@@ -10,6 +10,7 @@
 #include "USK/Logger/Log.h"
 #include "USK/Settings/SettingsUtils.h"
 #include "USK/Utils/PlatformUtils.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 /**
  * @brief Virtual function to allow custom GameInstances an opportunity to set up what it needs
@@ -196,6 +197,7 @@ UTexture2D* UUSKGameInstance::GetInputIndicatorIconForKey(const FKey Key, const 
 FKey UUSKGameInstance::GetKeyForInputAction(UInputMappingContext* Context, UInputAction* InputAction,
                                             const FName MappableName) const
 {
+#if ENGINE_MAJOR_VERSION >= 5
 	if (Context == nullptr || InputAction == nullptr)
 	{
 		return EKeys::Invalid;
@@ -219,12 +221,12 @@ FKey UUSKGameInstance::GetKeyForInputAction(UInputMappingContext* Context, UInpu
 	TArray<FEnhancedActionKeyMapping> Mappings = Context->GetMappings();
 	for (FEnhancedActionKeyMapping Mapping : Mappings)
 	{
-		if (Mapping.Action == InputAction && Mapping.IsPlayerMappable() &&
-			Mapping.PlayerMappableOptions.Name == MappableName)
+		if (Mapping.Action == InputAction && Mapping.PlayerMappableOptions.Name == MappableName)
 		{
 			return Mapping.Key;
 		}
-	}	
+	}
+#endif
 	
 	return EKeys::Invalid;
 }
@@ -234,6 +236,7 @@ FKey UUSKGameInstance::GetKeyForInputAction(UInputMappingContext* Context, UInpu
  */
 void UUSKGameInstance::UpdateKeyBindings() const
 {
+#if ENGINE_MAJOR_VERSION >= 5
 	if (SettingsConfig == nullptr)
 	{
 		return;
@@ -266,12 +269,15 @@ void UUSKGameInstance::UpdateKeyBindings() const
 	Settings->KeyBindings.GetKeys(Keys);
 	for (const FName Key : Keys)
 	{
-#if ENGINE_MAJOR_VERSION >= 5
+#if ENGINE_MINOR_VERSION >= 2
 		Subsystem->RemovePlayerMappedKeyInSlot(Key);
-#endif
-		
 		Subsystem->AddPlayerMappedKeyInSlot(Key, Settings->KeyBindings[Key]);
+#else
+		Subsystem->RemovePlayerMappedKey(Key);
+		Subsystem->AddPlayerMappedKey(Key, Settings->KeyBindings[Key]);
+#endif
 	}
+#endif
 }
 
 /**
