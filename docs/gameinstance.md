@@ -163,7 +163,7 @@ The Game Instance will automatically detect input events and update the current 
 	<tr>
 		<td>GetInputIndicatorIconForKey</td>
 		<td>Get the input indicator icon for a specific key</td>
-		<td><strong>Key (FKey)</strong><br/>The key used to retrieve the input indicator icon</td>
+		<td><strong>Key (FKey)</strong><br/>The key used to retrieve the input indicator icon<br/><br/><strong>InputDevice (EInputDevice)</strong><br/>The input device used to retrieve the input indicator icon</td>
 		<td><strong>UTexture2D*</strong><br/>The input indicator icon for the specified key</td>
 	</tr>
 	<tr>
@@ -215,7 +215,7 @@ void ATestActor::Test()
 	USKGameInstance->EnableInputIndicators();
 	USKGameInstance->DisableInputIndicators();
 	TArray<UTexture2D*> InputIndicatorIcon = USKGameInstance->GetInputIndicatorIcon(InputAction, Amount);
-	UTexture2D* InputIndicatorIconForKey = USKGameInstance->GetInputIndicatorIconForKey(Key);
+	UTexture2D* InputIndicatorIconForKey = USKGameInstance->GetInputIndicatorIconForKey(Key, InputDevice);
 	FKey KeyForInputAction = USKGameInstance->GetKeyForInputAction(Context, InputAction, MappableName);
 	USKGameInstance->UpdateKeyBindings();
 }

@@ -296,6 +296,12 @@ You can add the following widgets to enable extra functionality:
 		<td>true</td>
 	</tr>
 	<tr>
+		<td>InputDevice</td>
+		<td>The input device associated with the action to rebind</td>
+		<td>EInputDevice</td>
+		<td>EInputDevice::Unknown</td>
+	</tr>
+	<tr>
 		<td>InputMappingContext</td>
 		<td>The input mapping context containing the action to rebind</td>
 		<td>UInputMappingContext*</td>
@@ -508,6 +514,12 @@ You can add the following widgets to enable extra functionality:
 		<td></td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>IsWaitingForKeyPress</td>
+		<td>Is the menu item waiting for a key press?</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the menu item is waiting for a key press</td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -525,6 +537,7 @@ You can use the <code>MenuItem</code> using Blueprints by adding one of the foll
 	<li>Ultimate Starter Kit > UI > On Menu Back</li>
 	<li>Ultimate Starter Kit > UI > Any Key Pressed</li>
 	<li>Ultimate Starter Kit > UI > Apply Key Binding</li>
+	<li>Ultimate Starter Kit > UI > Is Waiting For Key Press</li>
 </ul>
 
 ## C++ Usage
@@ -552,5 +565,6 @@ void ATestActor::Test()
 	bool OnMenuBackValue = MenuItem->OnMenuBack();
 	MenuItem->AnyKeyPressed(Key);
 	MenuItem->ApplyKeyBinding();
+	bool IsWaitingForKeyPressValue = MenuItem->IsWaitingForKeyPress();
 }
 ```
