@@ -18,7 +18,12 @@
 		{
 			"Name": "USK",
 			"Type": "Runtime",
-			"LoadingPhase": "PreLoadingScreen"
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "USKEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
 		}
 	],
 	"Plugins": [
