@@ -86,7 +86,11 @@ void SEdNodeDialogueTransition::UpdateGraphNode()
 			+ SOverlay::Slot()
 			[
 				SNew(SImage)
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 1
+				.Image(FAppStyle::GetBrush("Graph.TransitionNode.ColorSpill"))
+#else
 				.Image(FEditorStyle::GetBrush("Graph.TransitionNode.ColorSpill"))
+#endif
 				.ColorAndOpacity(this, &SEdNodeDialogueTransition::GetEdgeColor)
 			]
 			+ SOverlay::Slot()
@@ -183,7 +187,11 @@ FSlateColor SEdNodeDialogueTransition::GetEdgeColor() const
  */
 const FSlateBrush* SEdNodeDialogueTransition::GetEdgeImage() const
 {
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 1
+	return FAppStyle::GetBrush("Graph.TransitionNode.Icon");
+#else
 	return FEditorStyle::GetBrush("Graph.TransitionNode.Icon");
+#endif
 }
 
 /**

@@ -56,7 +56,11 @@ void SEdNodeDialogueEntry::UpdateGraphNode()
 		.VAlign(VAlign_Center)
 		[
 			SNew(SBorder)
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 1
+			.BorderImage(FAppStyle::GetBrush("Graph.StateNode.Body"))
+#else
 			.BorderImage(FEditorStyle::GetBrush("Graph.StateNode.Body"))
+#endif
 			.Padding(0.0f)
 			.BorderBackgroundColor(this, &SEdNodeDialogueEntry::GetBorderBackgroundColor)
 			[
@@ -87,7 +91,11 @@ void SEdNodeDialogueEntry::UpdateGraphNode()
 				.Padding(8.0f)
 				[
 					SNew(SBorder)
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 1
+					.BorderImage(FAppStyle::GetBrush("Graph.StateNode.ColorSpill"))
+#else
 					.BorderImage(FEditorStyle::GetBrush("Graph.StateNode.ColorSpill"))
+#endif
 					.BorderBackgroundColor(TitleShadowColor)
 					.HAlign(HAlign_Center)
 					.VAlign(VAlign_Center)
@@ -125,7 +133,11 @@ void SEdNodeDialogueEntry::UpdateGraphNode()
 								.AutoHeight()
 								[
 									SAssignNew(InlineEditableText, SInlineEditableTextBlock)
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 1
+									.Style(FAppStyle::Get(), "Graph.StateNode.NodeTitleInlineEditableText")
+#else
 									.Style(FEditorStyle::Get(), "Graph.StateNode.NodeTitleInlineEditableText")
+#endif
 									.Text(NodeTitle.Get(), &SNodeTitle::GetHeadTitle)
 									.WrapTextAt(this, &SEdNodeDialogueEntry::GetWrapTextAt)
 									.OnVerifyTextChanged(this, &SEdNodeDialogueEntry::OnVerifyNameTextChanged)
@@ -293,5 +305,9 @@ EVisibility SEdNodeDialogueEntry::GetDragOverMarkerVisibility() const
  */
 const FSlateBrush* SEdNodeDialogueEntry::GetNameIcon() const
 {
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 1
+	return FAppStyle::GetBrush(TEXT("BTEditor.Graph.BTNode.Icon"));
+#else
 	return FEditorStyle::GetBrush(TEXT("BTEditor.Graph.BTNode.Icon"));
+#endif
 }

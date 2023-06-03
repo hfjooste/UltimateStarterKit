@@ -125,7 +125,11 @@ void FDialogueDragConnection::HoverTargetChanged()
 	if (UniqueMessages.Num() == 0)
 	{
 		SetSimpleFeedbackMessage(
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 1
+			FAppStyle::GetBrush(TEXT("Graph.ConnectorFeedback.NewNode")),
+#else
 			FEditorStyle::GetBrush(TEXT("Graph.ConnectorFeedback.NewNode")),
+#endif
 			FLinearColor::White,
 			NSLOCTEXT("GraphEditor.Feedback", "PlaceNewNode", "Place a new node."));
 		return;
@@ -141,16 +145,28 @@ void FDialogueDragConnection::HoverTargetChanged()
     	case CONNECT_RESPONSE_BREAK_OTHERS_A:
     	case CONNECT_RESPONSE_BREAK_OTHERS_B:
     	case CONNECT_RESPONSE_BREAK_OTHERS_AB:
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 1
+    		StatusSymbol = FAppStyle::GetBrush(TEXT("Graph.ConnectorFeedback.OK"));
+#else
     		StatusSymbol = FEditorStyle::GetBrush(TEXT("Graph.ConnectorFeedback.OK"));
+#endif
     		break;
 
     	case CONNECT_RESPONSE_MAKE_WITH_CONVERSION_NODE:
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 1
+    		StatusSymbol = FAppStyle::GetBrush(TEXT("Graph.ConnectorFeedback.ViaCast"));
+#else
     		StatusSymbol = FEditorStyle::GetBrush(TEXT("Graph.ConnectorFeedback.ViaCast"));
+#endif
     		break;
 
     	case CONNECT_RESPONSE_DISALLOW:
     	default:
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 1
+    		StatusSymbol = FAppStyle::GetBrush(TEXT("Graph.ConnectorFeedback.Error"));
+#else
     		StatusSymbol = FEditorStyle::GetBrush(TEXT("Graph.ConnectorFeedback.Error"));
+#endif
     		break;
     	}
 

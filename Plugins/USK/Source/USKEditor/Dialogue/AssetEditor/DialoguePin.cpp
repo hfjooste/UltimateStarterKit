@@ -54,7 +54,11 @@ TSharedRef<SWidget> SDialoguePin::GetDefaultValueWidget()
  */
 const FSlateBrush* SDialoguePin::GetPinBorder() const
 {
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 1
+	return FAppStyle::GetBrush(TEXT("Graph.StateNode.Body"));
+#else
 	return FEditorStyle::GetBrush(TEXT("Graph.StateNode.Body"));
+#endif
 }
 
 /**
