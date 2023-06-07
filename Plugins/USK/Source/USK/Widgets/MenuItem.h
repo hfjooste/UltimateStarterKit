@@ -26,6 +26,12 @@ class USK_API UMenuItem : public UUserWidget
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMenuItemOnSelected);
 
 	/**
+	 * @brief Event used to notify other classes that a specific menu item in the container was selected
+	 * @param Index The index of the menu item that was selected
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMenuItemOnSelectedInContainer, int, Index);
+
+	/**
 	 * @brief Event used to notify other classes that the menu item was highlighted
 	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMenuItemOnHighlighted);
@@ -436,6 +442,12 @@ public:
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
 	FMenuItemOnSelected OnSelected;
+
+	/**
+	 * @brief Event used to notify other classes that a specific menu item in the container was selected
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
+	FMenuItemOnSelectedInContainer OnSelectedInContainer;
 
 	/**
 	 * @brief Event used to notify other classes that the menu item was highlighted

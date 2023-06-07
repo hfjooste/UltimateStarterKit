@@ -327,6 +327,11 @@ void UMenuItem::SelectItem()
 #endif
 
 	OnSelected.Broadcast();
+	if (IsValid(Menu) && IsValid(Menu->Container))
+	{
+		OnSelectedInContainer.Broadcast(Menu->Container->GetChildIndex(this));
+	}
+	
     AutoSaveSettings(AutoSaveSettingsOnSelected);
 }
 

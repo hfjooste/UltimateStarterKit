@@ -152,7 +152,7 @@ protected:
 	/**
 	 * @brief Rebuild the dialogue
 	 */
-	void RebuildDialogue() const;
+	void RebuildDialogue();
 
 	/**
 	 * @brief Delete the selected nodes
@@ -240,7 +240,7 @@ protected:
 	 * @param Package The package that was saved
 	 * @param ObjectSaveContext The context of the objects that were saved
 	 */
-	void OnPackageSavedWithContext(const FString& PackageFileName, UPackage* Package, FObjectPostSaveContext ObjectSaveContext) const;
+	void OnPackageSavedWithContext(const FString& PackageFileName, UPackage* Package, FObjectPostSaveContext ObjectSaveContext);
 #endif
 
 private:

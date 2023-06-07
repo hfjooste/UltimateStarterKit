@@ -33,6 +33,12 @@ public:
 	class UScrollBox* ScrollContainer;
 
 	/**
+	 * @brief The container used to display the menu items
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class UPanelWidget* Container;
+
+	/**
 	 * @brief Should the input binding automatically be added as soon as the widget is loaded?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|General")
@@ -177,6 +183,13 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void RemoveHighlight(UMenuItem* MenuItem);
+
+	/**
+	 * @brief Add a menu item to the container
+	 * @param MenuItem The menu item to add
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void AddMenuItem(UMenuItem* MenuItem);
 
 protected:
 	/**

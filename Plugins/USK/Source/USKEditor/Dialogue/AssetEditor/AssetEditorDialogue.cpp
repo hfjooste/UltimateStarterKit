@@ -394,7 +394,7 @@ FGraphPanelSelectionSet FAssetEditorDialogue::GetSelectedNodes() const
 /**
  * @brief Rebuild the dialogue
  */
-void FAssetEditorDialogue::RebuildDialogue() const
+void FAssetEditorDialogue::RebuildDialogue()
 {
 	if (!IsValid(EditingDialogue))
 	{
@@ -718,7 +718,7 @@ void FAssetEditorDialogue::OnFinishedChangingProperties(const FPropertyChangedEv
  * @param PackageFileName PackageFileName The name of the package that was saved
  * @param Context The context of the objects that were saved
  */
-void FAssetEditorDialogue::OnPackageSaved(const FString& PackageFileName, UObject* Context) const
+void FAssetEditorDialogue::OnPackageSaved(const FString& PackageFileName, UObject* Context)
 {
 	RebuildDialogue();
 }
@@ -729,7 +729,7 @@ void FAssetEditorDialogue::OnPackageSaved(const FString& PackageFileName, UObjec
  * @param Package The package that was saved
  * @param ObjectSaveContext The context of the objects that were saved
  */
-void FAssetEditorDialogue::OnPackageSavedWithContext(const FString& PackageFileName, UPackage* Package, FObjectPostSaveContext ObjectSaveContext) const
+void FAssetEditorDialogue::OnPackageSavedWithContext(const FString& PackageFileName, UPackage* Package, FObjectPostSaveContext ObjectSaveContext)
 {
 	RebuildDialogue();
 }

@@ -40,7 +40,8 @@ FText UDialogueEntry::GetText()
 void UDialogueEntry::PreEditChange(FProperty* PropertyAboutToChange)
 {
 	Super::PreEditChange(PropertyAboutToChange);
-	if (PropertyAboutToChange->GetFName() != GET_MEMBER_NAME_CHECKED(UDialogueEntry, Transition) || Edges.IsEmpty())
+	if (PropertyAboutToChange->GetFName() != GET_MEMBER_NAME_CHECKED(UDialogueEntry, Transition) ||
+		Edges.Num() == 0)
 	{
 		return;
 	}
@@ -62,7 +63,7 @@ void UDialogueEntry::PostEditChangeProperty(FPropertyChangedEvent& PropertyChang
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 	if (PropertyChangedEvent.Property->GetFName() != GET_MEMBER_NAME_CHECKED(UDialogueEntry, Transition) ||
-		Edges.IsEmpty())
+		Edges.Num() == 0)
 	{
 		return;
 	}

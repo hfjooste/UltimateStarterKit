@@ -168,7 +168,7 @@ void UEdGraphDialogue::ClearDialogue()
 void UEdGraphDialogue::SortDialogue(UDialogueEntry* RootNode)
 {
 	int Level = 0;
-	TArray CurrLevelNodes = { RootNode };
+	TArray<UDialogueEntry*> CurrLevelNodes = { RootNode };
 	TArray<UDialogueEntry*> NextLevelNodes;
 	TSet<UDialogueEntry*> Visited;
 

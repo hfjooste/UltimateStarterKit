@@ -33,10 +33,22 @@ public:
 	EDialogueTransitionType Transition;
 
 	/**
+	 * @brief The ID of the dialogue entry
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Entry")
+	FName Id = FName(FGuid::NewGuid().ToString());
+
+	/**
 	 * @brief The text to display
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Entry")
 	FText Text;
+
+	/**
+	 * @brief The speed of the dialogue
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Entry")
+	float Speed = 12.5f;
 
 	/**
 	 * @brief A reference to the dialogue containing this entry
