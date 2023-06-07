@@ -15,7 +15,7 @@ class UDialogue;
  * @brief The pawn responsible for managing the dialogue
  */
 UCLASS()
-class ADialogueManager : public APawn
+class USK_API ADialogueManager : public APawn
 {
 	GENERATED_BODY()
 

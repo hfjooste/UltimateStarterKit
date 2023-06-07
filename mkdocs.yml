@@ -63,6 +63,16 @@ nav:
     - Input Devices: inputdevice.md
     - Game Instance: gameinstance.md
   - Logger: logger.md
+  - Dialogue System:
+    - Overview: dialogueoverview.md
+    - Dialogue: dialogue.md
+    - Participant: dialogueparticipant.md
+    - Entry: dialogueentry.md
+    - Transition:
+      - Transition Type: dialoguetransitiontype.md
+      - Transition Data: dialoguetransition.md
+    - Manager: dialoguemanager.md
+    - Widget: dialoguewidget.md
   - Trackable Data:
     - Overview: trackabledataoverview.md
     - Data: trackabledata.md
