@@ -3,6 +3,7 @@
 This project uses a few assets from third parties:
 
 <ul>
+    <li><a href="https://github.com/jinyuliao/GenericGraph" target="_blank">Generic Graph by jinyuliao</a></li>
     <li><a href="https://www.behance.net/pravdin" target="_blank">Comic Helvetic Font by Alexander Pravdin</a></li>
     <li><a href="https://freesound.org/people/broumbroum/" target="_blank">Menu Sound Effects by Broumbroum</a></li>
     <li><a href="https://freesound.org/people/felixyadomi/" target="_blank">Land & Jump Sound Effects by Felixyadomi</a></li>

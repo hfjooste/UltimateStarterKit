@@ -8,6 +8,7 @@
 #include "Components/ScrollBox.h"
 #include "MenuItem.h"
 #include "Blueprint/WidgetTree.h"
+#include "Components/CanvasPanel.h"
 #include "Kismet/GameplayStatics.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Logger/Log.h"
@@ -259,6 +260,30 @@ void UMenu::RemoveHighlight(UMenuItem* MenuItem)
 	USK_LOG_TRACE("Removing highlight from menu item");
 	HighlightedMenuItemBeforeRemoval = CurrentMenuItem;
 	UpdateHighlightedItem(nullptr, EMenuNavigation::HighlightItem, false, false);
+}
+
+/**
+ * @brief Add a menu item to the container
+ * @param MenuItem The menu item to add
+ */
+void UMenu::AddMenuItem(UMenuItem* MenuItem)
+{
+	if (!IsValid(Container))
+	{
+		USK_LOG_ERROR("Failed to add menu item. Container is not valid");
+		return;
+	}
+
+	if (!IsValid(MenuItem))
+	{
+		USK_LOG_ERROR("Failed to add menu item. Menu item is not valid");
+		return;
+	}
+
+	Container->AddChild(MenuItem);
+	MenuItem->Menu = this;
+	MenuItem->SetHighlightedState(true, false, false);
+	MenuItem->SetHighlightedState(false, false, false);
 }
 
 /**

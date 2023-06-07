@@ -20,13 +20,13 @@ public class USK : ModuleRules
 		});
 
 		PrivateDependencyModuleNames.AddRange(new[]
-			{
-				"CoreUObject",
-				"Engine",
-				"Slate",
-				"SlateCore"	
-			}
-		);
+		{
+			"CoreUObject",
+			"Engine",
+			"Slate",
+			"SlateCore",
+			"GameplayTags"
+		});
 
 		DynamicallyLoadedModuleNames.AddRange(new string[] { });
 	}

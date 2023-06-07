@@ -418,6 +418,11 @@ You can add the following widgets to enable extra functionality:
 		<td></td>
 	</tr>
 	<tr>
+		<td>OnSelectedInContainer</td>
+		<td>Event used to notify other classes that a specific menu item in the container was selected</td>
+		<td><strong>Index (int)</strong><br/>The index of the menu item that was selected</td>
+	</tr>
+	<tr>
 		<td>OnHighlighted</td>
 		<td>Event used to notify other classes that the menu item was highlighted</td>
 		<td></td>

@@ -21,6 +21,11 @@ You can add the following widgets to enable extra functionality:
 		<td>Scroll container used for large menus with many items</td>
 		<td>UScrollBox*</td>
 	</tr>
+	<tr>
+		<td>Container</td>
+		<td>The container used to display the menu items</td>
+		<td>UPanelWidget*</td>
+	</tr>
 </table>
 
 ## API Reference
@@ -194,6 +199,12 @@ You can add the following widgets to enable extra functionality:
 		<td><strong>MenuItem (UMenuItem*)</strong><br/>The menu item to remove the highlighted state from</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>AddMenuItem</td>
+		<td>Add a menu item to the container</td>
+		<td><strong>MenuItem (UMenuItem*)</strong><br/>The menu item to add</td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -211,6 +222,7 @@ You can use the <code>Menu</code> using Blueprints by adding one of the followin
 	<li>Ultimate Starter Kit > UI > On Menu Back</li>
 	<li>Ultimate Starter Kit > UI > Request Highlight</li>
 	<li>Ultimate Starter Kit > UI > Remove Highlight</li>
+	<li>Ultimate Starter Kit > UI > Add Menu Item</li>
 </ul>
 
 ## C++ Usage
@@ -238,5 +250,6 @@ void ATestActor::Test()
 	Menu->OnMenuBack();
 	Menu->RequestHighlight(MenuItem);
 	Menu->RemoveHighlight(MenuItem);
+	Menu->AddMenuItem(MenuItem);
 }
 ```

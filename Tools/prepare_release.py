@@ -16,6 +16,14 @@ os.system(f"python \"{docs}\" --input \"Core\\USKGameInstance\" --output gameins
 os.system(f"python \"{docs}\" --input \"Data\\TrackableData\" --output trackabledata")
 os.system(f"python \"{docs}\" --input \"Data\\TrackableDataComponent\" --output trackabledatacomponent")
 
+os.system(f"python \"{docs}\" --input \"Dialogue\\Dialogue\" --output dialogue")
+os.system(f"python \"{docs}\" --input \"Dialogue\\DialogueParticipant\" --output dialogueparticipant")
+os.system(f"python \"{docs}\" --input \"Dialogue\\DialogueEntry\" --output dialogueentry")
+os.system(f"python \"{docs}\" --input \"Dialogue\\DialogueTransition\" --output dialoguetransition")
+os.system(f"python \"{docs}\" --input \"Dialogue\\DialogueTransitionType\" --output dialoguetransitiontype")
+os.system(f"python \"{docs}\" --input \"Dialogue\\DialogueManager\" --output dialoguemanager")
+os.system(f"python \"{docs}\" --input \"Dialogue\\DialogueWidget\" --output dialoguewidget")
+
 os.system(f"python \"{docs}\" --input \"Items\\AllowedCollector\" --output allowedcollector")
 os.system(f"python \"{docs}\" --input \"Items\\CollectableItem\" --output collectableitem")
 
