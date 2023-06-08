@@ -51,6 +51,12 @@ public:
 	float Speed = 12.5f;
 
 	/**
+	 * @brief The audio to play with this dialogue entry
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Entry")
+	USoundBase* Audio;
+
+	/**
 	 * @brief A reference to the dialogue containing this entry
 	 */
 	UPROPERTY(BlueprintReadOnly, Category = "Ultimate Starter Kit|Dialogue|Entry")

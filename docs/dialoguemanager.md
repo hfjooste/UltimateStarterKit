@@ -7,6 +7,21 @@ The <code>DialogueManager</code> relies on other components of this plugin to wo
 	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
 </ul>
 
+## Components
+The <code>DialogueManager</code> uses the following components:
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Type</th>
+	</tr>
+	<tr>
+		<td>AudioComponent</td>
+		<td>The audio component responsible for playing the audio files of the dialogue entries</td>
+		<td>UAudioComponent*</td>
+	</tr>
+</table>
+
 ## API Reference
 ### Properties
 <table>

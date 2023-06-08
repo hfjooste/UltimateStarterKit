@@ -41,6 +41,12 @@ A single entry in a dialogue
 		<td>12.5f</td>
 	</tr>
 	<tr>
+		<td>Audio</td>
+		<td>The audio to play with this dialogue entry</td>
+		<td>USoundBase*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>Dialogue</td>
 		<td>A reference to the dialogue containing this entry</td>
 		<td>UDialogue*</td>

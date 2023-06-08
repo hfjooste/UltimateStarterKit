@@ -6,8 +6,17 @@
 #include "DialogueWidget.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Components/AudioComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "USK/Logger/Log.h"
+
+/**
+ * @brief Create a new instance of the DialogueManager class 
+ */
+ADialogueManager::ADialogueManager()
+{
+	AudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("Audio Component"));;
+}
 
 /**
  * @brief Overridable native event for when play begins for this actor
@@ -99,12 +108,14 @@ void ADialogueManager::SkipEntry()
 
 	if (DialogueWidget->SkipEntry())
 	{
+		AudioComponent->Stop();
 		return;
 	}
 
 	if (CurrentEntry->IsLeafNode())
 	{
 		USK_LOG_INFO("Dialogue ended");
+		AudioComponent->Stop();
 		OnDialogueEnded.Broadcast(CurrentEntry->Id);
 		return;
 	}
@@ -128,6 +139,13 @@ void ADialogueManager::UpdateCurrentEntry(UDialogueEntry* NewEntry)
 {
 	CurrentEntry = NewEntry;	
 	DialogueWidget->UpdateEntry(NewEntry);
+	AudioComponent->Stop();
+
+	if (IsValid(NewEntry->Audio))
+	{
+		AudioComponent->SetSound(NewEntry->Audio);
+		AudioComponent->Play();	
+	}
 }
 
 /**
