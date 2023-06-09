@@ -52,6 +52,18 @@ public:
 	bool PlayOnStart = true;
 
 	/**
+	 * @brief The sound effect to play when an entry is skipped
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Audio")
+	USoundBase* SkipSFX;
+
+	/**
+	 * @brief The sound effect to play when advancing to the next entry
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Audio")
+	USoundBase* AdvanceSFX;
+
+	/**
 	 * @brief The input mapping context used to interact with the dialogue
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Input")

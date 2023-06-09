@@ -8,6 +8,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "Components/AudioComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "USK/Audio/AudioUtils.h"
 #include "USK/Logger/Log.h"
 
 /**
@@ -109,6 +110,7 @@ void ADialogueManager::SkipEntry()
 	if (DialogueWidget->SkipEntry())
 	{
 		AudioComponent->Stop();
+		UAudioUtils::PlaySound2D(GetWorld(), SkipSFX);
 		return;
 	}
 
@@ -129,6 +131,7 @@ void ADialogueManager::SkipEntry()
 	TArray<UDialogueEntry*> ChildEntries;
 	CurrentEntry->Edges.GenerateKeyArray(ChildEntries);
 	UpdateCurrentEntry(ChildEntries[0]);
+	UAudioUtils::PlaySound2D(GetWorld(), AdvanceSFX);
 }
 
 /**
@@ -175,4 +178,5 @@ void ADialogueManager::OnChoiceSelected(int Index)
 	TArray<UDialogueEntry*> ChildEntries;
 	CurrentEntry->Edges.GenerateKeyArray(ChildEntries);
 	UpdateCurrentEntry(ChildEntries[Index]);
+	UAudioUtils::PlaySound2D(GetWorld(), AdvanceSFX);
 }
