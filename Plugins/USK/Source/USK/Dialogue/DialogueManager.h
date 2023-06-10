@@ -26,6 +26,18 @@ class USK_API ADialogueManager : public APawn
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDialogueEnded, FName, LastEntryId);
 
 	/**
+	 * @brief Event used to notify other classes when a dialogue entry has started
+	 * @param LastEntryId The ID of the dialogue entry
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDialogueEntryStarted, FName, EntryId);
+
+	/**
+	 * @brief Event used to notify other classes when a dialogue entry has ended
+	 * @param LastEntryId The ID of the dialogue entry
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDialogueEntryEnded, FName, EntryId);
+
+	/**
 	 * @brief The audio component responsible for playing the audio files of the dialogue entries
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Dialogue",
@@ -80,6 +92,18 @@ public:
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Dialogue|Events")
 	FDialogueEnded OnDialogueEnded;
+
+	/**
+	 * @brief Event used to notify other classes when a dialogue entry has started
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Dialogue|Events")
+	FDialogueEntryStarted OnDialogueEntryStarted;
+
+	/**
+	 * @brief Event used to notify other classes when a dialogue entry has ended
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Dialogue|Events")
+	FDialogueEntryEnded OnDialogueEntryEnded;
 
 	/**
 	 * @brief Create a new instance of the DialogueManager class 

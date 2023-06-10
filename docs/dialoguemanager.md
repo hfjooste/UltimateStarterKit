@@ -5,6 +5,7 @@ The pawn responsible for managing the dialogue
 The <code>DialogueManager</code> relies on other components of this plugin to work:
 <ul>
 	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+	<li><a href="../audio">Audio</a>: Used to play sound effects either 2D or at a specified location</li>
 </ul>
 
 ## Components
@@ -50,6 +51,18 @@ The <code>DialogueManager</code> uses the following components:
 		<td>true</td>
 	</tr>
 	<tr>
+		<td>SkipSFX</td>
+		<td>The sound effect to play when an entry is skipped</td>
+		<td>USoundBase*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>AdvanceSFX</td>
+		<td>The sound effect to play when advancing to the next entry</td>
+		<td>USoundBase*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>InputMappingContext</td>
 		<td>The input mapping context used to interact with the dialogue</td>
 		<td>UInputMappingContext*</td>
@@ -74,6 +87,16 @@ The <code>DialogueManager</code> uses the following components:
 		<td>OnDialogueEnded</td>
 		<td>Event used to notify other classes when the dialogue has ended</td>
 		<td><strong>LastEntryId (FName)</strong><br/>The ID of the last entry in the dialogue</td>
+	</tr>
+	<tr>
+		<td>OnDialogueEntryStarted</td>
+		<td>Event used to notify other classes when a dialogue entry has started</td>
+		<td><strong>LastEntryId (FName)</strong><br/>The ID of the dialogue entry</td>
+	</tr>
+	<tr>
+		<td>OnDialogueEntryEnded</td>
+		<td>Event used to notify other classes when a dialogue entry has ended</td>
+		<td><strong>LastEntryId (FName)</strong><br/>The ID of the dialogue entry</td>
 	</tr>
 </table>
 

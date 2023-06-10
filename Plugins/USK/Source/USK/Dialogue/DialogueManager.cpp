@@ -118,6 +118,7 @@ void ADialogueManager::SkipEntry()
 	{
 		USK_LOG_INFO("Dialogue ended");
 		AudioComponent->Stop();
+		OnDialogueEntryEnded.Broadcast(CurrentEntry->Id);
 		OnDialogueEnded.Broadcast(CurrentEntry->Id);
 		return;
 	}
@@ -140,8 +141,14 @@ void ADialogueManager::SkipEntry()
  */
 void ADialogueManager::UpdateCurrentEntry(UDialogueEntry* NewEntry)
 {
+	if (IsValid(CurrentEntry))
+	{
+		OnDialogueEntryEnded.Broadcast(CurrentEntry->Id);	
+	}
+	
 	CurrentEntry = NewEntry;	
 	DialogueWidget->UpdateEntry(NewEntry);
+	OnDialogueEntryStarted.Broadcast(NewEntry->Id);
 	AudioComponent->Stop();
 
 	if (IsValid(NewEntry->Audio))
