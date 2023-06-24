@@ -16,24 +16,24 @@ struct USK_API FInventoryItemData : public FTableRowBase
 	/**
 	 * @brief The name of the inventory item
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Inventory|Item Data")
 	FText Name;
 
 	/**
 	 * @brief The description of the inventory item
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Inventory|Item Data")
 	FText Description;
 
 	/**
 	 * @brief The image displayed in the inventory
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Inventory|Item Data")
 	UTexture2D* InventoryImage;
 
 	/**
 	 * @brief The preview image displayed when the item is highlighted
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Inventory|Item Data")
 	UTexture2D* PreviewImage;
 };
