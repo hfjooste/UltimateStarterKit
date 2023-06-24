@@ -7,12 +7,14 @@
 #include "Components/PanelWidget.h"
 #include "Components/ScrollBox.h"
 #include "MenuItem.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Blueprint/WidgetTree.h"
 #include "Components/CanvasPanel.h"
 #include "Kismet/GameplayStatics.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Logger/Log.h"
 #include "Runtime/Launch/Resources/Version.h"
+#include "USK/Core/USKGameInstance.h"
 
 /**
  * @brief Overridable native event for when the widget has been constructed
@@ -29,6 +31,14 @@ void UMenu::NativeConstruct()
 
 	USK_LOG_TRACE("Adding binding to visibility changed event");
 	OnNativeVisibilityChanged.AddUObject(this, &UMenu::OnMenuVisibilityChanged);
+
+	UGameInstance* CurrentGameInstance = UGameplayStatics::GetGameInstance(GetWorld());
+	GameInstance = dynamic_cast<UUSKGameInstance*>(CurrentGameInstance);
+	if (IsValid(GameInstance))
+	{
+		GameInstance->OnGamePaused.AddDynamic(this, &UMenu::OnGamePaused);
+		GameInstance->OnGameUnpaused.AddDynamic(this, &UMenu::OnGameUnpaused);
+	}
 }
 
 /**
@@ -306,11 +316,18 @@ void UMenu::OnMenuVisibilityChanged(ESlateVisibility NewVisibility)
  * @brief Add the input bindings for the menu
  */
 void UMenu::AddInputBindings()
-{
+{	
 	if (PauseGameWhileVisible)
 	{
 		USK_LOG_INFO("Pausing game");
-		UGameplayStatics::SetGamePaused(GetWorld(), true);
+		if (IsValid(GameInstance))
+		{
+			GameInstance->PauseGame();
+		}
+		else
+		{
+			UGameplayStatics::SetGamePaused(GetWorld(), true);
+		}		
 	}
 	
 	if (InputMappingContext == nullptr)
@@ -337,8 +354,8 @@ void UMenu::AddInputBindings()
 	USK_LOG_TRACE("Adding menu input mapping context");
 	Subsystem->RemoveMappingContext(InputMappingContext);
 	Subsystem->AddMappingContext(InputMappingContext, 0);
+	
 	InitializeActionBindings(PlayerController);
-
 	PlayerController->InputComponent->BindKey(EKeys::AnyKey, IE_Pressed, this, &UMenu::AnyKeyPressed);
 }
 
@@ -346,11 +363,18 @@ void UMenu::AddInputBindings()
  * @brief Remove the input bindings for the menu
  */
 void UMenu::RemoveInputBindings() const
-{
+{	
 	if (PauseGameWhileVisible)
 	{
 		USK_LOG_INFO("Resuming game");
-		UGameplayStatics::SetGamePaused(GetWorld(), false);
+		if (IsValid(GameInstance))
+		{
+			GameInstance->UnpauseGame();
+		}
+		else
+		{
+			UGameplayStatics::SetGamePaused(GetWorld(), false);
+		}		
 	}
 	
 	if (InputMappingContext == nullptr)
@@ -363,6 +387,12 @@ void UMenu::RemoveInputBindings() const
 	if (PlayerController == nullptr)
 	{
 		USK_LOG_ERROR("Unable to remove input binding. Player controller is nullptr");
+		return;
+	}
+
+	if (!ShouldUpdateInputBinding())
+	{
+		USK_LOG_INFO("Not updating input binding. Another menu was found");
 		return;
 	}
 	
@@ -386,7 +416,7 @@ bool UMenu::IsInputAllowed() const
 {
 	return GetVisibility() != ESlateVisibility::Collapsed &&
 		GetVisibility() != ESlateVisibility::Hidden &&
-		!HasAnyFlags(RF_BeginDestroyed);
+		!HasAnyFlags(RF_BeginDestroyed) && GetIsEnabled();
 }
 
 /**
@@ -557,4 +587,62 @@ void UMenu::AnyKeyPressed(const FKey Key)
 	{
 		CurrentMenuItem->AnyKeyPressed(Key);
 	}
+}
+
+/**
+ * @brief Should the input binding be updated?
+ * @return A boolean value indicating if the input binding should be updated
+ */
+bool UMenu::ShouldUpdateInputBinding() const
+{
+	TArray<UUserWidget*> Widgets;
+	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(GetWorld(), Widgets, StaticClass(), false);
+
+	for (UUserWidget* Widget : Widgets)
+	{
+		const UMenu* Menu = dynamic_cast<UMenu*>(Widget);
+		if (IsValid(Menu) && Menu != this && Menu->IsVisible() && !Menu->HasAnyFlags(RF_BeginDestroyed))
+		{
+			return false;
+		}		
+	}
+
+	return true;
+}
+
+/**
+ * @brief Called after the game is paused
+ */
+void UMenu::OnGamePaused()
+{
+	if (DisableWhilePaused)
+	{
+		USK_LOG_INFO("Disabling menu while game is paused");
+		SetIsEnabled(false);
+	}
+}
+
+/**
+ * @brief Called after the game is unpaused
+ */
+void UMenu::OnGameUnpaused()
+{
+	if (DisableWhilePaused)
+	{
+		FLatentActionInfo LatentAction;
+		LatentAction.Linkage = 0;
+		LatentAction.CallbackTarget = this;
+		LatentAction.UUID = GetUniqueID();
+		LatentAction.ExecutionFunction = "EnableMenuAfterUnpaused";
+		UKismetSystemLibrary::RetriggerableDelay(GetWorld(), EnableAfterUnpausedDelay, LatentAction);
+	}
+}
+
+/**
+ * @brief Enable the menu again after the game is unpaused
+ */
+void UMenu::EnableMenuAfterUnpaused()
+{
+	USK_LOG_INFO("Enabling menu after game is unpaused");
+	SetIsEnabled(true);
 }

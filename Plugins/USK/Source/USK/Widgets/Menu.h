@@ -8,6 +8,7 @@
 #include "MenuNavigation.h"
 #include "Menu.generated.h"
 
+class UUSKGameInstance;
 class UMenuItem;
 class UInputAction;
 class UInputMappingContext;
@@ -49,6 +50,12 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|General")
 	bool PauseGameWhileVisible;
+
+	/**
+	 * @brief Should the menu be disabled while the game is paused?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|General")
+	bool DisableWhilePaused;
 
 	/**
 	 * @brief The sound effect played when a menu item is selected
@@ -209,6 +216,12 @@ protected:
 	
 private:
 	/**
+	 * @brief A reference to the game instance
+	 */
+	UPROPERTY()
+	UUSKGameInstance* GameInstance;
+	
+	/**
 	 * @brief A reference to the current menu item
 	 */
 	UPROPERTY()
@@ -224,6 +237,11 @@ private:
 	 * @brief Has the action bindings been initialized?
 	 */
 	bool bIsActionBindingsInitialized;
+
+	/**
+	 * @brief The delay before the menu is enabled after the game is unpaused
+	 */
+	float EnableAfterUnpausedDelay = 0.05f;
 
 	/**
 	 * @brief Called when the visibility of the menu is changed
@@ -280,4 +298,28 @@ private:
 	 */
 	UFUNCTION()
 	void AnyKeyPressed(const FKey Key);
+
+	/**
+	 * @brief Should the input binding be updated?
+	 * @return A boolean value indicating if the input binding should be updated
+	 */
+	bool ShouldUpdateInputBinding() const;
+
+	/**
+	 * @brief Called after the game is paused
+	 */
+	UFUNCTION()
+	void OnGamePaused();
+
+	/**
+	 * @brief Called after the game is unpaused
+	 */
+	UFUNCTION()
+	void OnGameUnpaused();
+
+	/**
+	 * @brief Enable the menu again after the game is unpaused
+	 */
+	UFUNCTION()
+	void EnableMenuAfterUnpaused();
 };
