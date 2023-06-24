@@ -440,31 +440,31 @@ public:
 	/**
 	 * @brief Event used to notify other classes that the menu item was selected
 	 */
-	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|UI|Events")
 	FMenuItemOnSelected OnSelected;
 
 	/**
 	 * @brief Event used to notify other classes that a specific menu item in the container was selected
 	 */
-	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|UI|Events")
 	FMenuItemOnSelectedInContainer OnSelectedInContainer;
 
 	/**
 	 * @brief Event used to notify other classes that the menu item was highlighted
 	 */
-	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|UI|Events")
 	FMenuItemOnHighlighted OnHighlighted;
 
 	/**
 	 * @brief Event used to notify other classes that the menu item's highlighted state was removed
 	 */
-	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|UI|Events")
 	FMenuItemOnHighlightRemoved OnHighlightRemoved;
 
 	/**
 	 * @brief Event used to notify other classes that the menu item's value was updated
 	 */
-	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|UI|Events")
 	FMenuItemOnValueChanged OnValueChanged;
 
 	/**
@@ -495,6 +495,13 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void SetHighlightedState(bool IsHighlighted, const bool PlayHighlightedAnimation, const bool PlayHighlightedSound);
+
+	/**
+	 * @brief Check if the menu item is highlighted
+	 * @return A boolean value indicating if the menu item is highlighted
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|UI")
+	bool IsHighlighted() const;
 
 	/**
 	 * @brief Get the current value of the menu item
@@ -616,6 +623,11 @@ private:
 	 * @brief Is the menu item waiting for a key press?
 	 */
 	bool WaitingForKeyPress;
+
+	/**
+	 * @brief Is the menu item highlighted?
+	 */
+	bool bIsHighlighted;
 
 	/**
 	 * @brief Update the value text of the menu item 

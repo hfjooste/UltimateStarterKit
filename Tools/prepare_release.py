@@ -24,6 +24,14 @@ os.system(f"python \"{docs}\" --input \"Dialogue\\DialogueTransitionType\" --out
 os.system(f"python \"{docs}\" --input \"Dialogue\\DialogueManager\" --output dialoguemanager")
 os.system(f"python \"{docs}\" --input \"Dialogue\\DialogueWidget\" --output dialoguewidget")
 
+os.system(f"python \"{docs}\" --input \"Inventory\\InventoryComponent\" --output inventorycomponent")
+os.system(f"python \"{docs}\" --input \"Inventory\\InventoryData\" --output inventorydata")
+os.system(f"python \"{docs}\" --input \"Inventory\\InventoryItem\" --output inventoryitem")
+os.system(f"python \"{docs}\" --input \"Inventory\\InventoryItemData\" --output inventoryitemdata")
+os.system(f"python \"{docs}\" --input \"Inventory\\InventoryMenuItem\" --output inventorymenuitem")
+os.system(f"python \"{docs}\" --input \"Inventory\\InventorySize\" --output inventorysize")
+os.system(f"python \"{docs}\" --input \"Inventory\\InventoryWidget\" --output inventorywidget")
+
 os.system(f"python \"{docs}\" --input \"Items\\AllowedCollector\" --output allowedcollector")
 os.system(f"python \"{docs}\" --input \"Items\\CollectableItem\" --output collectableitem")
 

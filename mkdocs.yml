@@ -73,6 +73,14 @@ nav:
       - Transition Data: dialoguetransition.md
     - Manager: dialoguemanager.md
     - Widget: dialoguewidget.md
+  - Inventory:
+    - Inventory Component: inventorycomponent.md
+    - Inventory Data: inventorydata.md
+    - Inventory Item: inventoryitem.md
+    - Inventory Item Data: inventoryitemdata.md
+    - Inventory Menu Item: inventorymenuitem.md
+    - Inventory Size: inventorysize.md
+    - Inventory Widget: inventorywidget.md
   - Trackable Data:
     - Overview: trackabledataoverview.md
     - Data: trackabledata.md

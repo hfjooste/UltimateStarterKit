@@ -181,6 +181,8 @@ void UMenuItem::SetHighlightedState(const bool IsHighlighted,
 	const bool PlayHighlightedAnimation, const bool PlayHighlightedSound)
 {
 	USK_LOG_TRACE("Setting highlighted state");
+	
+	bIsHighlighted = IsHighlighted;
 	const FLinearColor BorderColor = IsHighlighted ? BorderHighlightedColor : BorderNormalColor;
 	const FLinearColor BackgroundColor = IsHighlighted ? BackgroundHighlightedColor : BackgroundNormalColor;
 
@@ -272,6 +274,15 @@ void UMenuItem::SetHighlightedState(const bool IsHighlighted,
 		OnHighlightRemoved.Broadcast();
 		AutoSaveSettings(AutoSaveSettingsOnHighlightRemoved);
 	}
+}
+
+/**
+ * @brief Check if the menu item is highlighted
+ * @return A boolean value indicating if the menu item is highlighted
+ */
+bool UMenuItem::IsHighlighted() const
+{
+	return bIsHighlighted;
 }
 
 /**

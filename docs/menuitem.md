@@ -466,6 +466,12 @@ You can add the following widgets to enable extra functionality:
 		<td></td>
 	</tr>
 	<tr>
+		<td>IsHighlighted</td>
+		<td>Check if the menu item is highlighted</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the menu item is highlighted</td>
+	</tr>
+	<tr>
 		<td>GetValue</td>
 		<td>Get the current value of the menu item</td>
 		<td></td>
@@ -533,6 +539,7 @@ You can use the <code>MenuItem</code> using Blueprints by adding one of the foll
 	<li>Ultimate Starter Kit > UI > Set Text</li>
 	<li>Ultimate Starter Kit > UI > Set Title</li>
 	<li>Ultimate Starter Kit > UI > Set Highlighted State</li>
+	<li>Ultimate Starter Kit > UI > Is Highlighted</li>
 	<li>Ultimate Starter Kit > UI > Get Value</li>
 	<li>Ultimate Starter Kit > UI > Update Value</li>
 	<li>Ultimate Starter Kit > UI > Select Item</li>
@@ -561,6 +568,7 @@ void ATestActor::Test()
 	MenuItem->SetText(Text);
 	MenuItem->SetTitle(Text);
 	MenuItem->SetHighlightedState(IsHighlighted, PlayHighlightedAnimation, PlayHighlightedSound);
+	bool IsHighlightedValue = MenuItem->IsHighlighted();
 	int Value = MenuItem->GetValue();
 	MenuItem->UpdateValue(Increment);
 	MenuItem->SelectItem();
