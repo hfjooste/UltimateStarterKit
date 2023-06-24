@@ -108,6 +108,16 @@ The Game Instance will automatically detect input events and update the current 
 		<td>Event used to notify other classes when the current input device is updated</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>OnGamePaused</td>
+		<td>Event used to notify other classes when the game is paused</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>OnGameUnpaused</td>
+		<td>Event used to notify other classes when the game is unpaused</td>
+		<td></td>
+	</tr>
 </table>
 
 ### Functions
@@ -178,6 +188,18 @@ The Game Instance will automatically detect input events and update the current 
 		<td></td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>PauseGame</td>
+		<td>Pause the game</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>UnpauseGame</td>
+		<td>Unpause the game</td>
+		<td></td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -193,6 +215,8 @@ You can use the <code>USKGameInstance</code> using Blueprints by adding one of t
 	<li>Ultimate Starter Kit > Input > Get Input Indicator Icon For Key</li>
 	<li>Ultimate Starter Kit > Input > Get Key For Input Action</li>
 	<li>Ultimate Starter Kit > Input > Update Key Bindings</li>
+	<li>Ultimate Starter Kit > Pause > Pause Game</li>
+	<li>Ultimate Starter Kit > Pause > Unpause Game</li>
 </ul>
 
 ## C++ Usage
@@ -218,5 +242,7 @@ void ATestActor::Test()
 	UTexture2D* InputIndicatorIconForKey = USKGameInstance->GetInputIndicatorIconForKey(Key, InputDevice);
 	FKey KeyForInputAction = USKGameInstance->GetKeyForInputAction(Context, InputAction, MappableName);
 	USKGameInstance->UpdateKeyBindings();
+	USKGameInstance->PauseGame();
+	USKGameInstance->UnpauseGame();
 }
 ```

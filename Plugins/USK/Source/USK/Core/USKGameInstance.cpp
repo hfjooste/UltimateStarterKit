@@ -281,6 +281,24 @@ void UUSKGameInstance::UpdateKeyBindings() const
 }
 
 /**
+ * @brief Pause the game
+ */
+void UUSKGameInstance::PauseGame()
+{
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
+	OnGamePaused.Broadcast();
+}
+
+/**
+ * @brief Unpause the game
+ */
+void UUSKGameInstance::UnpauseGame()
+{
+	UGameplayStatics::SetGamePaused(GetWorld(), false);
+	OnGameUnpaused.Broadcast();
+}
+
+/**
  * @brief Load data at the specified index
  * @param Index The save slot index to load data from
  */

@@ -29,6 +29,16 @@ class USK_API UUSKGameInstance : public UGameInstance
 	 * @brief Event used to notify other classes when the current input device is updated
 	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameInstanceOnInputDeviceUpdatedDelegate);
+
+	/**
+	 * @brief Event used to notify other classes when the game is paused
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGamePausedDelegate);
+
+	/**
+	 * @brief Event used to notify other classes when the game is unpaused
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameUnpausedDelegate);
 	
 public:
 	/**
@@ -105,6 +115,18 @@ public:
 	FGameInstanceOnInputDeviceUpdatedDelegate OnInputDeviceUpdated;
 
 	/**
+	 * @brief Event used to notify other classes when the game is paused
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Input|Events")
+	FGamePausedDelegate OnGamePaused;
+
+	/**
+	 * @brief Event used to notify other classes when the game is unpaused
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Input|Events")
+	FGameUnpausedDelegate OnGameUnpaused;
+
+	/**
 	 * @brief Get the save data that is currently loaded
 	 * @return A reference to the current save data
 	 */
@@ -177,6 +199,18 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
 	void UpdateKeyBindings() const;
+
+	/**
+	 * @brief Pause the game
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Pause")
+	void PauseGame();
+
+	/**
+	 * @brief Unpause the game
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Pause")
+	void UnpauseGame();
 
 protected:
 	/**
