@@ -29,6 +29,18 @@ The <code>InventoryComponent</code> relies on other components of this plugin to
 		<td>bool</td>
 		<td>true</td>
 	</tr>
+	<tr>
+		<td>EnforceMaxAmount</td>
+		<td>Should a maximum amount be enforced for each item?</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>MaxAmount</td>
+		<td>The maximum amount of each item</td>
+		<td>int</td>
+		<td>99</td>
+	</tr>
 </table>
 
 ### Events

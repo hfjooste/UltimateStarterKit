@@ -60,6 +60,11 @@ void UInventoryComponent::AddItem(const FName Id, const int Amount)
 		Items.Add(Id, Amount);
 	}
 
+	if (EnforceMaxAmount && Items[Id] > MaxAmount)
+	{
+		Items[Id] = MaxAmount;
+	}
+
 	if (Items[Id] <= 0)
 	{
 		RemoveAll(Id);

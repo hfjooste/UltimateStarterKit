@@ -37,6 +37,19 @@ public:
 	bool AutoSave = true;
 
 	/**
+	 * @brief Should a maximum amount be enforced for each item?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Inventory")
+	bool EnforceMaxAmount;
+
+	/**
+	 * @brief The maximum amount of each item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Inventory",
+		meta=(EditCondition = "EnforceMaxAmount", EditConditionHides))
+	int MaxAmount = 99;
+
+	/**
 	 * @brief Event used to notify other classes every time an item in the inventory was updated
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Inventory|Events")
