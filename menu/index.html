@@ -1671,6 +1671,7 @@
 <p>The <code>Menu</code> relies on other components of this plugin to work:</p>
 <ul>
     <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+    <li><a href="../gameinstance">Game Instance</a>: Used to monitor for input device changes and handle saving/loading game data</li>
     <li><a href="../audio">Audio</a>: Used to play sound effects either 2D or at a specified location</li>
 </ul>
 
@@ -1712,6 +1713,12 @@
     <tr>
         <td>PauseGameWhileVisible</td>
         <td>Should the game automatically be paused/resumed based on the visibility of the menu?</td>
+        <td>bool</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>DisableWhilePaused</td>
+        <td>Should the menu be disabled while the game is paused?</td>
         <td>bool</td>
         <td></td>
     </tr>
