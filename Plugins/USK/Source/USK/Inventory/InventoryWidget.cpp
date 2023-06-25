@@ -52,6 +52,17 @@ void UInventoryWidget::UpdatePreview(const FInventoryItem Item) const
 }
 
 /**
+ * @brief Update the highlighted index
+ * @param Column The column index of the item that is highlighted
+ * @param Row The row index of the item that is highlighted
+ */
+void UInventoryWidget::UpdateHighlightedIndex(int Column, int Row)
+{
+	HighlightedColumn = Column;
+	HighlightedRow = Row;
+}
+
+/**
  * @brief Select an inventory item
  * @param Id The ID of the item to select
  */
@@ -112,6 +123,8 @@ void UInventoryWidget::RefreshInventory()
 		for (int X = 0; X < GridSize.X; X++)
 		{
 			ItemIndex++;
+			InventoryGrid[X][Y]->UpdateInventoryGridPosition(X, Y);
+			
 			if (ItemIndex >= InventoryItems.Num())
 			{
 				InventoryGrid[X][Y]->InitializeEmptyInventoryItem(this);
@@ -130,7 +143,7 @@ void UInventoryWidget::RefreshInventory()
 		}
 	}
 
-	InventoryMenu->RequestHighlight(InventoryGrid[0][0]);
+	InventoryMenu->RequestHighlight(InventoryGrid[HighlightedColumn][HighlightedRow]);
 }
 
 /**

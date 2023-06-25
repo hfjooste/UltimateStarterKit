@@ -42,6 +42,14 @@ public:
 	void InitializeInventoryItem(UInventoryWidget* Widget, FInventoryItem Item, FInventoryItemData Data);
 
 	/**
+	 * @brief Update the grid position of the inventory menu item
+	 * @param CurrentColumn The current column of the inventory menu item
+	 * @param CurrentRow The current row of the inventory menu item
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Inventory")
+	void UpdateInventoryGridPosition(int CurrentColumn, int CurrentRow);
+
+	/**
 	 * @brief Get the inventory item tracked by this menu item
 	 * @return The inventory item tracked by this menu item
 	 */
@@ -73,10 +81,20 @@ private:
 	bool bIsEmpty;
 
 	/**
-	 * @brief Update the inventory preview
+	 * @brief The column of the inventory item
+	 */
+	int Column;
+
+	/**
+	 * @brief The row of the inventory item
+	 */
+	int Row;
+
+	/**
+	 * @brief Called after the inventory item is highlighted
 	 */
 	UFUNCTION()
-	void UpdateInventoryPreview();
+	void OnInventoryItemHighlighted();
 
 	/**
 	 * @brief Called after the inventory item is selected

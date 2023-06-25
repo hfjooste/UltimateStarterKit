@@ -14,7 +14,7 @@ void UInventoryMenuItem::InitializeEmptyInventoryItem(UInventoryWidget* Widget)
 {
 	bIsEmpty = true;
 	InventoryWidget = Widget;
-	OnHighlighted.AddDynamic(this, &UInventoryMenuItem::UpdateInventoryPreview);
+	OnHighlighted.AddDynamic(this, &UInventoryMenuItem::OnInventoryItemHighlighted);
 	OnSelected.AddDynamic(this, &UInventoryMenuItem::OnInventoryItemSelected);
 
 	SetText(FText::GetEmpty());
@@ -43,6 +43,17 @@ void UInventoryMenuItem::InitializeInventoryItem(UInventoryWidget* Widget, FInve
 		InventoryImage->SetBrushFromTexture(Data.InventoryImage);
 		InventoryImage->SetVisibility(ESlateVisibility::Visible);
 	}
+}
+
+/**
+ * @brief Update the grid position of the inventory menu item
+ * @param CurrentColumn The current column of the inventory menu item
+ * @param CurrentRow The current row of the inventory menu item
+ */
+void UInventoryMenuItem::UpdateInventoryGridPosition(int CurrentColumn, int CurrentRow)
+{
+	Column = CurrentColumn;
+	Row = CurrentRow;
 }
 
 /**
@@ -78,9 +89,9 @@ void UInventoryMenuItem::UpdateAmount(const int Amount)
 }
 
 /**
- * @brief Update the inventory preview
+ * @brief Called after the inventory item is highlighted
  */
-void UInventoryMenuItem::UpdateInventoryPreview()
+void UInventoryMenuItem::OnInventoryItemHighlighted()
 {
 	if (!IsValid(InventoryWidget))
 	{
@@ -89,6 +100,7 @@ void UInventoryMenuItem::UpdateInventoryPreview()
 	}
 
 	InventoryWidget->UpdatePreview(InventoryItem);
+	InventoryWidget->UpdateHighlightedIndex(Column, Row);
 }
 
 /**

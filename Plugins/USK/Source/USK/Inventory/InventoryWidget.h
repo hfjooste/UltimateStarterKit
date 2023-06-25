@@ -110,6 +110,14 @@ public:
 	void UpdatePreview(const FInventoryItem Item) const;
 
 	/**
+	 * @brief Update the highlighted index
+	 * @param Column The column index of the item that is highlighted
+	 * @param Row The row index of the item that is highlighted
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Inventory")
+	void UpdateHighlightedIndex(int Column, int Row);
+
+	/**
 	 * @brief Select an inventory item
 	 * @param Id The ID of the item to select
 	 */
@@ -155,6 +163,16 @@ private:
 	 * @return The data for the inventory item
 	 */
 	FInventoryItemData* GetInventoryItemData(const FName Id) const;
+
+	/**
+	 * @brief The column index of the item that is highlighted
+	 */
+	int HighlightedColumn;
+
+	/**
+	 * @brief The row index of the item that is highlighted
+	 */
+	int HighlightedRow;
 
 	/**
 	 * @brief Update the preview name
