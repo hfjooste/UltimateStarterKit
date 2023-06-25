@@ -56,7 +56,7 @@ void UInventoryWidget::UpdatePreview(const FInventoryItem Item) const
  * @param Column The column index of the item that is highlighted
  * @param Row The row index of the item that is highlighted
  */
-void UInventoryWidget::UpdateHighlightedIndex(int Column, int Row)
+void UInventoryWidget::UpdateHighlightedIndex(const int Column, const int Row)
 {
 	HighlightedColumn = Column;
 	HighlightedRow = Row;
@@ -100,6 +100,11 @@ void UInventoryWidget::RefreshItem(const FName Id, const int Amount)
 					Item.Id = Id;
 					Item.Amount = Amount;
 					UpdatePreview(Item);
+				}
+
+				if (Amount <= 0)
+				{
+					RefreshInventory();
 				}
 				
 				return;
