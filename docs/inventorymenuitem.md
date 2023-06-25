@@ -54,6 +54,12 @@ You can add the following widgets to enable extra functionality:
 		<td></td>
 	</tr>
 	<tr>
+		<td>UpdateInventoryGridPosition</td>
+		<td>Update the grid position of the inventory menu item</td>
+		<td><strong>CurrentColumn (int)</strong><br/>The current column of the inventory menu item<br/><br/><strong>CurrentRow (int)</strong><br/>The current row of the inventory menu item</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>GetInventoryItem</td>
 		<td>Get the inventory item tracked by this menu item</td>
 		<td></td>
@@ -72,6 +78,7 @@ You can use the <code>InventoryMenuItem</code> using Blueprints by adding one of
 <ul>
 	<li>Ultimate Starter Kit > Inventory > Initialize Empty Inventory Item</li>
 	<li>Ultimate Starter Kit > Inventory > Initialize Inventory Item</li>
+	<li>Ultimate Starter Kit > Inventory > Update Inventory Grid Position</li>
 	<li>Ultimate Starter Kit > Inventory > Get Inventory Item</li>
 	<li>Ultimate Starter Kit > Inventory > Update Amount</li>
 </ul>
@@ -91,6 +98,7 @@ void ATestActor::Test()
 	// InventoryMenuItem is a pointer to the UInventoryMenuItem
 	InventoryMenuItem->InitializeEmptyInventoryItem(Widget);
 	InventoryMenuItem->InitializeInventoryItem(Widget, Item, Data);
+	InventoryMenuItem->UpdateInventoryGridPosition(CurrentColumn, CurrentRow);
 	FInventoryItem InventoryItem = InventoryMenuItem->GetInventoryItem();
 	InventoryMenuItem->UpdateAmount(Amount);
 }

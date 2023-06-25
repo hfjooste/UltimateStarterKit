@@ -128,6 +128,12 @@ You can add the following widgets to enable extra functionality:
 		<td></td>
 	</tr>
 	<tr>
+		<td>UpdateHighlightedIndex</td>
+		<td>Update the highlighted index</td>
+		<td><strong>Column (int)</strong><br/>The column index of the item that is highlighted<br/><br/><strong>Row (int)</strong><br/>The row index of the item that is highlighted</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>SelectItem</td>
 		<td>Select an inventory item</td>
 		<td><strong>Id (FName)</strong><br/>The ID of the item to select</td>
@@ -158,6 +164,7 @@ You can use the <code>InventoryWidget</code> using Blueprints by adding one of t
 <ul>
 	<li>Ultimate Starter Kit > Inventory > Load Inventory</li>
 	<li>Ultimate Starter Kit > Inventory > Update Preview</li>
+	<li>Ultimate Starter Kit > Inventory > Update Highlighted Index</li>
 	<li>Ultimate Starter Kit > Inventory > Select Item</li>
 	<li>Ultimate Starter Kit > Inventory > Get Inventory</li>
 	<li>Ultimate Starter Kit > Inventory > Refresh Item</li>
@@ -179,6 +186,7 @@ void ATestActor::Test()
 	// InventoryWidget is a pointer to the UInventoryWidget
 	InventoryWidget->LoadInventory(InventoryComponent);
 	InventoryWidget->UpdatePreview(Item);
+	InventoryWidget->UpdateHighlightedIndex(Column, Row);
 	InventoryWidget->SelectItem(Id);
 	UInventoryComponent* Inventory = InventoryWidget->GetInventory();
 	InventoryWidget->RefreshItem(Id, Amount);
