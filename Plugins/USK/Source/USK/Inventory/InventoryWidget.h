@@ -6,6 +6,7 @@
 #include "InventoryItemData.h"
 #include "InventoryMenuItem.h"
 #include "InventorySize.h"
+#include "Math/Vector2D.h"
 #include "Blueprint/UserWidget.h"
 #include "InventoryWidget.generated.h"
 
@@ -209,5 +210,5 @@ private:
 	 * @param ItemCount The amount of items included in the grid
 	 * @return The required size of the grid
 	 */
-	FVector2d GetRequiredGridSize(int ItemCount) const;
+	FVector2D GetRequiredGridSize(int ItemCount) const;
 };

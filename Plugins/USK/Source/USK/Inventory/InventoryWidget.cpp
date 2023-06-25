@@ -120,7 +120,7 @@ void UInventoryWidget::RefreshInventory()
 {
 	TArray<FInventoryItem> InventoryItems = Inventory->GetItems();
 	InitializeGrid(InventoryItems.Num());
-	const FVector2d GridSize = GetRequiredGridSize(InventoryItems.Num());
+	const FVector2D GridSize = GetRequiredGridSize(InventoryItems.Num());
 
 	int ItemIndex = -1;	
 	for (int Y = 0; Y < GridSize.Y; Y++)
@@ -242,7 +242,7 @@ void UInventoryWidget::InitializeGrid(const int ItemCount)
 		}
 	}
 	
-	const FVector2d GridSize = GetRequiredGridSize(ItemCount);
+	const FVector2D GridSize = GetRequiredGridSize(ItemCount);
 	InventoryGrid.Empty();
 	for (int X = 0; X < GridSize.X; X++)
 	{
@@ -291,11 +291,11 @@ void UInventoryWidget::InitializeGrid(const int ItemCount)
  * @param ItemCount The amount of items included in the grid
  * @return The required size of the grid
  */
-FVector2d UInventoryWidget::GetRequiredGridSize(const int ItemCount) const
+FVector2D UInventoryWidget::GetRequiredGridSize(const int ItemCount) const
 {
 	const int MaxColumns = InventorySize != EInventorySize::FixedRows ? Columns :
 		FMath::CeilToInt(static_cast<float>(ItemCount) / static_cast<float>(Rows));
 	const int MaxRows = InventorySize != EInventorySize::FixedColumns ? Rows :
 		FMath::CeilToInt(static_cast<float>(ItemCount) / static_cast<float>(Columns));
-	return FVector2d(MaxColumns, MaxRows);
+	return FVector2D(MaxColumns, MaxRows);
 }
