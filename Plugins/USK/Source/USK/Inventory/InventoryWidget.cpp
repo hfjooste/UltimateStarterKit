@@ -102,14 +102,14 @@ void UInventoryWidget::RefreshItem(const FName Id, const int Amount)
  */
 void UInventoryWidget::RefreshInventory()
 {
-	InitializeGrid();
-
-	int ItemIndex = -1;
 	TArray<FInventoryItem> InventoryItems = Inventory->GetItems();
-	
-	for (int Y = 0; Y < Rows; Y++)
+	InitializeGrid(InventoryItems.Num());
+	const FVector2d GridSize = GetRequiredGridSize(InventoryItems.Num());
+
+	int ItemIndex = -1;	
+	for (int Y = 0; Y < GridSize.Y; Y++)
 	{
-		for (int X = 0; X < Columns; X++)
+		for (int X = 0; X < GridSize.X; X++)
 		{
 			ItemIndex++;
 			if (ItemIndex >= InventoryItems.Num())
@@ -206,8 +206,9 @@ void UInventoryWidget::UpdateAmount(const int Amount) const
 
 /**
  * @brief Initialize the grid of inventory items
+ * @param ItemCount The amount of items included in the grid
  */
-void UInventoryWidget::InitializeGrid()
+void UInventoryWidget::InitializeGrid(const int ItemCount)
 {
 	if (!IsValid(MenuItemClass))
 	{
@@ -222,12 +223,13 @@ void UInventoryWidget::InitializeGrid()
 			InventoryItem->RemoveFromParent();
 		}
 	}
-
+	
+	const FVector2d GridSize = GetRequiredGridSize(ItemCount);
 	InventoryGrid.Empty();
-	for (int X = 0; X < Columns; X++)
+	for (int X = 0; X < GridSize.X; X++)
 	{
 		InventoryGrid.Add(TArray<UInventoryMenuItem*>());
-		for (int Y = 0; Y < Rows; Y++)
+		for (int Y = 0; Y < GridSize.Y; Y++)
 		{
 			UInventoryMenuItem* NewMenuItem = CreateWidget<UInventoryMenuItem>(GetWorld(), MenuItemClass);
 			if (!IsValid(NewMenuItem))
@@ -254,14 +256,28 @@ void UInventoryWidget::InitializeGrid()
 		}
 	}
 
-	for (int X = 0; X < Columns; X++)
+	for (int X = 0; X < GridSize.X; X++)
 	{
-		for (int Y = 0; Y < Rows; Y++)
+		for (int Y = 0; Y < GridSize.Y; Y++)
 		{
-			InventoryGrid[X][Y]->MenuItemLeft = X == 0 ? InventoryGrid[Columns - 1][Y] : InventoryGrid[X - 1][Y];
-			InventoryGrid[X][Y]->MenuItemRight = X == Columns - 1 ? InventoryGrid[0][Y] : InventoryGrid[X + 1][Y];
-			InventoryGrid[X][Y]->MenuItemUp = Y == 0 ? InventoryGrid[X][Rows - 1] : InventoryGrid[X][Y - 1];
-			InventoryGrid[X][Y]->MenuItemDown = Y == Rows - 1 ? InventoryGrid[X][0] : InventoryGrid[X][Y + 1];
+			InventoryGrid[X][Y]->MenuItemLeft = X == 0 ? InventoryGrid[GridSize.X - 1][Y] : InventoryGrid[X - 1][Y];
+			InventoryGrid[X][Y]->MenuItemRight = X == GridSize.X - 1 ? InventoryGrid[0][Y] : InventoryGrid[X + 1][Y];
+			InventoryGrid[X][Y]->MenuItemUp = Y == 0 ? InventoryGrid[X][GridSize.Y - 1] : InventoryGrid[X][Y - 1];
+			InventoryGrid[X][Y]->MenuItemDown = Y == GridSize.Y - 1 ? InventoryGrid[X][0] : InventoryGrid[X][Y + 1];
 		}
 	}
+}
+
+/**
+ * @brief Get the required size of the grid
+ * @param ItemCount The amount of items included in the grid
+ * @return The required size of the grid
+ */
+FVector2d UInventoryWidget::GetRequiredGridSize(const int ItemCount) const
+{
+	const int MaxColumns = InventorySize != EInventorySize::FixedRows ? Columns :
+		FMath::CeilToInt(static_cast<float>(ItemCount) / static_cast<float>(Rows));
+	const int MaxRows = InventorySize != EInventorySize::FixedColumns ? Rows :
+		FMath::CeilToInt(static_cast<float>(ItemCount) / static_cast<float>(Columns));
+	return FVector2d(MaxColumns, MaxRows);
 }

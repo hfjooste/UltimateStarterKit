@@ -78,13 +78,15 @@ public:
 	/**
 	 * @brief The amount of rows in the inventory
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Inventory")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Inventory",
+		meta=(EditCondition = "InventorySize != EInventorySize::FixedColumns", EditConditionHides))
 	int Rows;
 
 	/**
 	 * @brief The amount of columns in the inventory
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Inventory")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Inventory",
+		meta=(EditCondition = "InventorySize != EInventorySize::FixedRows", EditConditionHides))
 	int Columns;
 
 	/**
@@ -180,6 +182,14 @@ private:
 
 	/**
 	 * @brief Initialize the grid of inventory items
+	 * @param ItemCount The amount of items included in the grid
 	 */
-	void InitializeGrid();
+	void InitializeGrid(int ItemCount);
+
+	/**
+	 * @brief Get the required size of the grid
+	 * @param ItemCount The amount of items included in the grid
+	 * @return The required size of the grid
+	 */
+	FVector2d GetRequiredGridSize(int ItemCount) const;
 };
