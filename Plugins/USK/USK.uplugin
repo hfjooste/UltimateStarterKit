@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 24,
-	"VersionName": "3.0.0-beta10",
+	"VersionName": "3.0.0",
 	"FriendlyName": "Ultimate Starter Kit",
 	"Description": "The Ultimate Starter Kit plugin to speed up development of Unreal Engine games",
 	"Category": "Other",
@@ -11,7 +11,7 @@
 	"MarketplaceURL": "",
 	"SupportURL": "https://github.com/hfjooste/UltimateStarterKit",
 	"CanContainContent": true,
-	"IsBetaVersion": true,
+	"IsBetaVersion": false,
 	"IsExperimentalVersion": false,
 	"Installed": false,
 	"Modules": [
