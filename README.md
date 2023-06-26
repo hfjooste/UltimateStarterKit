@@ -46,12 +46,6 @@ The Ultimate Starter Kit plugin comes with the following features:
 - Each function is fully documented in the C++ source code
 - The demo project contains an example of each system in Blueprints
 
-## Roadmap
-I'm planning on expanding this plugin and adding a bunch of new features. This includes:
-- Settings system with save data integration
-- Inventory management
-- Basic dialogue system
-
 ## Credits
 <ul>
     <li><a href="https://www.behance.net/pravdin" target="_blank">Comic Helvetic Font by Alexander Pravdin</a></li>
