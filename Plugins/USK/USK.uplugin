@@ -1,12 +1,12 @@
 {
 	"FileVersion": 3,
-	"Version": 7,
-	"VersionName": "2.3.1",
+	"Version": 25,
+	"VersionName": "3.0.0",
 	"FriendlyName": "Ultimate Starter Kit",
 	"Description": "The Ultimate Starter Kit plugin to speed up development of Unreal Engine games",
 	"Category": "Other",
 	"CreatedBy": "Henry Jooste",
-	"CreatedByURL": "https://twitter.com/hfjooste",
+	"CreatedByURL": "https://linktr.ee/hfjooste",
 	"DocsURL": "https://hfjooste.github.io/UltimateStarterKit",
 	"MarketplaceURL": "",
 	"SupportURL": "https://github.com/hfjooste/UltimateStarterKit",
@@ -18,7 +18,12 @@
 		{
 			"Name": "USK",
 			"Type": "Runtime",
-			"LoadingPhase": "PreLoadingScreen"
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "USKEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
 		}
 	],
 	"Plugins": [

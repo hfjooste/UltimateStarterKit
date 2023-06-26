@@ -6,7 +6,7 @@
 #include "InputDevice.generated.h"
 
 /**
- * @brief An enum of all the supported input devices
+ * @brief Supported input devices. This is used to update the input indicators when using different input devices
  */
 UENUM(BlueprintType)
 enum class EInputDevice : uint8

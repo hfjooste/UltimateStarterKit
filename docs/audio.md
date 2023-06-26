@@ -1,12 +1,6 @@
 ## Introduction
 A system used to manage the basic properties of audio files. It includes different sound classes, a sound mix and sound attenuation settings
 
-## Dependencies
-The audio system relies on other components of this plugin to work:
-<ul>
-    <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
-</ul>
-
 ## Sound Classes
 The audio system includes a few basic preconfigured sound classes:
 <table>

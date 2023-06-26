@@ -22,14 +22,14 @@ class USK_API APlatformerCharacter : public ACharacter
 	/**
 	 * @brief The spring arm component responsible for controlling the distance of the camera
 	 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Ultimate Starter Kit|Platformer Character",
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Platformer Character",
 		meta=(AllowPrivateAccess = "true"))
 	class USpringArmComponent* SpringArmComponent;
 
 	/**
 	 * @brief The camera used by the character
 	 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Ultimate Starter Kit|Platformer Character",
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Platformer Character",
 		meta=(AllowPrivateAccess = "true"))
 	class UCameraComponent* CameraComponent;
 
@@ -60,37 +60,37 @@ protected:
 	/**
 	 * @brief The input mapping context used by the player
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Input")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Input")
 	UInputMappingContext* InputMappingContext;
 
 	/**
 	 * @brief The move input action
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Input")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Input")
 	UInputAction* MoveAction;
 
 	/**
 	 * @brief The camera rotation input action
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Input")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Input")
 	UInputAction* LookAroundAction;
 
 	/**
 	 * @brief The jump input action
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Input")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Input")
 	UInputAction* JumpAction;
 
 	/**
 	 * @brief The shadow decal class used to draw a shadow below the character while in the air
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Jump|Effects")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump|Effects")
 	TSubclassOf<AShadowDecal> ShadowDecalClass;
 
 	/**
 	 * @brief An array of sound effects played when jumping
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Jump|Effects")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump|Effects")
 	TArray<USoundBase*> JumpSoundEffects;
 
 	/**
@@ -108,7 +108,7 @@ protected:
 	/**
 	 * @brief An array of sound effects played when landing
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Jump|Effects")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump|Effects")
 	TArray<USoundBase*> LandedSoundEffects;
 
 	/**
@@ -126,94 +126,94 @@ protected:
 	/**
 	 * @brief Does the character support variable jump height?
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Jump")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump")
 	bool VariableJumpHeight = true;
 
 	/**
 	 * @brief The amount of time to hold the jump button to reach the max height
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Jump",
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump",
 		meta = (EditCondition = "VariableJumpHeight"))
 	float VariableJumpHeightMaxHoldTime = 0.3f;
 
 	/**
 	 * @brief The velocity applied to the character when jumping
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Jump")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump")
 	float JumpVelocity = 500.0f;
 
 	/**
 	 * @brief The amount of lateral movement control available to the character while in the air
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Jump")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump")
 	float AirControl = 1000.0f;
 
 	/**
 	 * @brief The amount of friction to apply to lateral air movement when falling
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Jump")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump")
 	float FallingFriction = 3.5f;
 
 	/**
 	 * @brief The amount of gravity applied to the character
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Jump")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump")
 	float Gravity = 2.0f;
 
 	/**
 	 * @brief Can the character perform a double jump?
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Jump")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump")
 	bool CanDoubleJump = true;
 
 	/**
 	 * @brief Does the character support coyote time when trying to jump?
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Jump")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump")
 	bool CanCoyoteJump = true;
 
 	/**
 	 * @brief The amount of coyote time for the character
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Jump",
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump",
 		meta = (EditCondition = "CanCoyoteJump"))
 	float CoyoteJumpTime = 0.375f;
 
 	/**
 	 * @brief The velocity applied to the character when performing a coyote jump
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Jump",
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Jump",
 		meta = (EditCondition = "CanCoyoteJump"))
 	float CoyoteJumpVelocity = 700.0f;
 
 	/**
 	 * @brief Friction coefficient applied when braking
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Movement")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Movement")
 	float BrakingFriction = 10.0f;
 
 	/**
 	 * @brief The rate of change of velocity
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Movement")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Movement")
 	float MaxAcceleration = 2500.0f;
 
 	/**
 	 * @brief Length of the spring arm component
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Camera")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Camera")
 	float TargetArmLength = 350.0f;
 
 	/**
 	 * @brief The multiplier applied to the spring arm component when the character is moving
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Camera")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Camera")
 	float ArmLengthMultiplier = 0.4f;
 
 	/**
 	 * @brief The speed used when adjusting the camera distance
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|Platformer Character|Camera")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Platformer Character|Camera")
 	float CameraAdjustmentSpeed = 3.0f;
 
 	/**

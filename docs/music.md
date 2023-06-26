@@ -1,78 +1,85 @@
 ## Introduction
-The music player can be used to play, pause and stop music. It also allows you to easily adjust the volume of the music
+Actor responsible for playing, pausing and stopping music. It also allows you to adjust music volume
 
-## API Reference
-### Components
+## Dependencies
+The <code>inal</code> relies on other components of this plugin to work:
+<ul>
+	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+</ul>
+
+## Components
+The <code>inal</code> uses the following components:
 <table>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td>AudioPlayer</td>
-        <td>UAudioComponent*</td>
-        <td>The audio player component is responsible for the music playback</td>
-    </tr>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Type</th>
+	</tr>
+	<tr>
+		<td>AudioPlayer</td>
+		<td>Actor responsible for playing, pausing and stopping music. It also allows you to adjust music volume</td>
+		<td>UAudioComponent*</td>
+	</tr>
 </table>
 
+## API Reference
 ### Properties
 <table>
-    <tr>
-        <th>Property</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Default Value</th>
-    </tr>
-    <tr>
-        <td>PlayOnStart</td>
-        <td>Should the music automatically play when the actor is spawned?</td>
-        <td>bool</td>
-        <td>true</td>
-    </tr>
+	<tr>
+		<th>Property</th>
+		<th>Description</th>
+		<th>Type</th>
+		<th>Default Value</th>
+	</tr>
+	<tr>
+		<td>PlayOnStart</td>
+		<td>Should the music automatically play when the actor is spawned?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
 </table>
 
 ### Functions
 <table>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Params</th>
-        <th>Return</th>
-    </tr>
-    <tr>
-        <td>SetVolume</td>
-        <td>Adjust the playback volume of the music </td>
-        <td><strong>Volume (float)</strong><br/>The new volume of the music</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Play</td>
-        <td>Play the music</td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Pause</td>
-        <td>Pause the music</td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Stop</td>
-        <td>Stop the music</td>
-        <td></td>
-        <td></td>
-    </tr>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Params</th>
+		<th>Return</th>
+	</tr>
+	<tr>
+		<td>SetVolume</td>
+		<td>Adjust the playback volume of the music</td>
+		<td><strong>Volume (float)</strong><br/>The new volume of the music</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Play</td>
+		<td>Play the music</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Pause</td>
+		<td>Pause the music</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Stop</td>
+		<td>Stop the music</td>
+		<td></td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
-You can play sounds using Blueprints by adding one of the following nodes (requires a reference to a <code>Music Player</code> actor):
+You can use the <code>inal</code> using Blueprints by adding one of the following nodes:
 <ul>
-    <li>Ultimate Starter Kit > Audio > Set Volume</li>
-    <li>Ultimate Starter Kit > Audio > Play</li>
-    <li>Ultimate Starter Kit > Audio > Pause</li>
-    <li>Ultimate Starter Kit > Audio > Stop</li>
+	<li>Ultimate Starter Kit > Audio > Set Volume</li>
+	<li>Ultimate Starter Kit > Audio > Play</li>
+	<li>Ultimate Starter Kit > Audio > Pause</li>
+	<li>Ultimate Starter Kit > Audio > Stop</li>
 </ul>
 
 ## C++ Usage
@@ -81,16 +88,16 @@ Before you can use the plugin, you first need to enable the plugin in your <code
 PublicDependencyModuleNames.Add("USK");
 ```
 
-The currency system can now be used in any of your C++ files:
+The <code>inal</code> can now be used in any of your C++ files:
 ```c++
 #include "USK/Audio/MusicPlayer.h"
 
 void ATestActor::Test()
 {
-    // MusicPlayer is a pointer to a Music Player actor
-    MusicPlayer->SetVolume(2.0f);
-    MusicPlayer->Pause();
-    MusicPlayer->Play();
-    MusicPlayer->Stop();
+	// inal is a pointer to the final
+	inal->SetVolume(Volume);
+	inal->Play();
+	inal->Pause();
+	inal->Stop();
 }
 ```

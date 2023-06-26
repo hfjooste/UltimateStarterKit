@@ -8,14 +8,25 @@
 #include "TrackableDataComponent.generated.h"
 
 /**
- * @brief Actor component that tracks data
+ * @brief A component that is used to easily manage/track different types of actor data
  */
 UCLASS()
 class USK_API UTrackableDataComponent : public UActorComponent
 {
 	GENERATED_BODY()
-	
+
+	/**
+	 * @brief Event used to notify other classes every time the data value reaches 0
+	 * @param Name The name of the data item
+	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FValueZeroDelegate, FName, Name);
+
+	/**
+	 * @brief Event used to notify other classes every time the data value is updated
+	 * @param Name The name of the data item
+	 * @param Value The current value of the data item
+	 * @param ValuePercentage The percentage of the current value compared to the max value of the data item
+	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FValueUpdatedDelegate, FName, Name, float, Value, float, ValuePercentage);
 
 public:
@@ -26,13 +37,13 @@ public:
 	TMap<FName, FTrackableData> Data;
 
 	/**
-	 * @brief Event that is broadcasted every time the data value reaches 0
+	 * @brief Event used to notify other classes every time the data value reaches 0
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Trackable Data|Events")
 	FValueZeroDelegate OnValueZero;
 
 	/**
-	 * @brief Event that is broadcasted every time the data value is updated
+	 * @brief Event used to notify other classes every time the data value is updated
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Trackable Data|Events")
 	FValueUpdatedDelegate OnValueUpdated;

@@ -3,6 +3,7 @@
 
 # Jetbrains Rider
 .idea/
+Plugins/Developer/RiderLink
 
 # Visual Studio Code
 .ignore
@@ -86,3 +87,6 @@ site/
 
 # Packaged Builds
 Release/
+
+# Python Scripts
+__pycache__

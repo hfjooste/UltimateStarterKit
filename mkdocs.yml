@@ -13,12 +13,21 @@ plugins:
       cover_subtitle: Documentation
 extra:
   social:
+    - name: Sponsor Development
+      icon: fontawesome/solid/heart
+      link: https://github.com/sponsors/hfjooste
+    - name: Linktree
+      icon: fontawesome/solid/link
+      link: https://linktr.ee/hfjooste
+    - name: Mastodon
+      icon: fontawesome/brands/mastodon
+      link: https://mastodon.gamedev.place/@hfjooste
+    - name: Reddit
+      icon: fontawesome/brands/reddit
+      link: https://www.reddit.com/user/HenryJooste
     - name: Twitter
       icon: fontawesome/brands/twitter 
       link: https://twitter.com/hfjooste
-    - name: Mastodon
-      icon: fontawesome/brands/mastodon
-      link: https://mastodon.social/@hfjooste
     - name: GitHub
       icon: fontawesome/brands/github
       link: https://github.com/hfjooste
@@ -48,10 +57,30 @@ theme:
         name: Switch to dark mode
 nav:
   - Getting Started: index.md
+  - Support the Project: support.md
+  - Special Thanks: specialthanks.md
   - Core Functionality:
     - Input Devices: inputdevice.md
     - Game Instance: gameinstance.md
   - Logger: logger.md
+  - Dialogue System:
+    - Overview: dialogueoverview.md
+    - Dialogue: dialogue.md
+    - Participant: dialogueparticipant.md
+    - Entry: dialogueentry.md
+    - Transition:
+      - Transition Type: dialoguetransitiontype.md
+      - Transition Data: dialoguetransition.md
+    - Manager: dialoguemanager.md
+    - Widget: dialoguewidget.md
+  - Inventory:
+    - Inventory Component: inventorycomponent.md
+    - Inventory Data: inventorydata.md
+    - Inventory Item: inventoryitem.md
+    - Inventory Item Data: inventoryitemdata.md
+    - Inventory Menu Item: inventorymenuitem.md
+    - Inventory Size: inventorysize.md
+    - Inventory Widget: inventorywidget.md
   - Trackable Data:
     - Overview: trackabledataoverview.md
     - Data: trackabledata.md
@@ -65,10 +94,32 @@ nav:
     - Character: platformercharacter.md
     - Animation Instance: platformeranimation.md
     - Shadow Decal: platformershadow.md
+  - Items:
+    - Allowed Collector: allowedcollector.md
+    - Collectable Item: collectableitem.md
   - UI & Widgets:
+    - Collectable Item Icon: collectableitemicon.md
+    - Credits:
+      - Credits Entry: creditsentry.md
+      - Credits Widget: creditswidget.md
+    - FPS Counter: fpscounter.md
     - Input Indicator: inputindicator.md
     - Input Indicator Icon: inputindicatoricon.md
     - Menu: menu.md
     - Menu Item:
-      - Menu Navigation: menunavigation.md
+      - Navigation: menunavigation.md
+      - Value Update Method: menuitemvalueupdatemethod.md
       - Menu Item Widget: menuitem.md
+  - Settings:
+    - Data: settingsdata.md
+    - Config: settingsconfig.md
+    - Items:
+      - Types: settingsitemtype.md
+      - Logic: settingsitem.md
+    - Utils: settingsutils.md
+  - Utils:
+    - Config Utils: configutils.md
+    - Platform:
+      - Platform Type: platformtype.md
+      - Platform Utils: platformutils.md
+    - Project Utils: projectutils.md

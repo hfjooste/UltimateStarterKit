@@ -6,21 +6,39 @@
 #include "Engine/GameInstance.h"
 #include "USKSaveGame.h"
 #include "USK/Character/PlatformerAnimationInstance.h"
+#include "USK/Settings/SettingsConfig.h"
 #include "USKGameInstance.generated.h"
 
 class UInputAction;
 class UInputMappingContext;
 
 /**
- * @brief Game instance with support for saving/loading data
+ * @brief A base game instance with support for saving and loading game data using multiple save slots
  */
 UCLASS()
 class USK_API UUSKGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 
+	/**
+	 * @brief Event used to notify other classes when the save data is loaded
+	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameInstanceOnDataLoadedDelegate);
+
+	/**
+	 * @brief Event used to notify other classes when the current input device is updated
+	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameInstanceOnInputDeviceUpdatedDelegate);
+
+	/**
+	 * @brief Event used to notify other classes when the game is paused
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGamePausedDelegate);
+
+	/**
+	 * @brief Event used to notify other classes when the game is unpaused
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameUnpausedDelegate);
 	
 public:
 	/**
@@ -30,46 +48,64 @@ public:
 	TSubclassOf<UUSKSaveGame> SaveGameClass;
 
 	/**
+	 * @brief The configuration for the settings
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	USettingsConfig* SettingsConfig;
+
+	/**
 	 * @brief Event used to notify other classes when the save data is loaded
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
 	FGameInstanceOnDataLoadedDelegate OnDataLoadedEvent;
 
 	/**
+	 * @brief Is the input indicators feature enabled?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input")
+	bool IsInputIndicatorsEnabled = true;
+
+	/**
 	 * @brief The input mapping context used to extract the keys based on specific input actions
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input",
-		DisplayName = "Input Mapping Context (Optional)")
+		DisplayName = "Input Mapping Context (Optional)",
+		meta=(EditCondition = "IsInputIndicatorsEnabled", EditConditionHides))
 	UInputMappingContext* InputMappingContext;
 
 	/**
 	 * @brief A map of all keyboard/mouse keys and the texture displayed in the indicator
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input",
+		meta=(EditCondition = "IsInputIndicatorsEnabled", EditConditionHides))
 	TMap<FKey, UTexture2D*> KeyboardMouseInputMappings;
 
 	/**
 	 * @brief A map of all generic controller keys and the texture displayed in the indicator
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input",
+		meta=(EditCondition = "IsInputIndicatorsEnabled", EditConditionHides))
 	TMap<FKey, UTexture2D*> GenericControllerInputMappings;
 
 	/**
 	 * @brief A map of all Xbox controller keys and the texture displayed in the indicator
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input",
+		meta=(EditCondition = "IsInputIndicatorsEnabled", EditConditionHides))
 	TMap<FKey, UTexture2D*> XboxControllerInputMappings;
 
 	/**
 	 * @brief A map of all Playstation controller keys and the texture displayed in the indicator
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input",
+		meta=(EditCondition = "IsInputIndicatorsEnabled", EditConditionHides))
 	TMap<FKey, UTexture2D*> PlaystationControllerInputMappings;
 
 	/**
 	 * @brief A map of all Switch controller keys and the texture displayed in the indicator
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input",
+		meta=(EditCondition = "IsInputIndicatorsEnabled", EditConditionHides))
 	TMap<FKey, UTexture2D*> SwitchControllerInputMappings;
 
 	/**
@@ -77,6 +113,18 @@ public:
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Input|Events")
 	FGameInstanceOnInputDeviceUpdatedDelegate OnInputDeviceUpdated;
+
+	/**
+	 * @brief Event used to notify other classes when the game is paused
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Input|Events")
+	FGamePausedDelegate OnGamePaused;
+
+	/**
+	 * @brief Event used to notify other classes when the game is unpaused
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Input|Events")
+	FGameUnpausedDelegate OnGameUnpaused;
 
 	/**
 	 * @brief Get the save data that is currently loaded
@@ -107,6 +155,18 @@ public:
 	bool IsSaveSlotUsed(int Index);
 
 	/**
+	 * @brief Enable the input indicators feature
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
+	void EnableInputIndicators();
+
+	/**
+	 * @brief Disable the input indicators feature
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
+	void DisableInputIndicators();
+
+	/**
 	 * @brief Get the input indicator icon for a specific action
 	 * @param InputAction The input action
 	 * @param Amount The amount of icons to retrieve
@@ -114,6 +174,43 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
 	TArray<UTexture2D*> GetInputIndicatorIcon(UInputAction* InputAction, int Amount);
+	
+	/**
+	 * @brief Get the input indicator icon for a specific key
+	 * @param Key The key used to retrieve the input indicator icon
+	 * @param InputDevice The input device used to retrieve the input indicator icon
+	 * @return The input indicator icon for the specified key
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
+	UTexture2D* GetInputIndicatorIconForKey(FKey Key, EInputDevice InputDevice) const;
+
+	/**
+	 * @brief Get the key used by a specific input action
+	 * @param Context The input mapping context
+	 * @param InputAction The input action
+	 * @param MappableName The player mappable name for the action
+	 * @return The key used by the specified input action
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
+	FKey GetKeyForInputAction(UInputMappingContext* Context, UInputAction* InputAction, FName MappableName) const;
+
+	/**
+	 * @brief Update the key bindings that was changed by the player 
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
+	void UpdateKeyBindings() const;
+
+	/**
+	 * @brief Pause the game
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Pause")
+	void PauseGame();
+
+	/**
+	 * @brief Unpause the game
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Pause")
+	void UnpauseGame();
 
 protected:
 	/**
@@ -134,6 +231,16 @@ private:
 	 */
 	UPROPERTY()
 	UUSKSaveGame* CurrentSaveGame;
+
+	/**
+	 * @brief A boolean flag used to check if the features of the game instance was initialized
+	 */
+	bool bIsFeaturesInitialized = false;
+
+	/**
+	 * @brief The delay before initializing the features of the game instance
+	 */
+	float InitializeFeaturesDelay = 0.2f;
 
 	/**
 	 * @brief The delay before initializing the input indicators
@@ -167,6 +274,17 @@ private:
 	 * @return The file name of the save slot at the specified index
 	 */
 	FString GetSaveSlotName(int Index) const;
+
+	/**
+	 * @brief Initialize the features of the game instance after a delay
+	 */
+	void InitializeFeaturesAfterDelay();
+
+	/**
+	 * @brief Initialize the features of the game instance
+	 */
+	UFUNCTION()
+	void InitializeFeatures();
 
 	/**
 	 * @brief Start a timer to initialize the input indicators
@@ -203,11 +321,4 @@ private:
 	 * @return The input device based on the specified key
 	 */
 	EInputDevice GetInputDevice(FKey Key);
-
-	/**
-	 * @brief Get the input indicator icon for a specific key
-	 * @param Key The key used to retrieve the input indicator icon
-	 * @return The input indicator icon for the specified key
-	 */
-	UTexture2D* GetInputIndicatorIconForKey(FKey Key) const;
 };

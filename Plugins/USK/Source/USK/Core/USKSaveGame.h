@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/SaveGame.h"
+#include "USK/Inventory/InventoryData.h"
 #include "USKSaveGame.generated.h"
 
 /**
@@ -19,4 +20,10 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit")
 	TMap<FName, float> TrackableData;
+
+	/**
+	 * @brief A map of all the inventories and the data for each inventory
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit")
+	TMap<FName, FInventoryData> InventoryData;
 };

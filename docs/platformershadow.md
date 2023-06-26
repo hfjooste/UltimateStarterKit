@@ -1,27 +1,33 @@
 ## Introduction
-A decal used as a shadow to indicate where the character will land
+Decal used to draw a shadow beneath a character when the character is in the air
 
-## API Usage
+## Dependencies
+The <code>ShadowDecal</code> relies on other components of this plugin to work:
+<ul>
+	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+</ul>
+
+## API Reference
 ### Functions
 <table>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Params</th>
-        <th>Return</th>
-    </tr>
-    <tr>
-        <td>Initialize</td>
-        <td>Initialize the shadow decal</td>
-        <td><strong>OwnerCharacter (ACharacter*)</strong><br/>The character owning this shadow decal</td>
-        <td></td>
-    </tr>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Params</th>
+		<th>Return</th>
+	</tr>
+	<tr>
+		<td>Initialize</td>
+		<td>Initialize the shadow decal</td>
+		<td><strong>OwnerCharacter (ACharacter*)</strong><br/>The character owning this shadow decal</td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
-You can initialize a shadow decal using Blueprints by adding the following node (requires a reference to the <code>Shadow Decal Instance</code>):
+You can use the <code>ShadowDecal</code> using Blueprints by adding one of the following nodes:
 <ul>
-    <li>Ultimate Starter Kit > Shadow Decal > Initialize</li>
+	<li>Ultimate Starter Kit > Shadow Decal > Initialize</li>
 </ul>
 
 ## C++ Usage
@@ -30,13 +36,13 @@ Before you can use the plugin, you first need to enable the plugin in your <code
 PublicDependencyModuleNames.Add("USK");
 ```
 
-The shadow decal can now be initialized in any of your C++ files:
+The <code>ShadowDecal</code> can now be used in any of your C++ files:
 ```c++
 #include "USK/Character/ShadowDecal.h"
 
-void ATestCharacter::Test()
+void ATestActor::Test()
 {
-    // ShadowDecal is a pointer to the AShadowDecal actor
-    ShadowDecal->Initialize(this);
+	// ShadowDecal is a pointer to the AShadowDecal
+	ShadowDecal->Initialize(OwnerCharacter);
 }
 ```

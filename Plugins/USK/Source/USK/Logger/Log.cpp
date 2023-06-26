@@ -1,7 +1,8 @@
 ﻿// Created by Henry Jooste
 
 #include "Log.h"
-#include "Engine.h"
+#include "Engine/Engine.h"
+#include "USK/Utils/PlatformUtils.h"
 
 DEFINE_LOG_CATEGORY(LogUSK);
 
@@ -71,12 +72,8 @@ void ULog::Trace(const FString Tag, const FString Text)
  * @param Text The text to log out
  */
 void ULog::LogToScreen(const FColor Color, const FString Tag, const FString Text)
-{
-#if !UE_EDITOR && !WITH_EDITOR
-	return;
-#endif
-    	
-	if (!GEngine)
+{    	
+	if (!UPlatformUtils::IsInEditor() || !GEngine)
 	{
 		return;
 	}

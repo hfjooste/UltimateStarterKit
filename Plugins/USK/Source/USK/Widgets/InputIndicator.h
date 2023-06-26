@@ -10,7 +10,7 @@
 #include "InputIndicator.generated.h"
 
 /**
- * @brief Widget used to display input indicators based on the current input device 
+ * @brief A widget used to display input indicators based on the current input device and input action
  */
 UCLASS()
 class USK_API UInputIndicator : public UUserWidget
@@ -27,25 +27,25 @@ public:
 	/**
 	 * @brief The input indicator icon class
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|UI")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|UI")
 	TSubclassOf<UInputIndicatorIcon> InputIndicatorIconClass;
 
 	/**
 	 * @brief The input action displayed by widget
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|UI")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|UI")
 	UInputAction* Action;
 
 	/**
 	 * @brief The size of the image
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|UI")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|UI")
 	float Size = 50.0f;
 
 	/**
 	 * @brief The amount of images to display for the input action
 	 */
-	UPROPERTY(EditAnywhere, Category="Ultimate Starter Kit|UI")
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|UI")
 	int Amount = 1;
 
 	/**

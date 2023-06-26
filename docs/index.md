@@ -24,16 +24,3 @@ The Ultimate Starter Kit plugin includes content that can be used in your Bluepr
     <li>Click on the settings button</li>
     <li>Enable the <code>Show Plugin Content</code> setting</li>
 </ol>
-
-## Features
-The Ultimate Starter Kit plugin comes with the following features:
-<ul>
-    <li><a href="logger">Logger</a>: A system used to easily log info to file and via on-screen messages</li>
-    <li><a href="gameinstance">Save data management</a>: A system used to easily save/load game data with support for multiple save slots</li>
-    <li><a href="gameinstance">Input Indicators</a>: A system used to easily detect different input devices and update the UI to display the correct indicators</li>
-    <li><a href="currency">Currency</a>: A system that is used to easily manage different types of currency</li>
-    <li><a href="audio">Audio</a>: A system used to manage the basic properties of audio files</li>
-    <li><a href="stats">Stats</a>: A system used to easily manage character stats with an optional regenerate ability</li>
-    <li><a href="platformer">3D platformer character</a>: Basic 3D platformer character and animation template</li>
-    <li><a href="menu">Menu System</a>: A customizable menu system with support for controllers and complex menu layouts</li>
-</ul>

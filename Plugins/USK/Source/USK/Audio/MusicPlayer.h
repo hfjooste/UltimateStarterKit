@@ -6,7 +6,7 @@
 #include "MusicPlayer.generated.h"
 
 /**
- * @brief Actor that is responsible for play music
+ * @brief Actor responsible for playing, pausing and stopping music. It also allows you to adjust music volume
  */
 UCLASS()
 class USK_API AMusicPlayer final : public AActor

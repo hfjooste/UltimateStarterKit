@@ -5,7 +5,7 @@
 #include "TrackableData.generated.h"
 
 /**
- * @brief A type of data to track
+ * @brief All trackable data use the FTrackableData struct to specify the default values and behaviours
  */
 USTRUCT(BlueprintType)
 struct USK_API FTrackableData
