@@ -32,19 +32,19 @@ enum class EPlatform : uint8
 	Linux,
 
 	/**
-	 * @brief Xbox console
+	 * @brief Console MX
 	 */
-	Xbox,
+	ConsoleMx,
 
 	/**
-	 * @brief Playstation console
+	 * @brief Console SP
 	 */
-	Playstation,
+	ConsoleSp,
 
 	/**
-	 * @brief Nintendo Switch console
+	 * @brief Console NS
 	 */
-	Switch,
+	ConsoleNs,
 
 	/**
 	 * @brief Android (any architecture)

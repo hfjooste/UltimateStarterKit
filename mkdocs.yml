@@ -59,6 +59,7 @@ nav:
   - Getting Started: index.md
   - Support the Project: support.md
   - Special Thanks: specialthanks.md
+  - Console Codenames: platform_copyright.md
   - Core Functionality:
     - Input Devices: inputdevice.md
     - Game Instance: gameinstance.md

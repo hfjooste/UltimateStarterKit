@@ -65,22 +65,22 @@ A Blueprint Function Library class used for platform detection
 		<td><strong>bool</strong><br/>A boolean value indicating if the build is running on a console platform</td>
 	</tr>
 	<tr>
-		<td>IsXbox</td>
-		<td>Is the build running on Xbox?</td>
+		<td>IsConsoleMx</td>
+		<td>Is the build running on Console MX?</td>
 		<td></td>
-		<td><strong>bool</strong><br/>A boolean value indicating if the build is running on Xbox</td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the build is running on Console MX</td>
 	</tr>
 	<tr>
-		<td>IsPlaystation</td>
-		<td>Is the build running on Playstation?</td>
+		<td>IsConsoleSp</td>
+		<td>Is the build running on Console SP?</td>
 		<td></td>
-		<td><strong>bool</strong><br/>A boolean value indicating if the build is running on Playstation</td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the build is running on Console SP</td>
 	</tr>
 	<tr>
-		<td>IsSwitch</td>
-		<td>Is the build running on Switch?</td>
+		<td>IsConsoleNs</td>
+		<td>Is the build running on Console NS?</td>
 		<td></td>
-		<td><strong>bool</strong><br/>A boolean value indicating if the build is running on Switch</td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the build is running on Console NS</td>
 	</tr>
 	<tr>
 		<td>IsMobile</td>
@@ -138,9 +138,9 @@ You can use the <code>PlatformUtils</code> using Blueprints by adding one of the
 	<li>Ultimate Starter Kit > Utils > Platform > Is MacOS (ARM)</li>
 	<li>Ultimate Starter Kit > Utils > Platform > Is Linux</li>
 	<li>Ultimate Starter Kit > Utils > Platform > Is Console</li>
-	<li>Ultimate Starter Kit > Utils > Platform > Is Xbox</li>
-	<li>Ultimate Starter Kit > Utils > Platform > Is Playstation</li>
-	<li>Ultimate Starter Kit > Utils > Platform > Is Switch</li>
+	<li>Ultimate Starter Kit > Utils > Platform > Is Console MX</li>
+	<li>Ultimate Starter Kit > Utils > Platform > Is Console SP</li>
+	<li>Ultimate Starter Kit > Utils > Platform > Is Console NS</li>
 	<li>Ultimate Starter Kit > Utils > Platform > Is Mobile</li>
 	<li>Ultimate Starter Kit > Utils > Platform > Is Android</li>
 	<li>Ultimate Starter Kit > Utils > Platform > Is Android (x86)</li>
@@ -171,9 +171,9 @@ void ATestActor::Test()
 	bool IsMacOSArmValue = UPlatformUtils::IsMacOSArm();
 	bool IsLinuxValue = UPlatformUtils::IsLinux();
 	bool IsConsoleValue = UPlatformUtils::IsConsole();
-	bool IsXboxValue = UPlatformUtils::IsXbox();
-	bool IsPlaystationValue = UPlatformUtils::IsPlaystation();
-	bool IsSwitchValue = UPlatformUtils::IsSwitch();
+	bool IsConsoleMxValue = UPlatformUtils::IsConsoleMx();
+	bool IsConsoleSpValue = UPlatformUtils::IsConsoleSp();
+	bool IsConsoleNsValue = UPlatformUtils::IsConsoleNs();
 	bool IsMobileValue = UPlatformUtils::IsMobile();
 	bool IsAndroidValue = UPlatformUtils::IsAndroid();
 	bool IsAndroidx86Value = UPlatformUtils::IsAndroidx86();

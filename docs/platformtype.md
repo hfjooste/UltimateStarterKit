@@ -24,16 +24,16 @@ The types of supported platform types
 		<td>Linux (any architecture)</td>
 	</tr>
 	<tr>
-		<td>Xbox</td>
-		<td>Xbox console</td>
+		<td>ConsoleMx</td>
+		<td>Console MX</td>
 	</tr>
 	<tr>
-		<td>Playstation</td>
-		<td>Playstation console</td>
+		<td>ConsoleSp</td>
+		<td>Console SP</td>
 	</tr>
 	<tr>
-		<td>Switch</td>
-		<td>Nintendo Switch console</td>
+		<td>ConsoleNs</td>
+		<td>Console NS</td>
 	</tr>
 	<tr>
 		<td>Android</td>

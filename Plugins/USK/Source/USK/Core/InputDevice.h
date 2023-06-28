@@ -22,19 +22,19 @@ enum class EInputDevice : uint8
 	GenericController,
 
 	/**
-	 * @brief Using an Xbox controller
+	 * @brief Using an Console MX controller
 	 */
-	XboxController,
+	MxController,
 
 	/**
-	 * @brief Using a Playstation controller
+	 * @brief Using a Console SP controller
 	 */
-	PlaystationController,
+	SpController,
 
 	/**
-	 * @brief Using a Nintendo Switch controller
+	 * @brief Using a Console NS controller
 	 */
-	SwitchController,
+	NsController,
 
 	/**
 	 * @brief Unknown device (used before initializing the input indicators)

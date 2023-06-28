@@ -83,25 +83,28 @@ public:
 	static bool IsConsole();
 
 	/**
-	 * @brief Is the build running on Xbox?
-	 * @return A boolean value indicating if the build is running on Xbox
+	 * @brief Is the build running on Console MX?
+	 * @return A boolean value indicating if the build is running on Console MX
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Utils|Platform")
-	static bool IsXbox();
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Utils|Platform",
+		DisplayName="Is Console MX")
+	static bool IsConsoleMx();
 
 	/**
-	 * @brief Is the build running on Playstation?
-	 * @return A boolean value indicating if the build is running on Playstation
+	 * @brief Is the build running on Console SP?
+	 * @return A boolean value indicating if the build is running on Console SP
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Utils|Platform")
-	static bool IsPlaystation();
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Utils|Platform",
+		DisplayName="Is Console SP")
+	static bool IsConsoleSp();
 
 	/**
-	 * @brief Is the build running on Switch?
-	 * @return A boolean value indicating if the build is running on Switch
+	 * @brief Is the build running on Console NS?
+	 * @return A boolean value indicating if the build is running on Console NS
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Utils|Platform")
-	static bool IsSwitch();
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Utils|Platform",
+		DisplayName="Is Console NS")
+	static bool IsConsoleNs();
 
 	/**
 	 * @brief Is the build running on a mobile platform?
@@ -156,4 +159,26 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Utils|Platform",
 		DisplayName="Is iOS")
 	static bool IsIOS();
+
+private:
+	/**
+	 * @brief Reverse a string
+	 * @param Input The string to reverse
+	 * @return The reversed string
+	 */
+	static FString ReverseString(const FString& Input);
+
+	/**
+	 * @brief Obfuscate a string
+	 * @param Input The string to obfuscate
+	 * @return The obfuscated string
+	 */
+	static FString Obfuscate(const FString& Input);
+
+	/**
+	 * @brief Deobfuscate a string
+	 * @param Input The string to deobfuscate
+	 * @return The deobfuscated string
+	 */
+	static FString Deobfuscate(const FString& Input);
 };

@@ -72,20 +72,20 @@ The Game Instance will automatically detect input events and update the current 
 		<td></td>
 	</tr>
 	<tr>
-		<td>XboxControllerInputMappings</td>
-		<td>A map of all Xbox controller keys and the texture displayed in the indicator</td>
+		<td>MxControllerInputMappings</td>
+		<td>A map of all Console MX controller keys and the texture displayed in the indicator</td>
 		<td>TMap&lt;FKey, UTexture2D*&gt;</td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>PlaystationControllerInputMappings</td>
-		<td>A map of all Playstation controller keys and the texture displayed in the indicator</td>
+		<td>SpControllerInputMappings</td>
+		<td>A map of all Console SP controller keys and the texture displayed in the indicator</td>
 		<td>TMap&lt;FKey, UTexture2D*&gt;</td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>SwitchControllerInputMappings</td>
-		<td>A map of all Switch controller keys and the texture displayed in the indicator</td>
+		<td>NsControllerInputMappings</td>
+		<td>A map of all Console NS controller keys and the texture displayed in the indicator</td>
 		<td>TMap&lt;FKey, UTexture2D*&gt;</td>
 		<td></td>
 	</tr>

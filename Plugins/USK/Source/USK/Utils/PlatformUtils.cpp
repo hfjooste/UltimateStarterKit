@@ -25,19 +25,19 @@ EPlatform UPlatformUtils::GetPlatform()
 		return EPlatform::Linux;
 	}
 	
-	if (IsXbox())
+	if (IsConsoleMx())
 	{
-		return EPlatform::Xbox;
+		return EPlatform::ConsoleMx;
 	}
 
-	if (IsPlaystation())
+	if (IsConsoleSp())
 	{
-		return EPlatform::Playstation;
+		return EPlatform::ConsoleSp;
 	}
 
-	if (IsSwitch())
+	if (IsConsoleNs())
 	{
-		return EPlatform::Switch;
+		return EPlatform::ConsoleNs;
 	}
 
 	if (IsAndroid())
@@ -146,37 +146,37 @@ bool UPlatformUtils::IsLinux()
  */
 bool UPlatformUtils::IsConsole()
 {
-	return IsXbox() || IsPlaystation() || IsSwitch();
+	return IsConsoleMx() || IsConsoleSp() || IsConsoleNs();
 }
 
 /**
- * @brief Is the build running on Xbox?
- * @return A boolean value indicating if the build is running on Xbox
+ * @brief Is the build running on Console MX?
+ * @return A boolean value indicating if the build is running on Console MX
  */
-bool UPlatformUtils::IsXbox()
+bool UPlatformUtils::IsConsoleMx()
 {
 	const FString Platform = UGameplayStatics::GetPlatformName();
-	return Platform.Contains("xbox");
+	return Platform.Contains(Deobfuscate("PT1BZWk5R2U="));
 }
 
 /**
- * @brief Is the build running on Playstation?
- * @return A boolean value indicating if the build is running on Playstation
+ * @brief Is the build running on Console SP?
+ * @return A boolean value indicating if the build is running on Console SP
  */
-bool UPlatformUtils::IsPlaystation()
+bool UPlatformUtils::IsConsoleSp()
 {
 	const FString Platform = UGameplayStatics::GetPlatformName();
-	return Platform.Contains("ps") || Platform.Contains("station");
+	return Platform.Contains(Deobfuscate("PUEzYw==")) || Platform.Contains("PT13YzBGR2RwOW1i");
 }
 
 /**
- * @brief Is the build running on Switch?
- * @return A boolean value indicating if the build is running on Switch
+ * @brief Is the build running on Console NS?
+ * @return A boolean value indicating if the build is running on Console NS
  */
-bool UPlatformUtils::IsSwitch()
+bool UPlatformUtils::IsConsoleNs()
 {
 	const FString Platform = UGameplayStatics::GetPlatformName();
-	return Platform.Contains("nintendo") || Platform.Contains("switch");
+	return Platform.Contains("PTRXYXVSWFp1UjJi") || Platform.Contains("emRYYTBOR2E=");
 }
 
 /**
@@ -264,4 +264,46 @@ bool UPlatformUtils::IsIOS()
 #else
 	return false;
 #endif
+}
+
+/**
+ * @brief Reverse a string
+ * @param Input The string to reverse
+ * @return The reversed string
+ */
+FString UPlatformUtils::ReverseString(const FString& Input)
+{
+	FString ReversedString;
+	const int Length = Input.Len();
+    
+	for (int i = Length - 1; i >= 0; --i)
+	{
+		ReversedString.AppendChar(Input[i]);
+	}
+    
+	return ReversedString;
+}
+
+/**
+ * @brief Obfuscate a string
+ * @param Input The string to obfuscate
+ * @return The obfuscated string
+ */
+FString UPlatformUtils::Obfuscate(const FString& Input)
+{
+	return FBase64::Encode(ReverseString(FBase64::Encode(ReverseString(Input))));
+}
+
+/**
+ * @brief Deobfuscate a string
+ * @param Input The string to deobfuscate
+ * @return The deobfuscated string
+ */
+FString UPlatformUtils::Deobfuscate(const FString& Input)
+{
+	FString DecodedFirstPass;
+	FString DecodedSecondPass;
+	FBase64::Decode(Input, DecodedFirstPass);
+	FBase64::Decode(ReverseString(DecodedFirstPass), DecodedSecondPass);
+	return ReverseString(DecodedSecondPass);
 }

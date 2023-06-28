@@ -88,25 +88,25 @@ public:
 	TMap<FKey, UTexture2D*> GenericControllerInputMappings;
 
 	/**
-	 * @brief A map of all Xbox controller keys and the texture displayed in the indicator
+	 * @brief A map of all Console MX controller keys and the texture displayed in the indicator
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input",
 		meta=(EditCondition = "IsInputIndicatorsEnabled", EditConditionHides))
-	TMap<FKey, UTexture2D*> XboxControllerInputMappings;
+	TMap<FKey, UTexture2D*> MxControllerInputMappings;
 
 	/**
-	 * @brief A map of all Playstation controller keys and the texture displayed in the indicator
+	 * @brief A map of all Console SP controller keys and the texture displayed in the indicator
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input",
 		meta=(EditCondition = "IsInputIndicatorsEnabled", EditConditionHides))
-	TMap<FKey, UTexture2D*> PlaystationControllerInputMappings;
+	TMap<FKey, UTexture2D*> SpControllerInputMappings;
 
 	/**
-	 * @brief A map of all Switch controller keys and the texture displayed in the indicator
+	 * @brief A map of all Console NS controller keys and the texture displayed in the indicator
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Input",
 		meta=(EditCondition = "IsInputIndicatorsEnabled", EditConditionHides))
-	TMap<FKey, UTexture2D*> SwitchControllerInputMappings;
+	TMap<FKey, UTexture2D*> NsControllerInputMappings;
 
 	/**
 	 * @brief Event used to notify other classes when the current input device is updated

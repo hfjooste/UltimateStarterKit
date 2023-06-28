@@ -175,12 +175,12 @@ UTexture2D* UUSKGameInstance::GetInputIndicatorIconForKey(const FKey Key, const 
 		return KeyboardMouseInputMappings.FindRef(Key);
 	case EInputDevice::GenericController:
 		return GenericControllerInputMappings.FindRef(Key);
-	case EInputDevice::XboxController:
-		return XboxControllerInputMappings.FindRef(Key);
-	case EInputDevice::PlaystationController:
-		return PlaystationControllerInputMappings.FindRef(Key);
-	case EInputDevice::SwitchController:
-		return SwitchControllerInputMappings.FindRef(Key);
+	case EInputDevice::MxController:
+		return MxControllerInputMappings.FindRef(Key);
+	case EInputDevice::SpController:
+		return SpControllerInputMappings.FindRef(Key);
+	case EInputDevice::NsController:
+		return NsControllerInputMappings.FindRef(Key);
 	default:
 		USK_LOG_ERROR("Unsupported input device");
 		return nullptr;
@@ -477,19 +477,19 @@ EInputDevice UUSKGameInstance::GetInputDevice(const FKey Key)
 		return EInputDevice::KeyboardMouse;
 	}
 
-	if (UPlatformUtils::IsXbox())
+	if (UPlatformUtils::IsConsoleMx())
 	{
-		return EInputDevice::XboxController;
+		return EInputDevice::MxController;
 	}
 
-	if (UPlatformUtils::IsPlaystation())
+	if (UPlatformUtils::IsConsoleSp())
 	{
-		return EInputDevice::PlaystationController;
+		return EInputDevice::SpController;
 	}
 
-	if (UPlatformUtils::IsSwitch())
+	if (UPlatformUtils::IsConsoleNs())
 	{
-		return EInputDevice::SwitchController;
+		return EInputDevice::NsController;
 	}
 	
 	return EInputDevice::GenericController;

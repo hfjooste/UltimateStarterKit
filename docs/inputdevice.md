@@ -16,16 +16,16 @@ Supported input devices. This is used to update the input indicators when using 
 		<td>Using a controller on a desktop build</td>
 	</tr>
 	<tr>
-		<td>XboxController</td>
-		<td>Using an Xbox controller</td>
+		<td>MxController</td>
+		<td>Using an Console MX controller</td>
 	</tr>
 	<tr>
-		<td>PlaystationController</td>
-		<td>Using a Playstation controller</td>
+		<td>SpController</td>
+		<td>Using a Console SP controller</td>
 	</tr>
 	<tr>
-		<td>SwitchController</td>
-		<td>Using a Nintendo Switch controller</td>
+		<td>NsController</td>
+		<td>Using a Console NS controller</td>
 	</tr>
 	<tr>
 		<td>Unknown</td>
