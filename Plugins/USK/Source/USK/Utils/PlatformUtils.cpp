@@ -2,6 +2,7 @@
 
 #include "PlatformUtils.h"
 
+#include "Misc/Base64.h"
 #include "Kismet/GameplayStatics.h"
 
 /**
