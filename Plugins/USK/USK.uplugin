@@ -18,12 +18,42 @@
 		{
 			"Name": "USK",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Android",
+				"IOS",
+				"Linux",
+				"Mac",
+				"Switch",
+				"PS4",
+				"Win32",
+				"Win64",
+				"XboxOne"
+			],
+			"BlacklistPlatforms": [
+				"HTML5",
+				"HoloLens"
+			]
 		},
 		{
 			"Name": "USKEditor",
 			"Type": "Editor",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Android",
+				"IOS",
+				"Linux",
+				"Mac",
+				"Switch",
+				"PS4",
+				"Win32",
+				"Win64",
+				"XboxOne"
+			],
+			"BlacklistPlatforms": [
+				"HTML5",
+				"HoloLens"
+			]
 		}
 	],
 	"Plugins": [
