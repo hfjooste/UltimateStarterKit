@@ -64,6 +64,19 @@ public:
 	bool PlayOnStart = true;
 
 	/**
+	 * @brief A boolean value indicating if the dialogue should automatically be destroyed when completed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue")
+	bool DestroyOnComplete = true;
+
+	/**
+	 * @brief A boolean value indicating if the dialogue should automatically be stopped when completed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue",
+		meta=(EditCondition = "!DestroyOnComplete", EditConditionHides))
+	bool StopOnComplete = true;
+
+	/**
 	 * @brief The sound effect to play when an entry is skipped
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Audio")
@@ -113,8 +126,20 @@ public:
 	/**
 	 * @brief Play the dialogue
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Dialogue")
+	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "Ultimate Starter Kit|Dialogue")
 	void PlayDialogue();
+
+	/**
+	 * @brief Stop playing the dialogue
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Dialogue")
+	void StopDialogue();
+
+	/**
+	 * @brief Stop playing the dialogue and destroy the dialogue manager
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Dialogue")
+	void DestroyDialogue();
 
 	/**
 	 * @brief Skip the current entry in the dialogue
@@ -128,18 +153,13 @@ protected:
 	 */
 	virtual void BeginPlay() override;
 
-	/**
-	 * @brief Tell client that the Pawn is begin restarted
-	 */
-	virtual void PawnClientRestart() override;
-
-	/**
-	 * @brief Allows a Pawn to set up custom input bindings
-	 * @param PlayerInputComponent The component that enables an Actor to bind various forms of input events
-	 */
-	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
-
 private:
+	/**
+	 * @brief A reference to the pawn that was possessed before the dialogue started
+	 */
+	UPROPERTY()
+	APawn* PossessedPawn;
+	
 	/**
 	 * @brief A reference to the dialogue widget
 	 */

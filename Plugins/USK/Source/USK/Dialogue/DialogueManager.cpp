@@ -32,34 +32,6 @@ void ADialogueManager::BeginPlay()
 }
 
 /**
- * @brief Tell client that the Pawn is begin restarted
- */
-void ADialogueManager::PawnClientRestart()
-{
-	Super::PawnClientRestart();
-
-	USK_LOG_TRACE("Adding input mapping context");
-	const APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-	UEnhancedInputLocalPlayerSubsystem* Subsystem =
-		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
-	Subsystem->RemoveMappingContext(InputMappingContext);
-	Subsystem->AddMappingContext(InputMappingContext, 0);
-}
-
-/**
- * @brief Allows a Pawn to set up custom input bindings
- * @param PlayerInputComponent The component that enables an Actor to bind various forms of input events
- */
-void ADialogueManager::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	USK_LOG_TRACE("Setting up input bindings");
-
-	UEnhancedInputComponent* EnhancedInput = dynamic_cast<UEnhancedInputComponent*>(PlayerInputComponent);
-	EnhancedInput->BindAction(SkipAction, ETriggerEvent::Started, this, &ADialogueManager::SkipEntry);
-}
-
-/**
  * @brief Play the dialogue
  */
 void ADialogueManager::PlayDialogue()
@@ -83,17 +55,59 @@ void ADialogueManager::PlayDialogue()
 		return;
 	}
 
+	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	PossessedPawn = PlayerController->GetPawn();
+	PlayerController->Possess(this);
+
+	USK_LOG_TRACE("Adding input mapping context");
+	UEnhancedInputLocalPlayerSubsystem* Subsystem =
+		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
+	Subsystem->RemoveMappingContext(InputMappingContext);
+	Subsystem->AddMappingContext(InputMappingContext, 0);
+
+	USK_LOG_TRACE("Setting up input bindings");
+	UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(PlayerController->GetPawn()->InputComponent);
+	EnhancedInput->BindAction(SkipAction, ETriggerEvent::Started, this, &ADialogueManager::SkipEntry);
+
 	DialogueWidget = CreateWidget<UDialogueWidget>(GetWorld(), DialogueWidgetClass);
-	if (!IsValid(DialogueWidget))
+	if (IsValid(DialogueWidget))
 	{
-		USK_LOG_ERROR("Unable to create dialogue widget");
-		return;
+		DialogueWidget->OnChoiceSelected.AddDynamic(this, &ADialogueManager::OnChoiceSelected);        
+		DialogueWidget->AddToViewport();
+	}
+	
+	UpdateCurrentEntry(Dialogue->RootEntries[0]);
+}
+
+/**
+ * @brief Stop playing the dialogue
+ */
+void ADialogueManager::StopDialogue()
+{
+	if (IsValid(DialogueWidget))
+	{
+		DialogueWidget->RemoveFromParent();
 	}
 
-	DialogueWidget->OnChoiceSelected.AddDynamic(this, &ADialogueManager::OnChoiceSelected);
+	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	UEnhancedInputLocalPlayerSubsystem* Subsystem =
+		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
+	Subsystem->RemoveMappingContext(InputMappingContext);
 
-	DialogueWidget->AddToViewport();
-	UpdateCurrentEntry(Dialogue->RootEntries[0]);
+	if (IsValid(PossessedPawn))
+	{
+		PlayerController->UnPossess();
+		PlayerController->Possess(PossessedPawn);
+	}
+}
+
+/**
+ * @brief Stop playing the dialogue and destroy the dialogue manager
+ */
+void ADialogueManager::DestroyDialogue()
+{
+	StopDialogue();
+	Destroy();
 }
 
 /**
@@ -120,6 +134,16 @@ void ADialogueManager::SkipEntry()
 		AudioComponent->Stop();
 		OnDialogueEntryEnded.Broadcast(CurrentEntry->Id);
 		OnDialogueEnded.Broadcast(CurrentEntry->Id);
+
+		if (DestroyOnComplete)
+		{
+			DestroyDialogue();
+		}
+		else if (StopOnComplete)
+		{
+			StopDialogue();
+		}
+		
 		return;
 	}
 
