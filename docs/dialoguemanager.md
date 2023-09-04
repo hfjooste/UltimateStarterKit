@@ -51,6 +51,18 @@ The <code>DialogueManager</code> uses the following components:
 		<td>true</td>
 	</tr>
 	<tr>
+		<td>DestroyOnComplete</td>
+		<td>A boolean value indicating if the dialogue should automatically be destroyed when completed</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>StopOnComplete</td>
+		<td>A boolean value indicating if the dialogue should automatically be stopped when completed</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
 		<td>SkipSFX</td>
 		<td>The sound effect to play when an entry is skipped</td>
 		<td>USoundBase*</td>
@@ -115,6 +127,18 @@ The <code>DialogueManager</code> uses the following components:
 		<td></td>
 	</tr>
 	<tr>
+		<td>StopDialogue</td>
+		<td>Stop playing the dialogue</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>DestroyDialogue</td>
+		<td>Stop playing the dialogue and destroy the dialogue manager</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>SkipEntry</td>
 		<td>Skip the current entry in the dialogue</td>
 		<td></td>
@@ -126,6 +150,8 @@ The <code>DialogueManager</code> uses the following components:
 You can use the <code>DialogueManager</code> using Blueprints by adding one of the following nodes:
 <ul>
 	<li>Ultimate Starter Kit > Dialogue > Play Dialogue</li>
+	<li>Ultimate Starter Kit > Dialogue > Stop Dialogue</li>
+	<li>Ultimate Starter Kit > Dialogue > Destroy Dialogue</li>
 	<li>Ultimate Starter Kit > Dialogue > Skip Entry</li>
 </ul>
 
@@ -143,6 +169,8 @@ void ATestActor::Test()
 {
 	// DialogueManager is a pointer to the ADialogueManager
 	DialogueManager->PlayDialogue();
+	DialogueManager->StopDialogue();
+	DialogueManager->DestroyDialogue();
 	DialogueManager->SkipEntry();
 }
 ```
