@@ -1,10 +1,23 @@
 ﻿// Created by Henry Jooste
 
 #include "Log.h"
+
+#include "LogConfig.h"
 #include "Engine/Engine.h"
 #include "USK/Utils/PlatformUtils.h"
 
 DEFINE_LOG_CATEGORY(LogUSK);
+
+ULogConfig* ULog::Configuration;
+
+/**
+ * @brief Configure the logger
+ * @param Config The new config file used by the logger
+ */
+void ULog::Configure(ULogConfig* Config)
+{
+	Configuration = Config;
+}
 
 /**
  * @brief Log an error
@@ -12,9 +25,16 @@ DEFINE_LOG_CATEGORY(LogUSK);
  * @param Text The text to log out
  */
 void ULog::Error(const FString Tag, const FString Text)
-{	
-	UE_LOG(LogUSK, Error, TEXT("%s: %s"), *Tag, *Text);
-	LogToScreen(FColor::Red, Tag, Text);
+{
+	if (!IsValid(Configuration) || Configuration->bErrorWriteToFile)
+	{
+		UE_LOG(LogUSK, Error, TEXT("%s: %s"), *Tag, *Text);
+	}
+
+	if (!IsValid(Configuration) || Configuration->bErrorPrintToScreen)
+	{
+		LogToScreen(FColor::Red, Tag, Text);
+	}
 }
 
 /**
@@ -24,8 +44,15 @@ void ULog::Error(const FString Tag, const FString Text)
  */
 void ULog::Warning(const FString Tag, const FString Text)
 {
-	UE_LOG(LogUSK, Warning, TEXT("%s: %s"), *Tag, *Text);
-	LogToScreen(FColor::Yellow, Tag, Text);
+	if (!IsValid(Configuration) || Configuration->bWarningWriteToFile)
+	{
+		UE_LOG(LogUSK, Warning, TEXT("%s: %s"), *Tag, *Text);
+	}
+	
+	if (!IsValid(Configuration) || Configuration->bWarningPrintToScreen)
+	{
+		LogToScreen(FColor::Yellow, Tag, Text);
+	}
 }
 
 /**
@@ -35,8 +62,15 @@ void ULog::Warning(const FString Tag, const FString Text)
  */
 void ULog::Info(const FString Tag, const FString Text)
 {
-	UE_LOG(LogUSK, Display, TEXT("%s: %s"), *Tag, *Text);
-	LogToScreen(FColor::Blue, Tag, Text);
+	if (!IsValid(Configuration) || Configuration->bInfoWriteToFile)
+	{
+		UE_LOG(LogUSK, Display, TEXT("%s: %s"), *Tag, *Text);
+	}
+
+	if (!IsValid(Configuration) || Configuration->bInfoPrintToScreen)
+	{
+		LogToScreen(FColor::Blue, Tag, Text);
+	}
 }
 
 /**
@@ -46,10 +80,15 @@ void ULog::Info(const FString Tag, const FString Text)
  */
 void ULog::Debug(const FString Tag, const FString Text)
 {
-#if WITH_EDITOR || UE_EDITOR || UE_BUILD_TEST || UE_BUILD_DEVELOPMENT || UE_BUILD_DEBUG
-	UE_LOG(LogUSK, Verbose, TEXT("%s: %s"), *Tag, *Text);
-	LogToScreen(FColor::Magenta, Tag, Text);
-#endif
+	if (!IsValid(Configuration) || Configuration->bDebugWriteToFile)
+	{
+		UE_LOG(LogUSK, Verbose, TEXT("%s: %s"), *Tag, *Text);
+	}
+
+	if (!IsValid(Configuration) || Configuration->bDebugPrintToScreen)
+	{
+		LogToScreen(FColor::Magenta, Tag, Text);
+	}
 }
 
 /**
@@ -59,10 +98,15 @@ void ULog::Debug(const FString Tag, const FString Text)
  */
 void ULog::Trace(const FString Tag, const FString Text)
 {
-#if WITH_EDITOR || UE_EDITOR || UE_BUILD_TEST || UE_BUILD_DEVELOPMENT || UE_BUILD_DEBUG
-	UE_LOG(LogUSK, VeryVerbose, TEXT("%s: %s"), *Tag, *Text);
-	LogToScreen(FColor::White, Tag, Text);
-#endif
+	if (!IsValid(Configuration) || Configuration->bTraceWriteToFile)
+	{
+		UE_LOG(LogUSK, VeryVerbose, TEXT("%s: %s"), *Tag, *Text);
+	}
+
+	if (!IsValid(Configuration) || Configuration->bTracePrintToScreen)
+	{
+		LogToScreen(FColor::White, Tag, Text);
+	}
 }
 
 /**

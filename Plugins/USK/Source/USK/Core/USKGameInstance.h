@@ -9,6 +9,7 @@
 #include "USK/Settings/SettingsConfig.h"
 #include "USKGameInstance.generated.h"
 
+class ULogConfig;
 class UInputAction;
 class UInputMappingContext;
 
@@ -41,6 +42,30 @@ class USK_API UUSKGameInstance : public UGameInstance
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameUnpausedDelegate);
 	
 public:
+	/**
+	 * @brief The log configuration used when running the game in the editor
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Logger")
+	ULogConfig* LogConfigEditor;
+
+	/**
+	 * @brief The log configuration used by debug builds
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Logger")
+	ULogConfig* LogConfigDebug;
+
+	/**
+	 * @brief The log configuration used by development builds
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Logger")
+	ULogConfig* LogConfigDevelopment;
+
+	/**
+	 * @brief The log configuration used by shipping builds
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Logger")
+	ULogConfig* LogConfigShipping;
+	
 	/**
 	 * @brief The class that holds the data that should be saved/loaded
 	 */

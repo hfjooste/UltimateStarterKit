@@ -6,6 +6,8 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "Log.generated.h"
 
+class ULogConfig;
+
 /**
  * @brief Log an error
  * @param Text The text to log out
@@ -47,6 +49,13 @@ class USK_API ULog final : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 	
 public:
+	/**
+	 * @brief Configure the logger
+	 * @param Config The new config file used by the logger
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Logger")
+	static void Configure(ULogConfig* Config);
+	
 	/**
 	 * @brief Log an error
 	 * @param Tag The category of the log entry
@@ -95,4 +104,9 @@ private:
 	 * @param Text The text to log out
 	 */
 	static void LogToScreen(const FColor Color, const FString Tag, const FString Text);
+
+	/**
+	 * @brief The current configuration used by the logger
+	 */
+	static ULogConfig* Configuration;
 };

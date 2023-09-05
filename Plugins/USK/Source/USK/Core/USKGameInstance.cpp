@@ -19,6 +19,16 @@ void UUSKGameInstance::Init()
 {
 	Super::Init();
 	InitializeFeaturesAfterDelay();
+
+#if UE_EDITOR || WITH_EDITOR
+	ULog::Configure(LogConfigEditor);
+#elif UE_BUILD_DEBUG
+	ULog::Configure(LogConfigDebug);
+#elif UE_BUILD_DEVELOPMENT
+	ULog::Configure(LogConfigDevelopment);
+#elif UE_BUILD_SHIPPING
+	ULog::Configure(LogConfigShipping);
+#endif
 }
 
 /**
