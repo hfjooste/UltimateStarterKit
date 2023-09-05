@@ -36,6 +36,30 @@ The Game Instance will automatically detect input events and update the current 
 		<th>Default Value</th>
 	</tr>
 	<tr>
+		<td>LogConfigEditor</td>
+		<td>The log configuration used when running the game in the editor</td>
+		<td>ULogConfig*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>LogConfigDebug</td>
+		<td>The log configuration used by debug builds</td>
+		<td>ULogConfig*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>LogConfigDevelopment</td>
+		<td>The log configuration used by development builds</td>
+		<td>ULogConfig*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>LogConfigShipping</td>
+		<td>The log configuration used by shipping builds</td>
+		<td>ULogConfig*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>SaveGameClass</td>
 		<td>The class that holds the data that should be saved/loaded</td>
 		<td>TSubclassOf&lt;UUSKSaveGame&gt;</td>

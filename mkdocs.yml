@@ -63,7 +63,9 @@ nav:
   - Core Functionality:
     - Input Devices: inputdevice.md
     - Game Instance: gameinstance.md
-  - Logger: logger.md
+  - Logging System:
+    - Logger: logger.md
+    - Log Configuration: logconfig.md
   - Dialogue System:
     - Overview: dialogueoverview.md
     - Dialogue: dialogue.md

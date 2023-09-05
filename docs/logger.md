@@ -49,156 +49,57 @@ The log levels corresponds to the following verbosity level in Unreal Engine:
     </tr>
 </table>
 
-The plugin will automatically ignore certain log levels based on the type of build:
-<table>
-    <tr>
-        <th>Log Level</th>
-        <th>Development</th>
-        <th>Shipping</th>
-    </tr>
-    <tr>
-        <td>Trace</td>
-        <td>Enabled</td>
-        <td>Disabled</td>
-    </tr>
-    <tr>
-        <td>Debug</td>
-        <td>Enabled</td>
-        <td>Disabled</td>
-    </tr>
-    <tr>
-        <td>Information</td>
-        <td>Enabled</td>
-        <td>Enabled</td>
-    </tr>
-    <tr>
-        <td>Warning</td>
-        <td>Enabled</td>
-        <td>Enabled</td>
-    </tr>
-    <tr>
-        <td>Error</td>
-        <td>Enabled</td>
-        <td>Enabled</td>
-    </tr>
-</table>
-
-## Logging Methods
-There are 2 different logging methods. Both of these are used each time you log something:
-<ul>
-    <li><strong>On-screen messages:</strong> These messages will appear on-screen for 5 seconds (only used when running the game through the editor)</li>
-    <li><strong>Log File:</strong> Everything you log is also written to a file using the Unreal Engine logging feature
-</ul>
-
 ## API Reference
-### Macros
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Params</th>
-        <th>Return</th>
-    </tr>
-    <tr>
-        <td>USK_LOG_TRACE</td>
-        <td>Log trace information using the current function name as the tag</td>
-        <td>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>USK_LOG_DEBUG</td>
-        <td>Log debug information using the current function name as the tag</td>
-        <td>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>USK_LOG_INFO</td>
-        <td>Log information using the current function name as the tag</td>
-        <td>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>USK_LOG_WARNING</td>
-        <td>Log a warning using the current function name as the tag</td>
-        <td>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>USK_LOG_ERROR</td>
-        <td>Log an error using the current function name as the tag</td>
-        <td>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-</table>
-
 ### Functions
 <table>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Params</th>
-        <th>Return</th>
-    </tr>
-    <tr>
-        <td>Trace</td>
-        <td>Log trace information</td>
-        <td>
-            <strong>Tag (FString)</strong><br/>The category of the log entry. This is usually the function or class name. It allows you to find out exactly where this is being logged<br/><br/>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Debug</td>
-        <td>Log debug information</td>
-        <td>
-            <strong>Tag (FString)</strong><br/>The category of the log entry. This is usually the function or class name. It allows you to find out exactly where this is being logged<br/><br/>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Info</td>
-        <td>Log information</td>
-        <td>
-            <strong>Tag (FString)</strong><br/>The category of the log entry. This is usually the function or class name. It allows you to find out exactly where this is being logged<br/><br/>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Warning</td>
-        <td>Log a warning</td>
-        <td>
-            <strong>Tag (FString)</strong><br/>The category of the log entry. This is usually the function or class name. It allows you to find out exactly where this is being logged<br/><br/>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Error</td>
-        <td>Log an error</td>
-        <td>
-            <strong>Tag (FString)</strong><br/>The category of the log entry. This is usually the function or class name. It allows you to find out exactly where this is being logged<br/><br/>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Params</th>
+		<th>Return</th>
+	</tr>
+	<tr>
+		<td>Configure</td>
+		<td>Configure the logger</td>
+		<td><strong>Config (ULogConfig*)</strong><br/>The new config file used by the logger</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Error</td>
+		<td>Log an error</td>
+		<td><strong>Tag (FString)</strong><br/>The category of the log entry<br/><br/><strong>Text (FString)</strong><br/>The text to log out</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Warning</td>
+		<td>Log a warning</td>
+		<td><strong>Tag (FString)</strong><br/>The category of the log entry<br/><br/><strong>Text (FString)</strong><br/>The text to log out</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Info</td>
+		<td>Log info</td>
+		<td><strong>Tag (FString)</strong><br/>The category of the log entry<br/><br/><strong>Text (FString)</strong><br/>The text to log out</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Debug</td>
+		<td>Log debug information</td>
+		<td><strong>Tag (FString)</strong><br/>The category of the log entry<br/><br/><strong>Text (FString)</strong><br/>The text to log out</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Trace</td>
+		<td>Log trace information</td>
+		<td><strong>Tag (FString)</strong><br/>The category of the log entry<br/><br/><strong>Text (FString)</strong><br/>The text to log out</td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
 You can easily log info using Blueprints by adding one of the following nodes:
 <ul>
+	<li>Ultimate Starter Kit > Logger > Configure</li>
     <li>Ultimate Starter Kit > Logger > Log Trace</li>
     <li>Ultimate Starter Kit > Logger > Log Debug</li>
     <li>Ultimate Starter Kit > Logger > Log Info</li>
@@ -224,6 +125,7 @@ void ATestActor::Test()
     USK_LOG_WARNING("Testing warning logging");
     USK_LOG_ERROR("Testing error logging");
 
+	ULog::Configure(Config);
     ULog::Trace("Custom Tag", "Testing trace logging");
     ULog::Debug("Custom Tag", "Testing debug logging");
     ULog::Info("Custom Tag", "Testing info logging");
