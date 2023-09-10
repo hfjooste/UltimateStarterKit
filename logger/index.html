@@ -14,7 +14,7 @@
         <link rel="prev" href="../gameinstance/">
       
       
-        <link rel="next" href="../dialogueoverview/">
+        <link rel="next" href="../logconfig/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
@@ -331,6 +331,35 @@
     
   
   
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          Logging System
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Logging System
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
@@ -374,26 +403,12 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#logging-methods" class="md-nav__link">
-    Logging Methods
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#api-reference" class="md-nav__link">
     API Reference
   </a>
   
     <nav class="md-nav" aria-label="API Reference">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#macros" class="md-nav__link">
-    Macros
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#functions" class="md-nav__link">
@@ -425,6 +440,27 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logconfig/" class="md-nav__link">
+        Log Configuration
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -1597,26 +1633,12 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#logging-methods" class="md-nav__link">
-    Logging Methods
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#api-reference" class="md-nav__link">
     API Reference
   </a>
   
     <nav class="md-nav" aria-label="API Reference">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#macros" class="md-nav__link">
-    Macros
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#functions" class="md-nav__link">
@@ -1714,98 +1736,7 @@
     </tr>
 </table>
 
-<p>The plugin will automatically ignore certain log levels based on the type of build:</p>
-<table>
-    <tr>
-        <th>Log Level</th>
-        <th>Development</th>
-        <th>Shipping</th>
-    </tr>
-    <tr>
-        <td>Trace</td>
-        <td>Enabled</td>
-        <td>Disabled</td>
-    </tr>
-    <tr>
-        <td>Debug</td>
-        <td>Enabled</td>
-        <td>Disabled</td>
-    </tr>
-    <tr>
-        <td>Information</td>
-        <td>Enabled</td>
-        <td>Enabled</td>
-    </tr>
-    <tr>
-        <td>Warning</td>
-        <td>Enabled</td>
-        <td>Enabled</td>
-    </tr>
-    <tr>
-        <td>Error</td>
-        <td>Enabled</td>
-        <td>Enabled</td>
-    </tr>
-</table>
-
-<h2 id="logging-methods">Logging Methods</h2>
-<p>There are 2 different logging methods. Both of these are used each time you log something:</p>
-<ul>
-    <li><strong>On-screen messages:</strong> These messages will appear on-screen for 5 seconds (only used when running the game through the editor)</li>
-    <li><strong>Log File:</strong> Everything you log is also written to a file using the Unreal Engine logging feature
-</ul>
-
 <h2 id="api-reference">API Reference</h2>
-<h3 id="macros">Macros</h3>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Params</th>
-        <th>Return</th>
-    </tr>
-    <tr>
-        <td>USK_LOG_TRACE</td>
-        <td>Log trace information using the current function name as the tag</td>
-        <td>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>USK_LOG_DEBUG</td>
-        <td>Log debug information using the current function name as the tag</td>
-        <td>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>USK_LOG_INFO</td>
-        <td>Log information using the current function name as the tag</td>
-        <td>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>USK_LOG_WARNING</td>
-        <td>Log a warning using the current function name as the tag</td>
-        <td>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>USK_LOG_ERROR</td>
-        <td>Log an error using the current function name as the tag</td>
-        <td>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-</table>
-
 <h3 id="functions">Functions</h3>
 <table>
     <tr>
@@ -1815,48 +1746,39 @@
         <th>Return</th>
     </tr>
     <tr>
-        <td>Trace</td>
-        <td>Log trace information</td>
-        <td>
-            <strong>Tag (FString)</strong><br/>The category of the log entry. This is usually the function or class name. It allows you to find out exactly where this is being logged<br/><br/>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Debug</td>
-        <td>Log debug information</td>
-        <td>
-            <strong>Tag (FString)</strong><br/>The category of the log entry. This is usually the function or class name. It allows you to find out exactly where this is being logged<br/><br/>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Info</td>
-        <td>Log information</td>
-        <td>
-            <strong>Tag (FString)</strong><br/>The category of the log entry. This is usually the function or class name. It allows you to find out exactly where this is being logged<br/><br/>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Warning</td>
-        <td>Log a warning</td>
-        <td>
-            <strong>Tag (FString)</strong><br/>The category of the log entry. This is usually the function or class name. It allows you to find out exactly where this is being logged<br/><br/>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
+        <td>Configure</td>
+        <td>Configure the logger</td>
+        <td><strong>Config (ULogConfig*)</strong><br/>The new config file used by the logger</td>
         <td></td>
     </tr>
     <tr>
         <td>Error</td>
         <td>Log an error</td>
-        <td>
-            <strong>Tag (FString)</strong><br/>The category of the log entry. This is usually the function or class name. It allows you to find out exactly where this is being logged<br/><br/>
-            <strong>Text (FString)</strong><br/>The text that should be logged out
-        </td>
+        <td><strong>Tag (FString)</strong><br/>The category of the log entry<br/><br/><strong>Text (FString)</strong><br/>The text to log out</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Warning</td>
+        <td>Log a warning</td>
+        <td><strong>Tag (FString)</strong><br/>The category of the log entry<br/><br/><strong>Text (FString)</strong><br/>The text to log out</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Info</td>
+        <td>Log info</td>
+        <td><strong>Tag (FString)</strong><br/>The category of the log entry<br/><br/><strong>Text (FString)</strong><br/>The text to log out</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Debug</td>
+        <td>Log debug information</td>
+        <td><strong>Tag (FString)</strong><br/>The category of the log entry<br/><br/><strong>Text (FString)</strong><br/>The text to log out</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Trace</td>
+        <td>Log trace information</td>
+        <td><strong>Tag (FString)</strong><br/>The category of the log entry<br/><br/><strong>Text (FString)</strong><br/>The text to log out</td>
         <td></td>
     </tr>
 </table>
@@ -1864,6 +1786,7 @@
 <h2 id="blueprint-usage">Blueprint Usage</h2>
 <p>You can easily log info using Blueprints by adding one of the following nodes:</p>
 <ul>
+    <li>Ultimate Starter Kit > Logger > Configure</li>
     <li>Ultimate Starter Kit > Logger > Log Trace</li>
     <li>Ultimate Starter Kit > Logger > Log Debug</li>
     <li>Ultimate Starter Kit > Logger > Log Info</li>
@@ -1886,6 +1809,7 @@ void ATestActor::Test()
     USK_LOG_WARNING(&quot;Testing warning logging&quot;);
     USK_LOG_ERROR(&quot;Testing error logging&quot;);
 
+    ULog::Configure(Config);
     ULog::Trace(&quot;Custom Tag&quot;, &quot;Testing trace logging&quot;);
     ULog::Debug(&quot;Custom Tag&quot;, &quot;Testing debug logging&quot;);
     ULog::Info(&quot;Custom Tag&quot;, &quot;Testing info logging&quot;);
