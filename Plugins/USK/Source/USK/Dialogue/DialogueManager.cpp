@@ -4,6 +4,7 @@
 
 #include "Dialogue.h"
 #include "DialogueWidget.h"
+#include "DialogueEntry.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Components/AudioComponent.h"

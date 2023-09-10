@@ -6,6 +6,7 @@
 #include "DialogueTransitionType.h"
 #include "DialogueParticipant.h"
 #include "Templates/SubclassOf.h"
+#include "Sound/SoundBase.h"
 #include "DialogueEntry.generated.h"
 
 class UDialogue;
