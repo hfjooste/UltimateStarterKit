@@ -14,7 +14,7 @@ class UInventoryWidget;
  * @brief The menu item used to display an inventory item
  */
 UCLASS()
-class UInventoryMenuItem : public UMenuItem
+class USK_API UInventoryMenuItem : public UMenuItem
 {
 	GENERATED_BODY()
 

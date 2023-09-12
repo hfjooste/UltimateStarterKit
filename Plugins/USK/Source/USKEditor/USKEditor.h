@@ -18,7 +18,10 @@ public:
 
 private:
 	TArray< TSharedPtr<IAssetTypeActions> > CreatedAssetTypeActions;
-	EAssetTypeCategories::Type DialogueAssetCategoryBit;
 	TSharedPtr<FGraphPanelNodeFactory> GraphPanelNodeFactory_Dialogue;
-	void RegisterAssetTypeAction(IAssetTools& AssetTools, TSharedRef<IAssetTypeActions> Action);
+	void RegisterAssetTypeAction(IAssetTools& AssetTools, const TSharedRef<IAssetTypeActions>& Action);
+	void RegisterBlueprint(IAssetTools& AssetTools, EAssetTypeCategories::Type Category, const FString& AssetSubMenu,
+		const FString& AssetName, FColor AssetColor, UClass* AssetClass);
+	void RegisterDialogue(IAssetTools& AssetTools, EAssetTypeCategories::Type Category,
+		const FString& AssetName, FColor AssetColor, UClass* AssetClass);
 };
