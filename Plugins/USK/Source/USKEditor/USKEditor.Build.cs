@@ -21,7 +21,6 @@ public class USKEditor : ModuleRules
 		PrivateDependencyModuleNames.AddRange(new[]
 		{
 			"USK",
-			"AssetDefinition",
 			"AssetTools",
 			"Slate",
 			"InputCore",
