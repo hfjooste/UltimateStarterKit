@@ -92,9 +92,10 @@ nav:
     - Audio Overview: audio.md
     - Audio Utils: audioutils.md
     - Music Player: music.md
-  - 3D Platformer:
+  - Characters:
     - Overview: platformer.md
-    - Character: platformercharacter.md
+    - Base Character: uskcharacter.md
+    - 3D Platformer Character: platformercharacter.md
     - Animation Instance: platformeranimation.md
     - Shadow Decal: platformershadow.md
   - Items:
