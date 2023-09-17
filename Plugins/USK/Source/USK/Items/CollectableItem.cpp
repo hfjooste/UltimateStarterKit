@@ -7,6 +7,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 #include "USK/Audio/AudioUtils.h"
+#include "USK/Character/FpsCharacter.h"
 #include "USK/Character/PlatformerCharacter.h"
 #include "USK/Logger/Log.h"
 
@@ -74,6 +75,8 @@ bool ACollectableItem::ShouldBeCollected(const AActor* OtherActor)
 		return OtherActor->IsA(ACharacter::StaticClass());
 	case EAllowedCollector::AnyPlatformerCharacter:
 		return OtherActor->IsA(APlatformerCharacter::StaticClass());
+	case EAllowedCollector::AnyFpsCharacter:
+		return OtherActor->IsA(AFpsCharacter::StaticClass());
 	case EAllowedCollector::PossessedPawn:
 		return UGameplayStatics::GetPlayerPawn(GetWorld(), 0) == OtherActor;
 	case EAllowedCollector::Custom:

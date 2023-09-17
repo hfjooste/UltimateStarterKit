@@ -32,6 +32,11 @@ enum class EAllowedCollector : uint8
 	AnyPlatformerCharacter,
 
 	/**
+	 * @brief Any FPS character can collect the item
+	 */
+	AnyFpsCharacter,
+
+	/**
 	 * @brief Only the possessed pawn can collect the item
 	 */
 	PossessedPawn,
