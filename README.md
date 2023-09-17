@@ -32,6 +32,7 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><strong>Currency</strong>: A system that is used to easily manage different types of currency</li>
     <li><strong>Audio</strong>: A system used to manage the basic properties of audio files</li>
     <li><strong>Stats</strong>: A system used to easily manage character stats with an optional regenerate ability</li>
+    <li><strong>FPS character</strong>: Basic FPS character with platformer features</li>
     <li><strong>3D platformer character</strong>: Basic 3D platformer character and animation template</li>
     <li><strong>Menu system</strong>: A customizable menu system with support for controllers and complex menu layouts</li>
     <li><strong>Config Utils</strong>: Extract information from different config files</li>

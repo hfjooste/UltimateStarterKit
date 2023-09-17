@@ -95,6 +95,7 @@ nav:
   - Characters:
     - Overview: platformer.md
     - Base Character: uskcharacter.md
+    - FPS Character: fpscharacter.md
     - 3D Platformer Character: platformercharacter.md
     - Animation Instance: platformeranimation.md
     - Shadow Decal: platformershadow.md
