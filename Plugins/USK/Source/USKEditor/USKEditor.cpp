@@ -7,6 +7,7 @@
 #include "Assets/USKAsset.h"
 #include "Dialogue\AssetEditor\DialogueEditorStyle.h"
 #include "USK/Audio/MusicPlayer.h"
+#include "USK/Character/FpsCharacter.h"
 #include "USK/Character/PlatformerCharacter.h"
 #include "USK/Core/USKGameInstance.h"
 #include "USK/Dialogue/Dialogue.h"
@@ -41,6 +42,8 @@ void FUSKEditorModule::StartupModule()
 	RegisterBlueprint(AssetTools, UskCategory, "Core", "Log Configuration",
 		FColor(10, 25, 175), ULogConfig::StaticClass());
 
+	RegisterBlueprint(AssetTools, UskCategory, "Gameplay", "FPS Character",
+		FColor(63, 126, 255), AFpsCharacter::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "Gameplay", "Platformer Character",
 		FColor(63, 126, 255), APlatformerCharacter::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "Gameplay", "Shadow Decal",
