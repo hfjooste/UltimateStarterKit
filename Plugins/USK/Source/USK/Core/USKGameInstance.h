@@ -5,7 +5,6 @@
 #include "InputDevice.h"
 #include "Engine/GameInstance.h"
 #include "USKSaveGame.h"
-#include "USK/Character/PlatformerAnimationInstance.h"
 #include "USK/Settings/SettingsConfig.h"
 #include "USKGameInstance.generated.h"
 
