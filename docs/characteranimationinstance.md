@@ -174,43 +174,43 @@ The <code>USKCharacterAnimationInstance</code> relies on other components of thi
 		<td>GetIdleAnimation</td>
 		<td>Get the idle animation based on the current armed state</td>
 		<td></td>
-		<td><strong>UAnimSequenceBase*</strong><br/>The idle animation to play</td>
+		<td><strong>UAnimSequence*</strong><br/>The idle animation to play</td>
 	</tr>
 	<tr>
 		<td>GetWalkAnimation</td>
 		<td>Get the walk animation based on the current armed state</td>
 		<td></td>
-		<td><strong>UAnimSequenceBase*</strong><br/>The walk animation to play</td>
+		<td><strong>UAnimSequence*</strong><br/>The walk animation to play</td>
 	</tr>
 	<tr>
 		<td>GetRunAnimation</td>
 		<td>Get the run animation based on the current armed state</td>
 		<td></td>
-		<td><strong>UAnimSequenceBase*</strong><br/>The run animation to play</td>
+		<td><strong>UAnimSequence*</strong><br/>The run animation to play</td>
 	</tr>
 	<tr>
 		<td>GetJumpAnimation</td>
 		<td>Get the jump animation based on the current armed state</td>
 		<td></td>
-		<td><strong>UAnimSequenceBase*</strong><br/>The jump animation to play</td>
+		<td><strong>UAnimSequence*</strong><br/>The jump animation to play</td>
 	</tr>
 	<tr>
 		<td>GetDoubleJumpAnimation</td>
 		<td>Get the double jump animation based on the current armed state</td>
 		<td></td>
-		<td><strong>UAnimSequenceBase*</strong><br/>The double jump animation to play</td>
+		<td><strong>UAnimSequence*</strong><br/>The double jump animation to play</td>
 	</tr>
 	<tr>
 		<td>GetFallAnimation</td>
 		<td>Get the fall animation based on the current armed state</td>
 		<td></td>
-		<td><strong>UAnimSequenceBase*</strong><br/>The fall animation to play</td>
+		<td><strong>UAnimSequence*</strong><br/>The fall animation to play</td>
 	</tr>
 	<tr>
 		<td>GetLandAnimation</td>
 		<td>Get the land animation based on the current armed state</td>
 		<td></td>
-		<td><strong>UAnimSequenceBase*</strong><br/>The land animation to play</td>
+		<td><strong>UAnimSequence*</strong><br/>The land animation to play</td>
 	</tr>
 </table>
 
