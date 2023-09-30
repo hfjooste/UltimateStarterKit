@@ -30,7 +30,8 @@ public:
 	 * @brief Get the spring arm component of the character
 	 * @return The spring arm component responsible for controlling the distance of the camera
 	 */
-	USpringArmComponent* GetSpringArmComponent() const { return SpringArmComponent; }
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Camera")
+	USpringArmComponent* GetSpringArmComponent() const;
 
 protected:
 	/**

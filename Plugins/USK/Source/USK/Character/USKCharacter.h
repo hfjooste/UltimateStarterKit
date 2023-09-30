@@ -6,6 +6,7 @@
 #include "InputActionValue.h"
 #include "NiagaraCommon.h"
 #include "GameFramework/Character.h"
+#include "..\Weapons\Weapon.h"
 #include "USKCharacter.generated.h"
 
 class UInputAction;
@@ -30,7 +31,14 @@ public:
 	/**
 	 * @brief Is the character double jumping?
 	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Jump")
 	bool IsDoubleJumping;
+
+	/**
+	 * @brief The attach point used by all weapons
+	 */
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Weapons")
+	FName WeaponAttachPoint;
 
 	/**
 	 * @brief Create a new instance of the AUSKCharacter actor
@@ -41,7 +49,22 @@ public:
 	 * @brief Get the camera used by the character
 	 * @return The camera used by the character
 	 */
-	UCameraComponent* GetCameraComponent() const { return CameraComponent; }
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Camera")
+	UCameraComponent* GetCameraComponent() const;
+
+	/**
+	 * @brief Set the current weapon used by the character
+	 * @param NewWeapon The new weapon
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Weapons")
+	void SetWeapon(AWeapon* NewWeapon);
+
+	/**
+	 * @brief Get the current weapon used by the character
+	 * @return The current weapon used by the character
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Weapons")
+	AWeapon* GetWeapon() const;
 
 protected:
 	/**
@@ -67,6 +90,12 @@ protected:
 	 */
 	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Input")
 	UInputAction* JumpAction;
+
+	/**
+	 * @brief The fire weapon input action
+	 */
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Input")
+	UInputAction* FireWeaponAction;
 
 	/**
 	 * @brief The shadow decal class used to draw a shadow below the character while in the air
@@ -219,7 +248,19 @@ protected:
 	 */
 	virtual void Jump() override;
 
+	/**
+	 * @brief Fire the current weapon
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Weapons")
+	void FireWeapon();
+
 private:
+	/**
+	 * @brief A reference to the current weapon
+	 */
+	UPROPERTY()
+	AWeapon* Weapon;
+	
 	/**
 	 * @brief Can the character perform a coyote jump?
 	 */

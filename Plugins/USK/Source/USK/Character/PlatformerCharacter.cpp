@@ -45,6 +45,15 @@ void APlatformerCharacter::Tick(float DeltaSeconds)
 }
 
 /**
+ * @brief Get the spring arm component of the character
+ * @return The spring arm component responsible for controlling the distance of the camera
+ */
+USpringArmComponent* APlatformerCharacter::GetSpringArmComponent() const
+{
+	return SpringArmComponent;
+}
+
+/**
  * @brief Adjust the camera position
  * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
  */

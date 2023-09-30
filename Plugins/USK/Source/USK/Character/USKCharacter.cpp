@@ -87,6 +87,7 @@ void AUSKCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	EnhancedInput->BindAction(LookAroundAction, ETriggerEvent::Triggered, this, &AUSKCharacter::RotateCamera);
 	EnhancedInput->BindAction(JumpAction, ETriggerEvent::Started, this, &AUSKCharacter::Jump);
 	EnhancedInput->BindAction(JumpAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopJumping);
+	EnhancedInput->BindAction(FireWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::FireWeapon);
 }
 
 /**
@@ -136,6 +137,33 @@ void AUSKCharacter::OnMovementModeChanged(EMovementMode PrevMovementMode, uint8 
 }
 
 /**
+ * @brief Get the camera used by the character
+ * @return The camera used by the character
+ */
+UCameraComponent* AUSKCharacter::GetCameraComponent() const
+{
+	return CameraComponent;
+}
+
+/**
+ * @brief Set the current weapon used by the character
+ * @param NewWeapon The new weapon
+ */
+void AUSKCharacter::SetWeapon(AWeapon* NewWeapon)
+{
+	Weapon = NewWeapon;
+}
+
+/**
+ * @brief Get the current weapon used by the character
+ * @return The current weapon used by the character
+ */
+AWeapon* AUSKCharacter::GetWeapon() const
+{
+	return Weapon;
+}
+
+/**
  * @brief Make the character jump on the next update
  */
 void AUSKCharacter::Jump()
@@ -168,6 +196,17 @@ void AUSKCharacter::Jump()
 	{
 		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), JumpParticleFx,
 			GetActorLocation() + JumpParticleFxSpawnOffset);
+	}
+}
+
+/**
+ * @brief Fire the current weapon
+ */
+void AUSKCharacter::FireWeapon()
+{
+	if (IsValid(Weapon))
+	{
+		Weapon->Fire();
 	}
 }
 
