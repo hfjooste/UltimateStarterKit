@@ -97,8 +97,13 @@ nav:
     - Base Character: uskcharacter.md
     - FPS Character: fpscharacter.md
     - 3D Platformer Character: platformercharacter.md
-    - Animation Instance: platformeranimation.md
+    - Animation Instance: characteranimationinstance.md
     - Shadow Decal: platformershadow.md
+  - Weapons:
+    - Weapon: weapon.md
+    - Weapon Type: weapontype.md
+    - Weapon Item: weaponitem.md
+    - Weapon Projectile: weaponprojectile.md
   - Items:
     - Allowed Collector: allowedcollector.md
     - Collectable Item: collectableitem.md

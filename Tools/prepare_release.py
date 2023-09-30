@@ -6,7 +6,7 @@ print(f"Documentation script path: {docs}\n")
 os.system(f"python \"{docs}\" --input \"Audio\\AudioUtils\" --output audioutils")
 os.system(f"python \"{docs}\" --input \"Audio\\MusicPlayer\" --output music")
 
-os.system(f"python \"{docs}\" --input \"Character\\PlatformerAnimationInstance\" --output platformeranimation")
+os.system(f"python \"{docs}\" --input \"Character\\USKCharacterAnimationInstance\" --output characteranimationinstance")
 os.system(f"python \"{docs}\" --input \"Character\\PlatformerCharacter\" --output platformercharacter")
 os.system(f"python \"{docs}\" --input \"Character\\ShadowDecal\" --output platformershadow")
 os.system(f"python \"{docs}\" --input \"Character\\USKCharacter\" --output uskcharacter")
@@ -49,6 +49,11 @@ os.system(f"python \"{docs}\" --input \"Utils\\ConfigUtils\" --output configutil
 os.system(f"python \"{docs}\" --input \"Utils\\Platform\" --output platformtype")
 os.system(f"python \"{docs}\" --input \"Utils\\PlatformUtils\" --output platformutils")
 os.system(f"python \"{docs}\" --input \"Utils\\ProjectUtils\" --output projectutils")
+
+os.system(f"python \"{docs}\" --input \"Weapons\\Weapon\" --output weapon")
+os.system(f"python \"{docs}\" --input \"Weapons\\WeaponType\" --output weapontype")
+os.system(f"python \"{docs}\" --input \"Weapons\\WeaponItem\" --output weaponitem")
+os.system(f"python \"{docs}\" --input \"Weapons\\WeaponProjectile\" --output weaponprojectile")
 
 os.system(f"python \"{docs}\" --input \"Widgets\\CollectableItemIcon\" --output collectableitemicon")
 os.system(f"python \"{docs}\" --input \"Widgets\\CreditsEntry\" --output creditsentry")

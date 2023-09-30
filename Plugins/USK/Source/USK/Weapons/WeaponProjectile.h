@@ -56,7 +56,7 @@ protected:
 	 * @param NormalImpulse The normal impulse of the hit
 	 * @param HitResult Result describing the hit
 	 */
-	UFUNCTION()
+	UFUNCTION(Category = "Ultimate Starter Kit|Weapon Projectile")
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 		FVector NormalImpulse, const FHitResult& HitResult);
 };

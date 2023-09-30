@@ -64,5 +64,21 @@ The <code>PlatformerCharacter</code> uses the following components:
 	</tr>
 </table>
 
+### Functions
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Params</th>
+		<th>Return</th>
+	</tr>
+	<tr>
+		<td>GetSpringArmComponent</td>
+		<td>Get the spring arm component of the character</td>
+		<td></td>
+		<td><strong>USpringArmComponent*</strong><br/>The spring arm component responsible for controlling the distance of the camera</td>
+	</tr>
+</table>
+
 ## Blueprint Usage
 There is no additional functions exposed to Blueprints. Just create the character and add it to your level

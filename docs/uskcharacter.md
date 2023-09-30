@@ -33,6 +33,18 @@ The <code>USKCharacter</code> uses the following components:
 		<th>Default Value</th>
 	</tr>
 	<tr>
+		<td>IsDoubleJumping</td>
+		<td>Is the character double jumping?</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>WeaponAttachPoint</td>
+		<td>The attach point used by all weapons</td>
+		<td>FName</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>InputMappingContext</td>
 		<td>The input mapping context used by the player</td>
 		<td>UInputMappingContext*</td>
@@ -53,6 +65,12 @@ The <code>USKCharacter</code> uses the following components:
 	<tr>
 		<td>JumpAction</td>
 		<td>The jump input action</td>
+		<td>UInputAction*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>FireWeaponAction</td>
+		<td>The fire weapon input action</td>
 		<td>UInputAction*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -169,6 +187,40 @@ The <code>USKCharacter</code> uses the following components:
 		<td>The rate of change of velocity</td>
 		<td>float</td>
 		<td>2500.0f</td>
+	</tr>
+</table>
+
+### Functions
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Params</th>
+		<th>Return</th>
+	</tr>
+	<tr>
+		<td>GetCameraComponent</td>
+		<td>Get the camera used by the character</td>
+		<td></td>
+		<td><strong>UCameraComponent*</strong><br/>The camera used by the character</td>
+	</tr>
+	<tr>
+		<td>SetWeapon</td>
+		<td>Set the current weapon used by the character</td>
+		<td><strong>NewWeapon (AWeapon*)</strong><br/>The new weapon</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GetWeapon</td>
+		<td>Get the current weapon used by the character</td>
+		<td></td>
+		<td><strong>AWeapon*</strong><br/>The current weapon used by the character</td>
+	</tr>
+	<tr>
+		<td>FireWeapon</td>
+		<td>Fire the current weapon</td>
+		<td></td>
+		<td></td>
 	</tr>
 </table>
 
