@@ -17,6 +17,7 @@
 #include "USK/Inventory/InventoryWidget.h"
 #include "USK/Items/CollectableItem.h"
 #include "USK/Logger/LogConfig.h"
+#include "USK/Weapons/WeaponItem.h"
 #include "USK/Widgets/CollectableItemIcon.h"
 #include "USK/Widgets/CreditsWidget.h"
 #include "USK/Widgets/FpsCounter.h"
@@ -50,6 +51,13 @@ void FUSKEditorModule::StartupModule()
 		FColor(63, 126, 255), AShadowDecal::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "Gameplay", "Collectable Item",
 		FColor(63, 126, 255), ACollectableItem::StaticClass());
+
+	RegisterBlueprint(AssetTools, UskCategory, "Weapons", "Weapon",
+		FColor(52, 255, 180), AWeapon::StaticClass());
+	RegisterBlueprint(AssetTools, UskCategory, "Weapons", "Weapon Item",
+		FColor(52, 255, 180), AWeaponItem::StaticClass());
+	RegisterBlueprint(AssetTools, UskCategory, "Weapons", "Weapon Projectile",
+		FColor(52, 255, 180), AWeaponProjectile::StaticClass());
 
 	RegisterDialogue(AssetTools, UskCategory, "Dialogue",
 		FColor(255, 201, 14), UDialogue::StaticClass());
