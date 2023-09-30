@@ -177,49 +177,49 @@ protected:
 	 * @return The idle animation to play
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
-	UAnimSequenceBase* GetIdleAnimation() const;
+	UAnimSequence* GetIdleAnimation() const;
 
 	/**
 	 * @brief Get the walk animation based on the current armed state
 	 * @return The walk animation to play
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
-	UAnimSequenceBase* GetWalkAnimation() const;
+	UAnimSequence* GetWalkAnimation() const;
 
 	/**
 	 * @brief Get the run animation based on the current armed state
 	 * @return The run animation to play
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
-	UAnimSequenceBase* GetRunAnimation() const;
+	UAnimSequence* GetRunAnimation() const;
 
 	/**
 	 * @brief Get the jump animation based on the current armed state
 	 * @return The jump animation to play
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
-	UAnimSequenceBase* GetJumpAnimation() const;
+	UAnimSequence* GetJumpAnimation() const;
 
 	/**
 	 * @brief Get the double jump animation based on the current armed state
 	 * @return The double jump animation to play
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
-	UAnimSequenceBase* GetDoubleJumpAnimation() const;
+	UAnimSequence* GetDoubleJumpAnimation() const;
 
 	/**
 	 * @brief Get the fall animation based on the current armed state
 	 * @return The fall animation to play
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
-	UAnimSequenceBase* GetFallAnimation() const;
+	UAnimSequence* GetFallAnimation() const;
 
 	/**
 	 * @brief Get the land animation based on the current armed state
 	 * @return The land animation to play
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
-	UAnimSequenceBase* GetLandAnimation() const;
+	UAnimSequence* GetLandAnimation() const;
 
 private:
 	/**
@@ -235,6 +235,6 @@ private:
 	 * @param WeaponTwoHandedAnimation The two handed weapon animation
 	 * @return The animation to play
 	 */
-	UAnimSequenceBase* GetAnimation(UAnimSequenceBase* UnarmedAnimation, UAnimSequenceBase* WeaponOneHandedAnimation,
-		UAnimSequenceBase* WeaponTwoHandedAnimation) const;
+	UAnimSequence* GetAnimation(UAnimSequence* UnarmedAnimation, UAnimSequence* WeaponOneHandedAnimation,
+		UAnimSequence* WeaponTwoHandedAnimation) const;
 };

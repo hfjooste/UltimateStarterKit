@@ -52,7 +52,7 @@ void UUSKCharacterAnimationInstance::NativeUpdateAnimation(float DeltaSeconds)
  * @brief Get the idle animation based on the current armed state
  * @return The idle animation to play
  */
-UAnimSequenceBase* UUSKCharacterAnimationInstance::GetIdleAnimation() const
+UAnimSequence* UUSKCharacterAnimationInstance::GetIdleAnimation() const
 {
 	return GetAnimation(IdleAnimation, IdleWeaponOneHandedAnimation, IdleWeaponTwoHandedAnimation);
 }
@@ -61,7 +61,7 @@ UAnimSequenceBase* UUSKCharacterAnimationInstance::GetIdleAnimation() const
  * @brief Get the walk animation based on the current armed state
  * @return The walk animation to play
  */
-UAnimSequenceBase* UUSKCharacterAnimationInstance::GetWalkAnimation() const
+UAnimSequence* UUSKCharacterAnimationInstance::GetWalkAnimation() const
 {
 	return GetAnimation(WalkAnimation, WalkWeaponOneHandedAnimation, WalkWeaponTwoHandedAnimation);
 }
@@ -70,7 +70,7 @@ UAnimSequenceBase* UUSKCharacterAnimationInstance::GetWalkAnimation() const
  * @brief Get the run animation based on the current armed state
  * @return The run animation to play
  */
-UAnimSequenceBase* UUSKCharacterAnimationInstance::GetRunAnimation() const
+UAnimSequence* UUSKCharacterAnimationInstance::GetRunAnimation() const
 {
 	return GetAnimation(RunAnimation, RunWeaponOneHandedAnimation, RunWeaponTwoHandedAnimation);
 }
@@ -79,7 +79,7 @@ UAnimSequenceBase* UUSKCharacterAnimationInstance::GetRunAnimation() const
  * @brief Get the jump animation based on the current armed state
  * @return The jump animation to play
  */
-UAnimSequenceBase* UUSKCharacterAnimationInstance::GetJumpAnimation() const
+UAnimSequence* UUSKCharacterAnimationInstance::GetJumpAnimation() const
 {
 	return GetAnimation(JumpAnimation, JumpWeaponOneHandedAnimation, JumpWeaponTwoHandedAnimation);
 }
@@ -88,7 +88,7 @@ UAnimSequenceBase* UUSKCharacterAnimationInstance::GetJumpAnimation() const
  * @brief Get the double jump animation based on the current armed state
  * @return The double jump animation to play
  */
-UAnimSequenceBase* UUSKCharacterAnimationInstance::GetDoubleJumpAnimation() const
+UAnimSequence* UUSKCharacterAnimationInstance::GetDoubleJumpAnimation() const
 {
 	return GetAnimation(DoubleJumpAnimation, DoubleJumpWeaponOneHandedAnimation, DoubleJumpWeaponTwoHandedAnimation);
 }
@@ -97,7 +97,7 @@ UAnimSequenceBase* UUSKCharacterAnimationInstance::GetDoubleJumpAnimation() cons
  * @brief Get the fall animation based on the current armed state
  * @return The fall animation to play
  */
-UAnimSequenceBase* UUSKCharacterAnimationInstance::GetFallAnimation() const
+UAnimSequence* UUSKCharacterAnimationInstance::GetFallAnimation() const
 {
 	return GetAnimation(FallAnimation, FallWeaponOneHandedAnimation, FallWeaponTwoHandedAnimation);
 }
@@ -106,7 +106,7 @@ UAnimSequenceBase* UUSKCharacterAnimationInstance::GetFallAnimation() const
  * @brief Get the land animation based on the current armed state
  * @return The land animation to play
  */
-UAnimSequenceBase* UUSKCharacterAnimationInstance::GetLandAnimation() const
+UAnimSequence* UUSKCharacterAnimationInstance::GetLandAnimation() const
 {
 	return GetAnimation(LandAnimation, LandOneHandedAnimation, LandWeaponTwoHandedAnimation);
 }
@@ -118,8 +118,8 @@ UAnimSequenceBase* UUSKCharacterAnimationInstance::GetLandAnimation() const
  * @param WeaponTwoHandedAnimation The two handed weapon animation
  * @return The animation to play
  */
-UAnimSequenceBase* UUSKCharacterAnimationInstance::GetAnimation(UAnimSequenceBase* UnarmedAnimation,
-	UAnimSequenceBase* WeaponOneHandedAnimation, UAnimSequenceBase* WeaponTwoHandedAnimation) const
+UAnimSequence* UUSKCharacterAnimationInstance::GetAnimation(UAnimSequence* UnarmedAnimation,
+	UAnimSequence* WeaponOneHandedAnimation, UAnimSequence* WeaponTwoHandedAnimation) const
 {
 	if (!IsValid(Character) || !IsValid(Character->GetWeapon()))
 	{
