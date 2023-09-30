@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameFramework/Pawn.h"
 #include "DialogueManager.generated.h"
 
 class UInputAction;
