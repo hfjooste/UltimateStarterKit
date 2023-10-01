@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "NiagaraSystem.h"
 #include "GameFramework/Actor.h"
 #include "Animation/AnimMontage.h"
 #include "WeaponProjectile.h"
@@ -44,6 +45,12 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
 	TSubclassOf<AWeaponProjectile> ProjectileClass;
+
+	/**
+	 * @brief The muzzle flash particle effects
+	 */
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Weapon")
+	UNiagaraSystem* MuzzleFlashParticleFx;
 
 	/**
 	 * @brief The sound played each time the weapon is fired

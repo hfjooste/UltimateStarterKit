@@ -2,6 +2,7 @@
 
 #include "Weapon.h"
 
+#include "NiagaraFunctionLibrary.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Character/USKCharacter.h"
 
@@ -64,6 +65,13 @@ void AWeapon::SpawnProjectile() const
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	GetWorld()->SpawnActor<AWeaponProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, SpawnParams);
 	UAudioUtils::PlaySound(Character, FireSound);
+
+	if (IsValid(MuzzleFlashParticleFx))
+    {
+    	UNiagaraFunctionLibrary::SpawnSystemAttached(MuzzleFlashParticleFx, MuzzleFlash, NAME_None,
+    		FVector::ZeroVector, FRotator::ZeroRotator,
+    		EAttachLocation::SnapToTarget, true);
+    }
 }
 
 /**
