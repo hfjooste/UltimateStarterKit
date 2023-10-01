@@ -6,7 +6,7 @@
 #include "InputActionValue.h"
 #include "NiagaraCommon.h"
 #include "GameFramework/Character.h"
-#include "..\Weapons\Weapon.h"
+#include "USK/Weapons/Weapon.h"
 #include "USKCharacter.generated.h"
 
 class UInputAction;
@@ -207,6 +207,12 @@ protected:
 	 */
 	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Movement")
 	float MaxAcceleration = 2500.0f;
+
+	/**
+	 * @brief The default weapon the character will equip on spawn
+	 */
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Weapons")
+	TSubclassOf<AWeapon> DefaultWeaponClass;
 
 	/**
 	 * @brief Overridable native event for when play begins for this actor

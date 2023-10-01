@@ -13,6 +13,7 @@
 #include "Camera/CameraComponent.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Logger/Log.h"
+#include "USK/Weapons/WeaponUtils.h"
 
 /**
  * @brief Create a new instance of the AUSKCharacter actor
@@ -55,6 +56,12 @@ void AUSKCharacter::BeginPlay()
 		USK_LOG_TRACE("Adding shadow decal");
 		AActor* ShadowDecalActor = GetWorld()->SpawnActor(ShadowDecalClass);
 		dynamic_cast<AShadowDecal*>(ShadowDecalActor)->Initialize(this);
+	}
+
+	if (IsValid(DefaultWeaponClass))
+	{
+		USK_LOG_TRACE("Equiping default weapon");
+		UWeaponUtils::EquipWeapon(this, DefaultWeaponClass);
 	}
 }
 
