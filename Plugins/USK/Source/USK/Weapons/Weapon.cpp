@@ -6,6 +6,16 @@
 #include "USK/Character/USKCharacter.h"
 
 /**
+ * @brief Create a new instance of the AWeapon actor
+ */
+AWeapon::AWeapon()
+{
+	RootComponent = CreateDefaultSubobject<USceneComponent>("Weapon Root");
+	MuzzleFlash = CreateDefaultSubobject<USceneComponent>("Muzzle Flash");
+	MuzzleFlash->SetupAttachment(RootComponent);
+}
+
+/**
  * @brief Attach the weapon to a character
  * @param TargetCharacter The character that will use the weapon
  */
@@ -48,10 +58,10 @@ void AWeapon::SpawnProjectile() const
 
 	const APlayerController* PlayerController = dynamic_cast<APlayerController*>(Character->GetController());
 	const FRotator SpawnRotation = PlayerController->PlayerCameraManager->GetCameraRotation();
-	const FVector SpawnLocation = GetActorLocation() + SpawnRotation.RotateVector(MuzzleOffset);
+	const FVector SpawnLocation = MuzzleFlash->GetComponentLocation();
 
 	FActorSpawnParameters SpawnParams;
-	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	GetWorld()->SpawnActor<AWeaponProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, SpawnParams);
 	UAudioUtils::PlaySound(Character, FireSound);
 }

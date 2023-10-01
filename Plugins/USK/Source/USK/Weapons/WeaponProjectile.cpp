@@ -29,6 +29,24 @@ AWeaponProjectile::AWeaponProjectile()
 }
 
 /**
+ * @brief Get the collision component used by the projectile
+ * @return The collision component used by the projectile
+ */
+USphereComponent* AWeaponProjectile::GetCollisionComponent() const
+{
+	return CollisionComponent;
+}
+
+/**
+ * @brief Get the projectile movement component used to move the projectile
+ * @return The projectile movement component used to move the projectile
+ */
+UProjectileMovementComponent* AWeaponProjectile::GetProjectileMovementComponent() const
+{
+	return ProjectileMovementComponent;
+}
+
+/**
  * @brief Called after the projectile hits something
  * @param HitComponent The component responsible for the hit
  * @param OtherActor The actor that was hit
@@ -48,24 +66,6 @@ void AWeaponProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherAc
 	{
 		OtherComponent->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
 	}
-
+	
 	Destroy();
-}
-
-/**
- * @brief Get the collision component used by the projectile
- * @return The collision component used by the projectile
- */
-USphereComponent* AWeaponProjectile::GetCollisionComponent() const
-{
-	return CollisionComponent;
-}
-
-/**
- * @brief Get the projectile movement component used to move the projectile
- * @return The projectile movement component used to move the projectile
- */
-UProjectileMovementComponent* AWeaponProjectile::GetProjectileMovementComponent() const
-{
-	return ProjectileMovementComponent;
 }

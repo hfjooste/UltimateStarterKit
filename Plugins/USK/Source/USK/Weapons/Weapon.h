@@ -18,6 +18,13 @@ UCLASS()
 class USK_API AWeapon : public AActor
 {
 	GENERATED_BODY()
+
+	/**
+	 * @brief The muzzle flash of the weapon
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Weapon",
+		meta=(AllowPrivateAccess = "true"))
+	class USceneComponent* MuzzleFlash;
 	
 public:
 	/**
@@ -51,10 +58,9 @@ public:
 	UAnimMontage* FireAnimation;
 
 	/**
-	 * @brief The muzzle offset of the weapon
+	 * @brief Create a new instance of the AWeapon actor
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
-	FVector MuzzleOffset;
+	AWeapon();
 
 	/**
 	 * @brief Attach the weapon to a character
