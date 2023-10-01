@@ -18,7 +18,7 @@ void AWeapon::AttachWeapon(AUSKCharacter* TargetCharacter)
 	}
 
 	const FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
-	AttachToComponent(Character->GetMesh(), AttachmentRules, Character->WeaponAttachPoint);
+	AttachToComponent(Character->GetMesh(), AttachmentRules, WeaponAttachPoint);
 	Character->SetWeapon(this);
 }
 

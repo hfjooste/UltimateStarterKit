@@ -35,12 +35,6 @@ public:
 	bool IsDoubleJumping;
 
 	/**
-	 * @brief The attach point used by all weapons
-	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Weapons")
-	FName WeaponAttachPoint;
-
-	/**
 	 * @brief Create a new instance of the AUSKCharacter actor
 	 */
 	AUSKCharacter();

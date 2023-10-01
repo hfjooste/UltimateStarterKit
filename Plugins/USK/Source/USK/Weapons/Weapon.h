@@ -27,6 +27,12 @@ public:
 	EWeaponType WeaponType;
 
 	/**
+	 * @brief The attach point used by all weapons
+	 */
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Weapon")
+	FName WeaponAttachPoint;
+
+	/**
 	 * @brief The projectile spawned by the weapon
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
