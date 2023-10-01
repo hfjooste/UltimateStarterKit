@@ -41,6 +41,12 @@ public:
 	FName WeaponAttachPoint;
 
 	/**
+	 * @brief The relative transform of the weapon after it is attached to a character
+	 */
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Weapon")
+	FTransform WeaponTransform;
+
+	/**
 	 * @brief The projectile spawned by the weapon
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")

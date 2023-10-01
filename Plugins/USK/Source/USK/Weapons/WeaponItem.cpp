@@ -33,4 +33,5 @@ void AWeaponItem::OnItemCollected_Implementation(AActor* Collector)
 	}
 
 	Weapon->AttachWeapon(Character);
+	Weapon->SetActorRelativeTransform(Weapon->WeaponTransform);
 }
