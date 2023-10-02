@@ -30,6 +30,12 @@ class USK_API AWeaponProjectile : public AActor
 
 public:
 	/**
+	 * @brief Should the projectile be destroyed after hitting something?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon Projectile")
+	bool bDestroyOnHit = true;
+	
+	/**
 	 * @brief Create a new instance of the AWeaponProjectile actor
 	 */
 	AWeaponProjectile();

@@ -68,6 +68,9 @@ void AWeaponProjectile::OnHit_Implementation(UPrimitiveComponent* HitComponent, 
 	{
 		OtherComponent->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
 	}
-	
-	Destroy();
+
+	if (bDestroyOnHit)
+	{
+		Destroy();	
+	}
 }
