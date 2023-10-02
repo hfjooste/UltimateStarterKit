@@ -21,6 +21,21 @@ class USK_API AWeapon : public AActor
 	GENERATED_BODY()
 
 	/**
+	 * @brief Event used to notify other classes when the weapon is equipped
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponEquipped);
+
+	/**
+	 * @brief Event used to notify other classes when the weapon is unequipped
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponUnequipped);
+
+	/**
+	 * @brief Event used to notify other classes when the weapon is fired
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponFired);
+
+	/**
 	 * @brief The muzzle flash of the weapon
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Weapon",
@@ -71,16 +86,40 @@ public:
 	UAnimMontage* FireAnimation;
 
 	/**
+	 * @brief Event used to notify other classes when the weapon is equipped
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Weapon|Events")
+	FWeaponEquipped OnWeaponEquipped;
+
+	/**
+	 * @brief Event used to notify other classes when the weapon is unequipped
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Weapon|Events")
+	FWeaponUnequipped OnWeaponUnequipped;
+
+	/**
+	 * @brief Event used to notify other classes when the weapon is fired
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Weapon|Events")
+	FWeaponFired OnWeaponFired;
+
+	/**
 	 * @brief Create a new instance of the AWeapon actor
 	 */
 	AWeapon();
 
 	/**
-	 * @brief Attach the weapon to a character
+	 * @brief Equip the weapon
 	 * @param TargetCharacter The character that will use the weapon
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
-	void AttachWeapon(AUSKCharacter* TargetCharacter);
+	void Equip(AUSKCharacter* TargetCharacter);
+
+	/**
+	 * @brief Unequip the weapon
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
+	void Unequip();
 
 	/**
 	 * @brief Fire the weapon

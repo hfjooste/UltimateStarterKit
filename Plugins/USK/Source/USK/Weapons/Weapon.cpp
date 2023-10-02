@@ -5,6 +5,7 @@
 #include "NiagaraFunctionLibrary.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Character/USKCharacter.h"
+#include "USK/Logger/Log.h"
 
 /**
  * @brief Create a new instance of the AWeapon actor
@@ -17,10 +18,10 @@ AWeapon::AWeapon()
 }
 
 /**
- * @brief Attach the weapon to a character
+ * @brief Equip the weapon
  * @param TargetCharacter The character that will use the weapon
  */
-void AWeapon::AttachWeapon(AUSKCharacter* TargetCharacter)
+void AWeapon::Equip(AUSKCharacter* TargetCharacter)
 {
 	Character = TargetCharacter;
 	if (!IsValid(Character))
@@ -31,6 +32,24 @@ void AWeapon::AttachWeapon(AUSKCharacter* TargetCharacter)
 	const FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
 	AttachToComponent(Character->GetMesh(), AttachmentRules, WeaponAttachPoint);
 	Character->SetWeapon(this);
+	SetActorRelativeTransform(WeaponTransform);
+	OnWeaponEquipped.Broadcast();
+	USK_LOG_INFO("Weapon equipped");
+}
+
+/**
+ * @brief Unequip the weapon
+ */
+void AWeapon::Unequip()
+{
+	if (IsValid(Character) && Character->GetWeapon() == this)
+	{
+		Character->SetWeapon(nullptr);
+	}
+
+	OnWeaponUnequipped.Broadcast();
+	USK_LOG_INFO("Weapon unequipped");
+	Destroy();
 }
 
 /**
@@ -44,7 +63,8 @@ void AWeapon::Fire()
 	}
 
 	SpawnProjectile();
-	PlayFireAnimation();	
+	PlayFireAnimation();
+	OnWeaponFired.Broadcast();
 }
 
 /**

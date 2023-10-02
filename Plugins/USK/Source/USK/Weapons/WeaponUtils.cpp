@@ -27,7 +27,7 @@ void UWeaponUtils::EquipWeapon(AUSKCharacter* Owner, const TSubclassOf<AWeapon> 
 	AWeapon* CurrentWeapon = Owner->GetWeapon();
 	if (IsValid(CurrentWeapon))
 	{
-		CurrentWeapon->Destroy();
+		CurrentWeapon->Unequip();
 	}
 
 	AWeapon* Weapon = Owner->GetWorld()->SpawnActor<AWeapon>(WeaponClass);
@@ -37,6 +37,5 @@ void UWeaponUtils::EquipWeapon(AUSKCharacter* Owner, const TSubclassOf<AWeapon> 
 		return;
 	}
 
-	Weapon->AttachWeapon(Owner);
-	Weapon->SetActorRelativeTransform(Weapon->WeaponTransform);
+	Weapon->Equip(Owner);
 }

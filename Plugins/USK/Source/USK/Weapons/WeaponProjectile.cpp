@@ -4,6 +4,7 @@
 
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "USK/Logger/Log.h"
 
 /**
  * @brief Create a new instance of the AWeaponProjectile actor
@@ -14,13 +15,13 @@ AWeaponProjectile::AWeaponProjectile()
 	CollisionComponent->InitSphereRadius(5.0f);
 	CollisionComponent->BodyInstance.SetCollisionProfileName("Projectile");
 	CollisionComponent->OnComponentHit.AddDynamic(this, &AWeaponProjectile::OnHit);
-	CollisionComponent->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
+	CollisionComponent->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.0f));
 	CollisionComponent->CanCharacterStepUpOn = ECB_No;
 	
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Movement"));
 	ProjectileMovementComponent->UpdatedComponent = CollisionComponent;
-	ProjectileMovementComponent->InitialSpeed = 3000.f;
-	ProjectileMovementComponent->MaxSpeed = 3000.f;
+	ProjectileMovementComponent->InitialSpeed = 3000.0f;
+	ProjectileMovementComponent->MaxSpeed = 3000.0f;
 	ProjectileMovementComponent->bRotationFollowsVelocity = true;
 	ProjectileMovementComponent->bShouldBounce = true;
 
@@ -54,14 +55,15 @@ UProjectileMovementComponent* AWeaponProjectile::GetProjectileMovementComponent(
  * @param NormalImpulse The normal impulse of the hit
  * @param HitResult Result describing the hit
  */
-void AWeaponProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,
+void AWeaponProjectile::OnHit_Implementation(UPrimitiveComponent* HitComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& HitResult)
 {
-	if (OtherActor == this)
+	if (!IsValid(OtherActor) || OtherActor == this)
 	{
 		return;
 	}
-	
+
+	USK_LOG_TRACE(*FString::Format(TEXT("Projectile hit {0}"), { OtherActor->GetName() }));
 	if (IsValid(OtherActor) && IsValid(OtherComponent) && OtherComponent->IsSimulatingPhysics())
 	{
 		OtherComponent->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
