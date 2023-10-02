@@ -104,6 +104,8 @@ nav:
     - Weapon Type: weapontype.md
     - Weapon Item: weaponitem.md
     - Weapon Projectile: weaponprojectile.md
+    - Weapon Projectile Data: weaponprojectiledata.md
+    - Weapon Utils: weaponutils.md
   - Items:
     - Allowed Collector: allowedcollector.md
     - Collectable Item: collectableitem.md

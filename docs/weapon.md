@@ -4,8 +4,24 @@ The weapon attached to characters
 ## Dependencies
 The <code>Weapon</code> relies on other components of this plugin to work:
 <ul>
+	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
 	<li><a href="../audio">Audio</a>: Used to play sound effects either 2D or at a specified location</li>
 </ul>
+
+## Components
+The <code>Weapon</code> uses the following components:
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Type</th>
+	</tr>
+	<tr>
+		<td>MuzzleFlash</td>
+		<td>The muzzle flash of the weapon</td>
+		<td>USceneComponent*</td>
+	</tr>
+</table>
 
 ## API Reference
 ### Properties
@@ -23,10 +39,28 @@ The <code>Weapon</code> relies on other components of this plugin to work:
 		<td></td>
 	</tr>
 	<tr>
-		<td>ProjectileClass</td>
-		<td>The projectile spawned by the weapon</td>
-		<td>TSubclassOf&lt;AWeaponProjectile&gt;</td>
+		<td>WeaponAttachPoint</td>
+		<td>The attach point used by all weapons</td>
+		<td>FName</td>
 		<td></td>
+	</tr>
+	<tr>
+		<td>WeaponTransform</td>
+		<td>The relative transform of the weapon after it is attached to a character</td>
+		<td>FTransform</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Projectiles</td>
+		<td>The projectiles spawned by the weapon</td>
+		<td>TArray&lt;FWeaponProjectileData&gt;</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>MuzzleFlashParticleFx</td>
+		<td>The muzzle flash particle effects</td>
+		<td>UNiagaraSystem*</td>
+		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
 		<td>FireSound</td>
@@ -40,10 +74,28 @@ The <code>Weapon</code> relies on other components of this plugin to work:
 		<td>UAnimMontage*</td>
 		<td><code>nullptr</code></td>
 	</tr>
+</table>
+
+### Events
+<table>
 	<tr>
-		<td>MuzzleOffset</td>
-		<td>The muzzle offset of the weapon</td>
-		<td>FVector</td>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Params</th>
+	</tr>
+	<tr>
+		<td>OnWeaponEquipped</td>
+		<td>Event used to notify other classes when the weapon is equipped</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>OnWeaponUnequipped</td>
+		<td>Event used to notify other classes when the weapon is unequipped</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>OnWeaponFired</td>
+		<td>Event used to notify other classes when the weapon is fired</td>
 		<td></td>
 	</tr>
 </table>
@@ -57,9 +109,15 @@ The <code>Weapon</code> relies on other components of this plugin to work:
 		<th>Return</th>
 	</tr>
 	<tr>
-		<td>AttachWeapon</td>
-		<td>Attach the weapon to a character</td>
+		<td>Equip</td>
+		<td>Equip the weapon</td>
 		<td><strong>TargetCharacter (AUSKCharacter*)</strong><br/>The character that will use the weapon</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Unequip</td>
+		<td>Unequip the weapon</td>
+		<td></td>
 		<td></td>
 	</tr>
 	<tr>
@@ -73,7 +131,8 @@ The <code>Weapon</code> relies on other components of this plugin to work:
 ## Blueprint Usage
 You can use the <code>Weapon</code> using Blueprints by adding one of the following nodes:
 <ul>
-	<li>Ultimate Starter Kit > Weapon > Attach Weapon</li>
+	<li>Ultimate Starter Kit > Weapon > Equip</li>
+	<li>Ultimate Starter Kit > Weapon > Unequip</li>
 	<li>Ultimate Starter Kit > Weapon > Fire</li>
 </ul>
 
@@ -90,7 +149,8 @@ The <code>Weapon</code> can now be used in any of your C++ files:
 void ATestActor::Test()
 {
 	// Weapon is a pointer to the AWeapon
-	Weapon->AttachWeapon(TargetCharacter);
+	Weapon->Equip(TargetCharacter);
+	Weapon->Unequip();
 	Weapon->Fire();
 }
 ```

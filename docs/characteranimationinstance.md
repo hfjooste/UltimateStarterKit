@@ -7,6 +7,9 @@ The <code>USKCharacterAnimationInstance</code> relies on other components of thi
 	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
 </ul>
 
+## Animation Montages
+The animation blueprint contains a <code>USK</code> slot that can be used to play animation montages
+
 ## API Reference
 ### Properties
 <table>

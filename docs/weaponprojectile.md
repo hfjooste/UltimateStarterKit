@@ -1,6 +1,12 @@
 ## Introduction
 The projectile spawned by weapons
 
+## Dependencies
+The <code>WeaponProjectile</code> relies on other components of this plugin to work:
+<ul>
+	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+</ul>
+
 ## Components
 The <code>WeaponProjectile</code> uses the following components:
 <table>
@@ -22,6 +28,28 @@ The <code>WeaponProjectile</code> uses the following components:
 </table>
 
 ## API Reference
+### Properties
+<table>
+	<tr>
+		<th>Property</th>
+		<th>Description</th>
+		<th>Type</th>
+		<th>Default Value</th>
+	</tr>
+	<tr>
+		<td>bDestroyOnHit</td>
+		<td>Should the projectile be destroyed after hitting something?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>HitImpulse</td>
+		<td>The impulse applied to the component that was hit</td>
+		<td>float</td>
+		<td></td>
+	</tr>
+</table>
+
 ### Functions
 <table>
 	<tr>

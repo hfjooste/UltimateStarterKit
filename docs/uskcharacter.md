@@ -39,12 +39,6 @@ The <code>USKCharacter</code> uses the following components:
 		<td></td>
 	</tr>
 	<tr>
-		<td>WeaponAttachPoint</td>
-		<td>The attach point used by all weapons</td>
-		<td>FName</td>
-		<td></td>
-	</tr>
-	<tr>
 		<td>InputMappingContext</td>
 		<td>The input mapping context used by the player</td>
 		<td>UInputMappingContext*</td>
@@ -187,6 +181,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>The rate of change of velocity</td>
 		<td>float</td>
 		<td>2500.0f</td>
+	</tr>
+	<tr>
+		<td>DefaultWeaponClass</td>
+		<td>The default weapon the character will equip on spawn</td>
+		<td>TSubclassOf&lt;AWeapon&gt;</td>
+		<td></td>
 	</tr>
 </table>
 

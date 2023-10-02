@@ -1,12 +1,6 @@
 ## Introduction
 A weapon item that can be picked up by a character
 
-## Dependencies
-The <code>WeaponItem</code> relies on other components of this plugin to work:
-<ul>
-	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
-</ul>
-
 ## API Reference
 ### Properties
 <table>
