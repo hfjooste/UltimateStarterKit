@@ -64,9 +64,9 @@ void AWeaponProjectile::OnHit_Implementation(UPrimitiveComponent* HitComponent, 
 	}
 
 	USK_LOG_TRACE(*FString::Format(TEXT("Projectile hit {0}"), { OtherActor->GetName() }));
-	if (IsValid(OtherActor) && IsValid(OtherComponent) && OtherComponent->IsSimulatingPhysics())
+	if (IsValid(OtherComponent) && !FMath::IsNearlyZero(HitImpulse) && OtherComponent->IsSimulatingPhysics())
 	{
-		OtherComponent->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
+		OtherComponent->AddImpulseAtLocation(GetVelocity() * HitImpulse, GetActorLocation());
 	}
 
 	if (bDestroyOnHit)

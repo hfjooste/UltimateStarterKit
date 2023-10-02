@@ -34,6 +34,12 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon Projectile")
 	bool bDestroyOnHit = true;
+
+	/**
+	 * @brief The impulse applied to the component that was hit
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon Projectile")
+	float HitImpulse;
 	
 	/**
 	 * @brief Create a new instance of the AWeaponProjectile actor
