@@ -7,6 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "Animation/AnimMontage.h"
 #include "WeaponProjectile.h"
+#include "WeaponProjectileData.h"
 #include "WeaponType.h"
 #include "Weapon.generated.h"
 
@@ -62,10 +63,10 @@ public:
 	FTransform WeaponTransform;
 
 	/**
-	 * @brief The projectile spawned by the weapon
+	 * @brief The projectiles spawned by the weapon
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
-	TSubclassOf<AWeaponProjectile> ProjectileClass;
+	TArray<FWeaponProjectileData> Projectiles;
 
 	/**
 	 * @brief The muzzle flash particle effects
@@ -136,8 +137,9 @@ private:
 
 	/**
 	 * @brief Spawn the projectile
+	 * @param Projectile The projectile to spawn
 	 */
-	void SpawnProjectile() const;
+	void SpawnProjectile(const FWeaponProjectileData& Projectile) const;
 
 	/**
 	 * @brief Play the fire animation

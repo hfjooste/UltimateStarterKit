@@ -3,6 +3,7 @@
 #include "Weapon.h"
 
 #include "NiagaraFunctionLibrary.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Character/USKCharacter.h"
 #include "USK/Logger/Log.h"
@@ -62,36 +63,48 @@ void AWeapon::Fire()
 		return;
 	}
 
-	SpawnProjectile();
+	UAudioUtils::PlaySound(Character, FireSound);
+	for (FWeaponProjectileData Projectile : Projectiles)
+	{
+		SpawnProjectile(Projectile);
+	}
+
+	if (IsValid(MuzzleFlashParticleFx))
+	{
+		UNiagaraFunctionLibrary::SpawnSystemAttached(MuzzleFlashParticleFx, MuzzleFlash, NAME_None,
+			FVector::ZeroVector, FRotator::ZeroRotator,
+			EAttachLocation::SnapToTarget, true);
+	}
+	
 	PlayFireAnimation();
 	OnWeaponFired.Broadcast();
 }
 
 /**
  * @brief Spawn the projectile
+ * @param Projectile The projectile to spawn
  */
-void AWeapon::SpawnProjectile() const
+void AWeapon::SpawnProjectile(const FWeaponProjectileData& Projectile) const
 {
-	if (!IsValid(ProjectileClass))
+	if (!IsValid(Projectile.ProjectileClass))
 	{
 		return;
 	}
 
 	const APlayerController* PlayerController = dynamic_cast<APlayerController*>(Character->GetController());
-	const FRotator SpawnRotation = PlayerController->PlayerCameraManager->GetCameraRotation();
-	const FVector SpawnLocation = MuzzleFlash->GetComponentLocation();
+	const FRotator SpawnRotation = UKismetMathLibrary::ComposeRotators(
+		PlayerController->PlayerCameraManager->GetCameraRotation(), Projectile.SpawnTransform.Rotator());
+	const FVector SpawnLocation = MuzzleFlash->GetComponentLocation() + Projectile.SpawnTransform.GetLocation();
 
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-	GetWorld()->SpawnActor<AWeaponProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, SpawnParams);
-	UAudioUtils::PlaySound(Character, FireSound);
-
-	if (IsValid(MuzzleFlashParticleFx))
-    {
-    	UNiagaraFunctionLibrary::SpawnSystemAttached(MuzzleFlashParticleFx, MuzzleFlash, NAME_None,
-    		FVector::ZeroVector, FRotator::ZeroRotator,
-    		EAttachLocation::SnapToTarget, true);
-    }
+	AWeaponProjectile* WeaponProjectile = GetWorld()->SpawnActor<AWeaponProjectile>(Projectile.ProjectileClass,
+		SpawnLocation, SpawnRotation, SpawnParams);
+	
+	if (IsValid(WeaponProjectile))
+	{
+		WeaponProjectile->SetActorScale3D(Projectile.SpawnTransform.GetScale3D());
+	}
 }
 
 /**
