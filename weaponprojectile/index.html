@@ -14,7 +14,7 @@
         <link rel="prev" href="../weaponitem/">
       
       
-        <link rel="next" href="../allowedcollector/">
+        <link rel="next" href="../weaponprojectiledata/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
@@ -1088,6 +1088,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#components" class="md-nav__link">
     Components
   </a>
@@ -1101,6 +1108,13 @@
   
     <nav class="md-nav" aria-label="API Reference">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#functions" class="md-nav__link">
@@ -1132,6 +1146,34 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../weaponprojectiledata/" class="md-nav__link">
+        Weapon Projectile Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../weaponutils/" class="md-nav__link">
+        Weapon Utils
+      </a>
     </li>
   
 
@@ -1745,6 +1787,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    Dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#components" class="md-nav__link">
     Components
   </a>
@@ -1758,6 +1807,13 @@
   
     <nav class="md-nav" aria-label="API Reference">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#functions" class="md-nav__link">
@@ -1807,6 +1863,12 @@
 
 <h2 id="introduction">Introduction</h2>
 <p>The projectile spawned by weapons</p>
+<h2 id="dependencies">Dependencies</h2>
+<p>The <code>WeaponProjectile</code> relies on other components of this plugin to work:</p>
+<ul>
+    <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+</ul>
+
 <h2 id="components">Components</h2>
 <p>The <code>WeaponProjectile</code> uses the following components:</p>
 <table>
@@ -1828,6 +1890,28 @@
 </table>
 
 <h2 id="api-reference">API Reference</h2>
+<h3 id="properties">Properties</h3>
+<table>
+    <tr>
+        <th>Property</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Default Value</th>
+    </tr>
+    <tr>
+        <td>bDestroyOnHit</td>
+        <td>Should the projectile be destroyed after hitting something?</td>
+        <td>bool</td>
+        <td>true</td>
+    </tr>
+    <tr>
+        <td>HitImpulse</td>
+        <td>The impulse applied to the component that was hit</td>
+        <td>float</td>
+        <td></td>
+    </tr>
+</table>
+
 <h3 id="functions">Functions</h3>
 <table>
     <tr>
