@@ -37,14 +37,20 @@ class USK_API AWeapon : public AActor
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponFired);
 
 	/**
-	 * @brief Event used to notify other classes when the ammo is empty
-	 */
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponAmmoEmpty);
-
-	/**
 	 * @brief Event used to notify other classes when the weapon is fired with an empty clip
 	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponFiredEmptyClip);
+
+	/**
+	 * @brief Event used to notify other classes when the ammo is updated
+	 * @param RemainingAmmo The amount of ammo remaining
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWeaponAmmoUpdated, int, RemainingAmmo);
+
+	/**
+	 * @brief Event used to notify other classes when the ammo is empty
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponAmmoEmpty);
 
 	/**
 	 * @brief The muzzle flash of the weapon
@@ -161,16 +167,22 @@ public:
 	FWeaponFired OnWeaponFired;
 
 	/**
-	 * @brief Event used to notify other classes when the ammo is empty
-	 */
-	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Weapon|Events")
-	FWeaponAmmoEmpty OnWeaponAmmoEmpty;
-
-	/**
 	 * @brief Event used to notify other classes when the weapon is fired with an empty clip
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Weapon|Events")
 	FWeaponFiredEmptyClip OnWeaponFiredEmptyClip;
+
+	/**
+	 * @brief Event used to notify other classes when the ammo is updated
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Weapon|Events")
+	FWeaponAmmoUpdated OnWeaponAmmoUpdated;
+
+	/**
+	 * @brief Event used to notify other classes when the ammo is empty
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Weapon|Events")
+	FWeaponAmmoEmpty OnWeaponAmmoEmpty;
 
 	/**
 	 * @brief Create a new instance of the AWeapon actor
@@ -201,6 +213,27 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
 	void StopFiring();
+
+	/**
+	 * @brief Add more ammo to the weapon
+	 * @param Amount The amount of ammo to add
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
+	void AddAmmo(int Amount);
+
+	/**
+	 * @brief Remove ammo from the weapon
+	 * @param Amount The amount of ammo to remove
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
+	void RemoveAmmo(int Amount);
+
+	/**
+	 * @brief Get the amount of ammo remaining
+	 * @return The amount of ammo remaining
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Weapon")
+	int GetAmmoRemaining() const;	
 
 protected:
 	/**

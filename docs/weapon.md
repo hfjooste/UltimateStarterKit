@@ -141,13 +141,18 @@ The <code>Weapon</code> uses the following components:
 		<td></td>
 	</tr>
 	<tr>
-		<td>OnWeaponAmmoEmpty</td>
-		<td>Event used to notify other classes when the ammo is empty</td>
+		<td>OnWeaponFiredEmptyClip</td>
+		<td>Event used to notify other classes when the weapon is fired with an empty clip</td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>OnWeaponFiredEmptyClip</td>
-		<td>Event used to notify other classes when the weapon is fired with an empty clip</td>
+		<td>OnWeaponAmmoUpdated</td>
+		<td>Event used to notify other classes when the ammo is updated</td>
+		<td><strong>RemainingAmmo (int)</strong><br/>The amount of ammo remaining</td>
+	</tr>
+	<tr>
+		<td>OnWeaponAmmoEmpty</td>
+		<td>Event used to notify other classes when the ammo is empty</td>
 		<td></td>
 	</tr>
 </table>
@@ -184,6 +189,24 @@ The <code>Weapon</code> uses the following components:
 		<td></td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>AddAmmo</td>
+		<td>Add more ammo to the weapon</td>
+		<td><strong>Amount (int)</strong><br/>The amount of ammo to add</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>RemoveAmmo</td>
+		<td>Remove ammo from the weapon</td>
+		<td><strong>Amount (int)</strong><br/>The amount of ammo to remove</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GetAmmoRemaining</td>
+		<td>Get the amount of ammo remaining</td>
+		<td></td>
+		<td><strong>int</strong><br/>The amount of ammo remaining</td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -193,6 +216,9 @@ You can use the <code>Weapon</code> using Blueprints by adding one of the follow
 	<li>Ultimate Starter Kit > Weapon > Unequip</li>
 	<li>Ultimate Starter Kit > Weapon > Start Firing</li>
 	<li>Ultimate Starter Kit > Weapon > Stop Firing</li>
+	<li>Ultimate Starter Kit > Weapon > Add Ammo</li>
+	<li>Ultimate Starter Kit > Weapon > Remove Ammo</li>
+	<li>Ultimate Starter Kit > Weapon > Get Ammo Remaining</li>
 </ul>
 
 ## C++ Usage
@@ -212,5 +238,8 @@ void ATestActor::Test()
 	Weapon->Unequip();
 	Weapon->StartFiring();
 	Weapon->StopFiring();
+	Weapon->AddAmmo(Amount);
+	Weapon->RemoveAmmo(Amount);
+	int AmmoRemaining = Weapon->GetAmmoRemaining();
 }
 ```

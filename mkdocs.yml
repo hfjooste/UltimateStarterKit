@@ -104,6 +104,7 @@ nav:
     - Weapon Type: weapontype.md
     - Weapon Fire Mode: weaponfiremode.md
     - Weapon Item: weaponitem.md
+    - Weapon Ammo Item: weaponammoitem.md
     - Weapon Projectile: weaponprojectile.md
     - Weapon Projectile Data: weaponprojectiledata.md
     - Weapon Utils: weaponutils.md

@@ -98,6 +98,42 @@ void AWeapon::StopFiring()
 }
 
 /**
+ * @brief Add more ammo to the weapon
+ * @param Amount The amount of ammo to add
+ */
+void AWeapon::AddAmmo(const int Amount)
+{
+	USK_LOG_DEBUG("Adding ammo to the weapon");
+	AmmoRemaining = FMath::Min(AmmoRemaining + Amount, Ammo);
+	OnWeaponAmmoUpdated.Broadcast(AmmoRemaining);
+}
+
+/**
+ * @brief Remove ammo from the weapon
+ * @param Amount The amount of ammo to remove
+ */
+void AWeapon::RemoveAmmo(const int Amount)
+{
+	USK_LOG_DEBUG("Removing ammo from the weapon");
+	AmmoRemaining = FMath::Max(AmmoRemaining - Amount, 0);
+	OnWeaponAmmoUpdated.Broadcast(AmmoRemaining);
+
+	if (AmmoRemaining <= 0)
+	{
+		OnWeaponAmmoEmpty.Broadcast();
+	}
+}
+
+/**
+ * @brief Get the amount of ammo remaining
+ * @return The amount of ammo remaining
+ */
+int AWeapon::GetAmmoRemaining() const
+{
+	return AmmoRemaining;
+}
+
+/**
  * @brief Fire a single shot weapon
  */
 void AWeapon::StartFiringSingleShot()
@@ -117,11 +153,7 @@ void AWeapon::StartFiringSingleShot()
 
 	if (!bInfiniteAmmo)
 	{
-		AmmoRemaining--;
-		if (AmmoRemaining <= 0)
-		{
-			OnWeaponAmmoEmpty.Broadcast();
-		}
+		RemoveAmmo(1);
 	}
 	
 	UAudioUtils::PlaySound(Character, FireSound);

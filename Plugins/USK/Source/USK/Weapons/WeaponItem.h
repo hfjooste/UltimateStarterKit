@@ -19,7 +19,7 @@ public:
 	/**
 	 * @brief The weapon assigned to this item
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Item")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Item")
 	TSubclassOf<AWeapon> WeaponClass;
 
 	/**
