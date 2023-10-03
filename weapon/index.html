@@ -1136,8 +1136,36 @@
   
   
     <li class="md-nav__item">
+      <a href="../weaponfiremode/" class="md-nav__link">
+        Weapon Fire Mode
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../weaponitem/" class="md-nav__link">
         Weapon Item
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../weaponammoitem/" class="md-nav__link">
+        Weapon Ammo Item
       </a>
     </li>
   
@@ -1915,6 +1943,36 @@
         <td></td>
     </tr>
     <tr>
+        <td>WeaponFireMode</td>
+        <td>The fire mode of weapon</td>
+        <td>EWeaponFireMode</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>FireRate</td>
+        <td>The fire rate of the weapon (amount of seconds between each shot)</td>
+        <td>float</td>
+        <td>0.2f</td>
+    </tr>
+    <tr>
+        <td>MaxShotsPerFireEvent</td>
+        <td>The amount of shots fired per fire event</td>
+        <td>int</td>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td>bInfiniteAmmo</td>
+        <td>Does the weapon have an infinite amount of ammo?</td>
+        <td>bool</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Ammo</td>
+        <td>The amount of ammo for the weapon</td>
+        <td>int</td>
+        <td>50</td>
+    </tr>
+    <tr>
         <td>WeaponAttachPoint</td>
         <td>The attach point used by all weapons</td>
         <td>FName</td>
@@ -1945,8 +2003,20 @@
         <td><code>nullptr</code></td>
     </tr>
     <tr>
+        <td>EmptyClipFireSound</td>
+        <td>The sound played each time the weapon is fired with an empty clip</td>
+        <td>USoundBase*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
         <td>FireAnimation</td>
         <td>The animation played when the weapon is fired</td>
+        <td>UAnimMontage*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>EmptyClipFireAnimation</td>
+        <td>The animation played when the weapon is fired with an empty clip</td>
         <td>UAnimMontage*</td>
         <td><code>nullptr</code></td>
     </tr>
@@ -1974,6 +2044,21 @@
         <td>Event used to notify other classes when the weapon is fired</td>
         <td></td>
     </tr>
+    <tr>
+        <td>OnWeaponFiredEmptyClip</td>
+        <td>Event used to notify other classes when the weapon is fired with an empty clip</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>OnWeaponAmmoUpdated</td>
+        <td>Event used to notify other classes when the ammo is updated</td>
+        <td><strong>RemainingAmmo (int)</strong><br/>The amount of ammo remaining</td>
+    </tr>
+    <tr>
+        <td>OnWeaponAmmoEmpty</td>
+        <td>Event used to notify other classes when the ammo is empty</td>
+        <td></td>
+    </tr>
 </table>
 
 <h3 id="functions">Functions</h3>
@@ -1997,10 +2082,34 @@
         <td></td>
     </tr>
     <tr>
-        <td>Fire</td>
-        <td>Fire the weapon</td>
+        <td>StartFiring</td>
+        <td>Start firing the weapon</td>
         <td></td>
         <td></td>
+    </tr>
+    <tr>
+        <td>StopFiring</td>
+        <td>Stop firing the weapon</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>AddAmmo</td>
+        <td>Add more ammo to the weapon</td>
+        <td><strong>Amount (int)</strong><br/>The amount of ammo to add</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>RemoveAmmo</td>
+        <td>Remove ammo from the weapon</td>
+        <td><strong>Amount (int)</strong><br/>The amount of ammo to remove</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>GetAmmoRemaining</td>
+        <td>Get the amount of ammo remaining</td>
+        <td></td>
+        <td><strong>int</strong><br/>The amount of ammo remaining</td>
     </tr>
 </table>
 
@@ -2009,7 +2118,11 @@
 <ul>
     <li>Ultimate Starter Kit > Weapon > Equip</li>
     <li>Ultimate Starter Kit > Weapon > Unequip</li>
-    <li>Ultimate Starter Kit > Weapon > Fire</li>
+    <li>Ultimate Starter Kit > Weapon > Start Firing</li>
+    <li>Ultimate Starter Kit > Weapon > Stop Firing</li>
+    <li>Ultimate Starter Kit > Weapon > Add Ammo</li>
+    <li>Ultimate Starter Kit > Weapon > Remove Ammo</li>
+    <li>Ultimate Starter Kit > Weapon > Get Ammo Remaining</li>
 </ul>
 
 <h2 id="c-usage">C++ Usage</h2>
@@ -2024,7 +2137,11 @@ void ATestActor::Test()
     // Weapon is a pointer to the AWeapon
     Weapon-&gt;Equip(TargetCharacter);
     Weapon-&gt;Unequip();
-    Weapon-&gt;Fire();
+    Weapon-&gt;StartFiring();
+    Weapon-&gt;StopFiring();
+    Weapon-&gt;AddAmmo(Amount);
+    Weapon-&gt;RemoveAmmo(Amount);
+    int AmmoRemaining = Weapon-&gt;GetAmmoRemaining();
 }
 </code></pre>
 
