@@ -249,10 +249,16 @@ protected:
 	virtual void Jump() override;
 
 	/**
-	 * @brief Fire the current weapon
+	 * @brief Start firing the current weapon
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Weapons")
-	void FireWeapon();
+	void StartFiringWeapon();
+
+	/**
+	 * @brief Stop firing the current weapon
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Weapons")
+	void StopFiringWeapon();
 
 private:
 	/**

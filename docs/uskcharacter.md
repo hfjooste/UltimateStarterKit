@@ -217,8 +217,14 @@ The <code>USKCharacter</code> uses the following components:
 		<td><strong>AWeapon*</strong><br/>The current weapon used by the character</td>
 	</tr>
 	<tr>
-		<td>FireWeapon</td>
-		<td>Fire the current weapon</td>
+		<td>StartFiringWeapon</td>
+		<td>Start firing the current weapon</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>StopFiringWeapon</td>
+		<td>Stop firing the current weapon</td>
 		<td></td>
 		<td></td>
 	</tr>

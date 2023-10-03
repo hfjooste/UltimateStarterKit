@@ -4,6 +4,7 @@
 
 #include "NiagaraFunctionLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Character/USKCharacter.h"
 #include "USK/Logger/Log.h"
@@ -54,11 +55,44 @@ void AWeapon::Unequip()
 }
 
 /**
- * @brief Fire the weapon
+ * @brief Start firing the weapon
  */
-void AWeapon::Fire()
+void AWeapon::StartFiring()
 {
-	if (!IsValid(Character) || !IsValid(Character->GetController()))
+	bIsFiring = true;
+	ShotsRemaining = MaxShotsPerFireEvent;
+	
+	switch (WeaponFireMode)
+	{
+	case EWeaponFireMode::SingleShot:
+		StartFiringSingleShot();
+		break;
+	case EWeaponFireMode::SemiAuto:
+		StartFiringSemiAuto();
+		break;
+	case EWeaponFireMode::FullAuto:
+		StartFiringFullAuto();
+		break;
+	default:
+		USK_LOG_ERROR("Invalid weapon fire mode");
+		break;
+	}
+}
+
+/**
+ * @brief Stop firing the weapon
+ */
+void AWeapon::StopFiring()
+{
+	bIsFiring = false;
+}
+
+/**
+ * @brief Fire a single shot weapon
+ */
+void AWeapon::StartFiringSingleShot()
+{
+	if (!bIsFiring || !IsValid(Character) || !IsValid(Character->GetController()))
 	{
 		return;
 	}
@@ -78,6 +112,40 @@ void AWeapon::Fire()
 	
 	PlayFireAnimation();
 	OnWeaponFired.Broadcast();
+}
+
+/**
+ * @brief Fire a semi-auto weapon
+ */
+void AWeapon::StartFiringSemiAuto()
+{
+	if (!bIsFiring)
+	{
+		return;
+	}
+
+	ShotsRemaining--;
+	if (ShotsRemaining < 0)
+	{
+		return;
+	}
+	
+	StartFiringSingleShot();
+	UKismetSystemLibrary::K2_SetTimer(this, "StartFiringSemiAuto", FireRate, false);
+}
+
+/**
+ * @brief Fire a full auto weapon
+ */
+void AWeapon::StartFiringFullAuto()
+{
+	if (!bIsFiring)
+	{
+		return;
+	}
+	
+	StartFiringSingleShot();
+	UKismetSystemLibrary::K2_SetTimer(this, "StartFiringFullAuto", FireRate, false);
 }
 
 /**

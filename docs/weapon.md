@@ -39,6 +39,24 @@ The <code>Weapon</code> uses the following components:
 		<td></td>
 	</tr>
 	<tr>
+		<td>WeaponFireMode</td>
+		<td>The fire mode of weapon</td>
+		<td>EWeaponFireMode</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>FireRate</td>
+		<td>The fire rate of the weapon (amount of seconds between each shot)</td>
+		<td>float</td>
+		<td>0.2f</td>
+	</tr>
+	<tr>
+		<td>MaxShotsPerFireEvent</td>
+		<td>The amount of shots fired per fire event</td>
+		<td>int</td>
+		<td>3</td>
+	</tr>
+	<tr>
 		<td>WeaponAttachPoint</td>
 		<td>The attach point used by all weapons</td>
 		<td>FName</td>
@@ -121,8 +139,14 @@ The <code>Weapon</code> uses the following components:
 		<td></td>
 	</tr>
 	<tr>
-		<td>Fire</td>
-		<td>Fire the weapon</td>
+		<td>StartFiring</td>
+		<td>Start firing the weapon</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>StopFiring</td>
+		<td>Stop firing the weapon</td>
 		<td></td>
 		<td></td>
 	</tr>
@@ -133,7 +157,8 @@ You can use the <code>Weapon</code> using Blueprints by adding one of the follow
 <ul>
 	<li>Ultimate Starter Kit > Weapon > Equip</li>
 	<li>Ultimate Starter Kit > Weapon > Unequip</li>
-	<li>Ultimate Starter Kit > Weapon > Fire</li>
+	<li>Ultimate Starter Kit > Weapon > Start Firing</li>
+	<li>Ultimate Starter Kit > Weapon > Stop Firing</li>
 </ul>
 
 ## C++ Usage
@@ -151,6 +176,7 @@ void ATestActor::Test()
 	// Weapon is a pointer to the AWeapon
 	Weapon->Equip(TargetCharacter);
 	Weapon->Unequip();
-	Weapon->Fire();
+	Weapon->StartFiring();
+	Weapon->StopFiring();
 }
 ```

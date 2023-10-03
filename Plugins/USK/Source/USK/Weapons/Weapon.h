@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "NiagaraSystem.h"
+#include "WeaponFireMode.h"
 #include "GameFramework/Actor.h"
 #include "Animation/AnimMontage.h"
 #include "WeaponProjectile.h"
@@ -49,6 +50,27 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
 	EWeaponType WeaponType;
+
+	/**
+	 * @brief The fire mode of weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	EWeaponFireMode WeaponFireMode;
+
+	/**
+	 * @brief The fire rate of the weapon (amount of seconds between each shot)
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon",
+		meta=(EditCondition = "WeaponFireMode == EWeaponFireMode::SemiAuto || WeaponFireMode == EWeaponFireMode::FullAuto",
+			EditConditionHides))
+	float FireRate = 0.2f;
+
+	/**
+	 * @brief The amount of shots fired per fire event
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon",
+		meta=(EditCondition = "WeaponFireMode == EWeaponFireMode::SemiAuto", EditConditionHides))
+	int MaxShotsPerFireEvent = 3;
 
 	/**
 	 * @brief The attach point used by all weapons
@@ -123,10 +145,16 @@ public:
 	void Unequip();
 
 	/**
-	 * @brief Fire the weapon
+	 * @brief Start firing the weapon
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
-	void Fire();
+	void StartFiring();
+
+	/**
+	 * @brief Stop firing the weapon
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
+	void StopFiring();
 
 private:
 	/**
@@ -134,6 +162,34 @@ private:
 	 */
 	UPROPERTY()
 	AUSKCharacter* Character;
+
+	/**
+	 * @brief Is the weapon currently being fired?
+	 */
+	bool bIsFiring;
+
+	/**
+	 * @brief The amount of shots remaining before the weapon stops firing
+	 */
+	int ShotsRemaining;
+
+	/**
+	 * @brief Fire a single shot weapon
+	 */
+	UFUNCTION()
+	void StartFiringSingleShot();
+
+	/**
+	 * @brief Fire a semi-auto weapon
+	 */
+	UFUNCTION()
+	void StartFiringSemiAuto();
+
+	/**
+	 * @brief Fire a full auto weapon
+	 */
+	UFUNCTION()
+	void StartFiringFullAuto();
 
 	/**
 	 * @brief Spawn the projectile

@@ -94,7 +94,8 @@ void AUSKCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	EnhancedInput->BindAction(LookAroundAction, ETriggerEvent::Triggered, this, &AUSKCharacter::RotateCamera);
 	EnhancedInput->BindAction(JumpAction, ETriggerEvent::Started, this, &AUSKCharacter::Jump);
 	EnhancedInput->BindAction(JumpAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopJumping);
-	EnhancedInput->BindAction(FireWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::FireWeapon);
+	EnhancedInput->BindAction(FireWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::StartFiringWeapon);
+	EnhancedInput->BindAction(FireWeaponAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopFiringWeapon);
 }
 
 /**
@@ -207,13 +208,24 @@ void AUSKCharacter::Jump()
 }
 
 /**
- * @brief Fire the current weapon
+ * @brief Start firing the current weapon
  */
-void AUSKCharacter::FireWeapon()
+void AUSKCharacter::StartFiringWeapon()
 {
 	if (IsValid(Weapon))
 	{
-		Weapon->Fire();
+		Weapon->StartFiring();
+	}
+}
+
+/**
+ * @brief Stop firing the current weapon
+ */
+void AUSKCharacter::StopFiringWeapon()
+{
+	if (IsValid(Weapon))
+	{
+		Weapon->StopFiring();
 	}
 }
 
