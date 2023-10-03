@@ -57,6 +57,18 @@ The <code>Weapon</code> uses the following components:
 		<td>3</td>
 	</tr>
 	<tr>
+		<td>bInfiniteAmmo</td>
+		<td>Does the weapon have an infinite amount of ammo?</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Ammo</td>
+		<td>The amount of ammo for the weapon</td>
+		<td>int</td>
+		<td>50</td>
+	</tr>
+	<tr>
 		<td>WeaponAttachPoint</td>
 		<td>The attach point used by all weapons</td>
 		<td>FName</td>
@@ -87,8 +99,20 @@ The <code>Weapon</code> uses the following components:
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>EmptyClipFireSound</td>
+		<td>The sound played each time the weapon is fired with an empty clip</td>
+		<td>USoundBase*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>FireAnimation</td>
 		<td>The animation played when the weapon is fired</td>
+		<td>UAnimMontage*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>EmptyClipFireAnimation</td>
+		<td>The animation played when the weapon is fired with an empty clip</td>
 		<td>UAnimMontage*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -114,6 +138,16 @@ The <code>Weapon</code> uses the following components:
 	<tr>
 		<td>OnWeaponFired</td>
 		<td>Event used to notify other classes when the weapon is fired</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>OnWeaponAmmoEmpty</td>
+		<td>Event used to notify other classes when the ammo is empty</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>OnWeaponFiredEmptyClip</td>
+		<td>Event used to notify other classes when the weapon is fired with an empty clip</td>
 		<td></td>
 	</tr>
 </table>

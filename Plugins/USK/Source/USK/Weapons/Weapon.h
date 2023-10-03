@@ -7,7 +7,6 @@
 #include "WeaponFireMode.h"
 #include "GameFramework/Actor.h"
 #include "Animation/AnimMontage.h"
-#include "WeaponProjectile.h"
 #include "WeaponProjectileData.h"
 #include "WeaponType.h"
 #include "Weapon.generated.h"
@@ -36,6 +35,16 @@ class USK_API AWeapon : public AActor
 	 * @brief Event used to notify other classes when the weapon is fired
 	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponFired);
+
+	/**
+	 * @brief Event used to notify other classes when the ammo is empty
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponAmmoEmpty);
+
+	/**
+	 * @brief Event used to notify other classes when the weapon is fired with an empty clip
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponFiredEmptyClip);
 
 	/**
 	 * @brief The muzzle flash of the weapon
@@ -73,15 +82,28 @@ public:
 	int MaxShotsPerFireEvent = 3;
 
 	/**
+	 * @brief Does the weapon have an infinite amount of ammo?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	bool bInfiniteAmmo;
+
+	/**
+	 * @brief The amount of ammo for the weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon",
+		meta=(EditCondition = "!bInfiniteAmmo", EditConditionHides))
+	int Ammo = 50;
+
+	/**
 	 * @brief The attach point used by all weapons
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Weapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
 	FName WeaponAttachPoint;
 
 	/**
 	 * @brief The relative transform of the weapon after it is attached to a character
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Weapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
 	FTransform WeaponTransform;
 
 	/**
@@ -93,7 +115,7 @@ public:
 	/**
 	 * @brief The muzzle flash particle effects
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Weapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
 	UNiagaraSystem* MuzzleFlashParticleFx;
 
 	/**
@@ -103,10 +125,22 @@ public:
 	USoundBase* FireSound;
 
 	/**
+	 * @brief The sound played each time the weapon is fired with an empty clip
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	USoundBase* EmptyClipFireSound;
+
+	/**
 	 * @brief The animation played when the weapon is fired
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
 	UAnimMontage* FireAnimation;
+
+	/**
+	 * @brief The animation played when the weapon is fired with an empty clip
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	UAnimMontage* EmptyClipFireAnimation;
 
 	/**
 	 * @brief Event used to notify other classes when the weapon is equipped
@@ -125,6 +159,18 @@ public:
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Weapon|Events")
 	FWeaponFired OnWeaponFired;
+
+	/**
+	 * @brief Event used to notify other classes when the ammo is empty
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Weapon|Events")
+	FWeaponAmmoEmpty OnWeaponAmmoEmpty;
+
+	/**
+	 * @brief Event used to notify other classes when the weapon is fired with an empty clip
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Weapon|Events")
+	FWeaponFiredEmptyClip OnWeaponFiredEmptyClip;
 
 	/**
 	 * @brief Create a new instance of the AWeapon actor
@@ -156,6 +202,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
 	void StopFiring();
 
+protected:
+	/**
+	 * @brief Overridable native event for when play begins for this actor
+	 */
+	virtual void BeginPlay() override;
+
 private:
 	/**
 	 * @brief A reference to the owner character
@@ -172,6 +224,11 @@ private:
 	 * @brief The amount of shots remaining before the weapon stops firing
 	 */
 	int ShotsRemaining;
+
+	/**
+	 * @brief The amount of ammo remaining
+	 */
+	int AmmoRemaining;
 
 	/**
 	 * @brief Fire a single shot weapon
@@ -201,4 +258,9 @@ private:
 	 * @brief Play the fire animation
 	 */
 	void PlayFireAnimation() const;
+
+	/**
+	 * @brief Play the empty clip fire animation
+	 */
+	void PlayEmptyClipFireAnimation() const;
 };

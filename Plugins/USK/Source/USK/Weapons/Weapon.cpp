@@ -3,6 +3,7 @@
 #include "Weapon.h"
 
 #include "NiagaraFunctionLibrary.h"
+#include "WeaponProjectile.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "USK/Audio/AudioUtils.h"
@@ -17,6 +18,15 @@ AWeapon::AWeapon()
 	RootComponent = CreateDefaultSubobject<USceneComponent>("Weapon Root");
 	MuzzleFlash = CreateDefaultSubobject<USceneComponent>("Muzzle Flash");
 	MuzzleFlash->SetupAttachment(RootComponent);
+}
+
+/**
+ * @brief Overridable native event for when play begins for this actor
+ */
+void AWeapon::BeginPlay()
+{
+	Super::BeginPlay();
+	AmmoRemaining = Ammo;
 }
 
 /**
@@ -97,6 +107,23 @@ void AWeapon::StartFiringSingleShot()
 		return;
 	}
 
+	if (!bInfiniteAmmo && AmmoRemaining <= 0)
+	{
+		UAudioUtils::PlaySound(Character, EmptyClipFireSound);
+		PlayEmptyClipFireAnimation();
+		OnWeaponFiredEmptyClip.Broadcast();
+		return;
+	}
+
+	if (!bInfiniteAmmo)
+	{
+		AmmoRemaining--;
+		if (AmmoRemaining <= 0)
+		{
+			OnWeaponAmmoEmpty.Broadcast();
+		}
+	}
+	
 	UAudioUtils::PlaySound(Character, FireSound);
 	for (FWeaponProjectileData Projectile : Projectiles)
 	{
@@ -186,4 +213,17 @@ void AWeapon::PlayFireAnimation() const
 	}
 
 	Character->PlayAnimMontage(FireAnimation, 1.0f);
+}
+
+/**
+ * @brief Play the empty clip fire animation
+ */
+void AWeapon::PlayEmptyClipFireAnimation() const
+{
+	if (!IsValid(EmptyClipFireAnimation))
+	{
+		return;
+	}
+
+	Character->PlayAnimMontage(EmptyClipFireAnimation, 1.0f);
 }
