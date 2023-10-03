@@ -5,7 +5,7 @@
 #include "AssetToolsModule.h"
 #include "Assets/DialogueAsset.h"
 #include "Assets/USKAsset.h"
-#include "Dialogue\AssetEditor\DialogueEditorStyle.h"
+#include "Dialogue/AssetEditor/DialogueEditorStyle.h"
 #include "USK/Audio/MusicPlayer.h"
 #include "USK/Character/FpsCharacter.h"
 #include "USK/Character/PlatformerCharacter.h"
@@ -17,7 +17,10 @@
 #include "USK/Inventory/InventoryWidget.h"
 #include "USK/Items/CollectableItem.h"
 #include "USK/Logger/LogConfig.h"
+#include "USK/Weapons/Weapon.h"
 #include "USK/Weapons/WeaponItem.h"
+#include "USK/Weapons/WeaponAmmoItem.h"
+#include "USK/Weapons/WeaponProjectile.h"
 #include "USK/Widgets/CollectableItemIcon.h"
 #include "USK/Widgets/CreditsWidget.h"
 #include "USK/Widgets/FpsCounter.h"
@@ -56,6 +59,8 @@ void FUSKEditorModule::StartupModule()
 		FColor(52, 255, 180), AWeapon::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "Weapons", "Weapon Item",
 		FColor(52, 255, 180), AWeaponItem::StaticClass());
+    RegisterBlueprint(AssetTools, UskCategory, "Weapons", "Weapon Ammo Item",
+        FColor(52, 255, 180), AWeaponAmmoItem::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "Weapons", "Weapon Projectile",
 		FColor(52, 255, 180), AWeaponProjectile::StaticClass());
 
