@@ -57,6 +57,12 @@ The <code>Weapon</code> uses the following components:
 		<td>3</td>
 	</tr>
 	<tr>
+		<td>Projectiles</td>
+		<td>The projectiles spawned by the weapon</td>
+		<td>TArray&lt;FWeaponProjectileData&gt;</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>bInfiniteAmmo</td>
 		<td>Does the weapon have an infinite amount of ammo?</td>
 		<td>bool</td>
@@ -81,10 +87,22 @@ The <code>Weapon</code> uses the following components:
 		<td></td>
 	</tr>
 	<tr>
-		<td>Projectiles</td>
-		<td>The projectiles spawned by the weapon</td>
-		<td>TArray&lt;FWeaponProjectileData&gt;</td>
-		<td></td>
+		<td>RecoilCurve</td>
+		<td>The curve used to add recoil to the weapon</td>
+		<td>UCurveVector*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>RecoveryTime</td>
+		<td>The recovery time after recoil was applied</td>
+		<td>float</td>
+		<td>1.0f</td>
+	</tr>
+	<tr>
+		<td>RecoilRecoveryDelay</td>
+		<td>The delay before we start recovering from recoil</td>
+		<td>float</td>
+		<td>0.15f</td>
 	</tr>
 	<tr>
 		<td>MuzzleFlashParticleFx</td>
@@ -207,6 +225,42 @@ The <code>Weapon</code> uses the following components:
 		<td></td>
 		<td><strong>int</strong><br/>The amount of ammo remaining</td>
 	</tr>
+	<tr>
+		<td>StartRecoil</td>
+		<td>Start applying recoil to the weapon</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>StopRecoil</td>
+		<td>Stop applying recoil to the weapon</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>ApplyRecoil</td>
+		<td>Apply recoil to the weapon</td>
+		<td><strong>DeltaSeconds (float)</strong><br/>Game time elapsed during last frame modified by the time dilation</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>StartRecoilRecovery</td>
+		<td>Start recovering from recoil</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>StopRecoilRecovery</td>
+		<td>Stop recovering from recoil</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>ApplyRecoilRecovery</td>
+		<td>Recover from recoil</td>
+		<td><strong>DeltaSeconds (float)</strong><br/>Game time elapsed during last frame modified by the time dilation</td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -219,6 +273,12 @@ You can use the <code>Weapon</code> using Blueprints by adding one of the follow
 	<li>Ultimate Starter Kit > Weapon > Add Ammo</li>
 	<li>Ultimate Starter Kit > Weapon > Remove Ammo</li>
 	<li>Ultimate Starter Kit > Weapon > Get Ammo Remaining</li>
+	<li>Ultimate Starter Kit > Weapon > Start Recoil</li>
+	<li>Ultimate Starter Kit > Weapon > Stop Recoil</li>
+	<li>Ultimate Starter Kit > Weapon > Apply Recoil</li>
+	<li>Ultimate Starter Kit > Weapon > Start Recoil Recovery</li>
+	<li>Ultimate Starter Kit > Weapon > Stop Recoil Recovery</li>
+	<li>Ultimate Starter Kit > Weapon > Apply Recoil Recovery</li>
 </ul>
 
 ## C++ Usage
@@ -241,5 +301,11 @@ void ATestActor::Test()
 	Weapon->AddAmmo(Amount);
 	Weapon->RemoveAmmo(Amount);
 	int AmmoRemaining = Weapon->GetAmmoRemaining();
+	Weapon->StartRecoil();
+	Weapon->StopRecoil();
+	Weapon->ApplyRecoil(DeltaSeconds);
+	Weapon->StartRecoilRecovery();
+	Weapon->StopRecoilRecovery();
+	Weapon->ApplyRecoilRecovery(DeltaSeconds);
 }
 ```

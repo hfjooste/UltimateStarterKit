@@ -67,6 +67,12 @@ The item requires an actor to overlap with the item before it can be collected. 
 		<th>Return</th>
 	</tr>
 	<tr>
+		<td>CanCollectItem</td>
+		<td>Check if the item can be collected</td>
+		<td><strong>Collector (AActor*)</strong><br/>A pointer to the actor that is trying to collect the item</td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the item can be collected</td>
+	</tr>
+	<tr>
 		<td>CollectItem</td>
 		<td>Collect the item</td>
 		<td><strong>Collector (AActor*)</strong><br/>A pointer to the actor that collected the item</td>
@@ -83,6 +89,7 @@ The item requires an actor to overlap with the item before it can be collected. 
 ## Blueprint Usage
 You can use the <code>CollectableItem</code> using Blueprints by adding one of the following nodes:
 <ul>
+	<li>Ultimate Starter Kit > Item > Can Collect Item</li>
 	<li>Ultimate Starter Kit > Item > Collect Item</li>
 	<li>Ultimate Starter Kit > Item > On Item Collected</li>
 </ul>
@@ -100,6 +107,7 @@ The <code>CollectableItem</code> can now be used in any of your C++ files:
 void ATestActor::Test()
 {
 	// CollectableItem is a pointer to the ACollectableItem
+	bool CanCollectItemValue = CollectableItem->CanCollectItem(Collector);
 	CollectableItem->CollectItem(Collector);
 	CollectableItem->OnItemCollected(Collector);
 }
