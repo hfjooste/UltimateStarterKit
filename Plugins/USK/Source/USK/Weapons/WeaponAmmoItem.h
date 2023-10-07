@@ -36,6 +36,13 @@ public:
 	TArray<TSubclassOf<AWeapon>> AllowedWeapons;
 
 	/**
+	 * @brief Check if the item can be collected
+	 * @param Collector A pointer to the actor that is trying to collect the item
+	 * @return A boolean value indicating if the item can be collected
+	 */
+	virtual bool CanCollectItem_Implementation(AActor* Collector) const override;
+
+	/**
 	 * @brief Called after the item is collected
 	 * @param Collector A pointer to the actor that collected the item
 	 */

@@ -54,6 +54,14 @@ public:
 	FVector CollectedParticleFxSpawnOffset;
 
 	/**
+	 * @brief Check if the item can be collected
+	 * @param Collector A pointer to the actor that is trying to collect the item
+	 * @return A boolean value indicating if the item can be collected
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Ultimate Starter Kit|Item")
+	bool CanCollectItem(AActor* Collector) const;
+
+	/**
 	 * @brief Collect the item
 	 * @param Collector A pointer to the actor that collected the item
 	 */

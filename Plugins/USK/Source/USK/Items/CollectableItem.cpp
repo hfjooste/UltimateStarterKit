@@ -18,9 +18,51 @@
 void ACollectableItem::NotifyActorBeginOverlap(AActor* OtherActor)
 {
 	Super::NotifyActorBeginOverlap(OtherActor);
-	if (ShouldBeCollected(OtherActor))
+	if (CanCollectItem(OtherActor))
 	{
 		CollectItem(OtherActor);
+	}
+}
+
+/**
+ * @brief Check if the item can be collected
+ * @param Collector A pointer to the actor that is trying to collect the item
+ * @return A boolean value indicating if the item can be collected
+ */
+bool ACollectableItem::CanCollectItem_Implementation(AActor* Collector) const
+{
+	if (!IsValid(Collector))
+	{
+		USK_LOG_ERROR("Collector is invalid");
+		return false;
+	}
+	
+	switch (AllowedCollector)
+	{
+	case EAllowedCollector::AnyActor:
+		return true;
+	case EAllowedCollector::AnyPawn:
+		return Collector->IsA(APawn::StaticClass());
+	case EAllowedCollector::AnyCharacter:
+		return Collector->IsA(ACharacter::StaticClass());
+	case EAllowedCollector::AnyPlatformerCharacter:
+		return Collector->IsA(APlatformerCharacter::StaticClass());
+	case EAllowedCollector::AnyFpsCharacter:
+		return Collector->IsA(AFpsCharacter::StaticClass());
+	case EAllowedCollector::PossessedPawn:
+		return UGameplayStatics::GetPlayerPawn(GetWorld(), 0) == Collector;
+	case EAllowedCollector::Custom:
+		for (const TSubclassOf<AActor> AllowedCollectorType : AllowedCollectorTypes)
+		{
+			if (Collector->IsA(AllowedCollectorType))
+			{
+				return true;
+			}
+		}
+		return false;
+	default:
+		USK_LOG_WARNING("Unknown allowed collector type");
+		return false;
 	}
 }
 
@@ -51,45 +93,3 @@ void ACollectableItem::CollectItem(AActor* Collector)
  * @param Collector A pointer to the actor that collected the item
  */
 void ACollectableItem::OnItemCollected_Implementation(AActor* Collector) { }
-
-/**
- * @brief Should the item be collected?
- * @param OtherActor The other actor that caused the overlap event
- * @return A boolean value indicating if the item should be collected
- */
-bool ACollectableItem::ShouldBeCollected(const AActor* OtherActor)
-{
-	if (OtherActor == nullptr)
-	{
-		USK_LOG_ERROR("Other actor shouldn't be nullptr");
-		return false;
-	}
-	
-	switch (AllowedCollector)
-	{
-	case EAllowedCollector::AnyActor:
-		return true;
-	case EAllowedCollector::AnyPawn:
-		return OtherActor->IsA(APawn::StaticClass());
-	case EAllowedCollector::AnyCharacter:
-		return OtherActor->IsA(ACharacter::StaticClass());
-	case EAllowedCollector::AnyPlatformerCharacter:
-		return OtherActor->IsA(APlatformerCharacter::StaticClass());
-	case EAllowedCollector::AnyFpsCharacter:
-		return OtherActor->IsA(AFpsCharacter::StaticClass());
-	case EAllowedCollector::PossessedPawn:
-		return UGameplayStatics::GetPlayerPawn(GetWorld(), 0) == OtherActor;
-	case EAllowedCollector::Custom:
-		for (const TSubclassOf<AActor> AllowedCollectorType : AllowedCollectorTypes)
-		{
-			if (OtherActor->IsA(AllowedCollectorType))
-			{
-				return true;
-			}
-		}
-		return false;
-	default:
-		USK_LOG_WARNING("Unknown allowed collector type");
-		return false;
-	}
-}
