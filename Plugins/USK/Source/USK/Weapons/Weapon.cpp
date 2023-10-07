@@ -6,6 +6,8 @@
 #include "WeaponProjectile.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Engine/World.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Character/USKCharacter.h"
 #include "USK/Logger/Log.h"
