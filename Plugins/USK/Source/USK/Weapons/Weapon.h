@@ -9,6 +9,7 @@
 #include "Animation/AnimMontage.h"
 #include "WeaponProjectileData.h"
 #include "WeaponType.h"
+#include "Curves/CurveVector.h"
 #include "Weapon.generated.h"
 
 class AUSKCharacter;
@@ -117,6 +118,27 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
 	TArray<FWeaponProjectileData> Projectiles;
+
+	/**
+	 * @brief The curve used to add recoil to the weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	UCurveVector* RecoilCurve;
+
+	/**
+	 * @brief The recovery time after recoil was applied
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon",
+		meta=(EditCondition = "RecoilCurve != nullptr", EditConditionHides))
+	float RecoveryTime = 1.0f;
+
+	/**
+	 * @brief The delay before we start recovering from recoil
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon",
+		meta=(EditCondition = "RecoilCurve != nullptr && WeaponFireMode == EWeaponFireMode::SingleSHot",
+			EditConditionHides))
+	float RecoilRecoveryDelay = 0.15f;
 
 	/**
 	 * @brief The muzzle flash particle effects
@@ -241,12 +263,62 @@ protected:
 	 */
 	virtual void BeginPlay() override;
 
+	/**
+	 * @brief Event called every frame, if ticking is enabled
+	 * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+	 */
+	virtual void Tick(float DeltaSeconds) override;
+
+	/**
+	 * @brief Start applying recoil to the weapon
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
+	void StartRecoil();
+
+	/**
+	 * @brief Stop applying recoil to the weapon
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
+	void StopRecoil();
+
+	/**
+	 * @brief Apply recoil to the weapon
+	 * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
+	void ApplyRecoil(float DeltaSeconds);
+
+	/**
+	 * @brief Start recovering from recoil
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
+	void StartRecoilRecovery();
+
+	/**
+	 * @brief Stop recovering from recoil
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
+	void StopRecoilRecovery();
+
+	/**
+	 * @brief Recover from recoil
+	 * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
+	void ApplyRecoilRecovery(float DeltaSeconds);
+
 private:
 	/**
 	 * @brief A reference to the owner character
 	 */
 	UPROPERTY()
 	AUSKCharacter* Character;
+
+	/**
+	 * @brief A reference to the player controller
+	 */
+	UPROPERTY()
+	APlayerController* PlayerController;
 
 	/**
 	 * @brief Is the weapon currently being fired?
@@ -262,6 +334,46 @@ private:
 	 * @brief The amount of ammo remaining
 	 */
 	int AmmoRemaining;
+
+	/**
+	 * @brief Are we currently applying recoil to the weapon?
+	 */
+	bool bRecoil;
+
+	/**
+	 * @brief Are we currently recovering from recoil?
+	 */
+	bool bRecoilRecovery;
+
+	/**
+	 * @brief The amount of time we have been applying recoil
+	 */
+	float RecoilTime;
+
+	/**
+	 * @brief The speed used to recover from recoil
+	 */
+	float RecoilRecoverySpeed;
+
+	/**
+	 * @brief The amount of time remaining to recover from recoil
+	 */
+	float RecoilRecoveryTimeRemaining;
+
+	/**
+	 * @brief The rotation before we start applying recoil
+	 */
+	FRotator RecoilStartRotation;
+
+	/**
+	 * @brief The rotation change that was applied because of recoil
+	 */
+	FRotator RecoilDeltaRot;
+
+	/**
+	 * @brief The rotation change due to player input
+	 */
+	FRotator PlayerDeltaRot;
 
 	/**
 	 * @brief Fire a single shot weapon

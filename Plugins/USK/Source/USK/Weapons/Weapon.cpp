@@ -15,6 +15,7 @@
  */
 AWeapon::AWeapon()
 {
+	PrimaryActorTick.bCanEverTick = true;
 	RootComponent = CreateDefaultSubobject<USceneComponent>("Weapon Root");
 	MuzzleFlash = CreateDefaultSubobject<USceneComponent>("Muzzle Flash");
 	MuzzleFlash->SetupAttachment(RootComponent);
@@ -30,6 +31,25 @@ void AWeapon::BeginPlay()
 }
 
 /**
+ * @brief Event called every frame, if ticking is enabled
+ * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+ */
+void AWeapon::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	if (bRecoil)
+	{
+		ApplyRecoil(DeltaSeconds);
+	}
+
+	if (bRecoilRecovery)
+	{
+		ApplyRecoilRecovery(DeltaSeconds);
+	}
+}
+
+/**
  * @brief Equip the weapon
  * @param TargetCharacter The character that will use the weapon
  */
@@ -41,6 +61,7 @@ void AWeapon::Equip(AUSKCharacter* TargetCharacter)
 		return;
 	}
 
+	PlayerController = dynamic_cast<APlayerController*>(Character->GetController());
 	const FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
 	AttachToComponent(Character->GetMesh(), AttachmentRules, WeaponAttachPoint);
 	Character->SetWeapon(this);
@@ -71,11 +92,13 @@ void AWeapon::StartFiring()
 {
 	bIsFiring = true;
 	ShotsRemaining = MaxShotsPerFireEvent;
-	
+
+	StartRecoil();
 	switch (WeaponFireMode)
 	{
 	case EWeaponFireMode::SingleShot:
 		StartFiringSingleShot();
+		UKismetSystemLibrary::K2_SetTimer(this, "StopRecoil", RecoilRecoveryDelay, false);
 		break;
 	case EWeaponFireMode::SemiAuto:
 		StartFiringSemiAuto();
@@ -95,6 +118,7 @@ void AWeapon::StartFiring()
 void AWeapon::StopFiring()
 {
 	bIsFiring = false;
+	StopRecoil();
 }
 
 /**
@@ -134,6 +158,97 @@ int AWeapon::GetAmmoRemaining() const
 }
 
 /**
+ * @brief Start applying recoil to the weapon
+ */
+void AWeapon::StartRecoil()
+{
+	if (!IsValid(RecoilCurve))
+	{
+		return;
+	}
+
+	StopRecoilRecovery();
+	PlayerDeltaRot = FRotator::ZeroRotator;
+	RecoilDeltaRot = FRotator::ZeroRotator;
+	RecoilStartRotation = UKismetMathLibrary::NormalizedDeltaRotator(
+		PlayerController->GetControlRotation(), FRotator::ZeroRotator);
+			
+	bRecoil = true;
+	bRecoilRecovery = false;
+}
+
+/**
+ * @brief Stop applying recoil to the weapon
+ */
+void AWeapon::StopRecoil()
+{
+	if (!IsValid(RecoilCurve) || !bRecoil)
+	{
+		return;
+	}
+	
+	bRecoil = false;
+	StartRecoilRecovery();
+}
+
+/**
+ * @brief Apply recoil to the weapon
+ * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+ */
+void AWeapon::ApplyRecoil(const float DeltaSeconds)
+{
+	RecoilTime += DeltaSeconds;
+	FRotator Recoil = FRotator::MakeFromEuler(RecoilCurve->GetVectorValue(RecoilTime));
+	Recoil.Roll = 0;
+	
+	PlayerDeltaRot = PlayerController->GetControlRotation() - RecoilStartRotation - RecoilDeltaRot;
+	PlayerController->SetControlRotation(RecoilStartRotation + PlayerDeltaRot + Recoil);
+	RecoilDeltaRot = Recoil;
+}
+
+/**
+ * @brief Start recovering from recoil
+ */
+void AWeapon::StartRecoilRecovery()
+{
+	bRecoilRecovery = true;
+	RecoilRecoveryTimeRemaining = RecoveryTime;
+
+	const float MaxAdjustment = FMath::Max3(RecoilDeltaRot.Pitch, RecoilDeltaRot.Roll, RecoilDeltaRot.Yaw);
+	RecoilRecoverySpeed = MaxAdjustment / RecoveryTime;
+}
+
+/**
+ * @brief Stop recovering from recoil
+ */
+void AWeapon::StopRecoilRecovery()
+{
+	bRecoilRecovery = false;
+	RecoilTime = 0.0f;
+	RecoilDeltaRot = FRotator::ZeroRotator;
+	PlayerDeltaRot = FRotator::ZeroRotator;
+}
+
+/**
+ * @brief Recover from recoil
+ * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+ */
+void AWeapon::ApplyRecoilRecovery(const float DeltaSeconds)
+{
+	if (RecoilRecoveryTimeRemaining >= 0.0f)
+	{
+		const FRotator CurrentRotation = PlayerController->GetControlRotation();
+		RecoilRecoveryTimeRemaining -= DeltaSeconds;
+		PlayerController->SetControlRotation(UKismetMathLibrary::RInterpTo(PlayerController->GetControlRotation(),
+			PlayerController->GetControlRotation() - RecoilDeltaRot, DeltaSeconds, RecoilRecoverySpeed));
+		RecoilDeltaRot = RecoilDeltaRot + (PlayerController->GetControlRotation() - CurrentRotation);
+		return;
+	}
+
+	StopRecoilRecovery();
+}
+
+/**
  * @brief Fire a single shot weapon
  */
 void AWeapon::StartFiringSingleShot()
@@ -147,6 +262,7 @@ void AWeapon::StartFiringSingleShot()
 	{
 		UAudioUtils::PlaySound(Character, EmptyClipFireSound);
 		PlayEmptyClipFireAnimation();
+		StopRecoil();
 		OnWeaponFiredEmptyClip.Broadcast();
 		return;
 	}
@@ -186,6 +302,7 @@ void AWeapon::StartFiringSemiAuto()
 	ShotsRemaining--;
 	if (ShotsRemaining < 0)
 	{
+		StopRecoil();
 		return;
 	}
 	
@@ -218,7 +335,6 @@ void AWeapon::SpawnProjectile(const FWeaponProjectileData& Projectile) const
 		return;
 	}
 
-	const APlayerController* PlayerController = dynamic_cast<APlayerController*>(Character->GetController());
 	const FRotator SpawnRotation = UKismetMathLibrary::ComposeRotators(
 		PlayerController->PlayerCameraManager->GetCameraRotation(), Projectile.SpawnTransform.Rotator());
 	const FVector SpawnLocation = MuzzleFlash->GetComponentLocation() + Projectile.SpawnTransform.GetLocation();
