@@ -153,24 +153,25 @@ float UTrackableDataComponent::Remove(const FName Name, const float Amount)
  */
 void UTrackableDataComponent::LoadData()
 {
+	bool DisableSaveData = false;
 	if (GameInstance == nullptr)
 	{
+		DisableSaveData = true;
 		USK_LOG_ERROR("GameInstance is nullptr");
-		return;
 	}
 
 	UUSKSaveGame* SaveGame = GameInstance->GetSaveData();
 	if (SaveGame == nullptr)
 	{
+		DisableSaveData = true;
 		USK_LOG_ERROR("SaveGame is nullptr");
-		return;
 	}
 
 	TArray<FName> Keys;
 	Data.GetKeys(Keys);
 	for (FName Key : Keys)
 	{
-		if (!Data[Key].AutoSave || !SaveGame->TrackableData.Contains(Key))
+		if (DisableSaveData || !Data[Key].AutoSave || !SaveGame->TrackableData.Contains(Key))
 		{
 			USK_LOG_INFO(*FString::Format(TEXT("Resetting {0} to initial value"), { Key.ToString() }));
 			Data[Key].CurrentValue = Data[Key].InitialValue;
