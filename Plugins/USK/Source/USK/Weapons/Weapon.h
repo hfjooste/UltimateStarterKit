@@ -64,19 +64,19 @@ public:
 	/**
 	 * @brief The type of weapon
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Information")
 	EWeaponType WeaponType;
 
 	/**
 	 * @brief The fire mode of weapon
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Information")
 	EWeaponFireMode WeaponFireMode;
 
 	/**
 	 * @brief The fire rate of the weapon (amount of seconds between each shot)
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon",
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Firing",
 		meta=(EditCondition = "WeaponFireMode == EWeaponFireMode::SemiAuto || WeaponFireMode == EWeaponFireMode::FullAuto",
 			EditConditionHides))
 	float FireRate = 0.2f;
@@ -84,58 +84,58 @@ public:
 	/**
 	 * @brief The amount of shots fired per fire event
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon",
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Firing",
 		meta=(EditCondition = "WeaponFireMode == EWeaponFireMode::SemiAuto", EditConditionHides))
 	int MaxShotsPerFireEvent = 3;
 
 	/**
+	 * @brief The projectiles spawned by the weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Firing")
+	TArray<FWeaponProjectileData> Projectiles;
+
+	/**
 	 * @brief Does the weapon have an infinite amount of ammo?
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Ammo")
 	bool bInfiniteAmmo;
 
 	/**
 	 * @brief The amount of ammo for the weapon
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon",
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Ammo",
 		meta=(EditCondition = "!bInfiniteAmmo", EditConditionHides))
 	int Ammo = 50;
 
 	/**
 	 * @brief The attach point used by all weapons
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Attachment")
 	FName WeaponAttachPoint;
 
 	/**
 	 * @brief The relative transform of the weapon after it is attached to a character
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Attachment")
 	FTransform WeaponTransform;
-
-	/**
-	 * @brief The projectiles spawned by the weapon
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
-	TArray<FWeaponProjectileData> Projectiles;
 
 	/**
 	 * @brief The curve used to add recoil to the weapon
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Recoil")
 	UCurveVector* RecoilCurve;
 
 	/**
 	 * @brief The recovery time after recoil was applied
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon",
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Recoil",
 		meta=(EditCondition = "RecoilCurve != nullptr", EditConditionHides))
 	float RecoveryTime = 1.0f;
 
 	/**
 	 * @brief The delay before we start recovering from recoil
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon",
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Recoil",
 		meta=(EditCondition = "RecoilCurve != nullptr && WeaponFireMode == EWeaponFireMode::SingleSHot",
 			EditConditionHides))
 	float RecoilRecoveryDelay = 0.15f;
@@ -143,31 +143,31 @@ public:
 	/**
 	 * @brief The muzzle flash particle effects
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Effects")
 	UNiagaraSystem* MuzzleFlashParticleFx;
 
 	/**
 	 * @brief The sound played each time the weapon is fired
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Effects")
 	USoundBase* FireSound;
 
 	/**
 	 * @brief The sound played each time the weapon is fired with an empty clip
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Effects")
 	USoundBase* EmptyClipFireSound;
 
 	/**
 	 * @brief The animation played when the weapon is fired
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Animations")
 	UAnimMontage* FireAnimation;
 
 	/**
 	 * @brief The animation played when the weapon is fired with an empty clip
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Animations")
 	UAnimMontage* EmptyClipFireAnimation;
 
 	/**
