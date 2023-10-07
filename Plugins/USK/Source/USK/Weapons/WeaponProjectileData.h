@@ -2,9 +2,8 @@
 
 #pragma once
 
+#include "WeaponProjectile.h"
 #include "WeaponProjectileData.generated.h"
-
-class AWeaponProjectile;
 
 /**
  * @brief Structure describing a projectile spawned by a weapon

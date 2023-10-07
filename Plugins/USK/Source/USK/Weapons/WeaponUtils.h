@@ -4,10 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "USK/Character/USKCharacter.h"
+#include "Weapon.h"
 #include "WeaponUtils.generated.h"
-
-class AUSKCharacter;
-class AWeapon;
 
 /**
  * @brief A Blueprint Function Library class used to manage weapons

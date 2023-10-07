@@ -2,6 +2,7 @@
 
 #include "WeaponUtils.h"
 
+#include "Engine/World.h"
 #include "USK/Character/USKCharacter.h"
 #include "USK/Logger/Log.h"
 
