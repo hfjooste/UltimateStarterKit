@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "WeaponProjectileHitData.h"
 #include "GameFramework/Actor.h"
 #include "WeaponProjectile.generated.h"
 
@@ -40,6 +41,18 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon Projectile")
 	float HitImpulse;
+
+	/**
+	 * @brief The default hit reaction of the projectile
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon Projectile")
+	FWeaponProjectileHitData DefaultHitReaction;
+
+	/**
+	 * @brief A list of hit reactions for specific actors
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon Projectile")
+	TMap<TSubclassOf<AActor>, FWeaponProjectileHitData> HitReactions;
 	
 	/**
 	 * @brief Create a new instance of the AWeaponProjectile actor
@@ -72,4 +85,11 @@ protected:
 	UFUNCTION(BlueprintNativeEvent, Category = "Ultimate Starter Kit|Weapon Projectile")
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 		FVector NormalImpulse, const FHitResult& HitResult);
+
+	/**
+	 * @brief Process the hit reaction of the projectile
+	 * @param OtherActor The actor that was hit
+	 * @param HitResult The result describing the hit
+	 */
+	void ProcessHitReaction(AActor* OtherActor, const FHitResult& HitResult);
 };

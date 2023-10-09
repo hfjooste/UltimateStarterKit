@@ -2,8 +2,10 @@
 
 #include "WeaponProjectile.h"
 
+#include "NiagaraFunctionLibrary.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "USK/Audio/AudioUtils.h"
 #include "USK/Logger/Log.h"
 
 /**
@@ -69,8 +71,36 @@ void AWeaponProjectile::OnHit_Implementation(UPrimitiveComponent* HitComponent, 
 		OtherComponent->AddImpulseAtLocation(GetVelocity() * HitImpulse, GetActorLocation());
 	}
 
+	ProcessHitReaction(OtherActor, HitResult);
 	if (bDestroyOnHit)
 	{
 		Destroy();	
 	}
+}
+
+/**
+ * @brief Process the hit reaction of the projectile
+ * @param OtherActor The actor that was hit
+ * @param HitResult The result describing the hit
+ */
+void AWeaponProjectile::ProcessHitReaction(AActor* OtherActor, const FHitResult& HitResult)
+{
+	FWeaponProjectileHitData HitReaction = DefaultHitReaction;
+	for (const TTuple<TSubclassOf<AActor>, FWeaponProjectileHitData> HitReactionData : HitReactions)
+	{
+		if (OtherActor->IsA(HitReactionData.Key))
+		{
+			HitReaction = HitReactionData.Value;
+			break;
+		}
+	}
+
+	if (IsValid(HitReaction.HitParticleFx))
+	{
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), HitReaction.HitParticleFx,
+			HitResult.Location + HitReaction.HitParticleFxTransform.GetLocation(),
+			HitReaction.HitParticleFxTransform.Rotator(), HitReaction.HitParticleFxTransform.GetScale3D());
+	}
+	
+	UAudioUtils::PlayRandomSound(OtherActor, HitReaction.HitSfx);
 }
