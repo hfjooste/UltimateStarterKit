@@ -150,13 +150,13 @@ public:
 	 * @brief The sound played each time the weapon is fired
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Effects")
-	USoundBase* FireSound;
+	TArray<USoundBase*> FireSound;
 
 	/**
 	 * @brief The sound played each time the weapon is fired with an empty clip
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Effects")
-	USoundBase* EmptyClipFireSound;
+	TArray<USoundBase*> EmptyClipFireSound;
 
 	/**
 	 * @brief The animation played when the weapon is fired

@@ -262,7 +262,7 @@ void AWeapon::StartFiringSingleShot()
 
 	if (!bInfiniteAmmo && AmmoRemaining <= 0)
 	{
-		UAudioUtils::PlaySound(Character, EmptyClipFireSound);
+		UAudioUtils::PlayRandomSound(this, EmptyClipFireSound);
 		PlayEmptyClipFireAnimation();
 		StopRecoil();
 		OnWeaponFiredEmptyClip.Broadcast();
@@ -274,7 +274,7 @@ void AWeapon::StartFiringSingleShot()
 		RemoveAmmo(1);
 	}
 	
-	UAudioUtils::PlaySound(Character, FireSound);
+	UAudioUtils::PlayRandomSound(this, FireSound);
 	for (FWeaponProjectileData Projectile : Projectiles)
 	{
 		SpawnProjectile(Projectile);
