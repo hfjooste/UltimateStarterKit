@@ -57,6 +57,7 @@ os.system(f"python \"{docs}\" --input \"Weapons\\WeaponItem\" --output weaponite
 os.system(f"python \"{docs}\" --input \"Weapons\\WeaponAmmoItem\" --output weaponammoitem")
 os.system(f"python \"{docs}\" --input \"Weapons\\WeaponProjectile\" --output weaponprojectile")
 os.system(f"python \"{docs}\" --input \"Weapons\\WeaponProjectileData\" --output weaponprojectiledata")
+os.system(f"python \"{docs}\" --input \"Weapons\\WeaponProjectileHitData\" --output weaponprojectilehitdata")
 os.system(f"python \"{docs}\" --input \"Weapons\\WeaponUtils\" --output weaponutils")
 
 os.system(f"python \"{docs}\" --input \"Widgets\\CollectableItemIcon\" --output collectableitemicon")

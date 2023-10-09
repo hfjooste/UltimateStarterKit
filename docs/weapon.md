@@ -113,14 +113,14 @@ The <code>Weapon</code> uses the following components:
 	<tr>
 		<td>FireSound</td>
 		<td>The sound played each time the weapon is fired</td>
-		<td>USoundBase*</td>
-		<td><code>nullptr</code></td>
+		<td>TArray&lt;USoundBase*&gt;</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>EmptyClipFireSound</td>
 		<td>The sound played each time the weapon is fired with an empty clip</td>
-		<td>USoundBase*</td>
-		<td><code>nullptr</code></td>
+		<td>TArray&lt;USoundBase*&gt;</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>FireAnimation</td>

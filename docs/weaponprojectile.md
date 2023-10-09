@@ -5,6 +5,7 @@ The projectile spawned by weapons
 The <code>WeaponProjectile</code> relies on other components of this plugin to work:
 <ul>
 	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+	<li><a href="../audio">Audio</a>: Used to play sound effects either 2D or at a specified location</li>
 </ul>
 
 ## Components
@@ -46,6 +47,18 @@ The <code>WeaponProjectile</code> uses the following components:
 		<td>HitImpulse</td>
 		<td>The impulse applied to the component that was hit</td>
 		<td>float</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>DefaultHitReaction</td>
+		<td>The default hit reaction of the projectile</td>
+		<td>FWeaponProjectileHitData</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>HitReactions</td>
+		<td>A list of hit reactions for specific actors</td>
+		<td>TMap&lt;TSubclassOf&lt;AActor&gt;, FWeaponProjectileHitData&gt;</td>
 		<td></td>
 	</tr>
 </table>
