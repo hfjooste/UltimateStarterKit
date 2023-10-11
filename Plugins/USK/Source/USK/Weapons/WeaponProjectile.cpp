@@ -72,6 +72,8 @@ void AWeaponProjectile::OnHit_Implementation(UPrimitiveComponent* HitComponent, 
 	}
 
 	ProcessHitReaction(OtherActor, HitResult);
+	SpawnDecal(OtherActor, HitResult);
+	
 	if (bDestroyOnHit)
 	{
 		Destroy();	
@@ -103,4 +105,31 @@ void AWeaponProjectile::ProcessHitReaction(AActor* OtherActor, const FHitResult&
 	}
 	
 	UAudioUtils::PlayRandomSound(OtherActor, HitReaction.HitSfx);
+}
+
+/**
+ * @brief Spawn a decal at the hit location
+ * @param OtherActor The actor that was hit
+ * @param HitResult The result describing the hit
+ */
+void AWeaponProjectile::SpawnDecal(const AActor* OtherActor, const FHitResult& HitResult)
+{
+	TSubclassOf<AWeaponProjectileDecal> Decal = DefaultDecal;
+	for (const TTuple<TSubclassOf<AActor>, TSubclassOf<AWeaponProjectileDecal>> DecalData : Decals)
+	{
+		if (OtherActor->IsA(DecalData.Key))
+		{
+			Decal = DecalData.Value;
+			break;
+		}
+	}
+
+	if (!IsValid(Decal))
+	{
+		return;
+	}
+
+	USK_LOG_TRACE("Spawning projectile decal");
+	const FTransform DecalTransform = FTransform(HitResult.ImpactNormal.Rotation(), HitResult.ImpactPoint);
+	GetWorld()->SpawnActor<AWeaponProjectileDecal>(Decal, DecalTransform);
 }

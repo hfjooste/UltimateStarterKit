@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "WeaponProjectileDecal.h"
 #include "WeaponProjectileHitData.h"
 #include "GameFramework/Actor.h"
 #include "WeaponProjectile.generated.h"
@@ -45,14 +46,26 @@ public:
 	/**
 	 * @brief The default hit reaction of the projectile
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon Projectile")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon Projectile|Hit Reaction")
 	FWeaponProjectileHitData DefaultHitReaction;
 
 	/**
 	 * @brief A list of hit reactions for specific actors
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon Projectile")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon Projectile|Hit Reaction")
 	TMap<TSubclassOf<AActor>, FWeaponProjectileHitData> HitReactions;
+
+	/**
+	 * @brief The default decal that is spawned when the projectile hits something
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon Projectile|Decals")
+	TSubclassOf<AWeaponProjectileDecal> DefaultDecal;
+
+	/**
+	 * @brief A list of decals for specific actors
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon Projectile|Decals")
+	TMap<TSubclassOf<AWeaponProjectileDecal>, TSubclassOf<AWeaponProjectileDecal>> Decals;
 	
 	/**
 	 * @brief Create a new instance of the AWeaponProjectile actor
@@ -92,4 +105,11 @@ protected:
 	 * @param HitResult The result describing the hit
 	 */
 	void ProcessHitReaction(AActor* OtherActor, const FHitResult& HitResult);
+
+	/**
+	 * @brief Spawn a decal at the hit location
+	 * @param OtherActor The actor that was hit
+	 * @param HitResult The result describing the hit
+	 */
+	void SpawnDecal(const AActor* OtherActor, const FHitResult& HitResult);
 };
