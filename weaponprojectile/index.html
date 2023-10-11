@@ -1199,6 +1199,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../weaponprojectilehitdata/" class="md-nav__link">
+        Weapon Projectile Hit Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../weaponprojectiledecal/" class="md-nav__link">
+        Weapon Projectile Decal
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../weaponutils/" class="md-nav__link">
         Weapon Utils
       </a>
@@ -1895,6 +1923,7 @@
 <p>The <code>WeaponProjectile</code> relies on other components of this plugin to work:</p>
 <ul>
     <li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+    <li><a href="../audio">Audio</a>: Used to play sound effects either 2D or at a specified location</li>
 </ul>
 
 <h2 id="components">Components</h2>
@@ -1936,6 +1965,30 @@
         <td>HitImpulse</td>
         <td>The impulse applied to the component that was hit</td>
         <td>float</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>DefaultHitReaction</td>
+        <td>The default hit reaction of the projectile</td>
+        <td>FWeaponProjectileHitData</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>HitReactions</td>
+        <td>A list of hit reactions for specific actors</td>
+        <td>TMap&lt;TSubclassOf&lt;AActor&gt;, FWeaponProjectileHitData&gt;</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>DefaultDecal</td>
+        <td>The default decal that is spawned when the projectile hits something</td>
+        <td>TSubclassOf&lt;AWeaponProjectileDecal&gt;</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Decals</td>
+        <td>A list of decals for specific actors</td>
+        <td>TMap&lt;TSubclassOf&lt;AWeaponProjectileDecal&gt;, TSubclassOf&lt;AWeaponProjectileDecal&gt;&gt;</td>
         <td></td>
     </tr>
 </table>
