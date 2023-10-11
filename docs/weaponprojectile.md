@@ -61,6 +61,18 @@ The <code>WeaponProjectile</code> uses the following components:
 		<td>TMap&lt;TSubclassOf&lt;AActor&gt;, FWeaponProjectileHitData&gt;</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>DefaultDecal</td>
+		<td>The default decal that is spawned when the projectile hits something</td>
+		<td>TSubclassOf&lt;AWeaponProjectileDecal&gt;</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Decals</td>
+		<td>A list of decals for specific actors</td>
+		<td>TMap&lt;TSubclassOf&lt;AWeaponProjectileDecal&gt;, TSubclassOf&lt;AWeaponProjectileDecal&gt;&gt;</td>
+		<td></td>
+	</tr>
 </table>
 
 ### Functions

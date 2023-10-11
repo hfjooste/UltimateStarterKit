@@ -108,6 +108,7 @@ nav:
     - Weapon Projectile: weaponprojectile.md
     - Weapon Projectile Data: weaponprojectiledata.md
     - Weapon Projectile Hit Data: weaponprojectilehitdata.md
+    - Weapon Projectile Decal: weaponprojectiledecal.md
     - Weapon Utils: weaponutils.md
   - Items:
     - Allowed Collector: allowedcollector.md
