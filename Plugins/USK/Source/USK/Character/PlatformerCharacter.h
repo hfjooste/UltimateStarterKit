@@ -63,11 +63,22 @@ protected:
 	 */
 	virtual void Tick(float DeltaSeconds) override;
 
+	/**
+	 * @brief Update the character mesh location while crouching
+	 * @param SizeDifference The difference between the original capsule size and the crouched capsule size
+	 */
+	virtual void UpdateCharacterMeshLocationWhileCrouching(float SizeDifference) override;
+
 private:
 	/**
 	 * @brief The current arm length of the spring arm component
 	 */
 	float CurrentArmLength;
+
+	/**
+	 * @brief The default location of the character mesh
+	 */
+	FVector DefaultMeshLocation;
 
 	/**
 	 * @brief Adjust the camera position

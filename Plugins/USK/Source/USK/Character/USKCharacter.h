@@ -5,6 +5,7 @@
 #include "ShadowDecal.h"
 #include "InputActionValue.h"
 #include "NiagaraCommon.h"
+#include "Components/TimelineComponent.h"
 #include "GameFramework/Character.h"
 #include "USK/Weapons/Weapon.h"
 #include "USKCharacter.generated.h"
@@ -26,6 +27,13 @@ class USK_API AUSKCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
 		meta=(AllowPrivateAccess = "true"))
 	class UCameraComponent* CameraComponent;
+
+	/**
+	 * @brief The timeline component used for smooth crouching
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
+		meta=(AllowPrivateAccess = "true"))
+	class UTimelineComponent* CrouchTimeline;
 
 public:
 	/**
@@ -60,6 +68,20 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Weapons")
 	AWeapon* GetWeapon() const;
 
+	/**
+	 * @brief Check if the character is crouching 
+	 * @return A boolean value indicating if the character is crouching
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
+	bool IsCrouching() const;
+
+	/**
+	 * @brief Check if the character is busy ending the crouch
+	 * @return A boolean value indicating if the character is busy ending the crouch
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
+	bool IsEndingCrouch() const;
+
 protected:
 	/**
 	 * @brief The input mapping context used by the player
@@ -90,6 +112,12 @@ protected:
 	 */
 	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Input")
 	UInputAction* FireWeaponAction;
+
+	/**
+	 * @brief The crouch input action
+	 */
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Input")
+	UInputAction* CrouchAction;
 
 	/**
 	 * @brief The shadow decal class used to draw a shadow below the character while in the air
@@ -209,6 +237,12 @@ protected:
 	float MaxAcceleration = 2500.0f;
 
 	/**
+	 * @brief The float curve used for smooth crouching 
+	 */
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Movement")
+	UCurveFloat* CrouchCurve;
+
+	/**
 	 * @brief The default weapon the character will equip on spawn
 	 */
 	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Weapons")
@@ -260,6 +294,25 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Weapons")
 	void StopFiringWeapon();
 
+	/**
+	 * @brief Start crouching
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Movement")
+	void StartCrouching();
+
+	/**
+	 * @brief Stop crouching
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Movement")
+	void StopCrouching();
+
+	/**
+	 * @brief Update the character mesh location while crouching
+	 * @param SizeDifference The difference between the original capsule size and the crouched capsule size
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Movement")
+	virtual void UpdateCharacterMeshLocationWhileCrouching(float SizeDifference);
+
 private:
 	/**
 	 * @brief A reference to the current weapon
@@ -278,6 +331,31 @@ private:
 	bool CoyoteJumpPerformed;
 
 	/**
+	 * @brief Is the character crouching?
+	 */
+	bool bIsCrouching;
+
+	/**
+	 * @brief Is the character busy ending the crouch?
+	 */
+	bool bIsEndingCrouch;
+
+	/**
+	 * @brief The default movement speed of the character
+	 */
+	float DefaultMovementSpeed;
+
+	/**
+	 * @brief The default capsule size of the character
+	 */
+	float DefaultCapsuleSize;
+
+	/**
+	 * @brief Event used to smoothly adjust the capsule size during crouching
+	 */
+	FOnTimelineFloat CrouchTimelineUpdateEvent;
+
+	/**
 	 * @brief Move the character
 	 * @param Input The input action containing the input values
 	 */
@@ -294,4 +372,10 @@ private:
 	 */
 	UFUNCTION()
 	void ResetCoyoteJump();
+
+	/**
+	 * @brief Called after the crouch timeline is updated
+	 */
+	UFUNCTION()
+	void OnCrouchTimelineUpdated(float Value);
 };

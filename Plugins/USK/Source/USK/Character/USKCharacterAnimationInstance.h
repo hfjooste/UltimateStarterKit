@@ -58,6 +58,30 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
 	UAnimSequence* LandAnimation;
 
+	/**
+	 * @brief The animation used when the character starts crouching while unarmed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
+	UAnimSequence* CrouchStartAnimation;
+
+	/**
+	 * @brief The animation used when the character stops crouching while unarmed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
+	UAnimSequence* CrouchEndAnimation;
+
+	/**
+	 * @brief The animation used when the character is crouching and idle while unarmed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
+	UAnimSequence* CrouchIdleAnimation;
+
+	/**
+	 * @brief The animation used when the character is crouching and walking while unarmed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
+	UAnimSequence* CrouchWalkAnimation;
+
     /**
      * @brief The animation used when the character is in the idle state with a one handed weapon
      */
@@ -98,7 +122,31 @@ public:
 	 * @brief The animation used when the character is landing with a one handed weapon
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
-	UAnimSequence* LandOneHandedAnimation;
+	UAnimSequence* LandWeaponOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character starts crouching with a one handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
+	UAnimSequence* CrouchStartWeaponOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character stops crouching with a one handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
+	UAnimSequence* CrouchEndWeaponOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is crouching and idle with a one handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
+	UAnimSequence* CrouchIdleWeaponOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is crouching and walking with a one handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
+	UAnimSequence* CrouchWalkWeaponOneHandedAnimation;
 
 	/**
 	 * @brief The animation used when the character is in the idle state with a two handed weapon
@@ -143,6 +191,30 @@ public:
     UAnimSequence* LandWeaponTwoHandedAnimation;
 
 	/**
+	 * @brief The animation used when the character starts crouching with a two handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
+	UAnimSequence* CrouchStartWeaponTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character stops crouching with a two handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
+	UAnimSequence* CrouchEndWeaponTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is crouching and idle with a two handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
+	UAnimSequence* CrouchIdleWeaponTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is crouching and walking with a two handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
+	UAnimSequence* CrouchWalkWeaponTwoHandedAnimation;
+
+	/**
 	 * @brief The movement speed fo the character
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
@@ -153,6 +225,18 @@ public:
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
 	bool IsInAir;
+
+	/**
+	 * @brief Is the character currently crouching?
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
+	bool bIsCrouching;
+
+	/**
+	 * @brief Is the character busy ending the crouch?
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
+	bool bIsEndingCrouch;
 
 	/**
 	 * @brief Is the character double jumping?
@@ -220,6 +304,34 @@ protected:
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
 	UAnimSequence* GetLandAnimation() const;
+
+	/**
+	 * @brief Get the crouch start animation based on the current armed state
+	 * @return The crouch start animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetCrouchStartAnimation() const;
+
+	/**
+	 * @brief Get the crouch end animation based on the current armed state
+	 * @return The crouch end animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetCrouchEndAnimation() const;
+
+	/**
+	 * @brief Get the crouch idle animation based on the current armed state
+	 * @return The crouch idle animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetCrouchIdleAnimation() const;
+
+	/**
+	 * @brief Get the crouch walk animation based on the current armed state
+	 * @return The crouch walk animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetCrouchWalkAnimation() const;
 
 private:
 	/**

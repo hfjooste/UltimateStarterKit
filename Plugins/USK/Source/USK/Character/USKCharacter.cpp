@@ -11,6 +11,8 @@
 #include "Engine/LocalPlayer.h"
 #include "NiagaraFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
+#include "Components/CapsuleComponent.h"
+#include "Components/TimelineComponent.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Logger/Log.h"
 #include "USK/Weapons/WeaponUtils.h"
@@ -23,6 +25,7 @@ AUSKCharacter::AUSKCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+	CrouchTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("Crouch Timeline"));
 
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f);
 	GetCharacterMovement()->bOrientRotationToMovement = true;
@@ -63,6 +66,15 @@ void AUSKCharacter::BeginPlay()
 		USK_LOG_TRACE("Equiping default weapon");
 		UWeaponUtils::EquipWeapon(this, DefaultWeaponClass);
 	}
+
+	DefaultMovementSpeed = GetCharacterMovement()->MaxWalkSpeed;
+	DefaultCapsuleSize = GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
+	if (IsValid(CrouchCurve))
+	{
+		CrouchTimelineUpdateEvent.BindUFunction(this, FName("OnCrouchTimelineUpdated"));
+		CrouchTimeline->AddInterpFloat(CrouchCurve, CrouchTimelineUpdateEvent);
+		CrouchTimeline->SetLooping(false);
+	}
 }
 
 /**
@@ -96,6 +108,8 @@ void AUSKCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	EnhancedInput->BindAction(JumpAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopJumping);
 	EnhancedInput->BindAction(FireWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::StartFiringWeapon);
 	EnhancedInput->BindAction(FireWeaponAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopFiringWeapon);
+	EnhancedInput->BindAction(CrouchAction, ETriggerEvent::Started, this, &AUSKCharacter::StartCrouching);
+	EnhancedInput->BindAction(CrouchAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopCrouching);
 }
 
 /**
@@ -172,6 +186,24 @@ AWeapon* AUSKCharacter::GetWeapon() const
 }
 
 /**
+ * @brief Check if the character is crouching 
+ * @return A boolean value indicating if the character is crouching
+ */
+bool AUSKCharacter::IsCrouching() const
+{
+	return bIsCrouching;
+}
+
+/**
+ * @brief Check if the character is busy ending the crouch
+ * @return A boolean value indicating if the character is busy ending the crouch
+ */
+bool AUSKCharacter::IsEndingCrouch() const
+{
+	return bIsEndingCrouch;
+}
+
+/**
  * @brief Make the character jump on the next update
  */
 void AUSKCharacter::Jump()
@@ -230,6 +262,33 @@ void AUSKCharacter::StopFiringWeapon()
 }
 
 /**
+ * @brief Start crouching
+ */
+void AUSKCharacter::StartCrouching()
+{
+	bIsCrouching = true;
+	bIsEndingCrouch = false;
+	GetCharacterMovement()->MaxWalkSpeed = GetCharacterMovement()->MaxWalkSpeedCrouched;
+	CrouchTimeline->Play();
+}
+
+/**
+ * @brief Stop crouching
+ */
+void AUSKCharacter::StopCrouching()
+{
+	bIsEndingCrouch = true;
+	GetCharacterMovement()->MaxWalkSpeed = DefaultMovementSpeed;
+	CrouchTimeline->Reverse();
+}
+
+/**
+ * @brief Update the character mesh location while crouching
+ * @param SizeDifference The difference between the original capsule size and the crouched capsule size
+ */
+void AUSKCharacter::UpdateCharacterMeshLocationWhileCrouching(float SizeDifference) { }
+
+/**
  * @brief Move the character
  * @param Input The input action containing the input values
  */
@@ -265,4 +324,20 @@ void AUSKCharacter::ResetCoyoteJump()
 {
 	USK_LOG_TRACE("Resetting coyote jump");
 	CanPerformCoyoteJump = false;
+}
+
+/**
+ * @brief Called after the crouch timeline is updated
+ */
+void AUSKCharacter::OnCrouchTimelineUpdated(float Value)
+{
+	if (FMath::IsNearlyEqual(Value, 1.0f))
+	{
+		bIsCrouching = false;
+		bIsEndingCrouch = false;
+	}
+	
+	const float CapsuleHalfHeight = FMath::Lerp(0.0f, DefaultCapsuleSize, Value);
+	UpdateCharacterMeshLocationWhileCrouching(DefaultCapsuleSize - CapsuleHalfHeight);
+	GetCapsuleComponent()->SetCapsuleHalfHeight(CapsuleHalfHeight);
 }

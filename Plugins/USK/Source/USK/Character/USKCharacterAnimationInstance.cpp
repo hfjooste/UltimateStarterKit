@@ -31,6 +31,8 @@ void UUSKCharacterAnimationInstance::NativeUpdateAnimation(float DeltaSeconds)
 
 	MovementSpeed = UKismetMathLibrary::VSizeXY(Character->GetMovementComponent()->Velocity);
 	IsInAir = Character->GetMovementComponent()->IsFalling();
+	bIsCrouching = !IsInAir && Character->IsCrouching();
+	bIsEndingCrouch = Character->IsEndingCrouch();
 
 	if (!Character->IsDoubleJumping)
 	{
@@ -108,7 +110,47 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetFallAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetLandAnimation() const
 {
-	return GetAnimation(LandAnimation, LandOneHandedAnimation, LandWeaponTwoHandedAnimation);
+	return GetAnimation(LandAnimation, LandWeaponOneHandedAnimation, LandWeaponTwoHandedAnimation);
+}
+
+/**
+ * @brief Get the crouch start animation based on the current armed state
+ * @return The crouch start animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchStartAnimation() const
+{
+	return GetAnimation(CrouchStartAnimation,
+		CrouchStartWeaponOneHandedAnimation, CrouchStartWeaponTwoHandedAnimation);
+}
+
+/**
+ * @brief Get the crouch end animation based on the current armed state
+ * @return The crouch end animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchEndAnimation() const
+{
+	return GetAnimation(CrouchEndAnimation,
+		CrouchEndWeaponOneHandedAnimation, CrouchEndWeaponTwoHandedAnimation);
+}
+
+/**
+ * @brief Get the crouch idle animation based on the current armed state
+ * @return The crouch idle animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchIdleAnimation() const
+{
+	return GetAnimation(CrouchIdleAnimation,
+		CrouchIdleWeaponOneHandedAnimation, CrouchIdleWeaponTwoHandedAnimation);
+}
+
+/**
+ * @brief Get the crouch walk animation based on the current armed state
+ * @return The crouch walk animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchWalkAnimation() const
+{
+	return GetAnimation(CrouchWalkAnimation,
+		CrouchWalkWeaponOneHandedAnimation, CrouchWalkWeaponTwoHandedAnimation);
 }
 
 /**

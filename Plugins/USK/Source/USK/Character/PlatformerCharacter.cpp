@@ -32,6 +32,7 @@ void APlatformerCharacter::BeginPlay()
 	USK_LOG_TRACE("Initializing character camera");
 	GetSpringArmComponent()->TargetArmLength = TargetArmLength;
 	CurrentArmLength = TargetArmLength;
+	DefaultMeshLocation = GetMesh()->GetRelativeLocation();
 }
 
 /**
@@ -42,6 +43,16 @@ void APlatformerCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	AdjustCameraPosition(DeltaSeconds);
+}
+
+/**
+ * @brief Update the character mesh location while crouching
+ * @param SizeDifference The difference between the original capsule size and the crouched capsule size
+ */
+void APlatformerCharacter::UpdateCharacterMeshLocationWhileCrouching(float SizeDifference)
+{
+	Super::UpdateCharacterMeshLocationWhileCrouching(SizeDifference);
+	GetMesh()->SetRelativeLocation(DefaultMeshLocation + FVector(0.0f, 0.0f, SizeDifference));
 }
 
 /**
