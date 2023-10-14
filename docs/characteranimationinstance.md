@@ -218,6 +218,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>MovementBlendSpeed</td>
+		<td>The blend speed used when updating the movement speed</td>
+		<td>float</td>
+		<td>10.0f</td>
+	</tr>
+	<tr>
 		<td>MovementSpeed</td>
 		<td>The movement speed fo the character</td>
 		<td>float</td>
