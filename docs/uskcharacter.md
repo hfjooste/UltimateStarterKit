@@ -21,6 +21,11 @@ The <code>USKCharacter</code> uses the following components:
 		<td>Base character class</td>
 		<td>UCameraComponent*</td>
 	</tr>
+	<tr>
+		<td>CrouchTimeline</td>
+		<td>The timeline component used for smooth crouching</td>
+		<td>UTimelineComponent*</td>
+	</tr>
 </table>
 
 ## API Reference
@@ -65,6 +70,12 @@ The <code>USKCharacter</code> uses the following components:
 	<tr>
 		<td>FireWeaponAction</td>
 		<td>The fire weapon input action</td>
+		<td>UInputAction*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchAction</td>
+		<td>The crouch input action</td>
 		<td>UInputAction*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -183,6 +194,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>2500.0f</td>
 	</tr>
 	<tr>
+		<td>CrouchCurve</td>
+		<td>The float curve used for smooth crouching</td>
+		<td>UCurveFloat*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>DefaultWeaponClass</td>
 		<td>The default weapon the character will equip on spawn</td>
 		<td>TSubclassOf&lt;AWeapon&gt;</td>
@@ -217,6 +234,18 @@ The <code>USKCharacter</code> uses the following components:
 		<td><strong>AWeapon*</strong><br/>The current weapon used by the character</td>
 	</tr>
 	<tr>
+		<td>IsCrouching</td>
+		<td>Check if the character is crouching</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the character is crouching</td>
+	</tr>
+	<tr>
+		<td>IsEndingCrouch</td>
+		<td>Check if the character is busy ending the crouch</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the character is busy ending the crouch</td>
+	</tr>
+	<tr>
 		<td>StartFiringWeapon</td>
 		<td>Start firing the current weapon</td>
 		<td></td>
@@ -226,6 +255,24 @@ The <code>USKCharacter</code> uses the following components:
 		<td>StopFiringWeapon</td>
 		<td>Stop firing the current weapon</td>
 		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>StartCrouching</td>
+		<td>Start crouching</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>StopCrouching</td>
+		<td>Stop crouching</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>UpdateCharacterMeshLocationWhileCrouching</td>
+		<td>Update the character mesh location while crouching</td>
+		<td><strong>SizeDifference (float)</strong><br/>The difference between the original capsule size and the crouched capsule size</td>
 		<td></td>
 	</tr>
 </table>

@@ -62,6 +62,30 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>CrouchStartAnimation</td>
+		<td>The animation used when the character starts crouching while unarmed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchEndAnimation</td>
+		<td>The animation used when the character stops crouching while unarmed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchIdleAnimation</td>
+		<td>The animation used when the character is crouching and idle while unarmed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchWalkAnimation</td>
+		<td>The animation used when the character is crouching and walking while unarmed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>IdleWeaponOneHandedAnimation</td>
 		<td>The animation used when the character is in the idle state with a one handed weapon</td>
 		<td>UAnimSequence*</td>
@@ -98,8 +122,32 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
-		<td>LandOneHandedAnimation</td>
+		<td>LandWeaponOneHandedAnimation</td>
 		<td>The animation used when the character is landing with a one handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchStartWeaponOneHandedAnimation</td>
+		<td>The animation used when the character starts crouching with a one handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchEndWeaponOneHandedAnimation</td>
+		<td>The animation used when the character stops crouching with a one handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchIdleWeaponOneHandedAnimation</td>
+		<td>The animation used when the character is crouching and idle with a one handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchWalkWeaponOneHandedAnimation</td>
+		<td>The animation used when the character is crouching and walking with a one handed weapon</td>
 		<td>UAnimSequence*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -146,6 +194,30 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>CrouchStartWeaponTwoHandedAnimation</td>
+		<td>The animation used when the character starts crouching with a two handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchEndWeaponTwoHandedAnimation</td>
+		<td>The animation used when the character stops crouching with a two handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchIdleWeaponTwoHandedAnimation</td>
+		<td>The animation used when the character is crouching and idle with a two handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchWalkWeaponTwoHandedAnimation</td>
+		<td>The animation used when the character is crouching and walking with a two handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>MovementSpeed</td>
 		<td>The movement speed fo the character</td>
 		<td>float</td>
@@ -154,6 +226,18 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 	<tr>
 		<td>IsInAir</td>
 		<td>Is the character currently in the air?</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bIsCrouching</td>
+		<td>Is the character currently crouching?</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bIsEndingCrouch</td>
+		<td>Is the character busy ending the crouch?</td>
 		<td>bool</td>
 		<td></td>
 	</tr>
@@ -215,7 +299,31 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td></td>
 		<td><strong>UAnimSequence*</strong><br/>The land animation to play</td>
 	</tr>
+	<tr>
+		<td>GetCrouchStartAnimation</td>
+		<td>Get the crouch start animation based on the current armed state</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The crouch start animation to play</td>
+	</tr>
+	<tr>
+		<td>GetCrouchEndAnimation</td>
+		<td>Get the crouch end animation based on the current armed state</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The crouch end animation to play</td>
+	</tr>
+	<tr>
+		<td>GetCrouchIdleAnimation</td>
+		<td>Get the crouch idle animation based on the current armed state</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The crouch idle animation to play</td>
+	</tr>
+	<tr>
+		<td>GetCrouchWalkAnimation</td>
+		<td>Get the crouch walk animation based on the current armed state</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The crouch walk animation to play</td>
+	</tr>
 </table>
 
 ## Blueprint Usage
-You can use this template by creating your own animation blueprint and selecting <code>UPlatformerAnimationInstance</code> as the parent class. Set your animations and use this for your 3D platformer character
+You can use this template by creating your own animation blueprint and selecting <code>UPlatformerAnimationInstance</code> as the parent class. Set your animations and use this for your characters
