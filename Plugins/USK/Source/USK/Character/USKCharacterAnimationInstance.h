@@ -215,6 +215,12 @@ public:
 	UAnimSequence* CrouchWalkWeaponTwoHandedAnimation;
 
 	/**
+	 * @brief The blend speed used when updating the movement speed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character")
+	float MovementBlendSpeed = 10.0f;
+	
+	/**
 	 * @brief The movement speed fo the character
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")

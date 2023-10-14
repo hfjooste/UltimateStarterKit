@@ -29,7 +29,8 @@ void UUSKCharacterAnimationInstance::NativeUpdateAnimation(float DeltaSeconds)
 		return;
 	}
 
-	MovementSpeed = UKismetMathLibrary::VSizeXY(Character->GetMovementComponent()->Velocity);
+	const float NewMovementSpeed = UKismetMathLibrary::VSizeXY(Character->GetMovementComponent()->Velocity);
+	MovementSpeed = FMath::Lerp(MovementSpeed, NewMovementSpeed, DeltaSeconds * MovementBlendSpeed);
 	IsInAir = Character->GetMovementComponent()->IsFalling();
 	bIsCrouching = !IsInAir && Character->IsCrouching();
 	bIsEndingCrouch = Character->IsEndingCrouch();
