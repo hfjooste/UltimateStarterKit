@@ -86,6 +86,24 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>StompStartAnimation</td>
+		<td>The animation used when the character is starting to stomp while unarmed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompFallAnimation</td>
+		<td>The animation used when the character is falling after a stomp while unarmed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompLandAnimation</td>
+		<td>The animation used when the character is landing after a stomp while unarmed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>IdleWeaponOneHandedAnimation</td>
 		<td>The animation used when the character is in the idle state with a one handed weapon</td>
 		<td>UAnimSequence*</td>
@@ -148,6 +166,24 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 	<tr>
 		<td>CrouchWalkWeaponOneHandedAnimation</td>
 		<td>The animation used when the character is crouching and walking with a one handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompStartWeaponOneHandedAnimation</td>
+		<td>The animation used when the character is starting to stomp with a one handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompFallWeaponOneHandedAnimation</td>
+		<td>The animation used when the character is falling after a stomp with a one handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompLandWeaponOneHandedAnimation</td>
+		<td>The animation used when the character is landing after a stomp with a one handed weapon</td>
 		<td>UAnimSequence*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -218,6 +254,24 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>StompStartWeaponTwoHandedAnimation</td>
+		<td>The animation used when the character is starting to stomp with a two handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompFallWeaponTwoHandedAnimation</td>
+		<td>The animation used when the character is falling after a stomp with a two handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompLandWeaponTwoHandedAnimation</td>
+		<td>The animation used when the character is landing after a stomp with a two handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>MovementBlendSpeed</td>
 		<td>The blend speed used when updating the movement speed</td>
 		<td>float</td>
@@ -238,6 +292,18 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 	<tr>
 		<td>bIsCrouching</td>
 		<td>Is the character currently crouching?</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bIsStomping</td>
+		<td>Is the character currently stomping?</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bIsStompStarting</td>
+		<td>Is the character starting the stomp?</td>
 		<td>bool</td>
 		<td></td>
 	</tr>
@@ -328,6 +394,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>Get the crouch walk animation based on the current armed state</td>
 		<td></td>
 		<td><strong>UAnimSequence*</strong><br/>The crouch walk animation to play</td>
+	</tr>
+	<tr>
+		<td>GetStompStartAnimation</td>
+		<td>Get the stomp start animation based on the current armed state</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The stomp start animation to play</td>
 	</tr>
 </table>
 
