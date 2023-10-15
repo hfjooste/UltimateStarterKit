@@ -4,7 +4,6 @@
 
 #include "Animation/AnimInstance.h"
 #include "USKCharacter.h"
-#include "USK/Weapons/WeaponType.h"
 #include "USKCharacterAnimationInstance.generated.h"
 
 /**
@@ -82,6 +81,24 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
 	UAnimSequence* CrouchWalkAnimation;
 
+	/**
+	 * @brief The animation used when the character is starting to stomp while unarmed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
+	UAnimSequence* StompStartAnimation;
+
+	/**
+	 * @brief The animation used when the character is falling after a stomp while unarmed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
+	UAnimSequence* StompFallAnimation;
+
+	/**
+	 * @brief The animation used when the character is landing after a stomp while unarmed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
+	UAnimSequence* StompLandAnimation;
+
     /**
      * @brief The animation used when the character is in the idle state with a one handed weapon
      */
@@ -147,6 +164,24 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
 	UAnimSequence* CrouchWalkWeaponOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is starting to stomp with a one handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
+	UAnimSequence* StompStartWeaponOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is falling after a stomp with a one handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
+	UAnimSequence* StompFallWeaponOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is landing after a stomp with a one handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
+	UAnimSequence* StompLandWeaponOneHandedAnimation;
 
 	/**
 	 * @brief The animation used when the character is in the idle state with a two handed weapon
@@ -215,6 +250,24 @@ public:
 	UAnimSequence* CrouchWalkWeaponTwoHandedAnimation;
 
 	/**
+	 * @brief The animation used when the character is starting to stomp with a two handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
+	UAnimSequence* StompStartWeaponTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is falling after a stomp with a two handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
+	UAnimSequence* StompFallWeaponTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is landing after a stomp with a two handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
+	UAnimSequence* StompLandWeaponTwoHandedAnimation;
+
+	/**
 	 * @brief The blend speed used when updating the movement speed
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character")
@@ -237,6 +290,18 @@ public:
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
 	bool bIsCrouching;
+
+	/**
+	 * @brief Is the character currently stomping?
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
+	bool bIsStomping;
+
+	/**
+	 * @brief Is the character starting the stomp?
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
+	bool bIsStompStarting;
 
 	/**
 	 * @brief Is the character busy ending the crouch?
@@ -338,6 +403,13 @@ protected:
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
 	UAnimSequence* GetCrouchWalkAnimation() const;
+
+	/**
+	 * @brief Get the stomp start animation based on the current armed state
+	 * @return The stomp start animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetStompStartAnimation() const;
 
 private:
 	/**

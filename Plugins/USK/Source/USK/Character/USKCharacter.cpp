@@ -78,6 +78,16 @@ void AUSKCharacter::BeginPlay()
 }
 
 /**
+ * @brief Event called every frame, if ticking is enabled
+ * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+ */
+void AUSKCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	AirTime = GetCharacterMovement()->IsFalling() ? AirTime + DeltaSeconds : 0.0f;
+}
+
+/**
  * @brief Tell client that the Pawn is begin restarted
  */
 void AUSKCharacter::PawnClientRestart()
@@ -129,6 +139,12 @@ void AUSKCharacter::Landed(const FHitResult& Hit)
 	{
 		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), LandParticleFx,
 			Hit.Location + LandParticleFxSpawnOffset);
+	}
+
+	StopStomping();
+	if (bIsCrouching)
+	{
+		CrouchTimeline->Play();
 	}
 }
 
@@ -204,11 +220,29 @@ bool AUSKCharacter::IsEndingCrouch() const
 }
 
 /**
+ * @brief Check if the character is stomping
+ * @return A boolean value indicating if the character is stomping
+ */
+bool AUSKCharacter::IsStomping() const
+{
+	return bIsStomping;
+}
+
+/**
+ * Check if the character is starting to stomp
+ * @return A boolean value indicating if the character is starting to stomp
+ */
+bool AUSKCharacter::IsStompStarting() const
+{
+	return bIsStomping && FMath::IsNearlyZero(GetCharacterMovement()->GravityScale);
+}
+
+/**
  * @brief Make the character jump on the next update
  */
 void AUSKCharacter::Jump()
 {
-	if (!CanJump() && !CanPerformCoyoteJump)
+	if ((!CanJump() && !CanPerformCoyoteJump) || bIsStomping)
 	{
 		USK_LOG_TRACE("Can't jump");
 		return;
@@ -266,10 +300,18 @@ void AUSKCharacter::StopFiringWeapon()
  */
 void AUSKCharacter::StartCrouching()
 {
+	if (bCanStomp && GetCharacterMovement()->IsFalling() && AirTime >= MinAirTimeBeforeStomping)
+	{
+		StartStomping();
+	}
+	
 	bIsCrouching = true;
 	bIsEndingCrouch = false;
 	GetCharacterMovement()->MaxWalkSpeed = GetCharacterMovement()->MaxWalkSpeedCrouched;
-	CrouchTimeline->Play();
+	if (!GetCharacterMovement()->IsFalling())
+	{
+		CrouchTimeline->Play();
+	}
 }
 
 /**
@@ -289,13 +331,63 @@ void AUSKCharacter::StopCrouching()
 void AUSKCharacter::UpdateCharacterMeshLocationWhileCrouching(float SizeDifference) { }
 
 /**
+ * @brief Start the stomping ability
+ */
+void AUSKCharacter::StartStomping()
+{
+	bIsStomping = true;
+	if (StompZeroGravityDuration <= 0.0f)
+	{
+		ApplyStompVelocity();
+		return;
+	}
+	
+    GetCharacterMovement()->GravityScale = 0.0f;
+	const FVector CurrentVelocity = GetCharacterMovement()->Velocity;
+	GetCharacterMovement()->Velocity = FVector(CurrentVelocity.X, CurrentVelocity.Y, 0.0f);
+	UKismetSystemLibrary::K2_SetTimer(this, "StompAfterZeroGravity", StompZeroGravityDuration, false);
+}
+
+/**
+ * @brief Stop the stomping ability
+ */
+void AUSKCharacter::StopStomping()
+{
+	if (!bIsStomping)
+	{
+		return;
+	}
+	
+	UKismetSystemLibrary::K2_SetTimer(this, "ResetStomping", 0.1f, false);
+	LaunchCharacter(FVector(0.0f, 0.0f, StompLandVelocity), false, true);
+	
+	if (IsValid(StompCameraShake))
+	{
+		UGameplayStatics::PlayWorldCameraShake(GetWorld(), StompCameraShake,
+			GetActorLocation(), 1000.0f, 2000.0f, 1.0f);
+	}
+}
+
+/**
+ * @brief Apply the stomp velocity to the player
+ */
+void AUSKCharacter::ApplyStompVelocity()
+{
+	LaunchCharacter(FVector(0.0f, 0.0f, StompVelocity), true, false);
+}
+
+/**
  * @brief Move the character
  * @param Input The input action containing the input values
  */
 void AUSKCharacter::MoveCharacter(const FInputActionValue& Input)
 {
-	const FVector2D InputValue = Input.Get<FVector2D>();
+	if (bIsStomping)
+	{
+		return;
+	}
 	
+	const FVector2D InputValue = Input.Get<FVector2D>();	
 	FRotator Rotation = GetControlRotation();
 	Rotation.Pitch = 0.0f;
 	Rotation.Roll = 0.0f;
@@ -337,7 +429,26 @@ void AUSKCharacter::OnCrouchTimelineUpdated(float Value)
 		bIsEndingCrouch = false;
 	}
 	
-	const float CapsuleHalfHeight = FMath::Lerp(0.0f, DefaultCapsuleSize, Value);
+	const float CapsuleHalfHeight = GetCharacterMovement()->IsFalling()
+		? DefaultCapsuleSize
+		: FMath::Lerp(0.0f, DefaultCapsuleSize, Value);
 	UpdateCharacterMeshLocationWhileCrouching(DefaultCapsuleSize - CapsuleHalfHeight);
 	GetCapsuleComponent()->SetCapsuleHalfHeight(CapsuleHalfHeight);
+}
+
+/**
+ * @brief Perform a stomp after the zero gravity duration has elapsed
+ */
+void AUSKCharacter::StompAfterZeroGravity()
+{
+	GetCharacterMovement()->GravityScale = Gravity;
+	ApplyStompVelocity();
+}
+
+/**
+ * @brief Reset the stomping values
+ */
+void AUSKCharacter::ResetStomping()
+{
+	bIsStomping = false;
 }

@@ -34,6 +34,8 @@ void UUSKCharacterAnimationInstance::NativeUpdateAnimation(float DeltaSeconds)
 	IsInAir = Character->GetMovementComponent()->IsFalling();
 	bIsCrouching = !IsInAir && Character->IsCrouching();
 	bIsEndingCrouch = Character->IsEndingCrouch();
+    bIsStomping = Character->IsStomping();
+    bIsStompStarting = Character->IsStompStarting();
 
 	if (!Character->IsDoubleJumping)
 	{
@@ -102,7 +104,9 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetDoubleJumpAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetFallAnimation() const
 {
-	return GetAnimation(FallAnimation, FallWeaponOneHandedAnimation, FallWeaponTwoHandedAnimation);
+	return bIsStomping
+		? GetAnimation(StompFallAnimation, StompFallWeaponOneHandedAnimation, StompFallWeaponTwoHandedAnimation)
+		: GetAnimation(FallAnimation, FallWeaponOneHandedAnimation, FallWeaponTwoHandedAnimation);
 }
 
 /**
@@ -111,7 +115,9 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetFallAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetLandAnimation() const
 {
-	return GetAnimation(LandAnimation, LandWeaponOneHandedAnimation, LandWeaponTwoHandedAnimation);
+	return bIsStomping
+		? GetAnimation(StompLandAnimation, StompLandWeaponOneHandedAnimation, StompLandWeaponTwoHandedAnimation)
+		: GetAnimation(LandAnimation, LandWeaponOneHandedAnimation, LandWeaponTwoHandedAnimation);
 }
 
 /**
@@ -152,6 +158,15 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchWalkAnimation() const
 {
 	return GetAnimation(CrouchWalkAnimation,
 		CrouchWalkWeaponOneHandedAnimation, CrouchWalkWeaponTwoHandedAnimation);
+}
+
+/**
+ * @brief Get the stomp start animation based on the current armed state
+ * @return The stomp start animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetStompStartAnimation() const
+{
+	return GetAnimation(StompStartAnimation, StompStartWeaponOneHandedAnimation, StompStartWeaponTwoHandedAnimation);
 }
 
 /**

@@ -82,176 +82,237 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
 	bool IsEndingCrouch() const;
 
+	/**
+	 * @brief Check if the character is stomping
+	 * @return A boolean value indicating if the character is stomping
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
+	bool IsStomping() const;
+
+	/**
+	 * Check if the character is starting to stomp
+	 * @return A boolean value indicating if the character is starting to stomp
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
+	bool IsStompStarting() const;
+
 protected:
 	/**
 	 * @brief The input mapping context used by the player
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
 	UInputMappingContext* InputMappingContext;
 
 	/**
 	 * @brief The move input action
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
 	UInputAction* MoveAction;
 
 	/**
 	 * @brief The camera rotation input action
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
 	UInputAction* LookAroundAction;
 
 	/**
 	 * @brief The jump input action
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
 	UInputAction* JumpAction;
 
 	/**
 	 * @brief The fire weapon input action
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
 	UInputAction* FireWeaponAction;
 
 	/**
 	 * @brief The crouch input action
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Input")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
 	UInputAction* CrouchAction;
 
 	/**
 	 * @brief The shadow decal class used to draw a shadow below the character while in the air
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump|Effects")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump|Effects")
 	TSubclassOf<AShadowDecal> ShadowDecalClass;
 
 	/**
 	 * @brief An array of sound effects played when jumping
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump|Effects")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump|Effects")
 	TArray<USoundBase*> JumpSoundEffects;
 
 	/**
 	 * @brief The particle effects spawned when jumping
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump|Effects")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump|Effects")
 	UNiagaraSystem* JumpParticleFx;
 
 	/**
 	 * @brief The offset applied to the location of the jump particles when spawning
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump|Effects")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump|Effects")
 	FVector JumpParticleFxSpawnOffset;
 
 	/**
 	 * @brief An array of sound effects played when landing
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump|Effects")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump|Effects")
 	TArray<USoundBase*> LandedSoundEffects;
 
 	/**
 	 * @brief The particle effects spawned when landing
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump|Effects")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump|Effects")
 	UNiagaraSystem* LandParticleFx;
 
 	/**
 	 * @brief The offset applied to the location of the land particles when spawning
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump|Effects")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump|Effects")
 	FVector LandParticleFxSpawnOffset;
 
 	/**
 	 * @brief Does the character support variable jump height?
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump")
 	bool VariableJumpHeight = true;
 
 	/**
 	 * @brief The amount of time to hold the jump button to reach the max height
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump",
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
 		meta = (EditCondition = "VariableJumpHeight"))
 	float VariableJumpHeightMaxHoldTime = 0.3f;
 
 	/**
 	 * @brief The velocity applied to the character when jumping
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump")
 	float JumpVelocity = 500.0f;
 
 	/**
 	 * @brief The amount of lateral movement control available to the character while in the air
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump")
 	float AirControl = 1000.0f;
 
 	/**
 	 * @brief The amount of friction to apply to lateral air movement when falling
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump")
 	float FallingFriction = 3.5f;
 
 	/**
 	 * @brief The amount of gravity applied to the character
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump")
 	float Gravity = 2.0f;
 
 	/**
 	 * @brief Can the character perform a double jump?
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump")
 	bool CanDoubleJump = true;
 
 	/**
 	 * @brief Does the character support coyote time when trying to jump?
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump")
 	bool CanCoyoteJump = true;
 
 	/**
 	 * @brief The amount of coyote time for the character
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump",
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
 		meta = (EditCondition = "CanCoyoteJump"))
 	float CoyoteJumpTime = 0.375f;
 
 	/**
 	 * @brief The velocity applied to the character when performing a coyote jump
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Jump",
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
 		meta = (EditCondition = "CanCoyoteJump"))
 	float CoyoteJumpVelocity = 700.0f;
 
 	/**
 	 * @brief Friction coefficient applied when braking
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Movement")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
 	float BrakingFriction = 10.0f;
 
 	/**
 	 * @brief The rate of change of velocity
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Movement")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
 	float MaxAcceleration = 2500.0f;
 
 	/**
 	 * @brief The float curve used for smooth crouching 
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Movement")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Crouching")
 	UCurveFloat* CrouchCurve;
+
+	/**
+	 * @brief Can the character perform a stomp?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Stomping")
+	bool bCanStomp = true;
+
+	/**
+	 * @brief The minimum air time before the character can perform a stomp
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Stomping",
+		meta=(EditCondition = "bCanStomp", EditConditionHides))
+	float MinAirTimeBeforeStomping = 0.3f;
+
+	/**
+	 * @brief The velocity applied to the player after performing a stomp
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Stomping",
+		meta=(EditCondition = "bCanStomp", EditConditionHides))
+	float StompVelocity = -5000.0f;
+
+	/**
+	 * @brief The amount of time the character will be in zero gravity after performing a stomp
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Stomping",
+    		meta=(EditCondition = "bCanStomp", EditConditionHides))
+	float StompZeroGravityDuration = 0.5f;
+
+	/**
+	 * @brief The velocity applied to the player when landing after performing a stomp
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Stomping",
+			meta=(EditCondition = "bCanStomp", EditConditionHides))
+	float StompLandVelocity = 750.0f;
+
+	/**
+	 * @brief The camera shake applied when performing a stomp
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Stomping",
+		meta=(EditCondition = "bCanStomp", EditConditionHides))
+	TSubclassOf<UCameraShakeBase> StompCameraShake;
 
 	/**
 	 * @brief The default weapon the character will equip on spawn
 	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Character|Weapons")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Weapons")
 	TSubclassOf<AWeapon> DefaultWeaponClass;
 
 	/**
 	 * @brief Overridable native event for when play begins for this actor
 	 */
 	virtual void BeginPlay() override;
+
+	/**
+	 * @brief Event called every frame, if ticking is enabled
+	 * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+	 */
+	virtual void Tick(float DeltaSeconds) override;
 
 	/**
 	 * @brief Tell client that the Pawn is begin restarted
@@ -313,6 +374,21 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Movement")
 	virtual void UpdateCharacterMeshLocationWhileCrouching(float SizeDifference);
 
+	/**
+	 * @brief Start the stomping ability
+	 */
+	void StartStomping();
+
+	/**
+	 * @brief Stop the stomping ability
+	 */
+	void StopStomping();
+
+	/**
+	 * @brief Apply the stomp velocity to the player
+	 */
+	void ApplyStompVelocity();
+
 private:
 	/**
 	 * @brief A reference to the current weapon
@@ -341,6 +417,11 @@ private:
 	bool bIsEndingCrouch;
 
 	/**
+	 * @brief Is the character stomping?
+	 */
+	bool bIsStomping;
+
+	/**
 	 * @brief The default movement speed of the character
 	 */
 	float DefaultMovementSpeed;
@@ -354,6 +435,11 @@ private:
 	 * @brief Event used to smoothly adjust the capsule size during crouching
 	 */
 	FOnTimelineFloat CrouchTimelineUpdateEvent;
+
+	/**
+	 * @brief The current amount of time the player is in the air
+	 */
+	float AirTime;
 
 	/**
 	 * @brief Move the character
@@ -378,4 +464,16 @@ private:
 	 */
 	UFUNCTION()
 	void OnCrouchTimelineUpdated(float Value);
+
+	/**
+	 * @brief Perform a stomp after the zero gravity duration has elapsed
+	 */
+	UFUNCTION()
+	void StompAfterZeroGravity();
+
+	/**
+	 * @brief Reset the stomping values
+	 */
+	UFUNCTION()
+	void ResetStomping();
 };
