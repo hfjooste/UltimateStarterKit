@@ -242,6 +242,14 @@ bool AUSKCharacter::IsStompStarting() const
  */
 void AUSKCharacter::Jump()
 {
+	if (bIsStompJumpAllowed)
+	{
+		Super::Jump();
+		LaunchCharacter(FVector(0.0f, 0.0f, StompJumpVelocity), false, true);
+		ResetStompJump();
+		return;
+	}
+	
 	if ((!CanJump() && !CanPerformCoyoteJump) || bIsStomping)
 	{
 		USK_LOG_TRACE("Can't jump");
@@ -366,6 +374,12 @@ void AUSKCharacter::StopStomping()
 		UGameplayStatics::PlayWorldCameraShake(GetWorld(), StompCameraShake,
 			GetActorLocation(), 1000.0f, 2000.0f, 1.0f);
 	}
+
+	if (bCanStompJump && StompJumpDuration > 0.0f)
+	{
+		bIsStompJumpAllowed = true;
+		UKismetSystemLibrary::K2_SetTimer(this, "ResetStompJump", StompJumpDuration, false);
+	}
 }
 
 /**
@@ -451,4 +465,12 @@ void AUSKCharacter::StompAfterZeroGravity()
 void AUSKCharacter::ResetStomping()
 {
 	bIsStomping = false;
+}
+
+/**
+ * @brief Reset the stomp jump values
+ */
+void AUSKCharacter::ResetStompJump()
+{
+	bIsStompJumpAllowed = false;
 }

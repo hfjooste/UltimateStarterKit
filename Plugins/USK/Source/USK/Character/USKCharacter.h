@@ -98,7 +98,7 @@ public:
 
 protected:
 	/**
-	 * @brief The input mapping context used by the player
+	 * @brief The input mapping context used by the character
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
 	UInputMappingContext* InputMappingContext;
@@ -228,15 +228,36 @@ protected:
 	 * @brief The amount of coyote time for the character
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
-		meta = (EditCondition = "CanCoyoteJump"))
+		meta = (EditCondition = "CanCoyoteJump", EditConditionHides))
 	float CoyoteJumpTime = 0.375f;
 
 	/**
 	 * @brief The velocity applied to the character when performing a coyote jump
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
-		meta = (EditCondition = "CanCoyoteJump"))
+		meta = (EditCondition = "CanCoyoteJump", EditConditionHides))
 	float CoyoteJumpVelocity = 700.0f;
+
+	/**
+	 * @brief Can the character perform a high jump directly after landing from a stomp?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
+    		meta = (EditCondition = "bCanStomp"))
+    bool bCanStompJump = true;
+
+	/**
+	 * @brief The duration after the stomp that the character can perform the stomp jump
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
+			meta = (EditCondition = "bCanStomp && bCanStompJump", EditConditionHides))
+    float StompJumpDuration = 0.35f;
+
+	/**
+	 * @brief The velocity applied to the character when performing a stomp jump
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
+			meta = (EditCondition = "bCanStomp && bCanStompJump", EditConditionHides))
+	float StompJumpVelocity = 1250.0f;
 
 	/**
 	 * @brief Friction coefficient applied when braking
@@ -270,7 +291,7 @@ protected:
 	float MinAirTimeBeforeStomping = 0.3f;
 
 	/**
-	 * @brief The velocity applied to the player after performing a stomp
+	 * @brief The velocity applied to the character after performing a stomp
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Stomping",
 		meta=(EditCondition = "bCanStomp", EditConditionHides))
@@ -284,7 +305,7 @@ protected:
 	float StompZeroGravityDuration = 0.5f;
 
 	/**
-	 * @brief The velocity applied to the player when landing after performing a stomp
+	 * @brief The velocity applied to the character when landing after performing a stomp
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Stomping",
 			meta=(EditCondition = "bCanStomp", EditConditionHides))
@@ -385,7 +406,7 @@ protected:
 	void StopStomping();
 
 	/**
-	 * @brief Apply the stomp velocity to the player
+	 * @brief Apply the stomp velocity to the character
 	 */
 	void ApplyStompVelocity();
 
@@ -422,6 +443,11 @@ private:
 	bool bIsStomping;
 
 	/**
+	 * @brief Is the character allowed to perform a stomp jump?
+	 */
+	bool bIsStompJumpAllowed;
+
+	/**
 	 * @brief The default movement speed of the character
 	 */
 	float DefaultMovementSpeed;
@@ -437,7 +463,7 @@ private:
 	FOnTimelineFloat CrouchTimelineUpdateEvent;
 
 	/**
-	 * @brief The current amount of time the player is in the air
+	 * @brief The current amount of time the character is in the air
 	 */
 	float AirTime;
 
@@ -476,4 +502,10 @@ private:
 	 */
 	UFUNCTION()
 	void ResetStomping();
+
+	/**
+	 * @brief Reset the stomp jump values
+	 */
+	UFUNCTION()
+	void ResetStompJump();
 };
