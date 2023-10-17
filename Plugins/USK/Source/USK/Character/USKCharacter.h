@@ -278,6 +278,13 @@ protected:
 	bool bCanCrouch = true;
 
 	/**
+	 * @brief Should the crouch action be held down to crouch?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Crouching",
+		meta=(EditCondition = "bCanCrouch", EditConditionHides))
+	bool bHoldToCrouch = true;
+
+	/**
 	 * @brief The float curve used for smooth crouching 
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Crouching",
@@ -491,6 +498,11 @@ private:
 	 */
 	UFUNCTION()
 	void ResetCoyoteJump();
+
+	/**
+	 * @brief Stop crouching
+	 */
+	void StopCrouchingInternal();
 
 	/**
 	 * @brief Called after the crouch timeline is updated

@@ -311,10 +311,20 @@ void AUSKCharacter::StartCrouching()
 	if (bCanStomp && GetCharacterMovement()->IsFalling() && AirTime >= MinAirTimeBeforeStomping)
 	{
 		StartStomping();
+		if (!bHoldToCrouch)
+		{
+			return;
+		}
 	}
 
 	if (!bCanCrouch)
 	{
+		return;
+	}
+
+	if (!bHoldToCrouch && bIsCrouching)
+	{
+		StopCrouchingInternal();
 		return;
 	}
 	
@@ -332,14 +342,12 @@ void AUSKCharacter::StartCrouching()
  */
 void AUSKCharacter::StopCrouching()
 {
-	if (!bCanCrouch)
+	if (!bCanCrouch || !bHoldToCrouch)
 	{
 		return;
 	}
-	
-	bIsEndingCrouch = true;
-	GetCharacterMovement()->MaxWalkSpeed = DefaultMovementSpeed;
-	CrouchTimeline->Reverse();
+
+	StopCrouchingInternal();
 }
 
 /**
@@ -440,6 +448,16 @@ void AUSKCharacter::ResetCoyoteJump()
 {
 	USK_LOG_TRACE("Resetting coyote jump");
 	CanPerformCoyoteJump = false;
+}
+
+/**
+ * @brief Stop crouching
+ */
+void AUSKCharacter::StopCrouchingInternal()
+{
+	bIsEndingCrouch = true;
+	GetCharacterMovement()->MaxWalkSpeed = DefaultMovementSpeed;
+	CrouchTimeline->Reverse();
 }
 
 /**
