@@ -272,9 +272,16 @@ protected:
 	float MaxAcceleration = 2500.0f;
 
 	/**
-	 * @brief The float curve used for smooth crouching 
+	 * @brief Can the character crouch?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Crouching")
+	bool bCanCrouch = true;
+
+	/**
+	 * @brief The float curve used for smooth crouching 
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Crouching",
+	    meta=(EditCondition = "bCanCrouch", EditConditionHides))
 	UCurveFloat* CrouchCurve;
 
 	/**

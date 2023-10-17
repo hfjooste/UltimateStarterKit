@@ -312,6 +312,11 @@ void AUSKCharacter::StartCrouching()
 	{
 		StartStomping();
 	}
+
+	if (!bCanCrouch)
+	{
+		return;
+	}
 	
 	bIsCrouching = true;
 	bIsEndingCrouch = false;
@@ -327,6 +332,11 @@ void AUSKCharacter::StartCrouching()
  */
 void AUSKCharacter::StopCrouching()
 {
+	if (!bCanCrouch)
+	{
+		return;
+	}
+	
 	bIsEndingCrouch = true;
 	GetCharacterMovement()->MaxWalkSpeed = DefaultMovementSpeed;
 	CrouchTimeline->Reverse();
