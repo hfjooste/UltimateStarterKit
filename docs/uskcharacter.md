@@ -218,6 +218,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>true</td>
 	</tr>
 	<tr>
+		<td>bHoldToCrouch</td>
+		<td>Should the crouch action be held down to crouch?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
 		<td>CrouchCurve</td>
 		<td>The float curve used for smooth crouching</td>
 		<td>UCurveFloat*</td>
