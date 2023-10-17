@@ -212,6 +212,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>2500.0f</td>
 	</tr>
 	<tr>
+		<td>bCanCrouch</td>
+		<td>Can the character crouch?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
 		<td>CrouchCurve</td>
 		<td>The float curve used for smooth crouching</td>
 		<td>UCurveFloat*</td>
