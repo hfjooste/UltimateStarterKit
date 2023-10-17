@@ -90,7 +90,7 @@ public:
 	bool IsStomping() const;
 
 	/**
-	 * Check if the character is starting to stomp
+	 * @brief Check if the character is starting to stomp
 	 * @return A boolean value indicating if the character is starting to stomp
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")

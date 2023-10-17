@@ -45,7 +45,7 @@ The <code>USKCharacter</code> uses the following components:
 	</tr>
 	<tr>
 		<td>InputMappingContext</td>
-		<td>The input mapping context used by the player</td>
+		<td>The input mapping context used by the character</td>
 		<td>UInputMappingContext*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -182,6 +182,24 @@ The <code>USKCharacter</code> uses the following components:
 		<td>700.0f</td>
 	</tr>
 	<tr>
+		<td>bCanStompJump</td>
+		<td>Can the character perform a high jump directly after landing from a stomp?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>StompJumpDuration</td>
+		<td>The duration after the stomp that the character can perform the stomp jump</td>
+		<td>float</td>
+		<td>0.35f</td>
+	</tr>
+	<tr>
+		<td>StompJumpVelocity</td>
+		<td>The velocity applied to the character when performing a stomp jump</td>
+		<td>float</td>
+		<td>1250.0f</td>
+	</tr>
+	<tr>
 		<td>BrakingFriction</td>
 		<td>Friction coefficient applied when braking</td>
 		<td>float</td>
@@ -198,6 +216,42 @@ The <code>USKCharacter</code> uses the following components:
 		<td>The float curve used for smooth crouching</td>
 		<td>UCurveFloat*</td>
 		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>bCanStomp</td>
+		<td>Can the character perform a stomp?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>MinAirTimeBeforeStomping</td>
+		<td>The minimum air time before the character can perform a stomp</td>
+		<td>float</td>
+		<td>0.3f</td>
+	</tr>
+	<tr>
+		<td>StompVelocity</td>
+		<td>The velocity applied to the character after performing a stomp</td>
+		<td>float</td>
+		<td>-5000.0f</td>
+	</tr>
+	<tr>
+		<td>StompZeroGravityDuration</td>
+		<td>The amount of time the character will be in zero gravity after performing a stomp</td>
+		<td>float</td>
+		<td>0.5f</td>
+	</tr>
+	<tr>
+		<td>StompLandVelocity</td>
+		<td>The velocity applied to the character when landing after performing a stomp</td>
+		<td>float</td>
+		<td>750.0f</td>
+	</tr>
+	<tr>
+		<td>StompCameraShake</td>
+		<td>The camera shake applied when performing a stomp</td>
+		<td>TSubclassOf&lt;UCameraShakeBase&gt;</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>DefaultWeaponClass</td>
@@ -244,6 +298,18 @@ The <code>USKCharacter</code> uses the following components:
 		<td>Check if the character is busy ending the crouch</td>
 		<td></td>
 		<td><strong>bool</strong><br/>A boolean value indicating if the character is busy ending the crouch</td>
+	</tr>
+	<tr>
+		<td>IsStomping</td>
+		<td>Check if the character is stomping</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the character is stomping</td>
+	</tr>
+	<tr>
+		<td>IsStompStarting</td>
+		<td>Check if the character is starting to stomp</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the character is starting to stomp</td>
 	</tr>
 	<tr>
 		<td>StartFiringWeapon</td>
