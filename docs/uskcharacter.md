@@ -200,6 +200,18 @@ The <code>USKCharacter</code> uses the following components:
 		<td>1250.0f</td>
 	</tr>
 	<tr>
+		<td>bCanCrouchJump</td>
+		<td>Can the character perform a high jump while crouching?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>CrouchJumpVelocity</td>
+		<td>The velocity applied to the character when performing a crouch jump</td>
+		<td>float</td>
+		<td>1250.0f</td>
+	</tr>
+	<tr>
 		<td>BrakingFriction</td>
 		<td>Friction coefficient applied when braking</td>
 		<td>float</td>
