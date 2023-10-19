@@ -57,7 +57,6 @@ theme:
         name: Switch to dark mode
 nav:
   - Getting Started: index.md
-  - Support the Project: support.md
   - Special Thanks: specialthanks.md
   - Console Codenames: platform_copyright.md
   - Core Functionality:
