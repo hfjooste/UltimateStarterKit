@@ -249,6 +249,14 @@ void AUSKCharacter::Jump()
 		ResetStompJump();
 		return;
 	}
+
+	if (bCanCrouchJump && bIsCrouching)
+	{
+		StopCrouching();
+		Super::Jump();
+		LaunchCharacter(FVector(0.0f, 0.0f, CrouchJumpVelocity), false, true);
+		return;
+	}
 	
 	if ((!CanJump() && !CanPerformCoyoteJump) || bIsStomping)
 	{

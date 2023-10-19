@@ -260,6 +260,20 @@ protected:
 	float StompJumpVelocity = 1250.0f;
 
 	/**
+	 * @brief Can the character perform a high jump while crouching?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
+        meta = (EditCondition = "bCanCrouch"))
+    bool bCanCrouchJump = true;
+
+	/**
+	 * @brief The velocity applied to the character when performing a crouch jump
+	 */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
+            meta = (EditCondition = "bCanCrouch && bCanCrouchJump", EditConditionHides))
+    float CrouchJumpVelocity = 1250.0f;
+
+	/**
 	 * @brief Friction coefficient applied when braking
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
