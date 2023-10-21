@@ -319,6 +319,24 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>bool</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>LeanCameraRotationModifier</td>
+		<td>The modifier applied to the lean camera rotation</td>
+		<td>float</td>
+		<td>1.0f</td>
+	</tr>
+	<tr>
+		<td>LeanCameraRoll</td>
+		<td>The lean camera roll</td>
+		<td>float</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>LeanBoneName</td>
+		<td>The bone to rotate while the character is leaning</td>
+		<td>FName</td>
+		<td></td>
+	</tr>
 </table>
 
 ### Functions

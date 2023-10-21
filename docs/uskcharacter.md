@@ -38,12 +38,6 @@ The <code>USKCharacter</code> uses the following components:
 		<th>Default Value</th>
 	</tr>
 	<tr>
-		<td>IsDoubleJumping</td>
-		<td>Is the character double jumping?</td>
-		<td>bool</td>
-		<td></td>
-	</tr>
-	<tr>
 		<td>InputMappingContext</td>
 		<td>The input mapping context used by the character</td>
 		<td>UInputMappingContext*</td>
@@ -76,6 +70,12 @@ The <code>USKCharacter</code> uses the following components:
 	<tr>
 		<td>CrouchAction</td>
 		<td>The crouch input action</td>
+		<td>UInputAction*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>LeanAction</td>
+		<td>The lean input action</td>
 		<td>UInputAction*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -212,6 +212,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>1250.0f</td>
 	</tr>
 	<tr>
+		<td>IsDoubleJumping</td>
+		<td>Is the character double jumping?</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>BrakingFriction</td>
 		<td>Friction coefficient applied when braking</td>
 		<td>float</td>
@@ -278,6 +284,30 @@ The <code>USKCharacter</code> uses the following components:
 		<td></td>
 	</tr>
 	<tr>
+		<td>bCanLean</td>
+		<td>Can the character lean?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>LeanSpeed</td>
+		<td>The speed used when leaning</td>
+		<td>float</td>
+		<td>5.0f</td>
+	</tr>
+	<tr>
+		<td>LeanOffset</td>
+		<td>The offset applied to the camera when leaning</td>
+		<td>float</td>
+		<td>50.0f</td>
+	</tr>
+	<tr>
+		<td>LeanRotation</td>
+		<td>The rotation applied to the camera when leaning</td>
+		<td>float</td>
+		<td>25.0f</td>
+	</tr>
+	<tr>
 		<td>DefaultWeaponClass</td>
 		<td>The default weapon the character will equip on spawn</td>
 		<td>TSubclassOf&lt;AWeapon&gt;</td>
@@ -334,6 +364,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>Check if the character is starting to stomp</td>
 		<td></td>
 		<td><strong>bool</strong><br/>A boolean value indicating if the character is starting to stomp</td>
+	</tr>
+	<tr>
+		<td>GetLeanCameraRoll</td>
+		<td>Get the current lean camera roll</td>
+		<td></td>
+		<td><strong>float</strong><br/>The current lean camera roll</td>
 	</tr>
 	<tr>
 		<td>StartFiringWeapon</td>
