@@ -75,6 +75,8 @@ void AUSKCharacter::BeginPlay()
 		CrouchTimeline->AddInterpFloat(CrouchCurve, CrouchTimelineUpdateEvent);
 		CrouchTimeline->SetLooping(false);
 	}
+
+    DefaultCameraLocation = GetCameraComponent()->GetRelativeLocation();
 }
 
 /**
@@ -85,6 +87,7 @@ void AUSKCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	AirTime = GetCharacterMovement()->IsFalling() ? AirTime + DeltaSeconds : 0.0f;
+    UpdateLeaning(DeltaSeconds);
 }
 
 /**
@@ -120,6 +123,8 @@ void AUSKCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	EnhancedInput->BindAction(FireWeaponAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopFiringWeapon);
 	EnhancedInput->BindAction(CrouchAction, ETriggerEvent::Started, this, &AUSKCharacter::StartCrouching);
 	EnhancedInput->BindAction(CrouchAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopCrouching);
+    EnhancedInput->BindAction(LeanAction, ETriggerEvent::Triggered, this, &AUSKCharacter::Lean);
+    EnhancedInput->BindAction(LeanAction, ETriggerEvent::Completed, this, &AUSKCharacter::Lean);
 }
 
 /**
@@ -235,6 +240,15 @@ bool AUSKCharacter::IsStomping() const
 bool AUSKCharacter::IsStompStarting() const
 {
 	return bIsStomping && FMath::IsNearlyZero(GetCharacterMovement()->GravityScale);
+}
+
+/**
+ * @brief Get the current lean camera roll
+ * @return The current lean camera roll
+ */
+float AUSKCharacter::GetLeanCameraRoll() const
+{
+	return CurrentLeanCameraRoll;
 }
 
 /**
@@ -509,4 +523,44 @@ void AUSKCharacter::ResetStomping()
 void AUSKCharacter::ResetStompJump()
 {
 	bIsStompJumpAllowed = false;
+}
+
+/**
+ * @brief Start/Stop leaning
+ * @param Input The input action containing the input values
+ */
+void AUSKCharacter::Lean(const FInputActionValue& Input)
+{
+    if (!bCanLean)
+    {
+        return;
+    }
+	
+    const float InputValue = Input.Get<float>();
+    TargetLeanCameraOffset = FVector(0.0f, InputValue * LeanOffset, 0.0f);
+    TargetLeanCameraRoll = InputValue * LeanRotation;
+}
+
+/**
+ * @brief Update the leaning of the character
+ * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+ */
+void AUSKCharacter::UpdateLeaning(const float DeltaSeconds)
+{
+    if (!bCanLean)
+    {
+        return;
+    }
+	
+    GetCameraComponent()->SetRelativeLocation(UKismetMathLibrary::VInterpTo(
+        GetCameraComponent()->GetRelativeLocation(), DefaultCameraLocation + TargetLeanCameraOffset,
+        DeltaSeconds, LeanSpeed));
+
+    AController* FpsController = GetController();
+    const FRotator ControlRotation = FpsController->GetControlRotation();
+	const FRotator NewLeanRotation = UKismetMathLibrary::RInterpTo(ControlRotation,
+		FRotator(ControlRotation.Pitch, ControlRotation.Yaw, TargetLeanCameraRoll),
+		DeltaSeconds, LeanSpeed);
+    FpsController->SetControlRotation(NewLeanRotation);
+	CurrentLeanCameraRoll = NewLeanRotation.Roll;
 }

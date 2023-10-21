@@ -36,6 +36,7 @@ void UUSKCharacterAnimationInstance::NativeUpdateAnimation(float DeltaSeconds)
 	bIsEndingCrouch = Character->IsEndingCrouch();
     bIsStomping = Character->IsStomping();
     bIsStompStarting = Character->IsStompStarting();
+	LeanCameraRoll = Character->GetLeanCameraRoll() * LeanCameraRotationModifier;
 
 	if (!Character->IsDoubleJumping)
 	{

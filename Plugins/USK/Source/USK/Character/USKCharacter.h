@@ -5,6 +5,7 @@
 #include "ShadowDecal.h"
 #include "InputActionValue.h"
 #include "NiagaraCommon.h"
+#include "Camera/CameraShakeBase.h"
 #include "Components/TimelineComponent.h"
 #include "GameFramework/Character.h"
 #include "USK/Weapons/Weapon.h"
@@ -36,67 +37,6 @@ class USK_API AUSKCharacter : public ACharacter
 	class UTimelineComponent* CrouchTimeline;
 
 public:
-	/**
-	 * @brief Is the character double jumping?
-	 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Jump")
-	bool IsDoubleJumping;
-
-	/**
-	 * @brief Create a new instance of the AUSKCharacter actor
-	 */
-	AUSKCharacter();
-
-	/**
-	 * @brief Get the camera used by the character
-	 * @return The camera used by the character
-	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Camera")
-	UCameraComponent* GetCameraComponent() const;
-
-	/**
-	 * @brief Set the current weapon used by the character
-	 * @param NewWeapon The new weapon
-	 */
-	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Weapons")
-	void SetWeapon(AWeapon* NewWeapon);
-
-	/**
-	 * @brief Get the current weapon used by the character
-	 * @return The current weapon used by the character
-	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Weapons")
-	AWeapon* GetWeapon() const;
-
-	/**
-	 * @brief Check if the character is crouching 
-	 * @return A boolean value indicating if the character is crouching
-	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
-	bool IsCrouching() const;
-
-	/**
-	 * @brief Check if the character is busy ending the crouch
-	 * @return A boolean value indicating if the character is busy ending the crouch
-	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
-	bool IsEndingCrouch() const;
-
-	/**
-	 * @brief Check if the character is stomping
-	 * @return A boolean value indicating if the character is stomping
-	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
-	bool IsStomping() const;
-
-	/**
-	 * @brief Check if the character is starting to stomp
-	 * @return A boolean value indicating if the character is starting to stomp
-	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
-	bool IsStompStarting() const;
-
-protected:
 	/**
 	 * @brief The input mapping context used by the character
 	 */
@@ -132,6 +72,12 @@ protected:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
 	UInputAction* CrouchAction;
+
+    /**
+     * @brief The lean input action
+     */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
+	UInputAction* LeanAction;
 
 	/**
 	 * @brief The shadow decal class used to draw a shadow below the character while in the air
@@ -274,6 +220,13 @@ protected:
     float CrouchJumpVelocity = 1250.0f;
 
 	/**
+	 * @brief Is the character double jumping?
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Jump",
+		meta = (EditCondition = "CanDoubleJump", EditConditionHides))
+	bool IsDoubleJumping;
+
+	/**
 	 * @brief Friction coefficient applied when braking
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
@@ -346,12 +299,101 @@ protected:
 		meta=(EditCondition = "bCanStomp", EditConditionHides))
 	TSubclassOf<UCameraShakeBase> StompCameraShake;
 
+    /**
+     * @brief Can the character lean? 
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Leaning")
+    bool bCanLean = true;
+
+    /**
+     * @brief The speed used when leaning 
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Leaning",
+            meta=(EditCondition = "bCanLean", EditConditionHides))
+    float LeanSpeed = 5.0f;
+
+    /**
+     * @brief The offset applied to the camera when leaning 
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Leaning",
+        meta=(EditCondition = "bCanLean", EditConditionHides))
+    float LeanOffset = 50.0f;
+
+    /**
+     * @brief The rotation applied to the camera when leaning 
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Leaning",
+        meta=(EditCondition = "bCanLean", EditConditionHides))
+    float LeanRotation = 25.0f;
+
 	/**
 	 * @brief The default weapon the character will equip on spawn
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Weapons")
 	TSubclassOf<AWeapon> DefaultWeaponClass;
 
+	/**
+	 * @brief Create a new instance of the AUSKCharacter actor
+	 */
+	AUSKCharacter();
+
+	/**
+	 * @brief Get the camera used by the character
+	 * @return The camera used by the character
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Camera")
+	UCameraComponent* GetCameraComponent() const;
+
+	/**
+	 * @brief Set the current weapon used by the character
+	 * @param NewWeapon The new weapon
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Weapons")
+	void SetWeapon(AWeapon* NewWeapon);
+
+	/**
+	 * @brief Get the current weapon used by the character
+	 * @return The current weapon used by the character
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Weapons")
+	AWeapon* GetWeapon() const;
+
+	/**
+	 * @brief Check if the character is crouching 
+	 * @return A boolean value indicating if the character is crouching
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
+	bool IsCrouching() const;
+
+	/**
+	 * @brief Check if the character is busy ending the crouch
+	 * @return A boolean value indicating if the character is busy ending the crouch
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
+	bool IsEndingCrouch() const;
+
+	/**
+	 * @brief Check if the character is stomping
+	 * @return A boolean value indicating if the character is stomping
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
+	bool IsStomping() const;
+
+	/**
+	 * @brief Check if the character is starting to stomp
+	 * @return A boolean value indicating if the character is starting to stomp
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
+	bool IsStompStarting() const;
+
+	/**
+	 * @brief Get the current lean camera roll
+	 * @return The current lean camera roll
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Leaning")
+	float GetLeanCameraRoll() const;
+
+protected:
 	/**
 	 * @brief Overridable native event for when play begins for this actor
 	 */
@@ -496,6 +538,26 @@ private:
 	float AirTime;
 
 	/**
+	 * @brief The default camera location
+	 */
+	FVector DefaultCameraLocation;
+
+	/**
+	 * @brief The target camera lean offset
+	 */
+	FVector TargetLeanCameraOffset;
+
+	/**
+	 * @brief The target camera lean roll
+	 */
+	float TargetLeanCameraRoll;
+
+	/**
+	 * @brief The current camera lean roll
+	 */
+	float CurrentLeanCameraRoll;
+
+	/**
 	 * @brief Move the character
 	 * @param Input The input action containing the input values
 	 */
@@ -541,4 +603,17 @@ private:
 	 */
 	UFUNCTION()
 	void ResetStompJump();
+
+	/**
+	 * @brief Start/Stop leaning
+	 * @param Input The input action containing the input values
+	 */
+	UFUNCTION()
+    void Lean(const FInputActionValue& Input);
+
+	/**
+	 * @brief Update the leaning of the character
+	 * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+	 */
+	void UpdateLeaning(const float DeltaSeconds);
 };

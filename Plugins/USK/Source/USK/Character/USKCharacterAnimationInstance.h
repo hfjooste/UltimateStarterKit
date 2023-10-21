@@ -315,6 +315,24 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
 	bool IsDoubleJumping;
 
+	/**
+	 * @brief The modifier applied to the lean camera rotation
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character")
+	float LeanCameraRotationModifier = 1.0f;
+
+	/**
+	 * @brief The lean camera roll
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
+	float LeanCameraRoll;
+
+	/**
+	 * @brief The bone to rotate while the character is leaning
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character")
+	FName LeanBoneName;
+
 protected:
 	/**
 	 * @brief Executed when begin play is called on the owning component

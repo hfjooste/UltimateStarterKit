@@ -7,6 +7,10 @@ public class USK : ModuleRules
 	public USK(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+		if (Target.Type == TargetType.Editor)
+		{
+			PublicDependencyModuleNames.AddRange(new[] { "UnrealEd" });
+		}
 		
 		PublicIncludePaths.AddRange(new string[] { });
 		PrivateIncludePaths.AddRange(new string[] { });
@@ -25,7 +29,10 @@ public class USK : ModuleRules
 			"Engine",
 			"Slate",
 			"SlateCore",
-			"GameplayTags"
+			"GameplayTags",
+			"BlueprintGraph",
+			"AnimGraphRuntime",
+			"AnimGraph"
 		});
 
 		DynamicallyLoadedModuleNames.AddRange(new string[] { });
