@@ -16,6 +16,8 @@ public class USKEditor : ModuleRules
 			"CoreUObject",
 			"Engine",
 			"UnrealEd",
+			"BlueprintGraph",
+			"AnimGraph"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new[]

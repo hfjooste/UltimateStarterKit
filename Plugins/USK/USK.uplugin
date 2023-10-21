@@ -37,7 +37,7 @@
 		},
 		{
 			"Name": "USKEditor",
-			"Type": "Editor",
+			"Type": "UncookedOnly",
 			"LoadingPhase": "Default",
 			"WhitelistPlatforms": [
 				"Android",

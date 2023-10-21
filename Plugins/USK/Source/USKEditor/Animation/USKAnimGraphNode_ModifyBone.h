@@ -4,14 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "AnimGraphNode_ModifyBone.h"
-#include "USKAnimNode_ModifyBone.h"
+#include "USK/Animation/USKAnimNode_ModifyBone.h"
 #include "USKAnimGraphNode_ModifyBone.generated.h"
 
 /**
  * @brief Animation graph node used to modify a bone
  */
 UCLASS()
-class USK_API UUSKAnimGraphNode_ModifyBone : public UAnimGraphNode_SkeletalControlBase
+class USKEDITOR_API UUSKAnimGraphNode_ModifyBone : public UAnimGraphNode_SkeletalControlBase
 {
 	GENERATED_UCLASS_BODY()
 	
