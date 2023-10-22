@@ -270,67 +270,67 @@ public:
 	/**
 	 * @brief The blend speed used when updating the movement speed
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
 	float MovementBlendSpeed = 10.0f;
 	
 	/**
 	 * @brief The movement speed fo the character
 	 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Movement")
 	float MovementSpeed;
-
-	/**
-	 * @brief Is the character currently in the air?
-	 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
-	bool IsInAir;
 
 	/**
 	 * @brief Is the character currently crouching?
 	 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Movement|Crouching")
 	bool bIsCrouching;
 
 	/**
 	 * @brief Is the character currently stomping?
 	 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Movement|Stomping")
 	bool bIsStomping;
 
 	/**
 	 * @brief Is the character starting the stomp?
 	 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Movement|Stomping")
 	bool bIsStompStarting;
 
 	/**
 	 * @brief Is the character busy ending the crouch?
 	 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Movement|Crouching")
 	bool bIsEndingCrouch;
+
+	/**
+	 * @brief Is the character currently in the air?
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Jump")
+	bool IsInAir;
 
 	/**
 	 * @brief Is the character double jumping?
 	 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Jump")
 	bool IsDoubleJumping;
 
 	/**
 	 * @brief The modifier applied to the lean camera rotation
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Leaning")
 	float LeanCameraRotationModifier = 1.0f;
 
 	/**
 	 * @brief The lean camera roll
 	 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Leaning")
 	float LeanCameraRoll;
 
 	/**
 	 * @brief The bone to rotate while the character is leaning
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Leaning")
 	FName LeanBoneName;
 
 protected:
