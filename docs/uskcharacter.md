@@ -62,6 +62,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>SprintAction</td>
+		<td>The sprint input action</td>
+		<td>UInputAction*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>FireWeaponAction</td>
 		<td>The fire weapon input action</td>
 		<td>UInputAction*</td>
@@ -218,6 +224,24 @@ The <code>USKCharacter</code> uses the following components:
 		<td></td>
 	</tr>
 	<tr>
+		<td>MovementSpeed</td>
+		<td>The default movement speed</td>
+		<td>float</td>
+		<td>600.0f</td>
+	</tr>
+	<tr>
+		<td>bCanSprint</td>
+		<td>Can the character sprint?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>SprintSpeed</td>
+		<td>The movement speed while the character is sprinting</td>
+		<td>float</td>
+		<td>950.0f</td>
+	</tr>
+	<tr>
 		<td>BrakingFriction</td>
 		<td>Friction coefficient applied when braking</td>
 		<td>float</td>
@@ -240,6 +264,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>Should the crouch action be held down to crouch?</td>
 		<td>bool</td>
 		<td>true</td>
+	</tr>
+	<tr>
+		<td>CrouchSpeed</td>
+		<td>The movement speed while the character is crouching</td>
+		<td>float</td>
+		<td>300.0f</td>
 	</tr>
 	<tr>
 		<td>CrouchCurve</td>

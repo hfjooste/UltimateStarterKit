@@ -38,6 +38,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>SprintAnimation</td>
+		<td>The animation used when the character is sprinting while unarmed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>JumpAnimation</td>
 		<td>The animation used when the character is jumping while unarmed</td>
 		<td>UAnimSequence*</td>
@@ -118,6 +124,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 	<tr>
 		<td>RunWeaponOneHandedAnimation</td>
 		<td>The animation used when the character is running with a one handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SprintWeaponOneHandedAnimation</td>
+		<td>The animation used when the character is sprinting with a one handed weapon</td>
 		<td>UAnimSequence*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -206,6 +218,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>SprintWeaponTwoHandedAnimation</td>
+		<td>The animation used when the character is sprinting with a two handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>JumpWeaponTwoHandedAnimation</td>
 		<td>The animation used when the character is jumping with a two handed weapon</td>
 		<td>UAnimSequence*</td>
@@ -284,12 +302,6 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td></td>
 	</tr>
 	<tr>
-		<td>IsInAir</td>
-		<td>Is the character currently in the air?</td>
-		<td>bool</td>
-		<td></td>
-	</tr>
-	<tr>
 		<td>bIsCrouching</td>
 		<td>Is the character currently crouching?</td>
 		<td>bool</td>
@@ -310,6 +322,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 	<tr>
 		<td>bIsEndingCrouch</td>
 		<td>Is the character busy ending the crouch?</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>IsInAir</td>
+		<td>Is the character currently in the air?</td>
 		<td>bool</td>
 		<td></td>
 	</tr>
@@ -364,6 +382,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>Get the run animation based on the current armed state</td>
 		<td></td>
 		<td><strong>UAnimSequence*</strong><br/>The run animation to play</td>
+	</tr>
+	<tr>
+		<td>GetSprintAnimation</td>
+		<td>Get the sprint animation based on the current armed state</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The sprint animation to play</td>
 	</tr>
 	<tr>
 		<td>GetJumpAnimation</td>
