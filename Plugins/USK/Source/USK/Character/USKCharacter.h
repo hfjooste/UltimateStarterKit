@@ -62,6 +62,12 @@ public:
 	UInputAction* JumpAction;
 
 	/**
+	 * @brief The sprint input action
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
+	UInputAction* SprintAction;
+
+	/**
 	 * @brief The fire weapon input action
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
@@ -227,6 +233,25 @@ public:
 	bool IsDoubleJumping;
 
 	/**
+	 * @brief The default movement speed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
+	float MovementSpeed = 600.0f;
+
+	/**
+	 * @brief Can the character sprint?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
+	bool bCanSprint = true;
+
+	/**
+	 * @brief The movement speed while the character is sprinting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement",
+		meta=(EditCondition = "bCanCrouch", EditConditionHides))
+	float SprintSpeed = 950.0f;
+
+	/**
 	 * @brief Friction coefficient applied when braking
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
@@ -250,6 +275,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Crouching",
 		meta=(EditCondition = "bCanCrouch", EditConditionHides))
 	bool bHoldToCrouch = true;
+
+	/**
+	 * @brief The movement speed while the character is crouching
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Crouching",
+		meta=(EditCondition = "bCanCrouch", EditConditionHides))
+	float CrouchSpeed = 300.0f;
 
 	/**
 	 * @brief The float curve used for smooth crouching 
@@ -518,11 +550,6 @@ private:
 	bool bIsStompJumpAllowed;
 
 	/**
-	 * @brief The default movement speed of the character
-	 */
-	float DefaultMovementSpeed;
-
-	/**
 	 * @brief The default capsule size of the character
 	 */
 	float DefaultCapsuleSize;
@@ -556,6 +583,16 @@ private:
 	 * @brief The current camera lean roll
 	 */
 	float CurrentLeanCameraRoll;
+
+	/**
+	 * @brief Is the character sprinting?
+	 */
+	float bIsSprinting;
+
+	/**
+	 * @brief Is sprinting queued?
+	 */
+	bool bSprintQueued;
 
 	/**
 	 * @brief Move the character
@@ -616,4 +653,22 @@ private:
 	 * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
 	 */
 	void UpdateLeaning(const float DeltaSeconds);
+
+	/**
+	 * @brief Try to start sprinting by checking the character states
+	 */
+	UFUNCTION()
+	void Sprint();
+
+	/**
+	 * @brief Start sprinting
+	 */
+	UFUNCTION()
+	void StartSprinting();
+
+	/**
+	 * @brief Stop sprinting
+	 */
+	UFUNCTION()
+	void StopSprinting();
 };

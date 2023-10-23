@@ -67,7 +67,6 @@ void AUSKCharacter::BeginPlay()
 		UWeaponUtils::EquipWeapon(this, DefaultWeaponClass);
 	}
 
-	DefaultMovementSpeed = GetCharacterMovement()->MaxWalkSpeed;
 	DefaultCapsuleSize = GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
 	if (IsValid(CrouchCurve))
 	{
@@ -119,6 +118,8 @@ void AUSKCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	EnhancedInput->BindAction(LookAroundAction, ETriggerEvent::Triggered, this, &AUSKCharacter::RotateCamera);
 	EnhancedInput->BindAction(JumpAction, ETriggerEvent::Started, this, &AUSKCharacter::Jump);
 	EnhancedInput->BindAction(JumpAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopJumping);
+	EnhancedInput->BindAction(SprintAction, ETriggerEvent::Started, this, &AUSKCharacter::Sprint);
+	EnhancedInput->BindAction(SprintAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopSprinting);
 	EnhancedInput->BindAction(FireWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::StartFiringWeapon);
 	EnhancedInput->BindAction(FireWeaponAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopFiringWeapon);
 	EnhancedInput->BindAction(CrouchAction, ETriggerEvent::Started, this, &AUSKCharacter::StartCrouching);
@@ -352,7 +353,7 @@ void AUSKCharacter::StartCrouching()
 	
 	bIsCrouching = true;
 	bIsEndingCrouch = false;
-	GetCharacterMovement()->MaxWalkSpeed = GetCharacterMovement()->MaxWalkSpeedCrouched;
+	GetCharacterMovement()->MaxWalkSpeed = CrouchSpeed;
 	if (!GetCharacterMovement()->IsFalling())
 	{
 		CrouchTimeline->Play();
@@ -478,8 +479,13 @@ void AUSKCharacter::ResetCoyoteJump()
 void AUSKCharacter::StopCrouchingInternal()
 {
 	bIsEndingCrouch = true;
-	GetCharacterMovement()->MaxWalkSpeed = DefaultMovementSpeed;
+	GetCharacterMovement()->MaxWalkSpeed = MovementSpeed;
 	CrouchTimeline->Reverse();
+
+	if (bSprintQueued)
+	{
+		StartSprinting();
+	}
 }
 
 /**
@@ -563,4 +569,50 @@ void AUSKCharacter::UpdateLeaning(const float DeltaSeconds)
 		DeltaSeconds, LeanSpeed);
     FpsController->SetControlRotation(NewLeanRotation);
 	CurrentLeanCameraRoll = NewLeanRotation.Roll;
+}
+
+/**
+ * @brief Try to start sprinting by checking the character states
+ */
+void AUSKCharacter::Sprint()
+{
+	if (!bCanSprint)
+	{
+		return;
+	}
+
+	if (bIsCrouching)
+	{
+		bSprintQueued = true;
+		return;
+	}
+	
+	StartSprinting();
+}
+
+/**
+ * @brief Start sprinting
+ */
+void AUSKCharacter::StartSprinting()
+{
+	USK_LOG_TRACE("Starting to sprint");
+	bIsSprinting = true;
+	bSprintQueued = false;
+	GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
+}
+
+/**
+ * @brief Stop sprinting
+ */
+void AUSKCharacter::StopSprinting()
+{
+	if (!bIsSprinting)
+	{
+		bSprintQueued = false;
+		return;
+	}
+	
+	USK_LOG_TRACE("Stopping sprint");
+	bIsSprinting = false;
+	GetCharacterMovement()->MaxWalkSpeed = bIsCrouching ? CrouchSpeed : MovementSpeed;
 }

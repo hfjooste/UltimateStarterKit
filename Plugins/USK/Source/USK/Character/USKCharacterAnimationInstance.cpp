@@ -82,6 +82,15 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetRunAnimation() const
 }
 
 /**
+ * @brief Get the sprint animation based on the current armed state
+ * @return The sprint animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetSprintAnimation() const
+{
+	return GetAnimation(SprintAnimation, SprintWeaponOneHandedAnimation, SprintWeaponTwoHandedAnimation);
+}
+
+/**
  * @brief Get the jump animation based on the current armed state
  * @return The jump animation to play
  */

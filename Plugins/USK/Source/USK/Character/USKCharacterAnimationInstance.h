@@ -34,6 +34,12 @@ public:
 	UAnimSequence* RunAnimation;
 
 	/**
+	 * @brief The animation used when the character is sprinting while unarmed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
+	UAnimSequence* SprintAnimation;
+
+	/**
 	 * @brief The animation used when the character is jumping while unarmed
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
@@ -116,6 +122,12 @@ public:
      */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
     UAnimSequence* RunWeaponOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is sprinting with a one handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
+	UAnimSequence* SprintWeaponOneHandedAnimation;
 
     /**
      * @brief The animation used when the character is jumping with a one handed weapon
@@ -200,6 +212,12 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
 	UAnimSequence* RunWeaponTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is sprinting with a two handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
+	UAnimSequence* SprintWeaponTwoHandedAnimation;
 
 	/**
 	 * @brief The animation used when the character is jumping with a two handed weapon
@@ -365,6 +383,13 @@ protected:
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
 	UAnimSequence* GetRunAnimation() const;
+
+	/**
+	 * @brief Get the sprint animation based on the current armed state
+	 * @return The sprint animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetSprintAnimation() const;
 
 	/**
 	 * @brief Get the jump animation based on the current armed state
