@@ -8,6 +8,7 @@ This project uses a few assets from third parties:
     <li><a href="https://freesound.org/people/broumbroum/" target="_blank">Menu Sound Effects by Broumbroum</a></li>
     <li><a href="https://freesound.org/people/felixyadomi/" target="_blank">Land & Jump Sound Effects by Felixyadomi</a></li>
     <li><a href="https://freesound.org/people/Scrampunk/" target="_blank">Item Sound Effects by Scrampunk</a></li>
+    <li><a href="https://freesound.org/people/Aquafeniz/" target="_blank">Slide Sound Effects by Aquafeniz</a></li>
     <li><a href="https://inaudio.org" target="_blank">Music by InAudio</a></li>
 </ul>
 

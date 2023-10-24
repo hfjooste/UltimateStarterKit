@@ -105,6 +105,24 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
 	UAnimSequence* StompLandAnimation;
 
+	/**
+	 * @brief The animation used when the character starts sliding while unarmed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
+	UAnimSequence* SlideStartAnimation;
+
+	/**
+	 * @brief The animation used when the character stops sliding while unarmed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
+	UAnimSequence* SlideEndAnimation;
+
+	/**
+	 * @brief The animation used when the character is sliding while unarmed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
+	UAnimSequence* SlideLoopAnimation;
+
     /**
      * @brief The animation used when the character is in the idle state with a one handed weapon
      */
@@ -194,6 +212,24 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
 	UAnimSequence* StompLandWeaponOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character starts sliding with a one handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
+	UAnimSequence* SlideStartWeaponOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character stops sliding with a one handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
+	UAnimSequence* SlideEndWeaponOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is sliding with a one handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
+	UAnimSequence* SlideLoopWeaponOneHandedAnimation;
 
 	/**
 	 * @brief The animation used when the character is in the idle state with a two handed weapon
@@ -286,6 +322,24 @@ public:
 	UAnimSequence* StompLandWeaponTwoHandedAnimation;
 
 	/**
+	 * @brief The animation used when the character starts sliding with a two handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
+	UAnimSequence* SlideStartWeaponTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character stops sliding with a two handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
+	UAnimSequence* SlideEndWeaponTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is sliding with a two handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
+	UAnimSequence* SlideLoopWeaponTwoHandedAnimation;
+
+	/**
 	 * @brief The blend speed used when updating the movement speed
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
@@ -350,6 +404,18 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Leaning")
 	FName LeanBoneName;
+
+	/**
+	 * @brief Is the character currently sliding?
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Sliding")
+	bool bIsSliding;
+
+	/**
+	 * @brief Is the character busy ending the slide?
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Sliding")
+	bool bIsEndingSlide;
 
 protected:
 	/**
@@ -453,6 +519,27 @@ protected:
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
 	UAnimSequence* GetStompStartAnimation() const;
+
+	/**
+	 * @brief Get the slide start animation based on the current armed state
+	 * @return The slide start animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetSlideStartAnimation() const;
+
+	/**
+	 * @brief Get the slide end animation based on the current armed state
+	 * @return The slide end animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetSlideEndAnimation() const;
+
+	/**
+	 * @brief Get the slide loop animation based on the current armed state
+	 * @return The slide loop animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetSlideLoopAnimation() const;
 
 private:
 	/**

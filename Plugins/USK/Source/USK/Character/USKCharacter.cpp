@@ -87,6 +87,8 @@ void AUSKCharacter::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 	AirTime = GetCharacterMovement()->IsFalling() ? AirTime + DeltaSeconds : 0.0f;
     UpdateLeaning(DeltaSeconds);
+	UpdateSliding(DeltaSeconds);
+	UpdateMovementSpeed();
 }
 
 /**
@@ -253,6 +255,24 @@ float AUSKCharacter::GetLeanCameraRoll() const
 }
 
 /**
+ * @brief Check if the character is sliding
+ * @return A boolean value indicating if the character is sliding
+ */
+bool AUSKCharacter::IsSliding() const
+{
+	return bIsSliding;
+}
+
+/**
+ * @brief Check if the character is busy ending the slide
+ * @return A boolean value indicating if the character is busy ending the slide
+ */
+bool AUSKCharacter::IsEndingSlide() const
+{
+	return bIsEndingSlide;
+}
+
+/**
  * @brief Make the character jump on the next update
  */
 void AUSKCharacter::Jump()
@@ -330,7 +350,7 @@ void AUSKCharacter::StopFiringWeapon()
  * @brief Start crouching
  */
 void AUSKCharacter::StartCrouching()
-{
+{	
 	if (bCanStomp && GetCharacterMovement()->IsFalling() && AirTime >= MinAirTimeBeforeStomping)
 	{
 		StartStomping();
@@ -353,10 +373,15 @@ void AUSKCharacter::StartCrouching()
 	
 	bIsCrouching = true;
 	bIsEndingCrouch = false;
-	GetCharacterMovement()->MaxWalkSpeed = CrouchSpeed;
 	if (!GetCharacterMovement()->IsFalling())
 	{
 		CrouchTimeline->Play();
+	}
+
+	if (UKismetMathLibrary::VSizeXY(GetMovementComponent()->Velocity) >= SlideMinSpeed &&
+		!bIsSliding && CurrentSlidingCooldown <= 0.0f && !GetCharacterMovement()->IsFalling())
+	{
+		StartSliding();
 	}
 }
 
@@ -437,7 +462,7 @@ void AUSKCharacter::ApplyStompVelocity()
  */
 void AUSKCharacter::MoveCharacter(const FInputActionValue& Input)
 {
-	if (bIsStomping)
+	if (bIsStomping || bIsSliding)
 	{
 		return;
 	}
@@ -478,8 +503,13 @@ void AUSKCharacter::ResetCoyoteJump()
  */
 void AUSKCharacter::StopCrouchingInternal()
 {
+	if (bIsSliding)
+	{
+		bStopCrouchingAfterSliding = true;
+		return;
+	}
+	
 	bIsEndingCrouch = true;
-	GetCharacterMovement()->MaxWalkSpeed = MovementSpeed;
 	CrouchTimeline->Reverse();
 
 	if (bSprintQueued)
@@ -497,6 +527,7 @@ void AUSKCharacter::OnCrouchTimelineUpdated(float Value)
 	{
 		bIsCrouching = false;
 		bIsEndingCrouch = false;
+		bIsEndingSlide = false;
 	}
 	
 	const float CapsuleHalfHeight = GetCharacterMovement()->IsFalling()
@@ -598,7 +629,6 @@ void AUSKCharacter::StartSprinting()
 	USK_LOG_TRACE("Starting to sprint");
 	bIsSprinting = true;
 	bSprintQueued = false;
-	GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 }
 
 /**
@@ -614,5 +644,89 @@ void AUSKCharacter::StopSprinting()
 	
 	USK_LOG_TRACE("Stopping sprint");
 	bIsSprinting = false;
-	GetCharacterMovement()->MaxWalkSpeed = bIsCrouching ? CrouchSpeed : MovementSpeed;
+}
+
+/**
+ * @brief Start sliding
+ */
+void AUSKCharacter::StartSliding()
+{
+	if (!bCanSlide)
+	{
+		return;
+	}
+	
+	USK_LOG_TRACE("Start sliding");
+	bIsSliding = true;
+	CurrentSlidingTime = SlidingTime;
+	CurrentSlidingCooldown = SlidingCooldown;
+	SlideDirection = GetActorForwardVector();
+	UAudioUtils::PlayRandomSound(this, SlideSoundEffects);
+}
+
+/**
+ * @brief Stop sliding
+ */
+void AUSKCharacter::StopSliding()
+{
+	USK_LOG_TRACE("Stop sliding");
+	CurrentSlidingTime = 0.0f;
+	bIsSliding = false;
+
+	if (bIsCrouching && bStopCrouchingAfterSliding)
+	{
+		bIsEndingSlide = true;
+		StopCrouchingInternal();
+		bStopCrouchingAfterSliding = false;
+	}
+}
+
+/**
+ * @brief Update the character state while sliding
+ * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+ */
+void AUSKCharacter::UpdateSliding(const float DeltaSeconds)
+{
+	if (!bIsSliding && CurrentSlidingCooldown <= 0.0f)
+	{
+		return;
+	}
+
+	if (CurrentSlidingTime > 0.0f)
+	{
+		CurrentSlidingTime -= DeltaSeconds;
+		AddMovementInput(SlideDirection, 1.0f, false);
+		if (CurrentSlidingTime <= 0.0f)
+		{
+			StopSliding();
+		}
+		
+		return;
+	}
+
+	CurrentSlidingCooldown -= DeltaSeconds;
+	if (CurrentSlidingCooldown <= 0.0f)
+	{
+		StopSliding();
+	}
+}
+
+/**
+ * @brief Update the current movement speed of the character
+ */
+void AUSKCharacter::UpdateMovementSpeed() const
+{
+	if (bIsSliding)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = SlideSpeed;
+		return;
+	}
+
+	if (bIsCrouching)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = CrouchSpeed;
+		return;
+	}
+
+	GetCharacterMovement()->MaxWalkSpeed = bIsSprinting ? SprintSpeed : MovementSpeed;
 }

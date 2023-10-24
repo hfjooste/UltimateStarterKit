@@ -359,6 +359,47 @@ public:
     float LeanRotation = 25.0f;
 
 	/**
+	 * @brief Can the character perform a slide?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Sliding")
+	bool bCanSlide = true;
+
+	/**
+	 * @brief The movement speed while the character is sliding
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Sliding",
+		meta=(EditCondition = "bCanSlide", EditConditionHides))
+	float SlideSpeed = 2500.0f;
+
+	/**
+	 * @brief The minimum movement speed before a slide is allowed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Sliding",
+		meta=(EditCondition = "bCanSlide", EditConditionHides))
+	float SlideMinSpeed = 400.0f;
+
+	/**
+	 * @brief The time the character is allowed to slide
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Sliding",
+		meta=(EditCondition = "bCanSlide", EditConditionHides))
+	float SlidingTime = 0.5f;
+
+	/**
+	 * @brief The cooldown after a slide before another slide can be performed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Sliding",
+		meta=(EditCondition = "bCanSlide", EditConditionHides))
+	float SlidingCooldown = 0.5f;
+
+	/**
+	 * @brief The sound effect played when the character is sliding
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Sliding",
+		meta=(EditCondition = "bCanSlide", EditConditionHides))
+	TArray<USoundBase*> SlideSoundEffects;
+
+	/**
 	 * @brief The default weapon the character will equip on spawn
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Weapons")
@@ -424,6 +465,20 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Leaning")
 	float GetLeanCameraRoll() const;
+
+	/**
+	 * @brief Check if the character is sliding
+	 * @return A boolean value indicating if the character is sliding
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Sliding")
+	bool IsSliding() const;
+
+	/**
+	 * @brief Check if the character is busy ending the slide
+	 * @return A boolean value indicating if the character is busy ending the slide
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Sliding")
+	bool IsEndingSlide() const;
 
 protected:
 	/**
@@ -587,12 +642,42 @@ private:
 	/**
 	 * @brief Is the character sprinting?
 	 */
-	float bIsSprinting;
+	bool bIsSprinting;
 
 	/**
 	 * @brief Is sprinting queued?
 	 */
 	bool bSprintQueued;
+
+	/**
+	 * @brief Is the character sliding?
+	 */
+	bool bIsSliding;
+
+	/**
+	 * @brief The amount of time remaining for the current slide
+	 */
+	float CurrentSlidingTime;
+
+	/**
+	 * @brief The amount of time remaining for the slide cooldown
+	 */
+	float CurrentSlidingCooldown;
+
+	/**
+	 * @brief The direction of the current slide
+	 */
+	FVector SlideDirection;
+
+	/**
+	 * @brief Should crouching be stopped after completing a slide?
+	 */
+	bool bStopCrouchingAfterSliding;
+
+	/**
+	 * @brief Is the character busy ending the slide?
+	 */
+	bool bIsEndingSlide;
 
 	/**
 	 * @brief Move the character
@@ -671,4 +756,25 @@ private:
 	 */
 	UFUNCTION()
 	void StopSprinting();
+
+	/**
+	 * @brief Start sliding
+	 */
+	void StartSliding();
+
+	/**
+	 * @brief Stop sliding
+	 */
+	void StopSliding();
+
+	/**
+	 * @brief Update the character state while sliding
+	 * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+	 */
+	void UpdateSliding(const float DeltaSeconds);
+
+	/**
+	 * @brief Update the current movement speed of the character
+	 */
+	void UpdateMovementSpeed() const;
 };

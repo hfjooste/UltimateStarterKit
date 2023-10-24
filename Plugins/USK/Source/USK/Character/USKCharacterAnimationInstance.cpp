@@ -34,6 +34,8 @@ void UUSKCharacterAnimationInstance::NativeUpdateAnimation(float DeltaSeconds)
 	IsInAir = Character->GetMovementComponent()->IsFalling();
 	bIsCrouching = !IsInAir && Character->IsCrouching();
 	bIsEndingCrouch = Character->IsEndingCrouch();
+	bIsSliding = !IsInAir && Character->IsSliding();
+	bIsEndingSlide = Character->IsEndingSlide();
     bIsStomping = Character->IsStomping();
     bIsStompStarting = Character->IsStompStarting();
 	LeanCameraRoll = Character->GetLeanCameraRoll() * LeanCameraRotationModifier;
@@ -177,6 +179,33 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchWalkAnimation() const
 UAnimSequence* UUSKCharacterAnimationInstance::GetStompStartAnimation() const
 {
 	return GetAnimation(StompStartAnimation, StompStartWeaponOneHandedAnimation, StompStartWeaponTwoHandedAnimation);
+}
+
+/**
+ * @brief Get the slide start animation based on the current armed state
+ * @return The slide start animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetSlideStartAnimation() const
+{
+	return GetAnimation(SlideStartAnimation, SlideStartWeaponOneHandedAnimation, SlideStartWeaponTwoHandedAnimation);
+}
+
+/**
+ * @brief Get the slide end animation based on the current armed state
+ * @return The slide end animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetSlideEndAnimation() const
+{
+	return GetAnimation(SlideEndAnimation, SlideEndWeaponOneHandedAnimation, SlideEndWeaponTwoHandedAnimation);
+}
+
+/**
+ * @brief Get the slide loop animation based on the current armed state
+ * @return The slide loop animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetSlideLoopAnimation() const
+{
+	return GetAnimation(SlideLoopAnimation, SlideLoopWeaponOneHandedAnimation, SlideLoopWeaponTwoHandedAnimation);
 }
 
 /**
