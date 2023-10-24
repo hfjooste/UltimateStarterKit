@@ -110,6 +110,24 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>SlideStartAnimation</td>
+		<td>The animation used when the character starts sliding while unarmed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideEndAnimation</td>
+		<td>The animation used when the character stops sliding while unarmed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideLoopAnimation</td>
+		<td>The animation used when the character is sliding while unarmed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>IdleWeaponOneHandedAnimation</td>
 		<td>The animation used when the character is in the idle state with a one handed weapon</td>
 		<td>UAnimSequence*</td>
@@ -196,6 +214,24 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 	<tr>
 		<td>StompLandWeaponOneHandedAnimation</td>
 		<td>The animation used when the character is landing after a stomp with a one handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideStartWeaponOneHandedAnimation</td>
+		<td>The animation used when the character starts sliding with a one handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideEndWeaponOneHandedAnimation</td>
+		<td>The animation used when the character stops sliding with a one handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideLoopWeaponOneHandedAnimation</td>
+		<td>The animation used when the character is sliding with a one handed weapon</td>
 		<td>UAnimSequence*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -290,6 +326,24 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>SlideStartWeaponTwoHandedAnimation</td>
+		<td>The animation used when the character starts sliding with a two handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideEndWeaponTwoHandedAnimation</td>
+		<td>The animation used when the character stops sliding with a two handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideLoopWeaponTwoHandedAnimation</td>
+		<td>The animation used when the character is sliding with a two handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>MovementBlendSpeed</td>
 		<td>The blend speed used when updating the movement speed</td>
 		<td>float</td>
@@ -353,6 +407,18 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>LeanBoneName</td>
 		<td>The bone to rotate while the character is leaning</td>
 		<td>FName</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bIsSliding</td>
+		<td>Is the character currently sliding?</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bIsEndingSlide</td>
+		<td>Is the character busy ending the slide?</td>
+		<td>bool</td>
 		<td></td>
 	</tr>
 </table>
@@ -442,6 +508,24 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>Get the stomp start animation based on the current armed state</td>
 		<td></td>
 		<td><strong>UAnimSequence*</strong><br/>The stomp start animation to play</td>
+	</tr>
+	<tr>
+		<td>GetSlideStartAnimation</td>
+		<td>Get the slide start animation based on the current armed state</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The slide start animation to play</td>
+	</tr>
+	<tr>
+		<td>GetSlideEndAnimation</td>
+		<td>Get the slide end animation based on the current armed state</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The slide end animation to play</td>
+	</tr>
+	<tr>
+		<td>GetSlideLoopAnimation</td>
+		<td>Get the slide loop animation based on the current armed state</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The slide loop animation to play</td>
 	</tr>
 </table>
 

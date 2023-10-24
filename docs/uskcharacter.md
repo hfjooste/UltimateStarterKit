@@ -338,6 +338,42 @@ The <code>USKCharacter</code> uses the following components:
 		<td>25.0f</td>
 	</tr>
 	<tr>
+		<td>bCanSlide</td>
+		<td>Can the character perform a slide?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>SlideSpeed</td>
+		<td>The movement speed while the character is sliding</td>
+		<td>float</td>
+		<td>2500.0f</td>
+	</tr>
+	<tr>
+		<td>SlideMinSpeed</td>
+		<td>The minimum movement speed before a slide is allowed</td>
+		<td>float</td>
+		<td>400.0f</td>
+	</tr>
+	<tr>
+		<td>SlidingTime</td>
+		<td>The time the character is allowed to slide</td>
+		<td>float</td>
+		<td>0.5f</td>
+	</tr>
+	<tr>
+		<td>SlidingCooldown</td>
+		<td>The cooldown after a slide before another slide can be performed</td>
+		<td>float</td>
+		<td>0.5f</td>
+	</tr>
+	<tr>
+		<td>SlideSoundEffects</td>
+		<td>The sound effect played when the character is sliding</td>
+		<td>TArray&lt;USoundBase*&gt;</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>DefaultWeaponClass</td>
 		<td>The default weapon the character will equip on spawn</td>
 		<td>TSubclassOf&lt;AWeapon&gt;</td>
@@ -400,6 +436,18 @@ The <code>USKCharacter</code> uses the following components:
 		<td>Get the current lean camera roll</td>
 		<td></td>
 		<td><strong>float</strong><br/>The current lean camera roll</td>
+	</tr>
+	<tr>
+		<td>IsSliding</td>
+		<td>Check if the character is sliding</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the character is sliding</td>
+	</tr>
+	<tr>
+		<td>IsEndingSlide</td>
+		<td>Check if the character is busy ending the slide</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the character is busy ending the slide</td>
 	</tr>
 	<tr>
 		<td>StartFiringWeapon</td>
