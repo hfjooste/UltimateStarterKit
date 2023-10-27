@@ -26,7 +26,7 @@ extra:
       icon: fontawesome/brands/reddit
       link: https://www.reddit.com/user/HenryJooste
     - name: Twitter
-      icon: fontawesome/brands/twitter 
+      icon: fontawesome/brands/x-twitter
       link: https://twitter.com/hfjooste
     - name: GitHub
       icon: fontawesome/brands/github
