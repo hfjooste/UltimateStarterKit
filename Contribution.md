@@ -53,7 +53,7 @@ If you encounter bugs, or issues, or have feature requests, please open a new is
 
 ## Getting Help
 
-If you need help or have questions about contributing to the Ultimate Starter Kit, feel free to reach out to us through the issue tracker or contact me through [Mastodon](https://mastodon.gamedev.place/@hfjooste) or [Twitter](https://twitter.com/hfjooste). You can also send me an email at henryjooste95@gmail.com.
+If you need help or have questions about contributing to the Ultimate Starter Kit, feel free to reach out to us through the issue tracker or contact me through [Mastodon](https://mastodon.gamedev.place/@hfjooste) or [Twitter](https://twitter.com/hfjooste). You can also send me an [Email at](mailto:henryjooste95@gmail.com).
 
 We appreciate your interest in contributing to the Ultimate Starter Kit and look forward to your valuable contributions!
 
