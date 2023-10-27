@@ -224,6 +224,18 @@ The <code>USKCharacter</code> uses the following components:
 		<td></td>
 	</tr>
 	<tr>
+		<td>bCanLongJump</td>
+		<td>Is the character allowed to perform a long jump?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>LongJumpVelocity</td>
+		<td>The velocity applied to the character during a long jump</td>
+		<td>FVector</td>
+		<td>FVecto</td>
+	</tr>
+	<tr>
 		<td>MovementSpeed</td>
 		<td>The default movement speed</td>
 		<td>float</td>
