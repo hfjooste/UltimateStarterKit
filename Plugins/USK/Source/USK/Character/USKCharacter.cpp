@@ -285,6 +285,12 @@ void AUSKCharacter::Jump()
 		return;
 	}
 
+	if (CanLongJump())
+	{
+		PerformLongJump();
+		return;
+	}
+
 	if (bCanCrouchJump && bIsCrouching)
 	{
 		StopCrouching();
@@ -729,4 +735,37 @@ void AUSKCharacter::UpdateMovementSpeed() const
 	}
 
 	GetCharacterMovement()->MaxWalkSpeed = bIsSprinting ? SprintSpeed : MovementSpeed;
+}
+
+/**
+ * @brief Check if the character can perform a long jump
+ * @return A boolean value indicating if the character can perform a long jump
+ */
+bool AUSKCharacter::CanLongJump() const
+{
+	return bCanLongJump && bCanSlide && bIsSliding;
+}
+
+/**
+ * @brief Perform a long jump
+ */
+void AUSKCharacter::PerformLongJump()
+{
+	USK_LOG_TRACE("Performing long jump");
+
+	CurrentSlidingCooldown = 0.0f;
+	StopSliding();
+	
+	Super::Jump();
+	const FVector LaunchVelocity = GetActorForwardVector() *
+		FVector(LongJumpVelocity.X, LongJumpVelocity.Y, 0.0f) +
+		FVector(0.0f, 0.0f, LongJumpVelocity.Z);
+	LaunchCharacter(LaunchVelocity, true, true);
+	UAudioUtils::PlayRandomSound(this, JumpSoundEffects);
+
+	if (JumpParticleFx != nullptr)
+	{
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), JumpParticleFx,
+			GetActorLocation() + JumpParticleFxSpawnOffset);
+	}
 }

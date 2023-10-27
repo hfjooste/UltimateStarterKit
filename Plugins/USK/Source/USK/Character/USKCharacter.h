@@ -233,6 +233,20 @@ public:
 	bool IsDoubleJumping;
 
 	/**
+	 * @brief Is the character allowed to perform a long jump?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
+		meta = (EditCondition = "bCanSlide"))
+	bool bCanLongJump = true;
+
+	/**
+	 * @brief The velocity applied to the character during a long jump
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
+		meta = (EditCondition = "bCanLongJump && bCanSlide", EditConditionHides))
+	FVector LongJumpVelocity = FVector(3250.0f, 3250.0f, 800.0f);
+
+	/**
 	 * @brief The default movement speed
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
@@ -777,4 +791,15 @@ private:
 	 * @brief Update the current movement speed of the character
 	 */
 	void UpdateMovementSpeed() const;
+
+	/**
+	 * @brief Check if the character can perform a long jump
+	 * @return A boolean value indicating if the character can perform a long jump
+	 */
+	bool CanLongJump() const;
+
+	/**
+	 * @brief Perform a long jump
+	 */
+	void PerformLongJump();
 };
