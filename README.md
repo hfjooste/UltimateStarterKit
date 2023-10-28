@@ -71,7 +71,7 @@ The Ultimate Starter Kit plugin comes with the following features:
 
 ## Contribution Guidelines
 
-If you would like to contribute to the Ultimate Starter Kit, please follow our [Contribution Guidelines](//Contribution.md). These guidelines provide detailed information on how to create branches, make changes, test, document, commit, and open pull requests. 
+If you would like to contribute to the Ultimate Starter Kit, please follow our [Contribution Guidelines](./Contribution.md). These guidelines provide detailed information on how to create branches, make changes, test, document, commit, and open pull requests. 
 We welcome contributions from the community and look forward to your valuable input.
 
 ## Support
