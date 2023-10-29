@@ -36,12 +36,14 @@ The Ultimate Starter Kit plugin comes with the following features:
         <ul>
             <li>First and Third person characters</li>
             <li>Shadow decals to make platforming easier</li>
+            <li>Sprinting</li>
             <li>Double jumping</li>
             <li>Variable jump height</li>
             <li>Coyote time</li>
             <li>Smooth crouching with crouch jumping</li>
             <li>Stomping with stomp jumping</li>
             <li>Leaning with procedural animations</li>
+            <li>Sliding with long jump</li>
         </ul>
     </li>
     <li><strong>Weapons System</strong>: A customizable weapon system with support for recoil, multiple fire types, fire rates, and projectile types</li>
