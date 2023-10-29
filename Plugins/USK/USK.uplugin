@@ -20,9 +20,6 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"WhitelistPlatforms": [
-				"Android",
-				"IOS",
-				"Linux",
 				"Mac",
 				"Switch",
 				"PS4",
@@ -31,6 +28,10 @@
 				"XboxOne"
 			],
 			"BlacklistPlatforms": [
+                "Android",
+                "IOS",
+                "Linux",
+                "LinuxArm64",
 				"HTML5",
 				"HoloLens"
 			]
@@ -40,9 +41,6 @@
 			"Type": "UncookedOnly",
 			"LoadingPhase": "Default",
 			"WhitelistPlatforms": [
-				"Android",
-				"IOS",
-				"Linux",
 				"Mac",
 				"Switch",
 				"PS4",
@@ -51,6 +49,10 @@
 				"XboxOne"
 			],
 			"BlacklistPlatforms": [
+                "Android",
+                "IOS",
+                "Linux",
+                "LinuxArm64",
 				"HTML5",
 				"HoloLens"
 			]

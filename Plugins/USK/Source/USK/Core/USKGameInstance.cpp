@@ -207,7 +207,7 @@ UTexture2D* UUSKGameInstance::GetInputIndicatorIconForKey(const FKey Key, const 
 FKey UUSKGameInstance::GetKeyForInputAction(UInputMappingContext* Context, UInputAction* InputAction,
                                             const FName MappableName) const
 {
-#if ENGINE_MAJOR_VERSION >= 5
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION < 3
 	if (Context == nullptr || InputAction == nullptr)
 	{
 		return EKeys::Invalid;

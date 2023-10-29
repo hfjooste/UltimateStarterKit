@@ -3,9 +3,9 @@
 #pragma once
 
 #include "SettingsItem.h"
+#include "Sound/SoundMix.h"
+#include "Sound/SoundClass.h"
 #include "Engine/DataAsset.h"
-#include "Engine/Classes/Sound/SoundMix.h"
-#include "Engine/Classes/Sound/SoundClass.h"
 #include "Items/SettingsItemAccessibilityColorBlindMode.h"
 #include "Items/SettingsItemAccessibilityColorBlindModeSeverity.h"
 #include "Items/SettingsItemAudioMaster.h"
