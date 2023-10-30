@@ -14,6 +14,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/TimelineComponent.h"
 #include "USK/Audio/AudioUtils.h"
+#include "USK/Core/USKGameInstance.h"
 #include "USK/Logger/Log.h"
 #include "USK/Weapons/WeaponUtils.h"
 
@@ -104,6 +105,16 @@ void AUSKCharacter::PawnClientRestart()
 		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
 	Subsystem->RemoveMappingContext(InputMappingContext);
 	Subsystem->AddMappingContext(InputMappingContext, 0);
+
+	UGameInstance* CurrentGameInstance = UGameplayStatics::GetGameInstance(GetWorld());
+	UUSKGameInstance* GameInstance = dynamic_cast<UUSKGameInstance*>(CurrentGameInstance);
+	if (!IsValid(GameInstance))
+	{
+		USK_LOG_ERROR("Unable to register input mapping context. GameInstance is not UUSKGameInstance");	
+		return;
+	}
+
+	GameInstance->RegisterInputMappingContext(InputMappingContext);
 }
 
 /**

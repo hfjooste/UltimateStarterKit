@@ -60,13 +60,13 @@ void USettingsItemControlsRemap::ApplySettings(UObject* World, const USettingsCo
 {
 #if ENGINE_MAJOR_VERSION >= 5
 	UGameInstance* CurrentGameInstance = UGameplayStatics::GetGameInstance(World);
-	const UUSKGameInstance* GameInstance = dynamic_cast<UUSKGameInstance*>(CurrentGameInstance);
+	UUSKGameInstance* GameInstance = dynamic_cast<UUSKGameInstance*>(CurrentGameInstance);
 	if (GameInstance == nullptr)
 	{
 		USK_LOG_ERROR("Unable to access settings item. GameInstance is not UUSKGameInstance");	
 		return;
 	}
 
-	GameInstance->UpdateKeyBindings();
+	GameInstance->ReregisterInputMappingContext();
 #endif
 }

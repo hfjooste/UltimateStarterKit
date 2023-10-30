@@ -12,6 +12,10 @@
 #include "USK/Utils/PlatformUtils.h"
 #include "Runtime/Launch/Resources/Version.h"
 
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 3
+#include "EnhancedInput/Public/UserSettings/EnhancedInputUserSettings.h"
+#endif
+
 /**
  * @brief Virtual function to allow custom GameInstances an opportunity to set up what it needs
  */
@@ -241,6 +245,53 @@ FKey UUSKGameInstance::GetKeyForInputAction(UInputMappingContext* Context, UInpu
 	return EKeys::Invalid;
 }
 
+void UUSKGameInstance::RegisterInputMappingContext(UInputMappingContext* Input)
+{
+#if ENGINE_MAJOR_VERSION < 5 || ENGINE_MINOR_VERSION < 3
+	UpdateKeyBindings();
+	return;
+#endif
+	
+	if (!IsValid(Input))
+	{
+		USK_LOG_WARNING("Unable to register input mapping context. Input is invalid");
+		UpdateKeyBindings();
+		return;
+	}
+	
+	const APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	if (!IsValid(PlayerController))
+	{
+		USK_LOG_WARNING("Unable to register input mapping context. PlayerController is invalid");
+		return;
+	}
+	
+	UEnhancedInputLocalPlayerSubsystem* Subsystem =
+		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
+	if (!IsValid(Subsystem))
+	{
+		USK_LOG_WARNING("Unable to register input mapping context. Subsystem is invalid");
+		return;
+	}
+	
+	UEnhancedInputUserSettings* InputSettings = Subsystem->GetUserSettings();
+	if (!IsValid(InputSettings))
+	{
+		USK_LOG_WARNING("Unable to register input mapping context. InputSettings is invalid");
+        return;
+	}
+
+	CurrentInputMappingContext = Input;
+	InputSettings->UnregisterInputMappingContext(CurrentInputMappingContext);
+	InputSettings->RegisterInputMappingContext(CurrentInputMappingContext);
+	UpdateKeyBindings();
+}
+
+void UUSKGameInstance::ReregisterInputMappingContext()
+{
+	RegisterInputMappingContext(CurrentInputMappingContext);
+}
+
 /**
  * @brief Update the key bindings that was changed by the player
  */
@@ -394,7 +445,7 @@ void UUSKGameInstance::InitializeInputIndicatorsAfterDelay()
  */
 void UUSKGameInstance::InitializeInputIndicators()
 {
-	UpdateKeyBindings();
+	RegisterInputMappingContext(InputMappingContext);
 	
 	USK_LOG_INFO("Setting default input device");
 	CurrentInputDevice = EInputDevice::Unknown;

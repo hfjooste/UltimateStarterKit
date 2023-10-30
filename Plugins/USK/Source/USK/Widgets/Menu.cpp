@@ -354,6 +354,11 @@ void UMenu::AddInputBindings()
 	USK_LOG_TRACE("Adding menu input mapping context");
 	Subsystem->RemoveMappingContext(InputMappingContext);
 	Subsystem->AddMappingContext(InputMappingContext, 0);
+
+	if (IsValid(GameInstance))
+	{
+		GameInstance->RegisterInputMappingContext(InputMappingContext);
+	}
 	
 	InitializeActionBindings(PlayerController);
 	PlayerController->InputComponent->BindKey(EKeys::AnyKey, IE_Pressed, this, &UMenu::AnyKeyPressed);

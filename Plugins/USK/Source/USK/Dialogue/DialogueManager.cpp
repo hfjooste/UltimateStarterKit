@@ -10,6 +10,7 @@
 #include "Components/AudioComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "USK/Audio/AudioUtils.h"
+#include "USK/Core/USKGameInstance.h"
 #include "USK/Logger/Log.h"
 
 /**
@@ -65,6 +66,13 @@ void ADialogueManager::PlayDialogue()
 		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
 	Subsystem->RemoveMappingContext(InputMappingContext);
 	Subsystem->AddMappingContext(InputMappingContext, 0);
+
+	UGameInstance* CurrentGameInstance = UGameplayStatics::GetGameInstance(GetWorld());
+	UUSKGameInstance* GameInstance = dynamic_cast<UUSKGameInstance*>(CurrentGameInstance);
+	if (IsValid(GameInstance))
+	{
+		GameInstance->RegisterInputMappingContext(InputMappingContext);
+	}
 
 	USK_LOG_TRACE("Setting up input bindings");
 	UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(PlayerController->GetPawn()->InputComponent);

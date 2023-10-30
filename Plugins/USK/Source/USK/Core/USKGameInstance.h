@@ -218,11 +218,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
 	FKey GetKeyForInputAction(UInputMappingContext* Context, UInputAction* InputAction, FName MappableName) const;
 
-	/**
-	 * @brief Update the key bindings that was changed by the player 
-	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
-	void UpdateKeyBindings() const;
+	void RegisterInputMappingContext(UInputMappingContext* Input);
+
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Input")
+	void ReregisterInputMappingContext();
 
 	/**
 	 * @brief Pause the game
@@ -255,6 +255,9 @@ private:
 	 */
 	UPROPERTY()
 	UUSKSaveGame* CurrentSaveGame;
+
+	UPROPERTY()
+	UInputMappingContext* CurrentInputMappingContext;
 
 	/**
 	 * @brief A boolean flag used to check if the features of the game instance was initialized
@@ -345,4 +348,9 @@ private:
 	 * @return The input device based on the specified key
 	 */
 	EInputDevice GetInputDevice(FKey Key);
+
+	/**
+	 * @brief Update the key bindings that was changed by the player
+	 */
+	void UpdateKeyBindings() const;
 };
