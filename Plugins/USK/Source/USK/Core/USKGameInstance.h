@@ -340,7 +340,7 @@ private:
 	 * @return A boolean value indicating if we've finished extracting the required amount of input indicator icons
 	 */
 	bool MapActionKeyToInputIndicator(TArray<UTexture2D*>& InputIndicators, const UInputAction* Action,
-	                                  const FKey Key, const UInputAction* RequiredAction, const int RequiredAmount);
+	                                  const FKey Key, const UInputAction* RequiredAction, const int RequiredAmount) const;
 
 	/**
 	 * @brief Get the input device based on the specified key

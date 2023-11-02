@@ -3,6 +3,8 @@
 #include "USKGameInstance.h"
 
 #include "EnhancedInputSubsystems.h"
+#include "EnhancedInput/Public/PlayerMappableKeySettings.h"
+#include "EnhancedInput/Public/UserSettings/EnhancedInputUserSettings.h"
 #include "InputDevice.h"
 #include "InputMappingContext.h"
 #include "Engine/World.h"
@@ -157,7 +159,7 @@ TArray<UTexture2D*> UUSKGameInstance::GetInputIndicatorIcon(UInputAction* InputA
 	const APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	const UEnhancedInputLocalPlayerSubsystem* Subsystem =
 		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
-	
+
 	TArray<FKey> Keys = Subsystem->QueryKeysMappedToAction(InputAction);
 	for (const FKey Key : Keys)
 	{
@@ -211,7 +213,7 @@ UTexture2D* UUSKGameInstance::GetInputIndicatorIconForKey(const FKey Key, const 
 FKey UUSKGameInstance::GetKeyForInputAction(UInputMappingContext* Context, UInputAction* InputAction,
                                             const FName MappableName) const
 {
-#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION < 3
+#if ENGINE_MAJOR_VERSION >= 5
 	if (Context == nullptr || InputAction == nullptr)
 	{
 		return EKeys::Invalid;
@@ -235,7 +237,7 @@ FKey UUSKGameInstance::GetKeyForInputAction(UInputMappingContext* Context, UInpu
 	TArray<FEnhancedActionKeyMapping> Mappings = Context->GetMappings();
 	for (FEnhancedActionKeyMapping Mapping : Mappings)
 	{
-		if (Mapping.Action == InputAction && Mapping.PlayerMappableOptions.Name == MappableName)
+		if (Mapping.Action == InputAction && Mapping.GetPlayerMappableKeySettings()->Name == MappableName)
 		{
 			return Mapping.Key;
 		}
@@ -281,6 +283,7 @@ void UUSKGameInstance::RegisterInputMappingContext(UInputMappingContext* Input)
         return;
 	}
 
+	USK_LOG_INFO("Registering input mapping context");
 	CurrentInputMappingContext = Input;
 	InputSettings->UnregisterInputMappingContext(CurrentInputMappingContext);
 	InputSettings->RegisterInputMappingContext(CurrentInputMappingContext);
@@ -317,12 +320,21 @@ void UUSKGameInstance::UpdateKeyBindings() const
 	}
 	
 	UEnhancedInputLocalPlayerSubsystem* Subsystem =
-		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
+		PlayerController->GetLocalPlayer()->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>();
 	if (Subsystem == nullptr)
 	{
 		USK_LOG_WARNING("Unable to update player mappable input. Subsystem is nullptr");
 		return;
 	}
+
+#if ENGINE_MINOR_VERSION >= 3
+	UEnhancedInputUserSettings* UserSettings = Subsystem->GetUserSettings();
+	if (!IsValid(UserSettings))
+	{
+		USK_LOG_WARNING("Unable to update player mappable input. UserSettings is nullptr");
+		return;
+	}
+#endif
 
 	USK_LOG_TRACE("Adding player mappable input configs to subsystem");
 	
@@ -330,14 +342,32 @@ void UUSKGameInstance::UpdateKeyBindings() const
 	Settings->KeyBindings.GetKeys(Keys);
 	for (const FName Key : Keys)
 	{
-#if ENGINE_MINOR_VERSION >= 2
+#if ENGINE_MINOR_VERSION >= 3
+		FMapPlayerKeyArgs KeyArgs;
+		KeyArgs.MappingName = Key;
+		KeyArgs.Slot = EPlayerMappableKeySlot::First;
+		KeyArgs.NewKey = Settings->KeyBindings[Key];
+		KeyArgs.bCreateMatchingSlotIfNeeded = true;
+
+		FGameplayTagContainer FailureReason;
+		UserSettings->MapPlayerKey(KeyArgs, FailureReason);
+		if (FailureReason != FGameplayTagContainer::EmptyContainer)
+		{
+			USK_LOG_ERROR("Failed to remap input");
+		}
+#elif ENGINE_MINOR_VERSION == 2
 		Subsystem->RemovePlayerMappedKeyInSlot(Key);
 		Subsystem->AddPlayerMappedKeyInSlot(Key, Settings->KeyBindings[Key]);
-#else
+#elif ENGINE_MINOR_VERSION < 2
 		Subsystem->RemovePlayerMappedKey(Key);
 		Subsystem->AddPlayerMappedKey(Key, Settings->KeyBindings[Key]);
 #endif
 	}
+
+#if ENGINE_MINOR_VERSION >= 3
+	UserSettings->SaveSettings();
+	UserSettings->ApplySettings();
+#endif
 #endif
 }
 
@@ -507,7 +537,7 @@ void UUSKGameInstance::UpdateInputDevice(const FKey Key)
  */
 bool UUSKGameInstance::MapActionKeyToInputIndicator(TArray<UTexture2D*>& InputIndicators,
                                                     const UInputAction* Action, const FKey Key,
-                                                    const UInputAction* RequiredAction, const int RequiredAmount)
+                                                    const UInputAction* RequiredAction, const int RequiredAmount) const
 {
 	if (Action != RequiredAction || Key.IsGamepadKey() != bIsUsingGamepad)
 	{
