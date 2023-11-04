@@ -11,6 +11,7 @@
 #include "USK/Character/PlatformerCharacter.h"
 #include "USK/Components/InteractTrigger.h"
 #include "USK/Logger/Log.h"
+#include "USK/Quests/QuestComponent.h"
 
 /**
  * @brief Overridable native event for when play begins for this actor
@@ -89,6 +90,13 @@ void ACollectableItem::CollectItem(AActor* Collector)
 	{
 		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), CollectedParticleFx,
 			GetActorLocation() + CollectedParticleFxSpawnOffset);
+	}
+
+	UQuestComponent* QuestComponent = dynamic_cast<UQuestComponent*>(
+		GetComponentByClass(UQuestComponent::StaticClass()));
+	if (IsValid(QuestComponent) && bCompleteQuestPointAfterCollecting)
+	{
+		QuestComponent->OnQuestPointCompleted();
 	}
 	
 	OnItemCollected(Collector);
