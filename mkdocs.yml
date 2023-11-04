@@ -115,6 +115,11 @@ nav:
   - Interact System:
     - Interact Trigger: interacttrigger.md
     - Interact Widget: interactwidget.md
+  - Quest System:
+    - Quest: quest.md
+    - Quest Component: questcomponent.md
+    - Quest Manager: questmanager.md
+    - Quest Widget: questwidget.md
   - UI & Widgets:
     - Collectable Item Icon: collectableitemicon.md
     - Credits:

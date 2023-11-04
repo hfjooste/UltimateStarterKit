@@ -56,6 +56,12 @@ The item requires an actor to overlap with the item before it can be collected. 
 		<td>FVector</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>bCompleteQuestPointAfterCollecting</td>
+		<td>Should the quest point be completed after the item is collected?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
 </table>
 
 ### Functions

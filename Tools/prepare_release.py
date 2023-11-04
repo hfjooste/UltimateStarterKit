@@ -42,6 +42,11 @@ os.system(f"python \"{docs}\" --input \"Widgets\\InteractWidget\" --output inter
 
 os.system(f"python \"{docs}\" --input \"Logger\\LogConfig\" --output logconfig")
 
+os.system(f"python \"{docs}\" --input \"Quests\\Quest\" --output quest")
+os.system(f"python \"{docs}\" --input \"Quests\\QuestComponent\" --output questcomponent")
+os.system(f"python \"{docs}\" --input \"Quests\\QuestManager\" --output questmanager")
+os.system(f"python \"{docs}\" --input \"Widgets\\QuestWidget\" --output questwidget")
+
 os.system(f"python \"{docs}\" --input \"Settings\\SettingsData\" --output settingsdata")
 os.system(f"python \"{docs}\" --input \"Settings\\SettingsConfig\" --output settingsconfig")
 os.system(f"python \"{docs}\" --input \"Settings\\SettingsItemType\" --output settingsitemtype")
