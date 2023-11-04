@@ -11,6 +11,8 @@
 #include "USK/Weapons/Weapon.h"
 #include "USKCharacter.generated.h"
 
+class UInteractWidget;
+class UInteractTrigger;
 class UInputAction;
 class UInputMappingContext;
 
@@ -84,6 +86,12 @@ public:
      */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
 	UInputAction* LeanAction;
+
+	/**
+	 * @brief The interact input action
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
+	UInputAction* InteractAction;
 
 	/**
 	 * @brief The shadow decal class used to draw a shadow below the character while in the air
@@ -420,6 +428,12 @@ public:
 	TSubclassOf<AWeapon> DefaultWeaponClass;
 
 	/**
+	 * @brief The class of the interact widget
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|UI")
+	TSubclassOf<UInteractWidget> InteractWidgetClass;
+
+	/**
 	 * @brief Create a new instance of the AUSKCharacter actor
 	 */
 	AUSKCharacter();
@@ -493,6 +507,20 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Sliding")
 	bool IsEndingSlide() const;
+
+	/**
+	 * @brief Get the current interact trigger
+	 * @return The current interact trigger
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Interact")
+	UInteractTrigger* GetInteractTrigger() const;
+
+	/**
+	 * @brief Update the current interact trigger
+	 * @param NewInteractTrigger The new interact trigger
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Interact")
+	void UpdateInteractTrigger(UInteractTrigger* NewInteractTrigger);
 
 protected:
 	/**
@@ -587,6 +615,18 @@ private:
 	 */
 	UPROPERTY()
 	AWeapon* Weapon;
+
+	/**
+	 * @brief The current interact trigger that the character is overlapping
+	 */
+	UPROPERTY()
+	UInteractTrigger* InteractTrigger;
+
+	/**
+	 * @brief The current interact widget
+	 */
+	UPROPERTY()
+	UInteractWidget* InteractWidget;
 	
 	/**
 	 * @brief Can the character perform a coyote jump?
@@ -802,4 +842,9 @@ private:
 	 * @brief Perform a long jump
 	 */
 	void PerformLongJump();
+
+	/**
+	 * @brief Interact with the current interact trigger
+	 */
+	void Interact();
 };

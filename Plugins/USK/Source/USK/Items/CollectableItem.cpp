@@ -9,7 +9,17 @@
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Character/FpsCharacter.h"
 #include "USK/Character/PlatformerCharacter.h"
+#include "USK/Components/InteractTrigger.h"
 #include "USK/Logger/Log.h"
+
+/**
+ * @brief Overridable native event for when play begins for this actor
+ */
+void ACollectableItem::BeginPlay()
+{
+	Super::BeginPlay();
+	bCollectOnInteract = IsValid(GetComponentByClass(UInteractTrigger::StaticClass()));
+}
 
 /**
  * @brief Event when this actor overlaps another actor
@@ -18,7 +28,7 @@
 void ACollectableItem::NotifyActorBeginOverlap(AActor* OtherActor)
 {
 	Super::NotifyActorBeginOverlap(OtherActor);
-	if (CanCollectItem(OtherActor))
+	if (!bCollectOnInteract && CanCollectItem(OtherActor))
 	{
 		CollectItem(OtherActor);
 	}

@@ -77,6 +77,11 @@ public:
 
 protected:
 	/**
+	 * @brief Overridable native event for when play begins for this actor
+	 */
+	virtual void BeginPlay() override;
+	
+	/**
 	 * @brief Event when this actor overlaps another actor
 	 * @param OtherActor The other actor that caused the overlap event
 	 */
@@ -84,9 +89,7 @@ protected:
 
 private:
 	/**
-	 * @brief Should the item be collected?
-	 * @param OtherActor The other actor that caused the overlap event
-	 * @return A boolean value indicating if the item should be collected
+	 * @brief Should the item be collected when the player interacts with it?
 	 */
-	bool ShouldBeCollected(const AActor* OtherActor);
+	bool bCollectOnInteract;
 };

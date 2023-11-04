@@ -14,8 +14,10 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/TimelineComponent.h"
 #include "USK/Audio/AudioUtils.h"
+#include "USK/Components/InteractTrigger.h"
 #include "USK/Logger/Log.h"
 #include "USK/Weapons/WeaponUtils.h"
+#include "USK/Widgets/InteractWidget.h"
 
 /**
  * @brief Create a new instance of the AUSKCharacter actor
@@ -128,6 +130,7 @@ void AUSKCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	EnhancedInput->BindAction(CrouchAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopCrouching);
     EnhancedInput->BindAction(LeanAction, ETriggerEvent::Triggered, this, &AUSKCharacter::Lean);
     EnhancedInput->BindAction(LeanAction, ETriggerEvent::Completed, this, &AUSKCharacter::Lean);
+	EnhancedInput->BindAction(InteractAction, ETriggerEvent::Started, this, &AUSKCharacter::Interact);
 }
 
 /**
@@ -270,6 +273,36 @@ bool AUSKCharacter::IsSliding() const
 bool AUSKCharacter::IsEndingSlide() const
 {
 	return bIsEndingSlide;
+}
+
+/**
+ * @brief Get the current interact trigger
+ * @return The current interact trigger
+ */
+UInteractTrigger* AUSKCharacter::GetInteractTrigger() const
+{
+	return InteractTrigger;
+}
+
+/**
+ * @brief Update the current interact trigger
+ * @param NewInteractTrigger The new interact trigger
+ */
+void AUSKCharacter::UpdateInteractTrigger(UInteractTrigger* NewInteractTrigger)
+{
+	InteractTrigger = NewInteractTrigger;
+	if (IsValid(InteractTrigger) && IsValid(InteractWidgetClass))
+	{
+		InteractWidget = CreateWidget<UInteractWidget>(GetWorld(), InteractWidgetClass);
+		InteractWidget->Show();
+		return;
+	}
+
+	if (IsValid(InteractWidget))
+	{
+		InteractWidget->Hide();
+		InteractWidget = nullptr;
+	}
 }
 
 /**
@@ -768,4 +801,17 @@ void AUSKCharacter::PerformLongJump()
 		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), JumpParticleFx,
 			GetActorLocation() + JumpParticleFxSpawnOffset);
 	}
+}
+
+/**
+ * @brief Interact with the current interact trigger
+ */
+void AUSKCharacter::Interact()
+{
+	if (!IsValid(InteractTrigger))
+	{
+		return;
+	}
+
+	InteractTrigger->OnInteracted(this);
 }
