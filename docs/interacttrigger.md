@@ -1,0 +1,58 @@
+## Introduction
+A trigger that can be used to interact with an object
+
+## API Reference
+### Functions
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Params</th>
+		<th>Return</th>
+	</tr>
+	<tr>
+		<td>CanInteract</td>
+		<td>Check if the actor can interact with the object</td>
+		<td><strong>Actor (AActor*)</strong><br/>The actor trying to interact with the object</td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the actor can interact with the object</td>
+	</tr>
+	<tr>
+		<td>OnInteracted</td>
+		<td>Called when the actor interacts with the object</td>
+		<td><strong>Actor (AActor*)</strong><br/>The actor that interacted with the object</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>ReceiveOnInteracted</td>
+		<td>Called when the actor interacts with the object</td>
+		<td><strong>Actor (AActor*)</strong><br/>The actor that interacted with the object</td>
+		<td></td>
+	</tr>
+</table>
+
+## Blueprint Usage
+You can use the <code>InteractTrigger</code> using Blueprints by adding one of the following nodes:
+<ul>
+	<li>Ultimate Starter Kit > Interact Trigger > Can Interact</li>
+	<li>Ultimate Starter Kit > Interact Trigger > On Interacted</li>
+	<li>Ultimate Starter Kit > Interact Trigger > OnInteracted</li>
+</ul>
+
+## C++ Usage
+Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:
+```c++
+PublicDependencyModuleNames.Add("USK");
+```
+
+The <code>InteractTrigger</code> can now be used in any of your C++ files:
+```c++
+#include "USK/Components/InteractTrigger.h"
+
+void ATestActor::Test()
+{
+	// InteractTrigger is a pointer to the UInteractTrigger
+	bool CanInteractValue = InteractTrigger->CanInteract(Actor);
+	InteractTrigger->OnInteracted(Actor);
+	InteractTrigger->ReceiveOnInteracted(Actor);
+}
+```

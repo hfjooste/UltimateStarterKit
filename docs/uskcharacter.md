@@ -86,6 +86,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>InteractAction</td>
+		<td>The interact input action</td>
+		<td>UInputAction*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>ShadowDecalClass</td>
 		<td>The shadow decal class used to draw a shadow below the character while in the air</td>
 		<td>TSubclassOf&lt;AShadowDecal&gt;</td>
@@ -391,6 +397,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>TSubclassOf&lt;AWeapon&gt;</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>InteractWidgetClass</td>
+		<td>The class of the interact widget</td>
+		<td>TSubclassOf&lt;UInteractWidget&gt;</td>
+		<td></td>
+	</tr>
 </table>
 
 ### Functions
@@ -460,6 +472,18 @@ The <code>USKCharacter</code> uses the following components:
 		<td>Check if the character is busy ending the slide</td>
 		<td></td>
 		<td><strong>bool</strong><br/>A boolean value indicating if the character is busy ending the slide</td>
+	</tr>
+	<tr>
+		<td>GetInteractTrigger</td>
+		<td>Get the current interact trigger</td>
+		<td></td>
+		<td><strong>UInteractTrigger*</strong><br/>The current interact trigger</td>
+	</tr>
+	<tr>
+		<td>UpdateInteractTrigger</td>
+		<td>Update the current interact trigger</td>
+		<td><strong>NewInteractTrigger (UInteractTrigger*)</strong><br/>The new interact trigger</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>StartFiringWeapon</td>

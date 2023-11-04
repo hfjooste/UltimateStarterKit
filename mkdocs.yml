@@ -112,6 +112,9 @@ nav:
   - Items:
     - Allowed Collector: allowedcollector.md
     - Collectable Item: collectableitem.md
+  - Interact System:
+    - Interact Trigger: interacttrigger.md
+    - Interact Widget: interactwidget.md
   - UI & Widgets:
     - Collectable Item Icon: collectableitemicon.md
     - Credits:

@@ -37,6 +37,9 @@ os.system(f"python \"{docs}\" --input \"Inventory\\InventoryWidget\" --output in
 os.system(f"python \"{docs}\" --input \"Items\\AllowedCollector\" --output allowedcollector")
 os.system(f"python \"{docs}\" --input \"Items\\CollectableItem\" --output collectableitem")
 
+os.system(f"python \"{docs}\" --input \"Components\\InteractTrigger\" --output interacttrigger")
+os.system(f"python \"{docs}\" --input \"Widgets\\InteractWidget\" --output interactwidget")
+
 os.system(f"python \"{docs}\" --input \"Logger\\LogConfig\" --output logconfig")
 
 os.system(f"python \"{docs}\" --input \"Settings\\SettingsData\" --output settingsdata")
