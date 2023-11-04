@@ -9,6 +9,7 @@
 #include "USK/Audio/MusicPlayer.h"
 #include "USK/Character/FpsCharacter.h"
 #include "USK/Character/PlatformerCharacter.h"
+#include "USK/Components/InteractTrigger.h"
 #include "USK/Core/USKGameInstance.h"
 #include "USK/Dialogue/Dialogue.h"
 #include "USK/Dialogue/DialogueManager.h"
@@ -17,6 +18,8 @@
 #include "USK/Inventory/InventoryWidget.h"
 #include "USK/Items/CollectableItem.h"
 #include "USK/Logger/LogConfig.h"
+#include "USK/Quests/Quest.h"
+#include "USK/Quests/QuestManager.h"
 #include "USK/Weapons/Weapon.h"
 #include "USK/Weapons/WeaponItem.h"
 #include "USK/Weapons/WeaponAmmoItem.h"
@@ -26,6 +29,7 @@
 #include "USK/Widgets/CreditsWidget.h"
 #include "USK/Widgets/FpsCounter.h"
 #include "USK/Widgets/InputIndicator.h"
+#include "USK/Widgets/InteractWidget.h"
 #include "USK/Widgets/Menu.h"
 
 #define LOCTEXT_NAMESPACE "FUSKEditorModule"
@@ -74,35 +78,47 @@ void FUSKEditorModule::StartupModule()
 	RegisterBlueprint(AssetTools, UskCategory, "Dialogue", "Dialogue Participant",
 		FColor(255, 201, 14), UDialogueParticipant::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "Dialogue", "Dialogue Widget",
-        	FColor(255, 201, 14), UDialogueWidget::StaticClass());
+        FColor(255, 201, 14), UDialogueWidget::StaticClass());
 
 	RegisterBlueprint(AssetTools, UskCategory, "Audio", "Music Player",
 		FColor(97, 85, 212), AMusicPlayer::StaticClass());
+
+	RegisterBlueprint(AssetTools, UskCategory, "Interaction", "Interact Trigger",
+		FColor(255, 127, 39), UInteractTrigger::StaticClass());
+	RegisterBlueprint(AssetTools, UskCategory, "Interaction", "Interact Widget",
+    	FColor(255, 127, 39), UInteractWidget::StaticClass());
 	
 	RegisterBlueprint(AssetTools, UskCategory, "Inventory", "Inventory Menu Item",
-			FColor(62, 140, 35), UInventoryMenuItem::StaticClass());
+		FColor(62, 140, 35), UInventoryMenuItem::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "Inventory", "Inventory Widget",
-			FColor(62, 140, 35), UInventoryWidget::StaticClass());
+		FColor(62, 140, 35), UInventoryWidget::StaticClass());
+	
+	RegisterBlueprint(AssetTools, UskCategory, "Quests", "Quest",
+		FColor(237, 28, 36), UQuest::StaticClass());
+	RegisterBlueprint(AssetTools, UskCategory, "Quests", "Quest Manager",
+		FColor(237, 28, 36), AQuestManager::StaticClass());
+	RegisterBlueprint(AssetTools, UskCategory, "Quests", "Quest Widget",
+		FColor(237, 28, 36), UQuestWidget::StaticClass());
 
 	RegisterBlueprint(AssetTools, UskCategory, "Settings", "Settings Configuration",
-			FColor(255, 105, 180), USettingsConfig::StaticClass());
+		FColor(255, 105, 180), USettingsConfig::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "Settings", "Settings Data",
-			FColor(255, 105, 180), USettingsData::StaticClass());
+		FColor(255, 105, 180), USettingsData::StaticClass());
 	
 	RegisterBlueprint(AssetTools, UskCategory, "UI", "Collectable Item Icon",
-			FColor(44, 89, 180), UCollectableItemIcon::StaticClass());
+		FColor(44, 89, 180), UCollectableItemIcon::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "UI", "Credits Widget",
-			FColor(44, 89, 180), UCreditsWidget::StaticClass());
+		FColor(44, 89, 180), UCreditsWidget::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "UI", "Framerate Counter",
-			FColor(44, 89, 180), UFpsCounter::StaticClass());
+		FColor(44, 89, 180), UFpsCounter::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "UI", "Input Indicator",
-			FColor(44, 89, 180), UInputIndicator::StaticClass());
+		FColor(44, 89, 180), UInputIndicator::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "UI", "Input Indicator Icon",
-			FColor(44, 89, 180), UInputIndicatorIcon::StaticClass());
+		FColor(44, 89, 180), UInputIndicatorIcon::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "UI", "Menu",
-			FColor(44, 89, 180), UMenu::StaticClass());
+		FColor(44, 89, 180), UMenu::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "UI", "Menu Item",
-			FColor(44, 89, 180), UMenuItem::StaticClass());
+		FColor(44, 89, 180), UMenuItem::StaticClass());
 }
 
 void FUSKEditorModule::ShutdownModule()
