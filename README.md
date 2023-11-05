@@ -1,4 +1,11 @@
 # Ultimate Starter Kit
+<p>
+    <img alt="Stars" src="https://img.shields.io/github/stars/hfjooste/UltimateStarterKit" />
+    <img alt="Downloads" src="https://img.shields.io/github/downloads/hfjooste/UltimateStarterKit/total" />
+    <img alt="Commit Activity" src="https://img.shields.io/github/commit-activity/w/hfjooste/UltimateStarterKit" />
+    <img alt="Contributors" src="https://img.shields.io/github/contributors/hfjooste/UltimateStarterKit" />
+    <img alt="Issues" src="https://img.shields.io/github/issues/hfjooste/UltimateStarterKit" />
+</p>
 The Ultimate Starter Kit plugin to speed up development of Unreal Engine games
 
 ## 📝 Requirements
