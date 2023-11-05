@@ -1,14 +1,21 @@
 # Ultimate Starter Kit
+<p>
+    <img alt="Stars" src="https://img.shields.io/github/stars/hfjooste/UltimateStarterKit" />
+    <img alt="Downloads" src="https://img.shields.io/github/downloads/hfjooste/UltimateStarterKit/total" />
+    <img alt="Commit Activity" src="https://img.shields.io/github/commit-activity/w/hfjooste/UltimateStarterKit" />
+    <img alt="Contributors" src="https://img.shields.io/github/contributors/hfjooste/UltimateStarterKit" />
+    <img alt="Issues" src="https://img.shields.io/github/issues/hfjooste/UltimateStarterKit" />
+</p>
 The Ultimate Starter Kit plugin to speed up development of Unreal Engine games
 
-## Requirements
+## 📝 Requirements
 The Ultimate Starter Kit plugin is only available for Unreal Engine 4.27 and newer. The plugin also depends on the following plugins:
 <ol>
     <li>Niagara</li>
     <li>Enhanced Input</li>
 </ol>
 
-## Installation
+## 🛠️ Installation
 <ol>
     <li>Download the latest release from <a href="https://github.com/hfjooste/UltimateStarterKit/releases" target="_blank">GitHub</a></li>
     <li>Navigate to <code>C:\Program Files\Epic Games\UE_{VERSION}\Engine\Plugins</code></li>
@@ -20,7 +27,7 @@ The Ultimate Starter Kit plugin is only available for Unreal Engine 4.27 and new
     <li>Restart Unreal Engine</li>
 </ol>
 
-## Features
+## 🚀 Features
 The Ultimate Starter Kit plugin comes with the following features:
 <ul>
     <li><strong>Logger</strong>: A system used to easily log info to file and via on-screen messages</li>
@@ -48,19 +55,21 @@ The Ultimate Starter Kit plugin comes with the following features:
     </li>
     <li><strong>Weapons System</strong>: A customizable weapon system with support for recoil, multiple fire types, fire rates, and projectile types</li>
     <li><strong>Menu system</strong>: A customizable menu system with support for controllers and complex menu layouts</li>
+    <li><strong>Interact system</strong>: A customizable interaction system with interact prompts</li>
+    <li><strong>Quest system</strong>: A quest system with support for multiple quest points</li>
     <li><strong>Config Utils</strong>: Extract information from different config files</li>
     <li><strong>Platform Utils</strong>: Easily detect different platform types and architectures</li>
     <li><strong>Project Utils</strong>: Extract project information like name, description, and version</li>
 </ul>
 
-## Documentation
+## 📜 Documentation
 - The full documentation is available <a href="https://hfjooste.github.io/UltimateStarterKit" target="_blank">here</a>
 - The Markdown documentation is also included in the repo under the <code>docs</code> directory for offline use. Or checkout the <code>docs</code> branch for the full HTML documentation
 - Each release contains the full HTML documentation and a PDF for that specific version
 - Each function is fully documented in the C++ source code
 - The demo project contains an example of each system in Blueprints
 
-## Credits
+## ❤️ Credits
 <ul>
     <li><a href="https://github.com/jinyuliao/GenericGraph" target="_blank">Generic Graph by jinyuliao</a></li>
     <li><a href="https://www.behance.net/pravdin" target="_blank">Comic Helvetic Font by Alexander Pravdin</a></li>
@@ -71,10 +80,10 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><a href="https://inaudio.org" target="_blank">Music by InAudio</a></li>
 </ul>
 
-## Contribution Guidelines
+## 💻 Contribution Guidelines
 
 If you would like to contribute to the Ultimate Starter Kit, please follow our [Contribution Guidelines](./Contribution.md). These guidelines provide detailed information on how to create branches, make changes, test, document, commit, and open pull requests. 
 We welcome contributions from the community and look forward to your valuable input.
 
-## Support
+## ℹ️ Support
 If you have any questions, feel free to contact me through <a href="https://mastodon.gamedev.place/@hfjooste" target="_blank">Mastodon</a> or <a href="https://twitter.com/hfjooste" target="_blank">Twitter</a>. You can also send me an email at <a href="mailto:henryjooste95@gmail.com">henryjooste95@gmail.com</a>. The Discussions or Issues tab on GitHub can also be used to discuss problems/features or report any issues
