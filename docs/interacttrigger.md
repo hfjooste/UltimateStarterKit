@@ -1,6 +1,12 @@
 ## Introduction
 A trigger that can be used to interact with an object
 
+## Dependencies
+The <code>InteractTrigger</code> relies on other components of this plugin to work:
+<ul>
+	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+</ul>
+
 ## API Reference
 ### Properties
 <table>
@@ -9,6 +15,18 @@ A trigger that can be used to interact with an object
 		<th>Description</th>
 		<th>Type</th>
 		<th>Default Value</th>
+	</tr>
+	<tr>
+		<td>bRequireCurrency</td>
+		<td>Is this a paid item that should be bought using currency?</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>CurrencyRequirements</td>
+		<td>The currency requirements before the object can be interacted with</td>
+		<td>TMap&lt;FName, int&gt;</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>InteractWidgetClass</td>
