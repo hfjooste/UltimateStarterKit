@@ -3,7 +3,9 @@
 #include "InteractTrigger.h"
 
 #include "USK/Character/USKCharacter.h"
+#include "USK/Data/CurrencyComponent.h"
 #include "USK/Items/CollectableItem.h"
+#include "USK/Logger/Log.h"
 #include "USK/Widgets/InteractWidget.h"
 
 /**
@@ -23,6 +25,37 @@ void UInteractTrigger::BeginPlay()
  */
 bool UInteractTrigger::CanInteract_Implementation(AActor* Actor)
 {
+	if (!bRequireCurrency)
+	{
+		return true;	
+	}
+	
+	if (!IsValid(Actor))
+	{
+		USK_LOG_ERROR("Actor is not valid");
+		return false;
+	}
+
+	UCurrencyComponent* Currency = Actor->GetComponentByClass<UCurrencyComponent>();
+	if (!IsValid(Currency))
+	{
+		USK_LOG_ERROR("Actor doesn't have a currency component");
+		return false;
+	}
+
+	for (const TTuple<FName, int> CurrencyRequirement : CurrencyRequirements)
+	{
+		if (Currency->GetValue(CurrencyRequirement.Key) < CurrencyRequirement.Value)
+		{
+			return false;
+		}
+	}
+
+	for (const TTuple<FName, int> CurrencyRequirement : CurrencyRequirements)
+	{
+		Currency->Remove(CurrencyRequirement.Key, CurrencyRequirement.Value);
+	}
+
 	return true;
 }
 

@@ -19,21 +19,34 @@ class USK_API UInteractTrigger : public UBoxComponent
 
 public:
 	/**
+	 * @brief Is this a paid item that should be bought using currency?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Interact Trigger|Requirements")
+	bool bRequireCurrency;
+
+	/**
+	 * @brief The currency requirements before the object can be interacted with
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Interact Trigger|Requirements",
+		meta=(EditCondition = "bRequireCurrency", EditConditionHides))
+	TMap<FName, int> CurrencyRequirements;
+	
+	/**
 	 * @brief The class of the interact widget
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Interact Trigger")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Interact Trigger|Widget")
 	TSubclassOf<UInteractWidget> InteractWidgetClass;
 
 	/**
 	 * @brief The text displayed before the input indicator
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Interact Trigger")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Interact Trigger|Widget")
 	FText BeforeText;
 
 	/**
 	 * @brief The text displayed after the input indicator
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Interact Trigger")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Interact Trigger|Widget")
 	FText AfterText;
 	
 	/**
