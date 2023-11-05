@@ -2,6 +2,34 @@
 A trigger that can be used to interact with an object
 
 ## API Reference
+### Properties
+<table>
+	<tr>
+		<th>Property</th>
+		<th>Description</th>
+		<th>Type</th>
+		<th>Default Value</th>
+	</tr>
+	<tr>
+		<td>InteractWidgetClass</td>
+		<td>The class of the interact widget</td>
+		<td>TSubclassOf&lt;UInteractWidget&gt;</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>BeforeText</td>
+		<td>The text displayed before the input indicator</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>AfterText</td>
+		<td>The text displayed after the input indicator</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+</table>
+
 ### Functions
 <table>
 	<tr>

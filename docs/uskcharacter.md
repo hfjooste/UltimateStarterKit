@@ -397,12 +397,6 @@ The <code>USKCharacter</code> uses the following components:
 		<td>TSubclassOf&lt;AWeapon&gt;</td>
 		<td></td>
 	</tr>
-	<tr>
-		<td>InteractWidgetClass</td>
-		<td>The class of the interact widget</td>
-		<td>TSubclassOf&lt;UInteractWidget&gt;</td>
-		<td></td>
-	</tr>
 </table>
 
 ### Functions
