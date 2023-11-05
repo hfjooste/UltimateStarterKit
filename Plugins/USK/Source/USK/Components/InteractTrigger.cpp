@@ -4,6 +4,7 @@
 
 #include "USK/Character/USKCharacter.h"
 #include "USK/Items/CollectableItem.h"
+#include "USK/Widgets/InteractWidget.h"
 
 /**
  * @brief Overridable native event for when play begins for this actor
@@ -44,6 +45,30 @@ void UInteractTrigger::OnInteracted(AActor* Actor)
 	}
 
 	ReceiveOnInteracted(Actor);
+}
+
+/**
+ * @brief Show the interact widget
+ */
+void UInteractTrigger::ShowWidget()
+{
+	if (IsValid(InteractWidgetClass))
+	{
+		InteractWidget = CreateWidget<UInteractWidget>(GetWorld(), InteractWidgetClass);
+		InteractWidget->Show(BeforeText, AfterText);	
+	}
+}
+
+/**
+ * @brief Hide the interact widget
+ */
+void UInteractTrigger::HideWidget()
+{
+	if (IsValid(InteractWidget))
+	{
+		InteractWidget->Hide();
+		InteractWidget = nullptr;
+	}
 }
 
 /**

@@ -6,6 +6,8 @@
 #include "Components/BoxComponent.h"
 #include "InteractTrigger.generated.h"
 
+class UInteractWidget;
+
 /**
  * @brief A trigger that can be used to interact with an object
  */
@@ -16,6 +18,24 @@ class USK_API UInteractTrigger : public UBoxComponent
 	GENERATED_BODY()
 
 public:
+	/**
+	 * @brief The class of the interact widget
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Interact Trigger")
+	TSubclassOf<UInteractWidget> InteractWidgetClass;
+
+	/**
+	 * @brief The text displayed before the input indicator
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Interact Trigger")
+	FText BeforeText;
+
+	/**
+	 * @brief The text displayed after the input indicator
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Interact Trigger")
+	FText AfterText;
+	
 	/**
 	 * @brief Check if the actor can interact with the object
 	 * @param Actor The actor trying to interact with the object
@@ -30,6 +50,16 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Interact Trigger")
 	void OnInteracted(AActor* Actor);
+
+	/**
+	 * @brief Show the interact widget
+	 */
+	void ShowWidget();
+
+	/**
+	 * @brief Hide the interact widget
+	 */
+	void HideWidget();
 	
 protected:
 	/**
@@ -46,6 +76,12 @@ protected:
 	void ReceiveOnInteracted(AActor* Actor);
 
 private:
+	/**
+	 * @brief The current interact widget
+	 */
+	UPROPERTY()
+	UInteractWidget* InteractWidget;
+	
 	/**
 	 * @brief Event when this component overlaps another actor
 	 * @param OverlappedComponent The component that triggered the event

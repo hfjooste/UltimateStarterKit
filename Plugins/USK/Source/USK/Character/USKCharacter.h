@@ -11,7 +11,6 @@
 #include "USK/Weapons/Weapon.h"
 #include "USKCharacter.generated.h"
 
-class UInteractWidget;
 class UInteractTrigger;
 class UInputAction;
 class UInputMappingContext;
@@ -428,12 +427,6 @@ public:
 	TSubclassOf<AWeapon> DefaultWeaponClass;
 
 	/**
-	 * @brief The class of the interact widget
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|UI")
-	TSubclassOf<UInteractWidget> InteractWidgetClass;
-
-	/**
 	 * @brief Create a new instance of the AUSKCharacter actor
 	 */
 	AUSKCharacter();
@@ -621,12 +614,6 @@ private:
 	 */
 	UPROPERTY()
 	UInteractTrigger* InteractTrigger;
-
-	/**
-	 * @brief The current interact widget
-	 */
-	UPROPERTY()
-	UInteractWidget* InteractWidget;
 	
 	/**
 	 * @brief Can the character perform a coyote jump?

@@ -290,18 +290,20 @@ UInteractTrigger* AUSKCharacter::GetInteractTrigger() const
  */
 void AUSKCharacter::UpdateInteractTrigger(UInteractTrigger* NewInteractTrigger)
 {
-	InteractTrigger = NewInteractTrigger;
-	if (IsValid(InteractTrigger) && IsValid(InteractWidgetClass))
+	if (InteractTrigger == NewInteractTrigger)
 	{
-		InteractWidget = CreateWidget<UInteractWidget>(GetWorld(), InteractWidgetClass);
-		InteractWidget->Show();
 		return;
 	}
-
-	if (IsValid(InteractWidget))
+	
+	if (IsValid(InteractTrigger))
 	{
-		InteractWidget->Hide();
-		InteractWidget = nullptr;
+		InteractTrigger->HideWidget();
+	}
+	
+	InteractTrigger = NewInteractTrigger;
+	if (IsValid(InteractTrigger))
+	{
+		InteractTrigger->ShowWidget();
 	}
 }
 
