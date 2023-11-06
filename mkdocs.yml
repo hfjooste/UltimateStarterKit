@@ -22,9 +22,6 @@ extra:
     - name: Mastodon
       icon: fontawesome/brands/mastodon
       link: https://mastodon.gamedev.place/@hfjooste
-    - name: Reddit
-      icon: fontawesome/brands/reddit
-      link: https://www.reddit.com/user/HenryJooste
     - name: Twitter
       icon: fontawesome/brands/x-twitter
       link: https://twitter.com/hfjooste
@@ -43,15 +40,15 @@ theme:
   palette:
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: yellow
-      accent: orange
+      primary: purple
+      accent: blue
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: yellow
-      accent: orange
+      primary: purple
+      accent: blue
       toggle:
         icon: material/brightness-7 
         name: Switch to dark mode
