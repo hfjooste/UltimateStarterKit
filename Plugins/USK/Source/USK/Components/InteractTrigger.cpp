@@ -36,7 +36,8 @@ bool UInteractTrigger::CanInteract_Implementation(AActor* Actor)
 		return false;
 	}
 
-	UCurrencyComponent* Currency = Actor->GetComponentByClass<UCurrencyComponent>();
+	UCurrencyComponent* Currency = dynamic_cast<UCurrencyComponent*>(
+		Actor->GetComponentByClass(UCurrencyComponent::StaticClass()));
 	if (!IsValid(Currency))
 	{
 		USK_LOG_ERROR("Actor doesn't have a currency component");
