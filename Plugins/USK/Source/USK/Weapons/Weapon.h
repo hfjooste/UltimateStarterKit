@@ -171,6 +171,12 @@ public:
 	UAnimMontage* EmptyClipFireAnimation;
 
 	/**
+	 * @brief The animation played when the weapon is equipped 
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Animations")
+	UAnimMontage* EquipAnimation;
+
+	/**
 	 * @brief Event used to notify other classes when the weapon is equipped
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Weapon|Events")
@@ -214,9 +220,10 @@ public:
 	/**
 	 * @brief Equip the weapon
 	 * @param TargetCharacter The character that will use the weapon
+	 * @param IsNewWeapon Is this a new weapon?
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
-	void Equip(AUSKCharacter* TargetCharacter);
+	void Equip(AUSKCharacter* TargetCharacter, bool IsNewWeapon);
 
 	/**
 	 * @brief Unequip the weapon
@@ -400,12 +407,8 @@ private:
 	void SpawnProjectile(const FWeaponProjectileData& Projectile) const;
 
 	/**
-	 * @brief Play the fire animation
+	 * @brief Play an animation montage
+	 * @param AnimMontage The animation montage to play
 	 */
-	void PlayFireAnimation() const;
-
-	/**
-	 * @brief Play the empty clip fire animation
-	 */
-	void PlayEmptyClipFireAnimation() const;
+	void PlayAnimation(UAnimMontage* AnimMontage) const;
 };

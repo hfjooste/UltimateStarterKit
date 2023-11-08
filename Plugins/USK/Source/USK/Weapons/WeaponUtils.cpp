@@ -38,5 +38,5 @@ void UWeaponUtils::EquipWeapon(AUSKCharacter* Owner, const TSubclassOf<AWeapon> 
 		return;
 	}
 
-	Weapon->Equip(Owner);
+	Weapon->Equip(Owner, true);
 }

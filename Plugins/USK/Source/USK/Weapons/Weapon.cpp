@@ -54,8 +54,9 @@ void AWeapon::Tick(float DeltaSeconds)
 /**
  * @brief Equip the weapon
  * @param TargetCharacter The character that will use the weapon
+ * @param IsNewWeapon Is this a new weapon?
  */
-void AWeapon::Equip(AUSKCharacter* TargetCharacter)
+void AWeapon::Equip(AUSKCharacter* TargetCharacter, const bool IsNewWeapon)
 {
 	Character = TargetCharacter;
 	if (!IsValid(Character))
@@ -63,11 +64,17 @@ void AWeapon::Equip(AUSKCharacter* TargetCharacter)
 		return;
 	}
 
-	PlayerController = dynamic_cast<APlayerController*>(Character->GetController());
-	const FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
-	AttachToComponent(Character->GetMesh(), AttachmentRules, WeaponAttachPoint);
-	Character->SetWeapon(this);
+	if (IsNewWeapon)
+	{
+		PlayerController = dynamic_cast<APlayerController*>(Character->GetController());
+		const FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
+		AttachToComponent(Character->GetMesh(), AttachmentRules, WeaponAttachPoint);
+		Character->SetWeapon(this);	
+	}
+	
 	SetActorRelativeTransform(WeaponTransform);
+	SetActorHiddenInGame(false);
+	PlayAnimation(EquipAnimation);
 	OnWeaponEquipped.Broadcast();
 	USK_LOG_INFO("Weapon equipped");
 }
@@ -79,12 +86,11 @@ void AWeapon::Unequip()
 {
 	if (IsValid(Character) && Character->GetWeapon() == this)
 	{
-		Character->SetWeapon(nullptr);
+		Character->GetWeapon()->SetActorHiddenInGame(true);
 	}
 
 	OnWeaponUnequipped.Broadcast();
 	USK_LOG_INFO("Weapon unequipped");
-	Destroy();
 }
 
 /**
@@ -263,7 +269,7 @@ void AWeapon::StartFiringSingleShot()
 	if (!bInfiniteAmmo && AmmoRemaining <= 0)
 	{
 		UAudioUtils::PlayRandomSound(this, EmptyClipFireSound);
-		PlayEmptyClipFireAnimation();
+		PlayAnimation(EmptyClipFireAnimation);
 		StopRecoil();
 		OnWeaponFiredEmptyClip.Broadcast();
 		return;
@@ -287,7 +293,7 @@ void AWeapon::StartFiringSingleShot()
 			EAttachLocation::SnapToTarget, true);
 	}
 	
-	PlayFireAnimation();
+	PlayAnimation(FireAnimation);
 	OnWeaponFired.Broadcast();
 }
 
@@ -353,27 +359,15 @@ void AWeapon::SpawnProjectile(const FWeaponProjectileData& Projectile) const
 }
 
 /**
- * @brief Play the fire animation
+ * @brief Play an animation montage
+ * @param AnimMontage The animation montage to play
  */
-void AWeapon::PlayFireAnimation() const
+void AWeapon::PlayAnimation(UAnimMontage* AnimMontage) const
 {
-	if (!IsValid(FireAnimation))
+	if (!IsValid(AnimMontage))
 	{
 		return;
 	}
 
-	Character->PlayAnimMontage(FireAnimation, 1.0f);
-}
-
-/**
- * @brief Play the empty clip fire animation
- */
-void AWeapon::PlayEmptyClipFireAnimation() const
-{
-	if (!IsValid(EmptyClipFireAnimation))
-	{
-		return;
-	}
-
-	Character->PlayAnimMontage(EmptyClipFireAnimation, 1.0f);
+	Character->PlayAnimMontage(AnimMontage, 1.0f);
 }

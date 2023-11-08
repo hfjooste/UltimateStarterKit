@@ -126,6 +126,8 @@ void AUSKCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	EnhancedInput->BindAction(SprintAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopSprinting);
 	EnhancedInput->BindAction(FireWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::StartFiringWeapon);
 	EnhancedInput->BindAction(FireWeaponAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopFiringWeapon);
+	EnhancedInput->BindAction(EquipNextWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::EquipNextWeapon);
+	EnhancedInput->BindAction(EquipPreviousWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::EquipPreviousWeapon);
 	EnhancedInput->BindAction(CrouchAction, ETriggerEvent::Started, this, &AUSKCharacter::StartCrouching);
 	EnhancedInput->BindAction(CrouchAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopCrouching);
     EnhancedInput->BindAction(LeanAction, ETriggerEvent::Triggered, this, &AUSKCharacter::Lean);
@@ -200,7 +202,14 @@ UCameraComponent* AUSKCharacter::GetCameraComponent() const
  */
 void AUSKCharacter::SetWeapon(AWeapon* NewWeapon)
 {
-	Weapon = NewWeapon;
+	if (Weapons.Num() >= MaxWeapons)
+	{
+		Weapons[CurrentWeaponIndex] = NewWeapon;
+		return;
+	}
+
+	Weapons.Add(NewWeapon);
+	CurrentWeaponIndex = Weapons.Num() - 1;
 }
 
 /**
@@ -209,7 +218,12 @@ void AUSKCharacter::SetWeapon(AWeapon* NewWeapon)
  */
 AWeapon* AUSKCharacter::GetWeapon() const
 {
-	return Weapon;
+	if (Weapons.Num() == 0 || Weapons.Num() <= CurrentWeaponIndex)
+	{
+		return nullptr;
+	}
+	
+	return Weapons[CurrentWeaponIndex];
 }
 
 /**
@@ -370,9 +384,9 @@ void AUSKCharacter::Jump()
  */
 void AUSKCharacter::StartFiringWeapon()
 {
-	if (IsValid(Weapon))
+	if (Weapons.Num() > 0 && Weapons.Num() > CurrentWeaponIndex && IsValid(Weapons[CurrentWeaponIndex]))
 	{
-		Weapon->StartFiring();
+		Weapons[CurrentWeaponIndex]->StartFiring();
 	}
 }
 
@@ -381,10 +395,40 @@ void AUSKCharacter::StartFiringWeapon()
  */
 void AUSKCharacter::StopFiringWeapon()
 {
-	if (IsValid(Weapon))
+	if (Weapons.Num() > 0 && Weapons.Num() > CurrentWeaponIndex && IsValid(Weapons[CurrentWeaponIndex]))
 	{
-		Weapon->StopFiring();
+		Weapons[CurrentWeaponIndex]->StopFiring();
 	}
+}
+
+/**
+ * @brief Equip the next weapon in the list of available weapons
+ */
+void AUSKCharacter::EquipNextWeapon()
+{
+	if (Weapons.Num() <= 1)
+	{
+		return;
+	}
+
+	Weapons[CurrentWeaponIndex]->Unequip();
+	CurrentWeaponIndex = Weapons.Num() <= CurrentWeaponIndex + 1  ? 0 : CurrentWeaponIndex + 1;
+	Weapons[CurrentWeaponIndex]->Equip(this, false);
+}
+
+/**
+ * @brief Equip the previous weapon in the list of available weapons
+ */
+void AUSKCharacter::EquipPreviousWeapon()
+{
+	if (Weapons.Num() <= 1)
+	{
+		return;
+	}
+
+	Weapons[CurrentWeaponIndex]->Unequip();
+	CurrentWeaponIndex = CurrentWeaponIndex == 0 ? Weapons.Num() - 1 : CurrentWeaponIndex - 1;
+	Weapons[CurrentWeaponIndex]->Equip(this, false);
 }
 
 /**

@@ -75,6 +75,18 @@ public:
 	UInputAction* FireWeaponAction;
 
 	/**
+	 * @brief The equip next weapon input action
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
+	UInputAction* EquipNextWeaponAction;
+
+	/**
+	 * @brief The equip previous weapon input action
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
+	UInputAction* EquipPreviousWeaponAction;
+
+	/**
 	 * @brief The crouch input action
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
@@ -421,6 +433,12 @@ public:
 	TArray<USoundBase*> SlideSoundEffects;
 
 	/**
+	 * @brief The maximum amount of weapons that the character can carry
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Weapons")
+	int MaxWeapons = 2;
+
+	/**
 	 * @brief The default weapon the character will equip on spawn
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Weapons")
@@ -569,6 +587,18 @@ protected:
 	void StopFiringWeapon();
 
 	/**
+	 * @brief Equip the next weapon in the list of available weapons
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Weapons")
+	void EquipNextWeapon();
+
+	/**
+	 * @brief Equip the previous weapon in the list of available weapons
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Weapons")
+	void EquipPreviousWeapon();
+
+	/**
 	 * @brief Start crouching
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Movement")
@@ -604,10 +634,10 @@ protected:
 
 private:
 	/**
-	 * @brief A reference to the current weapon
+	 * @brief A reference to the current weapons
 	 */
 	UPROPERTY()
-	AWeapon* Weapon;
+	TArray<AWeapon*> Weapons;
 
 	/**
 	 * @brief The current interact trigger that the character is overlapping
@@ -719,6 +749,11 @@ private:
 	 * @brief Is the character busy ending the slide?
 	 */
 	bool bIsEndingSlide;
+
+	/**
+	 * @brief The index of the equipped weapon
+	 */
+	int CurrentWeaponIndex = -1;
 
 	/**
 	 * @brief Move the character
