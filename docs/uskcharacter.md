@@ -74,6 +74,18 @@ The <code>USKCharacter</code> uses the following components:
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>EquipNextWeaponAction</td>
+		<td>The equip next weapon input action</td>
+		<td>UInputAction*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>EquipPreviousWeaponAction</td>
+		<td>The equip previous weapon input action</td>
+		<td>UInputAction*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>CrouchAction</td>
 		<td>The crouch input action</td>
 		<td>UInputAction*</td>
@@ -392,6 +404,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td></td>
 	</tr>
 	<tr>
+		<td>MaxWeapons</td>
+		<td>The maximum amount of weapons that the character can carry</td>
+		<td>int</td>
+		<td>2</td>
+	</tr>
+	<tr>
 		<td>DefaultWeaponClass</td>
 		<td>The default weapon the character will equip on spawn</td>
 		<td>TSubclassOf&lt;AWeapon&gt;</td>
@@ -488,6 +506,18 @@ The <code>USKCharacter</code> uses the following components:
 	<tr>
 		<td>StopFiringWeapon</td>
 		<td>Stop firing the current weapon</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>EquipNextWeapon</td>
+		<td>Equip the next weapon in the list of available weapons</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>EquipPreviousWeapon</td>
+		<td>Equip the previous weapon in the list of available weapons</td>
 		<td></td>
 		<td></td>
 	</tr>

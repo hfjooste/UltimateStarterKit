@@ -134,6 +134,12 @@ The <code>Weapon</code> uses the following components:
 		<td>UAnimMontage*</td>
 		<td><code>nullptr</code></td>
 	</tr>
+	<tr>
+		<td>EquipAnimation</td>
+		<td>The animation played when the weapon is equipped</td>
+		<td>UAnimMontage*</td>
+		<td><code>nullptr</code></td>
+	</tr>
 </table>
 
 ### Events
@@ -186,7 +192,7 @@ The <code>Weapon</code> uses the following components:
 	<tr>
 		<td>Equip</td>
 		<td>Equip the weapon</td>
-		<td><strong>TargetCharacter (AUSKCharacter*)</strong><br/>The character that will use the weapon</td>
+		<td><strong>TargetCharacter (AUSKCharacter*)</strong><br/>The character that will use the weapon<br/><br/><strong>IsNewWeapon (bool)</strong><br/>Is this a new weapon?</td>
 		<td></td>
 	</tr>
 	<tr>
@@ -294,7 +300,7 @@ The <code>Weapon</code> can now be used in any of your C++ files:
 void ATestActor::Test()
 {
 	// Weapon is a pointer to the AWeapon
-	Weapon->Equip(TargetCharacter);
+	Weapon->Equip(TargetCharacter, IsNewWeapon);
 	Weapon->Unequip();
 	Weapon->StartFiring();
 	Weapon->StopFiring();
