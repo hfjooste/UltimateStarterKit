@@ -15,9 +15,9 @@
 #include "Components/TimelineComponent.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Components/InteractTrigger.h"
+#include "USK/Data/StatsComponent.h"
 #include "USK/Logger/Log.h"
 #include "USK/Weapons/WeaponUtils.h"
-#include "USK/Widgets/InteractWidget.h"
 
 /**
  * @brief Create a new instance of the AUSKCharacter actor
@@ -78,6 +78,7 @@ void AUSKCharacter::BeginPlay()
 	}
 
     DefaultCameraLocation = GetCameraComponent()->GetRelativeLocation();
+	StatsComponent = dynamic_cast<UStatsComponent*>(GetComponentByClass(UStatsComponent::StaticClass()));
 }
 
 /**
@@ -91,6 +92,7 @@ void AUSKCharacter::Tick(float DeltaSeconds)
     UpdateLeaning(DeltaSeconds);
 	UpdateSliding(DeltaSeconds);
 	UpdateMovementSpeed();
+	UpdateStaminaWhileSprinting(DeltaSeconds);
 }
 
 /**
@@ -729,6 +731,33 @@ void AUSKCharacter::StopSprinting()
 	
 	USK_LOG_TRACE("Stopping sprint");
 	bIsSprinting = false;
+}
+
+/**
+ * @brief Update the stamina of the character while sprinting
+ * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+ */
+void AUSKCharacter::UpdateStaminaWhileSprinting(const float DeltaSeconds)
+{
+	if (!bIsSprinting || !bSprintRequiresStamina)
+	{
+		return;
+	}
+
+	if (!IsValid(StatsComponent))
+	{
+		USK_LOG_ERROR("Stats component is not valid");
+		return;
+	}
+
+	if (StatsComponent->GetValue(SprintStaminaStatName) <= 0.0f)
+	{
+		USK_LOG_INFO("Stamina empty. Stopping sprint");
+		StopSprinting();
+		return;
+	}
+
+	StatsComponent->Remove(SprintStaminaStatName, SprintStaminaUseRate * DeltaSeconds);
 }
 
 /**

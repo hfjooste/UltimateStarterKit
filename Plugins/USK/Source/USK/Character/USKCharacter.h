@@ -11,6 +11,7 @@
 #include "USK/Weapons/Weapon.h"
 #include "USKCharacter.generated.h"
 
+class UStatsComponent;
 class UInteractTrigger;
 class UInputAction;
 class UInputMappingContext;
@@ -272,19 +273,6 @@ public:
 	float MovementSpeed = 600.0f;
 
 	/**
-	 * @brief Can the character sprint?
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
-	bool bCanSprint = true;
-
-	/**
-	 * @brief The movement speed while the character is sprinting
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement",
-		meta=(EditCondition = "bCanSprint", EditConditionHides))
-	float SprintSpeed = 950.0f;
-
-	/**
 	 * @brief Friction coefficient applied when braking
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
@@ -295,6 +283,40 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
 	float MaxAcceleration = 2500.0f;
+
+	/**
+	 * @brief Can the character sprint?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Sprinting")
+	bool bCanSprint = true;
+
+	/**
+	 * @brief The movement speed while the character is sprinting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Sprinting",
+		meta=(EditCondition = "bCanSprint", EditConditionHides))
+	float SprintSpeed = 950.0f;
+
+	/**
+	 * @brief Does sprinting require stamina?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Sprinting",
+		meta=(EditCondition = "bCanSprint", EditConditionHides))
+	bool bSprintRequiresStamina;
+
+	/**
+	 * @brief The name of the stamina stat used for sprinting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Sprinting",
+		meta=(EditCondition = "bCanSprint && bSprintRequiresStamina", EditConditionHides))
+	FName SprintStaminaStatName;
+
+	/**
+	 * @brief The amount of stamina used per second while sprinting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Sprinting",
+		meta=(EditCondition = "bCanSprint && bSprintRequiresStamina", EditConditionHides))
+	float SprintStaminaUseRate = 20.0f;
 
 	/**
 	 * @brief Can the character crouch?
@@ -644,6 +666,12 @@ private:
 	 */
 	UPROPERTY()
 	UInteractTrigger* InteractTrigger;
+
+	/**
+	 * @brief A reference to the stats component
+	 */
+	UPROPERTY()
+	UStatsComponent* StatsComponent;
 	
 	/**
 	 * @brief Can the character perform a coyote jump?
@@ -832,6 +860,12 @@ private:
 	 */
 	UFUNCTION()
 	void StopSprinting();
+
+	/**
+	 * @brief Update the stamina of the character while sprinting
+	 * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+	 */
+	void UpdateStaminaWhileSprinting(const float DeltaSeconds);
 
 	/**
 	 * @brief Start sliding
