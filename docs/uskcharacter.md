@@ -260,6 +260,18 @@ The <code>USKCharacter</code> uses the following components:
 		<td>600.0f</td>
 	</tr>
 	<tr>
+		<td>BrakingFriction</td>
+		<td>Friction coefficient applied when braking</td>
+		<td>float</td>
+		<td>10.0f</td>
+	</tr>
+	<tr>
+		<td>MaxAcceleration</td>
+		<td>The rate of change of velocity</td>
+		<td>float</td>
+		<td>2500.0f</td>
+	</tr>
+	<tr>
 		<td>bCanSprint</td>
 		<td>Can the character sprint?</td>
 		<td>bool</td>
@@ -272,16 +284,22 @@ The <code>USKCharacter</code> uses the following components:
 		<td>950.0f</td>
 	</tr>
 	<tr>
-		<td>BrakingFriction</td>
-		<td>Friction coefficient applied when braking</td>
-		<td>float</td>
-		<td>10.0f</td>
+		<td>bSprintRequiresStamina</td>
+		<td>Does sprinting require stamina?</td>
+		<td>bool</td>
+		<td></td>
 	</tr>
 	<tr>
-		<td>MaxAcceleration</td>
-		<td>The rate of change of velocity</td>
+		<td>SprintStaminaStatName</td>
+		<td>The name of the stamina stat used for sprinting</td>
+		<td>FName</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>SprintStaminaUseRate</td>
+		<td>The amount of stamina used per second while sprinting</td>
 		<td>float</td>
-		<td>2500.0f</td>
+		<td>20.0f</td>
 	</tr>
 	<tr>
 		<td>bCanCrouch</td>
