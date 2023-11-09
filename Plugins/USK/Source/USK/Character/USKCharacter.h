@@ -281,7 +281,7 @@ public:
 	 * @brief The movement speed while the character is sprinting
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement",
-		meta=(EditCondition = "bCanCrouch", EditConditionHides))
+		meta=(EditCondition = "bCanSprint", EditConditionHides))
 	float SprintSpeed = 950.0f;
 
 	/**
