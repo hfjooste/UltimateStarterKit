@@ -1212,6 +1212,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#functions" class="md-nav__link">
     Functions
   </a>
@@ -2604,6 +2611,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#functions" class="md-nav__link">
     Functions
   </a>
@@ -2661,7 +2675,7 @@
     </tr>
     <tr>
         <td>CameraComponent</td>
-        <td>Base character class</td>
+        <td>The camera used by the character</td>
         <td>UCameraComponent*</td>
     </tr>
     <tr>
@@ -2713,6 +2727,24 @@
     <tr>
         <td>FireWeaponAction</td>
         <td>The fire weapon input action</td>
+        <td>UInputAction*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>EquipNextWeaponAction</td>
+        <td>The equip next weapon input action</td>
+        <td>UInputAction*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>EquipPreviousWeaponAction</td>
+        <td>The equip previous weapon input action</td>
+        <td>UInputAction*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>ReloadWeaponAction</td>
+        <td>The reload weapon input action</td>
         <td>UInputAction*</td>
         <td><code>nullptr</code></td>
     </tr>
@@ -2891,6 +2923,18 @@
         <td>600.0f</td>
     </tr>
     <tr>
+        <td>BrakingFriction</td>
+        <td>Friction coefficient applied when braking</td>
+        <td>float</td>
+        <td>10.0f</td>
+    </tr>
+    <tr>
+        <td>MaxAcceleration</td>
+        <td>The rate of change of velocity</td>
+        <td>float</td>
+        <td>2500.0f</td>
+    </tr>
+    <tr>
         <td>bCanSprint</td>
         <td>Can the character sprint?</td>
         <td>bool</td>
@@ -2903,16 +2947,22 @@
         <td>950.0f</td>
     </tr>
     <tr>
-        <td>BrakingFriction</td>
-        <td>Friction coefficient applied when braking</td>
-        <td>float</td>
-        <td>10.0f</td>
+        <td>bSprintRequiresStamina</td>
+        <td>Does sprinting require stamina?</td>
+        <td>bool</td>
+        <td></td>
     </tr>
     <tr>
-        <td>MaxAcceleration</td>
-        <td>The rate of change of velocity</td>
+        <td>SprintStaminaStatName</td>
+        <td>The name of the stamina stat used for sprinting</td>
+        <td>FName</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>SprintStaminaUseRate</td>
+        <td>The amount of stamina used per second while sprinting</td>
         <td>float</td>
-        <td>2500.0f</td>
+        <td>20.0f</td>
     </tr>
     <tr>
         <td>bCanCrouch</td>
@@ -3035,10 +3085,30 @@
         <td></td>
     </tr>
     <tr>
+        <td>MaxWeapons</td>
+        <td>The maximum amount of weapons that the character can carry</td>
+        <td>int</td>
+        <td>2</td>
+    </tr>
+    <tr>
         <td>DefaultWeaponClass</td>
         <td>The default weapon the character will equip on spawn</td>
         <td>TSubclassOf&lt;AWeapon&gt;</td>
         <td></td>
+    </tr>
+</table>
+
+<h3 id="events">Events</h3>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Params</th>
+    </tr>
+    <tr>
+        <td>OnCurrentWeaponUpdated</td>
+        <td>Event used to notify other classes when the weapon is updated</td>
+        <td><strong>Weapon (AWeapon*)</strong><br/>The current weapon used by the character<br/><br/><strong>Ammo (AWeapon*)</strong><br/>The amount of ammo remaining<br/><br/><strong>ReloadAmmo (AWeapon*)</strong><br/>The amount of ammo that can be used to reload the weapon</td>
     </tr>
 </table>
 
@@ -3131,6 +3201,18 @@
     <tr>
         <td>StopFiringWeapon</td>
         <td>Stop firing the current weapon</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>EquipNextWeapon</td>
+        <td>Equip the next weapon in the list of available weapons</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>EquipPreviousWeapon</td>
+        <td>Equip the previous weapon in the list of available weapons</td>
         <td></td>
         <td></td>
     </tr>
