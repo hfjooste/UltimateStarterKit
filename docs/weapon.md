@@ -69,10 +69,34 @@ The <code>Weapon</code> uses the following components:
 		<td></td>
 	</tr>
 	<tr>
+		<td>bRequireReloading</td>
+		<td>Does the weapon require reloading?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>bAutoReloadWhenFiringWhileEmpty</td>
+		<td>Should the weapon automatically be reloaded when firing while empty?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>ReloadDuration</td>
+		<td>The delay after reloading and before ammo is added to the weapon</td>
+		<td>float</td>
+		<td>0.65f</td>
+	</tr>
+	<tr>
 		<td>Ammo</td>
 		<td>The amount of ammo for the weapon</td>
 		<td>int</td>
 		<td>50</td>
+	</tr>
+	<tr>
+		<td>AmmoPerClip</td>
+		<td>The amount of ammo per clip</td>
+		<td>int</td>
+		<td>20</td>
 	</tr>
 	<tr>
 		<td>WeaponAttachPoint</td>
@@ -123,6 +147,12 @@ The <code>Weapon</code> uses the following components:
 		<td></td>
 	</tr>
 	<tr>
+		<td>ReloadSound</td>
+		<td>The sound played when the weapon is reloaded</td>
+		<td>TArray&lt;USoundBase*&gt;</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>FireAnimation</td>
 		<td>The animation played when the weapon is fired</td>
 		<td>UAnimMontage*</td>
@@ -137,6 +167,12 @@ The <code>Weapon</code> uses the following components:
 	<tr>
 		<td>EquipAnimation</td>
 		<td>The animation played when the weapon is equipped</td>
+		<td>UAnimMontage*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ReloadAnimation</td>
+		<td>The animation played when the weapon is reloaded</td>
 		<td>UAnimMontage*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -171,8 +207,8 @@ The <code>Weapon</code> uses the following components:
 	</tr>
 	<tr>
 		<td>OnWeaponAmmoUpdated</td>
-		<td>Event used to notify other classes when the ammo is updated</td>
-		<td><strong>RemainingAmmo (int)</strong><br/>The amount of ammo remaining</td>
+		<td>Event used to notify other classes when the weapon ammo is updated</td>
+		<td><strong>Weapon (AWeapon*)</strong><br/>The current weapon used by the character<br/><br/><strong>Ammo (AWeapon*)</strong><br/>The amount of ammo remaining<br/><br/><strong>ReloadAmmo (AWeapon*)</strong><br/>The amount of ammo that can be used to reload the weapon</td>
 	</tr>
 	<tr>
 		<td>OnWeaponAmmoEmpty</td>
@@ -232,6 +268,18 @@ The <code>Weapon</code> uses the following components:
 		<td><strong>int</strong><br/>The amount of ammo remaining</td>
 	</tr>
 	<tr>
+		<td>GetReloadAmmoRemaining</td>
+		<td>Get the amount of ammo that can be used when reloading</td>
+		<td></td>
+		<td><strong>int</strong><br/>The amount of ammo that can be used when reloading</td>
+	</tr>
+	<tr>
+		<td>Reload</td>
+		<td>Reload the weapon</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>StartRecoil</td>
 		<td>Start applying recoil to the weapon</td>
 		<td></td>
@@ -279,6 +327,8 @@ You can use the <code>Weapon</code> using Blueprints by adding one of the follow
 	<li>Ultimate Starter Kit > Weapon > Add Ammo</li>
 	<li>Ultimate Starter Kit > Weapon > Remove Ammo</li>
 	<li>Ultimate Starter Kit > Weapon > Get Ammo Remaining</li>
+	<li>Ultimate Starter Kit > Weapon > Get Reload Ammo Remaining</li>
+	<li>Ultimate Starter Kit > Weapon > Reload</li>
 	<li>Ultimate Starter Kit > Weapon > Start Recoil</li>
 	<li>Ultimate Starter Kit > Weapon > Stop Recoil</li>
 	<li>Ultimate Starter Kit > Weapon > Apply Recoil</li>
@@ -307,6 +357,8 @@ void ATestActor::Test()
 	Weapon->AddAmmo(Amount);
 	Weapon->RemoveAmmo(Amount);
 	int AmmoRemaining = Weapon->GetAmmoRemaining();
+	int ReloadAmmoRemaining = Weapon->GetReloadAmmoRemaining();
+	Weapon->Reload();
 	Weapon->StartRecoil();
 	Weapon->StopRecoil();
 	Weapon->ApplyRecoil(DeltaSeconds);

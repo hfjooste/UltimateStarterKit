@@ -18,7 +18,7 @@ The <code>USKCharacter</code> uses the following components:
 	</tr>
 	<tr>
 		<td>CameraComponent</td>
-		<td>Base character class</td>
+		<td>The camera used by the character</td>
 		<td>UCameraComponent*</td>
 	</tr>
 	<tr>
@@ -82,6 +82,12 @@ The <code>USKCharacter</code> uses the following components:
 	<tr>
 		<td>EquipPreviousWeaponAction</td>
 		<td>The equip previous weapon input action</td>
+		<td>UInputAction*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ReloadWeaponAction</td>
+		<td>The reload weapon input action</td>
 		<td>UInputAction*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -432,6 +438,20 @@ The <code>USKCharacter</code> uses the following components:
 		<td>The default weapon the character will equip on spawn</td>
 		<td>TSubclassOf&lt;AWeapon&gt;</td>
 		<td></td>
+	</tr>
+</table>
+
+### Events
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Params</th>
+	</tr>
+	<tr>
+		<td>OnCurrentWeaponUpdated</td>
+		<td>Event used to notify other classes when the weapon is updated</td>
+		<td><strong>Weapon (AWeapon*)</strong><br/>The current weapon used by the character<br/><br/><strong>Ammo (AWeapon*)</strong><br/>The amount of ammo remaining<br/><br/><strong>ReloadAmmo (AWeapon*)</strong><br/>The amount of ammo that can be used to reload the weapon</td>
 	</tr>
 </table>
 
