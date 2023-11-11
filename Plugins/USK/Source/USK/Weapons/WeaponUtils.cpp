@@ -39,4 +39,5 @@ void UWeaponUtils::EquipWeapon(AUSKCharacter* Owner, const TSubclassOf<AWeapon> 
 	}
 
 	Weapon->Equip(Owner, true);
+	Owner->OnNewWeaponEquipped(Weapon);
 }

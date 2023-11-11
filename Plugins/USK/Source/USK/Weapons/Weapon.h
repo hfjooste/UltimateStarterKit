@@ -23,6 +23,14 @@ class USK_API AWeapon : public AActor
 	GENERATED_BODY()
 
 	/**
+	 * @brief Event used to notify other classes when the weapon ammo is updated
+	 * @param Weapon The current weapon used by the character
+	 * @param Ammo The amount of ammo remaining
+	 * @param ReloadAmmo The amount of ammo that can be used to reload the weapon
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FWeaponAmmoUpdated, AWeapon*, Weapon, int, Ammo, int, ReloadAmmo);
+
+	/**
 	 * @brief Event used to notify other classes when the weapon is equipped
 	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponEquipped);
@@ -41,12 +49,6 @@ class USK_API AWeapon : public AActor
 	 * @brief Event used to notify other classes when the weapon is fired with an empty clip
 	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponFiredEmptyClip);
-
-	/**
-	 * @brief Event used to notify other classes when the ammo is updated
-	 * @param RemainingAmmo The amount of ammo remaining
-	 */
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWeaponAmmoUpdated, int, RemainingAmmo);
 
 	/**
 	 * @brief Event used to notify other classes when the ammo is empty
@@ -100,12 +102,40 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Ammo")
 	bool bInfiniteAmmo;
 
+    /**
+     * @brief Does the weapon require reloading?
+     */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Ammo",
+	    meta=(EditCondition = "!bInfiniteAmmo", EditConditionHides))
+	bool bRequireReloading = true;
+
+	/**
+	 * @brief Should the weapon automatically be reloaded when firing while empty?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Ammo",
+		meta=(EditCondition = "!bInfiniteAmmo && bRequireReloading", EditConditionHides))
+	bool bAutoReloadWhenFiringWhileEmpty = true;
+
+	/**
+	 * @brief The delay after reloading and before ammo is added to the weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Ammo",
+		meta=(EditCondition = "!bInfiniteAmmo && bRequireReloading", EditConditionHides))
+	float ReloadDuration = 0.65f;
+
 	/**
 	 * @brief The amount of ammo for the weapon
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Ammo",
 		meta=(EditCondition = "!bInfiniteAmmo", EditConditionHides))
 	int Ammo = 50;
+
+	/**
+	 * @brief The amount of ammo per clip
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Ammo",
+		meta=(EditCondition = "!bInfiniteAmmo && bRequireReloading", EditConditionHides))
+	int AmmoPerClip = 20;
 
 	/**
 	 * @brief The attach point used by all weapons
@@ -159,6 +189,12 @@ public:
 	TArray<USoundBase*> EmptyClipFireSound;
 
 	/**
+	 * @brief The sound played when the weapon is reloaded
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Effects")
+	TArray<USoundBase*> ReloadSound;
+
+	/**
 	 * @brief The animation played when the weapon is fired
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Animations")
@@ -167,7 +203,8 @@ public:
 	/**
 	 * @brief The animation played when the weapon is fired with an empty clip
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Animations")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Animations",
+		meta=(EditCondition = "!bInfiniteAmmo", EditConditionHides))
 	UAnimMontage* EmptyClipFireAnimation;
 
 	/**
@@ -175,6 +212,13 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Animations")
 	UAnimMontage* EquipAnimation;
+
+	/**
+	 * @brief The animation played when the weapon is reloaded 
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Animations",
+		meta=(EditCondition = "!bInfiniteAmmo && bRequireReloading", EditConditionHides))
+	UAnimMontage* ReloadAnimation;
 
 	/**
 	 * @brief Event used to notify other classes when the weapon is equipped
@@ -201,7 +245,7 @@ public:
 	FWeaponFiredEmptyClip OnWeaponFiredEmptyClip;
 
 	/**
-	 * @brief Event used to notify other classes when the ammo is updated
+	 * @brief Event used to notify other classes when the weapon ammo is updated
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Weapon|Events")
 	FWeaponAmmoUpdated OnWeaponAmmoUpdated;
@@ -262,7 +306,20 @@ public:
 	 * @return The amount of ammo remaining
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Weapon")
-	int GetAmmoRemaining() const;	
+	int GetAmmoRemaining() const;
+
+	/**
+	 * @brief Get the amount of ammo that can be used when reloading
+	 * @return The amount of ammo that can be used when reloading
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Weapon")
+	int GetReloadAmmoRemaining() const;
+
+	/**
+	 * @brief Reload the weapon
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Weapon")
+	void Reload();
 
 protected:
 	/**
@@ -333,6 +390,11 @@ private:
 	bool bIsFiring;
 
 	/**
+	 * @brief Is the weapon reloading?
+	 */
+	bool bIsReloading;
+
+	/**
 	 * @brief The amount of shots remaining before the weapon stops firing
 	 */
 	int ShotsRemaining;
@@ -341,6 +403,11 @@ private:
 	 * @brief The amount of ammo remaining
 	 */
 	int AmmoRemaining;
+
+	/**
+	 * @brief The amount of ammo remaining that can be used to reload
+	 */
+	int ReloadAmmoRemaining;
 
 	/**
 	 * @brief Are we currently applying recoil to the weapon?
@@ -399,6 +466,12 @@ private:
 	 */
 	UFUNCTION()
 	void StartFiringFullAuto();
+
+	/**
+	 * @brief Stop reloading and add ammo to the weapon
+	 */
+	UFUNCTION()
+	void StopReloading();
 
 	/**
 	 * @brief Spawn the projectile

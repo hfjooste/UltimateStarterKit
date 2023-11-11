@@ -79,6 +79,7 @@ void AUSKCharacter::BeginPlay()
 
     DefaultCameraLocation = GetCameraComponent()->GetRelativeLocation();
 	StatsComponent = dynamic_cast<UStatsComponent*>(GetComponentByClass(UStatsComponent::StaticClass()));
+	NotifyWeaponUpdated();
 }
 
 /**
@@ -130,6 +131,7 @@ void AUSKCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	EnhancedInput->BindAction(FireWeaponAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopFiringWeapon);
 	EnhancedInput->BindAction(EquipNextWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::EquipNextWeapon);
 	EnhancedInput->BindAction(EquipPreviousWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::EquipPreviousWeapon);
+	EnhancedInput->BindAction(ReloadWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::ReloadWeapon);
 	EnhancedInput->BindAction(CrouchAction, ETriggerEvent::Started, this, &AUSKCharacter::StartCrouching);
 	EnhancedInput->BindAction(CrouchAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopCrouching);
     EnhancedInput->BindAction(LeanAction, ETriggerEvent::Triggered, this, &AUSKCharacter::Lean);
@@ -324,6 +326,36 @@ void AUSKCharacter::UpdateInteractTrigger(UInteractTrigger* NewInteractTrigger)
 }
 
 /**
+ * @brief Called when the current weapon is updated
+ */
+void AUSKCharacter::OnWeaponUpdated()
+{
+	if (Weapons.Num() == 0)
+	{
+		NotifyWeaponUpdated();
+		return;
+	}
+
+	AWeapon* Weapon = Weapons[CurrentWeaponIndex];
+	if (!IsValid(Weapon))
+	{
+		NotifyWeaponUpdated();
+		return;
+	}
+	
+	NotifyWeaponUpdated();
+}
+
+/**
+ * @brief Called when a new weapon is equipped for the first time
+ * @param Weapon The new weapon that was equipped
+ */
+void AUSKCharacter::OnNewWeaponEquipped(AWeapon* Weapon)
+{
+	Weapon->OnWeaponAmmoUpdated.AddDynamic(this, &AUSKCharacter::OnWeaponAmmoUpdated);
+}
+
+/**
  * @brief Make the character jump on the next update
  */
 void AUSKCharacter::Jump()
@@ -408,14 +440,7 @@ void AUSKCharacter::StopFiringWeapon()
  */
 void AUSKCharacter::EquipNextWeapon()
 {
-	if (Weapons.Num() <= 1)
-	{
-		return;
-	}
-
-	Weapons[CurrentWeaponIndex]->Unequip();
-	CurrentWeaponIndex = Weapons.Num() <= CurrentWeaponIndex + 1  ? 0 : CurrentWeaponIndex + 1;
-	Weapons[CurrentWeaponIndex]->Equip(this, false);
+	UpdateWeaponIndex(true);
 }
 
 /**
@@ -423,14 +448,7 @@ void AUSKCharacter::EquipNextWeapon()
  */
 void AUSKCharacter::EquipPreviousWeapon()
 {
-	if (Weapons.Num() <= 1)
-	{
-		return;
-	}
-
-	Weapons[CurrentWeaponIndex]->Unequip();
-	CurrentWeaponIndex = CurrentWeaponIndex == 0 ? Weapons.Num() - 1 : CurrentWeaponIndex - 1;
-	Weapons[CurrentWeaponIndex]->Equip(this, false);
+	UpdateWeaponIndex(false);
 }
 
 /**
@@ -889,4 +907,75 @@ void AUSKCharacter::Interact()
 	}
 
 	InteractTrigger->OnInteracted(this);
+}
+
+/**
+ * @brief Called when the current weapon's ammo is updated
+ * @param Weapon The current weapon used by the character
+ * @param Ammo The amount of ammo remaining
+ * @param ReloadAmmo The amount of ammo that can be used to reload the weapon
+ */
+void AUSKCharacter::OnWeaponAmmoUpdated(AWeapon* Weapon, int Ammo, int ReloadAmmo)
+{
+	if (Weapons.Num() == 0 || Weapons[CurrentWeaponIndex] != Weapon)
+	{
+		return;
+	}
+	
+	NotifyWeaponUpdated();
+}
+
+/**
+ * @brief Notify other classes that the weapon has been updated
+ */
+void AUSKCharacter::NotifyWeaponUpdated()
+{
+	AWeapon* Weapon = Weapons.Num() == 0 ? nullptr : Weapons[CurrentWeaponIndex];
+	if (!IsValid(Weapon))
+	{
+		OnCurrentWeaponUpdated.Broadcast(nullptr, 0, 0);
+		return;
+	}
+	
+	OnCurrentWeaponUpdated.Broadcast(Weapon, Weapon->GetAmmoRemaining(), Weapon->GetReloadAmmoRemaining());
+}
+
+/**
+ * @brief Update the current weapon index
+ * @param EquipNextWeapon Should the next weapon be equipped?
+ */
+void AUSKCharacter::UpdateWeaponIndex(const bool EquipNextWeapon)
+{
+	if (Weapons.Num() <= 1)
+	{
+		return;
+	}
+
+	AWeapon* PreviousWeapon = Weapons[CurrentWeaponIndex];
+	if (IsValid(PreviousWeapon))
+	{
+		PreviousWeapon->Unequip();
+	}	
+	
+	CurrentWeaponIndex = EquipNextWeapon
+		? (Weapons.Num() <= CurrentWeaponIndex + 1  ? 0 : CurrentWeaponIndex + 1)
+		: (CurrentWeaponIndex == 0 ? Weapons.Num() - 1 : CurrentWeaponIndex - 1);
+	Weapons[CurrentWeaponIndex]->Equip(this, false);
+}
+
+/**
+ * @brief Reload the current weapon
+ */
+void AUSKCharacter::ReloadWeapon()
+{
+	if (Weapons.Num() == 0)
+	{
+		return;
+	}
+
+	AWeapon* Weapon = Weapons[CurrentWeaponIndex];
+	if (IsValid(Weapon))
+	{
+		Weapon->Reload();
+	}
 }

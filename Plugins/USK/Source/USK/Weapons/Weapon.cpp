@@ -29,7 +29,10 @@ AWeapon::AWeapon()
 void AWeapon::BeginPlay()
 {
 	Super::BeginPlay();
-	AmmoRemaining = Ammo;
+
+	AmmoRemaining = bRequireReloading ? AmmoPerClip : Ammo;
+	ReloadAmmoRemaining = Ammo - AmmoPerClip;
+	OnWeaponAmmoUpdated.Broadcast(this, AmmoRemaining, ReloadAmmoRemaining);
 }
 
 /**
@@ -75,6 +78,8 @@ void AWeapon::Equip(AUSKCharacter* TargetCharacter, const bool IsNewWeapon)
 	SetActorRelativeTransform(WeaponTransform);
 	SetActorHiddenInGame(false);
 	PlayAnimation(EquipAnimation);
+	TargetCharacter->OnWeaponUpdated();
+	
 	OnWeaponEquipped.Broadcast();
 	USK_LOG_INFO("Weapon equipped");
 }
@@ -136,8 +141,16 @@ void AWeapon::StopFiring()
 void AWeapon::AddAmmo(const int Amount)
 {
 	USK_LOG_DEBUG("Adding ammo to the weapon");
-	AmmoRemaining = FMath::Min(AmmoRemaining + Amount, Ammo);
-	OnWeaponAmmoUpdated.Broadcast(AmmoRemaining);
+	if (bRequireReloading)
+	{
+		ReloadAmmoRemaining = FMath::Min(ReloadAmmoRemaining + Amount, Ammo);
+	}
+	else
+	{
+		AmmoRemaining = FMath::Min(AmmoRemaining + Amount, Ammo);
+	}
+	
+	OnWeaponAmmoUpdated.Broadcast(this, AmmoRemaining, ReloadAmmoRemaining);
 }
 
 /**
@@ -148,8 +161,8 @@ void AWeapon::RemoveAmmo(const int Amount)
 {
 	USK_LOG_DEBUG("Removing ammo from the weapon");
 	AmmoRemaining = FMath::Max(AmmoRemaining - Amount, 0);
-	OnWeaponAmmoUpdated.Broadcast(AmmoRemaining);
-
+	OnWeaponAmmoUpdated.Broadcast(this, AmmoRemaining, ReloadAmmoRemaining);	
+	
 	if (AmmoRemaining <= 0)
 	{
 		OnWeaponAmmoEmpty.Broadcast();
@@ -163,6 +176,34 @@ void AWeapon::RemoveAmmo(const int Amount)
 int AWeapon::GetAmmoRemaining() const
 {
 	return AmmoRemaining;
+}
+
+/**
+ * @brief Get the amount of ammo that can be used when reloading
+ * @return The amount of ammo that can be used when reloading
+ */
+int AWeapon::GetReloadAmmoRemaining() const
+{
+	return bRequireReloading ? ReloadAmmoRemaining : AmmoRemaining;
+}
+
+/**
+ * @brief Reload the weapon
+ */
+void AWeapon::Reload()
+{
+	if (bIsReloading || !bRequireReloading || ReloadAmmoRemaining <= 0 || AmmoRemaining >= AmmoPerClip)
+	{
+		return;
+	}
+
+	USK_LOG_INFO("Reloading weapon");
+	bIsReloading = true;
+	StopRecoil();
+	
+	UAudioUtils::PlayRandomSound(this, ReloadSound);
+	PlayAnimation(ReloadAnimation);
+	UKismetSystemLibrary::K2_SetTimer(this, "StopReloading", ReloadDuration, false);
 }
 
 /**
@@ -261,16 +302,22 @@ void AWeapon::ApplyRecoilRecovery(const float DeltaSeconds)
  */
 void AWeapon::StartFiringSingleShot()
 {
-	if (!bIsFiring || !IsValid(Character) || !IsValid(Character->GetController()))
+	if (!bIsFiring || bIsReloading || !IsValid(Character) || !IsValid(Character->GetController()))
 	{
 		return;
 	}
 
 	if (!bInfiniteAmmo && AmmoRemaining <= 0)
 	{
+		if (bRequireReloading && bAutoReloadWhenFiringWhileEmpty && ReloadAmmoRemaining > 0)
+		{
+			Reload();
+			return;
+		}
+
+		StopRecoil();
 		UAudioUtils::PlayRandomSound(this, EmptyClipFireSound);
 		PlayAnimation(EmptyClipFireAnimation);
-		StopRecoil();
 		OnWeaponFiredEmptyClip.Broadcast();
 		return;
 	}
@@ -330,6 +377,25 @@ void AWeapon::StartFiringFullAuto()
 	
 	StartFiringSingleShot();
 	UKismetSystemLibrary::K2_SetTimer(this, "StartFiringFullAuto", FireRate, false);
+}
+
+/**
+ * @brief Stop reloading and add ammo to the weapon
+ */
+void AWeapon::StopReloading()
+{
+	USK_LOG_INFO("Adding ammo to weapon after reloading");
+	const int AmmoNeeded = FMath::Min(AmmoPerClip - AmmoRemaining, ReloadAmmoRemaining);
+    ReloadAmmoRemaining = FMath::Max(ReloadAmmoRemaining - AmmoNeeded, 0);
+    AmmoRemaining += AmmoNeeded;
+
+	bIsReloading = false;
+	OnWeaponAmmoUpdated.Broadcast(this, AmmoRemaining, ReloadAmmoRemaining);
+
+	if (bIsFiring)
+	{
+		StartRecoil();
+	}
 }
 
 /**

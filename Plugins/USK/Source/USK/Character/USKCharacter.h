@@ -25,6 +25,14 @@ class USK_API AUSKCharacter : public ACharacter
 	GENERATED_BODY()
 
 	/**
+	 * @brief Event used to notify other classes when the weapon is updated
+	 * @param Weapon The current weapon used by the character
+	 * @param Ammo The amount of ammo remaining
+	 * @param ReloadAmmo The amount of ammo that can be used to reload the weapon
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FCurrentWeaponUpdated, AWeapon*, Weapon, int, Ammo, int, ReloadAmmo);
+
+	/**
 	 * @brief The camera used by the character
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
@@ -86,6 +94,12 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
 	UInputAction* EquipPreviousWeaponAction;
+
+	/**
+	 * @brief The reload weapon input action
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
+	UInputAction* ReloadWeaponAction;
 
 	/**
 	 * @brief The crouch input action
@@ -467,6 +481,12 @@ public:
 	TSubclassOf<AWeapon> DefaultWeaponClass;
 
 	/**
+	 * @brief Event used to notify other classes when the weapon is updated
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Character|Weapons|Events")
+	FCurrentWeaponUpdated OnCurrentWeaponUpdated;
+
+	/**
 	 * @brief Create a new instance of the AUSKCharacter actor
 	 */
 	AUSKCharacter();
@@ -554,6 +574,17 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Interact")
 	void UpdateInteractTrigger(UInteractTrigger* NewInteractTrigger);
+
+	/**
+	 * @brief Called when the current weapon is updated
+	 */
+	void OnWeaponUpdated();
+
+	/**
+	 * @brief Called when a new weapon is equipped for the first time
+	 * @param Weapon The new weapon that was equipped
+	 */
+	void OnNewWeaponEquipped(AWeapon* Weapon);
 
 protected:
 	/**
@@ -903,4 +934,30 @@ private:
 	 * @brief Interact with the current interact trigger
 	 */
 	void Interact();
+
+	/**
+	 * @brief Called when the current weapon's ammo is updated
+	 * @param Weapon The current weapon used by the character
+	 * @param Ammo The amount of ammo remaining
+	 * @param ReloadAmmo The amount of ammo that can be used to reload the weapon
+	 */
+	UFUNCTION()
+	void OnWeaponAmmoUpdated(AWeapon* Weapon, int Ammo, int ReloadAmmo);
+
+	/**
+	 * @brief Notify other classes that the weapon has been updated
+	 */
+	void NotifyWeaponUpdated();
+
+	/**
+	 * @brief Update the current weapon index
+	 * @param EquipNextWeapon Should the next weapon be equipped?
+	 */
+	void UpdateWeaponIndex(const bool EquipNextWeapon);
+
+	/**
+	 * @brief Reload the current weapon
+	 */
+	UFUNCTION()
+	void ReloadWeapon();
 };
