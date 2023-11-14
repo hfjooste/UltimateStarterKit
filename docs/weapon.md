@@ -17,6 +17,11 @@ The <code>Weapon</code> uses the following components:
 		<th>Type</th>
 	</tr>
 	<tr>
+		<td>WeaponMesh</td>
+		<td>The skeletal mesh of the weapon</td>
+		<td>USkeletalMeshComponent*</td>
+	</tr>
+	<tr>
 		<td>MuzzleFlash</td>
 		<td>The muzzle flash of the weapon</td>
 		<td>USceneComponent*</td>
@@ -43,6 +48,12 @@ The <code>Weapon</code> uses the following components:
 		<td>The fire mode of weapon</td>
 		<td>EWeaponFireMode</td>
 		<td></td>
+	</tr>
+	<tr>
+		<td>AimFov</td>
+		<td>The FOV of the camera while aiming</td>
+		<td>float</td>
+		<td>70</td>
 	</tr>
 	<tr>
 		<td>FireRate</td>
@@ -107,6 +118,12 @@ The <code>Weapon</code> uses the following components:
 	<tr>
 		<td>WeaponTransform</td>
 		<td>The relative transform of the weapon after it is attached to a character</td>
+		<td>FTransform</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>WeaponAimTransform</td>
+		<td>The relative transform of the weapon while aiming</td>
 		<td>FTransform</td>
 		<td></td>
 	</tr>

@@ -8,6 +8,9 @@ The <code>USKCharacter</code> relies on other components of this plugin to work:
 	<li><a href="../audio">Audio</a>: Used to play sound effects either 2D or at a specified location</li>
 </ul>
 
+## Camera Clipping
+Sometimes parts of the character mesh or weapon might clip when close to the camera (especially while aiming). This can be fixed by changing <code>Set Near Clip Plane</code> to <code>0.1</code> in your project settings
+
 ## Components
 The <code>USKCharacter</code> uses the following components:
 <table>
@@ -24,6 +27,11 @@ The <code>USKCharacter</code> uses the following components:
 	<tr>
 		<td>CrouchTimeline</td>
 		<td>The timeline component used for smooth crouching</td>
+		<td>UTimelineComponent*</td>
+	</tr>
+	<tr>
+		<td>AimTimeline</td>
+		<td>The timeline component used for aiming</td>
 		<td>UTimelineComponent*</td>
 	</tr>
 </table>
@@ -70,6 +78,12 @@ The <code>USKCharacter</code> uses the following components:
 	<tr>
 		<td>FireWeaponAction</td>
 		<td>The fire weapon input action</td>
+		<td>UInputAction*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>AimAction</td>
+		<td>The aim down sights input action</td>
 		<td>UInputAction*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -438,6 +452,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>The default weapon the character will equip on spawn</td>
 		<td>TSubclassOf&lt;AWeapon&gt;</td>
 		<td></td>
+	</tr>
+	<tr>
+		<td>AimCurve</td>
+		<td>The float curve used for aiming</td>
+		<td>UCurveFloat*</td>
+		<td><code>nullptr</code></td>
 	</tr>
 </table>
 

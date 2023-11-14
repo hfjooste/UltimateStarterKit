@@ -1,0 +1,2 @@
+## Camera Clipping
+Sometimes parts of the character mesh or weapon might clip when close to the camera (especially while aiming). This can be fixed by changing <code>Set Near Clip Plane</code> to <code>0.1</code> in your project settings
