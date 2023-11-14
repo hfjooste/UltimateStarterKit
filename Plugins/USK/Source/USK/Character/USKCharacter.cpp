@@ -28,6 +28,7 @@ AUSKCharacter::AUSKCharacter()
 
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	CrouchTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("Crouch Timeline"));
+	AimTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("Aim Timeline"));
 
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f);
 	GetCharacterMovement()->bOrientRotationToMovement = true;
@@ -77,7 +78,15 @@ void AUSKCharacter::BeginPlay()
 		CrouchTimeline->SetLooping(false);
 	}
 
+	if (IsValid(AimCurve))
+	{
+		AimTimelineUpdateEvent.BindUFunction(this, FName("OnAimTimelineUpdated"));
+		AimTimeline->AddInterpFloat(AimCurve, AimTimelineUpdateEvent);
+		AimTimeline->SetLooping(false);
+	}
+
     DefaultCameraLocation = GetCameraComponent()->GetRelativeLocation();
+	DefaultCameraFov = GetCameraComponent()->FieldOfView;
 	StatsComponent = dynamic_cast<UStatsComponent*>(GetComponentByClass(UStatsComponent::StaticClass()));
 	NotifyWeaponUpdated();
 }
@@ -129,6 +138,8 @@ void AUSKCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	EnhancedInput->BindAction(SprintAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopSprinting);
 	EnhancedInput->BindAction(FireWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::StartFiringWeapon);
 	EnhancedInput->BindAction(FireWeaponAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopFiringWeapon);
+	EnhancedInput->BindAction(AimAction, ETriggerEvent::Started, this, &AUSKCharacter::StartAiming);
+	EnhancedInput->BindAction(AimAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopAiming);
 	EnhancedInput->BindAction(EquipNextWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::EquipNextWeapon);
 	EnhancedInput->BindAction(EquipPreviousWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::EquipPreviousWeapon);
 	EnhancedInput->BindAction(ReloadWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::ReloadWeapon);
@@ -978,4 +989,45 @@ void AUSKCharacter::ReloadWeapon()
 	{
 		Weapon->Reload();
 	}
+}
+
+/**
+ * @brief Start aiming with the current weapon
+ */
+void AUSKCharacter::StartAiming()
+{
+	const AWeapon* Weapon = Weapons.Num() == 0 ? nullptr : Weapons[CurrentWeaponIndex];
+	if (!IsValid(Weapon))
+	{
+		return;
+	}
+	
+	bIsAiming = true;
+	AimTimeline->Play();
+}
+
+/**
+ * @brief Start aiming with the current weapon
+ */
+void AUSKCharacter::StopAiming()
+{
+	bIsAiming = false;
+	AimTimeline->Reverse();
+}
+
+/**
+ * @brief Called after the aim timeline is updated
+ */
+void AUSKCharacter::OnAimTimelineUpdated(float Value)
+{
+	AWeapon* Weapon = Weapons.Num() == 0 ? nullptr : Weapons[CurrentWeaponIndex];
+	if (!IsValid(Weapon))
+	{
+		return;
+	}
+
+	const FTransform OriginalTransform = Weapon->WeaponTransform;
+	const FTransform TargetTransform = Weapon->WeaponAimTransform;
+	Weapon->SetActorRelativeTransform(UKismetMathLibrary::TLerp(OriginalTransform, TargetTransform, Value));
+	GetCameraComponent()->SetFieldOfView(FMath::Lerp(DefaultCameraFov, Weapon->AimFov, Value));
 }

@@ -46,6 +46,13 @@ class USK_API AUSKCharacter : public ACharacter
 		meta=(AllowPrivateAccess = "true"))
 	class UTimelineComponent* CrouchTimeline;
 
+	/**
+	 * @brief The timeline component used for aiming
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
+		meta=(AllowPrivateAccess = "true"))
+	class UTimelineComponent* AimTimeline;
+
 public:
 	/**
 	 * @brief The input mapping context used by the character
@@ -82,6 +89,12 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
 	UInputAction* FireWeaponAction;
+
+	/**
+	 * @brief The aim down sights input action
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
+	UInputAction* AimAction;
 
 	/**
 	 * @brief The equip next weapon input action
@@ -481,6 +494,12 @@ public:
 	TSubclassOf<AWeapon> DefaultWeaponClass;
 
 	/**
+	 * @brief The float curve used for aiming 
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Weapons")
+	UCurveFloat* AimCurve;
+
+	/**
 	 * @brief Event used to notify other classes when the weapon is updated
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Character|Weapons|Events")
@@ -815,6 +834,21 @@ private:
 	int CurrentWeaponIndex = -1;
 
 	/**
+	 * @brief Is the character currently aiming?
+	 */
+	bool bIsAiming;
+
+	/**
+	 * @brief The default camera FOV while not aiming
+	 */
+	float DefaultCameraFov;
+
+	/**
+	 * @brief Event used to smoothly move the weapon while aiming
+	 */
+	FOnTimelineFloat AimTimelineUpdateEvent;
+
+	/**
 	 * @brief Move the character
 	 * @param Input The input action containing the input values
 	 */
@@ -960,4 +994,22 @@ private:
 	 */
 	UFUNCTION()
 	void ReloadWeapon();
+
+	/**
+	 * @brief Start aiming with the current weapon
+	 */
+	UFUNCTION()
+	void StartAiming();
+
+	/**
+	 * @brief Stop aiming with the current weapon
+	 */
+	UFUNCTION()
+	void StopAiming();
+
+	/**
+	 * @brief Called after the aim timeline is updated
+	 */
+	UFUNCTION()
+	void OnAimTimelineUpdated(float Value);
 };

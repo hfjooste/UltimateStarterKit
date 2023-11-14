@@ -56,6 +56,13 @@ class USK_API AWeapon : public AActor
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponAmmoEmpty);
 
 	/**
+	 * @brief The skeletal mesh of the weapon
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
+		meta=(AllowPrivateAccess = "true"))
+	class USkeletalMeshComponent* WeaponMesh;
+
+	/**
 	 * @brief The muzzle flash of the weapon
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Weapon",
@@ -74,6 +81,12 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Information")
 	EWeaponFireMode WeaponFireMode;
+
+	/**
+	 * @brief The FOV of the camera while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Information")
+	float AimFov = 70;
 
 	/**
 	 * @brief The fire rate of the weapon (amount of seconds between each shot)
@@ -148,6 +161,12 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Attachment")
 	FTransform WeaponTransform;
+
+	/**
+	 * @brief The relative transform of the weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Attachment")
+	FTransform WeaponAimTransform;
 
 	/**
 	 * @brief The curve used to add recoil to the weapon

@@ -19,8 +19,10 @@ AWeapon::AWeapon()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	RootComponent = CreateDefaultSubobject<USceneComponent>("Weapon Root");
+	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon Mesh");
+	WeaponMesh->SetupAttachment(RootComponent);
 	MuzzleFlash = CreateDefaultSubobject<USceneComponent>("Muzzle Flash");
-	MuzzleFlash->SetupAttachment(RootComponent);
+	MuzzleFlash->SetupAttachment(WeaponMesh);
 }
 
 /**
