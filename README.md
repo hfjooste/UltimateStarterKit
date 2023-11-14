@@ -53,7 +53,7 @@ The Ultimate Starter Kit plugin comes with the following features:
             <li>Sliding with long jump</li>
         </ul>
     </li>
-    <li><strong>Weapons System</strong>: A customizable weapon system with support for recoil, multiple fire types, fire rates, ammo, reloading, and projectile types</li>
+    <li><strong>Weapons System</strong>: A customizable weapon system with support for recoil, multiple fire types, aiming, fire rates, ammo, reloading, and projectile types</li>
     <li><strong>Menu system</strong>: A customizable menu system with support for controllers and complex menu layouts</li>
     <li><strong>Interact system</strong>: A customizable interaction system with interact prompts</li>
     <li><strong>Quest system</strong>: A quest system with support for multiple quest points</li>
