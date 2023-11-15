@@ -728,7 +728,7 @@ void AUSKCharacter::Sprint()
 		return;
 	}
 
-	if (bIsCrouching)
+	if (bIsCrouching || bIsAiming)
 	{
 		bSprintQueued = true;
 		return;
@@ -871,7 +871,7 @@ void AUSKCharacter::UpdateMovementSpeed() const
 		return;
 	}
 
-	GetCharacterMovement()->MaxWalkSpeed = bIsSprinting ? SprintSpeed : MovementSpeed;
+	GetCharacterMovement()->MaxWalkSpeed = bIsSprinting && !bIsAiming ? SprintSpeed : MovementSpeed;
 }
 
 /**
@@ -1013,6 +1013,11 @@ void AUSKCharacter::StopAiming()
 {
 	bIsAiming = false;
 	AimTimeline->Reverse();
+
+	if (bSprintQueued)
+	{
+		StartSprinting();
+	}
 }
 
 /**
