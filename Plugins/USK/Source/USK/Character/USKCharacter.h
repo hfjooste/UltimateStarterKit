@@ -597,13 +597,22 @@ public:
 	/**
 	 * @brief Called when the current weapon is updated
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Weapons")
 	void OnWeaponUpdated();
 
 	/**
 	 * @brief Called when a new weapon is equipped for the first time
 	 * @param Weapon The new weapon that was equipped
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Weapons")
 	void OnNewWeaponEquipped(AWeapon* Weapon);
+
+	/**
+	 * @brief Check if the character is aiming
+	 * @return A boolean value indicating if the character is aiming
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Weapons")
+	bool IsAiming() const;
 
 protected:
 	/**

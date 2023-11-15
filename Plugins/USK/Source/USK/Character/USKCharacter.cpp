@@ -367,6 +367,15 @@ void AUSKCharacter::OnNewWeaponEquipped(AWeapon* Weapon)
 }
 
 /**
+ * @brief Check if the character is aiming
+ * @return A boolean value indicating if the character is aiming
+ */
+bool AUSKCharacter::IsAiming() const
+{
+	return bIsAiming;
+}
+
+/**
  * @brief Make the character jump on the next update
  */
 void AUSKCharacter::Jump()

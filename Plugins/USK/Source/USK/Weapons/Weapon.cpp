@@ -204,7 +204,7 @@ void AWeapon::Reload()
 	StopRecoil();
 	
 	UAudioUtils::PlayRandomSound(this, ReloadSound);
-	PlayAnimation(ReloadAnimation);
+	PlayAnimation(IsValid(Character) && Character->IsAiming() ? ReloadAimAnimation : ReloadAnimation);
 	UKismetSystemLibrary::K2_SetTimer(this, "StopReloading", ReloadDuration, false);
 }
 

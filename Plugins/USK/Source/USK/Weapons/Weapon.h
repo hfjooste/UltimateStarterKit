@@ -240,6 +240,13 @@ public:
 	UAnimMontage* ReloadAnimation;
 
 	/**
+	 * @brief The animation played when the weapon is reloaded while aiming 
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Animations",
+		meta=(EditCondition = "!bInfiniteAmmo && bRequireReloading", EditConditionHides))
+	UAnimMontage* ReloadAimAnimation;
+
+	/**
 	 * @brief Event used to notify other classes when the weapon is equipped
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Weapon|Events")
