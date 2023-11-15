@@ -236,6 +236,114 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>IdleWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is in the idle state with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>WalkWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is walking with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>RunWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is running with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SprintWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is sprinting with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>JumpWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is jumping with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>DoubleJumpWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is double jumping with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>FallWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is falling with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>LandWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is landing with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchStartWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character starts crouching with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchEndWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character stops crouching with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchIdleWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is crouching and idle with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchWalkWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is crouching and walking with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompStartWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is starting to stomp with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompFallWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is falling after a stomp with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompLandWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is landing after a stomp with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideStartWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character starts sliding with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideEndWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character stops sliding with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideLoopWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is sliding with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>IdleWeaponTwoHandedAnimation</td>
 		<td>The animation used when the character is in the idle state with a two handed weapon</td>
 		<td>UAnimSequence*</td>
@@ -344,6 +452,114 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>IdleWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is in the idle state with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>WalkWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is walking with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>RunWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is running with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SprintWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is sprinting with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>JumpWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is jumping with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>DoubleJumpWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is double jumping with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>FallWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is falling with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>LandWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is landing with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchStartWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character starts crouching with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchEndWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character stops crouching with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchIdleWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is crouching and idle with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchWalkWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is crouching and walking with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompStartWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is starting to stomp with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompFallWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is falling after a stomp with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompLandWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is landing after a stomp with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideStartWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character starts sliding with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideEndWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character stops sliding with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideLoopWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is sliding with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>MovementBlendSpeed</td>
 		<td>The blend speed used when updating the movement speed</td>
 		<td>float</td>
@@ -418,6 +634,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 	<tr>
 		<td>bIsEndingSlide</td>
 		<td>Is the character busy ending the slide?</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bIsAiming</td>
+		<td>Is the character aiming?</td>
 		<td>bool</td>
 		<td></td>
 	</tr>
