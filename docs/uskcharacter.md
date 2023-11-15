@@ -556,6 +556,24 @@ The <code>USKCharacter</code> uses the following components:
 		<td></td>
 	</tr>
 	<tr>
+		<td>OnWeaponUpdated</td>
+		<td>Called when the current weapon is updated</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>OnNewWeaponEquipped</td>
+		<td>Called when a new weapon is equipped for the first time</td>
+		<td><strong>Weapon (AWeapon*)</strong><br/>The new weapon that was equipped</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>IsAiming</td>
+		<td>Check if the character is aiming</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the character is aiming</td>
+	</tr>
+	<tr>
 		<td>StartFiringWeapon</td>
 		<td>Start firing the current weapon</td>
 		<td></td>

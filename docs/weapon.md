@@ -193,6 +193,12 @@ The <code>Weapon</code> uses the following components:
 		<td>UAnimMontage*</td>
 		<td><code>nullptr</code></td>
 	</tr>
+	<tr>
+		<td>ReloadAimAnimation</td>
+		<td>The animation played when the weapon is reloaded while aiming</td>
+		<td>UAnimMontage*</td>
+		<td><code>nullptr</code></td>
+	</tr>
 </table>
 
 ### Events
