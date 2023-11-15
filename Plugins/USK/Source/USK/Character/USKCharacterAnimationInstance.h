@@ -231,6 +231,114 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
 	UAnimSequence* SlideLoopWeaponOneHandedAnimation;
 
+	    /**
+     * @brief The animation used when the character is in the idle state with a one handed weapon while aiming
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+    UAnimSequence* IdleWeaponAimOneHandedAnimation;
+
+    /**
+     * @brief The animation used when the character is walking with a one handed weapon while aiming
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+    UAnimSequence* WalkWeaponAimOneHandedAnimation;
+
+    /**
+     * @brief The animation used when the character is running with a one handed weapon while aiming
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+    UAnimSequence* RunWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is sprinting with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* SprintWeaponAimOneHandedAnimation;
+
+    /**
+     * @brief The animation used when the character is jumping with a one handed weapon while aiming
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+    UAnimSequence* JumpWeaponAimOneHandedAnimation;
+
+    /**
+     * @brief The animation used when the character is double jumping with a one handed weapon while aiming
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+    UAnimSequence* DoubleJumpWeaponAimOneHandedAnimation;
+
+    /**
+     * @brief The animation used when the character is falling with a one handed weapon while aiming
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+    UAnimSequence* FallWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is landing with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* LandWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character starts crouching with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* CrouchStartWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character stops crouching with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* CrouchEndWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is crouching and idle with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* CrouchIdleWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is crouching and walking with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* CrouchWalkWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is starting to stomp with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* StompStartWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is falling after a stomp with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* StompFallWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is landing after a stomp with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* StompLandWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character starts sliding with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* SlideStartWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character stops sliding with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* SlideEndWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is sliding with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* SlideLoopWeaponAimOneHandedAnimation;
+
 	/**
 	 * @brief The animation used when the character is in the idle state with a two handed weapon
 	 */
@@ -340,6 +448,114 @@ public:
 	UAnimSequence* SlideLoopWeaponTwoHandedAnimation;
 
 	/**
+	 * @brief The animation used when the character is in the idle state with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* IdleWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is walking with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* WalkWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is running with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* RunWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is sprinting with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* SprintWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is jumping with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* JumpWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is double jumping with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* DoubleJumpWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is falling with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* FallWeaponAimTwoHandedAnimation;
+
+    /**
+     * @brief The animation used when the character is landing with a two handed weapon while aiming
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+    UAnimSequence* LandWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character starts crouching with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* CrouchStartWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character stops crouching with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* CrouchEndWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is crouching and idle with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* CrouchIdleWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is crouching and walking with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* CrouchWalkWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is starting to stomp with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* StompStartWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is falling after a stomp with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* StompFallWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is landing after a stomp with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* StompLandWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character starts sliding with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* SlideStartWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character stops sliding with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* SlideEndWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is sliding with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* SlideLoopWeaponAimTwoHandedAnimation;
+
+	/**
 	 * @brief The blend speed used when updating the movement speed
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
@@ -416,6 +632,12 @@ public:
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Sliding")
 	bool bIsEndingSlide;
+
+	/**
+	 * @brief Is the character aiming?
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Movement")
+	bool bIsAiming;
 
 protected:
 	/**

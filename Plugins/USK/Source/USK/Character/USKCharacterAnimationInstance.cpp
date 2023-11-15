@@ -39,6 +39,7 @@ void UUSKCharacterAnimationInstance::NativeUpdateAnimation(float DeltaSeconds)
     bIsStomping = Character->IsStomping();
     bIsStompStarting = Character->IsStompStarting();
 	LeanCameraRoll = Character->GetLeanCameraRoll() * LeanCameraRotationModifier;
+	bIsAiming = Character->IsAiming();
 
 	if (!Character->IsDoubleJumping)
 	{
@@ -62,7 +63,9 @@ void UUSKCharacterAnimationInstance::NativeUpdateAnimation(float DeltaSeconds)
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetIdleAnimation() const
 {
-	return GetAnimation(IdleAnimation, IdleWeaponOneHandedAnimation, IdleWeaponTwoHandedAnimation);
+	return bIsAiming
+		? GetAnimation(IdleAnimation, IdleWeaponAimOneHandedAnimation, IdleWeaponAimTwoHandedAnimation)
+		: GetAnimation(IdleAnimation, IdleWeaponOneHandedAnimation, IdleWeaponTwoHandedAnimation);
 }
 
 /**
@@ -71,7 +74,9 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetIdleAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetWalkAnimation() const
 {
-	return GetAnimation(WalkAnimation, WalkWeaponOneHandedAnimation, WalkWeaponTwoHandedAnimation);
+	return bIsAiming
+		? GetAnimation(WalkAnimation, WalkWeaponAimOneHandedAnimation, WalkWeaponAimTwoHandedAnimation)
+		: GetAnimation(WalkAnimation, WalkWeaponOneHandedAnimation, WalkWeaponTwoHandedAnimation);
 }
 
 /**
@@ -80,7 +85,9 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetWalkAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetRunAnimation() const
 {
-	return GetAnimation(RunAnimation, RunWeaponOneHandedAnimation, RunWeaponTwoHandedAnimation);
+	return bIsAiming
+		? GetAnimation(RunAnimation, RunWeaponAimOneHandedAnimation, RunWeaponAimTwoHandedAnimation)
+		: GetAnimation(RunAnimation, RunWeaponOneHandedAnimation, RunWeaponTwoHandedAnimation);
 }
 
 /**
@@ -89,7 +96,9 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetRunAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetSprintAnimation() const
 {
-	return GetAnimation(SprintAnimation, SprintWeaponOneHandedAnimation, SprintWeaponTwoHandedAnimation);
+	return bIsAiming
+		? GetAnimation(SprintAnimation, SprintWeaponAimOneHandedAnimation, SprintWeaponAimTwoHandedAnimation)
+		: GetAnimation(SprintAnimation, SprintWeaponOneHandedAnimation, SprintWeaponTwoHandedAnimation);
 }
 
 /**
@@ -98,7 +107,9 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetSprintAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetJumpAnimation() const
 {
-	return GetAnimation(JumpAnimation, JumpWeaponOneHandedAnimation, JumpWeaponTwoHandedAnimation);
+	return bIsAiming
+		? GetAnimation(JumpAnimation, JumpWeaponAimOneHandedAnimation, JumpWeaponAimTwoHandedAnimation)
+		: GetAnimation(JumpAnimation, JumpWeaponOneHandedAnimation, JumpWeaponTwoHandedAnimation);
 }
 
 /**
@@ -107,7 +118,9 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetJumpAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetDoubleJumpAnimation() const
 {
-	return GetAnimation(DoubleJumpAnimation, DoubleJumpWeaponOneHandedAnimation, DoubleJumpWeaponTwoHandedAnimation);
+	return bIsAiming
+		? GetAnimation(DoubleJumpAnimation, DoubleJumpWeaponAimOneHandedAnimation, DoubleJumpWeaponAimTwoHandedAnimation)
+		: GetAnimation(DoubleJumpAnimation, DoubleJumpWeaponOneHandedAnimation, DoubleJumpWeaponTwoHandedAnimation);
 }
 
 /**
@@ -116,6 +129,13 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetDoubleJumpAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetFallAnimation() const
 {
+	if (bIsAiming)
+	{
+		return bIsStomping
+			? GetAnimation(StompFallAnimation, StompFallWeaponAimOneHandedAnimation, StompFallWeaponAimTwoHandedAnimation)
+			: GetAnimation(FallAnimation, FallWeaponAimOneHandedAnimation, FallWeaponAimTwoHandedAnimation);	
+	}
+	
 	return bIsStomping
 		? GetAnimation(StompFallAnimation, StompFallWeaponOneHandedAnimation, StompFallWeaponTwoHandedAnimation)
 		: GetAnimation(FallAnimation, FallWeaponOneHandedAnimation, FallWeaponTwoHandedAnimation);
@@ -127,6 +147,13 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetFallAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetLandAnimation() const
 {
+	if (bIsAiming)
+	{
+		return bIsStomping
+			? GetAnimation(StompLandAnimation, StompLandWeaponAimOneHandedAnimation, StompLandWeaponAimTwoHandedAnimation)
+			: GetAnimation(LandAnimation, LandWeaponOneHandedAnimation, LandWeaponTwoHandedAnimation);
+	}
+	
 	return bIsStomping
 		? GetAnimation(StompLandAnimation, StompLandWeaponOneHandedAnimation, StompLandWeaponTwoHandedAnimation)
 		: GetAnimation(LandAnimation, LandWeaponOneHandedAnimation, LandWeaponTwoHandedAnimation);
@@ -138,8 +165,9 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetLandAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchStartAnimation() const
 {
-	return GetAnimation(CrouchStartAnimation,
-		CrouchStartWeaponOneHandedAnimation, CrouchStartWeaponTwoHandedAnimation);
+	return bIsAiming
+		? GetAnimation(CrouchStartAnimation, CrouchStartWeaponAimOneHandedAnimation, CrouchStartWeaponAimTwoHandedAnimation)
+		: GetAnimation(CrouchStartAnimation, CrouchStartWeaponOneHandedAnimation, CrouchStartWeaponTwoHandedAnimation);
 }
 
 /**
@@ -148,8 +176,9 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchStartAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchEndAnimation() const
 {
-	return GetAnimation(CrouchEndAnimation,
-		CrouchEndWeaponOneHandedAnimation, CrouchEndWeaponTwoHandedAnimation);
+	return bIsAiming
+		? GetAnimation(CrouchEndAnimation, CrouchEndWeaponAimOneHandedAnimation, CrouchEndWeaponAimTwoHandedAnimation)
+		: GetAnimation(CrouchEndAnimation, CrouchEndWeaponOneHandedAnimation, CrouchEndWeaponTwoHandedAnimation);
 }
 
 /**
@@ -158,8 +187,9 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchEndAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchIdleAnimation() const
 {
-	return GetAnimation(CrouchIdleAnimation,
-		CrouchIdleWeaponOneHandedAnimation, CrouchIdleWeaponTwoHandedAnimation);
+	return bIsAiming
+		? GetAnimation(CrouchIdleAnimation, CrouchIdleWeaponAimOneHandedAnimation, CrouchIdleWeaponAimTwoHandedAnimation)
+		: GetAnimation(CrouchIdleAnimation, CrouchIdleWeaponOneHandedAnimation, CrouchIdleWeaponTwoHandedAnimation);
 }
 
 /**
@@ -168,8 +198,9 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchIdleAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchWalkAnimation() const
 {
-	return GetAnimation(CrouchWalkAnimation,
-		CrouchWalkWeaponOneHandedAnimation, CrouchWalkWeaponTwoHandedAnimation);
+	return bIsAiming
+		? GetAnimation(CrouchWalkAnimation, CrouchWalkWeaponAimOneHandedAnimation, CrouchWalkWeaponAimTwoHandedAnimation)
+		: GetAnimation(CrouchWalkAnimation, CrouchWalkWeaponOneHandedAnimation, CrouchWalkWeaponTwoHandedAnimation);
 }
 
 /**
@@ -178,7 +209,9 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchWalkAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetStompStartAnimation() const
 {
-	return GetAnimation(StompStartAnimation, StompStartWeaponOneHandedAnimation, StompStartWeaponTwoHandedAnimation);
+	return bIsAiming
+		? GetAnimation(StompStartAnimation, StompStartWeaponAimOneHandedAnimation, StompStartWeaponAimTwoHandedAnimation)
+		: GetAnimation(StompStartAnimation, StompStartWeaponOneHandedAnimation, StompStartWeaponTwoHandedAnimation);
 }
 
 /**
@@ -187,7 +220,9 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetStompStartAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetSlideStartAnimation() const
 {
-	return GetAnimation(SlideStartAnimation, SlideStartWeaponOneHandedAnimation, SlideStartWeaponTwoHandedAnimation);
+	return bIsAiming
+		? GetAnimation(SlideStartAnimation, SlideStartWeaponAimOneHandedAnimation, SlideStartWeaponAimTwoHandedAnimation)
+		: GetAnimation(SlideStartAnimation, SlideStartWeaponOneHandedAnimation, SlideStartWeaponTwoHandedAnimation);
 }
 
 /**
@@ -196,7 +231,9 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetSlideStartAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetSlideEndAnimation() const
 {
-	return GetAnimation(SlideEndAnimation, SlideEndWeaponOneHandedAnimation, SlideEndWeaponTwoHandedAnimation);
+	return bIsAiming
+		? GetAnimation(SlideEndAnimation, SlideEndWeaponAimOneHandedAnimation, SlideEndWeaponAimTwoHandedAnimation)
+		: GetAnimation(SlideEndAnimation, SlideEndWeaponOneHandedAnimation, SlideEndWeaponTwoHandedAnimation);
 }
 
 /**
@@ -205,7 +242,9 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetSlideEndAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetSlideLoopAnimation() const
 {
-	return GetAnimation(SlideLoopAnimation, SlideLoopWeaponOneHandedAnimation, SlideLoopWeaponTwoHandedAnimation);
+	return bIsAiming
+		? GetAnimation(SlideLoopAnimation, SlideLoopWeaponAimOneHandedAnimation, SlideLoopWeaponAimTwoHandedAnimation)
+		: GetAnimation(SlideLoopAnimation, SlideLoopWeaponOneHandedAnimation, SlideLoopWeaponTwoHandedAnimation);
 }
 
 /**
