@@ -454,10 +454,17 @@ public:
 	float SlideSpeed = 2500.0f;
 
 	/**
+	 * @brief Does sliding require the character to sprint?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Sliding",
+    		meta=(EditCondition = "bCanSlide && bCanSprint", EditConditionHides))
+    bool bSlideRequiresSprinting;
+
+	/**
 	 * @brief The minimum movement speed before a slide is allowed
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Sliding",
-		meta=(EditCondition = "bCanSlide", EditConditionHides))
+		meta=(EditCondition = "bCanSlide && !bSlideRequiresSprinting", EditConditionHides))
 	float SlideMinSpeed = 400.0f;
 
 	/**

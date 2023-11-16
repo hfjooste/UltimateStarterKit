@@ -503,8 +503,9 @@ void AUSKCharacter::StartCrouching()
 		CrouchTimeline->Play();
 	}
 
-	if (UKismetMathLibrary::VSizeXY(GetMovementComponent()->Velocity) >= SlideMinSpeed &&
-		!bIsSliding && CurrentSlidingCooldown <= 0.0f && !GetCharacterMovement()->IsFalling())
+	const bool SlideAllowed = (bSlideRequiresSprinting && bIsSprinting) || (!bSlideRequiresSprinting &&
+		UKismetMathLibrary::VSizeXY(GetMovementComponent()->Velocity) >= SlideMinSpeed);
+	if (SlideAllowed && !bIsSliding && CurrentSlidingCooldown <= 0.0f && !GetCharacterMovement()->IsFalling())
 	{
 		StartSliding();
 	}
