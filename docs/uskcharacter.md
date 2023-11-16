@@ -418,6 +418,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>2500.0f</td>
 	</tr>
 	<tr>
+		<td>bSlideRequiresSprinting</td>
+		<td>Does sliding require the character to sprint?</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>SlideMinSpeed</td>
 		<td>The minimum movement speed before a slide is allowed</td>
 		<td>float</td>
