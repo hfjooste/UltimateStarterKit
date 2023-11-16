@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
-	"Version": 42,
-	"VersionName": "3.15.0",
+	"Version": 43,
+	"VersionName": "3.16.0",
 	"FriendlyName": "Ultimate Starter Kit",
 	"Description": "The Ultimate Starter Kit plugin to speed up development of Unreal Engine games",
 	"Category": "Other",
