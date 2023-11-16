@@ -2688,6 +2688,11 @@
         <th>Type</th>
     </tr>
     <tr>
+        <td>WeaponMesh</td>
+        <td>The skeletal mesh of the weapon</td>
+        <td>USkeletalMeshComponent*</td>
+    </tr>
+    <tr>
         <td>MuzzleFlash</td>
         <td>The muzzle flash of the weapon</td>
         <td>USceneComponent*</td>
@@ -2714,6 +2719,12 @@
         <td>The fire mode of weapon</td>
         <td>EWeaponFireMode</td>
         <td></td>
+    </tr>
+    <tr>
+        <td>AimFov</td>
+        <td>The FOV of the camera while aiming</td>
+        <td>float</td>
+        <td>70</td>
     </tr>
     <tr>
         <td>FireRate</td>
@@ -2782,6 +2793,12 @@
         <td></td>
     </tr>
     <tr>
+        <td>WeaponAimTransform</td>
+        <td>The relative transform of the weapon while aiming</td>
+        <td>FTransform</td>
+        <td></td>
+    </tr>
+    <tr>
         <td>RecoilCurve</td>
         <td>The curve used to add recoil to the weapon</td>
         <td>UCurveVector*</td>
@@ -2844,6 +2861,12 @@
     <tr>
         <td>ReloadAnimation</td>
         <td>The animation played when the weapon is reloaded</td>
+        <td>UAnimMontage*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>ReloadAimAnimation</td>
+        <td>The animation played when the weapon is reloaded while aiming</td>
         <td>UAnimMontage*</td>
         <td><code>nullptr</code></td>
     </tr>

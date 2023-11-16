@@ -1190,6 +1190,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#camera-clipping" class="md-nav__link">
+    Camera Clipping
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#components" class="md-nav__link">
     Components
   </a>
@@ -2589,6 +2596,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#camera-clipping" class="md-nav__link">
+    Camera Clipping
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#components" class="md-nav__link">
     Components
   </a>
@@ -2665,6 +2679,8 @@
     <li><a href="../audio">Audio</a>: Used to play sound effects either 2D or at a specified location</li>
 </ul>
 
+<h2 id="camera-clipping">Camera Clipping</h2>
+<p>Sometimes parts of the character mesh or weapon might clip when close to the camera (especially while aiming). This can be fixed by changing <code>Set Near Clip Plane</code> to <code>0.1</code> in your project settings</p>
 <h2 id="components">Components</h2>
 <p>The <code>USKCharacter</code> uses the following components:</p>
 <table>
@@ -2681,6 +2697,11 @@
     <tr>
         <td>CrouchTimeline</td>
         <td>The timeline component used for smooth crouching</td>
+        <td>UTimelineComponent*</td>
+    </tr>
+    <tr>
+        <td>AimTimeline</td>
+        <td>The timeline component used for aiming</td>
         <td>UTimelineComponent*</td>
     </tr>
 </table>
@@ -2727,6 +2748,12 @@
     <tr>
         <td>FireWeaponAction</td>
         <td>The fire weapon input action</td>
+        <td>UInputAction*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>AimAction</td>
+        <td>The aim down sights input action</td>
         <td>UInputAction*</td>
         <td><code>nullptr</code></td>
     </tr>
@@ -3061,6 +3088,12 @@
         <td>2500.0f</td>
     </tr>
     <tr>
+        <td>bSlideRequiresSprinting</td>
+        <td>Does sliding require the character to sprint?</td>
+        <td>bool</td>
+        <td></td>
+    </tr>
+    <tr>
         <td>SlideMinSpeed</td>
         <td>The minimum movement speed before a slide is allowed</td>
         <td>float</td>
@@ -3095,6 +3128,12 @@
         <td>The default weapon the character will equip on spawn</td>
         <td>TSubclassOf&lt;AWeapon&gt;</td>
         <td></td>
+    </tr>
+    <tr>
+        <td>AimCurve</td>
+        <td>The float curve used for aiming</td>
+        <td>UCurveFloat*</td>
+        <td><code>nullptr</code></td>
     </tr>
 </table>
 
@@ -3191,6 +3230,24 @@
         <td>Update the current interact trigger</td>
         <td><strong>NewInteractTrigger (UInteractTrigger*)</strong><br/>The new interact trigger</td>
         <td></td>
+    </tr>
+    <tr>
+        <td>OnWeaponUpdated</td>
+        <td>Called when the current weapon is updated</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>OnNewWeaponEquipped</td>
+        <td>Called when a new weapon is equipped for the first time</td>
+        <td><strong>Weapon (AWeapon*)</strong><br/>The new weapon that was equipped</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>IsAiming</td>
+        <td>Check if the character is aiming</td>
+        <td></td>
+        <td><strong>bool</strong><br/>A boolean value indicating if the character is aiming</td>
     </tr>
     <tr>
         <td>StartFiringWeapon</td>
