@@ -57,26 +57,8 @@ void AUSKCharacter::BeginPlay()
 	GetCharacterMovement()->GravityScale = Gravity;
 	GetCharacterMovement()->BrakingFriction = BrakingFriction;
 	GetCharacterMovement()->MaxAcceleration = MaxAcceleration;
-	GetCharacterMovement()->bOrientRotationToMovement = CameraPerspective == ECameraPerspective::ThirdPerson;
-	
-	USK_LOG_TRACE("Initializing character camera");
-	GetCameraComponent()->bUsePawnControlRotation = CameraPerspective == ECameraPerspective::FirstPerson;
-	bUseControllerRotationYaw = CameraPerspective == ECameraPerspective::FirstPerson;
-    GetSpringArmComponent()->TargetArmLength =
-    	CameraPerspective == ECameraPerspective::ThirdPerson ? TargetArmLength : 0.0f;
-    CurrentArmLength = TargetArmLength;
 
-	if (CameraPerspective == ECameraPerspective::ThirdPerson)
-	{
-		GetCameraComponent()->AttachToComponent(GetSpringArmComponent(),
-			FAttachmentTransformRules::SnapToTargetIncludingScale);
-	}
-	else
-	{
-		GetCameraComponent()->AttachToComponent(GetMesh(),
-			FAttachmentTransformRules::SnapToTargetIncludingScale, HeadSocketName);
-		GetCameraComponent()->SetRelativeLocation(CameraAttachOffset);
-	}
+	InitializeCameraPerspective();
 
 	USK_LOG_TRACE("Initializing character jumping");
 	JumpMaxCount = 1;
@@ -111,7 +93,6 @@ void AUSKCharacter::BeginPlay()
 	}
 
 	DefaultMeshLocation = GetMesh()->GetRelativeLocation();
-    DefaultCameraLocation = GetCameraComponent()->GetRelativeLocation();
 	DefaultCameraFov = GetCameraComponent()->FieldOfView;
 	StatsComponent = dynamic_cast<UStatsComponent*>(GetComponentByClass(UStatsComponent::StaticClass()));
 	NotifyWeaponUpdated();
@@ -167,6 +148,7 @@ void AUSKCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	EnhancedInput->BindAction(FireWeaponAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopFiringWeapon);
 	EnhancedInput->BindAction(AimAction, ETriggerEvent::Started, this, &AUSKCharacter::StartAiming);
 	EnhancedInput->BindAction(AimAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopAiming);
+	EnhancedInput->BindAction(SwitchCameraPerspectiveAction, ETriggerEvent::Started, this, &AUSKCharacter::SwitchCameraPerspective);
 	EnhancedInput->BindAction(EquipNextWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::EquipNextWeapon);
 	EnhancedInput->BindAction(EquipPreviousWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::EquipPreviousWeapon);
 	EnhancedInput->BindAction(ReloadWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::ReloadWeapon);
@@ -254,6 +236,36 @@ USpringArmComponent* AUSKCharacter::GetSpringArmComponent() const
 ECameraPerspective AUSKCharacter::GetCameraPerspective() const
 {
 	return CameraPerspective;
+}
+
+/**
+ * @brief Update the current camera perspective
+ * @param NewCameraPerspective The new camera perspective
+ */
+void AUSKCharacter::UpdateCameraPerspective(const ECameraPerspective NewCameraPerspective)
+{
+	if (CameraPerspective == NewCameraPerspective)
+	{
+		return;
+	}
+	
+	CameraPerspective = NewCameraPerspective;
+	InitializeCameraPerspective();
+}
+
+/**
+ * @brief Switch the current camera perspective
+ */
+void AUSKCharacter::SwitchCameraPerspective()
+{
+	if (!bCanSwitchCameraPerspectives)
+	{
+		return;
+	}
+	
+	UpdateCameraPerspective(GetCameraPerspective() == ECameraPerspective::FirstPerson
+		? ECameraPerspective::ThirdPerson
+		: ECameraPerspective::FirstPerson);
 }
 
 /**
@@ -673,7 +685,7 @@ void AUSKCharacter::RotateCamera(const FInputActionValue& Input)
  */
 void AUSKCharacter::AdjustCameraPosition(const float DeltaSeconds)
 {
-	if (CameraPerspective != ECameraPerspective::ThirdPerson)
+	if (GetCameraPerspective() != ECameraPerspective::ThirdPerson)
 	{
 		return;
 	}
@@ -771,8 +783,8 @@ void AUSKCharacter::Lean(const FInputActionValue& Input)
     const float InputValue = Input.Get<float>();
 	const float LeanValue = InputValue * LeanOffset;
 	TargetLeanCameraOffset = FVector(0.0f,
-		CameraPerspective == ECameraPerspective::ThirdPerson ? LeanValue : 0.0f,
-		CameraPerspective == ECameraPerspective::FirstPerson ? LeanValue : 0.0f);
+		GetCameraPerspective() == ECameraPerspective::ThirdPerson ? LeanValue : 0.0f,
+		GetCameraPerspective() == ECameraPerspective::FirstPerson ? LeanValue : 0.0f);
     TargetLeanCameraRoll = InputValue * LeanRotation;
 }
 
@@ -787,6 +799,8 @@ void AUSKCharacter::UpdateLeaning(const float DeltaSeconds)
         return;
     }
 
+	const FVector DefaultCameraLocation = GetCameraPerspective() == ECameraPerspective::ThirdPerson
+		? FVector::ZeroVector : CameraAttachOffset;
 	GetCameraComponent()->SetRelativeLocation(UKismetMathLibrary::VInterpTo(
 		GetCameraComponent()->GetRelativeLocation(), DefaultCameraLocation + TargetLeanCameraOffset,
 		DeltaSeconds, LeanSpeed));
@@ -1117,4 +1131,31 @@ void AUSKCharacter::OnAimTimelineUpdated(float Value)
 	const FTransform TargetTransform = Weapon->WeaponAimTransform;
 	Weapon->SetActorRelativeTransform(UKismetMathLibrary::TLerp(OriginalTransform, TargetTransform, Value));
 	GetCameraComponent()->SetFieldOfView(FMath::Lerp(DefaultCameraFov, Weapon->AimFov, Value));
+}
+
+/**
+ * @brief Initialize the current camera perspective
+ */
+void AUSKCharacter::InitializeCameraPerspective()
+{
+	USK_LOG_INFO("Initializing camera perspective");
+	
+	GetCharacterMovement()->bOrientRotationToMovement = GetCameraPerspective() == ECameraPerspective::ThirdPerson;
+	GetCameraComponent()->bUsePawnControlRotation = GetCameraPerspective() == ECameraPerspective::FirstPerson;
+	bUseControllerRotationYaw = GetCameraPerspective() == ECameraPerspective::FirstPerson;
+	
+	CurrentArmLength = 0.0f;
+	GetSpringArmComponent()->TargetArmLength = 0.0f;	
+
+	if (GetCameraPerspective() == ECameraPerspective::ThirdPerson)
+	{
+		GetCameraComponent()->AttachToComponent(GetSpringArmComponent(),
+			FAttachmentTransformRules::SnapToTargetIncludingScale);
+	}
+	else
+	{
+		GetCameraComponent()->AttachToComponent(GetMesh(),
+			FAttachmentTransformRules::SnapToTargetIncludingScale, HeadSocketName);
+		GetCameraComponent()->SetRelativeLocation(CameraAttachOffset);
+	}
 }

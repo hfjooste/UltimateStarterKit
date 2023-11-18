@@ -139,6 +139,12 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
 	UInputAction* InteractAction;
+	
+	/**
+	 * @brief The switch camera perspective input action
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
+	UInputAction* SwitchCameraPerspectiveAction;
 
 	/**
 	 * @brief The camera perspective used by the character
@@ -147,38 +153,39 @@ public:
 	ECameraPerspective CameraPerspective;
 
 	/**
+	 * @brief Can the character switch perspectives?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera")
+	bool bCanSwitchCameraPerspectives = true;
+
+	/**
 	 * @brief The name of the head socket used to attach the camera in the first person perspective
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera",
-		meta=(EditCondition = "CameraPerspective==ECameraPerspective::FirstPerson", EditConditionHides))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera|First Person")
 	FName HeadSocketName;
 
 	/**
 	 * @brief The offset of the camera after attaching to the head
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera",
-		meta=(EditCondition = "CameraPerspective==ECameraPerspective::FirstPerson", EditConditionHides))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera|First Person")
 	FVector CameraAttachOffset;
 
 	/**
 	 * @brief Length of the spring arm component
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera",
-		meta=(EditCondition = "CameraPerspective==ECameraPerspective::ThirdPerson", EditConditionHides))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera|ThirdPerson")
 	float TargetArmLength = 350.0f;
 
 	/**
 	 * @brief The multiplier applied to the spring arm component when the character is moving
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera",
-		meta=(EditCondition = "CameraPerspective==ECameraPerspective::ThirdPerson", EditConditionHides))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera|ThirdPerson")
 	float ArmLengthMultiplier = 0.4f;
 
 	/**
 	 * @brief The speed used when adjusting the camera distance
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera",
-		meta=(EditCondition = "CameraPerspective==ECameraPerspective::ThirdPerson", EditConditionHides))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera|ThirdPerson")
 	float CameraAdjustmentSpeed = 3.0f;
 
 	/**
@@ -588,6 +595,19 @@ public:
 	ECameraPerspective GetCameraPerspective() const;
 
 	/**
+	 * @brief Update the current camera perspective
+	 * @param NewCameraPerspective The new camera perspective
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Camera")
+	void UpdateCameraPerspective(const ECameraPerspective NewCameraPerspective);
+
+	/**
+	 * @brief Switch the current camera perspective
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Camera")
+	void SwitchCameraPerspective();
+
+	/**
 	 * @brief Set the current weapon used by the character
 	 * @param NewWeapon The new weapon
 	 */
@@ -865,11 +885,6 @@ private:
 	float AirTime;
 
 	/**
-	 * @brief The default camera location
-	 */
-	FVector DefaultCameraLocation;
-
-	/**
 	 * @brief The target camera lean offset
 	 */
 	FVector TargetLeanCameraOffset;
@@ -1114,4 +1129,9 @@ private:
 	 */
 	UFUNCTION()
 	void OnAimTimelineUpdated(float Value);
+
+	/**
+	 * @brief Initialize the current camera perspective
+	 */
+	void InitializeCameraPerspective();
 };
