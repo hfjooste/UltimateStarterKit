@@ -7,10 +7,8 @@ os.system(f"python \"{docs}\" --input \"Audio\\AudioUtils\" --output audioutils"
 os.system(f"python \"{docs}\" --input \"Audio\\MusicPlayer\" --output music")
 
 os.system(f"python \"{docs}\" --input \"Character\\USKCharacterAnimationInstance\" --output characteranimationinstance")
-os.system(f"python \"{docs}\" --input \"Character\\PlatformerCharacter\" --output platformercharacter")
 os.system(f"python \"{docs}\" --input \"Character\\ShadowDecal\" --output platformershadow")
 os.system(f"python \"{docs}\" --input \"Character\\USKCharacter\" --output uskcharacter")
-os.system(f"python \"{docs}\" --input \"Character\\FpsCharacter\" --output fpscharacter")
 
 os.system(f"python \"{docs}\" --input \"Core\\InputDevice\" --output inputdevice")
 os.system(f"python \"{docs}\" --input \"Core\\USKGameInstance\" --output gameinstance")

@@ -643,6 +643,18 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>bool</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>AimRotation</td>
+		<td>Is the character aiming?</td>
+		<td>float</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>AimBoneName</td>
+		<td>The bone to rotate while the player is aiming up or down using the first person camera perspective</td>
+		<td>FName</td>
+		<td></td>
+	</tr>
 </table>
 
 ### Functions

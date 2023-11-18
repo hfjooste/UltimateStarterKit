@@ -25,6 +25,11 @@ The <code>USKCharacter</code> uses the following components:
 		<td>UCameraComponent*</td>
 	</tr>
 	<tr>
+		<td>SpringArmComponent</td>
+		<td>The spring arm component responsible for controlling the distance of the camera</td>
+		<td>USpringArmComponent*</td>
+	</tr>
+	<tr>
 		<td>CrouchTimeline</td>
 		<td>The timeline component used for smooth crouching</td>
 		<td>UTimelineComponent*</td>
@@ -122,6 +127,42 @@ The <code>USKCharacter</code> uses the following components:
 		<td>The interact input action</td>
 		<td>UInputAction*</td>
 		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CameraPerspective</td>
+		<td>The camera perspective used by the character</td>
+		<td>ECameraPerspective</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>HeadSocketName</td>
+		<td>The name of the head socket used to attach the camera in the first person perspective</td>
+		<td>FName</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>CameraAttachOffset</td>
+		<td>The offset of the camera after attaching to the head</td>
+		<td>FVector</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>TargetArmLength</td>
+		<td>Length of the spring arm component</td>
+		<td>float</td>
+		<td>350.0f</td>
+	</tr>
+	<tr>
+		<td>ArmLengthMultiplier</td>
+		<td>The multiplier applied to the spring arm component when the character is moving</td>
+		<td>float</td>
+		<td>0.4f</td>
+	</tr>
+	<tr>
+		<td>CameraAdjustmentSpeed</td>
+		<td>The speed used when adjusting the camera distance</td>
+		<td>float</td>
+		<td>3.0f</td>
 	</tr>
 	<tr>
 		<td>ShadowDecalClass</td>
@@ -496,6 +537,18 @@ The <code>USKCharacter</code> uses the following components:
 		<td><strong>UCameraComponent*</strong><br/>The camera used by the character</td>
 	</tr>
 	<tr>
+		<td>GetSpringArmComponent</td>
+		<td>Get the spring arm component of the character</td>
+		<td></td>
+		<td><strong>USpringArmComponent*</strong><br/>The spring arm component responsible for controlling the distance of the camera</td>
+	</tr>
+	<tr>
+		<td>GetCameraPerspective</td>
+		<td>Get the current camera perspective</td>
+		<td></td>
+		<td><strong>ECameraPerspective</strong><br/>The current camera perspective</td>
+	</tr>
+	<tr>
 		<td>SetWeapon</td>
 		<td>Set the current weapon used by the character</td>
 		<td><strong>NewWeapon (AWeapon*)</strong><br/>The new weapon</td>
@@ -506,6 +559,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>Get the current weapon used by the character</td>
 		<td></td>
 		<td><strong>AWeapon*</strong><br/>The current weapon used by the character</td>
+	</tr>
+	<tr>
+		<td>HasWeapon</td>
+		<td>Check if the character has a weapon</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the character has a weapon</td>
 	</tr>
 	<tr>
 		<td>IsCrouching</td>

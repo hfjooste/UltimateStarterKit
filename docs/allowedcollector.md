@@ -20,12 +20,8 @@ The types of actor(s) that can collect an item
 		<td>Any character can collect the item</td>
 	</tr>
 	<tr>
-		<td>AnyPlatformerCharacter</td>
-		<td>Any platformer character can collect the item</td>
-	</tr>
-	<tr>
-		<td>AnyFpsCharacter</td>
-		<td>Any FPS character can collect the item</td>
+		<td>AnyUskCharacter</td>
+		<td>Any USK character can collect the item</td>
 	</tr>
 	<tr>
 		<td>PossessedPawn</td>
