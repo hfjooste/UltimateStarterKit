@@ -129,10 +129,22 @@ The <code>USKCharacter</code> uses the following components:
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>SwitchCameraPerspectiveAction</td>
+		<td>The switch camera perspective input action</td>
+		<td>UInputAction*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>CameraPerspective</td>
 		<td>The camera perspective used by the character</td>
 		<td>ECameraPerspective</td>
 		<td></td>
+	</tr>
+	<tr>
+		<td>bCanSwitchCameraPerspectives</td>
+		<td>Can the character switch perspectives?</td>
+		<td>bool</td>
+		<td>true</td>
 	</tr>
 	<tr>
 		<td>HeadSocketName</td>
@@ -547,6 +559,18 @@ The <code>USKCharacter</code> uses the following components:
 		<td>Get the current camera perspective</td>
 		<td></td>
 		<td><strong>ECameraPerspective</strong><br/>The current camera perspective</td>
+	</tr>
+	<tr>
+		<td>UpdateCameraPerspective</td>
+		<td>Update the current camera perspective</td>
+		<td><strong>NewCameraPerspective (ECameraPerspective)</strong><br/>The new camera perspective</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>SwitchCameraPerspective</td>
+		<td>Switch the current camera perspective</td>
+		<td></td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>SetWeapon</td>
