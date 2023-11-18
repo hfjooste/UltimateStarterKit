@@ -13,6 +13,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/TimelineComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Components/InteractTrigger.h"
 #include "USK/Data/StatsComponent.h"
@@ -30,8 +31,12 @@ AUSKCharacter::AUSKCharacter()
 	CrouchTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("Crouch Timeline"));
 	AimTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("Aim Timeline"));
 
+	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("Camera Boom"));
+	SpringArmComponent->SetupAttachment(GetCapsuleComponent(), "head");
+	SpringArmComponent->bUsePawnControlRotation = true;
+	
+	GetCameraComponent()->SetupAttachment(GetMesh());
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f);
-	GetCharacterMovement()->bOrientRotationToMovement = true;
 
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
@@ -52,6 +57,26 @@ void AUSKCharacter::BeginPlay()
 	GetCharacterMovement()->GravityScale = Gravity;
 	GetCharacterMovement()->BrakingFriction = BrakingFriction;
 	GetCharacterMovement()->MaxAcceleration = MaxAcceleration;
+	GetCharacterMovement()->bOrientRotationToMovement = CameraPerspective == ECameraPerspective::ThirdPerson;
+	
+	USK_LOG_TRACE("Initializing character camera");
+	GetCameraComponent()->bUsePawnControlRotation = CameraPerspective == ECameraPerspective::FirstPerson;
+	bUseControllerRotationYaw = CameraPerspective == ECameraPerspective::FirstPerson;
+    GetSpringArmComponent()->TargetArmLength =
+    	CameraPerspective == ECameraPerspective::ThirdPerson ? TargetArmLength : 0.0f;
+    CurrentArmLength = TargetArmLength;
+
+	if (CameraPerspective == ECameraPerspective::ThirdPerson)
+	{
+		GetCameraComponent()->AttachToComponent(GetSpringArmComponent(),
+			FAttachmentTransformRules::SnapToTargetIncludingScale);
+	}
+	else
+	{
+		GetCameraComponent()->AttachToComponent(GetMesh(),
+			FAttachmentTransformRules::SnapToTargetIncludingScale, HeadSocketName);
+		GetCameraComponent()->SetRelativeLocation(CameraAttachOffset);
+	}
 
 	USK_LOG_TRACE("Initializing character jumping");
 	JumpMaxCount = 1;
@@ -85,6 +110,7 @@ void AUSKCharacter::BeginPlay()
 		AimTimeline->SetLooping(false);
 	}
 
+	DefaultMeshLocation = GetMesh()->GetRelativeLocation();
     DefaultCameraLocation = GetCameraComponent()->GetRelativeLocation();
 	DefaultCameraFov = GetCameraComponent()->FieldOfView;
 	StatsComponent = dynamic_cast<UStatsComponent*>(GetComponentByClass(UStatsComponent::StaticClass()));
@@ -99,6 +125,7 @@ void AUSKCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	AirTime = GetCharacterMovement()->IsFalling() ? AirTime + DeltaSeconds : 0.0f;
+	AdjustCameraPosition(DeltaSeconds);
     UpdateLeaning(DeltaSeconds);
 	UpdateSliding(DeltaSeconds);
 	UpdateMovementSpeed();
@@ -212,6 +239,24 @@ UCameraComponent* AUSKCharacter::GetCameraComponent() const
 }
 
 /**
+ * @brief Get the spring arm component of the character
+ * @return The spring arm component responsible for controlling the distance of the camera
+ */
+USpringArmComponent* AUSKCharacter::GetSpringArmComponent() const
+{
+	return SpringArmComponent;
+}
+
+/**
+ * @brief Get the current camera perspective
+ * @return The current camera perspective
+ */
+ECameraPerspective AUSKCharacter::GetCameraPerspective() const
+{
+	return CameraPerspective;
+}
+
+/**
  * @brief Set the current weapon used by the character
  * @param NewWeapon The new weapon
  */
@@ -233,12 +278,16 @@ void AUSKCharacter::SetWeapon(AWeapon* NewWeapon)
  */
 AWeapon* AUSKCharacter::GetWeapon() const
 {
-	if (Weapons.Num() == 0 || Weapons.Num() <= CurrentWeaponIndex)
-	{
-		return nullptr;
-	}
-	
-	return Weapons[CurrentWeaponIndex];
+	return HasWeapon() ? Weapons[CurrentWeaponIndex] : nullptr;
+}
+
+/**
+ * @brief Check if the character has a weapon
+ * @return A boolean value indicating if the character has a weapon
+ */
+bool AUSKCharacter::HasWeapon() const
+{
+	return Weapons.Num() > 0 && Weapons.Num() > CurrentWeaponIndex;
 }
 
 /**
@@ -528,7 +577,10 @@ void AUSKCharacter::StopCrouching()
  * @brief Update the character mesh location while crouching
  * @param SizeDifference The difference between the original capsule size and the crouched capsule size
  */
-void AUSKCharacter::UpdateCharacterMeshLocationWhileCrouching(float SizeDifference) { }
+void AUSKCharacter::UpdateCharacterMeshLocationWhileCrouching(float SizeDifference)
+{
+	GetMesh()->SetRelativeLocation(DefaultMeshLocation + FVector(0.0f, 0.0f, SizeDifference));
+}
 
 /**
  * @brief Start the stomping ability
@@ -616,6 +668,23 @@ void AUSKCharacter::RotateCamera(const FInputActionValue& Input)
 }
 
 /**
+ * @brief Adjust the camera position
+ * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+ */
+void AUSKCharacter::AdjustCameraPosition(const float DeltaSeconds)
+{
+	if (CameraPerspective != ECameraPerspective::ThirdPerson)
+	{
+		return;
+	}
+
+	const float ArmAdjustment = UKismetMathLibrary::VSizeXY(GetMovementComponent()->Velocity) * ArmLengthMultiplier;
+	CurrentArmLength = TargetArmLength + ArmAdjustment;
+	GetSpringArmComponent()->TargetArmLength = FMath::Lerp(GetSpringArmComponent()->TargetArmLength,
+		CurrentArmLength, DeltaSeconds * CameraAdjustmentSpeed);
+}
+
+/**
  * @brief Reset the coyote jump values
  */
 void AUSKCharacter::ResetCoyoteJump()
@@ -700,7 +769,10 @@ void AUSKCharacter::Lean(const FInputActionValue& Input)
     }
 	
     const float InputValue = Input.Get<float>();
-    TargetLeanCameraOffset = FVector(0.0f, InputValue * LeanOffset, 0.0f);
+	const float LeanValue = InputValue * LeanOffset;
+	TargetLeanCameraOffset = FVector(0.0f,
+		CameraPerspective == ECameraPerspective::ThirdPerson ? LeanValue : 0.0f,
+		CameraPerspective == ECameraPerspective::FirstPerson ? LeanValue : 0.0f);
     TargetLeanCameraRoll = InputValue * LeanRotation;
 }
 
@@ -714,17 +786,17 @@ void AUSKCharacter::UpdateLeaning(const float DeltaSeconds)
     {
         return;
     }
-	
-    GetCameraComponent()->SetRelativeLocation(UKismetMathLibrary::VInterpTo(
-        GetCameraComponent()->GetRelativeLocation(), DefaultCameraLocation + TargetLeanCameraOffset,
-        DeltaSeconds, LeanSpeed));
 
-    AController* FpsController = GetController();
-    const FRotator ControlRotation = FpsController->GetControlRotation();
+	GetCameraComponent()->SetRelativeLocation(UKismetMathLibrary::VInterpTo(
+		GetCameraComponent()->GetRelativeLocation(), DefaultCameraLocation + TargetLeanCameraOffset,
+		DeltaSeconds, LeanSpeed));
+
+    AController* CharacterController = GetController();
+    const FRotator ControlRotation = CharacterController->GetControlRotation();
 	const FRotator NewLeanRotation = UKismetMathLibrary::RInterpTo(ControlRotation,
 		FRotator(ControlRotation.Pitch, ControlRotation.Yaw, TargetLeanCameraRoll),
 		DeltaSeconds, LeanSpeed);
-    FpsController->SetControlRotation(NewLeanRotation);
+    CharacterController->SetControlRotation(NewLeanRotation);
 	CurrentLeanCameraRoll = NewLeanRotation.Roll;
 }
 

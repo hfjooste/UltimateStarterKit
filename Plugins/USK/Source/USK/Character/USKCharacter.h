@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "CameraPerspective.h"
 #include "ShadowDecal.h"
 #include "InputActionValue.h"
 #include "NiagaraCommon.h"
@@ -38,6 +39,13 @@ class USK_API AUSKCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
 		meta=(AllowPrivateAccess = "true"))
 	class UCameraComponent* CameraComponent;
+
+	/**
+	 * @brief The spring arm component responsible for controlling the distance of the camera
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
+		meta=(AllowPrivateAccess = "true"))
+	class USpringArmComponent* SpringArmComponent;
 
 	/**
 	 * @brief The timeline component used for smooth crouching
@@ -131,6 +139,47 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
 	UInputAction* InteractAction;
+
+	/**
+	 * @brief The camera perspective used by the character
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera")
+	ECameraPerspective CameraPerspective;
+
+	/**
+	 * @brief The name of the head socket used to attach the camera in the first person perspective
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera",
+		meta=(EditCondition = "CameraPerspective==ECameraPerspective::FirstPerson", EditConditionHides))
+	FName HeadSocketName;
+
+	/**
+	 * @brief The offset of the camera after attaching to the head
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera",
+		meta=(EditCondition = "CameraPerspective==ECameraPerspective::FirstPerson", EditConditionHides))
+	FVector CameraAttachOffset;
+
+	/**
+	 * @brief Length of the spring arm component
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera",
+		meta=(EditCondition = "CameraPerspective==ECameraPerspective::ThirdPerson", EditConditionHides))
+	float TargetArmLength = 350.0f;
+
+	/**
+	 * @brief The multiplier applied to the spring arm component when the character is moving
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera",
+		meta=(EditCondition = "CameraPerspective==ECameraPerspective::ThirdPerson", EditConditionHides))
+	float ArmLengthMultiplier = 0.4f;
+
+	/**
+	 * @brief The speed used when adjusting the camera distance
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera",
+		meta=(EditCondition = "CameraPerspective==ECameraPerspective::ThirdPerson", EditConditionHides))
+	float CameraAdjustmentSpeed = 3.0f;
 
 	/**
 	 * @brief The shadow decal class used to draw a shadow below the character while in the air
@@ -525,6 +574,20 @@ public:
 	UCameraComponent* GetCameraComponent() const;
 
 	/**
+	 * @brief Get the spring arm component of the character
+	 * @return The spring arm component responsible for controlling the distance of the camera
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Camera")
+	USpringArmComponent* GetSpringArmComponent() const;
+
+	/**
+	 * @brief Get the current camera perspective
+	 * @return The current camera perspective
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Camera")
+	ECameraPerspective GetCameraPerspective() const;
+
+	/**
 	 * @brief Set the current weapon used by the character
 	 * @param NewWeapon The new weapon
 	 */
@@ -537,6 +600,13 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Weapons")
 	AWeapon* GetWeapon() const;
+
+	/**
+	 * @brief Check if the character has a weapon
+	 * @return A boolean value indicating if the character has a weapon
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Weapons")
+	bool HasWeapon() const;
 
 	/**
 	 * @brief Check if the character is crouching 
@@ -703,7 +773,7 @@ protected:
 	 * @param SizeDifference The difference between the original capsule size and the crouched capsule size
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Movement")
-	virtual void UpdateCharacterMeshLocationWhileCrouching(float SizeDifference);
+	void UpdateCharacterMeshLocationWhileCrouching(float SizeDifference);
 
 	/**
 	 * @brief Start the stomping ability
@@ -738,6 +808,16 @@ private:
 	 */
 	UPROPERTY()
 	UStatsComponent* StatsComponent;
+
+	/**
+	 * @brief The current arm length of the spring arm component
+	 */
+	float CurrentArmLength;
+
+	/**
+	 * @brief The default location of the character mesh
+	 */
+	FVector DefaultMeshLocation;
 	
 	/**
 	 * @brief Can the character perform a coyote jump?
@@ -875,6 +955,12 @@ private:
 	 * @param Input The input action containing the input values
 	 */
 	void RotateCamera(const FInputActionValue& Input);
+
+	/**
+	 * @brief Adjust the camera position
+	 * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+	 */
+	void AdjustCameraPosition(const float DeltaSeconds);
 
 	/**
 	 * @brief Reset the coyote jump values

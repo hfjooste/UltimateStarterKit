@@ -636,8 +636,20 @@ public:
 	/**
 	 * @brief Is the character aiming?
 	 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Movement")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Aiming")
 	bool bIsAiming;
+
+	/**
+	 * @brief Is the character aiming?
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Aiming")
+	float AimRotation;
+
+	/**
+	 * @brief The bone to rotate while the player is aiming up or down using the first person camera perspective
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Aiming")
+	FName AimBoneName;
 
 protected:
 	/**

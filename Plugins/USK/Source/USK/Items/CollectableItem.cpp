@@ -7,8 +7,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 #include "USK/Audio/AudioUtils.h"
-#include "USK/Character/FpsCharacter.h"
-#include "USK/Character/PlatformerCharacter.h"
+#include "USK/Character/USKCharacter.h"
 #include "USK/Components/InteractTrigger.h"
 #include "USK/Logger/Log.h"
 #include "USK/Quests/QuestComponent.h"
@@ -56,10 +55,8 @@ bool ACollectableItem::CanCollectItem_Implementation(AActor* Collector) const
 		return Collector->IsA(APawn::StaticClass());
 	case EAllowedCollector::AnyCharacter:
 		return Collector->IsA(ACharacter::StaticClass());
-	case EAllowedCollector::AnyPlatformerCharacter:
-		return Collector->IsA(APlatformerCharacter::StaticClass());
-	case EAllowedCollector::AnyFpsCharacter:
-		return Collector->IsA(AFpsCharacter::StaticClass());
+	case EAllowedCollector::AnyUskCharacter:
+		return Collector->IsA(AUSKCharacter::StaticClass());
 	case EAllowedCollector::PossessedPawn:
 		return UGameplayStatics::GetPlayerPawn(GetWorld(), 0) == Collector;
 	case EAllowedCollector::Custom:
