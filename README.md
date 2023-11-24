@@ -2,13 +2,13 @@
 <p>
     <img alt="Stars" src="https://img.shields.io/github/stars/hfjooste/UltimateStarterKit" />
     <img alt="Downloads" src="https://img.shields.io/github/downloads/hfjooste/UltimateStarterKit/total" />
-    <img alt="Commit Activity" src="https://img.shields.io/github/commit-activity/w/hfjooste/UltimateStarterKit" />
     <img alt="Contributors" src="https://img.shields.io/github/contributors/hfjooste/UltimateStarterKit" />
     <img alt="Issues" src="https://img.shields.io/github/issues/hfjooste/UltimateStarterKit" />
 </p>
 The Ultimate Starter Kit plugin to speed up development of Unreal Engine games
 
 ## 📝 Requirements
+<i><strong>This plugin was only tested on Windows. It might not work as expected on Linux/MacOS</strong></i><br/><br/>
 The Ultimate Starter Kit plugin is only available for Unreal Engine 4.27 and newer. The plugin also depends on the following plugins:
 <ol>
     <li>Niagara</li>
@@ -42,6 +42,8 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><strong>Characters</strong>: Character controllers with lots of features
         <ul>
             <li>First and Third person characters</li>
+            <li>True FPS with a single full body mesh<li>
+            <li>Switch between different camera perspectives at runtime</li>
             <li>Shadow decals to make platforming easier</li>
             <li>Sprinting with stamina support</li>
             <li>Double jumping</li>
@@ -51,6 +53,13 @@ The Ultimate Starter Kit plugin comes with the following features:
             <li>Stomping with stomp jumping</li>
             <li>Leaning with procedural animations</li>
             <li>Sliding with long jump</li>
+        </ul>
+    </li>
+    <li><strong>Character Animation Blueprint</strong>: Base animation blueprint for all USK characters
+        <ul>
+            <li>Upper/Lower body animation blending</li>
+            <li>Procedural leaning animations</li>
+            <li>Supports animations for 3 different armed states with aiming animations</li>
         </ul>
     </li>
     <li><strong>Weapons System</strong>: A customizable weapon system with support for recoil, multiple fire types, aiming, fire rates, ammo, reloading, and projectile types</li>
