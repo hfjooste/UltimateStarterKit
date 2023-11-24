@@ -59,6 +59,150 @@ void UUSKCharacterAnimationInstance::NativeUpdateAnimation(float DeltaSeconds)
 }
 
 /**
+ * @brief Get the base idle animation
+ * @return The idle animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetIdleBaseAnimation() const
+{
+	return IdleBaseAnimation;
+}
+
+/**
+ * @brief Get the base walk animation
+ * @return The walk animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetWalkBaseAnimation() const
+{
+	return WalkBaseAnimation;
+}
+
+/**
+ * @brief Get the base run animation
+ * @return The run animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetRunBaseAnimation() const
+{
+	return RunBaseAnimation;
+}
+
+/**
+ * @brief Get the base sprint animation
+ * @return The sprint animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetSprintBaseAnimation() const
+{
+	return SprintBaseAnimation;
+}
+
+/**
+ * @brief Get the base jump animation
+ * @return The jump animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetJumpBaseAnimation() const
+{
+	return JumpBaseAnimation;
+}
+
+/**
+ * @brief Get the base double jump animation
+ * @return The double jump animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetDoubleJumpBaseAnimation() const
+{
+	return DoubleJumpBaseAnimation;
+}
+
+/**
+ * @brief Get the base fall animation
+ * @return The fall animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetFallBaseAnimation() const
+{
+	return FallBaseAnimation;
+}
+
+/**
+ * @brief Get the base land animation
+ * @return The land animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetLandBaseAnimation() const
+{
+	return LandBaseAnimation;
+}
+
+/**
+ * @brief Get the base crouch start animation
+ * @return The crouch start animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchStartBaseAnimation() const
+{
+	return CrouchStartBaseAnimation;
+}
+
+/**
+ * @brief Get the base crouch end animation
+ * @return The crouch end animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchEndBaseAnimation() const
+{
+	return CrouchEndBaseAnimation;
+}
+
+/**
+ * @brief Get the base crouch idle animation
+ * @return The crouch idle animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchIdleBaseAnimation() const
+{
+	return CrouchIdleBaseAnimation;
+}
+
+/**
+ * @brief Get the base crouch walk animation
+ * @return The crouch walk animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchWalkBaseAnimation() const
+{
+	return CrouchWalkBaseAnimation;
+}
+
+/**
+ * @brief Get the base stomp start animation
+ * @return The stomp start animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetStompStartBaseAnimation() const
+{
+	return StompStartBaseAnimation;
+}
+
+/**
+ * @brief Get the base slide start animation
+ * @return The slide start animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetSlideStartBaseAnimation() const
+{
+	return SlideStartBaseAnimation;
+}
+
+/**
+ * @brief Get the base slide end animation
+ * @return The slide end animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetSlideEndBaseAnimation() const
+{
+	return SlideEndBaseAnimation;
+}
+
+/**
+ * @brief Get the base slide loop animation
+ * @return The slide loop animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetSlideLoopBaseAnimation() const
+{
+	return SlideLoopBaseAnimation;
+}
+
+/**
  * @brief Get the idle animation based on the current armed state
  * @return The idle animation to play
  */

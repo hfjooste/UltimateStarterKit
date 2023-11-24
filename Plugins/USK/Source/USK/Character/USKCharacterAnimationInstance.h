@@ -16,6 +16,120 @@ class USK_API UUSKCharacterAnimationInstance : public UAnimInstance
 
 public:
 	/**
+	 * @brief The name of the bone used to blend the character's animations
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations")
+	FName BlendBoneName;
+		
+	/**
+	 * @brief The base animation used when the character is in the idle state
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* IdleBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is walking
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* WalkBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is running
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* RunBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is sprinting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* SprintBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is jumping
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* JumpBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is double jumping
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* DoubleJumpBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is falling
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* FallBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is landing
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* LandBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character starts crouching
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* CrouchStartBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character stops crouching
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* CrouchEndBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is crouching and idle
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* CrouchIdleBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is crouching and walking
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* CrouchWalkBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is starting to stomp
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* StompStartBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is falling after a stomp
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* StompFallBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is landing after a stomp
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* StompLandBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character starts sliding
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* SlideStartBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character stops sliding
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* SlideEndBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is sliding
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* SlideLoopBaseAnimation;
+	
+	/**
 	 * @brief The animation used when the character is in the idle state while unarmed
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
@@ -662,6 +776,118 @@ protected:
 	 * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
 	 */
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
+
+	/**
+	 * @brief Get the base idle animation
+	 * @return The idle animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetIdleBaseAnimation() const;
+
+	/**
+	 * @brief Get the base walk animation
+	 * @return The walk animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetWalkBaseAnimation() const;
+
+	/**
+	 * @brief Get the base run animation
+	 * @return The run animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetRunBaseAnimation() const;
+
+	/**
+	 * @brief Get the base sprint animation
+	 * @return The sprint animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetSprintBaseAnimation() const;
+
+	/**
+	 * @brief Get the base jump animation
+	 * @return The jump animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetJumpBaseAnimation() const;
+
+	/**
+	 * @brief Get the base double jump animation
+	 * @return The double jump animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetDoubleJumpBaseAnimation() const;
+
+	/**
+	 * @brief Get the base fall animation
+	 * @return The fall animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetFallBaseAnimation() const;
+
+	/**
+	 * @brief Get the base land animation
+	 * @return The land animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetLandBaseAnimation() const;
+
+	/**
+	 * @brief Get the base crouch start animation
+	 * @return The crouch start animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetCrouchStartBaseAnimation() const;
+
+	/**
+	 * @brief Get the base crouch end animation
+	 * @return The crouch end animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetCrouchEndBaseAnimation() const;
+
+	/**
+	 * @brief Get the base crouch idle animation
+	 * @return The crouch idle animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetCrouchIdleBaseAnimation() const;
+
+	/**
+	 * @brief Get the base crouch walk animation
+	 * @return The crouch walk animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetCrouchWalkBaseAnimation() const;
+
+	/**
+	 * @brief Get the base stomp start animation
+	 * @return The stomp start animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetStompStartBaseAnimation() const;
+
+	/**
+	 * @brief Get the base slide start animation
+	 * @return The slide start animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetSlideStartBaseAnimation() const;
+
+	/**
+	 * @brief Get the base slide end animation
+	 * @return The slide end animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetSlideEndBaseAnimation() const;
+
+	/**
+	 * @brief Get the base slide loop animation
+	 * @return The slide loop animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetSlideLoopBaseAnimation() const;
 
 	/**
 	 * @brief Get the idle animation based on the current armed state
