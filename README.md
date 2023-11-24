@@ -42,7 +42,7 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><strong>Characters</strong>: Character controllers with lots of features
         <ul>
             <li>First and Third person characters</li>
-            <li>True FPS with a single full body mesh<li>
+            <li>True FPS with a single full body mesh</li>
             <li>Switch between different camera perspectives at runtime</li>
             <li>Shadow decals to make platforming easier</li>
             <li>Sprinting with stamina support</li>
