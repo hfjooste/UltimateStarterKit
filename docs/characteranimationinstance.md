@@ -20,6 +20,120 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<th>Default Value</th>
 	</tr>
 	<tr>
+		<td>BlendBoneName</td>
+		<td>The name of the bone used to blend the character's animations</td>
+		<td>FName</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>IdleBaseAnimation</td>
+		<td>The base animation used when the character is in the idle state</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>WalkBaseAnimation</td>
+		<td>The base animation used when the character is walking</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>RunBaseAnimation</td>
+		<td>The base animation used when the character is running</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SprintBaseAnimation</td>
+		<td>The base animation used when the character is sprinting</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>JumpBaseAnimation</td>
+		<td>The base animation used when the character is jumping</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>DoubleJumpBaseAnimation</td>
+		<td>The base animation used when the character is double jumping</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>FallBaseAnimation</td>
+		<td>The base animation used when the character is falling</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>LandBaseAnimation</td>
+		<td>The base animation used when the character is landing</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchStartBaseAnimation</td>
+		<td>The base animation used when the character starts crouching</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchEndBaseAnimation</td>
+		<td>The base animation used when the character stops crouching</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchIdleBaseAnimation</td>
+		<td>The base animation used when the character is crouching and idle</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchWalkBaseAnimation</td>
+		<td>The base animation used when the character is crouching and walking</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompStartBaseAnimation</td>
+		<td>The base animation used when the character is starting to stomp</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompFallBaseAnimation</td>
+		<td>The base animation used when the character is falling after a stomp</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>StompLandBaseAnimation</td>
+		<td>The base animation used when the character is landing after a stomp</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideStartBaseAnimation</td>
+		<td>The base animation used when the character starts sliding</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideEndBaseAnimation</td>
+		<td>The base animation used when the character stops sliding</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SlideLoopBaseAnimation</td>
+		<td>The base animation used when the character is sliding</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>IdleAnimation</td>
 		<td>The animation used when the character is in the idle state while unarmed</td>
 		<td>UAnimSequence*</td>
@@ -664,6 +778,102 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<th>Description</th>
 		<th>Params</th>
 		<th>Return</th>
+	</tr>
+	<tr>
+		<td>GetIdleBaseAnimation</td>
+		<td>Get the base idle animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The idle animation to play</td>
+	</tr>
+	<tr>
+		<td>GetWalkBaseAnimation</td>
+		<td>Get the base walk animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The walk animation to play</td>
+	</tr>
+	<tr>
+		<td>GetRunBaseAnimation</td>
+		<td>Get the base run animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The run animation to play</td>
+	</tr>
+	<tr>
+		<td>GetSprintBaseAnimation</td>
+		<td>Get the base sprint animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The sprint animation to play</td>
+	</tr>
+	<tr>
+		<td>GetJumpBaseAnimation</td>
+		<td>Get the base jump animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The jump animation to play</td>
+	</tr>
+	<tr>
+		<td>GetDoubleJumpBaseAnimation</td>
+		<td>Get the base double jump animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The double jump animation to play</td>
+	</tr>
+	<tr>
+		<td>GetFallBaseAnimation</td>
+		<td>Get the base fall animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The fall animation to play</td>
+	</tr>
+	<tr>
+		<td>GetLandBaseAnimation</td>
+		<td>Get the base land animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The land animation to play</td>
+	</tr>
+	<tr>
+		<td>GetCrouchStartBaseAnimation</td>
+		<td>Get the base crouch start animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The crouch start animation to play</td>
+	</tr>
+	<tr>
+		<td>GetCrouchEndBaseAnimation</td>
+		<td>Get the base crouch end animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The crouch end animation to play</td>
+	</tr>
+	<tr>
+		<td>GetCrouchIdleBaseAnimation</td>
+		<td>Get the base crouch idle animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The crouch idle animation to play</td>
+	</tr>
+	<tr>
+		<td>GetCrouchWalkBaseAnimation</td>
+		<td>Get the base crouch walk animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The crouch walk animation to play</td>
+	</tr>
+	<tr>
+		<td>GetStompStartBaseAnimation</td>
+		<td>Get the base stomp start animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The stomp start animation to play</td>
+	</tr>
+	<tr>
+		<td>GetSlideStartBaseAnimation</td>
+		<td>Get the base slide start animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The slide start animation to play</td>
+	</tr>
+	<tr>
+		<td>GetSlideEndBaseAnimation</td>
+		<td>Get the base slide end animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The slide end animation to play</td>
+	</tr>
+	<tr>
+		<td>GetSlideLoopBaseAnimation</td>
+		<td>Get the base slide loop animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The slide loop animation to play</td>
 	</tr>
 	<tr>
 		<td>GetIdleAnimation</td>
