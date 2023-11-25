@@ -739,7 +739,7 @@ void AUSKCharacter::OnCrouchTimelineUpdated(float Value)
 	
 	const float CapsuleHalfHeight = GetCharacterMovement()->IsFalling()
 		? DefaultCapsuleSize
-		: FMath::Lerp(0.0f, DefaultCapsuleSize, Value);
+		: FMath::Lerp(GetCapsuleComponent()->GetUnscaledCapsuleRadius(), DefaultCapsuleSize, Value);
 	UpdateCharacterMeshLocationWhileCrouching(DefaultCapsuleSize - CapsuleHalfHeight);
 	GetCapsuleComponent()->SetCapsuleHalfHeight(CapsuleHalfHeight);
 }
