@@ -4,6 +4,7 @@
 #include "AnimationRuntime.h"
 #include "Animation/AnimInstanceProxy.h"
 #include "Animation/AnimTrace.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 #define DEFAULT_SOURCEINDEX 0xFF
 
