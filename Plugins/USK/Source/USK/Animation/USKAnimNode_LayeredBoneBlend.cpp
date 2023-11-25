@@ -11,7 +11,7 @@
  * @brief Create a new instance of the animation node
  */
 FUSKAnimNode_LayeredBoneBlend::FUSKAnimNode_LayeredBoneBlend()
-		: BlendMode(ELayeredBoneBlendMode::BranchFilter)
+		: BlendMode(EUSKLayeredBoneBlendMode::BranchFilter)
 		, bMeshSpaceRotationBlend(false)
 		, bMeshSpaceScaleBlend(false)
 		, CurveBlendOption(ECurveBlendOption::Override)
@@ -232,7 +232,7 @@ void FUSKAnimNode_LayeredBoneBlend::AddPose()
 	BlendWeights.Add(1.f);
 	new (BlendPoses) FPoseLink();
 
-	if (BlendMode == ELayeredBoneBlendMode::BlendMask) 
+	if (BlendMode == EUSKLayeredBoneBlendMode::BlendMask) 
 	{ 
 		BlendMasks.Add(nullptr);
 		return;
@@ -268,7 +268,7 @@ void FUSKAnimNode_LayeredBoneBlend::RemovePose(const int PoseIndex)
  */
 void FUSKAnimNode_LayeredBoneBlend::SetBlendMask(const int32 InPoseIndex, UBlendProfile* InBlendMask)
 {
-	check(BlendMode == ELayeredBoneBlendMode::BlendMask);
+	check(BlendMode == EUSKLayeredBoneBlendMode::BlendMask);
 	check(BlendPoses.IsValidIndex(InPoseIndex));
 	check(BlendMasks.IsValidIndex(InPoseIndex));
 
@@ -316,7 +316,7 @@ void FUSKAnimNode_LayeredBoneBlend::RebuildPerBoneBlendWeights(const USkeleton* 
 		return;
 	}
 
-	if (BlendMode == ELayeredBoneBlendMode::BranchFilter)
+	if (BlendMode == EUSKLayeredBoneBlendMode::BranchFilter)
 	{		
 		FAnimationRuntime::CreateMaskWeights(PerBoneBlendWeights, LayerSetup, InSkeleton);	
 	}

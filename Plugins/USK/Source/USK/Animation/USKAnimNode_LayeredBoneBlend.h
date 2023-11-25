@@ -7,7 +7,7 @@
 #include "Animation/AnimTypes.h"
 #include "Animation/AnimNodeBase.h"
 #include "Animation/AnimData/BoneMaskFilter.h"
-#include "AnimNodes/AnimNode_LayeredBoneBlend.h"
+#include "USKLayeredBoneBlendMode.h"
 #include "USKAnimNode_LayeredBoneBlend.generated.h"
 
 /**
@@ -42,7 +42,7 @@ struct USK_API FUSKAnimNode_LayeredBoneBlend : public FAnimNode_Base
 	 * @brief Whether to use branch filters or a blend mask to specify an input pose per-bone influence
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Animation")
-	ELayeredBoneBlendMode BlendMode;
+	EUSKLayeredBoneBlendMode BlendMode;
 
 	/** 
 	 * @brief The blend masks to use for our layer inputs. Allows the use of per-bone alphas

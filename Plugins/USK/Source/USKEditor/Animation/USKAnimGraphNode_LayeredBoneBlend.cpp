@@ -4,6 +4,7 @@
 #include "ToolMenus.h"
 #include "Kismet2/BlueprintEditorUtils.h"
 #include "ScopedTransaction.h"
+#include "AnimNodes/AnimNode_LayeredBoneBlend.h"
 #include "Kismet2/CompilerResultsLog.h"
 #include "UObject/UE5ReleaseStreamObjectVersion.h"
 
@@ -24,7 +25,7 @@ void UUSKAnimGraphNode_LayeredBoneBlend::PostLoad()
 {
 	Super::PostLoad();
 	
-	if (Node.BlendMode != ELayeredBoneBlendMode::BlendMask)
+	if (Node.BlendMode != EUSKLayeredBoneBlendMode::BlendMask)
 	{
 		return;
 	}
@@ -72,7 +73,7 @@ void UUSKAnimGraphNode_LayeredBoneBlend::PostEditChangeProperty(FPropertyChanged
 		Modify();
 
 		const int NumPoses = Node.BlendPoses.Num();
-		if (Node.BlendMode == ELayeredBoneBlendMode::BlendMask)
+		if (Node.BlendMode == EUSKLayeredBoneBlendMode::BlendMask)
 		{
 			Node.LayerSetup.Reset();
 			Node.BlendMasks.SetNum(NumPoses);
@@ -100,7 +101,7 @@ void UUSKAnimGraphNode_LayeredBoneBlend::ValidateAnimNodeDuringCompilation(USkel
 	UAnimGraphNode_Base::ValidateAnimNodeDuringCompilation(ForSkeleton, MessageLog);
 
 	bool bCompilationError = false;
-	if (Node.BlendMode == ELayeredBoneBlendMode::BlendMask)
+	if (Node.BlendMode == EUSKLayeredBoneBlendMode::BlendMask)
 	{
 		const int NumBlendMasks = Node.BlendMasks.Num();
 		for (int MaskIndex = 0; MaskIndex < NumBlendMasks; ++MaskIndex)
@@ -136,7 +137,7 @@ void UUSKAnimGraphNode_LayeredBoneBlend::ValidateAnimNodeDuringCompilation(USkel
  */
 void UUSKAnimGraphNode_LayeredBoneBlend::PreloadRequiredAssets()
 {
-	if (Node.BlendMode == ELayeredBoneBlendMode::BlendMask)
+	if (Node.BlendMode == EUSKLayeredBoneBlendMode::BlendMask)
 	{
 		const int NumBlendMasks = Node.BlendMasks.Num();
 		for (int MaskIndex = 0; MaskIndex < NumBlendMasks; ++MaskIndex)
