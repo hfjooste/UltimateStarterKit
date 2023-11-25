@@ -35,6 +35,12 @@ class USKEDITOR_API UUSKAnimGraphNode_LayeredBoneBlend : public UAnimGraphNode_B
 	virtual FText GetNodeTitle(ENodeTitleType::Type TitleType) const override;
 
 	/**
+	 * @brief Get the category used by the node
+	 * @return The category used by the node
+	 */
+	virtual FString GetNodeCategory() const override;
+
+	/**
 	 * @brief Get the tooltip text displayed by the node
 	 * @return The tooltip text displayed by the node
 	 */

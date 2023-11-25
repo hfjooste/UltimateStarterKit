@@ -29,6 +29,12 @@ class USKEDITOR_API UUSKAnimGraphNode_ModifyBone : public UAnimGraphNode_Skeleta
 	virtual FText GetNodeTitle(ENodeTitleType::Type TitleType) const override;
 
 	/**
+	 * @brief Get the category used by the node
+	 * @return The category used by the node
+	 */
+	virtual FString GetNodeCategory() const override;
+
+	/**
 	 * @brief Get the tooltip text displayed by the node
 	 * @return The tooltip text displayed by the node
 	 */

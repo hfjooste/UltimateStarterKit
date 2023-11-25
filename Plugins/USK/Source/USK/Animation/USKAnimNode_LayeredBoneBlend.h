@@ -37,7 +37,7 @@ struct USK_API FUSKAnimNode_LayeredBoneBlend : public FAnimNode_Base
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, EditFixedSize, Category = "Ultimate Starter Kit|Animation",
 		meta=(BlueprintCompilerGeneratedDefaults))
 	TArray<FPoseLink> BlendPoses;
-
+	
 	/**
 	 * @brief Whether to use branch filters or a blend mask to specify an input pose per-bone influence
 	 */
@@ -49,7 +49,7 @@ struct USK_API FUSKAnimNode_LayeredBoneBlend : public FAnimNode_Base
 	 */
 	UPROPERTY(EditAnywhere, EditFixedSize, Category = "Ultimate Starter Kit|Animation",
 		meta=(UseAsBlendMask=true))
-	TArray<TObjectPtr<UBlendProfile>> BlendMasks;
+	TArray<UBlendProfile*> BlendMasks;
 
 	/** 
 	 * @brief Configuration for the parts of the skeleton to blend for each layer

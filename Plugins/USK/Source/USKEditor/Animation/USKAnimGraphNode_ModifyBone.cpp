@@ -25,6 +25,15 @@ FText UUSKAnimGraphNode_ModifyBone::GetNodeTitle(ENodeTitleType::Type TitleType)
 }
 
 /**
+ * @brief Get the category used by the node
+ * @return The category used by the node
+ */
+FString UUSKAnimGraphNode_ModifyBone::GetNodeCategory() const
+{
+	return "Ultimate Starter Kit";
+}
+
+/**
  * @brief Get the tooltip text displayed by the node
  * @return The tooltip text displayed by the node
  */

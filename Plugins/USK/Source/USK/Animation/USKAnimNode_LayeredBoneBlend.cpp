@@ -95,7 +95,7 @@ void FUSKAnimNode_LayeredBoneBlend::Update_AnyThread(const FAnimationUpdateConte
 					CurrentBoneBlendWeights, BlendWeights);
 				bHasRelevantPoses = true;
 
-				if (bBlendRootMotionBasedOnRootBone && !CurrentBoneBlendWeights.IsEmpty())
+				if (bBlendRootMotionBasedOnRootBone && CurrentBoneBlendWeights.Num() > 0)
 				{
 					const float NewRootMotionWeight = CurrentBoneBlendWeights[0].BlendWeight;
 					if(NewRootMotionWeight > ZERO_ANIMWEIGHT_THRESH)
@@ -153,8 +153,13 @@ void FUSKAnimNode_LayeredBoneBlend::Evaluate_AnyThread(FPoseContext& Output)
 	TArray<FBlendedCurve> TargetBlendCurves;
 	TargetBlendCurves.SetNum(NumPoses);
 
+#if ENGINE_MAJOR_VERSION == 4
+	TArray<FStackCustomAttributes> TargetBlendAttributes;
+	TargetBlendAttributes.SetNum(NumPoses);
+#else
 	TArray<UE::Anim::FStackAttributeContainer> TargetBlendAttributes;
 	TargetBlendAttributes.SetNum(NumPoses);
+#endif
 
 	for (int ChildIndex = 0; ChildIndex < NumPoses; ++ChildIndex)
 	{
@@ -188,12 +193,21 @@ void FUSKAnimNode_LayeredBoneBlend::Evaluate_AnyThread(FPoseContext& Output)
 			continue;
 		}
 
+#if ENGINE_MAJOR_VERSION == 4
+		BasePoseContext.Curve.Set(UIDIndex, 0.0f);
+#else
 		BasePoseContext.Curve.InvalidateCurveWeight(UIDIndex);
+#endif
+		
 		for (int ChildIndex = 0; ChildIndex < NumPoses; ++ChildIndex)
 		{
 			if (SourceIndex != ChildIndex)
 			{
+#if ENGINE_MAJOR_VERSION == 4
+				TargetBlendCurves[ChildIndex].Set(UIDIndex, 0.0f);
+#else
 				TargetBlendCurves[ChildIndex].InvalidateCurveWeight(UIDIndex);
+#endif
 			}
 		}
 	}
@@ -316,6 +330,9 @@ void FUSKAnimNode_LayeredBoneBlend::RebuildPerBoneBlendWeights(const USkeleton* 
 		return;
 	}
 
+#if ENGINE_MAJOR_VERSION == 4	
+	FAnimationRuntime::CreateMaskWeights(PerBoneBlendWeights, LayerSetup, InSkeleton);
+#else
 	if (BlendMode == EUSKLayeredBoneBlendMode::BranchFilter)
 	{		
 		FAnimationRuntime::CreateMaskWeights(PerBoneBlendWeights, LayerSetup, InSkeleton);	
@@ -324,6 +341,7 @@ void FUSKAnimNode_LayeredBoneBlend::RebuildPerBoneBlendWeights(const USkeleton* 
 	{
 		FAnimationRuntime::CreateMaskWeights(PerBoneBlendWeights, BlendMasks, InSkeleton);
 	}
+#endif
 
 	SkeletonGuid = InSkeleton->GetGuid();
 	VirtualBoneGuid = InSkeleton->GetVirtualBoneGuid();
@@ -336,10 +354,12 @@ void FUSKAnimNode_LayeredBoneBlend::RebuildPerBoneBlendWeights(const USkeleton* 
  */
 void FUSKAnimNode_LayeredBoneBlend::UpdateCachedBoneData(const FBoneContainer& RequiredBones, const USkeleton* Skeleton)
 {
+#if ENGINE_MAJOR_VERSION >= 5
 	if (RequiredBones.GetSerialNumber() == RequiredBonesSerialNumber)
 	{
 		return;
 	}
+#endif
 
 	if (!ArePerBoneBlendWeightsValid(Skeleton) || !bBonesInitialized)
 	{
@@ -398,8 +418,13 @@ void FUSKAnimNode_LayeredBoneBlend::UpdateCachedBoneData(const FBoneContainer& R
 
 				if (DesiredBoneBlendWeights[CompactPoseIndex.GetInt()].BlendWeight > 0.f)
                 {
+#if ENGINE_MAJOR_VERSION == 4
+					CurvePoseSourceIndices[CurrentPoseIndex] =
+						DesiredBoneBlendWeights[CompactPoseIndex.GetInt()].SourceIndex;
+#else
 					CurvePoseSourceIndices[CurrentPoseIndex] =
 						IntCastChecked<uint8>(DesiredBoneBlendWeights[CompactPoseIndex.GetInt()].SourceIndex);
+#endif
                 }
 			}
 		}
@@ -409,7 +434,9 @@ void FUSKAnimNode_LayeredBoneBlend::UpdateCachedBoneData(const FBoneContainer& R
 		CurvePoseSourceIndices.Reset();
 	}
 
+#if ENGINE_MAJOR_VERSION >= 5
 	RequiredBonesSerialNumber = RequiredBones.GetSerialNumber();
+#endif
 }
 
 /**

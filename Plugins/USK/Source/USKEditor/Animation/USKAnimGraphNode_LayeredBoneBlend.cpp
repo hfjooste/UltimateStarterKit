@@ -6,7 +6,6 @@
 #include "ScopedTransaction.h"
 #include "AnimNodes/AnimNode_LayeredBoneBlend.h"
 #include "Kismet2/CompilerResultsLog.h"
-#include "UObject/UE5ReleaseStreamObjectVersion.h"
 
 /**
  * @brief Create a new instance of the animation node
@@ -24,7 +23,8 @@ UUSKAnimGraphNode_LayeredBoneBlend::UUSKAnimGraphNode_LayeredBoneBlend(const FOb
 void UUSKAnimGraphNode_LayeredBoneBlend::PostLoad()
 {
 	Super::PostLoad();
-	
+
+#if ENGINE_MAJOR_VERSION >= 5
 	if (Node.BlendMode != EUSKLayeredBoneBlendMode::BlendMask)
 	{
 		return;
@@ -39,6 +39,7 @@ void UUSKAnimGraphNode_LayeredBoneBlend::PostLoad()
     		BlendMask->ConditionalPostLoad();
     	}
     }
+#endif
 }
 
 /**
@@ -48,7 +49,16 @@ void UUSKAnimGraphNode_LayeredBoneBlend::PostLoad()
  */
 FText UUSKAnimGraphNode_LayeredBoneBlend::GetNodeTitle(ENodeTitleType::Type TitleType) const
 {
-	return FText::FromString("[USK] Transform Bone");
+	return FText::FromString("[USK] Layered Bone Blend");
+}
+
+/**
+ * @brief Get the category used by the node
+ * @return The category used by the node
+ */
+FString UUSKAnimGraphNode_LayeredBoneBlend::GetNodeCategory() const
+{
+	return "Ultimate Starter Kit";
 }
 
 /**
@@ -66,6 +76,7 @@ FText UUSKAnimGraphNode_LayeredBoneBlend::GetTooltipText() const
  */
 void UUSKAnimGraphNode_LayeredBoneBlend::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
+#if ENGINE_MAJOR_VERSION >= 5
 	const FName PropertyName = PropertyChangedEvent.Property ? PropertyChangedEvent.Property->GetFName() : NAME_None;
 	if (PropertyName == GET_MEMBER_NAME_STRING_CHECKED(FAnimNode_LayeredBoneBlend, BlendMode))
 	{
@@ -86,6 +97,7 @@ void UUSKAnimGraphNode_LayeredBoneBlend::PostEditChangeProperty(FPropertyChanged
 
 		FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(GetBlueprint());
 	}
+#endif
 
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 }
@@ -99,7 +111,8 @@ void UUSKAnimGraphNode_LayeredBoneBlend::ValidateAnimNodeDuringCompilation(USkel
 	FCompilerResultsLog& MessageLog)
 {
 	UAnimGraphNode_Base::ValidateAnimNodeDuringCompilation(ForSkeleton, MessageLog);
-
+	
+#if ENGINE_MAJOR_VERSION >= 5
 	bool bCompilationError = false;
 	if (Node.BlendMode == EUSKLayeredBoneBlendMode::BlendMask)
 	{
@@ -125,6 +138,7 @@ void UUSKAnimGraphNode_LayeredBoneBlend::ValidateAnimNodeDuringCompilation(USkel
 	{
 		return;
 	}
+#endif
 
  	if (!Node.ArePerBoneBlendWeightsValid(ForSkeleton))
  	{
@@ -137,6 +151,7 @@ void UUSKAnimGraphNode_LayeredBoneBlend::ValidateAnimNodeDuringCompilation(USkel
  */
 void UUSKAnimGraphNode_LayeredBoneBlend::PreloadRequiredAssets()
 {
+#if ENGINE_MAJOR_VERSION >= 5
 	if (Node.BlendMode == EUSKLayeredBoneBlendMode::BlendMask)
 	{
 		const int NumBlendMasks = Node.BlendMasks.Num();
@@ -146,6 +161,7 @@ void UUSKAnimGraphNode_LayeredBoneBlend::PreloadRequiredAssets()
 			PreloadObject(BlendMask);
 		}
 	}
+#endif
 
 	Super::PreloadRequiredAssets();
 }
