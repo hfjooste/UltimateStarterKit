@@ -37,6 +37,7 @@ void UUSKCharacterAnimationInstance::NativeUpdateAnimation(float DeltaSeconds)
 	bIsSliding = !IsInAir && Character->IsSliding();
 	bIsEndingSlide = Character->IsEndingSlide();
     bIsStomping = Character->IsStomping();
+	StompBlendValue = FMath::Lerp(StompBlendValue, bIsStomping ? 1.0f : 0.0f, DeltaSeconds * MovementBlendSpeed);
     bIsStompStarting = Character->IsStompStarting();
 	LeanCameraRoll = Character->GetLeanCameraRoll() * LeanCameraRotationModifier;
 	bIsAiming = Character->IsAiming();
@@ -118,7 +119,7 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetDoubleJumpBaseAnimation() cons
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetFallBaseAnimation() const
 {
-	return bIsStomping ? StompFallBaseAnimation : FallBaseAnimation;
+	return FallBaseAnimation;
 }
 
 /**
@@ -127,7 +128,7 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetFallBaseAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetLandBaseAnimation() const
 {
-	return bIsStomping ? StompLandBaseAnimation : LandBaseAnimation;
+	return LandBaseAnimation;
 }
 
 /**
@@ -173,6 +174,24 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchWalkBaseAnimation() cons
 UAnimSequence* UUSKCharacterAnimationInstance::GetStompStartBaseAnimation() const
 {
 	return StompStartBaseAnimation;
+}
+
+/**
+ * @brief Get the base stomp fall animation
+ * @return The stomp fall animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetStompFallBaseAnimation() const
+{
+	return StompFallBaseAnimation;
+}
+
+/**
+ * @brief Get the base stomp land animation
+ * @return The stomp land animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetStompLandBaseAnimation() const
+{
+	return StompLandBaseAnimation;
 }
 
 /**
@@ -274,16 +293,10 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetDoubleJumpAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetFallAnimation() const
 {
-	if (bIsAiming)
-	{
-		return bIsStomping
-			? GetAnimation(StompFallAnimation, StompFallWeaponAimOneHandedAnimation, StompFallWeaponAimTwoHandedAnimation)
-			: GetAnimation(FallAnimation, FallWeaponAimOneHandedAnimation, FallWeaponAimTwoHandedAnimation);	
-	}
-	
-	return bIsStomping
-		? GetAnimation(StompFallAnimation, StompFallWeaponOneHandedAnimation, StompFallWeaponTwoHandedAnimation)
+	return bIsAiming
+		? GetAnimation(FallAnimation, FallWeaponAimOneHandedAnimation, FallWeaponAimTwoHandedAnimation)
 		: GetAnimation(FallAnimation, FallWeaponOneHandedAnimation, FallWeaponTwoHandedAnimation);
+		
 }
 
 /**
@@ -292,15 +305,8 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetFallAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetLandAnimation() const
 {
-	if (bIsAiming)
-	{
-		return bIsStomping
-			? GetAnimation(StompLandAnimation, StompLandWeaponAimOneHandedAnimation, StompLandWeaponAimTwoHandedAnimation)
-			: GetAnimation(LandAnimation, LandWeaponOneHandedAnimation, LandWeaponTwoHandedAnimation);
-	}
-	
-	return bIsStomping
-		? GetAnimation(StompLandAnimation, StompLandWeaponOneHandedAnimation, StompLandWeaponTwoHandedAnimation)
+	return bIsAiming
+		? GetAnimation(LandAnimation, LandWeaponAimOneHandedAnimation, LandWeaponAimTwoHandedAnimation)
 		: GetAnimation(LandAnimation, LandWeaponOneHandedAnimation, LandWeaponTwoHandedAnimation);
 }
 
@@ -357,6 +363,28 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetStompStartAnimation() const
 	return bIsAiming
 		? GetAnimation(StompStartAnimation, StompStartWeaponAimOneHandedAnimation, StompStartWeaponAimTwoHandedAnimation)
 		: GetAnimation(StompStartAnimation, StompStartWeaponOneHandedAnimation, StompStartWeaponTwoHandedAnimation);
+}
+
+/**
+ * @brief Get the stomp fall animation based on the current armed state
+ * @return The stomp fall animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetStompFallAnimation() const
+{
+	return bIsAiming
+		? GetAnimation(StompFallAnimation, StompFallWeaponAimOneHandedAnimation, StompFallWeaponAimTwoHandedAnimation)
+		: GetAnimation(StompFallAnimation, StompFallWeaponOneHandedAnimation, StompFallWeaponTwoHandedAnimation);
+}
+
+/**
+ * @brief Get the stomp fall animation based on the current armed state
+ * @return The stomp fall animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetStompLandAnimation() const
+{
+	return bIsAiming
+		? GetAnimation(StompLandAnimation, StompLandWeaponAimOneHandedAnimation, StompLandWeaponAimTwoHandedAnimation)
+		: GetAnimation(StompLandAnimation, StompLandWeaponOneHandedAnimation, StompLandWeaponTwoHandedAnimation);
 }
 
 /**

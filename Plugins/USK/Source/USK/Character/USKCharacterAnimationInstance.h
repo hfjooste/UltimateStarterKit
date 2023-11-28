@@ -694,6 +694,12 @@ public:
 	bool bIsStomping;
 
 	/**
+	 * @brief The value used to blend stomp animations
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Movement|Stomping")
+	float StompBlendValue;
+
+	/**
 	 * @brief Is the character starting the stomp?
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Movement|Stomping")
@@ -869,6 +875,20 @@ protected:
 	UAnimSequence* GetStompStartBaseAnimation() const;
 
 	/**
+	 * @brief Get the base stomp fall animation
+	 * @return The stomp fall animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetStompFallBaseAnimation() const;
+
+	/**
+	 * @brief Get the base stomp land animation
+	 * @return The stomp land animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetStompLandBaseAnimation() const;
+
+	/**
 	 * @brief Get the base slide start animation
 	 * @return The slide start animation to play
 	 */
@@ -979,6 +999,20 @@ protected:
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
 	UAnimSequence* GetStompStartAnimation() const;
+
+	/**
+	 * @brief Get the stomp fall animation based on the current armed state
+	 * @return The stomp fall animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetStompFallAnimation() const;
+
+	/**
+	 * @brief Get the stomp fall animation based on the current armed state
+	 * @return The stomp fall animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetStompLandAnimation() const;
 
 	/**
 	 * @brief Get the slide start animation based on the current armed state
