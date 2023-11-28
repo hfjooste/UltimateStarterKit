@@ -463,6 +463,13 @@ public:
 	float StompLandVelocity = 750.0f;
 
 	/**
+	 * @brief The time it takes (in seconds) before the character recovers from a stomp and can move again
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Stomping",
+			meta=(EditCondition = "bCanStomp", EditConditionHides))
+	float StompRecoveryTime = 0.25f;
+
+	/**
 	 * @brief The camera shake applied when performing a stomp
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Stomping",

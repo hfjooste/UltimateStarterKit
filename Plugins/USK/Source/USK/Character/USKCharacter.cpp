@@ -622,8 +622,11 @@ void AUSKCharacter::StopStomping()
 		return;
 	}
 	
-	UKismetSystemLibrary::K2_SetTimer(this, "ResetStomping", 0.1f, false);
-	LaunchCharacter(FVector(0.0f, 0.0f, StompLandVelocity), false, true);
+	UKismetSystemLibrary::K2_SetTimer(this, "ResetStomping", StompRecoveryTime, false);
+	if (StompLandVelocity > 0.0f)
+	{
+		LaunchCharacter(FVector(0.0f, 0.0f, StompLandVelocity), false, true);	
+	}	
 	
 	if (IsValid(StompCameraShake))
 	{
