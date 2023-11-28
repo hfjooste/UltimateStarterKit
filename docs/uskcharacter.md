@@ -429,6 +429,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>750.0f</td>
 	</tr>
 	<tr>
+		<td>StompRecoveryTime</td>
+		<td>The time it takes (in seconds) before the character recovers from a stomp and can move again</td>
+		<td>float</td>
+		<td>0.25f</td>
+	</tr>
+	<tr>
 		<td>StompCameraShake</td>
 		<td>The camera shake applied when performing a stomp</td>
 		<td>TSubclassOf&lt;UCameraShakeBase&gt;</td>

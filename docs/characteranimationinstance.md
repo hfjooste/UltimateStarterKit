@@ -698,6 +698,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td></td>
 	</tr>
 	<tr>
+		<td>StompBlendValue</td>
+		<td>The value used to blend stomp animations</td>
+		<td>float</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>bIsStompStarting</td>
 		<td>Is the character starting the stomp?</td>
 		<td>bool</td>
@@ -858,6 +864,18 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><strong>UAnimSequence*</strong><br/>The stomp start animation to play</td>
 	</tr>
 	<tr>
+		<td>GetStompFallBaseAnimation</td>
+		<td>Get the base stomp fall animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The stomp fall animation to play</td>
+	</tr>
+	<tr>
+		<td>GetStompLandBaseAnimation</td>
+		<td>Get the base stomp land animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The stomp land animation to play</td>
+	</tr>
+	<tr>
 		<td>GetSlideStartBaseAnimation</td>
 		<td>Get the base slide start animation</td>
 		<td></td>
@@ -952,6 +970,18 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>Get the stomp start animation based on the current armed state</td>
 		<td></td>
 		<td><strong>UAnimSequence*</strong><br/>The stomp start animation to play</td>
+	</tr>
+	<tr>
+		<td>GetStompFallAnimation</td>
+		<td>Get the stomp fall animation based on the current armed state</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The stomp fall animation to play</td>
+	</tr>
+	<tr>
+		<td>GetStompLandAnimation</td>
+		<td>Get the stomp fall animation based on the current armed state</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The stomp fall animation to play</td>
 	</tr>
 	<tr>
 		<td>GetSlideStartAnimation</td>
