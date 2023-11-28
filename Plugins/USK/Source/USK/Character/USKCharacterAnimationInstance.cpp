@@ -118,7 +118,7 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetDoubleJumpBaseAnimation() cons
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetFallBaseAnimation() const
 {
-	return FallBaseAnimation;
+	return bIsStomping ? StompFallBaseAnimation : FallBaseAnimation;
 }
 
 /**
@@ -127,7 +127,7 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetFallBaseAnimation() const
  */
 UAnimSequence* UUSKCharacterAnimationInstance::GetLandBaseAnimation() const
 {
-	return LandBaseAnimation;
+	return bIsStomping ? StompLandBaseAnimation : LandBaseAnimation;
 }
 
 /**
