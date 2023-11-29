@@ -786,8 +786,7 @@ void AUSKCharacter::Lean(const FInputActionValue& Input)
     const float InputValue = Input.Get<float>();
 	const float LeanValue = InputValue * LeanOffset;
 	TargetLeanCameraOffset = FVector(0.0f,
-		GetCameraPerspective() == ECameraPerspective::ThirdPerson ? LeanValue : 0.0f,
-		GetCameraPerspective() == ECameraPerspective::FirstPerson ? LeanValue : 0.0f);
+		GetCameraPerspective() == ECameraPerspective::ThirdPerson ? LeanValue : 0.0f, 0.0f);
     TargetLeanCameraRoll = InputValue * LeanRotation;
 }
 
