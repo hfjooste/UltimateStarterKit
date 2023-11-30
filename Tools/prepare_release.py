@@ -67,6 +67,9 @@ os.system(f"python \"{docs}\" --input \"Weapons\\WeaponProjectileHitData\" --out
 os.system(f"python \"{docs}\" --input \"Weapons\\WeaponProjectileDecal\" --output weaponprojectiledecal")
 os.system(f"python \"{docs}\" --input \"Weapons\\WeaponUtils\" --output weaponutils")
 
+os.system(f"python \"{docs}\" --input \"Weapons\\CrosshairConfig\" --output crosshairconfig")
+os.system(f"python \"{docs}\" --input \"Widgets\\DynamicCrosshair\" --output dynamiccrosshair --widget DynamicCrosshair_Implementation")
+
 os.system(f"python \"{docs}\" --input \"Widgets\\CollectableItemIcon\" --output collectableitemicon")
 os.system(f"python \"{docs}\" --input \"Widgets\\CreditsEntry\" --output creditsentry")
 os.system(f"python \"{docs}\" --input \"Widgets\\CreditsWidget\" --output creditswidget")

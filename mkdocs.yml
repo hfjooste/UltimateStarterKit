@@ -106,6 +106,9 @@ nav:
     - Weapon Projectile Hit Data: weaponprojectilehitdata.md
     - Weapon Projectile Decal: weaponprojectiledecal.md
     - Weapon Utils: weaponutils.md
+  - Dynamic Crosshair:
+    - Config: crosshairconfig.md
+    - Widget: dynamiccrosshair.md
   - Items:
     - Allowed Collector: allowedcollector.md
     - Collectable Item: collectableitem.md

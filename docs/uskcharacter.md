@@ -524,6 +524,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>UCurveFloat*</td>
 		<td><code>nullptr</code></td>
 	</tr>
+	<tr>
+		<td>DefaultCrosshair</td>
+		<td>The default crosshair to use if no weapon is equipped</td>
+		<td>UCrosshairConfig*</td>
+		<td><code>nullptr</code></td>
+	</tr>
 </table>
 
 ### Events
@@ -537,6 +543,11 @@ The <code>USKCharacter</code> uses the following components:
 		<td>OnCurrentWeaponUpdated</td>
 		<td>Event used to notify other classes when the weapon is updated</td>
 		<td><strong>Weapon (AWeapon*)</strong><br/>The current weapon used by the character<br/><br/><strong>Ammo (AWeapon*)</strong><br/>The amount of ammo remaining<br/><br/><strong>ReloadAmmo (AWeapon*)</strong><br/>The amount of ammo that can be used to reload the weapon</td>
+	</tr>
+	<tr>
+		<td>OnCrosshairUpdated</td>
+		<td>Event used to notify other classes that the crosshair is updated</td>
+		<td><strong>Crosshair (UCrosshairConfig*)</strong><br/>The current crosshair config</td>
 	</tr>
 </table>
 
@@ -667,6 +678,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>Check if the character is aiming</td>
 		<td></td>
 		<td><strong>bool</strong><br/>A boolean value indicating if the character is aiming</td>
+	</tr>
+	<tr>
+		<td>GetCrosshair</td>
+		<td>Get the crosshair configuration</td>
+		<td></td>
+		<td><strong>UCrosshairConfig*</strong><br/>The crosshair configuration</td>
 	</tr>
 	<tr>
 		<td>StartFiringWeapon</td>

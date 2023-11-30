@@ -56,6 +56,12 @@ The <code>Weapon</code> uses the following components:
 		<td>70</td>
 	</tr>
 	<tr>
+		<td>Crosshair</td>
+		<td>The crosshair used by the weapon</td>
+		<td>UCrosshairConfig*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>FireRate</td>
 		<td>The fire rate of the weapon (amount of seconds between each shot)</td>
 		<td>float</td>
