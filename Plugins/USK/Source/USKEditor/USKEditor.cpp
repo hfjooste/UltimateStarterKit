@@ -57,6 +57,8 @@ void FUSKEditorModule::StartupModule()
 	RegisterBlueprint(AssetTools, UskCategory, "Gameplay", "Collectable Item",
 		FColor(63, 126, 255), ACollectableItem::StaticClass());
 
+	RegisterBlueprint(AssetTools, UskCategory, "Weapons", "Crosshair Config",
+		FColor(52, 255, 180), UCrosshairConfig::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "Weapons", "Weapon",
 		FColor(52, 255, 180), AWeapon::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "Weapons", "Weapon Item",

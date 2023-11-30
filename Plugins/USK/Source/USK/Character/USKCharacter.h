@@ -9,6 +9,7 @@
 #include "Camera/CameraShakeBase.h"
 #include "Components/TimelineComponent.h"
 #include "GameFramework/Character.h"
+#include "USK/Weapons/CrosshairConfig.h"
 #include "USK/Weapons/Weapon.h"
 #include "USKCharacter.generated.h"
 
@@ -32,6 +33,12 @@ class USK_API AUSKCharacter : public ACharacter
 	 * @param ReloadAmmo The amount of ammo that can be used to reload the weapon
 	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FCurrentWeaponUpdated, AWeapon*, Weapon, int, Ammo, int, ReloadAmmo);
+
+    /**
+     * @brief Event used to notify other classes that the crosshair is updated
+     * @param Crosshair The current crosshair config
+     */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCrosshairUpdated, UCrosshairConfig*, Crosshair);
 
 	/**
 	 * @brief The camera used by the character
@@ -570,10 +577,22 @@ public:
 	UCurveFloat* AimCurve;
 
 	/**
+	 * @brief The default crosshair to use if no weapon is equipped
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Weapons")
+	UCrosshairConfig* DefaultCrosshair;
+
+	/**
 	 * @brief Event used to notify other classes when the weapon is updated
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Character|Weapons|Events")
 	FCurrentWeaponUpdated OnCurrentWeaponUpdated;
+
+	/**
+	 * @brief Event used to notify other classes that the crosshair is updated
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Character|Weapons|Events")
+	FCrosshairUpdated OnCrosshairUpdated;
 
 	/**
 	 * @brief Create a new instance of the AUSKCharacter actor
@@ -715,8 +734,15 @@ public:
 	 * @brief Check if the character is aiming
 	 * @return A boolean value indicating if the character is aiming
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Weapons")
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Weapons")
 	bool IsAiming() const;
+
+	/**
+	 * @brief Get the crosshair configuration
+	 * @return The crosshair configuration
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Weapons")
+	UCrosshairConfig* GetCrosshair() const;
 
 protected:
 	/**

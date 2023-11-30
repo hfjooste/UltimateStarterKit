@@ -94,7 +94,7 @@ void AUSKCharacter::BeginPlay()
 
 	DefaultMeshLocation = GetMesh()->GetRelativeLocation();
 	DefaultCameraFov = GetCameraComponent()->FieldOfView;
-	StatsComponent = dynamic_cast<UStatsComponent*>(GetComponentByClass(UStatsComponent::StaticClass()));
+	StatsComponent = dynamic_cast<UStatsComponent*>(GetComponentByClass(UStatsComponent::StaticClass()));	
 	NotifyWeaponUpdated();
 }
 
@@ -425,6 +425,7 @@ void AUSKCharacter::OnWeaponUpdated()
 void AUSKCharacter::OnNewWeaponEquipped(AWeapon* Weapon)
 {
 	Weapon->OnWeaponAmmoUpdated.AddDynamic(this, &AUSKCharacter::OnWeaponAmmoUpdated);
+	OnCrosshairUpdated.Broadcast(GetCrosshair());
 }
 
 /**
@@ -434,6 +435,16 @@ void AUSKCharacter::OnNewWeaponEquipped(AWeapon* Weapon)
 bool AUSKCharacter::IsAiming() const
 {
 	return bIsAiming;
+}
+
+/**
+ * @brief Get the crosshair configuration
+ * @return The crosshair configuration
+ */
+UCrosshairConfig* AUSKCharacter::GetCrosshair() const
+{
+	const AWeapon* Weapon = GetWeapon();
+	return IsValid(Weapon) ? Weapon->Crosshair : DefaultCrosshair;
 }
 
 /**
@@ -1038,7 +1049,7 @@ void AUSKCharacter::OnWeaponAmmoUpdated(AWeapon* Weapon, int Ammo, int ReloadAmm
  * @brief Notify other classes that the weapon has been updated
  */
 void AUSKCharacter::NotifyWeaponUpdated()
-{
+{	
 	AWeapon* Weapon = Weapons.Num() == 0 ? nullptr : Weapons[CurrentWeaponIndex];
 	if (!IsValid(Weapon))
 	{
@@ -1070,6 +1081,7 @@ void AUSKCharacter::UpdateWeaponIndex(const bool EquipNextWeapon)
 		? (Weapons.Num() <= CurrentWeaponIndex + 1  ? 0 : CurrentWeaponIndex + 1)
 		: (CurrentWeaponIndex == 0 ? Weapons.Num() - 1 : CurrentWeaponIndex - 1);
 	Weapons[CurrentWeaponIndex]->Equip(this, false);
+	OnCrosshairUpdated.Broadcast(GetCrosshair());
 }
 
 /**

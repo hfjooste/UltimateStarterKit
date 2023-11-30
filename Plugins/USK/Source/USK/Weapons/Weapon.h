@@ -10,6 +10,7 @@
 #include "WeaponProjectileData.h"
 #include "WeaponType.h"
 #include "Curves/CurveVector.h"
+#include "CrosshairConfig.h"
 #include "Weapon.generated.h"
 
 class AUSKCharacter;
@@ -87,6 +88,12 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Information")
 	float AimFov = 70;
+
+	/**
+	 * @brief The crosshair used by the weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Information")
+	UCrosshairConfig* Crosshair;
 
 	/**
 	 * @brief The fire rate of the weapon (amount of seconds between each shot)
