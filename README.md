@@ -62,7 +62,19 @@ The Ultimate Starter Kit plugin comes with the following features:
             <li>Supports animations for 3 different armed states with aiming animations</li>
         </ul>
     </li>
-    <li><strong>Weapons System</strong>: A customizable weapon system with support for recoil, multiple fire types, aiming, fire rates, ammo, reloading, and projectile types</li>
+    <li><strong>Weapons System</strong>: A customizable weapon system that works with any USK character
+        <ul>
+            <li>Recoil support</li>
+            <li>Multiple fire types (single shot, burst and fully automatic)</li>
+            <li>Aiming with separate aim transform</li>
+            <li>Customizable fire rate</li>
+            <li>Ammo support with optional ammo clips</li>
+            <li>Ammo pickups with optional paid ammo</li>
+            <li>Reloading</li>
+            <li>Customizable projectile types</li>
+            <li>Dynamic crosshairs</li>
+        </ul>
+    </li>
     <li><strong>Menu system</strong>: A customizable menu system with support for controllers and complex menu layouts</li>
     <li><strong>Interact system</strong>: A customizable interaction system with interact prompts</li>
     <li><strong>Quest system</strong>: A quest system with support for multiple quest points</li>
