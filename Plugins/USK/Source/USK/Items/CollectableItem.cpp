@@ -8,6 +8,7 @@
 #include "Engine/World.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Character/USKCharacter.h"
+#include "USK/Components/AttractComponent.h"
 #include "USK/Components/InteractTrigger.h"
 #include "USK/Logger/Log.h"
 #include "USK/Quests/QuestComponent.h"
@@ -28,7 +29,8 @@ void ACollectableItem::BeginPlay()
 void ACollectableItem::NotifyActorBeginOverlap(AActor* OtherActor)
 {
 	Super::NotifyActorBeginOverlap(OtherActor);
-	if (!bCollectOnInteract && CanCollectItem(OtherActor))
+	if (!bCollectOnInteract && CanCollectItem(OtherActor) &&
+		!IsValid(GetComponentByClass(UAttractComponent::StaticClass())))
 	{
 		CollectItem(OtherActor);
 	}
