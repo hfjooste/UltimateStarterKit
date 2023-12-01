@@ -112,6 +112,7 @@ nav:
   - Items:
     - Allowed Collector: allowedcollector.md
     - Collectable Item: collectableitem.md
+    - Attract Component: attractcomponent.md
   - Interact System:
     - Interact Trigger: interacttrigger.md
     - Interact Widget: interactwidget.md
