@@ -28,9 +28,12 @@ public:
 		meta=(EditCondition="bDisplayCenterImage", EditConditionHides))
 	UTexture2D* CenterImage;
 
+    /**
+     * @brief The color of the center image
+     */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dynamic Crosshair|Center",
 		meta=(EditCondition="bDisplayCenterImage", EditConditionHides))
-	FSlateColor CenterColor = FSlateColor(FLinearColor::White);
+	FLinearColor CenterColor = FLinearColor::White;
 
 	/**
 	 * @brief Should a shadow be displayed behind the center image?
@@ -44,7 +47,7 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dynamic Crosshair|Center|Shadow",
 		meta=(EditCondition="bDisplayCenterImage && bDisplayCenterShadow", EditConditionHides))
-	FSlateColor CenterShadowColor = FSlateColor(FLinearColor::Black);
+	FLinearColor CenterShadowColor = FLinearColor::Black;
 
 	/**
 	 * @brief The scale of the shadow behind the center image
@@ -76,7 +79,7 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dynamic Crosshair|Sides",
 		meta=(EditCondition="bUseGlobalColor", EditConditionHides))
-	FSlateColor GlobalColor = FSlateColor(FLinearColor::White);
+	FLinearColor GlobalColor = FLinearColor::White;
 
 	/**
 	 * @brief Should the top side of the crosshair be displayed?
@@ -89,7 +92,7 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dynamic Crosshair|Sides|Top",
 		meta=(EditCondition="bDisplayTop && !bUseGlobalColor", EditConditionHides))
-	FSlateColor TopColor = FSlateColor(FLinearColor::White);
+	FLinearColor TopColor = FLinearColor::White;
 
 	/**
 	 * @brief The length of the top side of the crosshair
@@ -131,7 +134,7 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dynamic Crosshair|Sides|Top|Shadow",
 		meta=(EditCondition="bDisplayTop && bDisplayTopShadow", EditConditionHides))
-	FSlateColor TopShadowColor = FSlateColor(FLinearColor::Black);
+	FLinearColor TopShadowColor = FLinearColor::Black;
 
 	/**
 	 * @brief The scale of the shadow behind the top side of the crosshair
@@ -151,7 +154,7 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dynamic Crosshair|Sides|Bottom",
 		meta=(EditCondition="bDisplayBottom && !bUseGlobalColor", EditConditionHides))
-	FSlateColor BottomColor = FSlateColor(FLinearColor::White);
+	FLinearColor BottomColor = FLinearColor::White;
 
 	/**
 	 * @brief The length of the bottom side of the crosshair
@@ -193,7 +196,7 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dynamic Crosshair|Sides|Bottom|Shadow",
 		meta=(EditCondition="bDisplayBottom && bDisplayBottomShadow", EditConditionHides))
-	FSlateColor BottomShadowColor = FSlateColor(FLinearColor::Black);
+	FLinearColor BottomShadowColor = FLinearColor::Black;
 
 	/**
 	 * @brief The scale of the shadow behind the bottom side of the crosshair
@@ -213,7 +216,7 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dynamic Crosshair|Sides|Left",
 		meta=(EditCondition="bDisplayLeft && !bUseGlobalColor", EditConditionHides))
-	FSlateColor LeftColor = FSlateColor(FLinearColor::White);
+	FLinearColor LeftColor = FLinearColor::White;
 
 	/**
 	 * @brief The length of the left side of the crosshair
@@ -255,7 +258,7 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dynamic Crosshair|Sides|Left|Shadow",
 		meta=(EditCondition="bDisplayLeft && bDisplayLeftShadow", EditConditionHides))
-	FSlateColor LeftShadowColor = FSlateColor(FLinearColor::Black);
+	FLinearColor LeftShadowColor = FLinearColor::Black;
 
 	/**
 	 * @brief The scale of the shadow behind the left side of the crosshair
@@ -275,7 +278,7 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dynamic Crosshair|Sides|Right",
 		meta=(EditCondition="bDisplayRight && !bUseGlobalColor", EditConditionHides))
-	FSlateColor RightColor;
+	FLinearColor RightColor;
 
 	/**
 	 * @brief The length of the right side of the crosshair
@@ -317,7 +320,7 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dynamic Crosshair|Sides|Right|Shadow",
 		meta=(EditCondition="bDisplayRight && bDisplayRightShadow", EditConditionHides))
-	FSlateColor RightShadowColor = FSlateColor(FLinearColor::Black);
+	FLinearColor RightShadowColor = FLinearColor::Black;
 
 	/**
 	 * @brief The scale of the shadow behind the right side of the crosshair

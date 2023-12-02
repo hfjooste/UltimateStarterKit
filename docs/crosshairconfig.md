@@ -23,6 +23,12 @@ The crosshair configuration data asset
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>CenterColor</td>
+		<td>The color of the center image</td>
+		<td>FLinearColor</td>
+		<td>FLinearColor::White</td>
+	</tr>
+	<tr>
 		<td>bDisplayCenterShadow</td>
 		<td>Should a shadow be displayed behind the center image?</td>
 		<td>bool</td>
@@ -31,8 +37,8 @@ The crosshair configuration data asset
 	<tr>
 		<td>CenterShadowColor</td>
 		<td>The color of the shadow behind the center image</td>
-		<td>FSlateColor</td>
-		<td>FSlateColo</td>
+		<td>FLinearColor</td>
+		<td>FLinearColor::Black</td>
 	</tr>
 	<tr>
 		<td>CenterShadowScale</td>
@@ -61,8 +67,8 @@ The crosshair configuration data asset
 	<tr>
 		<td>GlobalColor</td>
 		<td>The global color used for the sides of the crosshair</td>
-		<td>FSlateColor</td>
-		<td>FSlateColo</td>
+		<td>FLinearColor</td>
+		<td>FLinearColor::White</td>
 	</tr>
 	<tr>
 		<td>bDisplayTop</td>
@@ -73,8 +79,8 @@ The crosshair configuration data asset
 	<tr>
 		<td>TopColor</td>
 		<td>The color of the top side of the crosshair</td>
-		<td>FSlateColor</td>
-		<td>FSlateColo</td>
+		<td>FLinearColor</td>
+		<td>FLinearColor::White</td>
 	</tr>
 	<tr>
 		<td>TopLength</td>
@@ -109,8 +115,8 @@ The crosshair configuration data asset
 	<tr>
 		<td>TopShadowColor</td>
 		<td>The color of the shadow behind the top side of the crosshair</td>
-		<td>FSlateColor</td>
-		<td>FSlateColo</td>
+		<td>FLinearColor</td>
+		<td>FLinearColor::Black</td>
 	</tr>
 	<tr>
 		<td>TopShadowScale</td>
@@ -127,8 +133,8 @@ The crosshair configuration data asset
 	<tr>
 		<td>BottomColor</td>
 		<td>The color of the bottom side of the crosshair</td>
-		<td>FSlateColor</td>
-		<td>FSlateColo</td>
+		<td>FLinearColor</td>
+		<td>FLinearColor::White</td>
 	</tr>
 	<tr>
 		<td>BottomLength</td>
@@ -163,8 +169,8 @@ The crosshair configuration data asset
 	<tr>
 		<td>BottomShadowColor</td>
 		<td>The color of the shadow behind the bottom side of the crosshair</td>
-		<td>FSlateColor</td>
-		<td>FSlateColo</td>
+		<td>FLinearColor</td>
+		<td>FLinearColor::Black</td>
 	</tr>
 	<tr>
 		<td>BottomShadowScale</td>
@@ -181,8 +187,8 @@ The crosshair configuration data asset
 	<tr>
 		<td>LeftColor</td>
 		<td>The color of the left side of the crosshair</td>
-		<td>FSlateColor</td>
-		<td>FSlateColo</td>
+		<td>FLinearColor</td>
+		<td>FLinearColor::White</td>
 	</tr>
 	<tr>
 		<td>LeftLength</td>
@@ -217,8 +223,8 @@ The crosshair configuration data asset
 	<tr>
 		<td>LeftShadowColor</td>
 		<td>The color of the shadow behind the left side of the crosshair</td>
-		<td>FSlateColor</td>
-		<td>FSlateColo</td>
+		<td>FLinearColor</td>
+		<td>FLinearColor::Black</td>
 	</tr>
 	<tr>
 		<td>LeftShadowScale</td>
@@ -235,7 +241,7 @@ The crosshair configuration data asset
 	<tr>
 		<td>RightColor</td>
 		<td>The color of the right side of the crosshair</td>
-		<td>FSlateColor</td>
+		<td>FLinearColor</td>
 		<td></td>
 	</tr>
 	<tr>
@@ -271,8 +277,8 @@ The crosshair configuration data asset
 	<tr>
 		<td>RightShadowColor</td>
 		<td>The color of the shadow behind the right side of the crosshair</td>
-		<td>FSlateColor</td>
-		<td>FSlateColo</td>
+		<td>FLinearColor</td>
+		<td>FLinearColor::Black</td>
 	</tr>
 	<tr>
 		<td>RightShadowScale</td>
