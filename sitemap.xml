@@ -2,357 +2,372 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/allowedcollector/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/attractcomponent/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/audio/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/audioutils/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/characteranimationinstance/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/collectableitem/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/collectableitemicon/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/configutils/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/creditsentry/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/creditswidget/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/crosshairconfig/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/dialogue/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/dialogueentry/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/dialoguemanager/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/dialogueoverview/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/dialogueparticipant/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/dialoguetransition/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/dialoguetransitiontype/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/dialoguewidget/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://hfjooste.github.io/UltimateStarterKit/dynamiccrosshair/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/fpscharacter/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/fpscounter/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/gameinstance/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/inputdevice/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/inputindicator/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/inputindicatoricon/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/interacttrigger/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/interactwidget/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/inventorycomponent/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/inventorydata/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/inventoryitem/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/inventoryitemdata/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/inventorymenuitem/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/inventorysize/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/inventorywidget/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/logconfig/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/logger/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/menu/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/menuitem/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/menuitemvalueupdatemethod/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/menunavigation/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/music/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/platform_copyright/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/platformer/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/platformercharacter/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/platformershadow/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/platformtype/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/platformutils/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/projectutils/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/quest/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/questcomponent/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/questmanager/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/questwidget/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/settingsconfig/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/settingsdata/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/settingsitem/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/settingsitemtype/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/settingsutils/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/specialthanks/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/trackabledata/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/trackabledatacomponent/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/trackabledataoverview/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/uskcharacter/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/weapon/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/weaponammoitem/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/weaponfiremode/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/weaponitem/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/weaponprojectile/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/weaponprojectiledata/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/weaponprojectiledecal/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/weaponprojectilehitdata/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/weapontype/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://hfjooste.github.io/UltimateStarterKit/weaponutils/</loc>
-         <lastmod>2023-11-28</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
