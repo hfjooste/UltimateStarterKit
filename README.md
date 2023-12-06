@@ -83,6 +83,9 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><strong>Project Utils</strong>: Extract project information like name, description, and version</li>
 </ul>
 
+## 📺 Tutorials
+You can find tutorials on how to get started and how to use the features from this plugin on [YouTube](https://www.youtube.com/playlist?list=PLfzg8BJXNRoBUWxRqKQwOhG0oqp1Qs3gu). The playlist will be updated on a regular basis with new tutorials
+
 ## 📜 Documentation
 - The full documentation is available <a href="https://hfjooste.github.io/UltimateStarterKit" target="_blank">here</a>
 - The Markdown documentation is also included in the repo under the <code>docs</code> directory for offline use. Or checkout the <code>docs</code> branch for the full HTML documentation
