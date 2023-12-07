@@ -203,6 +203,12 @@ public:
 	UNiagaraSystem* MuzzleFlashParticleFx;
 
 	/**
+	 * @brief The transform of the muzzle flash particle effects
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Effects")
+	FTransform MuzzleFlashParticleFxTransform;
+
+	/**
 	 * @brief The sound played each time the weapon is fired
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Effects")

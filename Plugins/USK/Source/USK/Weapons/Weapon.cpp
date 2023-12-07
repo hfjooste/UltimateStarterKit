@@ -338,8 +338,9 @@ void AWeapon::StartFiringSingleShot()
 	if (IsValid(MuzzleFlashParticleFx))
 	{
 		UNiagaraFunctionLibrary::SpawnSystemAttached(MuzzleFlashParticleFx, MuzzleFlash, NAME_None,
-			FVector::ZeroVector, FRotator::ZeroRotator,
-			EAttachLocation::SnapToTarget, true);
+			MuzzleFlashParticleFxTransform.GetLocation(), MuzzleFlashParticleFxTransform.Rotator(),
+			MuzzleFlashParticleFxTransform.GetScale3D(), EAttachLocation::SnapToTarget, true,
+			ENCPoolMethod::None);
 	}
 	
 	PlayAnimation(FireAnimation);
