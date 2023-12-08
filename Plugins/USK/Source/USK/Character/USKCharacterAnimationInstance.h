@@ -18,8 +18,26 @@ public:
 	/**
 	 * @brief The name of the bone used to blend the character's animations
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Blending")
 	FName BlendBoneName;
+
+	/**
+	 * @brief Whether to blend bone rotations in mesh space or in local space
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Blending")
+	bool bMeshSpaceRotationBlend;
+
+	/**
+	 * @brief Whether to blend bone scales in mesh space or in local space
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Blending")
+	bool bMeshSpaceScaleBlend;
+
+	/**
+	 * @brief Should we incorporate the per-bone blend weight of the root bone when lending root motion?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Blending")
+	bool bBlendRootMotionBasedOnRootBone = true;
 		
 	/**
 	 * @brief The base animation used when the character is in the idle state

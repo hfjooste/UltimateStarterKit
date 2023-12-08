@@ -26,6 +26,27 @@ struct USK_API FUSKAnimNode_LayeredBoneBlend : public FAnimNode_Base
 	FName Bone;
 
 	/**
+	 * @brief Whether to blend bone rotations in mesh space or in local space
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Animation",
+		meta=(PinShownByDefault))
+	bool bMeshSpaceRotationBlend;
+
+	/**
+	 * @brief Whether to blend bone scales in mesh space or in local space
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Animation",
+		meta=(PinShownByDefault))
+	bool bMeshSpaceScaleBlend;
+
+	/**
+	 * @brief Should we incorporate the per-bone blend weight of the root bone when lending root motion?
+	 */
+	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Animation",
+		meta=(PinShownByDefault))
+	bool bBlendRootMotionBasedOnRootBone;
+
+	/**
 	 * @brief The source pose
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Animation")
@@ -65,29 +86,11 @@ struct USK_API FUSKAnimNode_LayeredBoneBlend : public FAnimNode_Base
 	TArray<float> BlendWeights;
 
 	/**
-	 * @brief Whether to blend bone rotations in mesh space or in local space
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Animation")
-	bool bMeshSpaceRotationBlend;
-
-	/**
-	 * @brief Whether to blend bone scales in mesh space or in local space
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Animation")
-	bool bMeshSpaceScaleBlend;
-
-	/**
 	 * @brief Defines how to blend the layers together
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Animation")
 	TEnumAsByte<ECurveBlendOption::Type> CurveBlendOption;
-
-	/**
-	 * @brief Should we incorporate the per-bone blend weight of the root bone when lending root motion?
-	 */
-	UPROPERTY(EditAnywhere, Category = "Ultimate Starter Kit|Animation")
-	bool bBlendRootMotionBasedOnRootBone;
-
+	
 	/**
  	 * @brief Max LOD that this node is allowed to run
 	 */
