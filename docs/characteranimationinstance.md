@@ -26,6 +26,24 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td></td>
 	</tr>
 	<tr>
+		<td>bMeshSpaceRotationBlend</td>
+		<td>Whether to blend bone rotations in mesh space or in local space</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bMeshSpaceScaleBlend</td>
+		<td>Whether to blend bone scales in mesh space or in local space</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bBlendRootMotionBasedOnRootBone</td>
+		<td>Should we incorporate the per-bone blend weight of the root bone when lending root motion?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
 		<td>IdleBaseAnimation</td>
 		<td>The base animation used when the character is in the idle state</td>
 		<td>UAnimSequence*</td>

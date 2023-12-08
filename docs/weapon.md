@@ -158,6 +158,12 @@ The <code>Weapon</code> uses the following components:
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>MuzzleFlashParticleFxTransform</td>
+		<td>The transform of the muzzle flash particle effects</td>
+		<td>FTransform</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>FireSound</td>
 		<td>The sound played each time the weapon is fired</td>
 		<td>TArray&lt;USoundBase*&gt;</td>
