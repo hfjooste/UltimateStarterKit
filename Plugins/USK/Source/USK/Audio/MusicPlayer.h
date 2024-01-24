@@ -30,6 +30,13 @@ public:
 	 * @brief Create a new instance of the MusicPlayer class 
 	 */
 	AMusicPlayer();
+
+	/**
+	 * @brief Get a reference to the audio component
+	 * @return A reference to the audio component
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Audio")
+	UAudioComponent* GetAudioComponent() const;
 	
 	/**
 	 * @brief Adjust the playback volume of the music 

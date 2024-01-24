@@ -14,6 +14,15 @@ AMusicPlayer::AMusicPlayer()
 }
 
 /**
+ * @brief Get a reference to the audio component
+ * @return A reference to the audio component
+ */
+UAudioComponent* AMusicPlayer::GetAudioComponent() const
+{
+	return AudioPlayer;
+}
+
+/**
  * @brief Overridable native event for when play begins for this actor
  */
 void AMusicPlayer::BeginPlay()
