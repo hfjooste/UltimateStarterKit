@@ -148,6 +148,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Dialogue")
 	void SkipEntry();
 
+	/**
+	 * @brief Get the dialogue widget
+	 * @return A reference to the dialogue widget
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Dialogue")
+	UDialogueWidget* GetDialogueWidget() const;
+
 protected:
 	/**
 	 * @brief Overridable native event for when play begins for this actor

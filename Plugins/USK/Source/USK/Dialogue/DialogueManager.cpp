@@ -161,6 +161,15 @@ void ADialogueManager::SkipEntry()
 }
 
 /**
+ * @brief Get the dialogue widget
+ * @return A reference to the dialogue widget
+ */
+UDialogueWidget* ADialogueManager::GetDialogueWidget() const
+{
+	return DialogueWidget;
+}
+
+/**
  * @brief Update the current dialogue entry
  * @param NewEntry The new dialogue entry
  */
