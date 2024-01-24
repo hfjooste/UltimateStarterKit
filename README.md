@@ -78,6 +78,7 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><strong>Menu system</strong>: A customizable menu system with support for controllers and complex menu layouts</li>
     <li><strong>Interact system</strong>: A customizable interaction system with interact prompts</li>
     <li><strong>Quest system</strong>: A quest system with support for multiple quest points</li>
+    <li><strong>Message Popups</strong>: A reusable message popup widget with support for multiple buttons</li>
     <li><strong>Config Utils</strong>: Extract information from different config files</li>
     <li><strong>Platform Utils</strong>: Easily detect different platform types and architectures</li>
     <li><strong>Project Utils</strong>: Extract project information like name, description, and version</li>
