@@ -6,8 +6,10 @@
 #include "Engine/GameInstance.h"
 #include "USKSaveGame.h"
 #include "USK/Settings/SettingsConfig.h"
+#include "USK/Widgets/MessagePopupData.h"
 #include "USKGameInstance.generated.h"
 
+class UMessagePopupWidget;
 class ULogConfig;
 class UInputAction;
 class UInputMappingContext;
@@ -133,6 +135,12 @@ public:
 	TMap<FKey, UTexture2D*> NsControllerInputMappings;
 
 	/**
+	 * @brief The widget class used to display message popups
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	TSubclassOf<UMessagePopupWidget> MessagePopupWidgetClass;
+
+	/**
 	 * @brief Event used to notify other classes when the current input device is updated
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Input|Events")
@@ -236,6 +244,20 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Pause")
 	void UnpauseGame();
 
+	/**
+	 * @brief Show a message popup
+	 * @param Data The data displayed in the message popup
+	 * @return A reference to the message popup
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	UMessagePopupWidget* ShowMessagePopup(FMessagePopupData Data);
+
+	/**
+	 * @brief Hide the message popup
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void HideMessagePopup();
+
 protected:
 	/**
 	 * @brief Virtual function to allow custom GameInstances an opportunity to set up what it needs
@@ -255,6 +277,12 @@ private:
 	 */
 	UPROPERTY()
 	UUSKSaveGame* CurrentSaveGame;
+
+	/**
+	 * @brief A reference to the message popup widget
+	 */
+	UPROPERTY()
+	UMessagePopupWidget* MessagePopup;
 
 	/**
 	 * @brief A boolean flag used to check if the features of the game instance was initialized

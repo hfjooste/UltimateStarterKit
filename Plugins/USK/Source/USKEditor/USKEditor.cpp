@@ -30,6 +30,7 @@
 #include "USK/Widgets/InputIndicator.h"
 #include "USK/Widgets/InteractWidget.h"
 #include "USK/Widgets/Menu.h"
+#include "USK/Widgets/MessagePopupWidget.h"
 
 #define LOCTEXT_NAMESPACE "FUSKEditorModule"
 
@@ -118,6 +119,8 @@ void FUSKEditorModule::StartupModule()
 		FColor(44, 89, 180), UMenu::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "UI", "Menu Item",
 		FColor(44, 89, 180), UMenuItem::StaticClass());
+	RegisterBlueprint(AssetTools, UskCategory, "UI", "Message Popup",
+		FColor(44, 89, 180), UMessagePopupWidget::StaticClass());
 }
 
 void FUSKEditorModule::ShutdownModule()

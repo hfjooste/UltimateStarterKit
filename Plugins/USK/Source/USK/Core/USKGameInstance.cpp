@@ -11,6 +11,7 @@
 #include "USK/Settings/SettingsUtils.h"
 #include "USK/Utils/PlatformUtils.h"
 #include "Runtime/Launch/Resources/Version.h"
+#include "USK/Widgets/MessagePopupWidget.h"
 
 /**
  * @brief Virtual function to allow custom GameInstances an opportunity to set up what it needs
@@ -306,6 +307,42 @@ void UUSKGameInstance::UnpauseGame()
 {
 	UGameplayStatics::SetGamePaused(GetWorld(), false);
 	OnGameUnpaused.Broadcast();
+}
+
+/**
+ * @brief Show a message popup
+ * @param Data The data displayed in the message popup
+ * @return A reference to the message popup
+ */
+UMessagePopupWidget* UUSKGameInstance::ShowMessagePopup(const FMessagePopupData Data)
+{
+	if (!IsValid(MessagePopupWidgetClass))
+	{
+		USK_LOG_WARNING("Unable to show message popup widget. Class not specified");
+		return nullptr;
+	}
+	
+	HideMessagePopup();
+	MessagePopup = CreateWidget<UMessagePopupWidget>(GetWorld(), MessagePopupWidgetClass);
+	
+	if (IsValid(MessagePopup))
+	{
+		MessagePopup->Show(Data);
+	}
+
+	return MessagePopup;
+}
+
+/**
+ * @brief Hide the message popup
+ */
+void UUSKGameInstance::HideMessagePopup()
+{
+	if (IsValid(MessagePopup))
+	{
+		MessagePopup->Hide();
+		MessagePopup = nullptr;
+	}
 }
 
 /**
