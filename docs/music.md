@@ -48,6 +48,12 @@ The <code>inal</code> uses the following components:
 		<th>Return</th>
 	</tr>
 	<tr>
+		<td>GetAudioComponent</td>
+		<td>Get a reference to the audio component</td>
+		<td></td>
+		<td><strong>UAudioComponent*</strong><br/>A reference to the audio component</td>
+	</tr>
+	<tr>
 		<td>SetVolume</td>
 		<td>Adjust the playback volume of the music</td>
 		<td><strong>Volume (float)</strong><br/>The new volume of the music</td>
@@ -76,6 +82,7 @@ The <code>inal</code> uses the following components:
 ## Blueprint Usage
 You can use the <code>inal</code> using Blueprints by adding one of the following nodes:
 <ul>
+	<li>Ultimate Starter Kit > Audio > Get Audio Component</li>
 	<li>Ultimate Starter Kit > Audio > Set Volume</li>
 	<li>Ultimate Starter Kit > Audio > Play</li>
 	<li>Ultimate Starter Kit > Audio > Pause</li>
@@ -95,6 +102,7 @@ The <code>inal</code> can now be used in any of your C++ files:
 void ATestActor::Test()
 {
 	// inal is a pointer to the final
+	UAudioComponent* AudioComponent = inal->GetAudioComponent();
 	inal->SetVolume(Volume);
 	inal->Play();
 	inal->Pause();

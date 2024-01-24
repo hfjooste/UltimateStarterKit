@@ -134,6 +134,9 @@ nav:
       - Navigation: menunavigation.md
       - Value Update Method: menuitemvalueupdatemethod.md
       - Menu Item Widget: menuitem.md
+    - Message Popups:
+      - Message Popup Data: messagepopupdata.md
+      - Message Popup Widget: messagepopupwidget.md
   - Settings:
     - Data: settingsdata.md
     - Config: settingsconfig.md

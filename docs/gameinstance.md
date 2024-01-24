@@ -113,6 +113,12 @@ The Game Instance will automatically detect input events and update the current 
 		<td>TMap&lt;FKey, UTexture2D*&gt;</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>MessagePopupWidgetClass</td>
+		<td>The widget class used to display message popups</td>
+		<td>TSubclassOf&lt;UMessagePopupWidget&gt;</td>
+		<td></td>
+	</tr>
 </table>
 
 ### Events
@@ -224,6 +230,18 @@ The Game Instance will automatically detect input events and update the current 
 		<td></td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>ShowMessagePopup</td>
+		<td>Show a message popup</td>
+		<td><strong>Data (FMessagePopupData)</strong><br/>The data displayed in the message popup</td>
+		<td><strong>UMessagePopupWidget*</strong><br/>A reference to the message popup</td>
+	</tr>
+	<tr>
+		<td>HideMessagePopup</td>
+		<td>Hide the message popup</td>
+		<td></td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -241,6 +259,8 @@ You can use the <code>USKGameInstance</code> using Blueprints by adding one of t
 	<li>Ultimate Starter Kit > Input > Update Key Bindings</li>
 	<li>Ultimate Starter Kit > Pause > Pause Game</li>
 	<li>Ultimate Starter Kit > Pause > Unpause Game</li>
+	<li>Ultimate Starter Kit > UI > Show Message Popup</li>
+	<li>Ultimate Starter Kit > UI > Hide Message Popup</li>
 </ul>
 
 ## C++ Usage
@@ -268,5 +288,7 @@ void ATestActor::Test()
 	USKGameInstance->UpdateKeyBindings();
 	USKGameInstance->PauseGame();
 	USKGameInstance->UnpauseGame();
+	UMessagePopupWidget* ShowMessagePopupValue = USKGameInstance->ShowMessagePopup(Data);
+	USKGameInstance->HideMessagePopup();
 }
 ```
