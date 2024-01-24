@@ -66,12 +66,14 @@ public:
 	 * @brief Update the current entry and refresh the UI
 	 * @param Entry The new dialogue entry
 	 */
-	void UpdateEntry(const UDialogueEntry* Entry);
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	virtual void UpdateEntry(const UDialogueEntry* Entry);
 
 	/**
 	 * @brief Skip the current entry
 	 * @return A boolean value indicating if the entry was skipped
 	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	bool SkipEntry();
 
 protected:
