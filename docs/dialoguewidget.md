@@ -77,3 +77,50 @@ You can add the following widgets to enable extra functionality:
 		<td><strong>Index (int)</strong><br/>The index of the choice that was selected</td>
 	</tr>
 </table>
+
+### Functions
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Params</th>
+		<th>Return</th>
+	</tr>
+	<tr>
+		<td>UpdateEntry</td>
+		<td>Update the current entry and refresh the UI</td>
+		<td><strong>Entry (UDialogueEntry*)</strong><br/>The new dialogue entry</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>SkipEntry</td>
+		<td>Skip the current entry</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the entry was skipped</td>
+	</tr>
+</table>
+
+## Blueprint Usage
+You can use the <code>DialogueTransitionType</code> using Blueprints by adding one of the following nodes:
+<ul>
+	<li>Ultimate Starter Kit > UI > Update Entry</li>
+	<li>Ultimate Starter Kit > UI > Skip Entry</li>
+</ul>
+
+## C++ Usage
+Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:
+```c++
+PublicDependencyModuleNames.Add("USK");
+```
+
+The <code>DialogueTransitionType</code> can now be used in any of your C++ files:
+```c++
+#include "USK/Dialogue/DialogueWidget.h"
+
+void ATestActor::Test()
+{
+	// DialogueTransitionType is a pointer to the EDialogueTransitionType
+	DialogueTransitionType->UpdateEntry(Entry);
+	bool SkipEntryValue = DialogueTransitionType->SkipEntry();
+}
+```

@@ -144,6 +144,12 @@ The <code>DialogueManager</code> uses the following components:
 		<td></td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>GetDialogueWidget</td>
+		<td>Get the dialogue widget</td>
+		<td></td>
+		<td><strong>UDialogueWidget*</strong><br/>A reference to the dialogue widget</td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -153,6 +159,7 @@ You can use the <code>DialogueManager</code> using Blueprints by adding one of t
 	<li>Ultimate Starter Kit > Dialogue > Stop Dialogue</li>
 	<li>Ultimate Starter Kit > Dialogue > Destroy Dialogue</li>
 	<li>Ultimate Starter Kit > Dialogue > Skip Entry</li>
+	<li>Ultimate Starter Kit > Dialogue > Get Dialogue Widget</li>
 </ul>
 
 ## C++ Usage
@@ -172,5 +179,6 @@ void ATestActor::Test()
 	DialogueManager->StopDialogue();
 	DialogueManager->DestroyDialogue();
 	DialogueManager->SkipEntry();
+	UDialogueWidget* DialogueWidget = DialogueManager->GetDialogueWidget();
 }
 ```
