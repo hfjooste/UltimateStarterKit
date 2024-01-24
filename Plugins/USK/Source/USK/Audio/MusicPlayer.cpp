@@ -29,6 +29,7 @@ void AMusicPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
+	Volume = AudioPlayer->VolumeMultiplier;
 	if (!PlayOnStart)
 	{
 		AudioPlayer->Stop();
@@ -41,9 +42,9 @@ void AMusicPlayer::BeginPlay()
 
 /**
  * @brief Adjust the playback volume of the music
- * @param Volume The new volume of the music
+ * @param NewVolume The new volume of the music
  */
-void AMusicPlayer::SetVolume(const float Volume) const
+void AMusicPlayer::SetVolume(const float NewVolume)
 {
 	if (AudioPlayer == nullptr)
 	{
@@ -51,8 +52,9 @@ void AMusicPlayer::SetVolume(const float Volume) const
 		return;
 	}
 
-	AudioPlayer->SetVolumeMultiplier(Volume);	
-	USK_LOG_INFO(*FString::Format(TEXT("Volume changed to {0}"), { FString::SanitizeFloat(Volume, 5) }));
+	Volume = NewVolume;
+	AudioPlayer->SetVolumeMultiplier(NewVolume);	
+	USK_LOG_INFO(*FString::Format(TEXT("Volume changed to {0}"), { FString::SanitizeFloat(NewVolume, 5) }));
 }
 
 /**
@@ -128,4 +130,34 @@ void AMusicPlayer::Stop() const
 
 	AudioPlayer->Stop();
 	USK_LOG_INFO("Music stopped");
+}
+
+/**
+ * @brief Fade out the music
+ * @param FadeDuration The duration of the fade
+ */
+void AMusicPlayer::FadeOut(const float FadeDuration) const
+{
+	if (!IsValid(AudioPlayer))
+	{
+		USK_LOG_ERROR("AudioPlayer is not valid");
+		return;
+	}
+
+	AudioPlayer->FadeOut(FadeDuration, 0.0f);
+}
+
+/**
+ * @brief Fade in the music
+ * @param FadeDuration The duration of the fade
+ */
+void AMusicPlayer::FadeIn(const float FadeDuration) const
+{
+	if (!IsValid(AudioPlayer))
+	{
+		USK_LOG_ERROR("AudioPlayer is not valid");
+		return;
+	}
+
+	AudioPlayer->FadeIn(FadeDuration, Volume);
 }

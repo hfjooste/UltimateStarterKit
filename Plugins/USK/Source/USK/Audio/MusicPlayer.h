@@ -40,10 +40,10 @@ public:
 	
 	/**
 	 * @brief Adjust the playback volume of the music 
-	 * @param Volume The new volume of the music
+	 * @param NewVolume The new volume of the music
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Audio")
-	void SetVolume(float Volume) const;
+	void SetVolume(float NewVolume);
 
 	/**
 	 * @brief Play the music
@@ -63,9 +63,29 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Audio")
 	void Stop() const;
 
+	/**
+	 * @brief Fade out the music
+	 * @param FadeDuration The duration of the fade
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Audio")
+	void FadeOut(float FadeDuration) const;
+
+	/**
+	 * @brief Fade in the music
+	 * @param FadeDuration The duration of the fade
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Audio")
+	void FadeIn(float FadeDuration) const;
+
 protected:
 	/**
 	 * @brief Overridable native event for when play begins for this actor
 	 */
 	virtual void BeginPlay() override;
+
+private:
+	/**
+	 * @brief The current volume of the music
+	 */
+	float Volume;
 };

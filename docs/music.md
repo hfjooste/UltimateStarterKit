@@ -56,7 +56,7 @@ The <code>inal</code> uses the following components:
 	<tr>
 		<td>SetVolume</td>
 		<td>Adjust the playback volume of the music</td>
-		<td><strong>Volume (float)</strong><br/>The new volume of the music</td>
+		<td><strong>NewVolume (float)</strong><br/>The new volume of the music</td>
 		<td></td>
 	</tr>
 	<tr>
@@ -77,6 +77,18 @@ The <code>inal</code> uses the following components:
 		<td></td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>FadeOut</td>
+		<td>Fade out the music</td>
+		<td><strong>FadeDuration (float)</strong><br/>The duration of the fade</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>FadeIn</td>
+		<td>Fade in the music</td>
+		<td><strong>FadeDuration (float)</strong><br/>The duration of the fade</td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -87,6 +99,8 @@ You can use the <code>inal</code> using Blueprints by adding one of the followin
 	<li>Ultimate Starter Kit > Audio > Play</li>
 	<li>Ultimate Starter Kit > Audio > Pause</li>
 	<li>Ultimate Starter Kit > Audio > Stop</li>
+	<li>Ultimate Starter Kit > Audio > Fade Out</li>
+	<li>Ultimate Starter Kit > Audio > Fade In</li>
 </ul>
 
 ## C++ Usage
@@ -103,9 +117,11 @@ void ATestActor::Test()
 {
 	// inal is a pointer to the final
 	UAudioComponent* AudioComponent = inal->GetAudioComponent();
-	inal->SetVolume(Volume);
+	inal->SetVolume(NewVolume);
 	inal->Play();
 	inal->Pause();
 	inal->Stop();
+	inal->FadeOut(FadeDuration);
+	inal->FadeIn(FadeDuration);
 }
 ```
