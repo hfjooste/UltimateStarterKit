@@ -516,7 +516,7 @@ void UMenu::UpdateHighlightedItem(UMenuItem* NewItem, const EMenuNavigation Menu
 	case EMenuNavigation::Disabled:
 		break;
 	case EMenuNavigation::HighlightItem:
-		if (NewItem != nullptr && !NewItem->IsVisible())
+		if (!IsValid(NewItem) || !NewItem->IsVisible())
 		{
 			break;
 		}
