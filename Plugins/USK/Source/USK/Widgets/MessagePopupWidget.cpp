@@ -6,6 +6,7 @@
 #include "MenuItem.h"
 #include "Animation/WidgetAnimation.h"
 #include "Components/PanelWidget.h"
+#include "TimerManager.h"
 #include "USK/Logger/Log.h"
 
 /**
