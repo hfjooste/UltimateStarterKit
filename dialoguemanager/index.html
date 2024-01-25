@@ -2299,6 +2299,90 @@
 
               
             
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_16_8" id="__nav_16_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Message Popups
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_8">
+            <span class="md-nav__icon md-icon"></span>
+            Message Popups
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../messagepopupdata/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Message Popup Data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../messagepopupwidget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Message Popup Widget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2918,6 +3002,12 @@
         <td></td>
         <td></td>
     </tr>
+    <tr>
+        <td>GetDialogueWidget</td>
+        <td>Get the dialogue widget</td>
+        <td></td>
+        <td><strong>UDialogueWidget*</strong><br/>A reference to the dialogue widget</td>
+    </tr>
 </table>
 
 <h2 id="blueprint-usage">Blueprint Usage</h2>
@@ -2927,6 +3017,7 @@
     <li>Ultimate Starter Kit > Dialogue > Stop Dialogue</li>
     <li>Ultimate Starter Kit > Dialogue > Destroy Dialogue</li>
     <li>Ultimate Starter Kit > Dialogue > Skip Entry</li>
+    <li>Ultimate Starter Kit > Dialogue > Get Dialogue Widget</li>
 </ul>
 
 <h2 id="c-usage">C++ Usage</h2>
@@ -2943,6 +3034,7 @@ void ATestActor::Test()
     DialogueManager-&gt;StopDialogue();
     DialogueManager-&gt;DestroyDialogue();
     DialogueManager-&gt;SkipEntry();
+    UDialogueWidget* DialogueWidget = DialogueManager-&gt;GetDialogueWidget();
 }
 </code></pre>
 

@@ -753,8 +753,29 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blueprint-usage" class="md-nav__link">
+    Blueprint Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-usage" class="md-nav__link">
+    C++ Usage
+  </a>
   
 </li>
       
@@ -2285,6 +2306,90 @@
 
               
             
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_16_8" id="__nav_16_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Message Popups
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_8">
+            <span class="md-nav__icon md-icon"></span>
+            Message Popups
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../messagepopupdata/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Message Popup Data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../messagepopupwidget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Message Popup Widget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2720,8 +2825,29 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blueprint-usage" class="md-nav__link">
+    Blueprint Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-usage" class="md-nav__link">
+    C++ Usage
+  </a>
   
 </li>
       
@@ -2823,6 +2949,50 @@
         <td><strong>Index (int)</strong><br/>The index of the choice that was selected</td>
     </tr>
 </table>
+
+<h3 id="functions">Functions</h3>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Params</th>
+        <th>Return</th>
+    </tr>
+    <tr>
+        <td>UpdateEntry</td>
+        <td>Update the current entry and refresh the UI</td>
+        <td><strong>Entry (UDialogueEntry*)</strong><br/>The new dialogue entry</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>SkipEntry</td>
+        <td>Skip the current entry</td>
+        <td></td>
+        <td><strong>bool</strong><br/>A boolean value indicating if the entry was skipped</td>
+    </tr>
+</table>
+
+<h2 id="blueprint-usage">Blueprint Usage</h2>
+<p>You can use the <code>DialogueTransitionType</code> using Blueprints by adding one of the following nodes:</p>
+<ul>
+    <li>Ultimate Starter Kit > UI > Update Entry</li>
+    <li>Ultimate Starter Kit > UI > Skip Entry</li>
+</ul>
+
+<h2 id="c-usage">C++ Usage</h2>
+<p>Before you can use the plugin, you first need to enable the plugin in your <code>Build.cs</code> file:</p>
+<pre><code class="language-c++">PublicDependencyModuleNames.Add(&quot;USK&quot;);
+</code></pre>
+<p>The <code>DialogueTransitionType</code> can now be used in any of your C++ files:</p>
+<pre><code class="language-c++">#include &quot;USK/Dialogue/DialogueWidget.h&quot;
+
+void ATestActor::Test()
+{
+    // DialogueTransitionType is a pointer to the EDialogueTransitionType
+    DialogueTransitionType-&gt;UpdateEntry(Entry);
+    bool SkipEntryValue = DialogueTransitionType-&gt;SkipEntry();
+}
+</code></pre>
 
 
 

@@ -2292,6 +2292,90 @@
 
               
             
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_16_8" id="__nav_16_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Message Popups
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_8">
+            <span class="md-nav__icon md-icon"></span>
+            Message Popups
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../messagepopupdata/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Message Popup Data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../messagepopupwidget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Message Popup Widget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2808,9 +2892,15 @@
         <th>Return</th>
     </tr>
     <tr>
+        <td>GetAudioComponent</td>
+        <td>Get a reference to the audio component</td>
+        <td></td>
+        <td><strong>UAudioComponent*</strong><br/>A reference to the audio component</td>
+    </tr>
+    <tr>
         <td>SetVolume</td>
         <td>Adjust the playback volume of the music</td>
-        <td><strong>Volume (float)</strong><br/>The new volume of the music</td>
+        <td><strong>NewVolume (float)</strong><br/>The new volume of the music</td>
         <td></td>
     </tr>
     <tr>
@@ -2831,15 +2921,30 @@
         <td></td>
         <td></td>
     </tr>
+    <tr>
+        <td>FadeOut</td>
+        <td>Fade out the music</td>
+        <td><strong>FadeDuration (float)</strong><br/>The duration of the fade</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>FadeIn</td>
+        <td>Fade in the music</td>
+        <td><strong>FadeDuration (float)</strong><br/>The duration of the fade</td>
+        <td></td>
+    </tr>
 </table>
 
 <h2 id="blueprint-usage">Blueprint Usage</h2>
 <p>You can use the <code>inal</code> using Blueprints by adding one of the following nodes:</p>
 <ul>
+    <li>Ultimate Starter Kit > Audio > Get Audio Component</li>
     <li>Ultimate Starter Kit > Audio > Set Volume</li>
     <li>Ultimate Starter Kit > Audio > Play</li>
     <li>Ultimate Starter Kit > Audio > Pause</li>
     <li>Ultimate Starter Kit > Audio > Stop</li>
+    <li>Ultimate Starter Kit > Audio > Fade Out</li>
+    <li>Ultimate Starter Kit > Audio > Fade In</li>
 </ul>
 
 <h2 id="c-usage">C++ Usage</h2>
@@ -2852,10 +2957,13 @@
 void ATestActor::Test()
 {
     // inal is a pointer to the final
-    inal-&gt;SetVolume(Volume);
+    UAudioComponent* AudioComponent = inal-&gt;GetAudioComponent();
+    inal-&gt;SetVolume(NewVolume);
     inal-&gt;Play();
     inal-&gt;Pause();
     inal-&gt;Stop();
+    inal-&gt;FadeOut(FadeDuration);
+    inal-&gt;FadeIn(FadeDuration);
 }
 </code></pre>
 

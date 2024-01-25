@@ -2313,6 +2313,90 @@
 
               
             
+              
+                
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_16_8" id="__nav_16_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Message Popups
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_8">
+            <span class="md-nav__icon md-icon"></span>
+            Message Popups
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../messagepopupdata/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Message Popup Data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../messagepopupwidget/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Message Popup Widget
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2913,6 +2997,12 @@
         <td>TMap&lt;FKey, UTexture2D*&gt;</td>
         <td></td>
     </tr>
+    <tr>
+        <td>MessagePopupWidgetClass</td>
+        <td>The widget class used to display message popups</td>
+        <td>TSubclassOf&lt;UMessagePopupWidget&gt;</td>
+        <td></td>
+    </tr>
 </table>
 
 <h3 id="events">Events</h3>
@@ -3024,6 +3114,18 @@
         <td></td>
         <td></td>
     </tr>
+    <tr>
+        <td>ShowMessagePopup</td>
+        <td>Show a message popup</td>
+        <td><strong>Data (FMessagePopupData)</strong><br/>The data displayed in the message popup</td>
+        <td><strong>UMessagePopupWidget*</strong><br/>A reference to the message popup</td>
+    </tr>
+    <tr>
+        <td>HideMessagePopup</td>
+        <td>Hide the message popup</td>
+        <td></td>
+        <td></td>
+    </tr>
 </table>
 
 <h2 id="blueprint-usage">Blueprint Usage</h2>
@@ -3041,6 +3143,8 @@
     <li>Ultimate Starter Kit > Input > Update Key Bindings</li>
     <li>Ultimate Starter Kit > Pause > Pause Game</li>
     <li>Ultimate Starter Kit > Pause > Unpause Game</li>
+    <li>Ultimate Starter Kit > UI > Show Message Popup</li>
+    <li>Ultimate Starter Kit > UI > Hide Message Popup</li>
 </ul>
 
 <h2 id="c-usage">C++ Usage</h2>
@@ -3065,6 +3169,8 @@ void ATestActor::Test()
     USKGameInstance-&gt;UpdateKeyBindings();
     USKGameInstance-&gt;PauseGame();
     USKGameInstance-&gt;UnpauseGame();
+    UMessagePopupWidget* ShowMessagePopupValue = USKGameInstance-&gt;ShowMessagePopup(Data);
+    USKGameInstance-&gt;HideMessagePopup();
 }
 </code></pre>
 
