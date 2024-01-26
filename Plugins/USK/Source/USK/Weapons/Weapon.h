@@ -11,6 +11,7 @@
 #include "WeaponType.h"
 #include "Curves/CurveVector.h"
 #include "CrosshairConfig.h"
+#include "Camera/CameraShakeBase.h"
 #include "Weapon.generated.h"
 
 class AUSKCharacter;
@@ -196,6 +197,12 @@ public:
 			EditConditionHides))
 	float RecoilRecoveryDelay = 0.15f;
 
+	/**
+	 * @brief The camera shake applied when firing the weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Effects")
+	TSubclassOf<UCameraShakeBase> FireCameraShake;
+	
 	/**
 	 * @brief The muzzle flash particle effects
 	 */

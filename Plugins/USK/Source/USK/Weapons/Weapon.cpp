@@ -8,6 +8,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine/World.h"
+#include "Kismet/GameplayStatics.h"
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Character/USKCharacter.h"
 #include "USK/Logger/Log.h"
@@ -333,6 +334,12 @@ void AWeapon::StartFiringSingleShot()
 	for (FWeaponProjectileData Projectile : Projectiles)
 	{
 		SpawnProjectile(Projectile);
+	}
+
+	if (IsValid(FireCameraShake))
+	{
+		UGameplayStatics::PlayWorldCameraShake(GetWorld(), FireCameraShake,
+			GetActorLocation(), 1000.0f, 2000.0f, 1.0f);
 	}
 
 	if (IsValid(MuzzleFlashParticleFx))
