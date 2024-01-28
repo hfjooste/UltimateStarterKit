@@ -128,25 +128,25 @@ public:
 	 * @brief Play the dialogue
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "Ultimate Starter Kit|Dialogue")
-	void PlayDialogue();
+	virtual void PlayDialogue();
 
 	/**
 	 * @brief Stop playing the dialogue
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Dialogue")
-	void StopDialogue();
+	virtual void StopDialogue();
 
 	/**
 	 * @brief Stop playing the dialogue and destroy the dialogue manager
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Dialogue")
-	void DestroyDialogue();
+	virtual void DestroyDialogue();
 
 	/**
 	 * @brief Skip the current entry in the dialogue
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Dialogue")
-	void SkipEntry();
+	virtual void SkipEntry();
 
 	/**
 	 * @brief Get the dialogue widget
