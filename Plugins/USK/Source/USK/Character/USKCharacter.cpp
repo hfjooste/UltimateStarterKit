@@ -111,6 +111,7 @@ void AUSKCharacter::Tick(float DeltaSeconds)
 	UpdateSliding(DeltaSeconds);
 	UpdateMovementSpeed();
 	UpdateStaminaWhileSprinting(DeltaSeconds);
+	CalculateWeaponSway(DeltaSeconds);
 }
 
 /**
@@ -445,6 +446,15 @@ UCrosshairConfig* AUSKCharacter::GetCrosshair() const
 {
 	const AWeapon* Weapon = GetWeapon();
 	return IsValid(Weapon) ? Weapon->Crosshair : DefaultCrosshair;
+}
+
+/**
+ * @brief Get the current weapon sway rotation
+ * @return The current weapon sway rotation
+ */
+FRotator AUSKCharacter::GetWeaponSway() const
+{
+	return WeaponSway;
 }
 
 /**
@@ -1172,4 +1182,23 @@ void AUSKCharacter::InitializeCameraPerspective()
 			FAttachmentTransformRules::SnapToTargetIncludingScale, HeadSocketName);
 		GetCameraComponent()->SetRelativeLocation(CameraAttachOffset);
 	}
+}
+
+/**
+ * @brief Calculate the current weapon sway
+ */
+void AUSKCharacter::CalculateWeaponSway(const float DeltaSeconds)
+{
+	const AWeapon* Weapon = GetWeapon();
+	if (!IsValid(Weapon) || !Weapon->bWeaponSway)
+	{
+		PreviousControlRotation = GetControlRotation();
+		WeaponSway = FRotator::ZeroRotator;
+		return;
+	}
+	
+	const FRotator TargetWeaponSway = PreviousControlRotation - GetControlRotation() * Weapon->WeaponSwayMultiplier;
+	WeaponSway = UKismetMathLibrary::RInterpTo(WeaponSway, TargetWeaponSway,
+		DeltaSeconds, Weapon->WeaponSwayInterpSpeed);
+	PreviousControlRotation = GetControlRotation();
 }

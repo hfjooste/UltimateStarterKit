@@ -42,6 +42,7 @@ void UUSKCharacterAnimationInstance::NativeUpdateAnimation(float DeltaSeconds)
 	LeanCameraRoll = Character->GetLeanCameraRoll() * LeanCameraRotationModifier;
 	bIsAiming = Character->IsAiming();
 	AimRotation = Character->HasWeapon() ? Character->GetControlRotation().Pitch * -1.0f : 0.0f;
+	WeaponSway = Character->GetWeaponSway();
 
 	if (!Character->IsDoubleJumping)
 	{

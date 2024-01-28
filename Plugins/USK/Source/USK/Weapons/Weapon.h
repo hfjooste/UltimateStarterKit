@@ -198,6 +198,26 @@ public:
 	float RecoilRecoveryDelay = 0.15f;
 
 	/**
+	 * @brief Should weapon sway be enabled?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Effects")
+	bool bWeaponSway = true;
+
+	/**
+	 * @brief The multiplier applied to the weapon sway rotation
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Effects",
+		meta=(EditCondition = "bWeaponSway", EditConditionHides))
+	float WeaponSwayMultiplier = 1.0f;
+
+	/**
+	 * @brief The speed used to interpolate the weapon sway rotation
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Effects",
+		meta=(EditCondition = "bWeaponSway", EditConditionHides))
+	float WeaponSwayInterpSpeed = 10.0f;
+
+	/**
 	 * @brief The camera shake applied when firing the weapon
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Weapon|Effects")

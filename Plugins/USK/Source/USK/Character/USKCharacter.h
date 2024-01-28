@@ -744,6 +744,13 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Weapons")
 	UCrosshairConfig* GetCrosshair() const;
 
+	/**
+	 * @brief Get the current weapon sway rotation
+	 * @return The current weapon sway rotation
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Weapons")
+	FRotator GetWeaponSway() const;
+
 protected:
 	/**
 	 * @brief Overridable native event for when play begins for this actor
@@ -988,6 +995,16 @@ private:
 	float DefaultCameraFov;
 
 	/**
+	 * @brief The previous control rotation of the character used to calculate weapon sway
+	 */
+	FRotator PreviousControlRotation;
+
+	/**
+	 * @brief The weapon sway rotation applied to the character
+	 */
+	FRotator WeaponSway;
+
+	/**
 	 * @brief Event used to smoothly move the weapon while aiming
 	 */
 	FOnTimelineFloat AimTimelineUpdateEvent;
@@ -1167,4 +1184,9 @@ private:
 	 * @brief Initialize the current camera perspective
 	 */
 	void InitializeCameraPerspective();
+
+	/**
+	 * @brief Calculate the current weapon sway
+	 */
+	void CalculateWeaponSway(const float DeltaSeconds);
 };

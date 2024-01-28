@@ -789,6 +789,18 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Aiming")
 	FName AimBoneName;
 
+	/**
+	 * @brief The bone to rotate to simulate weapon sway
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Weapons")
+	FName WeaponSwayBoneName;
+
+	/**
+	 * @brief The weapon sway rotation applied to the character
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Weapons")
+	FRotator WeaponSway;
+
 protected:
 	/**
 	 * @brief Executed when begin play is called on the owning component
