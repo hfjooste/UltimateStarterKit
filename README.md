@@ -65,6 +65,7 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><strong>Weapons System</strong>: A customizable weapon system that works with any USK character
         <ul>
             <li>Recoil support</li>
+            <li>Customizable weapon sway</li>
             <li>Multiple fire types (single shot, burst and fully automatic)</li>
             <li>Aiming with separate aim transform</li>
             <li>Customizable fire rate</li>
