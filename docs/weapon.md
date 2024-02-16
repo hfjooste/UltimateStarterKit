@@ -152,6 +152,30 @@ The <code>Weapon</code> uses the following components:
 		<td>0.15f</td>
 	</tr>
 	<tr>
+		<td>bWeaponSway</td>
+		<td>Should weapon sway be enabled?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>WeaponSwayMultiplier</td>
+		<td>The multiplier applied to the weapon sway rotation</td>
+		<td>float</td>
+		<td>1.0f</td>
+	</tr>
+	<tr>
+		<td>WeaponSwayInterpSpeed</td>
+		<td>The speed used to interpolate the weapon sway rotation</td>
+		<td>float</td>
+		<td>10.0f</td>
+	</tr>
+	<tr>
+		<td>FireCameraShake</td>
+		<td>The camera shake applied when firing the weapon</td>
+		<td>TSubclassOf&lt;UCameraShakeBase&gt;</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>MuzzleFlashParticleFx</td>
 		<td>The muzzle flash particle effects</td>
 		<td>UNiagaraSystem*</td>

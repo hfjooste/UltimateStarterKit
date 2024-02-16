@@ -793,6 +793,18 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>FName</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>WeaponSwayBoneName</td>
+		<td>The bone to rotate to simulate weapon sway</td>
+		<td>FName</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>WeaponSway</td>
+		<td>The weapon sway rotation applied to the character</td>
+		<td>FRotator</td>
+		<td></td>
+	</tr>
 </table>
 
 ### Functions

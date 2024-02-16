@@ -686,6 +686,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td><strong>UCrosshairConfig*</strong><br/>The crosshair configuration</td>
 	</tr>
 	<tr>
+		<td>GetWeaponSway</td>
+		<td>Get the current weapon sway rotation</td>
+		<td></td>
+		<td><strong>FRotator</strong><br/>The current weapon sway rotation</td>
+	</tr>
+	<tr>
 		<td>StartFiringWeapon</td>
 		<td>Start firing the current weapon</td>
 		<td></td>
