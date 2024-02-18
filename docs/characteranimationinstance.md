@@ -116,6 +116,30 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>ProneStartBaseAnimation</td>
+		<td>The base animation used when the character starts proning</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneEndBaseAnimation</td>
+		<td>The base animation used when the character stops proning</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneIdleBaseAnimation</td>
+		<td>The base animation used when the character is proning and idle</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneMoveBaseAnimation</td>
+		<td>The base animation used when the character is proning and moving</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>StompStartBaseAnimation</td>
 		<td>The base animation used when the character is starting to stomp</td>
 		<td>UAnimSequence*</td>
@@ -220,6 +244,30 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 	<tr>
 		<td>CrouchWalkAnimation</td>
 		<td>The animation used when the character is crouching and walking while unarmed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneStartAnimation</td>
+		<td>The animation used when the character starts proning while unarmed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneEndAnimation</td>
+		<td>The animation used when the character stops proning while unarmed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneIdleAnimation</td>
+		<td>The animation used when the character is proning and idle while unarmed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneMoveAnimation</td>
+		<td>The animation used when the character is proning and moving while unarmed</td>
 		<td>UAnimSequence*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -332,6 +380,30 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>ProneStartWeaponOneHandedAnimation</td>
+		<td>The animation used when the character starts proning with a one handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneEndWeaponOneHandedAnimation</td>
+		<td>The animation used when the character stops proning with a one handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneIdleWeaponOneHandedAnimation</td>
+		<td>The animation used when the character is proning and idle with a one handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneMoveWeaponOneHandedAnimation</td>
+		<td>The animation used when the character is proning and moving with a one handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>StompStartWeaponOneHandedAnimation</td>
 		<td>The animation used when the character is starting to stomp with a one handed weapon</td>
 		<td>UAnimSequence*</td>
@@ -436,6 +508,30 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 	<tr>
 		<td>CrouchWalkWeaponAimOneHandedAnimation</td>
 		<td>The animation used when the character is crouching and walking with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneStartWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character starts proning with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneEndWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character stops proning with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneIdleWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is proning and idle with a one handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneMoveWeaponAimOneHandedAnimation</td>
+		<td>The animation used when the character is proning and moving with a one handed weapon while aiming</td>
 		<td>UAnimSequence*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -548,6 +644,30 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>ProneStartWeaponTwoHandedAnimation</td>
+		<td>The animation used when the character starts proning with a two handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneEndWeaponTwoHandedAnimation</td>
+		<td>The animation used when the character stops proning with a two handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneIdleWeaponTwoHandedAnimation</td>
+		<td>The animation used when the character is proning and idle with a two handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneMoveWeaponTwoHandedAnimation</td>
+		<td>The animation used when the character is proning and moving with a two handed weapon</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>StompStartWeaponTwoHandedAnimation</td>
 		<td>The animation used when the character is starting to stomp with a two handed weapon</td>
 		<td>UAnimSequence*</td>
@@ -656,6 +776,30 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>ProneStartWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character starts proning with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneEndWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character stops proning with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneIdleWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is proning and idle with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneMoveWeaponAimTwoHandedAnimation</td>
+		<td>The animation used when the character is proning and moving with a two handed weapon while aiming</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>StompStartWeaponAimTwoHandedAnimation</td>
 		<td>The animation used when the character is starting to stomp with a two handed weapon while aiming</td>
 		<td>UAnimSequence*</td>
@@ -710,6 +854,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td></td>
 	</tr>
 	<tr>
+		<td>bIsProning</td>
+		<td>Is the character currently proning?</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>bIsStomping</td>
 		<td>Is the character currently stomping?</td>
 		<td>bool</td>
@@ -730,6 +880,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 	<tr>
 		<td>bIsEndingCrouch</td>
 		<td>Is the character busy ending the crouch?</td>
+		<td>bool</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>bIsEndingProne</td>
+		<td>Is the character busy ending the prone?</td>
 		<td>bool</td>
 		<td></td>
 	</tr>
@@ -888,6 +1044,30 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><strong>UAnimSequence*</strong><br/>The crouch walk animation to play</td>
 	</tr>
 	<tr>
+		<td>GetProneStartBaseAnimation</td>
+		<td>Get the base prone start animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The prone start animation to play</td>
+	</tr>
+	<tr>
+		<td>GetProneEndBaseAnimation</td>
+		<td>Get the base prone end animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The prone end animation to play</td>
+	</tr>
+	<tr>
+		<td>GetProneIdleBaseAnimation</td>
+		<td>Get the base prone idle animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The prone idle animation to play</td>
+	</tr>
+	<tr>
+		<td>GetProneMoveBaseAnimation</td>
+		<td>Get the base prone walk animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The prone walk animation to play</td>
+	</tr>
+	<tr>
 		<td>GetStompStartBaseAnimation</td>
 		<td>Get the base stomp start animation</td>
 		<td></td>
@@ -994,6 +1174,30 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>Get the crouch walk animation based on the current armed state</td>
 		<td></td>
 		<td><strong>UAnimSequence*</strong><br/>The crouch walk animation to play</td>
+	</tr>
+	<tr>
+		<td>GetProneStartAnimation</td>
+		<td>Get the prone start animation based on the current armed state</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The prone start animation to play</td>
+	</tr>
+	<tr>
+		<td>GetProneEndAnimation</td>
+		<td>Get the prone end animation based on the current armed state</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The prone end animation to play</td>
+	</tr>
+	<tr>
+		<td>GetProneIdleAnimation</td>
+		<td>Get the prone idle animation based on the current armed state</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The prone idle animation to play</td>
+	</tr>
+	<tr>
+		<td>GetProneMoveAnimation</td>
+		<td>Get the prone walk animation based on the current armed state</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The prone walk animation to play</td>
 	</tr>
 	<tr>
 		<td>GetStompStartAnimation</td>

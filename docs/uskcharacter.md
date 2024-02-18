@@ -35,6 +35,11 @@ The <code>USKCharacter</code> uses the following components:
 		<td>UTimelineComponent*</td>
 	</tr>
 	<tr>
+		<td>ProneTimeline</td>
+		<td>The timeline component used for smooth proning</td>
+		<td>UTimelineComponent*</td>
+	</tr>
+	<tr>
 		<td>AimTimeline</td>
 		<td>The timeline component used for aiming</td>
 		<td>UTimelineComponent*</td>
@@ -113,6 +118,12 @@ The <code>USKCharacter</code> uses the following components:
 	<tr>
 		<td>CrouchAction</td>
 		<td>The crouch input action</td>
+		<td>UInputAction*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>ProneAction</td>
+		<td>The prone input action</td>
 		<td>UInputAction*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -382,7 +393,7 @@ The <code>USKCharacter</code> uses the following components:
 	</tr>
 	<tr>
 		<td>bHoldToCrouch</td>
-		<td>Should the crouch action be held down to crouch?</td>
+		<td>Should the crouch/prone action be held down to crouch?</td>
 		<td>bool</td>
 		<td>true</td>
 	</tr>
@@ -395,6 +406,48 @@ The <code>USKCharacter</code> uses the following components:
 	<tr>
 		<td>CrouchCurve</td>
 		<td>The float curve used for smooth crouching</td>
+		<td>UCurveFloat*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>bCanProne</td>
+		<td>Can the character prone?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>bHoldToProne</td>
+		<td>Should the crouch/prone action be held down to prone?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>ProneTraceHeight</td>
+		<td>The height of the trace used to check if the character can prone</td>
+		<td>float</td>
+		<td>5.0f</td>
+	</tr>
+	<tr>
+		<td>ProneTraceOffsetZ</td>
+		<td>The Z-offset of the trace used to check if the character can prone</td>
+		<td>float</td>
+		<td>-20.0f</td>
+	</tr>
+	<tr>
+		<td>ProneMoveTraceSizeMultiplier</td>
+		<td>The multiplier applied to the trace size when the character is moving while proning</td>
+		<td>float</td>
+		<td>0.5f</td>
+	</tr>
+	<tr>
+		<td>ProneSpeed</td>
+		<td>The movement speed while the character is proning</td>
+		<td>float</td>
+		<td>100.0f</td>
+	</tr>
+	<tr>
+		<td>ProneCurve</td>
+		<td>The float curve used for smooth proning</td>
 		<td>UCurveFloat*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -614,10 +667,22 @@ The <code>USKCharacter</code> uses the following components:
 		<td><strong>bool</strong><br/>A boolean value indicating if the character is crouching</td>
 	</tr>
 	<tr>
+		<td>IsProning</td>
+		<td>Check if the character is proning</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the character is proning</td>
+	</tr>
+	<tr>
 		<td>IsEndingCrouch</td>
 		<td>Check if the character is busy ending the crouch</td>
 		<td></td>
 		<td><strong>bool</strong><br/>A boolean value indicating if the character is busy ending the crouch</td>
+	</tr>
+	<tr>
+		<td>IsEndingProne</td>
+		<td>Check if the character is busy ending the prone</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the character is busy ending the prone</td>
 	</tr>
 	<tr>
 		<td>IsStomping</td>
@@ -724,6 +789,18 @@ The <code>USKCharacter</code> uses the following components:
 	<tr>
 		<td>StopCrouching</td>
 		<td>Stop crouching</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>StartProning</td>
+		<td>Start proning</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>StopProning</td>
+		<td>Stop proning</td>
 		<td></td>
 		<td></td>
 	</tr>
