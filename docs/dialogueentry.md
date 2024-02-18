@@ -50,7 +50,7 @@ A single entry in a dialogue
 		<td>bOverridePortraitImage</td>
 		<td>Should the participant portrait image be overridden?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>CustomPortraitImage</td>

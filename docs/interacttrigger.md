@@ -20,7 +20,7 @@ The <code>InteractTrigger</code> relies on other components of this plugin to wo
 		<td>bRequireCurrency</td>
 		<td>Is this a paid item that should be bought using currency?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>CurrencyRequirements</td>

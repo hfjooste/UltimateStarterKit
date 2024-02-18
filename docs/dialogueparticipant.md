@@ -32,7 +32,7 @@ A participant in the dialogue
 		<td>bCustomPortraitImageBorderColor</td>
 		<td>Should a custom border color be used for the portrait image instead of the participant color?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>PortraitImageBorderColor</td>

@@ -83,7 +83,7 @@ The <code>Weapon</code> uses the following components:
 		<td>bInfiniteAmmo</td>
 		<td>Does the weapon have an infinite amount of ammo?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>bRequireReloading</td>

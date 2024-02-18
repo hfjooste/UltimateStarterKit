@@ -33,7 +33,7 @@ The <code>InventoryComponent</code> relies on other components of this plugin to
 		<td>EnforceMaxAmount</td>
 		<td>Should a maximum amount be enforced for each item?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>MaxAmount</td>

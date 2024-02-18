@@ -131,13 +131,13 @@ You can add the following widgets to enable extra functionality:
 		<td>FocusByDefault</td>
 		<td>Should the menu item be focused by default?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>HideOnConsoles</td>
 		<td>Should the menu item be hidden on consoles?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>TitleText</td>

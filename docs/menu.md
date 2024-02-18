@@ -42,19 +42,19 @@ You can add the following widgets to enable extra functionality:
 		<td>AddInputBindingOnLoad</td>
 		<td>Should the input binding automatically be added as soon as the widget is loaded?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>PauseGameWhileVisible</td>
 		<td>Should the game automatically be paused/resumed based on the visibility of the menu?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>DisableWhilePaused</td>
 		<td>Should the menu be disabled while the game is paused?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>SelectedSFX</td>

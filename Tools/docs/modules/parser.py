@@ -237,6 +237,8 @@ class Parser:
                 name = name.split("=")[0].strip()
             if type.endswith("*") and default == "":
                 default = "<code>nullptr</code>"
+            if type == "bool" and default == "":
+                default = "false"
             event_params = []
             if only_events:
                 event_params = self.extract_event_params(type)

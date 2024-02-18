@@ -596,7 +596,7 @@ The configuration used for managing settings
 		<td>GraphicsVsyncDefault</td>
 		<td>The default value of the vsync setting</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>GraphicsFpsIndicatorImplementation</td>
@@ -626,7 +626,7 @@ The configuration used for managing settings
 		<td>GraphicsFpsIndicatorDefault</td>
 		<td>The default value of the FPS indicator setting</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>AccessibilityColorBlindModeImplementation</td>

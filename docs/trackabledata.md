@@ -19,7 +19,7 @@ All trackable data use the FTrackableData struct to specify the default values a
 		<td>EnforceMaxValue</td>
 		<td>Should we enforce a maximum value?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>MaxValue</td>
@@ -31,13 +31,13 @@ All trackable data use the FTrackableData struct to specify the default values a
 		<td>AutoSave</td>
 		<td>Should all value updates automatically be saved using the game instance?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>AutoGenerate</td>
 		<td>Should we automatically generate value every second?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>GenerateAmount</td>

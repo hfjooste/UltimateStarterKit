@@ -25,7 +25,7 @@ The data used to display a message popup
 		<td>bShowPositiveButton</td>
 		<td>Should the positive button be shown?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>PositiveButtonText</td>
@@ -37,7 +37,7 @@ The data used to display a message popup
 		<td>bShowNegativeButton</td>
 		<td>Should the negative button be shown?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>NegativeButtonText</td>
@@ -49,7 +49,7 @@ The data used to display a message popup
 		<td>bShowNeutralButton</td>
 		<td>Should the neutral button be shown?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>NeutralButtonText</td>

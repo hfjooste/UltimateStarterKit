@@ -29,13 +29,13 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>bMeshSpaceRotationBlend</td>
 		<td>Whether to blend bone rotations in mesh space or in local space</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>bMeshSpaceScaleBlend</td>
 		<td>Whether to blend bone scales in mesh space or in local space</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>bBlendRootMotionBasedOnRootBone</td>
@@ -851,19 +851,19 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>bIsCrouching</td>
 		<td>Is the character currently crouching?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>bIsProning</td>
 		<td>Is the character currently proning?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>bIsStomping</td>
 		<td>Is the character currently stomping?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>StompBlendValue</td>
@@ -875,31 +875,31 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>bIsStompStarting</td>
 		<td>Is the character starting the stomp?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>bIsEndingCrouch</td>
 		<td>Is the character busy ending the crouch?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>bIsEndingProne</td>
 		<td>Is the character busy ending the prone?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>IsInAir</td>
 		<td>Is the character currently in the air?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>IsDoubleJumping</td>
 		<td>Is the character double jumping?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>LeanCameraRotationModifier</td>
@@ -923,19 +923,19 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>bIsSliding</td>
 		<td>Is the character currently sliding?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>bIsEndingSlide</td>
 		<td>Is the character busy ending the slide?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>bIsAiming</td>
 		<td>Is the character aiming?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>AimRotation</td>

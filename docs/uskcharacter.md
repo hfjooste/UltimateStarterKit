@@ -323,7 +323,7 @@ The <code>USKCharacter</code> uses the following components:
 		<td>IsDoubleJumping</td>
 		<td>Is the character double jumping?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>bCanLongJump</td>
@@ -371,7 +371,7 @@ The <code>USKCharacter</code> uses the following components:
 		<td>bSprintRequiresStamina</td>
 		<td>Does sprinting require stamina?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>SprintStaminaStatName</td>
@@ -533,7 +533,7 @@ The <code>USKCharacter</code> uses the following components:
 		<td>bSlideRequiresSprinting</td>
 		<td>Does sliding require the character to sprint?</td>
 		<td>bool</td>
-		<td></td>
+		<td>false</td>
 	</tr>
 	<tr>
 		<td>SlideMinSpeed</td>
