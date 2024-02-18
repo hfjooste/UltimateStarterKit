@@ -29,6 +29,7 @@ AUSKCharacter::AUSKCharacter()
 
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	CrouchTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("Crouch Timeline"));
+	ProneTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("Prone Timeline"));
 	AimTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("Aim Timeline"));
 
 	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("Camera Boom"));
@@ -77,12 +78,20 @@ void AUSKCharacter::BeginPlay()
 		UWeaponUtils::EquipWeapon(this, DefaultWeaponClass);
 	}
 
-	DefaultCapsuleSize = GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
+	DefaultCapsuleHalfHeight = GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight();
+	DefaultCapsuleRadius = GetCapsuleComponent()->GetUnscaledCapsuleRadius();
 	if (IsValid(CrouchCurve))
 	{
 		CrouchTimelineUpdateEvent.BindUFunction(this, FName("OnCrouchTimelineUpdated"));
 		CrouchTimeline->AddInterpFloat(CrouchCurve, CrouchTimelineUpdateEvent);
 		CrouchTimeline->SetLooping(false);
+	}
+
+	if (IsValid(ProneCurve))
+	{
+		ProneTimelineUpdateEvent.BindUFunction(this, FName("OnProneTimelineUpdated"));
+		ProneTimeline->AddInterpFloat(ProneCurve, ProneTimelineUpdateEvent);
+		ProneTimeline->SetLooping(false);
 	}
 
 	if (IsValid(AimCurve))
@@ -109,6 +118,7 @@ void AUSKCharacter::Tick(float DeltaSeconds)
 	AdjustCameraPosition(DeltaSeconds);
     UpdateLeaning(DeltaSeconds);
 	UpdateSliding(DeltaSeconds);
+	UpdateProning();
 	UpdateMovementSpeed();
 	UpdateStaminaWhileSprinting(DeltaSeconds);
 	CalculateWeaponSway(DeltaSeconds);
@@ -155,6 +165,8 @@ void AUSKCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	EnhancedInput->BindAction(ReloadWeaponAction, ETriggerEvent::Started, this, &AUSKCharacter::ReloadWeapon);
 	EnhancedInput->BindAction(CrouchAction, ETriggerEvent::Started, this, &AUSKCharacter::StartCrouching);
 	EnhancedInput->BindAction(CrouchAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopCrouching);
+	EnhancedInput->BindAction(ProneAction, ETriggerEvent::Started, this, &AUSKCharacter::StartProning);
+	EnhancedInput->BindAction(ProneAction, ETriggerEvent::Completed, this, &AUSKCharacter::StopProning);
     EnhancedInput->BindAction(LeanAction, ETriggerEvent::Triggered, this, &AUSKCharacter::Lean);
     EnhancedInput->BindAction(LeanAction, ETriggerEvent::Completed, this, &AUSKCharacter::Lean);
 	EnhancedInput->BindAction(InteractAction, ETriggerEvent::Started, this, &AUSKCharacter::Interact);
@@ -180,6 +192,12 @@ void AUSKCharacter::Landed(const FHitResult& Hit)
 	}
 
 	StopStomping();
+	if (bIsProning)
+	{
+		ProneTimeline->Play();
+		return;
+	}
+	
 	if (bIsCrouching)
 	{
 		CrouchTimeline->Play();
@@ -313,12 +331,30 @@ bool AUSKCharacter::IsCrouching() const
 }
 
 /**
+ * @brief Check if the character is proning 
+ * @return A boolean value indicating if the character is proning
+ */
+bool AUSKCharacter::IsProning() const
+{
+	return bIsProning;
+}
+
+/**
  * @brief Check if the character is busy ending the crouch
  * @return A boolean value indicating if the character is busy ending the crouch
  */
 bool AUSKCharacter::IsEndingCrouch() const
 {
 	return bIsEndingCrouch;
+}
+
+/**
+ * @brief Check if the character is busy ending the prone
+ * @return A boolean value indicating if the character is busy ending the prone
+ */
+bool AUSKCharacter::IsEndingProne() const
+{
+	return bIsEndingProne;
 }
 
 /**
@@ -476,7 +512,7 @@ void AUSKCharacter::Jump()
 		return;
 	}
 
-	if (bCanCrouchJump && bIsCrouching)
+	if (bCanCrouchJump && bIsCrouching && !bIsProning)
 	{
 		StopCrouching();
 		Super::Jump();
@@ -557,7 +593,12 @@ void AUSKCharacter::EquipPreviousWeapon()
  * @brief Start crouching
  */
 void AUSKCharacter::StartCrouching()
-{	
+{
+	if (bIsProning)
+	{
+		return;
+	}
+	
 	if (bCanStomp && GetCharacterMovement()->IsFalling() && AirTime >= MinAirTimeBeforeStomping)
 	{
 		StartStomping();
@@ -598,12 +639,62 @@ void AUSKCharacter::StartCrouching()
  */
 void AUSKCharacter::StopCrouching()
 {
-	if (!bCanCrouch || !bHoldToCrouch)
+	if (!bCanCrouch || !bHoldToCrouch || bIsProning)
 	{
 		return;
 	}
 
 	StopCrouchingInternal();
+}
+
+/**
+ * @brief Start proning
+ */
+void AUSKCharacter::StartProning()
+{
+	if (!bCanProne || !bProneAllowed || bIsCrouching)
+	{
+		return;
+	}
+
+	if (!bHoldToProne && bIsProning)
+	{
+		if (!bCanStandFromProne)
+        {
+        	bForceStandFromProne = true;
+        	return;
+        }
+		
+		StopProningInternal();
+		return;
+	}
+	
+	bIsProning = true;
+	bIsEndingProne = false;
+	bForceStandFromProne = false;
+	if (!GetCharacterMovement()->IsFalling())
+	{
+		ProneTimeline->Play();
+	}
+}
+
+/**
+ * @brief Stop proning
+ */
+void AUSKCharacter::StopProning()
+{
+	if (!bIsProning || !bCanProne || !bHoldToProne || bIsCrouching)
+	{
+		return;
+	}
+
+	if (!bCanStandFromProne)
+	{
+		bForceStandFromProne = true;
+		return;
+	}
+
+	StopProningInternal();
 }
 
 /**
@@ -685,11 +776,22 @@ void AUSKCharacter::MoveCharacter(const FInputActionValue& Input)
 	FRotator Rotation = GetControlRotation();
 	Rotation.Pitch = 0.0f;
 	Rotation.Roll = 0.0f;
-	AddMovementInput(UKismetMathLibrary::GetForwardVector(Rotation), InputValue.Y);
+
+	const float ProneTraceOffset = ProneSpeed * ProneMoveTraceSizeMultiplier;
+	const FVector ForwardVector = UKismetMathLibrary::GetForwardVector(Rotation);
+	if (!bIsProning || CheckProneAllowedAtLocation(ForwardVector * FVector(InputValue.Y * ProneTraceOffset)))
+	{
+		AddMovementInput(ForwardVector, InputValue.Y);	
+	}
 
 	Rotation = GetControlRotation();
 	Rotation.Pitch = 0.0f;
-	AddMovementInput(UKismetMathLibrary::GetRightVector(Rotation), InputValue.X);
+
+	const FVector RightVector = UKismetMathLibrary::GetRightVector(Rotation);
+	if (!bIsProning || CheckProneAllowedAtLocation(RightVector * FVector(InputValue.X * ProneTraceOffset)))
+	{
+		AddMovementInput(RightVector, InputValue.X);	
+	}
 }
 
 /**
@@ -750,6 +852,21 @@ void AUSKCharacter::StopCrouchingInternal()
 }
 
 /**
+ * @brief Stop proning
+ */
+void AUSKCharacter::StopProningInternal()
+{
+	bIsEndingProne = true;
+	bForceStandFromProne = false;
+	ProneTimeline->Reverse();
+
+	if (bSprintQueued)
+	{
+		StartSprinting();
+	}
+}
+
+/**
  * @brief Called after the crouch timeline is updated
  */
 void AUSKCharacter::OnCrouchTimelineUpdated(float Value)
@@ -762,9 +879,32 @@ void AUSKCharacter::OnCrouchTimelineUpdated(float Value)
 	}
 	
 	const float CapsuleHalfHeight = GetCharacterMovement()->IsFalling()
-		? DefaultCapsuleSize
-		: FMath::Lerp(GetCapsuleComponent()->GetUnscaledCapsuleRadius(), DefaultCapsuleSize, Value);
-	UpdateCharacterMeshLocationWhileCrouching(DefaultCapsuleSize - CapsuleHalfHeight);
+		? DefaultCapsuleHalfHeight
+		: FMath::Lerp(GetCapsuleComponent()->GetUnscaledCapsuleRadius(), DefaultCapsuleHalfHeight, Value);
+	GetCapsuleComponent()->SetCapsuleRadius(DefaultCapsuleRadius);
+	UpdateCharacterMeshLocationWhileCrouching(DefaultCapsuleHalfHeight - CapsuleHalfHeight);
+	GetCapsuleComponent()->SetCapsuleHalfHeight(CapsuleHalfHeight);
+}
+
+/**
+ * @brief Called after the prone timeline is updated
+ */
+void AUSKCharacter::OnProneTimelineUpdated(float Value)
+{
+	if (FMath::IsNearlyEqual(Value, 1.0f))
+	{
+		bIsProning = false;
+		bIsEndingProne = false;
+	}
+	
+	const float CapsuleHalfHeight = GetCharacterMovement()->IsFalling()
+		? DefaultCapsuleHalfHeight
+		: DefaultCapsuleHalfHeight * Value;
+	const float CapsuleRadius = GetCharacterMovement()->IsFalling()
+		? DefaultCapsuleRadius
+		: DefaultCapsuleRadius * Value;
+	GetCapsuleComponent()->SetCapsuleRadius(CapsuleRadius);
+	UpdateCharacterMeshLocationWhileCrouching(DefaultCapsuleHalfHeight - CapsuleHalfHeight);
 	GetCapsuleComponent()->SetCapsuleHalfHeight(CapsuleHalfHeight);
 }
 
@@ -847,7 +987,7 @@ void AUSKCharacter::Sprint()
 		return;
 	}
 
-	if (bIsCrouching || bIsAiming)
+	if (bIsCrouching || bIsProning || bIsAiming)
 	{
 		bSprintQueued = true;
 		return;
@@ -981,6 +1121,12 @@ void AUSKCharacter::UpdateMovementSpeed() const
 	if (bIsSliding)
 	{
 		GetCharacterMovement()->MaxWalkSpeed = SlideSpeed;
+		return;
+	}
+
+	if (bIsProning)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = ProneSpeed;
 		return;
 	}
 
@@ -1201,4 +1347,48 @@ void AUSKCharacter::CalculateWeaponSway(const float DeltaSeconds)
 	WeaponSway = UKismetMathLibrary::RInterpTo(WeaponSway, TargetWeaponSway,
 		DeltaSeconds, Weapon->WeaponSwayInterpSpeed);
 	PreviousControlRotation = GetControlRotation();
+}
+
+/**
+ * @brief Update the proning state of the character
+ */
+void AUSKCharacter::UpdateProning()
+{
+	if (!bCanProne)
+	{
+		return;
+	}
+
+	bProneAllowed = CheckProneAllowedAtLocation(FVector::ZeroVector);
+
+	const FVector CanStandFromProneTraceLocation = GetActorLocation() +
+		FVector(0.0f, 0.0f, DefaultCapsuleHalfHeight);
+	FHitResult CanStandFromProneTraceResult;
+	bCanStandFromProne = bIsProning && !UKismetSystemLibrary::CapsuleTraceSingle(GetWorld(),
+		CanStandFromProneTraceLocation, CanStandFromProneTraceLocation, DefaultCapsuleRadius,
+		DefaultCapsuleRadius, UEngineTypes::ConvertToTraceType(ECC_Visibility),
+		false, { }, EDrawDebugTrace::None, CanStandFromProneTraceResult, true);
+
+	if (bCanStandFromProne && bForceStandFromProne)
+	{
+		StopProningInternal();
+	}
+}
+
+/**
+ * @brief Check if the character is allowed to prone at a location
+ * @param LocationOffset The offset applied to the character location when checking if proning is allowed
+ * @return A boolean value indicating if the character is allowed to prone at the location
+ */
+bool AUSKCharacter::CheckProneAllowedAtLocation(FVector LocationOffset) const
+{
+	const FVector TraceSize = FVector(DefaultCapsuleHalfHeight, DefaultCapsuleRadius, ProneTraceHeight);
+	const FVector TraceLocationOffset = FVector(0.0f, 0.0f,
+		GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight() + ProneTraceOffsetZ);
+	const FVector TraceLocation = GetActorLocation() - TraceLocationOffset + LocationOffset;
+
+	FHitResult ProneAllowedTraceResult;
+	return !UKismetSystemLibrary::BoxTraceSingle(GetWorld(), TraceLocation, TraceLocation, TraceSize,
+		GetActorRotation(), UEngineTypes::ConvertToTraceType(ECC_Visibility),
+		false, { }, EDrawDebugTrace::None, ProneAllowedTraceResult, true);
 }

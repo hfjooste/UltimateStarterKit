@@ -62,6 +62,13 @@ class USK_API AUSKCharacter : public ACharacter
 	class UTimelineComponent* CrouchTimeline;
 
 	/**
+	 * @brief The timeline component used for smooth proning
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
+		meta=(AllowPrivateAccess = "true"))
+	class UTimelineComponent* ProneTimeline;
+
+	/**
 	 * @brief The timeline component used for aiming
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
@@ -134,6 +141,12 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
 	UInputAction* CrouchAction;
+
+	/**
+	 * @brief The prone input action
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Input")
+	UInputAction* ProneAction;
 
     /**
      * @brief The lean input action
@@ -415,7 +428,7 @@ public:
 	bool bCanCrouch = true;
 
 	/**
-	 * @brief Should the crouch action be held down to crouch?
+	 * @brief Should the crouch/prone action be held down to crouch?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Crouching",
 		meta=(EditCondition = "bCanCrouch", EditConditionHides))
@@ -434,6 +447,54 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Crouching",
 	    meta=(EditCondition = "bCanCrouch", EditConditionHides))
 	UCurveFloat* CrouchCurve;
+
+	/**
+	 * @brief Can the character prone?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Proning")
+	bool bCanProne = true;
+
+	/**
+	 * @brief Should the crouch/prone action be held down to prone?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Proning",
+		meta=(EditCondition = "bCanProne", EditConditionHides))
+	bool bHoldToProne = true;
+
+	/**
+	 * @brief The height of the trace used to check if the character can prone
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Proning",
+		meta=(EditCondition = "bCanProne", EditConditionHides))
+	float ProneTraceHeight = 5.0f;
+
+	/**
+	 * @brief The Z-offset of the trace used to check if the character can prone
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Proning",
+		meta=(EditCondition = "bCanProne", EditConditionHides))
+	float ProneTraceOffsetZ = -20.0f;
+
+	/**
+	 * @brief The multiplier applied to the trace size when the character is moving while proning
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Proning",
+		meta=(EditCondition = "bCanProne", EditConditionHides))
+	float ProneMoveTraceSizeMultiplier = 0.5f;
+
+	/**
+	 * @brief The movement speed while the character is proning
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Proning",
+		meta=(EditCondition = "bCanProne", EditConditionHides))
+	float ProneSpeed = 100.0f;
+
+	/**
+	 * @brief The float curve used for smooth proning 
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Proning",
+		meta=(EditCondition = "bCanProne", EditConditionHides))
+	UCurveFloat* ProneCurve;
 
 	/**
 	 * @brief Can the character perform a stomp?
@@ -660,6 +721,13 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
 	bool IsCrouching() const;
+	
+	/**
+	 * @brief Check if the character is proning 
+	 * @return A boolean value indicating if the character is proning
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
+	bool IsProning() const;
 
 	/**
 	 * @brief Check if the character is busy ending the crouch
@@ -667,6 +735,13 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
 	bool IsEndingCrouch() const;
+
+	/**
+	 * @brief Check if the character is busy ending the prone
+	 * @return A boolean value indicating if the character is busy ending the prone
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
+	bool IsEndingProne() const;
 
 	/**
 	 * @brief Check if the character is stomping
@@ -829,6 +904,18 @@ protected:
 	void StopCrouching();
 
 	/**
+	 * @brief Start proning
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Movement")
+	void StartProning();
+
+	/**
+	 * @brief Stop proning
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character|Movement")
+	void StopProning();
+
+	/**
 	 * @brief Update the character mesh location while crouching
 	 * @param SizeDifference The difference between the original capsule size and the crouched capsule size
 	 */
@@ -900,6 +987,31 @@ private:
 	bool bIsEndingCrouch;
 
 	/**
+	 * @brief Is proning allowed?
+	 */
+	bool bProneAllowed;
+
+	/**
+	 * @brief Can the character stand from prone?
+	 */
+	bool bCanStandFromProne;
+
+	/**
+	 * @brief Should the character be forced to stand up from prone when possible?
+	 */
+	bool bForceStandFromProne;
+
+	/**
+	 * @brief Is the character proning?
+	 */
+	bool bIsProning;
+
+	/**
+	 * @brief Is the character busy ending the prone?
+	 */
+	bool bIsEndingProne;
+
+	/**
 	 * @brief Is the character stomping?
 	 */
 	bool bIsStomping;
@@ -910,14 +1022,24 @@ private:
 	bool bIsStompJumpAllowed;
 
 	/**
-	 * @brief The default capsule size of the character
+	 * @brief The default capsule half height of the character
 	 */
-	float DefaultCapsuleSize;
+	float DefaultCapsuleHalfHeight;
+
+	/**
+	 * @brief The default capsule radius of the character
+	 */
+	float DefaultCapsuleRadius;
 
 	/**
 	 * @brief Event used to smoothly adjust the capsule size during crouching
 	 */
 	FOnTimelineFloat CrouchTimelineUpdateEvent;
+
+	/**
+	 * @brief Event used to smoothly adjust the capsule size during proning
+	 */
+	FOnTimelineFloat ProneTimelineUpdateEvent;
 
 	/**
 	 * @brief The current amount of time the character is in the air
@@ -1039,10 +1161,21 @@ private:
 	void StopCrouchingInternal();
 
 	/**
+	 * @brief Stop proning
+	 */
+	void StopProningInternal();
+
+	/**
 	 * @brief Called after the crouch timeline is updated
 	 */
 	UFUNCTION()
 	void OnCrouchTimelineUpdated(float Value);
+
+	/**
+	 * @brief Called after the prone timeline is updated
+	 */
+	UFUNCTION()
+	void OnProneTimelineUpdated(float Value);
 
 	/**
 	 * @brief Perform a stomp after the zero gravity duration has elapsed
@@ -1189,4 +1322,16 @@ private:
 	 * @brief Calculate the current weapon sway
 	 */
 	void CalculateWeaponSway(const float DeltaSeconds);
+
+	/**
+	 * @brief Update the proning state of the character
+	 */
+	void UpdateProning();
+
+	/**
+	 * @brief Check if the character is allowed to prone at a location
+	 * @param LocationOffset The offset applied to the character location when checking if proning is allowed
+	 * @return A boolean value indicating if the character is allowed to prone at the location
+	 */
+	bool CheckProneAllowedAtLocation(FVector LocationOffset) const;
 };

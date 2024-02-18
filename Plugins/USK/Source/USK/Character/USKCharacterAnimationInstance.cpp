@@ -34,6 +34,8 @@ void UUSKCharacterAnimationInstance::NativeUpdateAnimation(float DeltaSeconds)
 	IsInAir = Character->GetMovementComponent()->IsFalling();
 	bIsCrouching = !IsInAir && Character->IsCrouching();
 	bIsEndingCrouch = Character->IsEndingCrouch();
+	bIsProning = !IsInAir && Character->IsProning();
+	bIsEndingProne = Character->IsEndingProne();
 	bIsSliding = !IsInAir && Character->IsSliding();
 	bIsEndingSlide = Character->IsEndingSlide();
     bIsStomping = Character->IsStomping();
@@ -166,6 +168,42 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchIdleBaseAnimation() cons
 UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchWalkBaseAnimation() const
 {
 	return CrouchWalkBaseAnimation;
+}
+
+/**
+ * @brief Get the base prone start animation
+ * @return The prone start animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetProneStartBaseAnimation() const
+{
+	return ProneStartBaseAnimation;
+}
+
+/**
+ * @brief Get the base prone end animation
+ * @return The prone end animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetProneEndBaseAnimation() const
+{
+	return ProneEndBaseAnimation;
+}
+
+/**
+ * @brief Get the base prone idle animation
+ * @return The prone idle animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetProneIdleBaseAnimation() const
+{
+	return ProneIdleBaseAnimation;
+}
+
+/**
+ * @brief Get the base prone walk animation
+ * @return The prone walk animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetProneMoveBaseAnimation() const
+{
+	return ProneMoveBaseAnimation;
 }
 
 /**
@@ -353,6 +391,50 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchWalkAnimation() const
 	return bIsAiming
 		? GetAnimation(CrouchWalkAnimation, CrouchWalkWeaponAimOneHandedAnimation, CrouchWalkWeaponAimTwoHandedAnimation)
 		: GetAnimation(CrouchWalkAnimation, CrouchWalkWeaponOneHandedAnimation, CrouchWalkWeaponTwoHandedAnimation);
+}
+
+/**
+ * @brief Get the prone start animation based on the current armed state
+ * @return The prone start animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetProneStartAnimation() const
+{
+	return bIsAiming
+		? GetAnimation(ProneStartAnimation, ProneStartWeaponAimOneHandedAnimation, ProneStartWeaponAimTwoHandedAnimation)
+		: GetAnimation(ProneStartAnimation, ProneStartWeaponOneHandedAnimation, ProneStartWeaponTwoHandedAnimation);
+}
+
+/**
+ * @brief Get the prone end animation based on the current armed state
+ * @return The prone end animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetProneEndAnimation() const
+{
+	return bIsAiming
+    		? GetAnimation(ProneEndAnimation, ProneEndWeaponAimOneHandedAnimation, ProneEndWeaponAimTwoHandedAnimation)
+    		: GetAnimation(ProneEndAnimation, ProneEndWeaponOneHandedAnimation, ProneEndWeaponTwoHandedAnimation);
+}
+
+/**
+ * @brief Get the prone idle animation based on the current armed state
+ * @return The prone idle animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetProneIdleAnimation() const
+{
+	return bIsAiming
+		? GetAnimation(ProneIdleAnimation, ProneIdleWeaponAimOneHandedAnimation, ProneIdleWeaponAimTwoHandedAnimation)
+		: GetAnimation(ProneIdleAnimation, ProneIdleWeaponOneHandedAnimation, ProneIdleWeaponTwoHandedAnimation);
+}
+
+/**
+ * @brief Get the prone walk animation based on the current armed state
+ * @return The prone walk animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetProneMoveAnimation() const
+{
+	return bIsAiming
+		? GetAnimation(ProneMoveAnimation, ProneMoveWeaponAimOneHandedAnimation, ProneMoveWeaponAimTwoHandedAnimation)
+		: GetAnimation(ProneMoveAnimation, ProneMoveWeaponOneHandedAnimation, ProneMoveWeaponTwoHandedAnimation);
 }
 
 /**

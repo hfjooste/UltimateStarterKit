@@ -112,6 +112,30 @@ public:
 	UAnimSequence* CrouchWalkBaseAnimation;
 
 	/**
+	 * @brief The base animation used when the character starts proning
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* ProneStartBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character stops proning
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* ProneEndBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is proning and idle
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* ProneIdleBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is proning and moving
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* ProneMoveBaseAnimation;
+
+	/**
 	 * @brief The base animation used when the character is starting to stomp
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
@@ -218,6 +242,30 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
 	UAnimSequence* CrouchWalkAnimation;
+
+	/**
+	 * @brief The animation used when the character starts proning while unarmed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
+	UAnimSequence* ProneStartAnimation;
+
+	/**
+	 * @brief The animation used when the character stops proning while unarmed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
+	UAnimSequence* ProneEndAnimation;
+
+	/**
+	 * @brief The animation used when the character is proning and idle while unarmed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
+	UAnimSequence* ProneIdleAnimation;
+
+	/**
+	 * @brief The animation used when the character is proning and moving while unarmed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Unarmed")
+	UAnimSequence* ProneMoveAnimation;
 
 	/**
 	 * @brief The animation used when the character is starting to stomp while unarmed
@@ -328,6 +376,30 @@ public:
 	UAnimSequence* CrouchWalkWeaponOneHandedAnimation;
 
 	/**
+	 * @brief The animation used when the character starts proning with a one handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
+	UAnimSequence* ProneStartWeaponOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character stops proning with a one handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
+	UAnimSequence* ProneEndWeaponOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is proning and idle with a one handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
+	UAnimSequence* ProneIdleWeaponOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is proning and moving with a one handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
+	UAnimSequence* ProneMoveWeaponOneHandedAnimation;
+
+	/**
 	 * @brief The animation used when the character is starting to stomp with a one handed weapon
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed")
@@ -434,6 +506,30 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
 	UAnimSequence* CrouchWalkWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character starts proning with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* ProneStartWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character stops proning with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* ProneEndWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is proning and idle with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* ProneIdleWeaponAimOneHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is proning and moving with a one handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon One Handed|Aim")
+	UAnimSequence* ProneMoveWeaponAimOneHandedAnimation;
 
 	/**
 	 * @brief The animation used when the character is starting to stomp with a one handed weapon while aiming
@@ -544,6 +640,30 @@ public:
 	UAnimSequence* CrouchWalkWeaponTwoHandedAnimation;
 
 	/**
+	 * @brief The animation used when the character starts proning with a two handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
+	UAnimSequence* ProneStartWeaponTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character stops proning with a two handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
+	UAnimSequence* ProneEndWeaponTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is proning and idle with a two handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
+	UAnimSequence* ProneIdleWeaponTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is proning and moving with a two handed weapon
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
+	UAnimSequence* ProneMoveWeaponTwoHandedAnimation;
+
+	/**
 	 * @brief The animation used when the character is starting to stomp with a two handed weapon
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed")
@@ -652,6 +772,30 @@ public:
 	UAnimSequence* CrouchWalkWeaponAimTwoHandedAnimation;
 
 	/**
+	 * @brief The animation used when the character starts proning with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* ProneStartWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character stops proning with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* ProneEndWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is proning and idle with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* ProneIdleWeaponAimTwoHandedAnimation;
+
+	/**
+	 * @brief The animation used when the character is proning and moving with a two handed weapon while aiming
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
+	UAnimSequence* ProneMoveWeaponAimTwoHandedAnimation;
+
+	/**
 	 * @brief The animation used when the character is starting to stomp with a two handed weapon while aiming
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Weapon Two Handed|Aim")
@@ -706,6 +850,12 @@ public:
 	bool bIsCrouching;
 
 	/**
+	 * @brief Is the character currently proning?
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Movement|Proning")
+	bool bIsProning;
+
+	/**
 	 * @brief Is the character currently stomping?
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Movement|Stomping")
@@ -728,6 +878,12 @@ public:
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Movement|Crouching")
 	bool bIsEndingCrouch;
+
+	/**
+	 * @brief Is the character busy ending the prone?
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Movement|Proning")
+	bool bIsEndingProne;
 
 	/**
 	 * @brief Is the character currently in the air?
@@ -898,6 +1054,34 @@ protected:
 	UAnimSequence* GetCrouchWalkBaseAnimation() const;
 
 	/**
+	 * @brief Get the base prone start animation
+	 * @return The prone start animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetProneStartBaseAnimation() const;
+
+	/**
+	 * @brief Get the base prone end animation
+	 * @return The prone end animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetProneEndBaseAnimation() const;
+
+	/**
+	 * @brief Get the base prone idle animation
+	 * @return The prone idle animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetProneIdleBaseAnimation() const;
+
+	/**
+	 * @brief Get the base prone walk animation
+	 * @return The prone walk animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetProneMoveBaseAnimation() const;
+
+	/**
 	 * @brief Get the base stomp start animation
 	 * @return The stomp start animation to play
 	 */
@@ -1022,6 +1206,34 @@ protected:
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
 	UAnimSequence* GetCrouchWalkAnimation() const;
+
+	/**
+	 * @brief Get the prone start animation based on the current armed state
+	 * @return The prone start animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetProneStartAnimation() const;
+
+	/**
+	 * @brief Get the prone end animation based on the current armed state
+	 * @return The prone end animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetProneEndAnimation() const;
+
+	/**
+	 * @brief Get the prone idle animation based on the current armed state
+	 * @return The prone idle animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetProneIdleAnimation() const;
+
+	/**
+	 * @brief Get the prone walk animation based on the current armed state
+	 * @return The prone walk animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetProneMoveAnimation() const;
 
 	/**
 	 * @brief Get the stomp start animation based on the current armed state
