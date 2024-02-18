@@ -2,6 +2,7 @@
 
 #include "USKGameInstance.h"
 
+#include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputDevice.h"
 #include "InputMappingContext.h"

@@ -93,7 +93,7 @@ void UDialogueWidget::UpdateEntry(const UDialogueEntry* Entry)
 	if (IsValid(ParticipantPortrait))
 	{		
 		ParticipantPortrait->SetBrushFromTexture(Image);
-		ParticipantPortrait->SetVisibility(IsValid(Image)
+		ParticipantPortrait->SetVisibility(Image != nullptr
 			? ESlateVisibility::SelfHitTestInvisible
 			: ESlateVisibility::Collapsed);
 	}
@@ -106,7 +106,7 @@ void UDialogueWidget::UpdateEntry(const UDialogueEntry* Entry)
 				? Entry->Owner->PortraitImageBorderColor
 				: FSlateColor(Color));
 		ParticipantPortraitBorder->SetBrushTintColor(BorderColor);
-		ParticipantPortraitBorder->SetVisibility(IsValid(Image)
+		ParticipantPortraitBorder->SetVisibility(Image != nullptr
 			? ESlateVisibility::SelfHitTestInvisible
 			: ESlateVisibility::Collapsed);
 	}

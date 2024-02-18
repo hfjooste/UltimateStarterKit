@@ -2,6 +2,7 @@
 
 #include "AttractComponent.h"
 
+#include "Engine/World.h"
 #include "InteractTrigger.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
