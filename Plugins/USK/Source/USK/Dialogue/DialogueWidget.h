@@ -39,6 +39,18 @@ public:
 	class UTextBlock* DialogueText;
 
 	/**
+	 * @brief The image used to display the portrait image of the participant
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class UImage* ParticipantPortrait;
+
+	/**
+	 * @brief The border image displayed around the portrait image of the participant
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class UImage* ParticipantPortraitBorder;
+
+	/**
 	 * @brief The menu used to display the dialogue choices
 	 */
 	UPROPERTY(meta = (BindWidget), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")

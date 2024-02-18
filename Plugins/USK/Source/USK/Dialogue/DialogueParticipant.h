@@ -22,6 +22,12 @@ public:
 	FText Name;
 
 	/**
+	 * @brief The portrait image for the dialogue participant
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Participant")
+	UTexture2D* Image;
+
+	/**
 	 * @brief The color used to represent the dialogue participant
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Participant")

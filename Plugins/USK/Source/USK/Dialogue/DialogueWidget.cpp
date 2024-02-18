@@ -29,6 +29,17 @@ void UDialogueWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 	{
 		DialogueTitle->SetText(FText::GetEmpty());
 		DialogueText->SetText(FText::GetEmpty());
+		
+		if (IsValid(ParticipantPortrait))
+		{
+			ParticipantPortrait->SetVisibility(ESlateVisibility::Collapsed);
+		}
+
+		if (IsValid(ParticipantPortraitBorder))
+		{
+			ParticipantPortraitBorder->SetVisibility(ESlateVisibility::Collapsed);
+		}
+		
 		UpdateTransitionIndicatorVisibility(ESlateVisibility::Collapsed);		
 		return;
 	}
@@ -74,6 +85,24 @@ void UDialogueWidget::UpdateEntry(const UDialogueEntry* Entry)
 	DialogueTitle->SetColorAndOpacity(Color);
 	DialogueTitle->SetText(Title);
 	DialogueText->SetText(FText::GetEmpty());
+
+	UTexture2D* Image = IsValid(Entry->Owner) ? Entry->Owner->Image : nullptr;
+	if (IsValid(ParticipantPortrait))
+	{		
+		ParticipantPortrait->SetBrushFromTexture(Image);
+		ParticipantPortrait->SetVisibility(IsValid(Image)
+			? ESlateVisibility::SelfHitTestInvisible
+			: ESlateVisibility::Collapsed);
+	}
+
+	if (IsValid(ParticipantPortraitBorder))
+	{
+		ParticipantPortraitBorder->SetBrushTintColor(Color);
+		ParticipantPortraitBorder->SetVisibility(IsValid(Image)
+			? ESlateVisibility::SelfHitTestInvisible
+			: ESlateVisibility::Collapsed);
+	}
+	
 	InitializeMenuItems(Entry);
 }
 
