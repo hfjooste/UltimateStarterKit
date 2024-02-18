@@ -50,6 +50,7 @@ The Ultimate Starter Kit plugin comes with the following features:
             <li>Variable jump height</li>
             <li>Coyote time</li>
             <li>Smooth crouching with crouch jumping</li>
+            <li>Proning</li>
             <li>Stomping with stomp jumping</li>
             <li>Leaning with procedural animations</li>
             <li>Sliding with long jump</li>
