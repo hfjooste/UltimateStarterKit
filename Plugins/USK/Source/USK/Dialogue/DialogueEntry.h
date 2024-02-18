@@ -58,6 +58,26 @@ public:
 	USoundBase* Audio;
 
 	/**
+	 * @brief Should the participant portrait image be overridden?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Entry")
+	bool bOverridePortraitImage;
+
+	/**
+	 * @brief The custom portrait image for this dialogue entry
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Entry",
+		meta=(EditCondition="bOverridePortraitImage", EditConditionHides))
+	UTexture2D* CustomPortraitImage;
+
+	/**
+	 * @brief The custom portrait border color for this dialogue entry
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Entry",
+		meta=(EditCondition="bOverridePortraitImage", EditConditionHides))
+	FSlateColor CustomPortraitBorderColor = FSlateColor(FLinearColor::Black);
+
+	/**
 	 * @brief A reference to the dialogue containing this entry
 	 */
 	UPROPERTY(BlueprintReadOnly, Category = "Ultimate Starter Kit|Dialogue|Entry")

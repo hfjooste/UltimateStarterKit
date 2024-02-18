@@ -86,7 +86,10 @@ void UDialogueWidget::UpdateEntry(const UDialogueEntry* Entry)
 	DialogueTitle->SetText(Title);
 	DialogueText->SetText(FText::GetEmpty());
 
-	UTexture2D* Image = IsValid(Entry->Owner) ? Entry->Owner->Image : nullptr;
+	UTexture2D* Image = Entry->bOverridePortraitImage
+		? Entry->CustomPortraitImage
+		: (IsValid(Entry->Owner) ? Entry->Owner->PortraitImage : nullptr);
+	
 	if (IsValid(ParticipantPortrait))
 	{		
 		ParticipantPortrait->SetBrushFromTexture(Image);
@@ -97,7 +100,12 @@ void UDialogueWidget::UpdateEntry(const UDialogueEntry* Entry)
 
 	if (IsValid(ParticipantPortraitBorder))
 	{
-		ParticipantPortraitBorder->SetBrushTintColor(Color);
+		const FSlateColor BorderColor = Entry->bOverridePortraitImage
+			? Entry->CustomPortraitBorderColor
+			: (IsValid(Entry->Owner) && Entry->Owner->bCustomPortraitImageBorderColor
+				? Entry->Owner->PortraitImageBorderColor
+				: FSlateColor(Color));
+		ParticipantPortraitBorder->SetBrushTintColor(BorderColor);
 		ParticipantPortraitBorder->SetVisibility(IsValid(Image)
 			? ESlateVisibility::SelfHitTestInvisible
 			: ESlateVisibility::Collapsed);
