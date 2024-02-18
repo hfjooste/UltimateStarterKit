@@ -41,6 +41,16 @@ You can add the following widgets to enable extra functionality:
 		<th>Type</th>
 	</tr>
 	<tr>
+		<td>ParticipantPortrait</td>
+		<td>The image used to display the portrait image of the participant</td>
+		<td>UImage*</td>
+	</tr>
+	<tr>
+		<td>ParticipantPortraitBorder</td>
+		<td>The border image displayed around the portrait image of the participant</td>
+		<td>UImage*</td>
+	</tr>
+	<tr>
 		<td>SkipEntryImage</td>
 		<td>The image displayed when the dialogue entry is completed</td>
 		<td>UImage*</td>

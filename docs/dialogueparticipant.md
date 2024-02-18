@@ -17,6 +17,12 @@ A participant in the dialogue
 		<td></td>
 	</tr>
 	<tr>
+		<td>Image</td>
+		<td>The portrait image for the dialogue participant</td>
+		<td>UTexture2D*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>Color</td>
 		<td>The color used to represent the dialogue participant</td>
 		<td>FLinearColor</td>
