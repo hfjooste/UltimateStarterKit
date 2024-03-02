@@ -2879,20 +2879,74 @@
         <td><code>nullptr</code></td>
     </tr>
     <tr>
-        <td>WalkBaseAnimation</td>
-        <td>The base animation used when the character is walking</td>
+        <td>WalkForwardBaseAnimation</td>
+        <td>The base animation used when the character is walking forward</td>
         <td>UAnimSequence*</td>
         <td><code>nullptr</code></td>
     </tr>
     <tr>
-        <td>RunBaseAnimation</td>
-        <td>The base animation used when the character is running</td>
+        <td>WalkBackwardsBaseAnimation</td>
+        <td>The base animation used when the character is walking backwards</td>
         <td>UAnimSequence*</td>
         <td><code>nullptr</code></td>
     </tr>
     <tr>
-        <td>SprintBaseAnimation</td>
-        <td>The base animation used when the character is sprinting</td>
+        <td>WalkLeftBaseAnimation</td>
+        <td>The base animation used when the character is walking left</td>
+        <td>UAnimSequence*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>WalkRightBaseAnimation</td>
+        <td>The base animation used when the character is walking right</td>
+        <td>UAnimSequence*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>RunForwardBaseAnimation</td>
+        <td>The base animation used when the character is running forward</td>
+        <td>UAnimSequence*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>RunBackwardsBaseAnimation</td>
+        <td>The base animation used when the character is running backwards</td>
+        <td>UAnimSequence*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>RunLeftBaseAnimation</td>
+        <td>The base animation used when the character is running left</td>
+        <td>UAnimSequence*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>RunRightBaseAnimation</td>
+        <td>The base animation used when the character is running right</td>
+        <td>UAnimSequence*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>SprintForwardBaseAnimation</td>
+        <td>The base animation used when the character is sprinting forward</td>
+        <td>UAnimSequence*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>SprintBackwardsBaseAnimation</td>
+        <td>The base animation used when the character is sprinting backwards</td>
+        <td>UAnimSequence*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>SprintLeftBaseAnimation</td>
+        <td>The base animation used when the character is sprinting left</td>
+        <td>UAnimSequence*</td>
+        <td><code>nullptr</code></td>
+    </tr>
+    <tr>
+        <td>SprintRightBaseAnimation</td>
+        <td>The base animation used when the character is sprinting right</td>
         <td>UAnimSequence*</td>
         <td><code>nullptr</code></td>
     </tr>
@@ -3672,8 +3726,14 @@
     </tr>
     <tr>
         <td>MovementSpeed</td>
-        <td>The movement speed fo the character</td>
+        <td>The movement speed of the character</td>
         <td>float</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>MovementDirection</td>
+        <td>The movement direction of the character multiplied by the movement speed</td>
+        <td>FVector2D</td>
         <td></td>
     </tr>
     <tr>
@@ -3749,6 +3809,18 @@
         <td></td>
     </tr>
     <tr>
+        <td>LookAtCenterRotation</td>
+        <td>The rotation applied to the character to look at the center of the screen</td>
+        <td>float</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>LookAtCenterBoneName</td>
+        <td>The bone to rotate while the character is looking at the center</td>
+        <td>FName</td>
+        <td></td>
+    </tr>
+    <tr>
         <td>bIsSliding</td>
         <td>Is the character currently sliding?</td>
         <td>bool</td>
@@ -3807,22 +3879,76 @@
         <td><strong>UAnimSequence*</strong><br/>The idle animation to play</td>
     </tr>
     <tr>
-        <td>GetWalkBaseAnimation</td>
-        <td>Get the base walk animation</td>
+        <td>GetWalkForwardBaseAnimation</td>
+        <td>Get the base walk forward animation</td>
         <td></td>
-        <td><strong>UAnimSequence*</strong><br/>The walk animation to play</td>
+        <td><strong>UAnimSequence*</strong><br/>The walk forward animation to play</td>
     </tr>
     <tr>
-        <td>GetRunBaseAnimation</td>
-        <td>Get the base run animation</td>
+        <td>GetWalkBackwardsBaseAnimation</td>
+        <td>Get the base walk backwards animation</td>
         <td></td>
-        <td><strong>UAnimSequence*</strong><br/>The run animation to play</td>
+        <td><strong>UAnimSequence*</strong><br/>The walk backwards animation to play</td>
     </tr>
     <tr>
-        <td>GetSprintBaseAnimation</td>
-        <td>Get the base sprint animation</td>
+        <td>GetWalkLeftBaseAnimation</td>
+        <td>Get the base walk left animation</td>
         <td></td>
-        <td><strong>UAnimSequence*</strong><br/>The sprint animation to play</td>
+        <td><strong>UAnimSequence*</strong><br/>The walk left animation to play</td>
+    </tr>
+    <tr>
+        <td>GetWalkRightBaseAnimation</td>
+        <td>Get the base walk right animation</td>
+        <td></td>
+        <td><strong>UAnimSequence*</strong><br/>The walk right animation to play</td>
+    </tr>
+    <tr>
+        <td>GetRunForwardBaseAnimation</td>
+        <td>Get the base run forward animation</td>
+        <td></td>
+        <td><strong>UAnimSequence*</strong><br/>The run forward animation to play</td>
+    </tr>
+    <tr>
+        <td>GetRunBackwardsBaseAnimation</td>
+        <td>Get the base run backwards animation</td>
+        <td></td>
+        <td><strong>UAnimSequence*</strong><br/>The run backwards animation to play</td>
+    </tr>
+    <tr>
+        <td>GetRunLeftBaseAnimation</td>
+        <td>Get the base run left animation</td>
+        <td></td>
+        <td><strong>UAnimSequence*</strong><br/>The run left animation to play</td>
+    </tr>
+    <tr>
+        <td>GetRunRightBaseAnimation</td>
+        <td>Get the base run right animation</td>
+        <td></td>
+        <td><strong>UAnimSequence*</strong><br/>The run right animation to play</td>
+    </tr>
+    <tr>
+        <td>GetSprintForwardBaseAnimation</td>
+        <td>Get the base sprint forward animation</td>
+        <td></td>
+        <td><strong>UAnimSequence*</strong><br/>The sprint forward animation to play</td>
+    </tr>
+    <tr>
+        <td>GetSprintBackwardsBaseAnimation</td>
+        <td>Get the base sprint backwards animation</td>
+        <td></td>
+        <td><strong>UAnimSequence*</strong><br/>The sprint backwards animation to play</td>
+    </tr>
+    <tr>
+        <td>GetSprintLeftBaseAnimation</td>
+        <td>Get the base sprint left animation</td>
+        <td></td>
+        <td><strong>UAnimSequence*</strong><br/>The sprint left animation to play</td>
+    </tr>
+    <tr>
+        <td>GetSprintRightBaseAnimation</td>
+        <td>Get the base sprint right animation</td>
+        <td></td>
+        <td><strong>UAnimSequence*</strong><br/>The sprint right animation to play</td>
     </tr>
     <tr>
         <td>GetJumpBaseAnimation</td>
