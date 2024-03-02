@@ -1,6 +1,8 @@
 ﻿// Created by Henry Jooste
 
 #include "USKCharacterAnimationInstance.h"
+
+#include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/PawnMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "USK/Logger/Log.h"
@@ -29,8 +31,17 @@ void UUSKCharacterAnimationInstance::NativeUpdateAnimation(float DeltaSeconds)
 		return;
 	}
 
-	const float NewMovementSpeed = UKismetMathLibrary::VSizeXY(Character->GetMovementComponent()->Velocity);
-	MovementSpeed = FMath::Lerp(MovementSpeed, NewMovementSpeed, DeltaSeconds * MovementBlendSpeed);
+	const FQuat CharacterRotation = Character->GetActorRotation().Quaternion();
+	const FVector CharacterVelocity = Character->GetMovementComponent()->Velocity;
+	const FVector DirectionVelocity = UKismetMathLibrary::Quat_RotateVector(CharacterRotation, CharacterVelocity);
+	const float NewMovementSpeed = UKismetMathLibrary::VSizeXY(CharacterVelocity);
+	const FVector2D NewMovementDirection = Character->GetCharacterMovement()->bOrientRotationToMovement
+		? FVector2D(0.0f, FMath::Abs(NewMovementSpeed))
+		: FVector2D(DirectionVelocity.X, DirectionVelocity.Y);
+	MovementSpeed = FMath::FInterpTo(MovementSpeed, NewMovementSpeed,
+		DeltaSeconds, MovementBlendSpeed);
+	MovementDirection = FMath::Vector2DInterpTo(MovementDirection, NewMovementDirection,
+		DeltaSeconds, MovementBlendSpeed);
 	IsInAir = Character->GetMovementComponent()->IsFalling();
 	bIsCrouching = !IsInAir && Character->IsCrouching();
 	bIsEndingCrouch = Character->IsEndingCrouch();
@@ -73,30 +84,111 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetIdleBaseAnimation() const
 }
 
 /**
- * @brief Get the base walk animation
- * @return The walk animation to play
+ * @brief Get the base walk forward animation
+ * @return The walk forward animation to play
  */
-UAnimSequence* UUSKCharacterAnimationInstance::GetWalkBaseAnimation() const
+UAnimSequence* UUSKCharacterAnimationInstance::GetWalkForwardBaseAnimation() const
 {
-	return WalkBaseAnimation;
+	return WalkForwardBaseAnimation;
 }
 
 /**
- * @brief Get the base run animation
- * @return The run animation to play
+ * @brief Get the base walk backwards animation
+ * @return The walk backwards animation to play
  */
-UAnimSequence* UUSKCharacterAnimationInstance::GetRunBaseAnimation() const
+UAnimSequence* UUSKCharacterAnimationInstance::GetWalkBackwardsBaseAnimation() const
 {
-	return RunBaseAnimation;
+	return WalkBackwardsBaseAnimation;
 }
 
 /**
- * @brief Get the base sprint animation
- * @return The sprint animation to play
+ * @brief Get the base walk left animation
+ * @return The walk left animation to play
  */
-UAnimSequence* UUSKCharacterAnimationInstance::GetSprintBaseAnimation() const
+UAnimSequence* UUSKCharacterAnimationInstance::GetWalkLeftBaseAnimation() const
 {
-	return SprintBaseAnimation;
+	return WalkLeftBaseAnimation;
+}
+
+/**
+ * @brief Get the base walk right animation
+ * @return The walk right animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetWalkRightBaseAnimation() const
+{
+	return WalkRightBaseAnimation;
+}
+
+/**
+ * @brief Get the base run forward animation
+ * @return The run forward animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetRunForwardBaseAnimation() const
+{
+	return RunForwardBaseAnimation;
+}
+
+/**
+ * @brief Get the base run backwards animation
+ * @return The run backwards animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetRunBackwardsBaseAnimation() const
+{
+	return RunBackwardsBaseAnimation;
+}
+
+/**
+ * @brief Get the base run left animation
+ * @return The run left animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetRunLeftBaseAnimation() const
+{
+	return RunLeftBaseAnimation;
+}
+
+/**
+ * @brief Get the base run right animation
+ * @return The run right animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetRunRightBaseAnimation() const
+{
+	return RunRightBaseAnimation;
+}
+
+/**
+ * @brief Get the base sprint forward animation
+ * @return The sprint forward animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetSprintForwardBaseAnimation() const
+{
+	return SprintForwardBaseAnimation;
+}
+
+/**
+ * @brief Get the base sprint backwards animation
+ * @return The sprint backwards animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetSprintBackwardsBaseAnimation() const
+{
+	return SprintBackwardsBaseAnimation;
+}
+
+/**
+ * @brief Get the base sprint left animation
+ * @return The sprint left animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetSprintLeftBaseAnimation() const
+{
+	return SprintLeftBaseAnimation;
+}
+
+/**
+ * @brief Get the base sprint right animation
+ * @return The sprint right animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetSprintRightBaseAnimation() const
+{
+	return SprintRightBaseAnimation;
 }
 
 /**

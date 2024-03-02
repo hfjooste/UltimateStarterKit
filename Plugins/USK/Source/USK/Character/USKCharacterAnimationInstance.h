@@ -46,22 +46,76 @@ public:
 	UAnimSequence* IdleBaseAnimation;
 
 	/**
-	 * @brief The base animation used when the character is walking
+	 * @brief The base animation used when the character is walking forward
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
-	UAnimSequence* WalkBaseAnimation;
+	UAnimSequence* WalkForwardBaseAnimation;
 
 	/**
-	 * @brief The base animation used when the character is running
+	 * @brief The base animation used when the character is walking backwards
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
-	UAnimSequence* RunBaseAnimation;
+	UAnimSequence* WalkBackwardsBaseAnimation;
 
 	/**
-	 * @brief The base animation used when the character is sprinting
+	 * @brief The base animation used when the character is walking left
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
-	UAnimSequence* SprintBaseAnimation;
+	UAnimSequence* WalkLeftBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is walking right
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* WalkRightBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is running forward
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* RunForwardBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is running backwards
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* RunBackwardsBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is running left
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* RunLeftBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is running right
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* RunRightBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is sprinting forward
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* SprintForwardBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is sprinting backwards
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* SprintBackwardsBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is sprinting left
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* SprintLeftBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is sprinting right
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* SprintRightBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character is jumping
@@ -838,10 +892,16 @@ public:
 	float MovementBlendSpeed = 10.0f;
 	
 	/**
-	 * @brief The movement speed fo the character
+	 * @brief The movement speed of the character
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Movement")
 	float MovementSpeed;
+
+	/**
+	 * @brief The movement direction of the character multiplied by the movement speed
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Movement")
+	FVector2D MovementDirection;
 
 	/**
 	 * @brief Is the character currently crouching?
@@ -989,25 +1049,88 @@ protected:
 	UAnimSequence* GetIdleBaseAnimation() const;
 
 	/**
-	 * @brief Get the base walk animation
-	 * @return The walk animation to play
+	 * @brief Get the base walk forward animation
+	 * @return The walk forward animation to play
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
-	UAnimSequence* GetWalkBaseAnimation() const;
+	UAnimSequence* GetWalkForwardBaseAnimation() const;
 
 	/**
-	 * @brief Get the base run animation
-	 * @return The run animation to play
+	 * @brief Get the base walk backwards animation
+	 * @return The walk backwards animation to play
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
-	UAnimSequence* GetRunBaseAnimation() const;
+	UAnimSequence* GetWalkBackwardsBaseAnimation() const;
 
 	/**
-	 * @brief Get the base sprint animation
-	 * @return The sprint animation to play
+	 * @brief Get the base walk left animation
+	 * @return The walk left animation to play
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
-	UAnimSequence* GetSprintBaseAnimation() const;
+	UAnimSequence* GetWalkLeftBaseAnimation() const;
+
+	/**
+	 * @brief Get the base walk right animation
+	 * @return The walk right animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetWalkRightBaseAnimation() const;
+
+	/**
+	 * @brief Get the base run forward animation
+	 * @return The run forward animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetRunForwardBaseAnimation() const;
+
+	/**
+	 * @brief Get the base run backwards animation
+	 * @return The run backwards animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetRunBackwardsBaseAnimation() const;
+
+	/**
+	 * @brief Get the base run left animation
+	 * @return The run left animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetRunLeftBaseAnimation() const;
+
+	/**
+	 * @brief Get the base run right animation
+	 * @return The run right animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetRunRightBaseAnimation() const;
+
+	/**
+	 * @brief Get the base sprint forward animation
+	 * @return The sprint forward animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetSprintForwardBaseAnimation() const;
+
+	/**
+	 * @brief Get the base sprint backwards animation
+	 * @return The sprint backwards animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetSprintBackwardsBaseAnimation() const;
+
+	/**
+	 * @brief Get the base sprint left animation
+	 * @return The sprint left animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetSprintLeftBaseAnimation() const;
+
+	/**
+	 * @brief Get the base sprint right animation
+	 * @return The sprint right animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetSprintRightBaseAnimation() const;
 
 	/**
 	 * @brief Get the base jump animation
