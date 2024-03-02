@@ -44,6 +44,11 @@ The <code>USKCharacter</code> uses the following components:
 		<td>The timeline component used for aiming</td>
 		<td>UTimelineComponent*</td>
 	</tr>
+	<tr>
+		<td>LookAtCenterTimeline</td>
+		<td>The timeline component used to look at the center of the screen</td>
+		<td>UTimelineComponent*</td>
+	</tr>
 </table>
 
 ## API Reference
@@ -518,6 +523,24 @@ The <code>USKCharacter</code> uses the following components:
 		<td>25.0f</td>
 	</tr>
 	<tr>
+		<td>bLookAtCenter</td>
+		<td>Should the character automatically rotate to look at the center of the screen</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>MaxLookAtCenterRotation</td>
+		<td>The maximum rotation that can be applied while looking at the center of the screen before rotating the actor</td>
+		<td>float</td>
+		<td>90.0f</td>
+	</tr>
+	<tr>
+		<td>LookAtCenterCurve</td>
+		<td>The float curve used to look at the center of the screen</td>
+		<td>UCurveFloat*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>bCanSlide</td>
 		<td>Can the character perform a slide?</td>
 		<td>bool</td>
@@ -701,6 +724,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>Get the current lean camera roll</td>
 		<td></td>
 		<td><strong>float</strong><br/>The current lean camera roll</td>
+	</tr>
+	<tr>
+		<td>GetLookAtCenterRotation</td>
+		<td>Get the look at center rotation</td>
+		<td></td>
+		<td><strong>float</strong><br/>The look at center rotation</td>
 	</tr>
 	<tr>
 		<td>IsSliding</td>
