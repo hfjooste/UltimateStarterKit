@@ -449,9 +449,15 @@ void UUSKGameInstance::InitializeInputIndicators()
 
 	USK_LOG_INFO("Adding input binding");
 	const APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-	if (PlayerController == nullptr)
+	if (!IsValid(PlayerController))
 	{
-		USK_LOG_ERROR("Failed to add input binding. PlayerController is nullptr");
+		USK_LOG_ERROR("Failed to add input binding. PlayerController is not valid");
+		return;
+	}
+
+	if (!IsValid(PlayerController->InputComponent))
+	{
+		USK_LOG_ERROR("Failed to add input binding. InputComponent is not valid");
 		return;
 	}
 
