@@ -23,9 +23,9 @@ void UUSKCharacterAnimationInstance::NativeBeginPlay()
 void UUSKCharacterAnimationInstance::NativeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeUpdateAnimation(DeltaSeconds);
-	if (Character == nullptr)
+	if (!IsValid(Character))
 	{
-		USK_LOG_WARNING("Character is nullptr");
+		USK_LOG_WARNING("Character is not valid");
 		return;
 	}
 
@@ -42,6 +42,7 @@ void UUSKCharacterAnimationInstance::NativeUpdateAnimation(float DeltaSeconds)
 	StompBlendValue = FMath::Lerp(StompBlendValue, bIsStomping ? 1.0f : 0.0f, DeltaSeconds * MovementBlendSpeed);
     bIsStompStarting = Character->IsStompStarting();
 	LeanCameraRoll = Character->GetLeanCameraRoll() * LeanCameraRotationModifier;
+	LookAtCenterRotation = Character->GetLookAtCenterRotation();
 	bIsAiming = Character->IsAiming();
 	AimRotation = Character->HasWeapon() ? Character->GetControlRotation().Pitch * -1.0f : 0.0f;
 	WeaponSway = Character->GetWeaponSway();

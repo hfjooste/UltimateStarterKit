@@ -31,6 +31,7 @@ AUSKCharacter::AUSKCharacter()
 	CrouchTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("Crouch Timeline"));
 	ProneTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("Prone Timeline"));
 	AimTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("Aim Timeline"));
+	LookAtCenterTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("Look At Center Timeline"));
 
 	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("Camera Boom"));
 	SpringArmComponent->SetupAttachment(GetCapsuleComponent(), "head");
@@ -51,7 +52,10 @@ void AUSKCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	USK_LOG_TRACE("Initializing character movement");	
+	USK_LOG_TRACE("Initializing references");
+	PlayerController = dynamic_cast<APlayerController*>(GetController());
+	
+	USK_LOG_TRACE("Initializing character movement");
 	GetCharacterMovement()->JumpZVelocity = JumpVelocity;
 	GetCharacterMovement()->AirControl = AirControl;
 	GetCharacterMovement()->FallingLateralFriction = FallingFriction;
@@ -101,6 +105,13 @@ void AUSKCharacter::BeginPlay()
 		AimTimeline->SetLooping(false);
 	}
 
+	if (IsValid(LookAtCenterCurve))
+	{
+		LookAtCenterTimelineUpdateEvent.BindUFunction(this, FName("OnLookAtCenterTimelineUpdated"));
+		LookAtCenterTimeline->AddInterpFloat(LookAtCenterCurve, LookAtCenterTimelineUpdateEvent);
+		LookAtCenterTimeline->SetLooping(false);
+	}
+
 	DefaultMeshLocation = GetMesh()->GetRelativeLocation();
 	DefaultCameraFov = GetCameraComponent()->FieldOfView;
 	StatsComponent = dynamic_cast<UStatsComponent*>(GetComponentByClass(UStatsComponent::StaticClass()));	
@@ -121,6 +132,7 @@ void AUSKCharacter::Tick(float DeltaSeconds)
 	UpdateProning();
 	UpdateMovementSpeed();
 	UpdateStaminaWhileSprinting(DeltaSeconds);
+	UpdateLookAtCenterActorRotation();
 	CalculateWeaponSway(DeltaSeconds);
 }
 
@@ -132,9 +144,9 @@ void AUSKCharacter::PawnClientRestart()
 	Super::PawnClientRestart();
 
 	USK_LOG_TRACE("Adding input mapping context");
-	const APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	const APlayerController* InputPlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	UEnhancedInputLocalPlayerSubsystem* Subsystem =
-		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
+		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(InputPlayerController->GetLocalPlayer());
 	Subsystem->RemoveMappingContext(InputMappingContext);
 	Subsystem->AddMappingContext(InputMappingContext, 0);
 }
@@ -382,6 +394,28 @@ bool AUSKCharacter::IsStompStarting() const
 float AUSKCharacter::GetLeanCameraRoll() const
 {
 	return CurrentLeanCameraRoll;
+}
+
+/**
+ * @brief Get the look at center rotation
+ * @return The look at center rotation
+ */
+float AUSKCharacter::GetLookAtCenterRotation() const
+{
+	if (!bLookAtCenter)
+	{
+		return 0.0f;
+	}
+	
+	if (!IsValid(PlayerController))
+	{
+		USK_LOG_WARNING("PlayerController is not valid");
+		return 0.0f;
+	}
+
+	const FRotator ActorRotation = GetActorRotation();
+	const FRotator CameraRotation = PlayerController->PlayerCameraManager->GetCameraRotation();	
+	return UKismetMathLibrary::NormalizedDeltaRotator(CameraRotation, ActorRotation).Yaw;
 }
 
 /**
@@ -1304,13 +1338,26 @@ void AUSKCharacter::OnAimTimelineUpdated(float Value)
 }
 
 /**
+ * @brief Called after the look at center timeline is updated
+ */
+void AUSKCharacter::OnLookAtCenterTimelineUpdated(float Value)
+{	
+	const FRotator CurrentRotation = GetActorRotation();
+	const FRotator StartRotation = FRotator(CurrentRotation.Pitch, StartLookAtActorRotation, CurrentRotation.Roll);
+	const FRotator TargetRotation = FRotator(CurrentRotation.Pitch, TargetLookAtActorRotation, CurrentRotation.Roll);
+	const FRotator NewRotation = UKismetMathLibrary::RLerp(StartRotation, TargetRotation, Value, true);
+	SetActorRotation(NewRotation);
+}
+
+/**
  * @brief Initialize the current camera perspective
  */
 void AUSKCharacter::InitializeCameraPerspective()
 {
 	USK_LOG_INFO("Initializing camera perspective");
 	
-	GetCharacterMovement()->bOrientRotationToMovement = GetCameraPerspective() == ECameraPerspective::ThirdPerson;
+	GetCharacterMovement()->bOrientRotationToMovement =
+		GetCameraPerspective() == ECameraPerspective::ThirdPerson && !bLookAtCenter;
 	GetCameraComponent()->bUsePawnControlRotation = GetCameraPerspective() == ECameraPerspective::FirstPerson;
 	bUseControllerRotationYaw = GetCameraPerspective() == ECameraPerspective::FirstPerson;
 	
@@ -1391,4 +1438,28 @@ bool AUSKCharacter::CheckProneAllowedAtLocation(FVector LocationOffset) const
 	return !UKismetSystemLibrary::BoxTraceSingle(GetWorld(), TraceLocation, TraceLocation, TraceSize,
 		GetActorRotation(), UEngineTypes::ConvertToTraceType(ECC_Visibility),
 		false, { }, EDrawDebugTrace::None, ProneAllowedTraceResult, true);
+}
+
+/**
+ * @brief Update the rotation of the character while looking at the center of the screen
+ */
+void AUSKCharacter::UpdateLookAtCenterActorRotation()
+{
+	if (!bLookAtCenter || GetCameraPerspective() != ECameraPerspective::ThirdPerson)
+	{
+		return;
+	}
+
+	const float LookAtCenterRotation = GetLookAtCenterRotation();
+	if (LookAtCenterRotation <= MaxLookAtCenterRotation &&
+		LookAtCenterRotation >= -MaxLookAtCenterRotation)
+	{
+		return;
+	}
+
+	StartLookAtActorRotation = GetActorRotation().Yaw;
+	TargetLookAtActorRotation = StartLookAtActorRotation +
+		(MaxLookAtCenterRotation * FMath::Sign(LookAtCenterRotation));
+	LookAtCenterTimeline->Stop();
+	LookAtCenterTimeline->PlayFromStart();
 }

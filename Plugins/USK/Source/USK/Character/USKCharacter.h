@@ -75,6 +75,13 @@ class USK_API AUSKCharacter : public ACharacter
 		meta=(AllowPrivateAccess = "true"))
 	class UTimelineComponent* AimTimeline;
 
+	/**
+	 * @brief The timeline component used to look at the center of the screen
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
+		meta=(AllowPrivateAccess = "true"))
+	class UTimelineComponent* LookAtCenterTimeline;
+
 public:
 	/**
 	 * @brief The input mapping context used by the character
@@ -572,6 +579,26 @@ public:
     float LeanRotation = 25.0f;
 
 	/**
+	 * @brief Should the character automatically rotate to look at the center of the screen
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Look")
+	bool bLookAtCenter = true;
+
+	/**
+	 * @brief The maximum rotation that can be applied while looking at the center of the screen before rotating the actor
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Look",
+		meta=(EditCondition = "bLookAtCenter", EditConditionHides))
+	float MaxLookAtCenterRotation = 90.0f;
+
+	/**
+	 * @brief The float curve used to look at the center of the screen 
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Look",
+		meta=(EditCondition = "bLookAtCenter", EditConditionHides))
+	UCurveFloat* LookAtCenterCurve;
+
+	/**
 	 * @brief Can the character perform a slide?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Sliding")
@@ -765,6 +792,13 @@ public:
 	float GetLeanCameraRoll() const;
 
 	/**
+	 * @brief Get the look at center rotation
+	 * @return The look at center rotation
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Look")
+	float GetLookAtCenterRotation() const;
+
+	/**
 	 * @brief Check if the character is sliding
 	 * @return A boolean value indicating if the character is sliding
 	 */
@@ -938,6 +972,12 @@ protected:
 	void ApplyStompVelocity();
 
 private:
+	/**
+	 * @brief A reference to the player controller
+	 */
+	UPROPERTY()
+	APlayerController* PlayerController;
+	
 	/**
 	 * @brief A reference to the current weapons
 	 */
@@ -1132,6 +1172,21 @@ private:
 	FOnTimelineFloat AimTimelineUpdateEvent;
 
 	/**
+	 * @brief Event used to smoothly rotate the character while looking at the center of the screen
+	 */
+	FOnTimelineFloat LookAtCenterTimelineUpdateEvent;
+
+	/**
+	 * @brief The starting rotation of the character when looking at the center of the screen
+	 */
+	float StartLookAtActorRotation;
+
+	/**
+	 * @brief The target rotation of the character when looking at the center of the screen
+	 */
+	float TargetLookAtActorRotation;
+
+	/**
 	 * @brief Move the character
 	 * @param Input The input action containing the input values
 	 */
@@ -1314,6 +1369,12 @@ private:
 	void OnAimTimelineUpdated(float Value);
 
 	/**
+	 * @brief Called after the look at center timeline is updated
+	 */
+	UFUNCTION()
+	void OnLookAtCenterTimelineUpdated(float Value);
+
+	/**
 	 * @brief Initialize the current camera perspective
 	 */
 	void InitializeCameraPerspective();
@@ -1334,4 +1395,9 @@ private:
 	 * @return A boolean value indicating if the character is allowed to prone at the location
 	 */
 	bool CheckProneAllowedAtLocation(FVector LocationOffset) const;
+
+	/**
+	 * @brief Update the rotation of the character while looking at the center of the screen
+	 */
+	void UpdateLookAtCenterActorRotation();
 };
