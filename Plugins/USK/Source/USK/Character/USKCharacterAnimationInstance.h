@@ -160,10 +160,28 @@ public:
 	UAnimSequence* CrouchIdleBaseAnimation;
 
 	/**
-	 * @brief The base animation used when the character is crouching and walking
+	 * @brief The base animation used when the character is crouching and walking forward
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
-	UAnimSequence* CrouchWalkBaseAnimation;
+	UAnimSequence* CrouchWalkForwardBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is crouching and walking backwards
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* CrouchWalkBackwardsBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is crouching and walking left
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* CrouchWalkLeftBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is crouching and walking right
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UAnimSequence* CrouchWalkRightBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character starts proning
@@ -1176,11 +1194,32 @@ protected:
 	UAnimSequence* GetCrouchIdleBaseAnimation() const;
 
 	/**
-	 * @brief Get the base crouch walk animation
-	 * @return The crouch walk animation to play
+	 * @brief Get the base crouch walk forward animation
+	 * @return The crouch walk forward animation to play
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
-	UAnimSequence* GetCrouchWalkBaseAnimation() const;
+	UAnimSequence* GetCrouchWalkForwardBaseAnimation() const;
+
+	/**
+	 * @brief Get the base crouch walk backwards animation
+	 * @return The crouch walk backwards animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetCrouchWalkBackwardsBaseAnimation() const;
+
+	/**
+	 * @brief Get the base crouch walk left animation
+	 * @return The crouch walk left animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetCrouchWalkLeftBaseAnimation() const;
+
+	/**
+	 * @brief Get the base crouch walk right animation
+	 * @return The crouch walk right animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetCrouchWalkRightBaseAnimation() const;
 
 	/**
 	 * @brief Get the base prone start animation

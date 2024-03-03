@@ -255,12 +255,39 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchIdleBaseAnimation() cons
 }
 
 /**
- * @brief Get the base crouch walk animation
- * @return The crouch walk animation to play
+ * @brief Get the base crouch walk forward animation
+ * @return The crouch walk forward animation to play
  */
-UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchWalkBaseAnimation() const
+UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchWalkForwardBaseAnimation() const
 {
-	return CrouchWalkBaseAnimation;
+	return CrouchWalkForwardBaseAnimation;
+}
+
+/**
+ * @brief Get the base crouch walk backwards animation
+ * @return The crouch walk backwards animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchWalkBackwardsBaseAnimation() const
+{
+	return CrouchWalkBackwardsBaseAnimation;
+}
+
+/**
+ * @brief Get the base crouch walk left animation
+ * @return The crouch walk left animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchWalkLeftBaseAnimation() const
+{
+	return CrouchWalkLeftBaseAnimation;
+}
+
+/**
+ * @brief Get the base crouch walk right animation
+ * @return The crouch walk right animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchWalkRightBaseAnimation() const
+{
+	return CrouchWalkRightBaseAnimation;
 }
 
 /**
