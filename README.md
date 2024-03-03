@@ -110,9 +110,14 @@ You can find tutorials on how to get started and how to use the features from th
 </ul>
 
 ## 💻 Contribution Guidelines
-
 If you would like to contribute to the Ultimate Starter Kit, please follow our [Contribution Guidelines](./Contribution.md). These guidelines provide detailed information on how to create branches, make changes, test, document, commit, and open pull requests. 
 We welcome contributions from the community and look forward to your valuable input.
 
 ## ℹ️ Support
-If you have any questions, feel free to contact me through <a href="https://mastodon.gamedev.place/@hfjooste" target="_blank">Mastodon</a> or <a href="https://twitter.com/hfjooste" target="_blank">Twitter</a>. You can also send me an email at <a href="mailto:henryjooste95@gmail.com">henryjooste95@gmail.com</a>. The Discussions or Issues tab on GitHub can also be used to discuss problems/features or report any issues
+If you have any questions, feel free to contact me on social media:
+<ul>
+    <li>🧵 <a href="https://www.threads.net/@hfjooste">Threads</a></li>
+    <li>🦣 <a href="https://mastodon.gamedev.place/@hfjooste" target="_blank">Mastodon</a></li>
+    <li>🐦 <a href="https://twitter.com/hfjooste" target="_blank">X (Twitter)</a></li>
+</ul>
+You can also send me an email at <a href="mailto:henryjooste95@gmail.com">henryjooste95@gmail.com</a>. The Discussions or Issues tab on GitHub can also be used to discuss problems/features or report any issues
