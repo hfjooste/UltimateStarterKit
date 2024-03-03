@@ -976,18 +976,6 @@ public:
 	FName LeanBoneName;
 
 	/**
-	 * @brief The rotation applied to the character to look at the center of the screen
-	 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Look")
-	float LookAtCenterRotation;
-
-	/**
-	 * @brief The bone to rotate while the character is looking at the center
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Look")
-	FName LookAtCenterBoneName;
-
-	/**
 	 * @brief Is the character currently sliding?
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Sliding")
@@ -1006,10 +994,16 @@ public:
 	bool bIsAiming;
 
 	/**
-	 * @brief Is the character aiming?
+	 * @brief The rotation applied to the character while aiming
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Aiming")
 	float AimRotation;
+
+	/**
+	 * @brief The rotation applied to the character to look at the center of the screen
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character|Aiming")
+	float LookAtCenterRotation;
 
 	/**
 	 * @brief The bone to rotate while the player is aiming up or down using the first person camera perspective
