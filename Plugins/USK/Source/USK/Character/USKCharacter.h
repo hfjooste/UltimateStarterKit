@@ -579,17 +579,69 @@ public:
     float LeanRotation = 25.0f;
 
 	/**
-	 * @brief Should the character automatically rotate to look at the center of the screen
+	 * @brief Should the character automatically rotate to look at the center of the screen while idle?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Look")
-	bool bLookAtCenter = true;
+	bool bLookAtCenterWhileIdle = true;
 
 	/**
-	 * @brief The maximum rotation that can be applied while looking at the center of the screen before rotating the actor
+	 * @brief The maximum rotation that can be applied while looking at the center of the screen while idle
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Look",
-		meta=(EditCondition = "bLookAtCenter", EditConditionHides))
-	float MaxLookAtCenterRotation = 90.0f;
+		meta=(EditCondition = "bLookAtCenterWhileIdle", EditConditionHides))
+	float MaxLookAtCenterRotationWhileIdle = 90.0f;
+
+	/**
+	 * @brief Should the character automatically rotate to look at the center of the screen while running?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Look")
+	bool bLookAtCenterWhileRunning = true;
+
+	/**
+	 * @brief The maximum rotation that can be applied while looking at the center of the screen while running
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Look",
+		meta=(EditCondition = "bLookAtCenterWhileRunning", EditConditionHides))
+	float MaxLookAtCenterRotationWhileRunning = 90.0f;
+
+	/**
+	 * @brief Should the character automatically rotate to look at the center of the screen while sprinting?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Look")
+	bool bLookAtCenterWhileSprinting = true;
+
+	/**
+	 * @brief The maximum rotation that can be applied while looking at the center of the screen while sprinting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Look",
+		meta=(EditCondition = "bLookAtCenterWhileSprinting", EditConditionHides))
+	float MaxLookAtCenterRotationWhileSprinting = 90.0f;
+
+	/**
+	 * @brief Should the character automatically rotate to look at the center of the screen while crouching?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Look")
+	bool bLookAtCenterWhileCrouching = true;
+
+	/**
+	 * @brief The maximum rotation that can be applied while looking at the center of the screen while crouching
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Look",
+		meta=(EditCondition = "bLookAtCenterWhileCrouching", EditConditionHides))
+	float MaxLookAtCenterRotationWhileCrouching = 60.0f;
+
+	/**
+	 * @brief Should the character automatically rotate to look at the center of the screen while proning?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Look")
+	bool bLookAtCenterWhileProning = true;
+
+	/**
+	 * @brief The maximum rotation that can be applied while looking at the center of the screen while proning
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Look",
+		meta=(EditCondition = "bLookAtCenterWhileProning", EditConditionHides))
+	float MaxLookAtCenterRotationWhileProning = 45.0f;
 
 	/**
 	 * @brief The float curve used to look at the center of the screen 
@@ -1400,4 +1452,16 @@ private:
 	 * @brief Update the rotation of the character while looking at the center of the screen
 	 */
 	void UpdateLookAtCenterActorRotation();
+
+	/**
+	 * @brief Check if the character should look at the center of the screen
+	 * @return A boolean value indicating if the character should look at the center of the screen
+	 */
+	bool ShouldLookAtCenter() const;
+
+	/**
+	 * @brief Get the max look at center rotation before rotating the actor
+	 * @return The max look at center rotation before rotating the actor
+	 */
+	float GetMaxLookAtCenterRotation() const;
 };

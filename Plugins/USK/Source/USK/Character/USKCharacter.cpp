@@ -402,7 +402,7 @@ float AUSKCharacter::GetLeanCameraRoll() const
  */
 float AUSKCharacter::GetLookAtCenterRotation() const
 {
-	if (!bLookAtCenter)
+	if (!ShouldLookAtCenter())
 	{
 		return 0.0f;
 	}
@@ -1356,8 +1356,6 @@ void AUSKCharacter::InitializeCameraPerspective()
 {
 	USK_LOG_INFO("Initializing camera perspective");
 	
-	GetCharacterMovement()->bOrientRotationToMovement =
-		GetCameraPerspective() == ECameraPerspective::ThirdPerson && !bLookAtCenter;
 	GetCameraComponent()->bUsePawnControlRotation = GetCameraPerspective() == ECameraPerspective::FirstPerson;
 	bUseControllerRotationYaw = GetCameraPerspective() == ECameraPerspective::FirstPerson;
 	
@@ -1445,11 +1443,15 @@ bool AUSKCharacter::CheckProneAllowedAtLocation(FVector LocationOffset) const
  */
 void AUSKCharacter::UpdateLookAtCenterActorRotation()
 {
-	if (!bLookAtCenter || GetCameraPerspective() != ECameraPerspective::ThirdPerson)
+	const bool bShouldLookAtCenter = ShouldLookAtCenter();
+	GetCharacterMovement()->bOrientRotationToMovement =
+		GetCameraPerspective() == ECameraPerspective::ThirdPerson && !bShouldLookAtCenter;
+	if (!bShouldLookAtCenter || GetCameraPerspective() != ECameraPerspective::ThirdPerson)
 	{
 		return;
 	}
 
+	const float MaxLookAtCenterRotation = FMath::Abs(GetMaxLookAtCenterRotation());
 	const float LookAtCenterRotation = GetLookAtCenterRotation();
 	if (LookAtCenterRotation <= MaxLookAtCenterRotation &&
 		LookAtCenterRotation >= -MaxLookAtCenterRotation)
@@ -1462,4 +1464,54 @@ void AUSKCharacter::UpdateLookAtCenterActorRotation()
 		(MaxLookAtCenterRotation * FMath::Sign(LookAtCenterRotation));
 	LookAtCenterTimeline->Stop();
 	LookAtCenterTimeline->PlayFromStart();
+}
+
+/**
+ * @brief Check if the character should look at the center of the screen
+ * @return A boolean value indicating if the character should look at the center of the screen
+ */
+bool AUSKCharacter::ShouldLookAtCenter() const
+{
+	if (bIsProning)
+	{
+		return bLookAtCenterWhileProning;
+	}
+
+	if (bIsCrouching)
+	{
+		return bLookAtCenterWhileCrouching;
+	}
+
+	const float Speed = UKismetMathLibrary::VSizeXY(GetMovementComponent()->Velocity);
+	if (FMath::IsNearlyZero(Speed, 1.0f))
+	{
+		return bLookAtCenterWhileIdle;
+	}
+
+	return bIsSprinting && !bIsAiming ? bLookAtCenterWhileSprinting : bLookAtCenterWhileRunning;
+}
+
+/**
+ * @brief Get the max look at center rotation before rotating the actor
+ * @return The max look at center rotation before rotating the actor
+ */
+float AUSKCharacter::GetMaxLookAtCenterRotation() const
+{
+	if (bIsProning)
+	{
+		return MaxLookAtCenterRotationWhileProning;
+	}
+
+	if (bIsCrouching)
+	{
+		return MaxLookAtCenterRotationWhileCrouching;
+	}
+
+	const float Speed = UKismetMathLibrary::VSizeXY(GetMovementComponent()->Velocity);
+	if (FMath::IsNearlyZero(Speed, 1.0f))
+	{
+		return MaxLookAtCenterRotationWhileIdle;
+	}
+
+	return bIsSprinting && !bIsAiming ? MaxLookAtCenterRotationWhileSprinting : MaxLookAtCenterRotationWhileRunning;
 }
