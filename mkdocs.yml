@@ -19,6 +19,9 @@ extra:
     - name: Linktree
       icon: fontawesome/solid/link
       link: https://linktr.ee/hfjooste
+    - name: Threads
+      icon: fontawesome/brands/threads
+      link: https://www.threads.net/@hfjooste
     - name: Mastodon
       icon: fontawesome/brands/mastodon
       link: https://mastodon.gamedev.place/@hfjooste
