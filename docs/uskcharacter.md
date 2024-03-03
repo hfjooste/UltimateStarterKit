@@ -523,16 +523,64 @@ The <code>USKCharacter</code> uses the following components:
 		<td>25.0f</td>
 	</tr>
 	<tr>
-		<td>bLookAtCenter</td>
-		<td>Should the character automatically rotate to look at the center of the screen</td>
+		<td>bLookAtCenterWhileIdle</td>
+		<td>Should the character automatically rotate to look at the center of the screen while idle?</td>
 		<td>bool</td>
 		<td>true</td>
 	</tr>
 	<tr>
-		<td>MaxLookAtCenterRotation</td>
-		<td>The maximum rotation that can be applied while looking at the center of the screen before rotating the actor</td>
+		<td>MaxLookAtCenterRotationWhileIdle</td>
+		<td>The maximum rotation that can be applied while looking at the center of the screen while idle</td>
 		<td>float</td>
 		<td>90.0f</td>
+	</tr>
+	<tr>
+		<td>bLookAtCenterWhileRunning</td>
+		<td>Should the character automatically rotate to look at the center of the screen while running?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>MaxLookAtCenterRotationWhileRunning</td>
+		<td>The maximum rotation that can be applied while looking at the center of the screen while running</td>
+		<td>float</td>
+		<td>90.0f</td>
+	</tr>
+	<tr>
+		<td>bLookAtCenterWhileSprinting</td>
+		<td>Should the character automatically rotate to look at the center of the screen while sprinting?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>MaxLookAtCenterRotationWhileSprinting</td>
+		<td>The maximum rotation that can be applied while looking at the center of the screen while sprinting</td>
+		<td>float</td>
+		<td>90.0f</td>
+	</tr>
+	<tr>
+		<td>bLookAtCenterWhileCrouching</td>
+		<td>Should the character automatically rotate to look at the center of the screen while crouching?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>MaxLookAtCenterRotationWhileCrouching</td>
+		<td>The maximum rotation that can be applied while looking at the center of the screen while crouching</td>
+		<td>float</td>
+		<td>60.0f</td>
+	</tr>
+	<tr>
+		<td>bLookAtCenterWhileProning</td>
+		<td>Should the character automatically rotate to look at the center of the screen while proning?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>MaxLookAtCenterRotationWhileProning</td>
+		<td>The maximum rotation that can be applied while looking at the center of the screen while proning</td>
+		<td>float</td>
+		<td>45.0f</td>
 	</tr>
 	<tr>
 		<td>LookAtCenterCurve</td>
