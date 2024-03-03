@@ -164,8 +164,26 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
-		<td>CrouchWalkBaseAnimation</td>
-		<td>The base animation used when the character is crouching and walking</td>
+		<td>CrouchWalkForwardBaseAnimation</td>
+		<td>The base animation used when the character is crouching and walking forward</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchWalkBackwardsBaseAnimation</td>
+		<td>The base animation used when the character is crouching and walking backwards</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchWalkLeftBaseAnimation</td>
+		<td>The base animation used when the character is crouching and walking left</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchWalkRightBaseAnimation</td>
+		<td>The base animation used when the character is crouching and walking right</td>
 		<td>UAnimSequence*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -980,18 +998,6 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td></td>
 	</tr>
 	<tr>
-		<td>LookAtCenterRotation</td>
-		<td>The rotation applied to the character to look at the center of the screen</td>
-		<td>float</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>LookAtCenterBoneName</td>
-		<td>The bone to rotate while the character is looking at the center</td>
-		<td>FName</td>
-		<td></td>
-	</tr>
-	<tr>
 		<td>bIsSliding</td>
 		<td>Is the character currently sliding?</td>
 		<td>bool</td>
@@ -1011,7 +1017,13 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 	</tr>
 	<tr>
 		<td>AimRotation</td>
-		<td>Is the character aiming?</td>
+		<td>The rotation applied to the character while aiming</td>
+		<td>float</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>LookAtCenterRotation</td>
+		<td>The rotation applied to the character to look at the center of the screen</td>
 		<td>float</td>
 		<td></td>
 	</tr>
@@ -1164,10 +1176,28 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><strong>UAnimSequence*</strong><br/>The crouch idle animation to play</td>
 	</tr>
 	<tr>
-		<td>GetCrouchWalkBaseAnimation</td>
-		<td>Get the base crouch walk animation</td>
+		<td>GetCrouchWalkForwardBaseAnimation</td>
+		<td>Get the base crouch walk forward animation</td>
 		<td></td>
-		<td><strong>UAnimSequence*</strong><br/>The crouch walk animation to play</td>
+		<td><strong>UAnimSequence*</strong><br/>The crouch walk forward animation to play</td>
+	</tr>
+	<tr>
+		<td>GetCrouchWalkBackwardsBaseAnimation</td>
+		<td>Get the base crouch walk backwards animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The crouch walk backwards animation to play</td>
+	</tr>
+	<tr>
+		<td>GetCrouchWalkLeftBaseAnimation</td>
+		<td>Get the base crouch walk left animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The crouch walk left animation to play</td>
+	</tr>
+	<tr>
+		<td>GetCrouchWalkRightBaseAnimation</td>
+		<td>Get the base crouch walk right animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The crouch walk right animation to play</td>
 	</tr>
 	<tr>
 		<td>GetProneStartBaseAnimation</td>
