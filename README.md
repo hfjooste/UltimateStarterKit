@@ -60,6 +60,8 @@ The Ultimate Starter Kit plugin comes with the following features:
         <ul>
             <li>Upper/Lower body animation blending</li>
             <li>Procedural leaning animations</li>
+            <li>Procedural aim offset animations</li>
+            <li>Support for directional movement animations</li>
             <li>Supports animations for 3 different armed states with aiming animations</li>
         </ul>
     </li>
