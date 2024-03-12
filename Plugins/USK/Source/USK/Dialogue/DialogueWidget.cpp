@@ -95,7 +95,9 @@ void UDialogueWidget::UpdateEntry(const UDialogueEntry* Entry)
 	DialogueTitle->SetColorAndOpacity(Color);
 	DialogueTitle->SetText(Title);
 	DialogueText->SetText(FText::GetEmpty());
-	DialogueText->SetTextStyleSet(Entry->bOverrideRichTextStyle ? Entry->RichTextStyle : RichTextStyle);
+
+	CurrentRichTextStyle = Entry->bOverrideRichTextStyle ? Entry->RichTextStyle : RichTextStyle;
+	DialogueText->SetTextStyleSet(CurrentRichTextStyle);
 
 	UTexture2D* Image = Entry->bOverridePortraitImage
 		? Entry->CustomPortraitImage
@@ -260,7 +262,7 @@ void UDialogueWidget::ProcessRichTextTag()
 
 	const int EndTagIndex = CurrentText.ToString().Find(">",
 		ESearchCase::IgnoreCase, ESearchDir::FromStart, TextIndexInt);
-    if (EndTagIndex <= TextIndexInt || !IsValid(DialogueText->GetTextStyleSet()))
+    if (EndTagIndex <= TextIndexInt || !IsValid(CurrentRichTextStyle))
     {
     	return;						
     }
@@ -273,8 +275,8 @@ void UDialogueWidget::ProcessRichTextTag()
 		return;
 	}
 
-	const FRichTextStyleRow* RichTextStyleRow = DialogueText->GetTextStyleSet()->
-			FindRow<FRichTextStyleRow>(FName(Tag), TEXT(""), true);
+	const FRichTextStyleRow* RichTextStyleRow = CurrentRichTextStyle->FindRow<FRichTextStyleRow>(
+		FName(Tag), TEXT(""), true);
 	if (RichTextStyleRow == nullptr)
 	{
 		return;

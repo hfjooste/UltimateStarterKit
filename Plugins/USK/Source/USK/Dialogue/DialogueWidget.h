@@ -105,6 +105,12 @@ protected:
 
 private:
 	/**
+	 * @brief The rich text style applied to the widget
+	 */
+	UPROPERTY()
+	UDataTable* CurrentRichTextStyle;
+	
+	/**
 	 * @brief An array of all the choice menu items
 	 */
 	TArray<UMenuItem*> ChoiceMenuItems;
