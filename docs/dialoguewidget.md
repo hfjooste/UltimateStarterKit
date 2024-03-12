@@ -23,7 +23,7 @@ You need to add the following before you can compile the <code>DialogueTransitio
 	<tr>
 		<td>DialogueText</td>
 		<td>The text block used to display the dialogue text</td>
-		<td>UTextBlock*</td>
+		<td>URichTextBlock*</td>
 	</tr>
 	<tr>
 		<td>ChoiceMenu</td>
@@ -71,6 +71,12 @@ You can add the following widgets to enable extra functionality:
 		<td>The class for all choice menu items</td>
 		<td>TSubclassOf&lt;UMenuItem&gt;</td>
 		<td></td>
+	</tr>
+	<tr>
+		<td>RichTextStyle</td>
+		<td>The rich text style applied to the dialogue text</td>
+		<td>UDataTable*</td>
+		<td><code>nullptr</code></td>
 	</tr>
 </table>
 

@@ -47,6 +47,18 @@ A single entry in a dialogue
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>bOverrideRichTextStyle</td>
+		<td>Should the rich text style be overridden?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>RichTextStyle</td>
+		<td>The rich text style applied to the widget</td>
+		<td>UDataTable*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>bOverridePortraitImage</td>
 		<td>Should the participant portrait image be overridden?</td>
 		<td>bool</td>
