@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Engine/DataTable.h"
 #include "DialogueWidget.generated.h"
 
 enum class EDialogueTransitionType : uint8;
@@ -36,7 +37,7 @@ public:
 	 * @brief The text block used to display the dialogue text
 	 */
 	UPROPERTY(meta = (BindWidget), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
-	class UTextBlock* DialogueText;
+	class URichTextBlock* DialogueText;
 
 	/**
 	 * @brief The image used to display the portrait image of the participant
@@ -67,6 +68,12 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
 	TSubclassOf<UMenuItem> ChoiceMenuItemClass;
+
+	/**
+	 * @brief The rich text style applied to the dialogue text
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	UDataTable* RichTextStyle;
 
 	/**
 	 * @brief Event used to notify other classes when a choice is selected
@@ -108,6 +115,11 @@ private:
 	float TextIndex;
 
 	/**
+	 * @brief Should an end tag be added to the text?
+	 */
+	bool bAddEndTag;
+
+	/**
 	 * @brief The text of the current dialogue entry
 	 */
 	FText CurrentText;
@@ -140,4 +152,9 @@ private:
 	 * @param NewVisibility The new visibility of the widget
 	 */
 	void UpdateTransitionIndicatorVisibility(ESlateVisibility NewVisibility);
+
+	/**
+	 * @brief Process the rich text tags in the current text
+	 */
+	void ProcessRichTextTag();
 };

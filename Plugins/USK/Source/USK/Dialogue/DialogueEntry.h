@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "DialogueTransitionType.h"
 #include "DialogueParticipant.h"
+#include "Engine/DataTable.h"
 #include "Templates/SubclassOf.h"
 #include "Sound/SoundBase.h"
 #include "DialogueEntry.generated.h"
@@ -56,6 +57,19 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Entry")
 	USoundBase* Audio;
+
+	/**
+	 * @brief Should the rich text style be overridden?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Entry")
+	bool bOverrideRichTextStyle;
+
+	/**
+	 * @brief The rich text style applied to the widget
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Dialogue|Entry",
+		meta=(EditCondition="bOverrideRichTextStyle", EditConditionHides))
+	UDataTable* RichTextStyle;
 
 	/**
 	 * @brief Should the participant portrait image be overridden?

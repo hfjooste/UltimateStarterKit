@@ -5,6 +5,7 @@
 #include "DialogueEntry.h"
 #include "DialogueTransition.h"
 #include "Components/Image.h"
+#include "Components/RichTextBlock.h"
 #include "Components/TextBlock.h"
 #include "Components/VerticalBox.h"
 #include "USK/Logger/Log.h"
@@ -46,13 +47,22 @@ void UDialogueWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 
 	if (TextIndex >= CurrentText.ToString().Len())
 	{
-		UpdateTransitionIndicatorVisibility(ESlateVisibility::Visible);		
+		bAddEndTag = false;
+		UpdateTransitionIndicatorVisibility(ESlateVisibility::Visible);
 		return;
 	}
 
 	TextIndex = FMath::Min(TextIndex + (InDeltaTime * UpdateSpeed),
 		static_cast<float>(CurrentText.ToString().Len()));
-	DialogueText->SetText(FText::FromString(CurrentText.ToString().Left(TextIndex)));
+	ProcessRichTextTag();
+
+	FString NewTextString = CurrentText.ToString().Left(TextIndex);
+	if (bAddEndTag)
+	{
+		NewTextString += "</>";
+	}
+	
+	DialogueText->SetText(FText::FromString(NewTextString));
 	UpdateTransitionIndicatorVisibility(ESlateVisibility::Collapsed);
 }
 
@@ -85,6 +95,7 @@ void UDialogueWidget::UpdateEntry(const UDialogueEntry* Entry)
 	DialogueTitle->SetColorAndOpacity(Color);
 	DialogueTitle->SetText(Title);
 	DialogueText->SetText(FText::GetEmpty());
+	DialogueText->SetTextStyleSet(Entry->bOverrideRichTextStyle ? Entry->RichTextStyle : RichTextStyle);
 
 	UTexture2D* Image = Entry->bOverridePortraitImage
 		? Entry->CustomPortraitImage
@@ -232,4 +243,43 @@ void UDialogueWidget::UpdateTransitionIndicatorVisibility(ESlateVisibility NewVi
 		USK_LOG_ERROR("Invalid dialogue transition type");
 		break;
 	}
+}
+
+/**
+ * @brief Process the rich text tags in the current text
+ */
+void UDialogueWidget::ProcessRichTextTag()
+{
+	const FString CurrentString = CurrentText.ToString();
+	const int TextIndexInt = FMath::RoundToInt(TextIndex);
+	
+	if (TextIndexInt >= CurrentString.Len() || CurrentString[TextIndexInt] != '<')
+	{
+		return;
+	}
+
+	const int EndTagIndex = CurrentText.ToString().Find(">",
+		ESearchCase::IgnoreCase, ESearchDir::FromStart, TextIndexInt);
+    if (EndTagIndex <= TextIndexInt || !IsValid(DialogueText->GetTextStyleSet()))
+    {
+    	return;						
+    }
+
+	const FString Tag = CurrentText.ToString().Mid(TextIndexInt + 1, EndTagIndex - TextIndexInt - 1);
+	if (Tag == "/")
+	{
+		bAddEndTag = false;
+		TextIndex = EndTagIndex + 1;
+		return;
+	}
+
+	const FRichTextStyleRow* RichTextStyleRow = DialogueText->GetTextStyleSet()->
+			FindRow<FRichTextStyleRow>(FName(Tag), TEXT(""), true);
+	if (RichTextStyleRow == nullptr)
+	{
+		return;
+	}
+
+	bAddEndTag = true;
+	TextIndex = EndTagIndex + 1;
 }
