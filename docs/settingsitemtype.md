@@ -12,6 +12,10 @@ An enum of all supported settings items
 		<td>A setting not managed by the game instance</td>
 	</tr>
 	<tr>
+		<td>GameplayDifficulty</td>
+		<td>The game difficulty setting</td>
+	</tr>
+	<tr>
 		<td>AudioMaster</td>
 		<td>The master audio volume setting</td>
 	</tr>

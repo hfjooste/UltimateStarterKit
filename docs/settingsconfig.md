@@ -11,6 +11,30 @@ The configuration used for managing settings
 		<th>Default Value</th>
 	</tr>
 	<tr>
+		<td>GameplayDifficultyImplementation</td>
+		<td>The implementation for the gameplay difficulty setting</td>
+		<td>TSubclassOf&lt;USettingsItem&gt;</td>
+		<td>USettingsItemGameplayDifficulty::StaticClas</td>
+	</tr>
+	<tr>
+		<td>GameplayDifficultyText</td>
+		<td>The text displayed in the gameplay difficulty settings item</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GameplayDifficultyOptions</td>
+		<td>The array of gameplay difficulty options</td>
+		<td>TArray&lt;FText&gt;</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GameplayDifficultyDefault</td>
+		<td>The default gameplay difficulty value</td>
+		<td>int</td>
+		<td>0</td>
+	</tr>
+	<tr>
 		<td>AudioMasterImplementation</td>
 		<td>The implementation for the audio master settings item</td>
 		<td>TSubclassOf&lt;USettingsItem&gt;</td>

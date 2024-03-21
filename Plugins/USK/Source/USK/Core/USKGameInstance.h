@@ -44,6 +44,7 @@ class USK_API UUSKGameInstance : public UGameInstance
 
 	/**
 	 * @brief Event used to notify other classes when the difficulty is updated
+	 * @param Difficulty The new difficulty value
 	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGameInstanceDifficultyUpdatedDelegate, int, Difficulty);
 	
@@ -165,6 +166,7 @@ public:
 
 	/**
 	 * @brief Event used to notify other classes when the difficulty is updated
+	 * @param Difficulty The new difficulty value
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Input|Events")
 	FGameInstanceDifficultyUpdatedDelegate OnDifficultyUpdated;

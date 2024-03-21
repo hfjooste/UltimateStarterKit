@@ -11,6 +11,18 @@ The settings data that is saved/loaded
 		<th>Default Value</th>
 	</tr>
 	<tr>
+		<td>GameplayDifficultyModified</td>
+		<td>Was the gameplay difficulty setting modified?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>GameplayDifficulty</td>
+		<td>The gameplay difficulty setting</td>
+		<td>int</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>AudioMasterModified</td>
 		<td>Was the master audio volume modified?</td>
 		<td>bool</td>

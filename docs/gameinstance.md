@@ -148,6 +148,11 @@ The Game Instance will automatically detect input events and update the current 
 		<td>Event used to notify other classes when the game is unpaused</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>OnDifficultyUpdated</td>
+		<td>Event used to notify other classes when the difficulty is updated</td>
+		<td><strong>Difficulty (int)</strong><br/>The new difficulty value</td>
+	</tr>
 </table>
 
 ### Functions
@@ -231,6 +236,18 @@ The Game Instance will automatically detect input events and update the current 
 		<td></td>
 	</tr>
 	<tr>
+		<td>UpdateDifficulty</td>
+		<td>Update the difficulty</td>
+		<td><strong>Difficulty (int)</strong><br/>The new difficulty</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GetDifficulty</td>
+		<td>Get the current difficulty</td>
+		<td></td>
+		<td><strong>int</strong><br/>The current difficulty</td>
+	</tr>
+	<tr>
 		<td>ShowMessagePopup</td>
 		<td>Show a message popup</td>
 		<td><strong>Data (FMessagePopupData)</strong><br/>The data displayed in the message popup</td>
@@ -259,6 +276,8 @@ You can use the <code>USKGameInstance</code> using Blueprints by adding one of t
 	<li>Ultimate Starter Kit > Input > Update Key Bindings</li>
 	<li>Ultimate Starter Kit > Pause > Pause Game</li>
 	<li>Ultimate Starter Kit > Pause > Unpause Game</li>
+	<li>Ultimate Starter Kit > Difficulty > Update Difficulty</li>
+	<li>Ultimate Starter Kit > Difficulty > Get Difficulty</li>
 	<li>Ultimate Starter Kit > UI > Show Message Popup</li>
 	<li>Ultimate Starter Kit > UI > Hide Message Popup</li>
 </ul>
@@ -288,6 +307,8 @@ void ATestActor::Test()
 	USKGameInstance->UpdateKeyBindings();
 	USKGameInstance->PauseGame();
 	USKGameInstance->UnpauseGame();
+	USKGameInstance->UpdateDifficulty(Difficulty);
+	int Difficulty = USKGameInstance->GetDifficulty();
 	UMessagePopupWidget* ShowMessagePopupValue = USKGameInstance->ShowMessagePopup(Data);
 	USKGameInstance->HideMessagePopup();
 }
