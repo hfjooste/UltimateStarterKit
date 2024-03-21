@@ -311,6 +311,33 @@ void UUSKGameInstance::UnpauseGame()
 }
 
 /**
+ * @brief Update the difficulty
+ * @param Difficulty The new difficulty
+ */
+void UUSKGameInstance::UpdateDifficulty(const int Difficulty) const
+{
+	USK_LOG_INFO("Updating difficulty: " + FString::FromInt(Difficulty));
+	OnDifficultyUpdated.Broadcast(Difficulty);
+}
+
+/**
+ * @brief Get the current difficulty
+ * @return The current difficulty
+ */
+int UUSKGameInstance::GetDifficulty() const
+{
+	const int DefaultDifficulty = IsValid(SettingsConfig) ? SettingsConfig->GameplayDifficultyDefault : 0;
+	const USettingsData* Settings = USettingsUtils::LoadSettings();
+	if (IsValid(Settings))
+	{
+		return Settings->GameplayDifficultyModified ? Settings->GameplayDifficulty : DefaultDifficulty;
+	}
+
+	USK_LOG_WARNING("Failed to load settings. Using default difficulty value");
+	return DefaultDifficulty;
+}
+
+/**
  * @brief Show a message popup
  * @param Data The data displayed in the message popup
  * @return A reference to the message popup

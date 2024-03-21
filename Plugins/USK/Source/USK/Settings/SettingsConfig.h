@@ -14,6 +14,7 @@
 #include "Items/SettingsItemAudioUi.h"
 #include "Items/SettingsItemAudioVoice.h"
 #include "Items/SettingsItemControlsRemap.h"
+#include "Items/SettingsItemGameplayDifficulty.h"
 #include "Items/SettingsItemGraphicsAntiAliasing.h"
 #include "Items/SettingsItemGraphicsFpsIndicator.h"
 #include "Items/SettingsItemGraphicsResolution.h"
@@ -36,6 +37,34 @@ class USK_API USettingsConfig : public UDataAsset
 	GENERATED_BODY()
 
 public:
+	/**
+	 * @brief The implementation for the gameplay difficulty setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Difficulty",
+		DisplayName = "Implementation")
+	TSubclassOf<USettingsItem> GameplayDifficultyImplementation = USettingsItemGameplayDifficulty::StaticClass();
+
+	/**
+	 * @brief The text displayed in the gameplay difficulty settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Difficulty",
+		DisplayName = "Title")
+	FText GameplayDifficultyText;
+
+	/**
+	 * @brief The array of gameplay difficulty options
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Difficulty",
+		DisplayName = "Options")
+	TArray<FText> GameplayDifficultyOptions;
+
+	/**
+	 * @brief The default gameplay difficulty value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Difficulty",
+		DisplayName = "Default Value")
+	int GameplayDifficultyDefault = 0;
+	
 	/**
 	 * @brief The implementation for the audio master settings item
 	 */

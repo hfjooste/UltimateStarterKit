@@ -90,6 +90,10 @@ void USettingsUtils::ApplySettings(const UUSKGameInstance* GameInstance, const U
 		return;
 	}
 
+	USK_LOG_INFO("Applying gameplay settings");
+	ApplySettingsInRange(GameInstance, Settings,
+		ESettingsItemType::GameplayDifficulty, ESettingsItemType::GameplayDifficulty);
+
 	USK_LOG_INFO("Applying audio settings");
 	ApplySettingsInRange(GameInstance, Settings,
 		ESettingsItemType::AudioMaster, ESettingsItemType::AudioVoice);
@@ -243,6 +247,8 @@ USettingsItem* USettingsUtils::GetSettingsItem(const ESettingsItemType SettingsI
 	{
 	case ESettingsItemType::None:
 		return nullptr;
+	case ESettingsItemType::GameplayDifficulty:
+		return Config->GameplayDifficultyImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::AudioMaster:
 		return Config->AudioMasterImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::AudioMusic:

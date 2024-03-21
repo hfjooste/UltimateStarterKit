@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Runtime/Launch/Resources/Version.h"
 #include "SettingsItemType.generated.h"
 
 /**
@@ -16,6 +15,11 @@ enum class ESettingsItemType : uint8
 	 * @brief A setting not managed by the game instance
 	 */
 	None = 0,
+
+	/**
+	 * @brief The game difficulty setting
+	 */
+	GameplayDifficulty = 1,
 
 	/**
 	 * @brief The master audio volume setting

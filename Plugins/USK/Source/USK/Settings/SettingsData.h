@@ -16,6 +16,18 @@ class USK_API USettingsData : public USaveGame
 	
 public:
 	/**
+	 * @brief Was the gameplay difficulty setting modified?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	bool GameplayDifficultyModified;
+
+	/**
+	 * @brief The gameplay difficulty setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	int GameplayDifficulty;
+	
+	/**
 	 * @brief Was the master audio volume modified?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")

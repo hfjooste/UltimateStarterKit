@@ -41,6 +41,11 @@ class USK_API UUSKGameInstance : public UGameInstance
 	 * @brief Event used to notify other classes when the game is unpaused
 	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameUnpausedDelegate);
+
+	/**
+	 * @brief Event used to notify other classes when the difficulty is updated
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGameInstanceDifficultyUpdatedDelegate, int, Difficulty);
 	
 public:
 	/**
@@ -159,6 +164,12 @@ public:
 	FGameUnpausedDelegate OnGameUnpaused;
 
 	/**
+	 * @brief Event used to notify other classes when the difficulty is updated
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Input|Events")
+	FGameInstanceDifficultyUpdatedDelegate OnDifficultyUpdated;
+
+	/**
 	 * @brief Get the save data that is currently loaded
 	 * @return A reference to the current save data
 	 */
@@ -243,6 +254,20 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Pause")
 	void UnpauseGame();
+
+	/**
+	 * @brief Update the difficulty
+	 * @param Difficulty The new difficulty
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Difficulty")
+	void UpdateDifficulty(int Difficulty) const;
+
+	/**
+	 * @brief Get the current difficulty
+	 * @return The current difficulty
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Difficulty")
+	int GetDifficulty() const;
 
 	/**
 	 * @brief Show a message popup
