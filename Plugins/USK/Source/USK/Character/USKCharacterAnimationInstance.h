@@ -38,83 +38,122 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Blending")
 	bool bBlendRootMotionBasedOnRootBone = true;
+
+	/**
+	 * @brief Should directional movement animations be used?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Blending")
+	bool bEnableDirectionalMovementAnimations;
 		
 	/**
 	 * @brief The base animation used when the character is in the idle state
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
 	UAnimSequence* IdleBaseAnimation;
+	
+    /**
+     * @brief The base animation used when the character is walking
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+    	meta=(EditCondition = "!bEnableDirectionalMovementAnimations", EditConditionHides))
+    UAnimSequence* WalkBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character is walking forward
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* WalkForwardBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character is walking backwards
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* WalkBackwardsBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character is walking left
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* WalkLeftBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character is walking right
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* WalkRightBaseAnimation;
 
 	/**
+	 * @brief The base animation used when the character is running
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "!bEnableDirectionalMovementAnimations", EditConditionHides))
+	UAnimSequence* RunBaseAnimation;
+	
+	/**
 	 * @brief The base animation used when the character is running forward
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* RunForwardBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character is running backwards
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* RunBackwardsBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character is running left
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* RunLeftBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character is running right
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* RunRightBaseAnimation;
+
+	/**
+	 * @brief The base animation used when the character is sprinting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "!bEnableDirectionalMovementAnimations", EditConditionHides))
+	UAnimSequence* SprintBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character is sprinting forward
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* SprintForwardBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character is sprinting backwards
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* SprintBackwardsBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character is sprinting left
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* SprintLeftBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character is sprinting right
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* SprintRightBaseAnimation;
 
 	/**
@@ -160,27 +199,38 @@ public:
 	UAnimSequence* CrouchIdleBaseAnimation;
 
 	/**
+	 * @brief The base animation used when the character is crouching and walking
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "!bEnableDirectionalMovementAnimations", EditConditionHides))
+	UAnimSequence* CrouchWalkBaseAnimation;
+
+	/**
 	 * @brief The base animation used when the character is crouching and walking forward
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* CrouchWalkForwardBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character is crouching and walking backwards
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* CrouchWalkBackwardsBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character is crouching and walking left
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* CrouchWalkLeftBaseAnimation;
 
 	/**
 	 * @brief The base animation used when the character is crouching and walking right
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations|Base",
+		meta=(EditCondition = "bEnableDirectionalMovementAnimations", EditConditionHides))
 	UAnimSequence* CrouchWalkRightBaseAnimation;
 
 	/**
@@ -1061,6 +1111,13 @@ protected:
 	UAnimSequence* GetIdleBaseAnimation() const;
 
 	/**
+	 * @brief Get the base walk animation
+	 * @return The walk animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetWalkBaseAnimation() const;
+
+	/**
 	 * @brief Get the base walk forward animation
 	 * @return The walk forward animation to play
 	 */
@@ -1089,6 +1146,13 @@ protected:
 	UAnimSequence* GetWalkRightBaseAnimation() const;
 
 	/**
+	 * @brief Get the base run animation
+	 * @return The run animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetRunBaseAnimation() const;
+	
+	/**
 	 * @brief Get the base run forward animation
 	 * @return The run forward animation to play
 	 */
@@ -1116,6 +1180,13 @@ protected:
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
 	UAnimSequence* GetRunRightBaseAnimation() const;
 
+	/**
+	 * @brief Get the base sprint animation
+	 * @return The sprint animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetSprintBaseAnimation() const;
+	
 	/**
 	 * @brief Get the base sprint forward animation
 	 * @return The sprint forward animation to play
@@ -1193,6 +1264,13 @@ protected:
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
 	UAnimSequence* GetCrouchIdleBaseAnimation() const;
 
+	/**
+	 * @brief Get the base crouch walk animation
+	 * @return The crouch walk animation to play
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	UAnimSequence* GetCrouchWalkBaseAnimation() const;
+	
 	/**
 	 * @brief Get the base crouch walk forward animation
 	 * @return The crouch walk forward animation to play

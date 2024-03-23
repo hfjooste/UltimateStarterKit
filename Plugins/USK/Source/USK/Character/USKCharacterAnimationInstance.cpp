@@ -84,6 +84,15 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetIdleBaseAnimation() const
 }
 
 /**
+ * @brief Get the base walk animation
+ * @return The walk animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetWalkBaseAnimation() const
+{
+	return WalkBaseAnimation;
+}
+
+/**
  * @brief Get the base walk forward animation
  * @return The walk forward animation to play
  */
@@ -120,6 +129,15 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetWalkRightBaseAnimation() const
 }
 
 /**
+ * @brief Get the base run animation
+ * @return The run animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetRunBaseAnimation() const
+{
+	return RunBaseAnimation;
+}
+
+/**
  * @brief Get the base run forward animation
  * @return The run forward animation to play
  */
@@ -153,6 +171,15 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetRunLeftBaseAnimation() const
 UAnimSequence* UUSKCharacterAnimationInstance::GetRunRightBaseAnimation() const
 {
 	return RunRightBaseAnimation;
+}
+
+/**
+ * @brief Get the base sprint animation
+ * @return The sprint animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetSprintBaseAnimation() const
+{
+	return SprintBaseAnimation;
 }
 
 /**
@@ -252,6 +279,15 @@ UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchEndBaseAnimation() const
 UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchIdleBaseAnimation() const
 {
 	return CrouchIdleBaseAnimation;
+}
+
+/**
+ * @brief Get the base crouch walk animation
+ * @return The crouch walk animation to play
+ */
+UAnimSequence* UUSKCharacterAnimationInstance::GetCrouchWalkBaseAnimation() const
+{
+	return CrouchWalkBaseAnimation;
 }
 
 /**
