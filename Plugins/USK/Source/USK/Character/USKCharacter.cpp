@@ -126,7 +126,7 @@ void AUSKCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	AirTime = GetCharacterMovement()->IsFalling() ? AirTime + DeltaSeconds : 0.0f;
-	AdjustCameraPosition(DeltaSeconds);
+	UpdateCamera(DeltaSeconds);
     UpdateLeaning(DeltaSeconds);
 	UpdateSliding(DeltaSeconds);
 	UpdateProning();
@@ -835,16 +835,32 @@ void AUSKCharacter::MoveCharacter(const FInputActionValue& Input)
 void AUSKCharacter::RotateCamera(const FInputActionValue& Input)
 {
 	const FVector2D InputValue = Input.Get<FVector2D>();
+	if (bSmoothCameraRotation)
+    {
+		TargetCameraInput = InputValue;
+		return;
+    }
+	
 	AddControllerYawInput(InputValue.X);
-	AddControllerPitchInput(InputValue.Y);
+	AddControllerPitchInput(InputValue.Y);	
 }
 
 /**
- * @brief Adjust the camera position
+ * @brief Update the position and rotation of the camera
  * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
  */
-void AUSKCharacter::AdjustCameraPosition(const float DeltaSeconds)
+void AUSKCharacter::UpdateCamera(const float DeltaSeconds)
 {
+	if (bSmoothCameraRotation)
+	{
+		CameraInput = FMath::Vector2DInterpTo(CameraInput, TargetCameraInput,
+			DeltaSeconds, SmoothCameraRotationSpeed);
+		TargetCameraInput = FMath::Vector2DInterpTo(TargetCameraInput, FVector2D::ZeroVector,
+			DeltaSeconds, SmoothCameraRotationSpeed);
+		AddControllerYawInput(CameraInput.X);
+		AddControllerPitchInput(CameraInput.Y);
+	}
+	
 	if (GetCameraPerspective() != ECameraPerspective::ThirdPerson)
 	{
 		return;

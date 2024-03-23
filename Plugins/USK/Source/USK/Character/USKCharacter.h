@@ -186,6 +186,19 @@ public:
 	bool bCanSwitchCameraPerspectives = true;
 
 	/**
+	 * @brief Should the camera rotation be smooth or instant?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera")
+	bool bSmoothCameraRotation;
+
+	/**
+	 * @brief The speed used to smooth the camera rotations
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera",
+		meta=(EditCondition = "bSmoothCameraRotation", EditConditionHides))
+	float SmoothCameraRotationSpeed = 5.0f;
+
+	/**
 	 * @brief The name of the head socket used to attach the camera in the first person perspective
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Camera|First Person")
@@ -1239,6 +1252,16 @@ private:
 	float TargetLookAtActorRotation;
 
 	/**
+	 * @brief The current input applied to the camera
+	 */
+	FVector2D CameraInput;
+
+	/**
+	 * @brief The target input that should be applied to the camera
+	 */
+	FVector2D TargetCameraInput;
+
+	/**
 	 * @brief Move the character
 	 * @param Input The input action containing the input values
 	 */
@@ -1251,10 +1274,10 @@ private:
 	void RotateCamera(const FInputActionValue& Input);
 
 	/**
-	 * @brief Adjust the camera position
+	 * @brief Update the position and rotation of the camera
 	 * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
 	 */
-	void AdjustCameraPosition(const float DeltaSeconds);
+	void UpdateCamera(const float DeltaSeconds);
 
 	/**
 	 * @brief Reset the coyote jump values
