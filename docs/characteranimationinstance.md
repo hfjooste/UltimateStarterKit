@@ -44,8 +44,20 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>true</td>
 	</tr>
 	<tr>
+		<td>bEnableDirectionalMovementAnimations</td>
+		<td>Should directional movement animations be used?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
 		<td>IdleBaseAnimation</td>
 		<td>The base animation used when the character is in the idle state</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>WalkBaseAnimation</td>
+		<td>The base animation used when the character is walking</td>
 		<td>UAnimSequence*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -74,6 +86,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
+		<td>RunBaseAnimation</td>
+		<td>The base animation used when the character is running</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
 		<td>RunForwardBaseAnimation</td>
 		<td>The base animation used when the character is running forward</td>
 		<td>UAnimSequence*</td>
@@ -94,6 +112,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 	<tr>
 		<td>RunRightBaseAnimation</td>
 		<td>The base animation used when the character is running right</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SprintBaseAnimation</td>
+		<td>The base animation used when the character is sprinting</td>
 		<td>UAnimSequence*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -160,6 +184,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 	<tr>
 		<td>CrouchIdleBaseAnimation</td>
 		<td>The base animation used when the character is crouching and idle</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>CrouchWalkBaseAnimation</td>
+		<td>The base animation used when the character is crouching and walking</td>
 		<td>UAnimSequence*</td>
 		<td><code>nullptr</code></td>
 	</tr>
@@ -1062,6 +1092,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><strong>UAnimSequence*</strong><br/>The idle animation to play</td>
 	</tr>
 	<tr>
+		<td>GetWalkBaseAnimation</td>
+		<td>Get the base walk animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The walk animation to play</td>
+	</tr>
+	<tr>
 		<td>GetWalkForwardBaseAnimation</td>
 		<td>Get the base walk forward animation</td>
 		<td></td>
@@ -1086,6 +1122,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td><strong>UAnimSequence*</strong><br/>The walk right animation to play</td>
 	</tr>
 	<tr>
+		<td>GetRunBaseAnimation</td>
+		<td>Get the base run animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The run animation to play</td>
+	</tr>
+	<tr>
 		<td>GetRunForwardBaseAnimation</td>
 		<td>Get the base run forward animation</td>
 		<td></td>
@@ -1108,6 +1150,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>Get the base run right animation</td>
 		<td></td>
 		<td><strong>UAnimSequence*</strong><br/>The run right animation to play</td>
+	</tr>
+	<tr>
+		<td>GetSprintBaseAnimation</td>
+		<td>Get the base sprint animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The sprint animation to play</td>
 	</tr>
 	<tr>
 		<td>GetSprintForwardBaseAnimation</td>
@@ -1174,6 +1222,12 @@ The animation blueprint contains a <code>USK</code> slot that can be used to pla
 		<td>Get the base crouch idle animation</td>
 		<td></td>
 		<td><strong>UAnimSequence*</strong><br/>The crouch idle animation to play</td>
+	</tr>
+	<tr>
+		<td>GetCrouchWalkBaseAnimation</td>
+		<td>Get the base crouch walk animation</td>
+		<td></td>
+		<td><strong>UAnimSequence*</strong><br/>The crouch walk animation to play</td>
 	</tr>
 	<tr>
 		<td>GetCrouchWalkForwardBaseAnimation</td>
