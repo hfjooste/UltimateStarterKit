@@ -397,9 +397,9 @@ bool UMenuItem::OnMenuBack()
 	SetText(FText::GetEmpty());
 	UpdateInputIndicator();
 	return true;
-#endif
-
+#else
 	return false;
+#endif
 }
 
 /**
