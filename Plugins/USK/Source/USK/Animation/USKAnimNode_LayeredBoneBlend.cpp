@@ -4,6 +4,7 @@
 #include "AnimationRuntime.h"
 #include "Animation/AnimInstanceProxy.h"
 #include "Animation/AnimTrace.h"
+#include "Animation/AnimationPoseData.h"
 #include "Runtime/Launch/Resources/Version.h"
 
 #define DEFAULT_SOURCEINDEX 0xFF
@@ -194,7 +195,7 @@ void FUSKAnimNode_LayeredBoneBlend::Evaluate_AnyThread(FPoseContext& Output)
 			continue;
 		}
 
-#if ENGINE_MAJOR_VERSION == 4
+#if ENGINE_MAJOR_VERSION == 4 || (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION == 0)
 		BasePoseContext.Curve.Set(UIDIndex, 0.0f);
 #else
 		BasePoseContext.Curve.InvalidateCurveWeight(UIDIndex);
@@ -204,7 +205,7 @@ void FUSKAnimNode_LayeredBoneBlend::Evaluate_AnyThread(FPoseContext& Output)
 		{
 			if (SourceIndex != ChildIndex)
 			{
-#if ENGINE_MAJOR_VERSION == 4
+#if ENGINE_MAJOR_VERSION == 4 || (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION == 0)
 				TargetBlendCurves[ChildIndex].Set(UIDIndex, 0.0f);
 #else
 				TargetBlendCurves[ChildIndex].InvalidateCurveWeight(UIDIndex);
