@@ -130,7 +130,7 @@ void AUSKCharacter::Tick(float DeltaSeconds)
     UpdateLeaning(DeltaSeconds);
 	UpdateSliding(DeltaSeconds);
 	UpdateProning();
-	UpdateMovementSpeed();
+	UpdateMovement(DeltaSeconds);
 	UpdateStaminaWhileSprinting(DeltaSeconds);
 	UpdateLookAtCenterActorRotation();
 	CalculateWeaponSway(DeltaSeconds);
@@ -806,25 +806,40 @@ void AUSKCharacter::MoveCharacter(const FInputActionValue& Input)
 		return;
 	}
 	
-	const FVector2D InputValue = Input.Get<FVector2D>();	
+	const FVector2D InputValue = Input.Get<FVector2D>();
+	if (bSmoothMovement)
+	{
+		TargetMovementInput = InputValue;
+		return;
+	}
+
+	ApplyMovementInput(InputValue);
+}
+
+/**
+ * @brief Apply movement to the character
+ * @param Input The movement input that should be applied
+ */
+void AUSKCharacter::ApplyMovementInput(FVector2D Input)
+{
 	FRotator Rotation = GetControlRotation();
 	Rotation.Pitch = 0.0f;
 	Rotation.Roll = 0.0f;
-
+	
 	const float ProneTraceOffset = ProneSpeed * ProneMoveTraceSizeMultiplier;
 	const FVector ForwardVector = UKismetMathLibrary::GetForwardVector(Rotation);
-	if (!bIsProning || CheckProneAllowedAtLocation(ForwardVector * FVector(InputValue.Y * ProneTraceOffset)))
+	if (!bIsProning || CheckProneAllowedAtLocation(ForwardVector * FVector(Input.Y * ProneTraceOffset)))
 	{
-		AddMovementInput(ForwardVector, InputValue.Y);	
+		AddMovementInput(ForwardVector, Input.Y);	
 	}
 
 	Rotation = GetControlRotation();
 	Rotation.Pitch = 0.0f;
 
 	const FVector RightVector = UKismetMathLibrary::GetRightVector(Rotation);
-	if (!bIsProning || CheckProneAllowedAtLocation(RightVector * FVector(InputValue.X * ProneTraceOffset)))
+	if (!bIsProning || CheckProneAllowedAtLocation(RightVector * FVector(Input.X * ProneTraceOffset)))
 	{
-		AddMovementInput(RightVector, InputValue.X);	
+		AddMovementInput(RightVector, Input.X);	
 	}
 }
 
@@ -1164,10 +1179,20 @@ void AUSKCharacter::UpdateSliding(const float DeltaSeconds)
 }
 
 /**
- * @brief Update the current movement speed of the character
+ * @brief Update the current movement and speed of the character
+ * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
  */
-void AUSKCharacter::UpdateMovementSpeed() const
+void AUSKCharacter::UpdateMovement(const float DeltaSeconds)
 {
+	if (bSmoothMovement)
+	{
+		MovementInput = FMath::Vector2DInterpTo(MovementInput, TargetMovementInput,
+			DeltaSeconds, SmoothMovementSpeed);
+		TargetMovementInput = FMath::Vector2DInterpTo(TargetMovementInput, FVector2D::ZeroVector,
+			DeltaSeconds, SmoothMovementSpeed);
+		ApplyMovementInput(MovementInput);
+	}
+	
 	if (bIsSliding)
 	{
 		GetCharacterMovement()->MaxWalkSpeed = SlideSpeed;
@@ -1393,6 +1418,7 @@ void AUSKCharacter::InitializeCameraPerspective()
 
 /**
  * @brief Calculate the current weapon sway
+ * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
  */
 void AUSKCharacter::CalculateWeaponSway(const float DeltaSeconds)
 {

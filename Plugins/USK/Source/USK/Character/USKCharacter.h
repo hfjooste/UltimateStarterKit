@@ -407,6 +407,19 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
 	float MaxAcceleration = 2500.0f;
 
+    /**
+     * @brief Should the movement be smooth or instant?
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
+    bool bSmoothMovement;
+
+    /**
+     * @brief The speed used to smooth the movement
+     */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement",
+        meta=(EditCondition = "bSmoothMovement", EditConditionHides))
+    float SmoothMovementSpeed = 5.0f;
+
 	/**
 	 * @brief Can the character sprint?
 	 */
@@ -1252,6 +1265,16 @@ private:
 	float TargetLookAtActorRotation;
 
 	/**
+	 * @brief The current movement input
+	 */
+	FVector2D MovementInput;
+
+	/**
+	 * @brief The target movement input
+	 */
+	FVector2D TargetMovementInput;
+
+	/**
 	 * @brief The current input applied to the camera
 	 */
 	FVector2D CameraInput;
@@ -1266,6 +1289,12 @@ private:
 	 * @param Input The input action containing the input values
 	 */
 	void MoveCharacter(const FInputActionValue& Input);
+
+	/**
+	 * @brief Apply movement to the character
+	 * @param Input The movement input that should be applied
+	 */
+	void ApplyMovementInput(FVector2D Input);
 
 	/**
 	 * @brief Rotate the camera
@@ -1379,9 +1408,10 @@ private:
 	void UpdateSliding(const float DeltaSeconds);
 
 	/**
-	 * @brief Update the current movement speed of the character
+	 * @brief Update the current movement and speed of the character
+	 * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
 	 */
-	void UpdateMovementSpeed() const;
+	void UpdateMovement(const float DeltaSeconds);
 
 	/**
 	 * @brief Check if the character can perform a long jump
@@ -1456,6 +1486,7 @@ private:
 
 	/**
 	 * @brief Calculate the current weapon sway
+	 * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
 	 */
 	void CalculateWeaponSway(const float DeltaSeconds);
 
