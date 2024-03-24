@@ -17,6 +17,10 @@
 #include "USK/Inventory/InventoryWidget.h"
 #include "USK/Items/CollectableItem.h"
 #include "USK/Logger/LogConfig.h"
+#include "USK/Narrative/WorldText.h"
+#include "USK/Narrative/WorldTextLetterWidget.h"
+#include "USK/Narrative/WorldTextWidget.h"
+#include "USK/Narrative/WorldTextWordWidget.h"
 #include "USK/Quests/Quest.h"
 #include "USK/Quests/QuestManager.h"
 #include "USK/Weapons/Weapon.h"
@@ -41,7 +45,7 @@ void FUSKEditorModule::StartupModule()
 	FEdGraphUtilities::RegisterVisualNodeFactory(GraphPanelNodeFactory_Dialogue);
 	IAssetTools& AssetTools = FModuleManager::LoadModuleChecked<FAssetToolsModule>("AssetTools").Get();
 
-	EAssetTypeCategories::Type UskCategory = AssetTools.RegisterAdvancedAssetCategory(
+	const EAssetTypeCategories::Type UskCategory = AssetTools.RegisterAdvancedAssetCategory(
 		FName(TEXT("USK")), FText::FromString("Ultimate Starter Kit"));
 
 	RegisterBlueprint(AssetTools, UskCategory, "Core", "Game Instance",
@@ -104,6 +108,15 @@ void FUSKEditorModule::StartupModule()
 		FColor(255, 105, 180), USettingsConfig::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "Settings", "Settings Data",
 		FColor(255, 105, 180), USettingsData::StaticClass());
+
+	RegisterBlueprint(AssetTools, UskCategory, "Narrative", "World Text",
+		FColor(255, 127, 39), AWorldText::StaticClass());
+	RegisterBlueprint(AssetTools, UskCategory, "Narrative", "World Text Widget",
+		FColor(255, 127, 39), UWorldTextWidget::StaticClass());
+	RegisterBlueprint(AssetTools, UskCategory, "Narrative", "World Text Word Widget",
+		FColor(255, 127, 39), UWorldTextWordWidget::StaticClass());
+	RegisterBlueprint(AssetTools, UskCategory, "Narrative", "World Text Letter Widget",
+		FColor(255, 127, 39), UWorldTextLetterWidget::StaticClass());
 	
 	RegisterBlueprint(AssetTools, UskCategory, "UI", "Collectable Item Icon",
 		FColor(44, 89, 180), UCollectableItemIcon::StaticClass());
