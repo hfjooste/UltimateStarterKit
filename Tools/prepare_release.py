@@ -46,6 +46,11 @@ os.system(f"python \"{docs}\" --input \"Quests\\QuestComponent\" --output questc
 os.system(f"python \"{docs}\" --input \"Quests\\QuestManager\" --output questmanager")
 os.system(f"python \"{docs}\" --input \"Widgets\\QuestWidget\" --output questwidget")
 
+os.system(f"python \"{docs}\" --input \"Narrative\\WorldText\" --output worldtext")
+os.system(f"python \"{docs}\" --input \"Narrative\\WorldTextWidget\" --output worldtextwidget --widget WorldTextWidget_Implementation")
+os.system(f"python \"{docs}\" --input \"Narrative\\WorldTextWordWidget\" --output worldtextwordwidget --widget WorldTextWordWidget_Implementation")
+os.system(f"python \"{docs}\" --input \"Narrative\\WorldTextLetterWidget\" --output worldtextletterwidget --widget WorldTextLetterWidget_Implementation")
+
 os.system(f"python \"{docs}\" --input \"Settings\\SettingsData\" --output settingsdata")
 os.system(f"python \"{docs}\" --input \"Settings\\SettingsConfig\" --output settingsconfig")
 os.system(f"python \"{docs}\" --input \"Settings\\SettingsItemType\" --output settingsitemtype")
