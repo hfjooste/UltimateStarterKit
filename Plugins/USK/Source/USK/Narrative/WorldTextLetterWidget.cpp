@@ -4,6 +4,7 @@
 
 #include "WorldTextWordWidget.h"
 #include "Animation/WidgetAnimation.h"
+#include "TimerManager.h"
 
 /**
  * @brief Initialize the letter

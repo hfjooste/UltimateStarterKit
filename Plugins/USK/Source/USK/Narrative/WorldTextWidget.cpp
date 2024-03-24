@@ -5,6 +5,7 @@
 #include "WorldTextWordWidget.h"
 #include "Kismet/KismetStringLibrary.h"
 #include "USK/Audio/AudioUtils.h"
+#include "TimerManager.h"
 
 /**
  * @brief Initialize the widget
