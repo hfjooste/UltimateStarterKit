@@ -373,6 +373,18 @@ The <code>USKCharacter</code> uses the following components:
 		<td>2500.0f</td>
 	</tr>
 	<tr>
+		<td>bSmoothMovement</td>
+		<td>Should the movement be smooth or instant?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>SmoothMovementSpeed</td>
+		<td>The speed used to smooth the movement</td>
+		<td>float</td>
+		<td>5.0f</td>
+	</tr>
+	<tr>
 		<td>bCanSprint</td>
 		<td>Can the character sprint?</td>
 		<td>bool</td>
