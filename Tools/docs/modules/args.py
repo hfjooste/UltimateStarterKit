@@ -23,7 +23,7 @@ class Args:
     def parse(self):
         args = self.parser.parse_args()
         self.input_file = args.input.replace(".h", "").replace(".cpp", "") + ".h"
-        self.input_file = os.path.abspath(os.path.join(os.path.dirname(__file__), "..\\..\\..\\Plugins\\USK\\Source\\USK", self.input_file))
+        self.input_file = os.path.abspath(os.path.join(os.path.dirname(__file__), "..\\..\\..\\Source\\USK", self.input_file))
         self.output_file = args.output.replace(".md", "") + ".md"
         self.output_file = os.path.abspath(os.path.join(os.path.dirname(__file__), "..\\..\\..\\docs", self.output_file))
         self.widget = args.widget
