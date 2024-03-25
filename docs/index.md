@@ -24,3 +24,6 @@ The Ultimate Starter Kit plugin includes content that can be used in your Bluepr
     <li>Click on the settings button</li>
     <li>Enable the <code>Show Plugin Content</code> setting</li>
 </ol>
+
+## Demo Project
+A demo project showcasing all the sytems can be found on [GitHub](https://github.com/hfjooste/USKDemo)

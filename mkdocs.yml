@@ -16,6 +16,9 @@ extra:
     - name: Sponsor Development
       icon: fontawesome/solid/heart
       link: https://github.com/sponsors/hfjooste
+    - name: Demo Project
+      icon: fontawesome/solid/gamepad
+      link: https://github.com/hfjooste/USKDemo
     - name: Linktree
       icon: fontawesome/solid/link
       link: https://linktr.ee/hfjooste
