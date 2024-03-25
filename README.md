@@ -88,6 +88,9 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><strong>Project Utils</strong>: Extract project information like name, description, and version</li>
 </ul>
 
+## 🎮 Demo Project
+A demo project showcasing all the sytems can be found on [GitHub](https://github.com/hfjooste/USKDemo)
+
 ## 📺 Tutorials
 You can find tutorials on how to get started and how to use the features from this plugin on [YouTube](https://www.youtube.com/playlist?list=PLfzg8BJXNRoBUWxRqKQwOhG0oqp1Qs3gu). The playlist will be updated on a regular basis with new tutorials
 
