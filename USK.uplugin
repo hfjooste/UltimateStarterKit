@@ -1,0 +1,71 @@
+{
+	"FileVersion": 3,
+	"Version": 102,
+	"VersionName": "4.0.0-beta3",
+	"FriendlyName": "Ultimate Starter Kit",
+	"Description": "The Ultimate Starter Kit plugin to speed up development of Unreal Engine games",
+	"Category": "Other",
+	"CreatedBy": "Henry Jooste",
+	"CreatedByURL": "https://linktr.ee/hfjooste",
+	"DocsURL": "https://hfjooste.github.io/UltimateStarterKit",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/81f5a1a202994ca6bcd2d1671cc10a6a",
+	"SupportURL": "https://github.com/hfjooste/UltimateStarterKit",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "USK",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Mac",
+				"Switch",
+				"PS4",
+				"Win32",
+				"Win64",
+				"XboxOne"
+			],
+			"BlacklistPlatforms": [
+                "Android",
+                "IOS",
+                "Linux",
+                "LinuxArm64",
+				"HTML5",
+				"HoloLens"
+			]
+		},
+		{
+			"Name": "USKEditor",
+			"Type": "UncookedOnly",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Mac",
+				"Switch",
+				"PS4",
+				"Win32",
+				"Win64",
+				"XboxOne"
+			],
+			"BlacklistPlatforms": [
+                "Android",
+                "IOS",
+                "Linux",
+                "LinuxArm64",
+				"HTML5",
+				"HoloLens"
+			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "EnhancedInput",
+			"Enabled": true
+		},
+		{
+			"Name": "Niagara",
+			"Enabled": true
+		}
+	]
+}
