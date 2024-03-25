@@ -11,7 +11,7 @@
 	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/81f5a1a202994ca6bcd2d1671cc10a6a",
 	"SupportURL": "https://github.com/hfjooste/UltimateStarterKit",
 	"CanContainContent": true,
-	"IsBetaVersion": false,
+	"IsBetaVersion": true,
 	"IsExperimentalVersion": false,
 	"Installed": false,
 	"Modules": [
