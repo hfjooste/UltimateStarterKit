@@ -88,6 +88,19 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><strong>Project Utils</strong>: Extract project information like name, description, and version</li>
 </ul>
 
+## 🎮 Demo Project
+A demo project showcasing all the sytems can be found on [GitHub](https://github.com/hfjooste/USKDemo)
+
+## ⚡ Made with Ultimate Starter Kit
+SOULMATES is a co-op card game set in a creepy world of darkness and cringe. Draw swarms of twisted souls to battle for you and your bestie. Manage your Swarm of Souls to play creatures and purchase new cards, or die horribly...
+<div>
+    <img width="33%" src="https://img.itch.zone/aW1hZ2UvMjQzNTc5OC8xNTA0OTQ5NC5qcGc=/original/Pk14tM.jpg">
+    <img width="33%" src="https://img.itch.zone/aW1hZ2UvMjQzNTc5OC8xNTA0OTQ5Ny5qcGc=/original/Sb2%2Fi5.jpg">
+    <img width="33%" src="https://img.itch.zone/aW1hZ2UvMjQzNTc5OC8xNTA0OTQ5Ni5qcGc=/original/aXeorw.jpg">
+</div>
+
+Download SOULMATES for free on [Itch.io](https://hfjooste.itch.io/soulmates)
+
 ## 📺 Tutorials
 You can find tutorials on how to get started and how to use the features from this plugin on [YouTube](https://www.youtube.com/playlist?list=PLfzg8BJXNRoBUWxRqKQwOhG0oqp1Qs3gu). The playlist will be updated on a regular basis with new tutorials
 
