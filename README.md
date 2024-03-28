@@ -94,9 +94,9 @@ A demo project showcasing all the sytems can be found on [GitHub](https://github
 ## ⚡ Made with Ultimate Starter Kit
 SOULMATES is a co-op card game set in a creepy world of darkness and cringe. Draw swarms of twisted souls to battle for you and your bestie. Manage your Swarm of Souls to play creatures and purchase new cards, or die horribly...
 <div>
-    <img width="33%" src="https://img.itch.zone/aW1hZ2UvMjQzNTc5OC8xNTA0OTQ5NC5qcGc=/original/Pk14tM.jpg">
-    <img width="33%" src="https://img.itch.zone/aW1hZ2UvMjQzNTc5OC8xNTA0OTQ5Ny5qcGc=/original/Sb2%2Fi5.jpg">
-    <img width="33%" src="https://img.itch.zone/aW1hZ2UvMjQzNTc5OC8xNTA0OTQ5Ni5qcGc=/original/aXeorw.jpg">
+    <img width="32%" src="https://img.itch.zone/aW1hZ2UvMjQzNTc5OC8xNTA0OTQ5NC5qcGc=/original/Pk14tM.jpg">
+    <img width="32%" src="https://img.itch.zone/aW1hZ2UvMjQzNTc5OC8xNTA0OTQ5Ny5qcGc=/original/Sb2%2Fi5.jpg">
+    <img width="32%" src="https://img.itch.zone/aW1hZ2UvMjQzNTc5OC8xNTA0OTQ5Ni5qcGc=/original/aXeorw.jpg">
 </div>
 
 Download SOULMATES for free on [Itch.io](https://hfjooste.itch.io/soulmates)
