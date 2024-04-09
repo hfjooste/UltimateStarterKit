@@ -94,6 +94,7 @@ nav:
     - Audio Overview: audio.md
     - Audio Utils: audioutils.md
     - Music Player: music.md
+    - USK Audio Component: uskaudiocomponent.md
   - Characters:
     - Overview: platformer.md
     - Base Character: uskcharacter.md
