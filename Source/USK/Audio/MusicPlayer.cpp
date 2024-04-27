@@ -1,6 +1,8 @@
 ﻿// Created by Henry Jooste
 
 #include "MusicPlayer.h"
+
+#include "USKAudioComponent.h"
 #include "USK/Logger/Log.h"
 #include "Components/AudioComponent.h"
 
@@ -10,14 +12,14 @@
 AMusicPlayer::AMusicPlayer()
 {
 	PrimaryActorTick.bCanEverTick = false;
-	AudioPlayer = CreateDefaultSubobject<UAudioComponent>(TEXT("Audio Player"));
+	AudioPlayer = CreateDefaultSubobject<UUSKAudioComponent>(TEXT("Audio Player"));
 }
 
 /**
  * @brief Get a reference to the audio component
  * @return A reference to the audio component
  */
-UAudioComponent* AMusicPlayer::GetAudioComponent() const
+UUSKAudioComponent* AMusicPlayer::GetAudioComponent() const
 {
 	return AudioPlayer;
 }

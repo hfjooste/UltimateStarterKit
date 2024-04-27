@@ -18,7 +18,7 @@ The <code>inal</code> uses the following components:
 	<tr>
 		<td>AudioPlayer</td>
 		<td>Actor responsible for playing, pausing and stopping music. It also allows you to adjust music volume</td>
-		<td>UAudioComponent*</td>
+		<td>UUSKAudioComponent*</td>
 	</tr>
 </table>
 
@@ -51,7 +51,7 @@ The <code>inal</code> uses the following components:
 		<td>GetAudioComponent</td>
 		<td>Get a reference to the audio component</td>
 		<td></td>
-		<td><strong>UAudioComponent*</strong><br/>A reference to the audio component</td>
+		<td><strong>UUSKAudioComponent*</strong><br/>A reference to the audio component</td>
 	</tr>
 	<tr>
 		<td>SetVolume</td>
@@ -116,7 +116,7 @@ The <code>inal</code> can now be used in any of your C++ files:
 void ATestActor::Test()
 {
 	// inal is a pointer to the final
-	UAudioComponent* AudioComponent = inal->GetAudioComponent();
+	UUSKAudioComponent* AudioComponent = inal->GetAudioComponent();
 	inal->SetVolume(NewVolume);
 	inal->Play();
 	inal->Pause();

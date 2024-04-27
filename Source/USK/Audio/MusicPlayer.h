@@ -17,13 +17,13 @@ class USK_API AMusicPlayer final : public AActor
 	 * @brief The audio player component is responsible for the music playback
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Audio", meta=(AllowPrivateAccess = "true"))
-	class UAudioComponent* AudioPlayer;
+	class UUSKAudioComponent* AudioPlayer;
 	
 public:
 	/**
 	 * @brief Should the music automatically play when the actor is spawned?
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Audio")
 	bool PlayOnStart = true;
 	
 	/**
@@ -36,7 +36,7 @@ public:
 	 * @return A reference to the audio component
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Audio")
-	UAudioComponent* GetAudioComponent() const;
+	UUSKAudioComponent* GetAudioComponent() const;
 	
 	/**
 	 * @brief Adjust the playback volume of the music 

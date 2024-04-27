@@ -5,6 +5,7 @@ print(f"Documentation script path: {docs}\n")
 
 os.system(f"python \"{docs}\" --input \"Audio\\AudioUtils\" --output audioutils")
 os.system(f"python \"{docs}\" --input \"Audio\\MusicPlayer\" --output music")
+os.system(f"python \"{docs}\" --input \"Audio\\USKAudioComponent\" --output uskaudiocomponent")
 
 os.system(f"python \"{docs}\" --input \"Character\\USKCharacterAnimationInstance\" --output characteranimationinstance")
 os.system(f"python \"{docs}\" --input \"Character\\ShadowDecal\" --output platformershadow")
