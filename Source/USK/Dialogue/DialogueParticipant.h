@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
+#include "Engine/Texture2D.h"
+#include "Styling/SlateColor.h"
 #include "DialogueParticipant.generated.h"
 
 /**

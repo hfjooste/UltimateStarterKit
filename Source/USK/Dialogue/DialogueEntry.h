@@ -6,6 +6,8 @@
 #include "DialogueTransitionType.h"
 #include "DialogueParticipant.h"
 #include "Engine/DataTable.h"
+#include "Engine/Texture2D.h"
+#include "Styling/SlateColor.h"
 #include "Templates/SubclassOf.h"
 #include "Sound/SoundBase.h"
 #include "DialogueEntry.generated.h"

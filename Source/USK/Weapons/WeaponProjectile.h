@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/World.h"
 #include "WeaponProjectileDecal.h"
 #include "WeaponProjectileHitData.h"
 #include "GameFramework/Actor.h"

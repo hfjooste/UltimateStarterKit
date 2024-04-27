@@ -4,6 +4,7 @@
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "GameFramework/Pawn.h"
 #include "Components/PanelWidget.h"
 #include "Components/ScrollBox.h"
 #include "MenuItem.h"

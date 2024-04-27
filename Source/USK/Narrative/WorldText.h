@@ -3,6 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameFramework/Actor.h"
+#include "WorldTextWordWidget.h"
+#include "WorldTextLetterWidget.h"
 #include "WorldText.generated.h"
 
 class UWorldTextLetterWidget;
