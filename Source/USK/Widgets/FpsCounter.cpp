@@ -87,7 +87,8 @@ void UFpsCounter::UpdateFramerateAfterDelay()
 	LatentAction.CallbackTarget = this;
 	LatentAction.UUID = GetUniqueID();
 	LatentAction.ExecutionFunction = "UpdateFramerate";
-	UKismetSystemLibrary::RetriggerableDelay(GetWorld(), UpdateDelay, LatentAction);
+	UKismetSystemLibrary::RetriggerableDelay(GetWorld(),
+		UpdateDelay * UGameplayStatics::GetGlobalTimeDilation(GetWorld()), LatentAction);
 }
 
 /**
@@ -96,7 +97,8 @@ void UFpsCounter::UpdateFramerateAfterDelay()
 void UFpsCounter::UpdateFramerate()
 {
 	const float DeltaSeconds = UGameplayStatics::GetWorldDeltaSeconds(GetWorld());
-	const float Framerate = FMath::RoundToInt(1.0f / DeltaSeconds);
+	const float TimeDilation = UGameplayStatics::GetGlobalTimeDilation(GetWorld());
+	const float Framerate = FMath::RoundToInt(1.0f / DeltaSeconds * TimeDilation);
 	FramerateText->SetText(FText::FromString(FString::FromInt(Framerate)));
 
 	if (Framerate >= HighFramerate)
