@@ -13,6 +13,7 @@
 #include "USK/Utils/PlatformUtils.h"
 #include "Runtime/Launch/Resources/Version.h"
 #include "USK/Widgets/MessagePopupWidget.h"
+#include "USK/Widgets/FpsCounter.h"
 
 /**
  * @brief Virtual function to allow custom GameInstances an opportunity to set up what it needs
@@ -45,6 +46,8 @@ void UUSKGameInstance::LoadComplete(const float LoadTime, const FString& MapName
 	{
 		InitializeInputIndicatorsAfterDelay();
 	}
+
+	ShowFpsCounter();
 }
 
 /**
@@ -428,7 +431,8 @@ void UUSKGameInstance::InitializeFeatures()
 	InitializeInputIndicators();
 
 	USK_LOG_INFO("Initializing settings");
-    USettingsUtils::Initialize(this);
+	USettingsUtils::Initialize(this);
+	ShowFpsCounter();
 	bIsFeaturesInitialized = true;
 }
 
@@ -574,4 +578,25 @@ EInputDevice UUSKGameInstance::GetInputDevice(const FKey Key)
 	}
 	
 	return EInputDevice::GenericController;
+}
+
+/**
+ * @brief Show the FPS counter
+ */
+void UUSKGameInstance::ShowFpsCounter()
+{
+	if (IsValid(FpsCounter))
+	{
+		FpsCounter->RemoveFromParent();
+		FpsCounter = nullptr;
+	}
+
+	if (IsValid(FpsCounterWidgetClass))
+	{
+		FpsCounter = CreateWidget<UFpsCounter>(GetWorld(), FpsCounterWidgetClass);
+		if (IsValid(FpsCounter))
+		{
+			FpsCounter->AddToViewport(1000000);
+		}
+	}
 }

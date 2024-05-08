@@ -9,6 +9,7 @@
 #include "USK/Widgets/MessagePopupData.h"
 #include "USKGameInstance.generated.h"
 
+class UFpsCounter;
 class UMessagePopupWidget;
 class ULogConfig;
 class UInputAction;
@@ -145,6 +146,12 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
 	TSubclassOf<UMessagePopupWidget> MessagePopupWidgetClass;
+
+	/**
+	 * @brief The widget class used to display the FPS counter
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	TSubclassOf<UFpsCounter> FpsCounterWidgetClass;
 
 	/**
 	 * @brief Event used to notify other classes when the current input device is updated
@@ -312,6 +319,12 @@ private:
 	UMessagePopupWidget* MessagePopup;
 
 	/**
+	 * @brief A reference to the FPS counter widget
+	 */
+	UPROPERTY()
+	UFpsCounter* FpsCounter;
+
+	/**
 	 * @brief A boolean flag used to check if the features of the game instance was initialized
 	 */
 	bool bIsFeaturesInitialized = false;
@@ -400,4 +413,9 @@ private:
 	 * @return The input device based on the specified key
 	 */
 	EInputDevice GetInputDevice(FKey Key);
+
+	/**
+	 * @brief Show the FPS counter
+	 */
+	void ShowFpsCounter();
 };
