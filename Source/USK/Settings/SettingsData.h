@@ -4,6 +4,7 @@
 
 #include "GameFramework/SaveGame.h"
 #include "InputCoreTypes.h"
+#include "SettingsFpsCounterType.h"
 #include "SettingsData.generated.h"
 
 /**
@@ -208,16 +209,16 @@ public:
 	bool GraphicsVsync;
 
 	/**
-	 * @brief Was the graphics FPS indicator setting modified?
+	 * @brief Was the graphics FPS indicator type setting modified?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
-	bool GraphicsFpsIndicatorModified;
+	bool GraphicsFpsIndicatorTypeModified;
 
 	/**
-	 * @brief The graphics FPS indicator value
+	 * @brief The graphics FPS indicator type
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
-	bool GraphicsFpsIndicator;
+	ESettingsFpsCounterType GraphicsFpsIndicatorType;
 
 	/**
 	 * @brief The color blind mode

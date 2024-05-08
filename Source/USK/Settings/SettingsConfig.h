@@ -766,25 +766,18 @@ public:
 	FText GraphicsFpsIndicatorText;
 
 	/**
-	 * @brief The text displayed when the FPS indicator setting is enabled
+	 * @brief The text displayed for the different FPS indicator type settings
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|FPS Indicator",
-		DisplayName = "Enabled Text")
-	FText GraphicsFpsIndicatorEnabledText;
-
-	/**
-	 * @brief The text displayed when the FPS indicator setting is disabled
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|FPS Indicator",
-		DisplayName = "Disabled Text")
-	FText GraphicsFpsIndicatorDisabledText;
+		DisplayName = "FPS Indicator Value Text")
+	TMap<ESettingsFpsCounterType, FText> GraphicsFpsIndicatorValueText;
 
 	/**
 	 * @brief The default value of the FPS indicator setting
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|FPS Indicator",
 		DisplayName = "Default Value")
-	bool GraphicsFpsIndicatorDefault;
+	ESettingsFpsCounterType GraphicsFpsIndicatorTypeDefault;
 
 	/**
 	 * @brief The implementation for the accessibility color blind mode settings item

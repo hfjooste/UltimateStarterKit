@@ -18,14 +18,24 @@ void USettingsItemGraphicsFpsIndicator::ConfigureMenuItem(const USettingsConfig*
 	UMenuItem* MenuItem)
 {
 	MenuItem->ValueMapping.Empty();
-	MenuItem->ValueMapping.Add(0, Config->GraphicsFpsIndicatorDisabledText);
-	MenuItem->ValueMapping.Add(1, Config->GraphicsFpsIndicatorEnabledText);
+	MenuItem->ValueMapping.Add(0,
+		Config->GraphicsFpsIndicatorValueText.Contains(ESettingsFpsCounterType::Disabled)
+			? Config->GraphicsFpsIndicatorValueText[ESettingsFpsCounterType::Disabled]
+			: FText::GetEmpty());
+	MenuItem->ValueMapping.Add(1,
+		Config->GraphicsFpsIndicatorValueText.Contains(ESettingsFpsCounterType::Simple)
+			? Config->GraphicsFpsIndicatorValueText[ESettingsFpsCounterType::Simple]
+			: FText::GetEmpty());
+	MenuItem->ValueMapping.Add(2,
+		Config->GraphicsFpsIndicatorValueText.Contains(ESettingsFpsCounterType::Detailed)
+			? Config->GraphicsFpsIndicatorValueText[ESettingsFpsCounterType::Detailed]
+			: FText::GetEmpty());
 	
 	MenuItem->MinValue = 0;
-	MenuItem->MaxValue = 1;
-	MenuItem->DefaultValue = Settings->GraphicsFpsIndicatorModified
-		? (Settings->GraphicsFpsIndicator ? 1 : 0)
-		: (Config->GraphicsFpsIndicatorDefault ? 1 : 0);
+	MenuItem->MaxValue = 2;
+	MenuItem->DefaultValue = Settings->GraphicsFpsIndicatorTypeModified
+		? static_cast<int>(Settings->GraphicsFpsIndicatorType)
+		: static_cast<int>(Config->GraphicsFpsIndicatorTypeDefault);
 	MenuItem->SetTitle(Config->GraphicsFpsIndicatorText);
 }
 
@@ -37,8 +47,8 @@ void USettingsItemGraphicsFpsIndicator::ConfigureMenuItem(const USettingsConfig*
  */
 USettingsData* USettingsItemGraphicsFpsIndicator::SaveSettings(USettingsData* Settings, const UMenuItem* MenuItem)
 {
-	Settings->GraphicsFpsIndicatorModified = true;
-	Settings->GraphicsFpsIndicator = MenuItem->GetValue() == 1;
+	Settings->GraphicsFpsIndicatorTypeModified = true;
+	Settings->GraphicsFpsIndicatorType = static_cast<ESettingsFpsCounterType>(MenuItem->GetValue());
 	USettingsUtils::SaveSettings(Settings);
 	return Settings;
 } 
@@ -52,18 +62,14 @@ USettingsData* USettingsItemGraphicsFpsIndicator::SaveSettings(USettingsData* Se
 void USettingsItemGraphicsFpsIndicator::ApplySettings(UObject* World, const USettingsConfig* Config,
 	const USettingsData* Settings)
 {
-	const bool Value = Settings->GraphicsFpsIndicatorModified
-		? Settings->GraphicsFpsIndicator
-		: Config->GraphicsFpsIndicatorDefault;
-
 	TArray<UUserWidget*> Widgets;
 	UWidgetBlueprintLibrary::GetAllWidgetsOfClass(World, Widgets, UFpsCounter::StaticClass(), false);
 	for (UUserWidget* Widget : Widgets)
 	{
 		UFpsCounter* FpsCounter = dynamic_cast<UFpsCounter*>(Widget);
-		if (FpsCounter != nullptr)
+		if (IsValid(FpsCounter))
 		{
-			FpsCounter->UpdateVisibility(Value);
+			FpsCounter->LoadSettings();
 		}
 	}
 }
