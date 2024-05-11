@@ -92,6 +92,15 @@ The Ultimate Starter Kit plugin comes with the following features:
 A demo project showcasing all the sytems can be found on [GitHub](https://github.com/hfjooste/USKDemo)
 
 ## ⚡ Made with Ultimate Starter Kit
+Untitled Bullet Prototype: Help your daughter get through a dungeon filled with monsters by navigating obstacles with your bullets
+<div>
+    <img width="32%" src="https://img.itch.zone/aW1hZ2UvMjcwMjA3Ni8xNjEwODc2OC5wbmc=/original/D79%2B%2Bm.png">
+    <img width="32%" src="https://img.itch.zone/aW1hZ2UvMjcwMjA3Ni8xNjEwODc2Mi5wbmc=/original/N5bIK6.png">
+    <img width="32%" src="https://img.itch.zone/aW1hZ2UvMjcwMjA3Ni8xNjEwODc2MS5wbmc=/original/vNIpvL.png">
+</div>
+
+Download Untitled Bullet Prototype for free on [Itch.io](https://hfjooste.itch.io/untitled-bullet-prototype)
+
 SOULMATES is a co-op card game set in a creepy world of darkness and cringe. Draw swarms of twisted souls to battle for you and your bestie. Manage your Swarm of Souls to play creatures and purchase new cards, or die horribly...
 <div>
     <img width="32%" src="https://img.itch.zone/aW1hZ2UvMjQzNTc5OC8xNTA0OTQ5NC5qcGc=/original/Pk14tM.jpg">
