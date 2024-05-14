@@ -40,6 +40,12 @@ public:
 	class UPanelWidget* Container;
 
 	/**
+	 * @brief Should the first item be highlighted when the menu is loaded?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|General")
+	bool HighlightFirstItemOnStart = true;
+
+	/**
 	 * @brief Should the input binding automatically be added as soon as the widget is loaded?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|General")

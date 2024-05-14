@@ -482,7 +482,7 @@ void UMenu::InitializeMenuItems()
 			continue;
 		}
 		
-		if (FallbackMenuItem == nullptr)
+		if (HighlightFirstItemOnStart && FallbackMenuItem == nullptr)
 		{
 			FallbackMenuItem = MenuItem;
 		}
