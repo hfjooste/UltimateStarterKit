@@ -16,50 +16,29 @@ struct USK_API FMessagePopupData
 	 * @brief The title displayed in the message popup
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
-	FText Title;
+	FText Title = FText::GetEmpty();
 
 	/**
 	 * @brief The text displayed in the message popup
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
-	FText Message;
-
-	/**
-	 * @brief Should the positive button be shown?
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
-	bool bShowPositiveButton;
+	FText Message = FText::GetEmpty();
 
 	/**
 	 * @brief The text displayed on the positive button
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI",
-		meta = (EditCondition = "bShowPositiveButton", EditConditionHides))
-	FText PositiveButtonText;
-
-	/**
-	 * @brief Should the negative button be shown?
-	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
-	bool bShowNegativeButton;
+	FText PositiveButtonText = FText::GetEmpty();
 
 	/**
 	 * @brief The text displayed on the negative button
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI",
-		meta = (EditCondition = "bShowNegativeButton", EditConditionHides))
-	FText NegativeButtonText;
-
-	/**
-	 * @brief Should the neutral button be shown?
-	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
-	bool bShowNeutralButton;
+	FText NegativeButtonText = FText::GetEmpty();
 
 	/**
 	 * @brief The text displayed on the neutral button
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI",
-		meta = (EditCondition = "bShowNeutralButton", EditConditionHides))
-	FText NeutralButtonText;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	FText NeutralButtonText = FText::GetEmpty();
 };

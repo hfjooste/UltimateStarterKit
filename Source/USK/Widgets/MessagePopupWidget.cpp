@@ -19,17 +19,17 @@ void UMessagePopupWidget::Show(const FMessagePopupData Data)
 	TitleText->SetVisibility(Data.Title.IsEmpty() ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
 	MessageText->SetText(Data.Message);
 
-	if (Data.bShowPositiveButton)
+	if (!Data.PositiveButtonText.IsEmpty())
 	{
 		PositiveButton = CreateButton(Data.PositiveButtonText);
 	}
 
-	if (Data.bShowNegativeButton)
+	if (!Data.NegativeButtonText.IsEmpty())
 	{
 		NegativeButton = CreateButton(Data.NegativeButtonText);
 	}
 
-	if (Data.bShowNeutralButton)
+	if (!Data.NeutralButtonText.IsEmpty())
 	{
 		NeutralButton = CreateButton(Data.NeutralButtonText);
 	}
