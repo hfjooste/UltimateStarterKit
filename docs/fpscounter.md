@@ -17,8 +17,38 @@ There is already a <code>FpsCounter_Implementation</code> that you can use in yo
 		<th>Type</th>
 	</tr>
 	<tr>
+		<td>SimpleViewContainer</td>
+		<td>Container for the simple view</td>
+		<td>UCanvasPanel*</td>
+	</tr>
+	<tr>
+		<td>DetailedViewContainer</td>
+		<td>Container for the detailed view</td>
+		<td>UCanvasPanel*</td>
+	</tr>
+	<tr>
+		<td>FramerateSimpleText</td>
+		<td>The text block used to display the framerate in the simple view</td>
+		<td>UTextBlock*</td>
+	</tr>
+	<tr>
 		<td>FramerateText</td>
 		<td>The text block used to display the framerate</td>
+		<td>UTextBlock*</td>
+	</tr>
+	<tr>
+		<td>MinText</td>
+		<td>The text block used to display the min framerate</td>
+		<td>UTextBlock*</td>
+	</tr>
+	<tr>
+		<td>MaxText</td>
+		<td>The text block used to display the max framerate</td>
+		<td>UTextBlock*</td>
+	</tr>
+	<tr>
+		<td>AverageText</td>
+		<td>The text block used to display the average framerate</td>
 		<td>UTextBlock*</td>
 	</tr>
 </table>
@@ -37,6 +67,12 @@ There is already a <code>FpsCounter_Implementation</code> that you can use in yo
 		<td>The delay in seconds between each update</td>
 		<td>float</td>
 		<td>0.125f</td>
+	</tr>
+	<tr>
+		<td>MeasureTime</td>
+		<td>The amount of seconds to measure the FPS before removing old measurements</td>
+		<td>int</td>
+		<td>120</td>
 	</tr>
 	<tr>
 		<td>HighFramerate</td>
@@ -84,12 +120,19 @@ There is already a <code>FpsCounter_Implementation</code> that you can use in yo
 		<td><strong>IsVisible (bool)</strong><br/>Is the widget visible?</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>LoadSettings</td>
+		<td>Load and apply the FPS counter settings</td>
+		<td></td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
 You can use the <code>FpsCounter</code> using Blueprints by adding one of the following nodes:
 <ul>
 	<li>Ultimate Starter Kit > UI > Update Visibility</li>
+	<li>Ultimate Starter Kit > UI > Load Settings</li>
 </ul>
 
 ## C++ Usage
@@ -106,5 +149,6 @@ void ATestActor::Test()
 {
 	// FpsCounter is a pointer to the UFpsCounter
 	FpsCounter->UpdateVisibility(IsVisible);
+	FpsCounter->LoadSettings();
 }
 ```
