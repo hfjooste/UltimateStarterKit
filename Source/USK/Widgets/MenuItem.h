@@ -49,10 +49,16 @@ class USK_API UMenuItem : public UUserWidget
 
 public:
 	/**
-	 * @brief The TextBlock used to display the title of the menu item
+	 * @brief The TextBlock used to display the title of the menu item while not highlighted
 	 */
 	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
 	class UTextBlock* Title;
+
+	/**
+	 * @brief The TextBlock used to display the title of the menu item while highlighted
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class UTextBlock* HighlightedTitle;
 
 	/**
 	 * @brief The TextBlock used to display the text of the menu item while not highlighted
@@ -97,10 +103,34 @@ public:
 	class UButton* IncreaseValueButton;
 
 	/**
+	 * @brief The image displayed in the increase value button while not highlighted
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class UImage* IncreaseValueButtonNormalImage;
+
+	/**
+	 * @brief The image displayed in the increase value button while highlighted
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class UImage* IncreaseValueButtonHighlightedImage;
+
+	/**
 	 * @brief The button used to decrease the value of the menu item
 	 */
 	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
 	class UButton* DecreaseValueButton;
+
+	/**
+	 * @brief The image displayed in the decrease value button while not highlighted
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class UImage* DecreaseValueButtonNormalImage;
+
+	/**
+	 * @brief The image displayed in the decrease value button while highlighted
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class UImage* DecreaseValueButtonHighlightedImage;
 
 	/**
 	 * @brief The border displayed on the left of the menu item
@@ -276,6 +306,30 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Background")
 	UTexture2D* BackgroundRightHighlightedImage;
+
+	/**
+	 * @brief The color of the slider bar when not highlighted
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Slider")
+	FLinearColor SliderBarNormalColor;
+
+	/**
+	 * @brief The color of the slider bar when highlighted
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Slider")
+	FLinearColor SliderBarHighlightedColor;
+
+	/**
+	 * @brief The color of the slider thumb when not highlighted
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Slider")
+	FLinearColor SliderThumbNormalColor;
+
+	/**
+	 * @brief The color of the slider thumb when highlighted
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Slider")
+	FLinearColor SliderThumbHighlightedColor;
 
 	/**
 	 * @brief The method used to update the value of the menu item

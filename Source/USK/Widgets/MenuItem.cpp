@@ -162,13 +162,23 @@ void UMenuItem::SetText(const FText& Text) const
  */
 void UMenuItem::SetTitle(const FText& Text) const
 {
-	if (Title == nullptr)
+	if (IsValid(Title))
 	{
-		return;	
+		Title->SetText(Text);
+		Title->SetVisibility(Text.IsEmpty() ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);	
 	}
 
-	Title->SetText(Text);
-	Title->SetVisibility(Text.IsEmpty() ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
+	if (IsValid(HighlightedTitle))
+	{
+		HighlightedTitle->SetText(Text);
+		HighlightedTitle->SetVisibility(Text.IsEmpty() ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
+	}
+
+	if (IsValid(Title) && IsValid(HighlightedTitle))
+	{
+		Title->SetVisibility(IsHighlighted() ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
+		HighlightedTitle->SetVisibility(IsHighlighted() ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
+	}
 }
 
 /**
@@ -185,6 +195,12 @@ void UMenuItem::SetHighlightedState(const bool IsHighlighted,
 	bIsHighlighted = IsHighlighted;
 	const FLinearColor BorderColor = IsHighlighted ? BorderHighlightedColor : BorderNormalColor;
 	const FLinearColor BackgroundColor = IsHighlighted ? BackgroundHighlightedColor : BackgroundNormalColor;
+
+	if (Title != nullptr && HighlightedTitle != nullptr)
+	{
+		Title->SetVisibility(IsHighlighted ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
+		HighlightedTitle->SetVisibility(IsHighlighted ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
+	}
 
 	if (NormalText != nullptr)
 	{
@@ -249,6 +265,50 @@ void UMenuItem::SetHighlightedState(const bool IsHighlighted,
 		USK_LOG_TRACE("Updating button background");
 		ButtonBackground->SetBrushFromTexture(IsHighlighted ? BackgroundHighlightedImage : BackgroundNormalImage);
 		ButtonBackground->SetColorAndOpacity(BackgroundColor);
+	}
+
+	if (ValueSlider != nullptr)
+	{
+		USK_LOG_TRACE("Updating button slider colors");
+		const FLinearColor ValueSliderBarColor = IsHighlighted ? SliderBarHighlightedColor : SliderBarNormalColor;
+		const FLinearColor ValueSliderThumbColor = IsHighlighted ? SliderThumbHighlightedColor : SliderThumbNormalColor;
+		
+		FSliderStyle ValueSliderStyle = ValueSlider->GetWidgetStyle();
+		ValueSliderStyle.NormalBarImage.TintColor = ValueSliderBarColor;
+		ValueSliderStyle.HoveredBarImage.TintColor = ValueSliderBarColor;
+		ValueSliderStyle.DisabledBarImage.TintColor = ValueSliderBarColor;
+		ValueSliderStyle.NormalThumbImage.TintColor = ValueSliderThumbColor;
+		ValueSliderStyle.HoveredThumbImage.TintColor = ValueSliderThumbColor;
+		ValueSliderStyle.DisabledThumbImage.TintColor = ValueSliderThumbColor;
+		ValueSlider->SetWidgetStyle(ValueSliderStyle);
+	}
+
+	if (IncreaseValueButtonNormalImage != nullptr)
+	{
+		IncreaseValueButtonNormalImage->SetVisibility(IsHighlighted
+			? ESlateVisibility::Collapsed
+			: ESlateVisibility::SelfHitTestInvisible);	
+	}
+
+	if (IncreaseValueButtonHighlightedImage != nullptr)
+	{
+		IncreaseValueButtonHighlightedImage->SetVisibility(IsHighlighted
+			? ESlateVisibility::SelfHitTestInvisible
+			: ESlateVisibility::Collapsed);
+	}
+
+	if (DecreaseValueButtonNormalImage != nullptr)
+	{
+		DecreaseValueButtonNormalImage->SetVisibility(IsHighlighted
+			? ESlateVisibility::Collapsed
+			: ESlateVisibility::SelfHitTestInvisible);	
+	}
+
+	if (DecreaseValueButtonHighlightedImage != nullptr)
+	{
+		DecreaseValueButtonHighlightedImage->SetVisibility(IsHighlighted
+			? ESlateVisibility::SelfHitTestInvisible
+			: ESlateVisibility::Collapsed);
 	}
 	
 	if (IsHighlighted && HighlightedAnimation != nullptr && PlayHighlightedAnimation)
