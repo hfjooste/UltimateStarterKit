@@ -203,16 +203,16 @@ The settings data that is saved/loaded
 		<td>false</td>
 	</tr>
 	<tr>
-		<td>GraphicsFpsIndicatorModified</td>
-		<td>Was the graphics FPS indicator setting modified?</td>
+		<td>GraphicsFpsIndicatorTypeModified</td>
+		<td>Was the graphics FPS indicator type setting modified?</td>
 		<td>bool</td>
 		<td>false</td>
 	</tr>
 	<tr>
-		<td>GraphicsFpsIndicator</td>
-		<td>The graphics FPS indicator value</td>
-		<td>bool</td>
-		<td>false</td>
+		<td>GraphicsFpsIndicatorType</td>
+		<td>The graphics FPS indicator type</td>
+		<td>ESettingsFpsCounterType</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>AccessibilityColorBlindMode</td>

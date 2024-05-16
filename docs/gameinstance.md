@@ -119,6 +119,12 @@ The Game Instance will automatically detect input events and update the current 
 		<td>TSubclassOf&lt;UMessagePopupWidget&gt;</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>FpsCounterWidgetClass</td>
+		<td>The widget class used to display the FPS counter</td>
+		<td>TSubclassOf&lt;UFpsCounter&gt;</td>
+		<td></td>
+	</tr>
 </table>
 
 ### Events

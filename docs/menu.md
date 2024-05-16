@@ -39,6 +39,12 @@ You can add the following widgets to enable extra functionality:
 		<th>Default Value</th>
 	</tr>
 	<tr>
+		<td>HighlightFirstItemOnStart</td>
+		<td>Should the first item be highlighted when the menu is loaded?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
 		<td>AddInputBindingOnLoad</td>
 		<td>Should the input binding automatically be added as soon as the widget is loaded?</td>
 		<td>bool</td>
