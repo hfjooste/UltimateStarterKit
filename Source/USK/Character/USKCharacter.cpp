@@ -56,6 +56,8 @@ void AUSKCharacter::BeginPlay()
 	
 	USK_LOG_TRACE("Initializing references");
 	PlayerController = dynamic_cast<APlayerController*>(GetController());
+	PlayerController->SetAudioListenerOverride(CameraComponent,
+		FVector::ZeroVector, FRotator::ZeroRotator);
 	
 	USK_LOG_TRACE("Initializing character movement");
 	GetCharacterMovement()->JumpZVelocity = JumpVelocity;
