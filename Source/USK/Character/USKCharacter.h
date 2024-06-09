@@ -940,6 +940,12 @@ public:
 
 protected:
 	/**
+	 * @brief A reference to the player controller
+	 */
+	UPROPERTY()
+	APlayerController* PlayerController;
+	
+	/**
 	 * @brief Overridable native event for when play begins for this actor
 	 */
 	virtual void BeginPlay() override;
@@ -1049,13 +1055,7 @@ protected:
 	 */
 	void ApplyStompVelocity();
 
-private:
-	/**
-	 * @brief A reference to the player controller
-	 */
-	UPROPERTY()
-	APlayerController* PlayerController;
-	
+private:	
 	/**
 	 * @brief A reference to the current weapons
 	 */
