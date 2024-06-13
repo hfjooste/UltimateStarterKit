@@ -678,6 +678,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td>UCrosshairConfig*</td>
 		<td><code>nullptr</code></td>
 	</tr>
+	<tr>
+		<td>PlayerController</td>
+		<td>A reference to the player controller</td>
+		<td>APlayerController*</td>
+		<td><code>nullptr</code></td>
+	</tr>
 </table>
 
 ### Events

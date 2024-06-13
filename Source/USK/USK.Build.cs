@@ -17,7 +17,9 @@ public class USK : ModuleRules
 			"EnhancedInput",
 			"Niagara",
 			"UMG",
-			"AnimGraphRuntime"
+			"AnimGraphRuntime",
+			"AIModule",
+			"NavigationSystem"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new[]
@@ -26,7 +28,8 @@ public class USK : ModuleRules
 			"Engine",
 			"Slate",
 			"SlateCore",
-			"GameplayTags"
+			"GameplayTags",
+			"AIModule"
 		});
 
 		DynamicallyLoadedModuleNames.AddRange(new string[] { });

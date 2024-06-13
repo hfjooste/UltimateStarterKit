@@ -19,7 +19,12 @@ You can add the following widgets to enable extra functionality:
 	</tr>
 	<tr>
 		<td>Title</td>
-		<td>The TextBlock used to display the title of the menu item</td>
+		<td>The TextBlock used to display the title of the menu item while not highlighted</td>
+		<td>UTextBlock*</td>
+	</tr>
+	<tr>
+		<td>HighlightedTitle</td>
+		<td>The TextBlock used to display the title of the menu item while highlighted</td>
 		<td>UTextBlock*</td>
 	</tr>
 	<tr>
@@ -58,9 +63,29 @@ You can add the following widgets to enable extra functionality:
 		<td>UButton*</td>
 	</tr>
 	<tr>
+		<td>IncreaseValueButtonNormalImage</td>
+		<td>The image displayed in the increase value button while not highlighted</td>
+		<td>UImage*</td>
+	</tr>
+	<tr>
+		<td>IncreaseValueButtonHighlightedImage</td>
+		<td>The image displayed in the increase value button while highlighted</td>
+		<td>UImage*</td>
+	</tr>
+	<tr>
 		<td>DecreaseValueButton</td>
 		<td>The button used to decrease the value of the menu item</td>
 		<td>UButton*</td>
+	</tr>
+	<tr>
+		<td>DecreaseValueButtonNormalImage</td>
+		<td>The image displayed in the decrease value button while not highlighted</td>
+		<td>UImage*</td>
+	</tr>
+	<tr>
+		<td>DecreaseValueButtonHighlightedImage</td>
+		<td>The image displayed in the decrease value button while highlighted</td>
+		<td>UImage*</td>
 	</tr>
 	<tr>
 		<td>BorderLeft</td>
@@ -252,6 +277,30 @@ You can add the following widgets to enable extra functionality:
 		<td>The image of the right button when highlighted</td>
 		<td>UTexture2D*</td>
 		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SliderBarNormalColor</td>
+		<td>The color of the slider bar when not highlighted</td>
+		<td>FLinearColor</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>SliderBarHighlightedColor</td>
+		<td>The color of the slider bar when highlighted</td>
+		<td>FLinearColor</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>SliderThumbNormalColor</td>
+		<td>The color of the slider thumb when not highlighted</td>
+		<td>FLinearColor</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>SliderThumbHighlightedColor</td>
+		<td>The color of the slider thumb when highlighted</td>
+		<td>FLinearColor</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>ValueUpdateMethod</td>

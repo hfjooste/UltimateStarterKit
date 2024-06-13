@@ -6,8 +6,11 @@
 #include "Assets/DialogueAsset.h"
 #include "Assets/USKAsset.h"
 #include "Dialogue/AssetEditor/DialogueEditorStyle.h"
+#include "USK/AI/EnemyPatrolPoint.h"
+#include "USK/AI/EnemyWanderArea.h"
 #include "USK/Audio/MusicPlayer.h"
 #include "USK/Character/USKCharacter.h"
+#include "USK/Character/USKEnemyCharacter.h"
 #include "USK/Components/InteractTrigger.h"
 #include "USK/Core/USKGameInstance.h"
 #include "USK/Dialogue/Dialogue.h"
@@ -47,6 +50,13 @@ void FUSKEditorModule::StartupModule()
 
 	const EAssetTypeCategories::Type UskCategory = AssetTools.RegisterAdvancedAssetCategory(
 		FName(TEXT("USK")), FText::FromString("Ultimate Starter Kit"));
+
+	RegisterBlueprint(AssetTools, UskCategory, "Artificial Intelligence", "Enemy Character",
+		FColor(0, 0, 0), AUSKEnemyCharacter::StaticClass());
+	RegisterBlueprint(AssetTools, UskCategory, "Artificial Intelligence", "Patrol Point",
+		FColor(0, 0, 0), AEnemyPatrolPoint::StaticClass());
+	RegisterBlueprint(AssetTools, UskCategory, "Artificial Intelligence", "Wander Area",
+		FColor(0, 0, 0), AEnemyWanderArea::StaticClass());
 
 	RegisterBlueprint(AssetTools, UskCategory, "Core", "Game Instance",
 		FColor(10, 25, 175), UUSKGameInstance::StaticClass());

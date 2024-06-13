@@ -68,6 +68,34 @@ nav:
   - Logging System:
     - Logger: logger.md
     - Log Configuration: logconfig.md
+  - Artificial Intelligence:
+    - Enemy Character: enemycharacter.md
+    - Wander Area: enemywanderarea.md
+    - Patrol Point: enemypatrolpoint.md
+    - Patrol Type: enemypatroltype.md
+    - Attack Type: enemyattacktype.md
+    - Behaviour Tree:
+      - Decorators:
+        - Is AI Paused: btdecorator_isaipaused.md
+        - Is Attacking: btdecorator_isattacking.md
+        - Is Dead: btdecorator_isdead.md
+        - Is Near Target: btdecorator_isneartarget.md
+        - Was Initialized: btdecorator_wasinitialized.md
+        - Was Target Reached: btdecorator_wastargetreached.md
+      - Tasks:
+        - Base Node: bttask_base.md
+        - Attack: bttask_attack.md
+        - Chase Target: bttask_chasetarget.md
+        - Clear Focus: bttask_clearfocus.md
+        - Focus Target: bttask_focustarget.md
+        - Idle: bttask_idle.md
+        - Initialize: bttask_initialize.md
+        - Patrol: bttask_patrol.md
+        - Pause AI: bttask_pauseai.md
+        - Reduce Pause Delay: bttask_reducepausedelay.md
+        - Reset Patrol Point Pause Delay: bttask_resetpatrolpointpausedelay.md
+        - Update State: bttask_updatestate.md
+        - Wander: bttask_wander.md
   - Dialogue System:
     - Overview: dialogueoverview.md
     - Dialogue: dialogue.md
