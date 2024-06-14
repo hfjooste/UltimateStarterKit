@@ -12,6 +12,11 @@ UENUM(BlueprintType)
 enum class EEnemyAttackType : uint8
 {
 	/**
+	 * @brief Enemy is not attacking
+	 */
+	None,
+	
+	/**
 	 * @brief A melee attack
 	 */
 	Melee,
@@ -20,9 +25,4 @@ enum class EEnemyAttackType : uint8
 	 * @brief A ranged attack
 	 */
 	Ranged,
-
-	/**
-	 * @brief Move to a random location each time a patrol point is reached
-	 */
-	RandomLocation,
 };

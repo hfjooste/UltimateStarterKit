@@ -38,5 +38,5 @@ bool UBTDecorator_UskIsAttacking::CalculateRawConditionValue(UBehaviorTreeCompon
 		return false;
 	}
 
-	return EnemyCharacter->IsAttacking();
+	return EnemyCharacter->GetCurrentAttackType() != EEnemyAttackType::None;
 }

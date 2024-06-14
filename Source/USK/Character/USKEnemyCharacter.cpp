@@ -55,9 +55,9 @@ bool AUSKEnemyCharacter::IsDead() const
  * @brief Start attacking the target
  * @param AttackType The type of attack to start
  */
-void AUSKEnemyCharacter::StartAttacking(EEnemyAttackType AttackType)
+void AUSKEnemyCharacter::StartAttacking(const EEnemyAttackType AttackType)
 {
-	bIsAttacking = true;
+	CurrentAttackType = AttackType;
 }
 
 /**
@@ -65,16 +65,16 @@ void AUSKEnemyCharacter::StartAttacking(EEnemyAttackType AttackType)
  */
 void AUSKEnemyCharacter::StopAttacking()
 {
-	bIsAttacking = false;
+	CurrentAttackType = EEnemyAttackType::None;
 }
 
 /**
- * @brief Check if the enemy is attacking
- * @return A boolean value indicating if the enemy is attacking
+ * @brief Get the current attack type of the enemy
+ * @return The current attack type of the enemy
  */
-bool AUSKEnemyCharacter::IsAttacking() const
+EEnemyAttackType AUSKEnemyCharacter::GetCurrentAttackType() const
 {
-	return bIsAttacking;
+	return CurrentAttackType;
 }
 
 /**

@@ -160,11 +160,11 @@ public:
 	void StopAttacking();
 
 	/**
-	 * @brief Check if the enemy is attacking
-	 * @return A boolean value indicating if the enemy is attacking
+	 * @brief Get the current attack type of the enemy
+	 * @return The current attack type of the enemy
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|AI")
-	bool IsAttacking() const;
+	EEnemyAttackType GetCurrentAttackType() const;
 
 protected:
 	/**
@@ -184,9 +184,9 @@ private:
 	bool bIsDead;
 
 	/**
-	 * @brief Is the enemy attacking?
+	 * @brief The current attack type
 	 */
-	bool bIsAttacking;
+	EEnemyAttackType CurrentAttackType;
 
 	/**
 	 * @brief Initialize the patrol points
