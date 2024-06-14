@@ -147,10 +147,10 @@ Base class for all enemy characters
 		<td></td>
 	</tr>
 	<tr>
-		<td>IsAttacking</td>
-		<td>Check if the enemy is attacking</td>
+		<td>GetCurrentAttackType</td>
+		<td>Get the current attack type of the enemy</td>
 		<td></td>
-		<td><strong>bool</strong><br/>A boolean value indicating if the enemy is attacking</td>
+		<td><strong>EEnemyAttackType</strong><br/>The current attack type of the enemy</td>
 	</tr>
 </table>
 
@@ -162,7 +162,7 @@ You can use the <code>USKEnemyCharacter</code> using Blueprints by adding one of
 	<li>Ultimate Starter Kit > AI > Is Dead</li>
 	<li>Ultimate Starter Kit > AI > Start Attacking</li>
 	<li>Ultimate Starter Kit > AI > Stop Attacking</li>
-	<li>Ultimate Starter Kit > AI > Is Attacking</li>
+	<li>Ultimate Starter Kit > AI > Get Current Attack Type</li>
 </ul>
 
 ## C++ Usage
@@ -183,6 +183,6 @@ void ATestActor::Test()
 	bool IsDeadValue = USKEnemyCharacter->IsDead();
 	USKEnemyCharacter->StartAttacking(AttackType);
 	USKEnemyCharacter->StopAttacking();
-	bool IsAttackingValue = USKEnemyCharacter->IsAttacking();
+	EEnemyAttackType CurrentAttackType = USKEnemyCharacter->GetCurrentAttackType();
 }
 ```

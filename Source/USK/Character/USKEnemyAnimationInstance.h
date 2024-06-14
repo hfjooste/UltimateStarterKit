@@ -64,27 +64,27 @@ protected:
 	 * @brief Get the movement speed of the player
 	 * @return The movement speed of the player
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe))
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
 	float GetMovementSpeed() const;
 
 	/**
 	 * @brief Check if the enemy is performing a melee attack
 	 * @return A boolean value indicating if the enemy is performing a melee attack
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe))
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
 	bool IsMeleeAttacking() const;
 
 	/**
 	 * @brief Check if the enemy is performing a ranged attack
 	 * @return A boolean value indicating if the enemy is performing a ranged attack
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe))
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
 	bool IsRangedAttacking() const;
 
 	/**
 	 * @brief Stop attacking the target
 	 */
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Animations")
 	void StopAttacking() const;
 
 private:

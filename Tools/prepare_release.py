@@ -4,6 +4,7 @@ docs = os.path.join(os.path.dirname(__file__), "docs", "docs_generator.py")
 print(f"Documentation script path: {docs}\n")
 
 os.system(f"python \"{docs}\" --input \"Character\\USKEnemyCharacter\" --output enemycharacter")
+os.system(f"python \"{docs}\" --input \"Character\\USKEnemyAnimationInstance\" --output enemyanimationinstance")
 os.system(f"python \"{docs}\" --input \"AI\\EnemyWanderArea\" --output enemywanderarea")
 os.system(f"python \"{docs}\" --input \"AI\\EnemyPatrolPoint\" --output enemypatrolpoint")
 os.system(f"python \"{docs}\" --input \"AI\\PatrolType\" --output enemypatroltype")
