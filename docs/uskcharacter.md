@@ -30,6 +30,11 @@ The <code>USKCharacter</code> uses the following components:
 		<td>USpringArmComponent*</td>
 	</tr>
 	<tr>
+		<td>AttackableObjectComponent</td>
+		<td>The component used to allow the actor to be attacked</td>
+		<td>UAttackableObjectComponent*</td>
+	</tr>
+	<tr>
 		<td>CrouchTimeline</td>
 		<td>The timeline component used for smooth crouching</td>
 		<td>UTimelineComponent*</td>

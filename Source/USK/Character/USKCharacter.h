@@ -13,6 +13,7 @@
 #include "USK/Weapons/Weapon.h"
 #include "USKCharacter.generated.h"
 
+class UAttackableObjectComponent;
 class UStatsComponent;
 class UInteractTrigger;
 class UInputAction;
@@ -53,6 +54,13 @@ class USK_API AUSKCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
 		meta=(AllowPrivateAccess = "true"))
 	class USpringArmComponent* SpringArmComponent;
+
+	/**
+	 * @brief The component used to allow the actor to be attacked
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
+		meta=(AllowPrivateAccess = "true"))
+	UAttackableObjectComponent* AttackableObjectComponent;
 
 	/**
 	 * @brief The timeline component used for smooth crouching

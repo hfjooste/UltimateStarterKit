@@ -1,6 +1,7 @@
 ﻿// Created by Henry Jooste
 
 #include "USKCharacter.h"
+
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -17,6 +18,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Curves/CurveFloat.h"
 #include "USK/Audio/AudioUtils.h"
+#include "USK/Components/AttackableObjectComponent.h"
 #include "USK/Components/InteractTrigger.h"
 #include "USK/Data/StatsComponent.h"
 #include "USK/Logger/Log.h"
@@ -30,6 +32,7 @@ AUSKCharacter::AUSKCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+	AttackableObjectComponent = CreateDefaultSubobject<UAttackableObjectComponent>(TEXT("Attackable Object Component"));
 	CrouchTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("Crouch Timeline"));
 	ProneTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("Prone Timeline"));
 	AimTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("Aim Timeline"));

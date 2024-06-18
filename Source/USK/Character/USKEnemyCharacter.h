@@ -5,10 +5,12 @@
 #include "CoreMinimal.h"
 #include "EnemyAttackType.h"
 #include "BehaviorTree/BehaviorTree.h"
+#include "Components/SphereComponent.h"
 #include "GameFramework/Character.h"
 #include "USK/AI/PatrolType.h"
 #include "USKEnemyCharacter.generated.h"
 
+class UAttackableObjectComponent;
 class AEnemyWanderArea;
 class AEnemyPatrolPoint;
 
@@ -19,6 +21,20 @@ UCLASS()
 class USK_API AUSKEnemyCharacter : public ACharacter
 {
 	GENERATED_BODY()
+
+	/**
+	 * @brief The collider used to detect objects that was attacked
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
+		meta=(AllowPrivateAccess = "true"))
+	USphereComponent* AttackCollider;
+
+	/**
+	 * @brief The component used to allow the actor to be attacked
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
+		meta=(AllowPrivateAccess = "true"))
+	UAttackableObjectComponent* AttackableObjectComponent;
 	
 public:
 	/**
@@ -126,6 +142,17 @@ public:
 	EPatrolType PatrolType;
 
 	/**
+	 * @brief The name of the bone to attach the attack collider to
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character")
+	FName AttackColliderAttachBoneName;
+
+	/**
+	 * @brief Constructor for the enemy character
+	 */
+	AUSKEnemyCharacter();
+
+	/**
 	 * @brief Get the array of patrol point locations
 	 * @return The array of patrol point locations
 	 */
@@ -179,6 +206,12 @@ private:
 	TArray<FVector> PatrolPointLocations;
 
 	/**
+	 * @brief The array of actors that have been attacked
+	 */
+	UPROPERTY()
+	TArray<AActor*> AttackedActors;
+
+	/**
 	 * @brief Is the enemy dead?
 	 */
 	bool bIsDead;
@@ -192,4 +225,17 @@ private:
 	 * @brief Initialize the patrol points
 	 */
 	void InitializePatrolPoints();
+
+	/**
+	 * @brief Event when this component overlaps another actor
+	 * @param OverlappedComponent The component that triggered the event
+	 * @param OtherActor The other actor that caused the overlap event
+	 * @param OtherComp The other component that caused the overlap event
+	 * @param OtherBodyIndex The index of the other body that caused the overlap event
+	 * @param bFromSweep A boolean value indicating if the overlap event was caused by a sweep 
+	 * @param SweepResult The result of the sweep that caused the overlap event
+	 */
+	UFUNCTION()
+	void OnAttackColliderOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 };

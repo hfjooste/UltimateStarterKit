@@ -5,6 +5,7 @@ print(f"Documentation script path: {docs}\n")
 
 os.system(f"python \"{docs}\" --input \"Character\\USKEnemyCharacter\" --output enemycharacter")
 os.system(f"python \"{docs}\" --input \"Character\\USKEnemyAnimationInstance\" --output enemyanimationinstance")
+os.system(f"python \"{docs}\" --input \"Components\\AttackableObjectComponent\" --output attackableobjectcomponent")
 os.system(f"python \"{docs}\" --input \"AI\\EnemyWanderArea\" --output enemywanderarea")
 os.system(f"python \"{docs}\" --input \"AI\\EnemyPatrolPoint\" --output enemypatrolpoint")
 os.system(f"python \"{docs}\" --input \"AI\\PatrolType\" --output enemypatroltype")

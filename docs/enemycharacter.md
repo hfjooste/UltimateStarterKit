@@ -1,6 +1,26 @@
 ## Introduction
 Base class for all enemy characters
 
+## Components
+The <code>USKEnemyCharacter</code> uses the following components:
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Type</th>
+	</tr>
+	<tr>
+		<td>AttackCollider</td>
+		<td>Base class for all enemy characters</td>
+		<td>USphereComponent*</td>
+	</tr>
+	<tr>
+		<td>AttackableObjectComponent</td>
+		<td>The component used to allow the actor to be attacked</td>
+		<td>UAttackableObjectComponent*</td>
+	</tr>
+</table>
+
 ## API Reference
 ### Properties
 <table>
@@ -104,6 +124,12 @@ Base class for all enemy characters
 		<td>PatrolType</td>
 		<td>The type of patrol movement the enemy will use</td>
 		<td>EPatrolType</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>AttackColliderAttachBoneName</td>
+		<td>The name of the bone to attach the attack collider to</td>
+		<td>FName</td>
 		<td></td>
 	</tr>
 </table>

@@ -4,7 +4,20 @@
 
 #include "AIController.h"
 #include "Algo/RandomShuffle.h"
+#include "USK/Components/AttackableObjectComponent.h"
 #include "USK/AI/EnemyPatrolPoint.h"
+
+/**
+ * @brief Constructor for the enemy character
+ */
+AUSKEnemyCharacter::AUSKEnemyCharacter()
+{
+	AttackCollider = CreateDefaultSubobject<USphereComponent>(TEXT("Attack Collider"));
+	AttackableObjectComponent = CreateDefaultSubobject<UAttackableObjectComponent>(TEXT("Attackable Object Component"));
+	
+	AttackCollider->SetupAttachment(GetMesh(), AttackColliderAttachBoneName);
+	AttackCollider->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+}
 
 /**
  * @brief Overridable native event for when play begins for this actor
@@ -12,8 +25,11 @@
 void AUSKEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	InitializePatrolPoints();
+	AttackCollider->AttachToComponent(GetMesh(),
+		FAttachmentTransformRules::SnapToTargetIncludingScale, AttackColliderAttachBoneName);
+	AttackCollider->OnComponentBeginOverlap.AddDynamic(this, &AUSKEnemyCharacter::OnAttackColliderOverlap);
 	
+	InitializePatrolPoints();	
 	if (IsValid(BehaviorTree))
 	{
 		AAIController* AiController = dynamic_cast<AAIController*>(GetController());
@@ -58,6 +74,10 @@ bool AUSKEnemyCharacter::IsDead() const
 void AUSKEnemyCharacter::StartAttacking(const EEnemyAttackType AttackType)
 {
 	CurrentAttackType = AttackType;
+	if (CurrentAttackType == EEnemyAttackType::Melee)
+	{
+		AttackCollider->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+	}
 }
 
 /**
@@ -66,6 +86,8 @@ void AUSKEnemyCharacter::StartAttacking(const EEnemyAttackType AttackType)
 void AUSKEnemyCharacter::StopAttacking()
 {
 	CurrentAttackType = EEnemyAttackType::None;
+	AttackCollider->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+	AttackedActors.Empty();
 }
 
 /**
@@ -99,4 +121,30 @@ void AUSKEnemyCharacter::InitializePatrolPoints()
 	{
 		Algo::RandomShuffle(PatrolPointLocations);
 	}
+}
+
+/**
+ * @brief Event when this component overlaps another actor
+ * @param OverlappedComponent The component that triggered the event
+ * @param OtherActor The other actor that caused the overlap event
+ * @param OtherComp The other component that caused the overlap event
+ * @param OtherBodyIndex The index of the other body that caused the overlap event
+ * @param bFromSweep A boolean value indicating if the overlap event was caused by a sweep 
+ * @param SweepResult The result of the sweep that caused the overlap event
+ */
+void AUSKEnemyCharacter::OnAttackColliderOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (IsDead() || OtherActor == this || AttackedActors.Contains(OtherActor))
+	{
+		return;
+	}
+
+	const UAttackableObjectComponent* OtherAttackableObjectComponent = dynamic_cast<UAttackableObjectComponent*>(
+		OtherActor->GetComponentByClass(UAttackableObjectComponent::StaticClass()));
+	if (IsValid(OtherAttackableObjectComponent))
+	{
+		AttackedActors.Add(OtherActor);
+		OtherAttackableObjectComponent->NotifyAttack(this);
+	}	
 }

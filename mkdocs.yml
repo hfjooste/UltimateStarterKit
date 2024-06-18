@@ -71,6 +71,7 @@ nav:
   - Artificial Intelligence:
     - Enemy Character: enemycharacter.md
     - Enemy Animation Instance: enemyanimationinstance.md
+    - Attackable Object Component: attackableobjectcomponent.md
     - Wander Area: enemywanderarea.md
     - Patrol Point: enemypatrolpoint.md
     - Patrol Type: enemypatroltype.md
