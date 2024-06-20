@@ -68,6 +68,41 @@ bool AUSKEnemyCharacter::IsDead() const
 }
 
 /**
+ * @brief Start the staggered state of the enemy
+ * @param StaggerDuration The duration of the staggered state
+ */
+void AUSKEnemyCharacter::StartStaggeredState(const float StaggerDuration)
+{
+	bIsStaggered = true;
+	
+	GetWorld()->GetTimerManager().ClearTimer(StaggerTimerHandle);
+	if (StaggerDuration <= 0.0f)
+	{
+		return;
+	}
+
+	GetWorld()->GetTimerManager().SetTimer(StaggerTimerHandle, this,
+		&AUSKEnemyCharacter::EndStaggeredState, StaggerDuration, false);
+}
+
+/**
+ * @brief End the staggered state of the enemy
+ */
+void AUSKEnemyCharacter::EndStaggeredState()
+{
+	bIsStaggered = false;
+}
+
+/**
+ * @brief Check if the enemy is staggered
+ * @return A boolean value indicating if the enemy is staggered
+ */
+bool AUSKEnemyCharacter::IsStaggered() const
+{
+	return bIsStaggered;
+}
+
+/**
  * @brief Start attacking the target
  * @param AttackType The type of attack to start
  */

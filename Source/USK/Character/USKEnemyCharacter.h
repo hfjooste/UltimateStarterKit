@@ -174,6 +174,26 @@ public:
 	bool IsDead() const;
 
 	/**
+	 * @brief Start the staggered state of the enemy
+	 * @param StaggerDuration The duration of the staggered state
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	void StartStaggeredState(float StaggerDuration = -1.0f);
+
+	/**
+	 * @brief End the staggered state of the enemy
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	void EndStaggeredState();
+
+	/**
+	 * @brief Check if the enemy is staggered
+	 * @return A boolean value indicating if the enemy is staggered
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|AI")
+	bool IsStaggered() const;
+
+	/**
 	 * @brief Start attacking the target
 	 * @param AttackType The type of attack to start
 	 */
@@ -217,9 +237,19 @@ private:
 	bool bIsDead;
 
 	/**
+	 * @brief Is the enemy staggered?
+	 */
+	bool bIsStaggered;
+
+	/**
 	 * @brief The current attack type
 	 */
 	EEnemyAttackType CurrentAttackType;
+
+	/**
+	 * @brief The timer handle used to end the staggered state
+	 */
+	FTimerHandle StaggerTimerHandle;
 
 	/**
 	 * @brief Initialize the patrol points
