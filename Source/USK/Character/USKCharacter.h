@@ -795,6 +795,13 @@ public:
 	ECameraPerspective GetCameraPerspective() const;
 
 	/**
+	 * @brief Get the attackable object component of the character
+	 * @return The attackable object component
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character")
+	UAttackableObjectComponent* GetAttackableObjectComponent() const;
+
+	/**
 	 * @brief Update the current camera perspective
 	 * @param NewCameraPerspective The new camera perspective
 	 */

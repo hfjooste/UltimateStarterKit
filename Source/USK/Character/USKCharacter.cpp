@@ -277,6 +277,15 @@ ECameraPerspective AUSKCharacter::GetCameraPerspective() const
 }
 
 /**
+ * @brief Get the attackable object component of the character
+ * @return The attackable object component
+ */
+UAttackableObjectComponent* AUSKCharacter::GetAttackableObjectComponent() const
+{
+	return AttackableObjectComponent;
+}
+
+/**
  * @brief Update the current camera perspective
  * @param NewCameraPerspective The new camera perspective
  */
