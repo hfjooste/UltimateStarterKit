@@ -544,6 +544,24 @@ FRotator AUSKCharacter::GetWeaponSway() const
 }
 
 /**
+ * @brief Update the dead state of the character
+ * @param NewValue The new dead state value
+ */
+void AUSKCharacter::UpdateDeadState(const bool NewValue)
+{
+	bIsDead = NewValue;
+}
+
+/**
+ * @brief Check if the character is dead
+ * @return A boolean value indicating if the character is dead
+ */
+bool AUSKCharacter::IsDead() const
+{
+	return bIsDead;
+}
+
+/**
  * @brief Make the character jump on the next update
  */
 void AUSKCharacter::Jump()

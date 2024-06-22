@@ -953,6 +953,20 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Weapons")
 	FRotator GetWeaponSway() const;
 
+	/**
+	 * @brief Update the dead state of the character
+	 * @param NewValue The new dead state value
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character")
+	void UpdateDeadState(bool NewValue);
+
+	/**
+	 * @brief Check if the character is dead
+	 * @return A boolean value indicating if the character is dead
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character")
+	bool IsDead() const;
+
 protected:
 	/**
 	 * @brief A reference to the player controller
@@ -1088,6 +1102,11 @@ private:
 	 */
 	UPROPERTY()
 	UStatsComponent* StatsComponent;
+
+	/**
+	 * @brief Is the character dead?
+	 */
+	bool bIsDead;
 
 	/**
 	 * @brief The current arm length of the spring arm component
