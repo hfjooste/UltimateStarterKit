@@ -1,6 +1,12 @@
 ## Introduction
 Base class for all enemy characters
 
+## Dependencies
+The <code>USKEnemyCharacter</code> relies on other components of this plugin to work:
+<ul>
+	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+</ul>
+
 ## Components
 The <code>USKEnemyCharacter</code> uses the following components:
 <table>
@@ -132,6 +138,18 @@ The <code>USKEnemyCharacter</code> uses the following components:
 		<td>FName</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>MeleeAttackAnimationMontages</td>
+		<td>The melee attack animation montages</td>
+		<td>TArray&lt;UAnimMontage*&gt;</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>RangedAttackAnimationMontages</td>
+		<td>The ranged attack animation montages</td>
+		<td>TArray&lt;UAnimMontage*&gt;</td>
+		<td></td>
+	</tr>
 </table>
 
 ### Functions
@@ -161,6 +179,24 @@ The <code>USKEnemyCharacter</code> uses the following components:
 		<td><strong>bool</strong><br/>A boolean value indicating if the enemy is dead</td>
 	</tr>
 	<tr>
+		<td>StartStaggeredState</td>
+		<td>Start the staggered state of the enemy</td>
+		<td><strong>StaggerDuration (float)</strong><br/>The duration of the staggered state</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>EndStaggeredState</td>
+		<td>End the staggered state of the enemy</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>IsStaggered</td>
+		<td>Check if the enemy is staggered</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the enemy is staggered</td>
+	</tr>
+	<tr>
 		<td>StartAttacking</td>
 		<td>Start attacking the target</td>
 		<td><strong>AttackType (EEnemyAttackType)</strong><br/>The type of attack to start</td>
@@ -169,6 +205,18 @@ The <code>USKEnemyCharacter</code> uses the following components:
 	<tr>
 		<td>StopAttacking</td>
 		<td>Stop attacking the target</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>OnAttackStarted</td>
+		<td>Called when the attack is started</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>OnAttackStopped</td>
+		<td>Called when the attack is stopped</td>
 		<td></td>
 		<td></td>
 	</tr>
@@ -186,8 +234,13 @@ You can use the <code>USKEnemyCharacter</code> using Blueprints by adding one of
 	<li>Ultimate Starter Kit > AI > Get Patrol Point Locations</li>
 	<li>Ultimate Starter Kit > AI > Update Dead State</li>
 	<li>Ultimate Starter Kit > AI > Is Dead</li>
+	<li>Ultimate Starter Kit > AI > Start Staggered State</li>
+	<li>Ultimate Starter Kit > AI > End Staggered State</li>
+	<li>Ultimate Starter Kit > AI > Is Staggered</li>
 	<li>Ultimate Starter Kit > AI > Start Attacking</li>
 	<li>Ultimate Starter Kit > AI > Stop Attacking</li>
+	<li>Ultimate Starter Kit > AI > On Attack Started</li>
+	<li>Ultimate Starter Kit > AI > On Attack Stopped</li>
 	<li>Ultimate Starter Kit > AI > Get Current Attack Type</li>
 </ul>
 
@@ -207,8 +260,13 @@ void ATestActor::Test()
 	TArray<FVector> PatrolPointLocations = USKEnemyCharacter->GetPatrolPointLocations();
 	USKEnemyCharacter->UpdateDeadState(NewValue);
 	bool IsDeadValue = USKEnemyCharacter->IsDead();
+	USKEnemyCharacter->StartStaggeredState(StaggerDuration);
+	USKEnemyCharacter->EndStaggeredState();
+	bool IsStaggeredValue = USKEnemyCharacter->IsStaggered();
 	USKEnemyCharacter->StartAttacking(AttackType);
 	USKEnemyCharacter->StopAttacking();
+	USKEnemyCharacter->OnAttackStarted();
+	USKEnemyCharacter->OnAttackStopped();
 	EEnemyAttackType CurrentAttackType = USKEnemyCharacter->GetCurrentAttackType();
 }
 ```

@@ -70,7 +70,10 @@ nav:
     - Log Configuration: logconfig.md
   - Artificial Intelligence:
     - Enemy Character: enemycharacter.md
-    - Enemy Animation Instance: enemyanimationinstance.md
+    - Animation:
+      - Animation Instance: enemyanimationinstance.md
+      - Attack Start Anim Notify: enemyattackstartanimnotify.md
+      - Attack End Anim Notify: enemyattackendanimnotify.md
     - Attackable Object Component: attackableobjectcomponent.md
     - Wander Area: enemywanderarea.md
     - Patrol Point: enemypatrolpoint.md

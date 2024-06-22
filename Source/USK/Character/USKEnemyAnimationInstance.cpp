@@ -27,7 +27,6 @@ void UUSKEnemyAnimationInstance::NativeUpdateAnimation(const float DeltaSeconds)
 	}
 
 	MovementSpeed = UKismetMathLibrary::VSizeXY(EnemyCharacter->GetVelocity());
-	CurrentAttackType = EnemyCharacter->GetCurrentAttackType();
 }
 
 /**
@@ -37,33 +36,4 @@ void UUSKEnemyAnimationInstance::NativeUpdateAnimation(const float DeltaSeconds)
 float UUSKEnemyAnimationInstance::GetMovementSpeed() const
 {
 	return MovementSpeed;
-}
-
-/**
- * @brief Check if the enemy is performing a melee attack
- * @return A boolean value indicating if the enemy is performing a melee attack
- */
-bool UUSKEnemyAnimationInstance::IsMeleeAttacking() const
-{
-	return CurrentAttackType == EEnemyAttackType::Melee;
-}
-
-/**
- * @brief Check if the enemy is performing a ranged attack
- * @return A boolean value indicating if the enemy is performing a ranged attack
- */
-bool UUSKEnemyAnimationInstance::IsRangedAttacking() const
-{
-	return CurrentAttackType == EEnemyAttackType::Ranged;
-}
-
-/**
- * @brief Stop attacking the target
- */
-void UUSKEnemyAnimationInstance::StopAttacking() const
-{
-	if (IsValid(EnemyCharacter))
-	{
-		EnemyCharacter->StopAttacking();
-	}
 }

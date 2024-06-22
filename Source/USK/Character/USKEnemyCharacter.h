@@ -144,8 +144,20 @@ public:
 	/**
 	 * @brief The name of the bone to attach the attack collider to
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Attack")
 	FName AttackColliderAttachBoneName;
+
+	/**
+	 * @brief The melee attack animation montages
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Attack")
+	TArray<UAnimMontage*> MeleeAttackAnimationMontages;
+
+	/**
+	 * @brief The ranged attack animation montages
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Attack")
+	TArray<UAnimMontage*> RangedAttackAnimationMontages;
 
 	/**
 	 * @brief Constructor for the enemy character
@@ -205,6 +217,18 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
 	void StopAttacking();
+
+	/**
+	 * @brief Called when the attack is started
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	void OnAttackStarted();
+
+	/**
+	 * @brief Called when the attack is stopped
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	void OnAttackStopped();
 
 	/**
 	 * @brief Get the current attack type of the enemy

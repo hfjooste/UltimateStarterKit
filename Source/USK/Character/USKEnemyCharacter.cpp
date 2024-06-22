@@ -6,6 +6,7 @@
 #include "Algo/RandomShuffle.h"
 #include "USK/Components/AttackableObjectComponent.h"
 #include "USK/AI/EnemyPatrolPoint.h"
+#include "USK/Logger/Log.h"
 
 /**
  * @brief Constructor for the enemy character
@@ -108,11 +109,41 @@ bool AUSKEnemyCharacter::IsStaggered() const
  */
 void AUSKEnemyCharacter::StartAttacking(const EEnemyAttackType AttackType)
 {
-	CurrentAttackType = AttackType;
-	if (CurrentAttackType == EEnemyAttackType::Melee)
+	if (CurrentAttackType != EEnemyAttackType::None)
 	{
-		AttackCollider->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+		return;
 	}
+
+	CurrentAttackType = AttackType;
+
+	UAnimMontage* AnimationMontage = nullptr;
+	switch (CurrentAttackType)
+	{
+	case EEnemyAttackType::Melee:
+		AnimationMontage = MeleeAttackAnimationMontages[
+			FMath::RandRange(0, MeleeAttackAnimationMontages.Num() - 1)];
+		break;
+	case EEnemyAttackType::Ranged:
+		AnimationMontage = RangedAttackAnimationMontages[
+			FMath::RandRange(0, RangedAttackAnimationMontages.Num() - 1)];
+		break;
+	case EEnemyAttackType::None:
+	default:
+		USK_LOG_WARNING("Invalid attack started");
+		break;
+	}
+
+	if (!IsValid(AnimationMontage))
+	{
+		USK_LOG_WARNING("Attack animation montage is invalid");
+		return;
+	}
+
+	PlayAnimMontage(AnimationMontage);
+
+	FTimerHandle EndAttackTimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(EndAttackTimerHandle, this,
+		&AUSKEnemyCharacter::StopAttacking, AnimationMontage->GetPlayLength(), false);
 }
 
 /**
@@ -121,6 +152,25 @@ void AUSKEnemyCharacter::StartAttacking(const EEnemyAttackType AttackType)
 void AUSKEnemyCharacter::StopAttacking()
 {
 	CurrentAttackType = EEnemyAttackType::None;
+}
+
+/**
+ * @brief Called when the attack is started
+ */
+void AUSKEnemyCharacter::OnAttackStarted()
+{
+	if (CurrentAttackType == EEnemyAttackType::Melee)
+	{
+		AttackedActors.Empty();
+		AttackCollider->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+	}
+}
+
+/**
+ * @brief Called when the attack is stopped
+ */
+void AUSKEnemyCharacter::OnAttackStopped()
+{
 	AttackCollider->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 	AttackedActors.Empty();
 }

@@ -737,6 +737,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td><strong>ECameraPerspective</strong><br/>The current camera perspective</td>
 	</tr>
 	<tr>
+		<td>GetAttackableObjectComponent</td>
+		<td>Get the attackable object component of the character</td>
+		<td></td>
+		<td><strong>UAttackableObjectComponent*</strong><br/>The attackable object component</td>
+	</tr>
+	<tr>
 		<td>UpdateCameraPerspective</td>
 		<td>Update the current camera perspective</td>
 		<td><strong>NewCameraPerspective (ECameraPerspective)</strong><br/>The new camera perspective</td>
