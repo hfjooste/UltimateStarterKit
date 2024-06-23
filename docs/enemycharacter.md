@@ -45,7 +45,7 @@ The <code>USKEnemyCharacter</code> uses the following components:
 	<tr>
 		<td>TargetActorClass</td>
 		<td>The class of the actor the enemy will target</td>
-		<td>TSubclassOf&lt;AActor&gt;</td>
+		<td>TSubclassOf&lt;AUSKCharacter&gt;</td>
 		<td></td>
 	</tr>
 	<tr>

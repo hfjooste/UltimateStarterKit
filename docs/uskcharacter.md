@@ -875,6 +875,18 @@ The <code>USKCharacter</code> uses the following components:
 		<td><strong>FRotator</strong><br/>The current weapon sway rotation</td>
 	</tr>
 	<tr>
+		<td>UpdateDeadState</td>
+		<td>Update the dead state of the character</td>
+		<td><strong>NewValue (bool)</strong><br/>The new dead state value</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>IsDead</td>
+		<td>Check if the character is dead</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the character is dead</td>
+	</tr>
+	<tr>
 		<td>StartFiringWeapon</td>
 		<td>Start firing the current weapon</td>
 		<td></td>

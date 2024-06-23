@@ -85,6 +85,8 @@ nav:
         - Is Attacking: btdecorator_isattacking.md
         - Is Dead: btdecorator_isdead.md
         - Is Near Target: btdecorator_isneartarget.md
+        - Is Staggered: btdecorator_isstaggered.md
+        - Is Target Dead: btdecorator_istargetdead.md
         - Was Initialized: btdecorator_wasinitialized.md
         - Was Target Reached: btdecorator_wastargetreached.md
       - Tasks:
