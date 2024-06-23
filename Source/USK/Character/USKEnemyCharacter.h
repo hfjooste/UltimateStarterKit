@@ -10,6 +10,7 @@
 #include "USK/AI/PatrolType.h"
 #include "USKEnemyCharacter.generated.h"
 
+class AUSKCharacter;
 class UAttackableObjectComponent;
 class AEnemyWanderArea;
 class AEnemyPatrolPoint;
@@ -47,7 +48,7 @@ public:
 	 * @brief The class of the actor the enemy will target
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|AI")
-	TSubclassOf<AActor> TargetActorClass;
+	TSubclassOf<AUSKCharacter> TargetActorClass;
 
 	/**
 	 * @brief Should the AI be paused when the target location is reached?
