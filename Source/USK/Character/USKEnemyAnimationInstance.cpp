@@ -26,12 +26,44 @@ void UUSKEnemyAnimationInstance::NativeUpdateAnimation(const float DeltaSeconds)
 		return;
 	}
 
+	bIsSpawning = EnemyCharacter->IsSpawning();
 	MovementSpeed = UKismetMathLibrary::VSizeXY(EnemyCharacter->GetVelocity());
 }
 
 /**
- * @brief Get the movement speed of the player
- * @return The movement speed of the player
+ * @brief Start the spawning animation
+ */
+void UUSKEnemyAnimationInstance::SpawningStarted() const
+{
+	if (IsValid(EnemyCharacter))
+	{
+		EnemyCharacter->SetActorHiddenInGame(false);
+	}
+}
+
+/**
+ * @brief End the spawning animation
+ */
+void UUSKEnemyAnimationInstance::SpawningCompleted() const
+{
+	if (IsValid(EnemyCharacter))
+	{
+		EnemyCharacter->UpdateSpawnState(false);
+	}
+}
+
+/**
+ * @brief Check if the character is busy spawning
+ * @return A boolean value indicating if the character is busy spawning
+ */
+bool UUSKEnemyAnimationInstance::IsSpawning() const
+{
+	return bIsSpawning;
+}
+
+/**
+ * @brief Get the movement speed of the character
+ * @return The movement speed of the character
  */
 float UUSKEnemyAnimationInstance::GetMovementSpeed() const
 {

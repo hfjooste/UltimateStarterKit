@@ -29,6 +29,8 @@ void AUSKEnemyCharacter::BeginPlay()
 	AttackCollider->AttachToComponent(GetMesh(),
 		FAttachmentTransformRules::SnapToTargetIncludingScale, AttackColliderAttachBoneName);
 	AttackCollider->OnComponentBeginOverlap.AddDynamic(this, &AUSKEnemyCharacter::OnAttackColliderOverlap);
+	UpdateSpawnState(bUseSpawningAnimation);
+	SetActorHiddenInGame(bUseSpawningAnimation);
 	
 	InitializePatrolPoints();	
 	if (IsValid(BehaviorTree))
@@ -48,6 +50,24 @@ void AUSKEnemyCharacter::BeginPlay()
 TArray<FVector> AUSKEnemyCharacter::GetPatrolPointLocations()
 {
 	return PatrolPointLocations;
+}
+
+/**
+ * @brief Update the spawning state of the enemy
+ * @param NewValue The new spawning state value
+ */
+void AUSKEnemyCharacter::UpdateSpawnState(const bool NewValue)
+{
+	bIsSpawning = NewValue;
+}
+
+/**
+ * @brief Check if the enemy is busy spawning
+ * @return A boolean value indicating if the enemy is busy spawning
+ */
+bool AUSKEnemyCharacter::IsSpawning() const
+{
+	return bIsSpawning;
 }
 
 /**

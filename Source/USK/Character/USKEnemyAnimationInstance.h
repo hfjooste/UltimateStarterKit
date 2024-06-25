@@ -19,6 +19,12 @@ class USK_API UUSKEnemyAnimationInstance : public UAnimInstance
 	
 public:
 	/**
+	 * @brief The animation played when the character is spawning
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations")
+	UAnimSequence* SpawnAnimation;
+	
+	/**
 	 * @brief The animation played when the character is idle
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations")
@@ -49,8 +55,27 @@ protected:
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 
 	/**
-	 * @brief Get the movement speed of the player
-	 * @return The movement speed of the player
+	 * @brief Start the spawning animation
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Animations")
+	void SpawningStarted() const;
+
+	/**
+	 * @brief End the spawning animation
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Animations")
+	void SpawningCompleted() const;
+
+	/**
+	 * @brief Check if the character is busy spawning
+	 * @return A boolean value indicating if the character is busy spawning
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	bool IsSpawning() const;
+
+	/**
+	 * @brief Get the movement speed of the character
+	 * @return The movement speed of the character
 	 */
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
 	float GetMovementSpeed() const;
@@ -63,7 +88,12 @@ private:
 	AUSKEnemyCharacter* EnemyCharacter;
 
 	/**
-	 * @brief The movement speed of the player
+	 * @brief Is the character busy spawning?
+	 */
+	bool bIsSpawning;
+
+	/**
+	 * @brief The movement speed of the character
 	 */
 	float MovementSpeed;
 };

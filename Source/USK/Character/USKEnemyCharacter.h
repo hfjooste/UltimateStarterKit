@@ -70,6 +70,12 @@ public:
 	float AcceptanceRadius = 100.0f;
 
 	/**
+	 * @brief Should the enemy use a spawning animation?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|AI")
+	bool bUseSpawningAnimation = false;
+
+	/**
 	 * @brief An array of areas where the enemy can wander
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|AI|Wander")
@@ -173,6 +179,20 @@ public:
 	TArray<FVector> GetPatrolPointLocations();
 
 	/**
+	 * @brief Update the spawning state of the enemy
+	 * @param NewValue The new spawning state value
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	void UpdateSpawnState(bool NewValue);
+
+	/**
+	 * @brief Check if the enemy is busy spawning
+	 * @return A boolean value indicating if the enemy is busy spawning
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|AI")
+	bool IsSpawning() const;
+
+	/**
 	 * @brief Update the dead state of the enemy
 	 * @param NewValue The new dead state value
 	 */
@@ -255,6 +275,11 @@ private:
 	 */
 	UPROPERTY()
 	TArray<AActor*> AttackedActors;
+
+	/**
+	 * @brief Is the enemy busy spawning?
+	 */
+	bool bIsSpawning;
 
 	/**
 	 * @brief Is the enemy dead?
