@@ -39,15 +39,18 @@ The Ultimate Starter Kit plugin comes with the following features:
     <li><strong>Currency</strong>: A system that is used to easily manage different types of currency</li>
     <li><strong>Audio</strong>: A system used to manage the basic properties of audio files</li>
     <li><strong>Stats</strong>: A system used to easily manage character stats with an optional regenerate ability</li>
+    <li><strong>Enemy AI</strong>: A modular AI system used to easily build complex behaviour trees</li>
     <li><strong>Characters</strong>: Character controllers with lots of features
         <ul>
             <li>First and Third person characters</li>
             <li>True FPS with a single full body mesh</li>
+            <li>Enemy characters</li>
             <li>Switch between different camera perspectives at runtime</li>
             <li>Shadow decals to make platforming easier</li>
             <li>Sprinting with stamina support</li>
             <li>Double jumping</li>
             <li>Variable jump height</li>
+            <li>Jump buffering</li>
             <li>Coyote time</li>
             <li>Smooth crouching with crouch jumping</li>
             <li>Proning</li>
