@@ -67,6 +67,12 @@ The <code>USKEnemyCharacter</code> uses the following components:
 		<td>100.0f</td>
 	</tr>
 	<tr>
+		<td>bUseSpawningAnimation</td>
+		<td>Should the enemy use a spawning animation?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
 		<td>WanderAreas</td>
 		<td>An array of areas where the enemy can wander</td>
 		<td>TArray&lt;AEnemyWanderArea*&gt;</td>
@@ -167,6 +173,18 @@ The <code>USKEnemyCharacter</code> uses the following components:
 		<td><strong>TArray&lt;FVector&gt;</strong><br/>The array of patrol point locations</td>
 	</tr>
 	<tr>
+		<td>UpdateSpawnState</td>
+		<td>Update the spawning state of the enemy</td>
+		<td><strong>NewValue (bool)</strong><br/>The new spawning state value</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>IsSpawning</td>
+		<td>Check if the enemy is busy spawning</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the enemy is busy spawning</td>
+	</tr>
+	<tr>
 		<td>UpdateDeadState</td>
 		<td>Update the dead state of the enemy</td>
 		<td><strong>NewValue (bool)</strong><br/>The new dead state value</td>
@@ -232,6 +250,8 @@ The <code>USKEnemyCharacter</code> uses the following components:
 You can use the <code>USKEnemyCharacter</code> using Blueprints by adding one of the following nodes:
 <ul>
 	<li>Ultimate Starter Kit > AI > Get Patrol Point Locations</li>
+	<li>Ultimate Starter Kit > AI > Update Spawn State</li>
+	<li>Ultimate Starter Kit > AI > Is Spawning</li>
 	<li>Ultimate Starter Kit > AI > Update Dead State</li>
 	<li>Ultimate Starter Kit > AI > Is Dead</li>
 	<li>Ultimate Starter Kit > AI > Start Staggered State</li>
@@ -258,6 +278,8 @@ void ATestActor::Test()
 {
 	// USKEnemyCharacter is a pointer to the AUSKEnemyCharacter
 	TArray<FVector> PatrolPointLocations = USKEnemyCharacter->GetPatrolPointLocations();
+	USKEnemyCharacter->UpdateSpawnState(NewValue);
+	bool IsSpawningValue = USKEnemyCharacter->IsSpawning();
 	USKEnemyCharacter->UpdateDeadState(NewValue);
 	bool IsDeadValue = USKEnemyCharacter->IsDead();
 	USKEnemyCharacter->StartStaggeredState(StaggerDuration);

@@ -17,6 +17,7 @@ os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskIsAiPaused\" --output
 os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskIsAttacking\" --output btdecorator_isattacking")
 os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskIsDead\" --output btdecorator_isdead")
 os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskIsNearTarget\" --output btdecorator_isneartarget")
+os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskIsSpawning\" --output btdecorator_isspawning")
 os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskIsStaggered\" --output btdecorator_isstaggered")
 os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskIsTargetDead\" --output btdecorator_istargetdead")
 os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskWasInitialized\" --output btdecorator_wasinitialized")
