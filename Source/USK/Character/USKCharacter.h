@@ -398,6 +398,19 @@ public:
 	FVector LongJumpVelocity = FVector(3250.0f, 3250.0f, 800.0f);
 
 	/**
+	 * @brief Should a jump be buffered while still in the air?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump")
+	bool bEnableJumpBuffering = true;
+
+	/**
+	 * @brief The duration a jump can be buffered
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
+		meta = (EditCondition = "bEnableJumpBuffering", EditConditionHides))
+	float JumpBufferDuration = 0.2f;
+
+	/**
 	 * @brief The default movement speed
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
@@ -1317,6 +1330,16 @@ private:
 	 * @brief The target input that should be applied to the camera
 	 */
 	FVector2D TargetCameraInput;
+
+	/**
+	 * @brief Is a jump buffered?
+	 */
+	bool JumpBuffered;
+
+	/**
+	 * @brief The timer handle used to cancel the buffered jump
+	 */
+	FTimerHandle JumpBufferTimerHandle;
 
 	/**
 	 * @brief Move the character

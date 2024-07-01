@@ -220,6 +220,14 @@ void AUSKCharacter::Landed(const FHitResult& Hit)
 	if (bIsCrouching)
 	{
 		CrouchTimeline->Play();
+		return;
+	}
+
+	if (JumpBuffered)
+	{
+		JumpBuffered = false;
+		GetWorld()->GetTimerManager().ClearTimer(JumpBufferTimerHandle);
+		GetWorld()->GetTimerManager().SetTimerForNextTick(this, &AUSKCharacter::Jump);
 	}
 }
 
@@ -591,6 +599,15 @@ void AUSKCharacter::Jump()
 	if ((!CanJump() && !CanPerformCoyoteJump) || bIsStomping)
 	{
 		USK_LOG_TRACE("Can't jump");
+		if (bEnableJumpBuffering && JumpBufferDuration > 0.0f)
+		{
+			JumpBuffered = true;
+			GetWorld()->GetTimerManager().ClearTimer(JumpBufferTimerHandle);
+			GetWorld()->GetTimerManager().SetTimer(JumpBufferTimerHandle, [this]
+			{
+				JumpBuffered = false;
+			}, JumpBufferDuration, false);
+		}
 		return;
 	}
 
