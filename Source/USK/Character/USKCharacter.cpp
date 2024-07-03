@@ -228,6 +228,15 @@ void AUSKCharacter::Landed(const FHitResult& Hit)
 		JumpBuffered = false;
 		GetWorld()->GetTimerManager().ClearTimer(JumpBufferTimerHandle);
 		GetWorld()->GetTimerManager().SetTimerForNextTick(this, &AUSKCharacter::Jump);
+
+		if (bEnableBunnyHopping && BunnyHoppingStacks < BunnyHoppingMaxStacks)
+		{
+			BunnyHoppingStacks++;
+		}
+	}
+	else if (bEnableBunnyHopping)
+	{
+		BunnyHoppingStacks = 0;
 	}
 }
 
@@ -858,6 +867,11 @@ void AUSKCharacter::MoveCharacter(const FInputActionValue& Input)
 	}
 	
 	const FVector2D InputValue = Input.Get<FVector2D>();
+	if (bEnableBunnyHopping && InputValue.IsNearlyZero())
+	{
+		BunnyHoppingStacks = 0;
+	}
+	
 	if (bSmoothMovement)
 	{
 		TargetMovementInput = InputValue;
@@ -1262,7 +1276,9 @@ void AUSKCharacter::UpdateMovement(const float DeltaSeconds)
 		return;
 	}
 
-	GetCharacterMovement()->MaxWalkSpeed = bIsSprinting && !bIsAiming ? SprintSpeed : MovementSpeed;
+	const float BunnyHoppingSpeed = bEnableBunnyHopping ? BunnyHoppingStacks * BunnyHoppingSpeedIncreasePerStack : 0.0f;
+	const float WalkSpeed = bIsSprinting && !bIsAiming ? SprintSpeed : MovementSpeed;
+	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed + BunnyHoppingSpeed;
 }
 
 /**

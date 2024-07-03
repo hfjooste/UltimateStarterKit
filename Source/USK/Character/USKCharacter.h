@@ -411,6 +411,27 @@ public:
 	float JumpBufferDuration = 0.2f;
 
 	/**
+	 * @brief Can the character bunny hop?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
+		meta = (EditCondition = "bEnableJumpBuffering", EditConditionHides))
+	bool bEnableBunnyHopping = true;
+
+	/**
+	 * @brief The maximum amount of bunny hopping stacks
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
+		meta = (EditCondition = "bEnableJumpBuffering && bEnableBunnyHopping", EditConditionHides))
+	int BunnyHoppingMaxStacks = 10;
+
+	/**
+	 * @brief The speed increase applied to the character when bunny hopping per stack
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Jump",
+		meta = (EditCondition = "bEnableJumpBuffering && bEnableBunnyHopping", EditConditionHides))
+	float BunnyHoppingSpeedIncreasePerStack = 100.0f;
+
+	/**
 	 * @brief The default movement speed
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement")
@@ -1340,6 +1361,11 @@ private:
 	 * @brief The timer handle used to cancel the buffered jump
 	 */
 	FTimerHandle JumpBufferTimerHandle;
+
+	/**
+	 * @brief The current bunny hopping stacks
+	 */
+	int BunnyHoppingStacks = 0;
 
 	/**
 	 * @brief Move the character
