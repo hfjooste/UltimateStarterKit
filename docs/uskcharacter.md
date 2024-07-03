@@ -372,6 +372,24 @@ The <code>USKCharacter</code> uses the following components:
 		<td>0.2f</td>
 	</tr>
 	<tr>
+		<td>bEnableBunnyHopping</td>
+		<td>Can the character bunny hop?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>BunnyHoppingMaxStacks</td>
+		<td>The maximum amount of bunny hopping stacks</td>
+		<td>int</td>
+		<td>10</td>
+	</tr>
+	<tr>
+		<td>BunnyHoppingSpeedIncreasePerStack</td>
+		<td>The speed increase applied to the character when bunny hopping per stack</td>
+		<td>float</td>
+		<td>100.0f</td>
+	</tr>
+	<tr>
 		<td>MovementSpeed</td>
 		<td>The default movement speed</td>
 		<td>float</td>
