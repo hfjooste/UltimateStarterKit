@@ -360,6 +360,18 @@ The <code>USKCharacter</code> uses the following components:
 		<td>FVecto</td>
 	</tr>
 	<tr>
+		<td>bEnableJumpBuffering</td>
+		<td>Should a jump be buffered while still in the air?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>JumpBufferDuration</td>
+		<td>The duration a jump can be buffered</td>
+		<td>float</td>
+		<td>0.2f</td>
+	</tr>
+	<tr>
 		<td>MovementSpeed</td>
 		<td>The default movement speed</td>
 		<td>float</td>
