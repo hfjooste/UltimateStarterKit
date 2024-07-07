@@ -372,6 +372,24 @@ The <code>USKCharacter</code> uses the following components:
 		<td>0.2f</td>
 	</tr>
 	<tr>
+		<td>bEnableBunnyHopping</td>
+		<td>Can the character bunny hop?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>BunnyHoppingMaxStacks</td>
+		<td>The maximum amount of bunny hopping stacks</td>
+		<td>int</td>
+		<td>10</td>
+	</tr>
+	<tr>
+		<td>BunnyHoppingSpeedIncreasePerStack</td>
+		<td>The speed increase applied to the character when bunny hopping per stack</td>
+		<td>float</td>
+		<td>100.0f</td>
+	</tr>
+	<tr>
 		<td>MovementSpeed</td>
 		<td>The default movement speed</td>
 		<td>float</td>
@@ -538,6 +556,24 @@ The <code>USKCharacter</code> uses the following components:
 		<td>The camera shake applied when performing a stomp</td>
 		<td>TSubclassOf&lt;UCameraShakeBase&gt;</td>
 		<td></td>
+	</tr>
+	<tr>
+		<td>bAdjustFovBasedOnSpeed</td>
+		<td>Should the camera field of view be adjusted based on the speed of the character?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>SpeedFovCurve</td>
+		<td>The float curve used to determine the FOV based on the character's speed</td>
+		<td>UCurveFloat*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>SpeedFovInterpSpeed</td>
+		<td>The speed used to interpolate the FOV based on the character's speed</td>
+		<td>float</td>
+		<td>5.0f</td>
 	</tr>
 	<tr>
 		<td>bCanLean</td>

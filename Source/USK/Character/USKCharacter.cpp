@@ -141,6 +141,7 @@ void AUSKCharacter::Tick(float DeltaSeconds)
 	UpdateStaminaWhileSprinting(DeltaSeconds);
 	UpdateLookAtCenterActorRotation();
 	CalculateWeaponSway(DeltaSeconds);
+	UpdateSpeedFov(DeltaSeconds);
 }
 
 /**
@@ -1623,4 +1624,22 @@ float AUSKCharacter::GetMaxLookAtCenterRotation() const
 	}
 
 	return bIsSprinting && !bIsAiming ? MaxLookAtCenterRotationWhileSprinting : MaxLookAtCenterRotationWhileRunning;
+}
+
+/**
+ * @brief Update the camera field of view based on the character's speed
+ * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+ */
+void AUSKCharacter::UpdateSpeedFov(const float DeltaSeconds) const
+{
+	if (!bAdjustFovBasedOnSpeed || !IsValid(SpeedFovCurve))
+	{
+		return;
+	}
+
+	const float CurrentSpeed = UKismetMathLibrary::VSizeXY(GetMovementComponent()->Velocity);
+	const float CurrentFov = GetCameraComponent()->FieldOfView;
+	const float TargetFov = SpeedFovCurve->GetFloatValue(CurrentSpeed);
+	const float NewFov = FMath::FInterpTo(CurrentFov, TargetFov, DeltaSeconds, SpeedFovInterpSpeed);
+	GetCameraComponent()->SetFieldOfView(NewFov);
 }

@@ -619,6 +619,26 @@ public:
 		meta=(EditCondition = "bCanStomp", EditConditionHides))
 	TSubclassOf<UCameraShakeBase> StompCameraShake;
 
+	/**
+	 * @brief Should the camera field of view be adjusted based on the speed of the character?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Speed Effects")
+	bool bAdjustFovBasedOnSpeed;
+
+	/**
+	 * @brief The float curve used to determine the FOV based on the character's speed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Speed Effects",
+		meta=(EditCondition = "bAdjustFovBasedOnSpeed", EditConditionHides))
+	UCurveFloat* SpeedFovCurve;
+
+	/**
+	 * @brief The speed used to interpolate the FOV based on the character's speed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Speed Effects",
+		meta=(EditCondition = "bAdjustFovBasedOnSpeed", EditConditionHides))
+	float SpeedFovInterpSpeed = 5.0f;
+
     /**
      * @brief Can the character lean? 
      */
@@ -1601,4 +1621,10 @@ private:
 	 * @return The max look at center rotation before rotating the actor
 	 */
 	float GetMaxLookAtCenterRotation() const;
+
+	/**
+	 * @brief Update the camera field of view based on the character's speed
+	 * @param DeltaSeconds Game time elapsed during last frame modified by the time dilation
+	 */
+	void UpdateSpeedFov(float DeltaSeconds) const;
 };
