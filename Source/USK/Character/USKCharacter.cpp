@@ -323,7 +323,7 @@ void AUSKCharacter::UpdateCameraPerspective(const ECameraPerspective NewCameraPe
  */
 void AUSKCharacter::SwitchCameraPerspective()
 {
-	if (!bCanSwitchCameraPerspectives)
+	if (!IsInputEnabled() || !bCanSwitchCameraPerspectives)
 	{
 		return;
 	}
@@ -584,6 +584,11 @@ bool AUSKCharacter::IsDead() const
  */
 void AUSKCharacter::Jump()
 {
+	if (!IsInputEnabled())
+	{
+		return;
+	}
+	
 	if (bIsStompJumpAllowed)
 	{
 		Super::Jump();
@@ -651,6 +656,11 @@ void AUSKCharacter::Jump()
  */
 void AUSKCharacter::StartFiringWeapon()
 {
+	if (!IsInputEnabled())
+	{
+		return;
+	}
+	
 	if (Weapons.Num() > 0 && Weapons.Num() > CurrentWeaponIndex && IsValid(Weapons[CurrentWeaponIndex]))
 	{
 		Weapons[CurrentWeaponIndex]->StartFiring();
@@ -673,6 +683,11 @@ void AUSKCharacter::StopFiringWeapon()
  */
 void AUSKCharacter::EquipNextWeapon()
 {
+	if (!IsInputEnabled())
+	{
+		return;
+	}
+	
 	UpdateWeaponIndex(true);
 }
 
@@ -681,6 +696,11 @@ void AUSKCharacter::EquipNextWeapon()
  */
 void AUSKCharacter::EquipPreviousWeapon()
 {
+	if (!IsInputEnabled())
+	{
+		return;
+	}
+	
 	UpdateWeaponIndex(false);
 }
 
@@ -689,7 +709,7 @@ void AUSKCharacter::EquipPreviousWeapon()
  */
 void AUSKCharacter::StartCrouching()
 {
-	if (bIsProning)
+	if (!IsInputEnabled() || bIsProning)
 	{
 		return;
 	}
@@ -747,7 +767,7 @@ void AUSKCharacter::StopCrouching()
  */
 void AUSKCharacter::StartProning()
 {
-	if (!bCanProne || !bProneAllowed || bIsCrouching)
+	if (!IsInputEnabled() || !bCanProne || !bProneAllowed || bIsCrouching)
 	{
 		return;
 	}
@@ -799,6 +819,15 @@ void AUSKCharacter::StopProning()
 void AUSKCharacter::UpdateCharacterMeshLocationWhileCrouching(float SizeDifference)
 {
 	GetMesh()->SetRelativeLocation(DefaultMeshLocation + FVector(0.0f, 0.0f, SizeDifference));
+}
+
+/**
+ * @brief Check if the input of the character is enabled
+ * @return A boolean value indicating if the input of the character is enabled
+ */
+bool AUSKCharacter::IsInputEnabled() const
+{
+	return true;
 }
 
 /**
@@ -862,7 +891,7 @@ void AUSKCharacter::ApplyStompVelocity()
  */
 void AUSKCharacter::MoveCharacter(const FInputActionValue& Input)
 {
-	if (bIsStomping || bIsSliding)
+	if (!IsInputEnabled() || bIsStomping || bIsSliding)
 	{
 		return;
 	}
@@ -915,6 +944,11 @@ void AUSKCharacter::ApplyMovementInput(FVector2D Input)
  */
 void AUSKCharacter::RotateCamera(const FInputActionValue& Input)
 {
+	if (!IsInputEnabled())
+	{
+		return;
+	}
+	
 	const FVector2D InputValue = Input.Get<FVector2D>();
 	if (bSmoothCameraRotation)
     {
@@ -1070,7 +1104,7 @@ void AUSKCharacter::ResetStompJump()
  */
 void AUSKCharacter::Lean(const FInputActionValue& Input)
 {
-    if (!bCanLean)
+    if (!IsInputEnabled() || !bCanLean)
     {
         return;
     }
@@ -1113,7 +1147,7 @@ void AUSKCharacter::UpdateLeaning(const float DeltaSeconds)
  */
 void AUSKCharacter::Sprint()
 {
-	if (!bCanSprint)
+	if (!IsInputEnabled() || !bCanSprint)
 	{
 		return;
 	}
@@ -1320,7 +1354,7 @@ void AUSKCharacter::PerformLongJump()
  */
 void AUSKCharacter::Interact()
 {
-	if (!IsValid(InteractTrigger))
+	if (!IsInputEnabled() || !IsValid(InteractTrigger))
 	{
 		return;
 	}
@@ -1388,7 +1422,7 @@ void AUSKCharacter::UpdateWeaponIndex(const bool EquipNextWeapon)
  */
 void AUSKCharacter::ReloadWeapon()
 {
-	if (Weapons.Num() == 0)
+	if (!IsInputEnabled() || Weapons.Num() == 0)
 	{
 		return;
 	}
@@ -1405,6 +1439,11 @@ void AUSKCharacter::ReloadWeapon()
  */
 void AUSKCharacter::StartAiming()
 {
+	if (!IsInputEnabled())
+	{
+		return;
+	}
+	
 	const AWeapon* Weapon = Weapons.Num() == 0 ? nullptr : Weapons[CurrentWeaponIndex];
 	if (!IsValid(Weapon))
 	{

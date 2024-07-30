@@ -1124,6 +1124,13 @@ protected:
 	void UpdateCharacterMeshLocationWhileCrouching(float SizeDifference);
 
 	/**
+	 * @brief Check if the input of the character is enabled
+	 * @return A boolean value indicating if the input of the character is enabled
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character|Movement")
+	virtual bool IsInputEnabled() const;
+	
+	/**
 	 * @brief Start the stomping ability
 	 */
 	void StartStomping();
