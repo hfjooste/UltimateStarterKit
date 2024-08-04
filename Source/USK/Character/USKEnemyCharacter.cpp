@@ -26,8 +26,6 @@ AUSKEnemyCharacter::AUSKEnemyCharacter()
 void AUSKEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	AttackCollider->AttachToComponent(GetMesh(),
-		FAttachmentTransformRules::SnapToTargetIncludingScale, AttackColliderAttachBoneName);
 	AttackCollider->OnComponentBeginOverlap.AddDynamic(this, &AUSKEnemyCharacter::OnAttackColliderOverlap);
 	UpdateSpawnState(bUseSpawningAnimation);
 	SetActorHiddenInGame(bUseSpawningAnimation);
@@ -182,6 +180,8 @@ void AUSKEnemyCharacter::OnAttackStarted()
 	if (CurrentAttackType == EEnemyAttackType::Melee)
 	{
 		AttackedActors.Empty();
+		AttackCollider->AttachToComponent(GetMesh(),
+			FAttachmentTransformRules::SnapToTargetIncludingScale, AttackColliderAttachBoneName);
 		AttackCollider->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
 	}
 }
