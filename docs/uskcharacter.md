@@ -988,6 +988,12 @@ The <code>USKCharacter</code> uses the following components:
 		<td><strong>SizeDifference (float)</strong><br/>The difference between the original capsule size and the crouched capsule size</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>IsInputEnabled</td>
+		<td>Check if the input of the character is enabled</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the input of the character is enabled</td>
+	</tr>
 </table>
 
 ## Blueprint Usage

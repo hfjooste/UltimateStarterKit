@@ -27,6 +27,7 @@ os.system(f"python \"{docs}\" --input \"AI\\USKBTTaskNode\" --output bttask_base
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskAttack\" --output bttask_attack")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskChaseTarget\" --output bttask_chasetarget")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskClearFocus\" --output bttask_clearfocus")
+os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskFlyChaseTarget\" --output bttask_flychasetarget")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskFocusTarget\" --output bttask_focustarget")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskIdle\" --output bttask_idle")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskInitialize\" --output bttask_initialize")
@@ -35,6 +36,7 @@ os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskPauseAi\" --output bttask_
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskReducePauseDelay\" --output bttask_reducepausedelay")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskResetPatrolPointPauseDelay\" --output bttask_resetpatrolpointpausedelay")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskUpdateState\" --output bttask_updatestate")
+os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskUpdateVelocity\" --output bttask_updatevelocity")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskWander\" --output bttask_wander")
 
 os.system(f"python \"{docs}\" --input \"Audio\\AudioUtils\" --output audioutils")

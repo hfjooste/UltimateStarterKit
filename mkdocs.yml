@@ -95,6 +95,7 @@ nav:
         - Attack: bttask_attack.md
         - Chase Target: bttask_chasetarget.md
         - Clear Focus: bttask_clearfocus.md
+        - Fly Chase Target: bttask_flychasetarget.md
         - Focus Target: bttask_focustarget.md
         - Idle: bttask_idle.md
         - Initialize: bttask_initialize.md
@@ -103,6 +104,7 @@ nav:
         - Reduce Pause Delay: bttask_reducepausedelay.md
         - Reset Patrol Point Pause Delay: bttask_resetpatrolpointpausedelay.md
         - Update State: bttask_updatestate.md
+        - Update Velocity: bttask_updatevelocity.md
         - Wander: bttask_wander.md
   - Dialogue System:
     - Overview: dialogueoverview.md
