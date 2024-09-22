@@ -205,6 +205,20 @@ EEnemyAttackType AUSKEnemyCharacter::GetCurrentAttackType() const
 }
 
 /**
+ * @brief Teleport the enemy out of the level
+ */
+void AUSKEnemyCharacter::TeleportOut()
+{
+}
+
+/**
+ * @brief Teleport the enemy into the level
+ */
+void AUSKEnemyCharacter::TeleportIn()
+{
+}
+
+/**
  * @brief Initialize the patrol points
  */
 void AUSKEnemyCharacter::InitializePatrolPoints()

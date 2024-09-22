@@ -35,6 +35,7 @@ os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskPatrol\" --output bttask_p
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskPauseAi\" --output bttask_pauseai")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskReducePauseDelay\" --output bttask_reducepausedelay")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskResetPatrolPointPauseDelay\" --output bttask_resetpatrolpointpausedelay")
+os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskTeleport\" --output bttask_teleport")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskUpdateState\" --output bttask_updatestate")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskUpdateVelocity\" --output bttask_updatevelocity")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskWander\" --output bttask_wander")

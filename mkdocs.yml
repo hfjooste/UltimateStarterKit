@@ -103,6 +103,7 @@ nav:
         - Pause AI: bttask_pauseai.md
         - Reduce Pause Delay: bttask_reducepausedelay.md
         - Reset Patrol Point Pause Delay: bttask_resetpatrolpointpausedelay.md
+        - Teleport: bttask_teleport.md
         - Update State: bttask_updatestate.md
         - Update Velocity: bttask_updatevelocity.md
         - Wander: bttask_wander.md

@@ -258,6 +258,18 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|AI")
 	EEnemyAttackType GetCurrentAttackType() const;
 
+	/**
+	 * @brief Teleport the enemy out of the level
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	virtual void TeleportOut();
+
+	/**
+	 * @brief Teleport the enemy into the level
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	virtual void TeleportIn();
+
 protected:
 	/**
 	 * @brief Overridable native event for when play begins for this actor

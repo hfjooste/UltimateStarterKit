@@ -244,6 +244,18 @@ The <code>USKEnemyCharacter</code> uses the following components:
 		<td></td>
 		<td><strong>EEnemyAttackType</strong><br/>The current attack type of the enemy</td>
 	</tr>
+	<tr>
+		<td>TeleportOut</td>
+		<td>Teleport the enemy out of the level</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>TeleportIn</td>
+		<td>Teleport the enemy into the level</td>
+		<td></td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -262,6 +274,8 @@ You can use the <code>USKEnemyCharacter</code> using Blueprints by adding one of
 	<li>Ultimate Starter Kit > AI > On Attack Started</li>
 	<li>Ultimate Starter Kit > AI > On Attack Stopped</li>
 	<li>Ultimate Starter Kit > AI > Get Current Attack Type</li>
+	<li>Ultimate Starter Kit > AI > Teleport Out</li>
+	<li>Ultimate Starter Kit > AI > Teleport In</li>
 </ul>
 
 ## C++ Usage
@@ -290,5 +304,7 @@ void ATestActor::Test()
 	USKEnemyCharacter->OnAttackStarted();
 	USKEnemyCharacter->OnAttackStopped();
 	EEnemyAttackType CurrentAttackType = USKEnemyCharacter->GetCurrentAttackType();
+	USKEnemyCharacter->TeleportOut();
+	USKEnemyCharacter->TeleportIn();
 }
 ```
