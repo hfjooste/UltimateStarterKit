@@ -109,7 +109,8 @@ void UBTTask_UskWander::UpdateLocation(UBlackboardComponent* Blackboard, AUSKEne
 		TargetLocation = EnemyCharacter->WanderAreas[EnemyCharacter->WanderAreaIndex]->GetRandomLocationInArea();
 	}
 
-	Blackboard->SetValueAsVector(WanderLocationKey.SelectedKeyName, TargetLocation);
+	const FVector ReachableLocation = GetLastReachableLocation(EnemyCharacter, TargetLocation);	
+	Blackboard->SetValueAsVector(WanderLocationKey.SelectedKeyName, ReachableLocation);
 }
 
 /**

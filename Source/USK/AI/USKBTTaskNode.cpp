@@ -6,6 +6,7 @@
 #include "NavigationPath.h"
 #include "NavigationSystem.h"
 #include "Blueprint/AIBlueprintHelperLibrary.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "USK/Character/USKEnemyCharacter.h"
 #include "Navigation/PathFollowingComponent.h"
 #include "USK/Logger/Log.h"
@@ -117,6 +118,23 @@ void UUSKBTTaskNode::FocusActor(AUSKEnemyCharacter* EnemyCharacter, AActor* Targ
 }
 
 /**
+ * @brief Focus a specific location
+ * @param EnemyCharacter The character that should focus the location
+ * @param Location The location to focus
+ */
+void UUSKBTTaskNode::FocusLocation(AUSKEnemyCharacter* EnemyCharacter, const FVector& Location)
+{	
+	AAIController* Controller = UAIBlueprintHelperLibrary::GetAIController(EnemyCharacter);
+	if (!IsValid(Controller))
+	{
+		USK_LOG_ERROR("AI Controller is invalid");
+		return;
+	}
+
+	Controller->SetFocalPoint(Location, EAIFocusPriority::Default);
+}
+
+/**
  * @brief Stop focusing
  * @param EnemyCharacter The character that should stop focusing
  */
@@ -130,4 +148,31 @@ void UUSKBTTaskNode::ClearFocus(AUSKEnemyCharacter* EnemyCharacter)
 	}
 
 	Controller->ClearFocus(EAIFocusPriority::Default);
+}
+
+/**
+ * @brief Get the last reachable location towards a target location
+ * @param EnemyCharacter The character to move
+ * @param TargetLocation The target location of the character
+ * @return The last reachable location
+ */
+FVector UUSKBTTaskNode::GetLastReachableLocation(const AUSKEnemyCharacter* EnemyCharacter,
+	const FVector& TargetLocation) const
+{
+	const UNavigationSystemV1* NavigationSystem = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
+	if (!IsValid(NavigationSystem))
+	{
+		USK_LOG_ERROR("Navigation system is invalid");
+		return TargetLocation;
+	}
+
+	const UNavigationPath* Path = NavigationSystem->FindPathToLocationSynchronously(GetWorld(),
+		EnemyCharacter->GetActorLocation(), TargetLocation);
+	if (!Path->IsValid() || Path->PathPoints.IsEmpty())
+	{
+		USK_LOG_ERROR("Invalid path");
+		return TargetLocation;
+	}
+	
+	return Path->PathPoints.Last();
 }

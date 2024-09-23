@@ -4,27 +4,27 @@
 
 #include "CoreMinimal.h"
 #include "USKBTTaskNode.h"
-#include "BTTask_UskTeleport.generated.h"
+#include "BTTask_UskResetWanderPause.generated.h"
 
 /**
- * @brief Behaviour tree task node used to make the enemy teleport away
+ * @brief Behaviour tree task node used to reset the wander pause delay to 0
  */
-UCLASS(Category = "Ultimate Starter Kit", meta = (DisplayName = "Teleport"))
-class USK_API UBTTask_UskTeleport : public UUSKBTTaskNode
+UCLASS(Category = "Ultimate Starter Kit", meta = (DisplayName = "Reset Wander Pause"))
+class USK_API UBTTask_UskResetWanderPause : public UUSKBTTaskNode
 {
 	GENERATED_BODY()
 	
 public:
 	/**
-	 * @brief The blackboard key used to store the owner
+	 * @brief The blackboard key used to store the wander pause delay
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|AI")
-	FBlackboardKeySelector OwnerKey;
+	FBlackboardKeySelector WanderPauseDelayKey;
 
 	/**
 	 * @brief Constructor for the task node
 	 */
-	UBTTask_UskTeleport();
+	UBTTask_UskResetWanderPause();
 
 protected:
 	/**

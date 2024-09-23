@@ -219,6 +219,24 @@ void AUSKEnemyCharacter::TeleportIn()
 }
 
 /**
+ * @brief Get the location to summon an enemy
+ * @return The location to summon an enemy
+ */
+FVector AUSKEnemyCharacter::GetSummonLocation()
+{
+	return FVector::ZeroVector;
+}
+
+/**
+ * @brief Summon an enemy
+ * @return The duration of the summon sequence
+ */
+float AUSKEnemyCharacter::SummonEnemy()
+{
+	return 0.01f;
+}
+
+/**
  * @brief Initialize the patrol points
  */
 void AUSKEnemyCharacter::InitializePatrolPoints()

@@ -270,6 +270,20 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
 	virtual void TeleportIn();
 
+	/**
+	 * @brief Get the location to summon an enemy
+	 * @return The location to summon an enemy
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	virtual FVector GetSummonLocation();
+
+	/**
+	 * @brief Summon an enemy
+	 * @return The duration of the summon sequence
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	virtual float SummonEnemy();
+
 protected:
 	/**
 	 * @brief Overridable native event for when play begins for this actor

@@ -256,6 +256,18 @@ The <code>USKEnemyCharacter</code> uses the following components:
 		<td></td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>GetSummonLocation</td>
+		<td>Get the location to summon an enemy</td>
+		<td></td>
+		<td><strong>FVector</strong><br/>The location to summon an enemy</td>
+	</tr>
+	<tr>
+		<td>SummonEnemy</td>
+		<td>Summon an enemy</td>
+		<td></td>
+		<td><strong>float</strong><br/>The duration of the summon sequence</td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -276,6 +288,8 @@ You can use the <code>USKEnemyCharacter</code> using Blueprints by adding one of
 	<li>Ultimate Starter Kit > AI > Get Current Attack Type</li>
 	<li>Ultimate Starter Kit > AI > Teleport Out</li>
 	<li>Ultimate Starter Kit > AI > Teleport In</li>
+	<li>Ultimate Starter Kit > AI > Get Summon Location</li>
+	<li>Ultimate Starter Kit > AI > Summon Enemy</li>
 </ul>
 
 ## C++ Usage
@@ -306,5 +320,7 @@ void ATestActor::Test()
 	EEnemyAttackType CurrentAttackType = USKEnemyCharacter->GetCurrentAttackType();
 	USKEnemyCharacter->TeleportOut();
 	USKEnemyCharacter->TeleportIn();
+	FVector SummonLocation = USKEnemyCharacter->GetSummonLocation();
+	float SummonEnemyValue = USKEnemyCharacter->SummonEnemy();
 }
 ```

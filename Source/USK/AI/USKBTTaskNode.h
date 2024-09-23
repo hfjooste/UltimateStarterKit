@@ -48,8 +48,23 @@ protected:
 	void FocusActor(AUSKEnemyCharacter* EnemyCharacter, AActor* Target);
 
 	/**
+	 * @brief Focus a specific location
+	 * @param EnemyCharacter The character that should focus the location
+	 * @param Location The location to focus
+	 */
+	void FocusLocation(AUSKEnemyCharacter* EnemyCharacter, const FVector& Location);
+
+	/**
 	 * @brief Stop focusing
 	 * @param EnemyCharacter The character that should stop focusing
 	 */
 	void ClearFocus(AUSKEnemyCharacter* EnemyCharacter);
+
+	/**
+	 * @brief Get the last reachable location towards a target location
+	 * @param EnemyCharacter The character to move
+	 * @param TargetLocation The target location of the character
+	 * @return The last reachable location
+	 */
+	FVector GetLastReachableLocation(const AUSKEnemyCharacter* EnemyCharacter, const FVector& TargetLocation) const;
 };
