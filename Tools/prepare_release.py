@@ -40,6 +40,7 @@ os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskPauseAi\" --output bttask_
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskReducePauseDelay\" --output bttask_reducepausedelay")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskReduceSummonDelay\" --output bttask_reducesummondelay")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskResetPatrolPointPauseDelay\" --output bttask_resetpatrolpointpausedelay")
+os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskResetSummonDelay\" --output bttask_resetsummondelay")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskResetWanderPause\" --output bttask_resetwanderpause")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskSummonEnemy\" --output bttask_summonenemy")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskTeleport\" --output bttask_teleport")
