@@ -1,8 +1,8 @@
 ## Introduction
-Behaviour tree task node used to reduce the summon delay
+Behaviour tree task node used to make the enemy select a summon location
 
 ## Dependencies
-The <code>BTTask_UskReduceSummonDelay</code> relies on other components of this plugin to work:
+The <code>BTTask_UskSelectSummonLocation</code> relies on other components of this plugin to work:
 <ul>
 	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
 </ul>
@@ -29,9 +29,9 @@ The <code>BTTask_UskReduceSummonDelay</code> relies on other components of this 
 		<td></td>
 	</tr>
 	<tr>
-		<td>bAbortIfStaggered</td>
-		<td>Should the task be aborted if the enemy becomes staggered?</td>
-		<td>bool</td>
-		<td>false</td>
+		<td>SummonLocationKey</td>
+		<td>The blackboard key used to store the summon location</td>
+		<td>FBlackboardKeySelector</td>
+		<td></td>
 	</tr>
 </table>

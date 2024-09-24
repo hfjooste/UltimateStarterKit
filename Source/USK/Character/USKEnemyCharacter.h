@@ -284,6 +284,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
 	virtual float SummonEnemy();
 
+	/**
+	 * @brief Cancel summoning of an enemy
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	virtual void CancelSummoningEnemy();
+
 protected:
 	/**
 	 * @brief Overridable native event for when play begins for this actor

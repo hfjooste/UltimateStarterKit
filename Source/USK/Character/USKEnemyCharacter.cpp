@@ -237,6 +237,13 @@ float AUSKEnemyCharacter::SummonEnemy()
 }
 
 /**
+ * @brief Cancel summoning of an enemy
+ */
+void AUSKEnemyCharacter::CancelSummoningEnemy()
+{
+}
+
+/**
  * @brief Initialize the patrol points
  */
 void AUSKEnemyCharacter::InitializePatrolPoints()

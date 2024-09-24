@@ -95,6 +95,7 @@ nav:
       - Tasks:
         - Base Node: bttask_base.md
         - Attack: bttask_attack.md
+        - Cancel Summoning Enemy: bttask_cancelsummoningenemy.md
         - Chase Target: bttask_chasetarget.md
         - Clear Focus: bttask_clearfocus.md
         - Fly Chase Target: bttask_flychasetarget.md
@@ -110,6 +111,7 @@ nav:
         - Reset Patrol Point Pause Delay: bttask_resetpatrolpointpausedelay.md
         - Reset Summon Delay: bttask_resetsummondelay.md
         - Reset Wander Pause: bttask_resetwanderpause.md
+        - Select Summon Location: bttask_selectsummonlocation
         - Summon Enemy: bttask_summonenemy.md
         - Teleport: bttask_teleport.md
         - Update State: bttask_updatestate.md

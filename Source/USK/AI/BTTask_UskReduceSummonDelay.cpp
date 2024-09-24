@@ -32,13 +32,32 @@ void UBTTask_UskReduceSummonDelay::TickTask(UBehaviorTreeComponent& OwnerComp, u
 		return;
 	}
 
+	if (bAbortIfStaggered)
+	{
+		const AUSKEnemyCharacter* EnemyCharacter = dynamic_cast<AUSKEnemyCharacter*>(
+		Blackboard->GetValueAsObject(OwnerKey.SelectedKeyName));
+		if (!IsValid(EnemyCharacter))
+		{
+			USK_LOG_ERROR("Enemy character is invalid");
+			FinishLatentTask(OwnerComp, EBTNodeResult::Failed);
+			return;
+		}
+
+		if (EnemyCharacter->IsStaggered())
+		{
+			FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
+			return;
+		}
+	}
+
 	const float CurrentDelay = Blackboard->GetValueAsFloat(SummonDelayKey.SelectedKeyName);
 	const float NewDelay = CurrentDelay - DeltaSeconds;
 	Blackboard->SetValueAsFloat(SummonDelayKey.SelectedKeyName, NewDelay);
 	if (NewDelay <= 0.0f)
 	{
 		FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
-	}}
+	}
+}
 
 /**
  * @brief Start executing the task

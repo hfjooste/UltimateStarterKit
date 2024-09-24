@@ -1,8 +1,8 @@
 ## Introduction
-Behaviour tree task node used to reduce the summon delay
+Behaviour tree task node used to cancel summoning an enemy
 
 ## Dependencies
-The <code>BTTask_UskReduceSummonDelay</code> relies on other components of this plugin to work:
+The <code>BTTask_UskCancelSummoningEnemy</code> relies on other components of this plugin to work:
 <ul>
 	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
 </ul>
@@ -27,11 +27,5 @@ The <code>BTTask_UskReduceSummonDelay</code> relies on other components of this 
 		<td>The blackboard key used to store the summon delay</td>
 		<td>FBlackboardKeySelector</td>
 		<td></td>
-	</tr>
-	<tr>
-		<td>bAbortIfStaggered</td>
-		<td>Should the task be aborted if the enemy becomes staggered?</td>
-		<td>bool</td>
-		<td>false</td>
 	</tr>
 </table>

@@ -268,6 +268,12 @@ The <code>USKEnemyCharacter</code> uses the following components:
 		<td></td>
 		<td><strong>float</strong><br/>The duration of the summon sequence</td>
 	</tr>
+	<tr>
+		<td>CancelSummoningEnemy</td>
+		<td>Cancel summoning of an enemy</td>
+		<td></td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -290,6 +296,7 @@ You can use the <code>USKEnemyCharacter</code> using Blueprints by adding one of
 	<li>Ultimate Starter Kit > AI > Teleport In</li>
 	<li>Ultimate Starter Kit > AI > Get Summon Location</li>
 	<li>Ultimate Starter Kit > AI > Summon Enemy</li>
+	<li>Ultimate Starter Kit > AI > Cancel Summoning Enemy</li>
 </ul>
 
 ## C++ Usage
@@ -322,5 +329,6 @@ void ATestActor::Test()
 	USKEnemyCharacter->TeleportIn();
 	FVector SummonLocation = USKEnemyCharacter->GetSummonLocation();
 	float SummonEnemyValue = USKEnemyCharacter->SummonEnemy();
+	USKEnemyCharacter->CancelSummoningEnemy();
 }
 ```

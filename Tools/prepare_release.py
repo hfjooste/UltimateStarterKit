@@ -27,6 +27,7 @@ os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskWasTargetReached\" --
 
 os.system(f"python \"{docs}\" --input \"AI\\USKBTTaskNode\" --output bttask_base")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskAttack\" --output bttask_attack")
+os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskCancelSummoningEnemy\" --output bttask_cancelsummoningenemy")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskChaseTarget\" --output bttask_chasetarget")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskClearFocus\" --output bttask_clearfocus")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskFlyChaseTarget\" --output bttask_flychasetarget")
@@ -42,6 +43,7 @@ os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskReduceSummonDelay\" --outp
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskResetPatrolPointPauseDelay\" --output bttask_resetpatrolpointpausedelay")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskResetSummonDelay\" --output bttask_resetsummondelay")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskResetWanderPause\" --output bttask_resetwanderpause")
+os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskSelectSummonLocation\" --output bttask_selectsummonlocation")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskSummonEnemy\" --output bttask_summonenemy")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskTeleport\" --output bttask_teleport")
 os.system(f"python \"{docs}\" --input \"AI\\BTTask_UskUpdateState\" --output bttask_updatestate")

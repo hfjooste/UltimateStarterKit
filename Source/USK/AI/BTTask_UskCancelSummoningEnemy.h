@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "USKBTTaskNode.h"
-#include "BTTask_UskReduceSummonDelay.generated.h"
+#include "BTTask_UskCancelSummoningEnemy.generated.h"
 
 /**
- * @brief Behaviour tree task node used to reduce the summon delay
+ * @brief Behaviour tree task node used to cancel summoning an enemy
  */
-UCLASS(Category = "Ultimate Starter Kit", meta = (DisplayName = "Reduce Summon Delay"))
-class USK_API UBTTask_UskReduceSummonDelay : public UUSKBTTaskNode
+UCLASS(Category = "Ultimate Starter Kit", meta = (DisplayName = "Cancel Summoning Enemy"))
+class USK_API UBTTask_UskCancelSummoningEnemy : public UUSKBTTaskNode
 {
 	GENERATED_BODY()
 	
@@ -20,7 +20,7 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|AI")
 	FBlackboardKeySelector OwnerKey;
-	
+
 	/**
 	 * @brief The blackboard key used to store the summon delay
 	 */
@@ -28,25 +28,11 @@ public:
 	FBlackboardKeySelector SummonDelayKey;
 
 	/**
-	 * @brief Should the task be aborted if the enemy becomes staggered?
-	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|AI")
-	bool bAbortIfStaggered = false;
-
-	/**
 	 * @brief Constructor for the task node
 	 */
-	UBTTask_UskReduceSummonDelay();
+	UBTTask_UskCancelSummoningEnemy();
 
 protected:
-	/**
-	 * @brief Update the task
-	 * @param OwnerComp A reference to the behaviour tree executing the task
-	 * @param NodeMemory Memory block used to store runtime data
-	 * @param DeltaSeconds The time since the last update
-	 */
-	virtual void TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
-	
 	/**
 	 * @brief Start executing the task
 	 * @param OwnerComp A reference to the behaviour tree executing the task
