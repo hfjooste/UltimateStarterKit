@@ -137,6 +137,15 @@ void UMenuItem::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
 }
 
 /**
+ * @brief Check if the menu item should keep the highlighted style
+ * @return A boolean value indicating if the menu item should keep the highlighted state
+ */
+bool UMenuItem::ShouldKeepHighlightedStyle() const
+{
+	return bKeepHighlightStyle;
+}
+
+/**
  * @brief Set the text displayed in the menu item
  * @param Text The new text displayed in the menu item
  */
@@ -192,86 +201,86 @@ void UMenuItem::SetHighlightedState(const bool IsHighlighted,
 {
 	USK_LOG_TRACE("Setting highlighted state");
 	
-	bIsHighlighted = IsHighlighted;
-	const FLinearColor BorderColor = IsHighlighted ? BorderHighlightedColor : BorderNormalColor;
-	const FLinearColor BackgroundColor = IsHighlighted ? BackgroundHighlightedColor : BackgroundNormalColor;
+	bIsHighlighted = IsHighlighted || ShouldKeepHighlightedStyle();
+	const FLinearColor BorderColor = bIsHighlighted ? BorderHighlightedColor : BorderNormalColor;
+	const FLinearColor BackgroundColor = bIsHighlighted ? BackgroundHighlightedColor : BackgroundNormalColor;
 
 	if (Title != nullptr && HighlightedTitle != nullptr)
 	{
-		Title->SetVisibility(IsHighlighted ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
-		HighlightedTitle->SetVisibility(IsHighlighted ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
+		Title->SetVisibility(bIsHighlighted ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
+		HighlightedTitle->SetVisibility(bIsHighlighted ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
 	}
 
 	if (NormalText != nullptr)
 	{
-		NormalText->SetVisibility(IsHighlighted ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);	
+		NormalText->SetVisibility(bIsHighlighted ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);	
 	}
 	
 	if (HighlightedText != nullptr)
 	{
 		USK_LOG_TRACE("Updating highlighted text");
-		HighlightedText->SetVisibility(IsHighlighted ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);	
+		HighlightedText->SetVisibility(bIsHighlighted ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);	
 	}
 
 	if (ValueText != nullptr)
 	{
 		USK_LOG_TRACE("Updating value text");
-		ValueText->SetVisibility(IsHighlighted ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
+		ValueText->SetVisibility(bIsHighlighted ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
 	}
 
 	if (HighlightedValueText != nullptr)
 	{
 		USK_LOG_TRACE("Updating highlighted value text");
-		HighlightedValueText->SetVisibility(IsHighlighted ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
+		HighlightedValueText->SetVisibility(bIsHighlighted ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
 	}
 
 	if (BorderLeft != nullptr)
 	{
 		USK_LOG_TRACE("Updating left border");
-		BorderLeft->SetBrushFromTexture(IsHighlighted ? BorderLeftHighlightedImage : BorderLeftNormalImage);
+		BorderLeft->SetBrushFromTexture(bIsHighlighted ? BorderLeftHighlightedImage : BorderLeftNormalImage);
 		BorderLeft->SetColorAndOpacity(BorderColor);
 	}
 	
 	if (BorderRight != nullptr)
 	{
 		USK_LOG_TRACE("Updating right border");
-		BorderRight->SetBrushFromTexture(IsHighlighted ? BorderRightHighlightedImage : BorderRightNormalImage);
+		BorderRight->SetBrushFromTexture(bIsHighlighted ? BorderRightHighlightedImage : BorderRightNormalImage);
 		BorderRight->SetColorAndOpacity(BorderColor);
 	}
 
 	if (BorderBackground != nullptr)
 	{
 		USK_LOG_TRACE("Updating border background");
-		BorderBackground->SetBrushFromTexture(IsHighlighted ? BorderHighlightedImage : BorderNormalImage);
+		BorderBackground->SetBrushFromTexture(bIsHighlighted ? BorderHighlightedImage : BorderNormalImage);
 		BorderBackground->SetColorAndOpacity(BorderColor);
 	}
 
 	if (ButtonLeft != nullptr)
 	{
 		USK_LOG_TRACE("Updating left button");
-		ButtonLeft->SetBrushFromTexture(IsHighlighted ? BackgroundLeftHighlightedImage : BackgroundLeftNormalImage);
+		ButtonLeft->SetBrushFromTexture(bIsHighlighted ? BackgroundLeftHighlightedImage : BackgroundLeftNormalImage);
 		ButtonLeft->SetColorAndOpacity(BackgroundColor);
 	}
 
 	if (ButtonRight != nullptr)
 	{
 		USK_LOG_TRACE("Updating right button");
-		ButtonRight->SetBrushFromTexture(IsHighlighted ? BackgroundRightHighlightedImage : BackgroundRightNormalImage);
+		ButtonRight->SetBrushFromTexture(bIsHighlighted ? BackgroundRightHighlightedImage : BackgroundRightNormalImage);
 		ButtonRight->SetColorAndOpacity(BackgroundColor);
 	}
 	
 	if (ButtonBackground != nullptr)
 	{
 		USK_LOG_TRACE("Updating button background");
-		ButtonBackground->SetBrushFromTexture(IsHighlighted ? BackgroundHighlightedImage : BackgroundNormalImage);
+		ButtonBackground->SetBrushFromTexture(bIsHighlighted ? BackgroundHighlightedImage : BackgroundNormalImage);
 		ButtonBackground->SetColorAndOpacity(BackgroundColor);
 	}
 
 	if (ValueSlider != nullptr)
 	{
 		USK_LOG_TRACE("Updating button slider colors");
-		const FLinearColor ValueSliderBarColor = IsHighlighted ? SliderBarHighlightedColor : SliderBarNormalColor;
-		const FLinearColor ValueSliderThumbColor = IsHighlighted ? SliderThumbHighlightedColor : SliderThumbNormalColor;
+		const FLinearColor ValueSliderBarColor = bIsHighlighted ? SliderBarHighlightedColor : SliderBarNormalColor;
+		const FLinearColor ValueSliderThumbColor = bIsHighlighted ? SliderThumbHighlightedColor : SliderThumbNormalColor;
 		
 		FSliderStyle ValueSliderStyle = ValueSlider->GetWidgetStyle();
 		ValueSliderStyle.NormalBarImage.TintColor = ValueSliderBarColor;
@@ -383,6 +392,11 @@ void UMenuItem::UpdateValue(const float Increment)
  */
 void UMenuItem::SelectItem()
 {
+	if (KeepHighlightStyleWhenSelected)
+	{
+		bKeepHighlightStyle = true;
+	}
+	
 #if ENGINE_MAJOR_VERSION >= 5
 	if (SettingsItemType == ESettingsItemType::ControlsRemap)
 	{
@@ -404,6 +418,18 @@ void UMenuItem::SelectItem()
 	}
 	
     AutoSaveSettings(AutoSaveSettingsOnSelected);
+}
+
+/**
+ * @brief Unselect the menu item
+ */
+void UMenuItem::UnselectItem()
+{
+	if (ShouldKeepHighlightedStyle())
+	{
+		bKeepHighlightStyle = false;
+		SetHighlightedState(false, false, false);
+	}
 }
 
 /**

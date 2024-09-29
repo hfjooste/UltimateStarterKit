@@ -450,6 +450,13 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation")
 	bool AllowSelection = true;
+
+	/**
+	 * @brief Should the highlighted style be kept when the menu item is selected?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation",
+		meta=(EditCondition = "AllowSelection", EditConditionHides))
+	bool KeepHighlightStyleWhenSelected = false;
 	
 	/**
 	 * @brief The type of navigation used by the menu item when pressing the up or down key
@@ -578,6 +585,12 @@ public:
 	void SelectItem();
 
 	/**
+	 * @brief Unselect the menu item
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void UnselectItem();
+
+	/**
 	 * @brief Save the settings managed by this menu item
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
@@ -646,6 +659,13 @@ protected:
 	 * @param InMouseEvent Information about the input event
 	 */
 	virtual void NativeOnMouseLeave(const FPointerEvent& InMouseEvent) override;
+
+	/**
+	 * @brief Check if the menu item should keep the highlighted style
+	 * @return A boolean value indicating if the menu item should keep the highlighted state
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|UI")
+	bool ShouldKeepHighlightedStyle() const;
 	
 private:
 	/**
@@ -682,6 +702,11 @@ private:
 	 * @brief Is the menu item highlighted?
 	 */
 	bool bIsHighlighted;
+
+	/**
+	 * @brief Should the highlighted state be kept?
+	 */
+	bool bKeepHighlightStyle;
 
 	/**
 	 * @brief Update the value text of the menu item 
