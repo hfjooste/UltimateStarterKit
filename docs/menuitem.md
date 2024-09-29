@@ -411,6 +411,12 @@ You can add the following widgets to enable extra functionality:
 		<td>true</td>
 	</tr>
 	<tr>
+		<td>KeepHighlightStyleWhenSelected</td>
+		<td>Should the highlighted style be kept when the menu item is selected?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
 		<td>VerticalNavigation</td>
 		<td>The type of navigation used by the menu item when pressing the up or down key</td>
 		<td>EMenuNavigation</td>
@@ -539,6 +545,12 @@ You can add the following widgets to enable extra functionality:
 		<td></td>
 	</tr>
 	<tr>
+		<td>UnselectItem</td>
+		<td>Unselect the menu item</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>SaveSettings</td>
 		<td>Save the settings managed by this menu item</td>
 		<td></td>
@@ -580,6 +592,12 @@ You can add the following widgets to enable extra functionality:
 		<td></td>
 		<td><strong>bool</strong><br/>A boolean value indicating if the menu item is waiting for a key press</td>
 	</tr>
+	<tr>
+		<td>ShouldKeepHighlightedStyle</td>
+		<td>Check if the menu item should keep the highlighted style</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the menu item should keep the highlighted state</td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -592,6 +610,7 @@ You can use the <code>MenuItem</code> using Blueprints by adding one of the foll
 	<li>Ultimate Starter Kit > UI > Get Value</li>
 	<li>Ultimate Starter Kit > UI > Update Value</li>
 	<li>Ultimate Starter Kit > UI > Select Item</li>
+	<li>Ultimate Starter Kit > UI > Unselect Item</li>
 	<li>Ultimate Starter Kit > UI > Save Settings</li>
 	<li>Ultimate Starter Kit > UI > Apply Settings</li>
 	<li>Ultimate Starter Kit > UI > Get Input Action Key</li>
@@ -599,6 +618,7 @@ You can use the <code>MenuItem</code> using Blueprints by adding one of the foll
 	<li>Ultimate Starter Kit > UI > Any Key Pressed</li>
 	<li>Ultimate Starter Kit > UI > Apply Key Binding</li>
 	<li>Ultimate Starter Kit > UI > Is Waiting For Key Press</li>
+	<li>Ultimate Starter Kit > UI > Should Keep Highlighted Style</li>
 </ul>
 
 ## C++ Usage
@@ -621,6 +641,7 @@ void ATestActor::Test()
 	int Value = MenuItem->GetValue();
 	MenuItem->UpdateValue(Increment);
 	MenuItem->SelectItem();
+	MenuItem->UnselectItem();
 	MenuItem->SaveSettings();
 	MenuItem->ApplySettings();
 	FKey InputActionKey = MenuItem->GetInputActionKey();
@@ -628,5 +649,6 @@ void ATestActor::Test()
 	MenuItem->AnyKeyPressed(Key);
 	MenuItem->ApplyKeyBinding();
 	bool IsWaitingForKeyPressValue = MenuItem->IsWaitingForKeyPress();
+	bool ShouldKeepHighlightedStyleValue = MenuItem->ShouldKeepHighlightedStyle();
 }
 ```

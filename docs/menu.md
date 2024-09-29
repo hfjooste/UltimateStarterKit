@@ -218,6 +218,12 @@ You can add the following widgets to enable extra functionality:
 		<td><strong>MenuItem (UMenuItem*)</strong><br/>The menu item to add</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>ForceSelect</td>
+		<td>Force select a menu item</td>
+		<td><strong>MenuItem (UMenuItem*)</strong><br/>The menu item to select</td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -236,6 +242,7 @@ You can use the <code>Menu</code> using Blueprints by adding one of the followin
 	<li>Ultimate Starter Kit > UI > Request Highlight</li>
 	<li>Ultimate Starter Kit > UI > Remove Highlight</li>
 	<li>Ultimate Starter Kit > UI > Add Menu Item</li>
+	<li>Ultimate Starter Kit > UI > Force Select</li>
 </ul>
 
 ## C++ Usage
@@ -264,5 +271,6 @@ void ATestActor::Test()
 	Menu->RequestHighlight(MenuItem);
 	Menu->RemoveHighlight(MenuItem);
 	Menu->AddMenuItem(MenuItem);
+	Menu->ForceSelect(MenuItem);
 }
 ```

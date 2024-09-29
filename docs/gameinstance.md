@@ -140,6 +140,11 @@ The Game Instance will automatically detect input events and update the current 
 		<td></td>
 	</tr>
 	<tr>
+		<td>OnSaveGameUpdated</td>
+		<td>Event used to notify other classes when the save data is updated</td>
+		<td><strong>SaveGame (UUSKSaveGame*)</strong><br/>The save game that was updated</td>
+	</tr>
+	<tr>
 		<td>OnInputDeviceUpdated</td>
 		<td>Event used to notify other classes when the current input device is updated</td>
 		<td></td>
