@@ -204,6 +204,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void AddMenuItem(UMenuItem* MenuItem);
 
+	/**
+	 * @brief Force select a menu item
+	 * @param MenuItem The menu item to select
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void ForceSelect(UMenuItem* MenuItem);
+
 protected:
 	/**
 	 * @brief Overridable native event for when the widget has been constructed
@@ -232,6 +239,12 @@ private:
 	 */
 	UPROPERTY()
 	UMenuItem* CurrentMenuItem;
+
+	/**
+	 * @brief The menu item that is currently selected
+	 */
+	UPROPERTY()
+	UMenuItem* SelectedMenuItem;
 
 	/**
 	 * @brief A reference to the highlighted menu item before the highlight state was removed

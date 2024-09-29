@@ -212,10 +212,16 @@ void UMenu::OnMenuSelected()
 	ValidSettingsItemType = CurrentMenuItem != nullptr &&
 		CurrentMenuItem->SettingsItemType != ESettingsItemType::ControlsRemap;
 #endif
+
+	if (IsValid(SelectedMenuItem))
+	{
+		SelectedMenuItem->UnselectItem();
+	}
 	
 	if (CurrentMenuItem != nullptr && (CurrentMenuItem->AllowSelection || ValidSettingsItemType))
 	{
 		UAudioUtils::PlaySound2D(GetWorld(), SelectedSFX);
+		SelectedMenuItem = CurrentMenuItem;
 		CurrentMenuItem->SelectItem();
 	}
 }
@@ -295,6 +301,30 @@ void UMenu::AddMenuItem(UMenuItem* MenuItem)
 	MenuItem->Menu = this;
 	MenuItem->SetHighlightedState(true, false, false);
 	MenuItem->SetHighlightedState(false, false, false);
+}
+
+/**
+ * @brief Force select a menu item
+ * @param MenuItem The menu item to select
+ */
+void UMenu::ForceSelect(UMenuItem* MenuItem)
+{
+	CurrentMenuItem = MenuItem;
+	if (IsValid(SelectedMenuItem))
+	{
+		SelectedMenuItem->UnselectItem();
+	}
+	
+	if (IsValid(CurrentMenuItem))
+	{
+		SelectedMenuItem = CurrentMenuItem;
+		CurrentMenuItem->SelectItem();
+	}
+
+	if (CurrentMenuItem->KeepHighlightStyleWhenSelected)
+	{
+		CurrentMenuItem->SetHighlightedState(true, false, false);
+	}
 }
 
 /**
