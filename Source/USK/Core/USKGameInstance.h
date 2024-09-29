@@ -48,6 +48,12 @@ class USK_API UUSKGameInstance : public UGameInstance
 	 * @param Difficulty The new difficulty value
 	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGameInstanceDifficultyUpdatedDelegate, int, Difficulty);
+
+	/**
+	 * @brief Event used to notify other classes when the save data is updated
+	 * @param SaveGame The save game that was updated
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGameInstanceSaveGameUpdatedDelegate, UUSKSaveGame*, SaveGame);
 	
 public:
 	/**
@@ -91,6 +97,12 @@ public:
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
 	FGameInstanceOnDataLoadedDelegate OnDataLoadedEvent;
+
+	/**
+	 * @brief Event used to notify other classes when the save data is updated
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
+	FGameInstanceSaveGameUpdatedDelegate OnSaveGameUpdated;
 
 	/**
 	 * @brief Is the input indicators feature enabled?

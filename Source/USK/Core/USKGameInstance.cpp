@@ -77,6 +77,7 @@ void UUSKGameInstance::SaveData()
 
 	USK_LOG_INFO("Saving data");
 	UGameplayStatics::SaveGameToSlot(CurrentSaveGame, GetSaveSlotName(CurrentSaveSlot), 0);
+	OnSaveGameUpdated.Broadcast(GetSaveData());
 }
 
 /**
