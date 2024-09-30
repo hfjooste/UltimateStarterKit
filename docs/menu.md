@@ -116,6 +116,12 @@ You can add the following widgets to enable extra functionality:
 		<td>UInputAction*</td>
 		<td><code>nullptr</code></td>
 	</tr>
+	<tr>
+		<td>GameInstance</td>
+		<td>A reference to the game instance</td>
+		<td>UUSKGameInstance*</td>
+		<td><code>nullptr</code></td>
+	</tr>
 </table>
 
 ### Events
