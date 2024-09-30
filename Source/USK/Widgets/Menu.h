@@ -213,6 +213,12 @@ public:
 
 protected:
 	/**
+	 * @brief A reference to the game instance
+	 */
+	UPROPERTY()
+	UUSKGameInstance* GameInstance;
+	
+	/**
 	 * @brief Overridable native event for when the widget has been constructed
 	 */
 	virtual void NativeConstruct() override;
@@ -227,13 +233,7 @@ protected:
 	 */
 	virtual void NativeOnInitialized() override;
 	
-private:
-	/**
-	 * @brief A reference to the game instance
-	 */
-	UPROPERTY()
-	UUSKGameInstance* GameInstance;
-	
+private:	
 	/**
 	 * @brief A reference to the current menu item
 	 */
