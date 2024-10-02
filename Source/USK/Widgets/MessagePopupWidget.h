@@ -148,6 +148,7 @@ private:
 	/**
 	 * @brief Remove the popup widget
 	 */
+	UFUNCTION()
 	void RemoveWidget();
 
 	/**

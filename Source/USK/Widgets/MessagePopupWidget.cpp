@@ -6,7 +6,7 @@
 #include "MenuItem.h"
 #include "Animation/WidgetAnimation.h"
 #include "Components/PanelWidget.h"
-#include "TimerManager.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "USK/Logger/Log.h"
 
 /**
@@ -60,11 +60,12 @@ void UMessagePopupWidget::Hide()
 
 	PlayAnimation(HideAnimation);
 
-	FTimerHandle HideWidgetTimerHandle;
-	GetWorld()->GetTimerManager().SetTimer(HideWidgetTimerHandle, [this]
-	{
-		RemoveWidget();
-	}, HideAnimation->GetEndTime(), false);
+	FLatentActionInfo LatentAction;
+	LatentAction.Linkage = 0;
+	LatentAction.CallbackTarget = this;
+	LatentAction.UUID = GetUniqueID();
+	LatentAction.ExecutionFunction = GET_FUNCTION_NAME_CHECKED(UMessagePopupWidget, RemoveWidget);
+	UKismetSystemLibrary::Delay(GetWorld(), HideAnimation->GetEndTime(), LatentAction);
 }
 
 /**
