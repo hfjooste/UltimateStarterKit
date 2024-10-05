@@ -227,34 +227,40 @@ The configuration used for managing settings
 		<td></td>
 	</tr>
 	<tr>
-		<td>GraphicsFullscreenImplementation</td>
-		<td>The implementation for the graphics fullscreen settings item</td>
+		<td>GraphicsWindowModeImplementation</td>
+		<td>The implementation for the graphics window mode settings item</td>
 		<td>TSubclassOf&lt;USettingsItem&gt;</td>
-		<td>USettingsItemGraphicsFullscreen::StaticClas</td>
+		<td>USettingsItemGraphicsWindowMode::StaticClas</td>
 	</tr>
 	<tr>
-		<td>GraphicsFullscreenText</td>
-		<td>The text displayed in the graphics fullscreen settings item</td>
+		<td>GraphicsWindowModeText</td>
+		<td>The text displayed in the graphics window mode settings item</td>
 		<td>FText</td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>GraphicsFullscreenEnabledText</td>
-		<td>The text displayed when fullscreen is enabled</td>
+		<td>GraphicsWindowModeFullscreenText</td>
+		<td>The text displayed when using the fullscreen value for the window mode setting</td>
 		<td>FText</td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>GraphicsFullscreenDisabledText</td>
-		<td>The text displayed when fullscreen is disabled</td>
+		<td>GraphicsWindowModeBorderlessText</td>
+		<td>The text displayed when using the borderless value for the window mode setting</td>
 		<td>FText</td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>GraphicsFullscreenDefault</td>
-		<td>The default value of the fullscreen setting</td>
-		<td>bool</td>
-		<td>true</td>
+		<td>GraphicsWindowModeWindowedText</td>
+		<td>The text displayed when using the windowed value for the window mode setting</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GraphicsWindowModeDefault</td>
+		<td>The default value of the window mode setting</td>
+		<td>int</td>
+		<td>0</td>
 	</tr>
 	<tr>
 		<td>GraphicsViewDistanceImplementation</td>

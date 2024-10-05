@@ -95,16 +95,16 @@ The settings data that is saved/loaded
 		<td></td>
 	</tr>
 	<tr>
-		<td>GraphicsFullscreenModified</td>
-		<td>Was the graphics fullscreen setting modified?</td>
+		<td>GraphicsWindowModeModified</td>
+		<td>Was the graphics window mode setting modified?</td>
 		<td>bool</td>
 		<td>false</td>
 	</tr>
 	<tr>
-		<td>GraphicsFullscreen</td>
-		<td>The graphics fullscreen value</td>
-		<td>bool</td>
-		<td>false</td>
+		<td>GraphicsWindowMode</td>
+		<td>The graphics window mode value</td>
+		<td>int</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>GraphicsViewDistanceModified</td>

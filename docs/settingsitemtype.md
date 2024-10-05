@@ -40,8 +40,8 @@ An enum of all supported settings items
 		<td>The graphics resolution setting</td>
 	</tr>
 	<tr>
-		<td>GraphicsFullscreen</td>
-		<td>The graphics fullscreen setting</td>
+		<td>GraphicsWindowMode</td>
+		<td>The graphics window mode setting</td>
 	</tr>
 	<tr>
 		<td>GraphicsViewDistance</td>

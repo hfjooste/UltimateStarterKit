@@ -2,6 +2,7 @@
 
 #include "SettingsUtils.h"
 
+#include "GameFramework/GameUserSettings.h"
 #include "Kismet/GameplayStatics.h"
 #include "USK/Core/USKGameInstance.h"
 #include "USK/Logger/Log.h"
@@ -57,6 +58,9 @@ void USettingsUtils::SaveSettings(USettingsData* Settings)
 {
 	USK_LOG_INFO("Saving settings");
 	UGameplayStatics::SaveGameToSlot(Settings, "settings", 0);
+	
+	UGameUserSettings* GameSettings = UGameUserSettings::GetGameUserSettings();
+	GameSettings->SaveSettings();
 }
 
 /**
@@ -261,8 +265,8 @@ USettingsItem* USettingsUtils::GetSettingsItem(const ESettingsItemType SettingsI
 		return Config->AudioVoiceImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::GraphicsResolution:
 		return Config->GraphicsResolutionImplementation->GetDefaultObject<USettingsItem>();
-	case ESettingsItemType::GraphicsFullscreen:
-		return Config->GraphicsFullscreenImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GraphicsWindowMode:
+		return Config->GraphicsWindowModeImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::GraphicsViewDistance:
 		return Config->GraphicsViewDistanceImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::GraphicsAntiAliasing:

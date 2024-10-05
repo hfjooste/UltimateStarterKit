@@ -3,13 +3,13 @@
 #pragma once
 
 #include "USK/Settings/SettingsItem.h"
-#include "SettingsItemGraphicsFullscreen.generated.h"
+#include "SettingsItemGraphicsWindowMode.generated.h"
 
 /**
- * @brief An implementation for the graphics fullscreen settings item
+ * @brief An implementation for the graphics window mode settings item
  */
 UCLASS()
-class USettingsItemGraphicsFullscreen : public USettingsItem
+class USettingsItemGraphicsWindowMode : public USettingsItem
 {
 	GENERATED_BODY()
 	
@@ -37,4 +37,12 @@ public:
 	 * @param Settings The current settings data
 	 */
 	virtual void ApplySettings(UObject* World, const USettingsConfig* Config, const USettingsData* Settings) override;
+
+private:
+	/**
+	 * @brief Notify other menu items that the setting was changed
+	 * @param World The world context
+	 * @param Value The new value of the setting
+	 */
+	void NotifySettingChanged(UObject* World, int Value) const;
 };

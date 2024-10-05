@@ -543,6 +543,20 @@ bool UMenuItem::IsWaitingForKeyPress()
 }
 
 /**
+ * @brief Called when the window mode setting is updated
+ * @param NewWindowMode The new window mode value
+ */
+void UMenuItem::OnWindowModeUpdated(const EWindowMode::Type NewWindowMode)
+{
+	if (SettingsItemType == ESettingsItemType::GraphicsResolution)
+	{
+		SetVisibility(NewWindowMode == EWindowMode::WindowedFullscreen
+			? ESlateVisibility::Collapsed
+			: ESlateVisibility::SelfHitTestInvisible);
+	}
+}
+
+/**
  * @brief Update the value text of the menu item 
  */
 void UMenuItem::UpdateValueText() const

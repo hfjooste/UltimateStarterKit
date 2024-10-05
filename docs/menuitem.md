@@ -593,6 +593,12 @@ You can add the following widgets to enable extra functionality:
 		<td><strong>bool</strong><br/>A boolean value indicating if the menu item is waiting for a key press</td>
 	</tr>
 	<tr>
+		<td>OnWindowModeUpdated</td>
+		<td>Called when the window mode setting is updated</td>
+		<td><strong>NewWindowMode (EWindowMode::Type)</strong><br/>The new window mode value</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>ShouldKeepHighlightedStyle</td>
 		<td>Check if the menu item should keep the highlighted style</td>
 		<td></td>
@@ -618,6 +624,7 @@ You can use the <code>MenuItem</code> using Blueprints by adding one of the foll
 	<li>Ultimate Starter Kit > UI > Any Key Pressed</li>
 	<li>Ultimate Starter Kit > UI > Apply Key Binding</li>
 	<li>Ultimate Starter Kit > UI > Is Waiting For Key Press</li>
+	<li>Ultimate Starter Kit > UI > On Window Mode Updated</li>
 	<li>Ultimate Starter Kit > UI > Should Keep Highlighted Style</li>
 </ul>
 
@@ -649,6 +656,7 @@ void ATestActor::Test()
 	MenuItem->AnyKeyPressed(Key);
 	MenuItem->ApplyKeyBinding();
 	bool IsWaitingForKeyPressValue = MenuItem->IsWaitingForKeyPress();
+	MenuItem->OnWindowModeUpdated(NewWindowMode);
 	bool ShouldKeepHighlightedStyleValue = MenuItem->ShouldKeepHighlightedStyle();
 }
 ```

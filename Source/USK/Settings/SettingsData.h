@@ -101,16 +101,16 @@ public:
 	int GraphicsResolutionY;
 
 	/**
-	 * @brief Was the graphics fullscreen setting modified?
+	 * @brief Was the graphics window mode setting modified?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
-	bool GraphicsFullscreenModified;
+	bool GraphicsWindowModeModified;
 
 	/**
-	 * @brief The graphics fullscreen value
+	 * @brief The graphics window mode value
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
-	bool GraphicsFullscreen;
+	int GraphicsWindowMode;
 
 	/**
 	 * @brief Was the graphics view distance setting modified?

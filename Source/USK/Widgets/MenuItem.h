@@ -636,6 +636,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	bool IsWaitingForKeyPress();
 
+	/**
+	 * @brief Called when the window mode setting is updated
+	 * @param NewWindowMode The new window mode value
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void OnWindowModeUpdated(EWindowMode::Type NewWindowMode);
+
 protected:
 	/**
 	 * @brief Overridable native event for when the widget has been constructed in the editor

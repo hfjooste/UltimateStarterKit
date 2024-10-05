@@ -53,9 +53,9 @@ enum class ESettingsItemType : uint8
 	GraphicsResolution = 100,
 
 	/**
-	 * @brief The graphics fullscreen setting
+	 * @brief The graphics window mode setting
 	 */
-	GraphicsFullscreen = 101,
+	GraphicsWindowMode = 101,
 
 	/**
 	 * @brief The graphics view distance setting

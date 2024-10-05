@@ -18,7 +18,7 @@
 #include "Items/SettingsItemGraphicsAntiAliasing.h"
 #include "Items/SettingsItemGraphicsFpsIndicator.h"
 #include "Items/SettingsItemGraphicsResolution.h"
-#include "Items/SettingsItemGraphicsFullscreen.h"
+#include "Items/SettingsItemGraphicsWindowMode.h"
 #include "Items/SettingsItemGraphicsPostProcessing.h"
 #include "Items/SettingsItemGraphicsShadingQuality.h"
 #include "Items/SettingsItemGraphicsShadowQuality.h"
@@ -290,39 +290,46 @@ public:
 	FText GraphicsResolutionText;
 
 	/**
-	 * @brief The implementation for the graphics fullscreen settings item
+	 * @brief The implementation for the graphics window mode settings item
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Fullscreen",
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Window Mode",
 		DisplayName = "Implementation")
-	TSubclassOf<USettingsItem> GraphicsFullscreenImplementation = USettingsItemGraphicsFullscreen::StaticClass();
+	TSubclassOf<USettingsItem> GraphicsWindowModeImplementation = USettingsItemGraphicsWindowMode::StaticClass();
 
 	/**
-	 * @brief The text displayed in the graphics fullscreen settings item
+	 * @brief The text displayed in the graphics window mode settings item
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Fullscreen",
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Window Mode",
 		DisplayName = "Title")
-	FText GraphicsFullscreenText;
+	FText GraphicsWindowModeText;
 
 	/**
-	 * @brief The text displayed when fullscreen is enabled
+	 * @brief The text displayed when using the fullscreen value for the window mode setting
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Fullscreen",
-		DisplayName = "Enabled Text")
-	FText GraphicsFullscreenEnabledText;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Window Mode",
+		DisplayName = "Fullscreen Text")
+	FText GraphicsWindowModeFullscreenText;
 
 	/**
-	 * @brief The text displayed when fullscreen is disabled
+	 * @brief The text displayed when using the borderless value for the window mode setting
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Fullscreen",
-		DisplayName = "Disabled Text")
-	FText GraphicsFullscreenDisabledText;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Window Mode",
+		DisplayName = "Borderless Text")
+	FText GraphicsWindowModeBorderlessText;
 
 	/**
-	 * @brief The default value of the fullscreen setting
+	 * @brief The text displayed when using the windowed value for the window mode setting
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Fullscreen",
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Window Mode",
+		DisplayName = "Windowed Text")
+	FText GraphicsWindowModeWindowedText;
+
+	/**
+	 * @brief The default value of the window mode setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Window Mode",
 		DisplayName = "Default Value")
-	bool GraphicsFullscreenDefault = true;
+	int GraphicsWindowModeDefault = 0;
 
 	/**
 	 * @brief The implementation for the graphics view distance settings item
