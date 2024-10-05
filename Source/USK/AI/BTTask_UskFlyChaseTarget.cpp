@@ -81,7 +81,9 @@ TArray<FVector> UBTTask_UskFlyChaseTarget::GetPossibleLocations(AUSKEnemyCharact
 		{
 			for (int Z = GridIndexMin; Z <= GridIndexMax; ++Z)
 			{
-				PossibleLocations.Add(CurrentLocation + (FVector(X, Y, Z) * GridBlockSize * 2.0f));
+				FVector PossibleLocation = CurrentLocation + (FVector(X, Y, Z) * GridBlockSize * 2.0f);
+				PossibleLocation.Z = FMath::Clamp(PossibleLocation.Z, MinZLocation, MaxZLocation);				
+				PossibleLocations.Add(PossibleLocation);
 			}
 		}
 	}

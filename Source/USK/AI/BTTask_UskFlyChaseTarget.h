@@ -52,6 +52,18 @@ public:
 	float MinDistanceFromGround = 500.0f;
 
 	/**
+	 * @brief The minimum Z location of the enemy while flying
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|AI")
+	float MinZLocation = -1000000.0f;
+
+	/**
+	 * @brief The maximum Z location of the enemy while flying
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|AI")
+	float MaxZLocation = 1000000.0f;
+
+	/**
 	 * @brief Should the velocity of the enemy character be reset when the target is lost?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|AI")

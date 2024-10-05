@@ -53,6 +53,18 @@ The <code>BTTask_UskFlyChaseTarget</code> relies on other components of this plu
 		<td>500.0f</td>
 	</tr>
 	<tr>
+		<td>MinZLocation</td>
+		<td>The minimum Z location of the enemy while flying</td>
+		<td>float</td>
+		<td>-1000000.0f</td>
+	</tr>
+	<tr>
+		<td>MaxZLocation</td>
+		<td>The maximum Z location of the enemy while flying</td>
+		<td>float</td>
+		<td>1000000.0f</td>
+	</tr>
+	<tr>
 		<td>bResetVelocityWhenTargetLost</td>
 		<td>Should the velocity of the enemy character be reset when the target is lost?</td>
 		<td>bool</td>
