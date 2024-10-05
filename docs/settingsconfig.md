@@ -629,6 +629,36 @@ The configuration used for managing settings
 		<td>false</td>
 	</tr>
 	<tr>
+		<td>GraphicsRayTracingImplementation</td>
+		<td>The implementation for the graphics ray tracing settings item</td>
+		<td>TSubclassOf&lt;USettingsItem&gt;</td>
+		<td>USettingsItemGraphicsRayTracing::StaticClas</td>
+	</tr>
+	<tr>
+		<td>GraphicsRayTracingText</td>
+		<td>The text displayed in the graphics ray tracing settings item</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GraphicsRayTracingEnabledText</td>
+		<td>The text displayed when the ray tracing setting is enabled</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GraphicsRayTracingDisabledText</td>
+		<td>The text displayed when the ray tracing setting is disabled</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GraphicsRayTracingDefault</td>
+		<td>The default value of the ray tracing setting</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
 		<td>GraphicsFpsIndicatorImplementation</td>
 		<td>The implementation for the graphics FPS indicator settings item</td>
 		<td>TSubclassOf&lt;USettingsItem&gt;</td>

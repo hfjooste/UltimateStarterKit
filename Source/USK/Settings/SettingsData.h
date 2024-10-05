@@ -209,6 +209,18 @@ public:
 	bool GraphicsVsync;
 
 	/**
+	 * @brief Was the graphics ray tracing setting modified?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	bool GraphicsRayTracingModified;
+
+	/**
+	 * @brief The graphics ray tracing value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	bool GraphicsRayTracing;
+
+	/**
 	 * @brief Was the graphics FPS indicator type setting modified?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")

@@ -80,6 +80,10 @@ An enum of all supported settings items
 		<td>The graphics FPS indicator setting</td>
 	</tr>
 	<tr>
+		<td>GraphicsRayTracing</td>
+		<td>The graphics ray tracing setting</td>
+	</tr>
+	<tr>
 		<td>AccessibilityColorBlindMode</td>
 		<td>The accessibility color blind mode setting</td>
 	</tr>

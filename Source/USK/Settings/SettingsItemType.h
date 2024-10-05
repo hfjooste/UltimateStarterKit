@@ -103,6 +103,11 @@ enum class ESettingsItemType : uint8
 	GraphicsFpsIndicator = 110,
 
 	/**
+	 * @brief The graphics ray tracing setting
+	 */
+	GraphicsRayTracing = 111,
+
+	/**
 	 * @brief The accessibility color blind mode setting 
 	 */
 	AccessibilityColorBlindMode = 150,

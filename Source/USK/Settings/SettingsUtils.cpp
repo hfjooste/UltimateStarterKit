@@ -285,6 +285,8 @@ USettingsItem* USettingsUtils::GetSettingsItem(const ESettingsItemType SettingsI
 		return Config->GraphicsVsyncImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::GraphicsFpsIndicator:
 		return Config->GraphicsFpsIndicatorImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GraphicsRayTracing:
+		return Config->GraphicsRayTracingImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::AccessibilityColorBlindMode:
 		return Config->AccessibilityColorBlindModeImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::AccessibilityColorBlindModeSeverity:

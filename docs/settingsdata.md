@@ -203,6 +203,18 @@ The settings data that is saved/loaded
 		<td>false</td>
 	</tr>
 	<tr>
+		<td>GraphicsRayTracingModified</td>
+		<td>Was the graphics ray tracing setting modified?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>GraphicsRayTracing</td>
+		<td>The graphics ray tracing value</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
 		<td>GraphicsFpsIndicatorTypeModified</td>
 		<td>Was the graphics FPS indicator type setting modified?</td>
 		<td>bool</td>

@@ -20,6 +20,7 @@
 #include "Items/SettingsItemGraphicsResolution.h"
 #include "Items/SettingsItemGraphicsWindowMode.h"
 #include "Items/SettingsItemGraphicsPostProcessing.h"
+#include "Items/SettingsItemGraphicsRayTracing.h"
 #include "Items/SettingsItemGraphicsShadingQuality.h"
 #include "Items/SettingsItemGraphicsShadowQuality.h"
 #include "Items/SettingsItemGraphicsTextureQuality.h"
@@ -757,6 +758,41 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|VSync",
 		DisplayName = "Default Value")
 	bool GraphicsVsyncDefault;
+
+	/**
+	 * @brief The implementation for the graphics ray tracing settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Ray Tracing",
+		DisplayName = "Implementation")
+	TSubclassOf<USettingsItem> GraphicsRayTracingImplementation = USettingsItemGraphicsRayTracing::StaticClass();
+
+	/**
+	 * @brief The text displayed in the graphics ray tracing settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Ray Tracing",
+		DisplayName = "Title")
+	FText GraphicsRayTracingText;
+
+	/**
+	 * @brief The text displayed when the ray tracing setting is enabled
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Ray Tracing",
+		DisplayName = "Enabled Text")
+	FText GraphicsRayTracingEnabledText;
+
+	/**
+	 * @brief The text displayed when the ray tracing setting is disabled
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Ray Tracing",
+		DisplayName = "Disabled Text")
+	FText GraphicsRayTracingDisabledText;
+
+	/**
+	 * @brief The default value of the ray tracing setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|Ray Tracing",
+		DisplayName = "Default Value")
+	bool GraphicsRayTracingDefault;
 
 	/**
 	 * @brief The implementation for the graphics FPS indicator settings item
