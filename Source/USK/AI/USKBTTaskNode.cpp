@@ -38,7 +38,7 @@ bool UUSKBTTaskNode::MoveToLocation(AUSKEnemyCharacter* EnemyCharacter, const FV
 		TargetReached = false;
 		return false;
 	}
-	
+
 	const UNavigationSystemV1* NavigationSystem = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
 	if (!IsValid(NavigationSystem))
 	{
@@ -46,9 +46,10 @@ bool UUSKBTTaskNode::MoveToLocation(AUSKEnemyCharacter* EnemyCharacter, const FV
 		TargetReached = false;
 		return false;
 	}
-	
+
+	const FVector FinalLocation = GetLastReachableLocation(EnemyCharacter, TargetLocation);
 	const UNavigationPath* Path = NavigationSystem->FindPathToLocationSynchronously(GetWorld(),
-		EnemyCharacter->GetActorLocation(), TargetLocation);		
+		EnemyCharacter->GetActorLocation(), FinalLocation);		
 	if (!IsValid(Path) || !Path->IsValid() || Path->IsPartial())
 	{		
 		TargetReached = true;
@@ -56,7 +57,7 @@ bool UUSKBTTaskNode::MoveToLocation(AUSKEnemyCharacter* EnemyCharacter, const FV
 		return true;
 	}
 
-	const EPathFollowingRequestResult::Type Result = Controller->MoveToLocation(TargetLocation, AcceptanceRadius,
+	const EPathFollowingRequestResult::Type Result = Controller->MoveToLocation(FinalLocation, AcceptanceRadius,
 		false, true, true,
 		true, nullptr, false);
 	if (Result == EPathFollowingRequestResult::Type::Failed)
@@ -66,8 +67,8 @@ bool UUSKBTTaskNode::MoveToLocation(AUSKEnemyCharacter* EnemyCharacter, const FV
 		return false;
 	}
 	
-	if (FMath::IsNearlyEqual(EnemyCharacter->GetActorLocation().X, TargetLocation.X, AcceptanceRadius) &&
-		FMath::IsNearlyEqual(EnemyCharacter->GetActorLocation().Y, TargetLocation.Y, AcceptanceRadius))
+	if (FMath::IsNearlyEqual(EnemyCharacter->GetActorLocation().X, FinalLocation.X, AcceptanceRadius) &&
+		FMath::IsNearlyEqual(EnemyCharacter->GetActorLocation().Y, FinalLocation.Y, AcceptanceRadius))
 	{		
 		Controller->StopMovement();
 		TargetReached = true;
