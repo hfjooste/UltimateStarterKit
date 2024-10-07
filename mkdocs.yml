@@ -84,6 +84,8 @@ nav:
         - Is AI Paused: btdecorator_isaipaused.md
         - Is Attacking: btdecorator_isattacking.md
         - Is Dead: btdecorator_isdead.md
+        - Is Dodge Queued: btdecorator_isdodgequeued.md
+        - Is Dodging: btdecorator_isdodging.md
         - Is Near Target: btdecorator_isneartarget.md
         - Is Spawning: btdecorator_isspawning.md
         - Is Staggered: btdecorator_isstaggered.md
@@ -98,6 +100,7 @@ nav:
         - Cancel Summoning Enemy: bttask_cancelsummoningenemy.md
         - Chase Target: bttask_chasetarget.md
         - Clear Focus: bttask_clearfocus.md
+        - Dodge: bttask_dodge.md
         - Fly Chase Target: bttask_flychasetarget.md
         - Focus Target: bttask_focustarget.md
         - Focus Location: bttask_focuslocation.md
@@ -106,6 +109,7 @@ nav:
         - Move To Summon Location: bttask_movetosummonlocation.md
         - Patrol: bttask_patrol.md
         - Pause AI: bttask_pauseai.md
+        - Queue Dodge: bttask_queuedodge.md
         - Reduce Pause Delay: bttask_reducepausedelay.md
         - Reduce Summon Delay: bttask_reducesummondelay.md
         - Reset Patrol Point Pause Delay: bttask_resetpatrolpointpausedelay.md
@@ -150,6 +154,7 @@ nav:
     - FPS Character: fpscharacter.md
     - 3D Platformer Character: platformercharacter.md
     - Animation Instance: characteranimationinstance.md
+    - Dodge Config: dodgeconfig.md
     - Shadow Decal: platformershadow.md
   - Weapons:
     - Weapon: weapon.md

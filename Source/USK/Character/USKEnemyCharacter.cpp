@@ -244,6 +244,32 @@ void AUSKEnemyCharacter::CancelSummoningEnemy()
 }
 
 /**
+ * @brief Start the dodge sequence
+ * @param DodgeConfig The config used to dodge
+ */
+void AUSKEnemyCharacter::StartDodging(FDodgeConfig DodgeConfig)
+{
+	bIsDodging = true;
+}
+
+/**
+ * @brief Stop the dodge sequence
+ */
+void AUSKEnemyCharacter::StopDodging()
+{
+	bIsDodging = false;
+}
+
+/**
+ * @brief Check if the enemy is dodging
+ * @return A boolean value indicating if the enemy is dodging
+ */
+bool AUSKEnemyCharacter::IsDodging() const
+{
+	return bIsDodging;
+}
+
+/**
  * @brief Initialize the patrol points
  */
 void AUSKEnemyCharacter::InitializePatrolPoints()

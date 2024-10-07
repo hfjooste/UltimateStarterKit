@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "DodgeConfig.h"
 #include "EnemyAttackType.h"
 #include "BehaviorTree/BehaviorTree.h"
 #include "Components/SphereComponent.h"
@@ -290,6 +291,26 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
 	virtual void CancelSummoningEnemy();
 
+	/**
+	 * @brief Start the dodge sequence
+	 * @param DodgeConfig The config used to dodge
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	virtual void StartDodging(FDodgeConfig DodgeConfig);
+
+	/**
+	 * @brief Stop the dodge sequence
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	virtual void StopDodging();
+
+	/**
+	 * @brief Check if the enemy is dodging
+	 * @return A boolean value indicating if the enemy is dodging
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	virtual bool IsDodging() const;
+
 protected:
 	/**
 	 * @brief Overridable native event for when play begins for this actor
@@ -322,6 +343,11 @@ private:
 	 * @brief Is the enemy staggered?
 	 */
 	bool bIsStaggered;
+
+	/**
+	 * @brief Is the enemy dodging?
+	 */
+	bool bIsDodging;
 
 	/**
 	 * @brief The current attack type

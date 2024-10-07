@@ -274,6 +274,24 @@ The <code>USKEnemyCharacter</code> uses the following components:
 		<td></td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>StartDodging</td>
+		<td>Start the dodge sequence</td>
+		<td><strong>DodgeConfig (FDodgeConfig)</strong><br/>The config used to dodge</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>StopDodging</td>
+		<td>Stop the dodge sequence</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>IsDodging</td>
+		<td>Check if the enemy is dodging</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the enemy is dodging</td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -297,6 +315,9 @@ You can use the <code>USKEnemyCharacter</code> using Blueprints by adding one of
 	<li>Ultimate Starter Kit > AI > Get Summon Location</li>
 	<li>Ultimate Starter Kit > AI > Summon Enemy</li>
 	<li>Ultimate Starter Kit > AI > Cancel Summoning Enemy</li>
+	<li>Ultimate Starter Kit > AI > Start Dodging</li>
+	<li>Ultimate Starter Kit > AI > Stop Dodging</li>
+	<li>Ultimate Starter Kit > AI > Is Dodging</li>
 </ul>
 
 ## C++ Usage
@@ -330,5 +351,8 @@ void ATestActor::Test()
 	FVector SummonLocation = USKEnemyCharacter->GetSummonLocation();
 	float SummonEnemyValue = USKEnemyCharacter->SummonEnemy();
 	USKEnemyCharacter->CancelSummoningEnemy();
+	USKEnemyCharacter->StartDodging(DodgeConfig);
+	USKEnemyCharacter->StopDodging();
+	bool IsDodgingValue = USKEnemyCharacter->IsDodging();
 }
 ```
