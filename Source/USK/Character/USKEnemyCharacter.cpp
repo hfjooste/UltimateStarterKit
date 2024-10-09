@@ -42,6 +42,15 @@ void AUSKEnemyCharacter::BeginPlay()
 }
 
 /**
+ * @brief Overridable native event for when the actor is being destroyed
+ */
+void AUSKEnemyCharacter::BeginDestroy()
+{
+	Super::BeginDestroy();
+	RushAttackCooldownTimerHandle.Invalidate();
+}
+
+/**
  * @brief Get the array of patrol point locations
  * @return The array of patrol point locations
  */
@@ -145,6 +154,10 @@ void AUSKEnemyCharacter::StartAttacking(const EEnemyAttackType AttackType)
 		AnimationMontage = RangedAttackAnimationMontages[
 			FMath::RandRange(0, RangedAttackAnimationMontages.Num() - 1)];
 		break;
+	case EEnemyAttackType::Rush:
+		AnimationMontage = RushAttackAnimationMontages[
+			FMath::RandRange(0, RushAttackAnimationMontages.Num() - 1)];
+		break;
 	case EEnemyAttackType::None:
 	default:
 		USK_LOG_WARNING("Invalid attack started");
@@ -158,6 +171,17 @@ void AUSKEnemyCharacter::StartAttacking(const EEnemyAttackType AttackType)
 	}
 
 	PlayAnimMontage(AnimationMontage);
+	if (AttackType == EEnemyAttackType::Rush)
+	{
+		bCanPerformRushAttack = false;
+		StartDodging(RushAttackDodgeConfig);
+		
+		if (RushAttackCooldown > 0.0f)
+		{
+			GetWorld()->GetTimerManager().SetTimer(RushAttackCooldownTimerHandle, this,
+				&AUSKEnemyCharacter::AllowRushAttack, RushAttackCooldown, false);
+		}
+	}
 
 	FTimerHandle EndAttackTimerHandle;
 	GetWorld()->GetTimerManager().SetTimer(EndAttackTimerHandle, this,
@@ -177,7 +201,7 @@ void AUSKEnemyCharacter::StopAttacking()
  */
 void AUSKEnemyCharacter::OnAttackStarted()
 {
-	if (CurrentAttackType == EEnemyAttackType::Melee)
+	if (CurrentAttackType == EEnemyAttackType::Melee || CurrentAttackType == EEnemyAttackType::Rush)
 	{
 		AttackedActors.Empty();
 		AttackCollider->AttachToComponent(GetMesh(),
@@ -270,6 +294,15 @@ bool AUSKEnemyCharacter::IsDodging() const
 }
 
 /**
+ * @brief Check if the enemy can perform a rush attack
+ * @return A boolean value indicating if the enemy can perform a rush attack
+ */
+bool AUSKEnemyCharacter::CanPerformRushAttack() const
+{
+	return bCanPerformRushAttack;
+}
+
+/**
  * @brief Initialize the patrol points
  */
 void AUSKEnemyCharacter::InitializePatrolPoints()
@@ -317,4 +350,12 @@ void AUSKEnemyCharacter::OnAttackColliderOverlap(UPrimitiveComponent* Overlapped
 		AttackedActors.Add(OtherActor);
 		OtherAttackableObjectComponent->NotifyAttack(this);
 	}	
+}
+
+/**
+ * @brief Allow the enemy to perform a rush attack
+ */
+void AUSKEnemyCharacter::AllowRushAttack()
+{
+	bCanPerformRushAttack = true;
 }

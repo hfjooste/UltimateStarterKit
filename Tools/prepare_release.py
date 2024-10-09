@@ -14,6 +14,7 @@ os.system(f"python \"{docs}\" --input \"AI\\PatrolType\" --output enemypatroltyp
 os.system(f"python \"{docs}\" --input \"Character\\DodgeConfig\" --output dodgeconfig")
 os.system(f"python \"{docs}\" --input \"Character\\EnemyAttackType\" --output enemyattacktype")
 
+os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskCanPerformRushAttack\" --output btdecorator_canperformrushattack")
 os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskCanSeeTarget\" --output btdecorator_canseetarget")
 os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskIsAiPaused\" --output btdecorator_isaipaused")
 os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskIsAttacking\" --output btdecorator_isattacking")

@@ -81,6 +81,7 @@ nav:
     - Attack Type: enemyattacktype.md
     - Behaviour Tree:
       - Decorators:
+        - Can Perform Rush Attack: btdecorator_canperformrushattack.md
         - Can See Target: btdecorator_canseetarget.md
         - Is AI Paused: btdecorator_isaipaused.md
         - Is Attacking: btdecorator_isattacking.md

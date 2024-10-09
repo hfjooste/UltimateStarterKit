@@ -19,4 +19,8 @@ The type of attack performed by an enemy character
 		<td>Ranged</td>
 		<td>A ranged attack</td>
 	</tr>
+	<tr>
+		<td>Rush</td>
+		<td>A melee attack while dashing forward</td>
+	</tr>
 </table>

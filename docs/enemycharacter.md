@@ -156,6 +156,24 @@ The <code>USKEnemyCharacter</code> uses the following components:
 		<td>TArray&lt;UAnimMontage*&gt;</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>RushAttackAnimationMontages</td>
+		<td>The rush attack animation montages</td>
+		<td>TArray&lt;UAnimMontage*&gt;</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>RushAttackDodgeConfig</td>
+		<td>The dodge config to use when starting the rush attack</td>
+		<td>FDodgeConfig</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>RushAttackCooldown</td>
+		<td>The cooldown before a rush attack is allowed again</td>
+		<td>float</td>
+		<td></td>
+	</tr>
 </table>
 
 ### Functions
@@ -292,6 +310,12 @@ The <code>USKEnemyCharacter</code> uses the following components:
 		<td></td>
 		<td><strong>bool</strong><br/>A boolean value indicating if the enemy is dodging</td>
 	</tr>
+	<tr>
+		<td>CanPerformRushAttack</td>
+		<td>Check if the enemy can perform a rush attack</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the enemy can perform a rush attack</td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -318,6 +342,7 @@ You can use the <code>USKEnemyCharacter</code> using Blueprints by adding one of
 	<li>Ultimate Starter Kit > AI > Start Dodging</li>
 	<li>Ultimate Starter Kit > AI > Stop Dodging</li>
 	<li>Ultimate Starter Kit > AI > Is Dodging</li>
+	<li>Ultimate Starter Kit > AI > Can Perform Rush Attack</li>
 </ul>
 
 ## C++ Usage
@@ -354,5 +379,6 @@ void ATestActor::Test()
 	USKEnemyCharacter->StartDodging(DodgeConfig);
 	USKEnemyCharacter->StopDodging();
 	bool IsDodgingValue = USKEnemyCharacter->IsDodging();
+	bool CanPerformRushAttackValue = USKEnemyCharacter->CanPerformRushAttack();
 }
 ```

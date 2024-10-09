@@ -25,4 +25,9 @@ enum class EEnemyAttackType : uint8
 	 * @brief A ranged attack
 	 */
 	Ranged,
+
+	/**
+	 * @brief A melee attack while dashing forward
+	 */
+	Rush,
 };

@@ -168,6 +168,24 @@ public:
 	TArray<UAnimMontage*> RangedAttackAnimationMontages;
 
 	/**
+	 * @brief The rush attack animation montages
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Attack")
+	TArray<UAnimMontage*> RushAttackAnimationMontages;
+
+	/**
+	 * @brief The dodge config to use when starting the rush attack
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Attack")
+	FDodgeConfig RushAttackDodgeConfig;
+
+	/**
+	 * @brief The cooldown before a rush attack is allowed again
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Attack")
+	float RushAttackCooldown;
+
+	/**
 	 * @brief Constructor for the enemy character
 	 */
 	AUSKEnemyCharacter();
@@ -311,11 +329,23 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
 	virtual bool IsDodging() const;
 
+	/**
+	 * @brief Check if the enemy can perform a rush attack
+	 * @return A boolean value indicating if the enemy can perform a rush attack
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|AI")
+	bool CanPerformRushAttack() const;
+
 protected:
 	/**
 	 * @brief Overridable native event for when play begins for this actor
 	 */
 	virtual void BeginPlay() override;
+
+	/**
+	 * @brief Overridable native event for when the actor is being destroyed
+	 */
+	virtual void BeginDestroy() override;
 
 private:
 	/**
@@ -350,6 +380,16 @@ private:
 	bool bIsDodging;
 
 	/**
+	 * @brief Can the enemy perform a rush attack?
+	 */
+	bool bCanPerformRushAttack = true;
+
+	/**
+	 * @brief The timer handle used for the rush attack cooldown
+	 */
+	FTimerHandle RushAttackCooldownTimerHandle;
+
+	/**
 	 * @brief The current attack type
 	 */
 	EEnemyAttackType CurrentAttackType;
@@ -376,4 +416,10 @@ private:
 	UFUNCTION()
 	void OnAttackColliderOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	/**
+	 * @brief Allow the enemy to perform a rush attack
+	 */
+	UFUNCTION()
+	void AllowRushAttack();
 };
