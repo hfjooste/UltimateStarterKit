@@ -34,6 +34,12 @@ The animation instance for the enemy character
 		<td>UAnimSequence*</td>
 		<td><code>nullptr</code></td>
 	</tr>
+	<tr>
+		<td>WaitingForExecutionAnimation</td>
+		<td>The animation played when the character is waiting to be executed</td>
+		<td>UAnimSequence*</td>
+		<td><code>nullptr</code></td>
+	</tr>
 </table>
 
 ### Functions
@@ -63,6 +69,12 @@ The animation instance for the enemy character
 		<td><strong>bool</strong><br/>A boolean value indicating if the character is busy spawning</td>
 	</tr>
 	<tr>
+		<td>IsWaitingForExecution</td>
+		<td>Check if the character is waiting to be executed</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the character is waiting to be executed</td>
+	</tr>
+	<tr>
 		<td>GetMovementSpeed</td>
 		<td>Get the movement speed of the character</td>
 		<td></td>
@@ -76,6 +88,7 @@ You can use the <code>USKEnemyAnimationInstance</code> using Blueprints by addin
 	<li>Animations > Spawning Started</li>
 	<li>Animations > Spawning Completed</li>
 	<li>Animations > Is Spawning</li>
+	<li>Animations > Is Waiting For Execution</li>
 	<li>Animations > Get Movement Speed</li>
 </ul>
 
@@ -95,6 +108,7 @@ void ATestActor::Test()
 	USKEnemyAnimationInstance->SpawningStarted();
 	USKEnemyAnimationInstance->SpawningCompleted();
 	bool IsSpawningValue = USKEnemyAnimationInstance->IsSpawning();
+	bool IsWaitingForExecutionValue = USKEnemyAnimationInstance->IsWaitingForExecution();
 	float MovementSpeed = USKEnemyAnimationInstance->GetMovementSpeed();
 }
 ```

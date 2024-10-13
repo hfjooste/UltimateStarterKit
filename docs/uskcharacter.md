@@ -935,6 +935,24 @@ The <code>USKCharacter</code> uses the following components:
 		<td><strong>bool</strong><br/>A boolean value indicating if the character is dead</td>
 	</tr>
 	<tr>
+		<td>StartExecution</td>
+		<td>Start the execution sequence</td>
+		<td><strong>ExecutionData (UExecutionData*)</strong><br/>The data describing the execution sequence<br/><br/><strong>Enemy (AActor*)</strong><br/>A reference to the enemy character that is being executed</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>CompleteExecution</td>
+		<td>Complete the execution sequence</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GetExecutionLocation</td>
+		<td>Get the location of the player during the execution sequence</td>
+		<td><strong>ExecutionData (UExecutionData*)</strong><br/>The data describing the execution sequence<br/><br/><strong>Enemy (AActor*)</strong><br/>A reference to the enemy character that is being executed</td>
+		<td><strong>FVector</strong><br/>The location of the player during the execution sequence</td>
+	</tr>
+	<tr>
 		<td>StartFiringWeapon</td>
 		<td>Start firing the current weapon</td>
 		<td></td>

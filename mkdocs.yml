@@ -74,6 +74,7 @@ nav:
       - Animation Instance: enemyanimationinstance.md
       - Attack Start Anim Notify: enemyattackstartanimnotify.md
       - Attack End Anim Notify: enemyattackendanimnotify.md
+      - Execution End Anim Notify: enemyexecutionendanimnotify.md
     - Attackable Object Component: attackableobjectcomponent.md
     - Wander Area: enemywanderarea.md
     - Patrol Point: enemypatrolpoint.md
@@ -93,6 +94,7 @@ nav:
         - Is Staggered: btdecorator_isstaggered.md
         - Is Summoning Enemy: btdecorator_isssummoningenemy.md
         - Is Target Dead: btdecorator_istargetdead.md
+        - Is Waiting For Execution: btdecorator_iswaitingforexecution.md
         - Is Wander Paused: btdecorator_iswanderpaused.md
         - Was Initialized: btdecorator_wasinitialized.md
         - Was Target Reached: btdecorator_wastargetreached.md
@@ -158,6 +160,7 @@ nav:
     - Animation Instance: characteranimationinstance.md
     - Dodge Config: dodgeconfig.md
     - Shadow Decal: platformershadow.md
+    - Execution Data: executiondata.md
   - Weapons:
     - Weapon: weapon.md
     - Weapon Type: weapontype.md

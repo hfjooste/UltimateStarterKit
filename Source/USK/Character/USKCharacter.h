@@ -2,8 +2,10 @@
 
 #pragma once
 
+#include "CoreMinimal.h"
 #include "CameraPerspective.h"
 #include "ShadowDecal.h"
+#include "ExecutionData.h"
 #include "InputActionValue.h"
 #include "NiagaraCommon.h"
 #include "Camera/CameraShakeBase.h"
@@ -1021,6 +1023,29 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Character")
 	bool IsDead() const;
 
+	/**
+	 * @brief Start the execution sequence
+	 * @param ExecutionData The data describing the execution sequence
+	 * @param Enemy A reference to the enemy character that is being executed
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character")
+	virtual void StartExecution(UExecutionData* ExecutionData, AActor* Enemy);
+
+	/**
+	 * @brief Complete the execution sequence
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character")
+	virtual void CompleteExecution();
+
+	/**
+	 * @brief Get the location of the player during the execution sequence
+	 * @param ExecutionData The data describing the execution sequence
+	 * @param Enemy A reference to the enemy character that is being executed
+	 * @return The location of the player during the execution sequence
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character")
+	FVector GetExecutionLocation(UExecutionData* ExecutionData, AActor* Enemy) const;
+
 protected:
 	/**
 	 * @brief A reference to the player controller
@@ -1032,6 +1057,11 @@ protected:
 	 * @brief Overridable native event for when play begins for this actor
 	 */
 	virtual void BeginPlay() override;
+
+	/**
+	 * @brief Overridable native event for when the actor is being destroyed
+	 */
+	virtual void BeginDestroy() override;
 
 	/**
 	 * @brief Event called every frame, if ticking is enabled
@@ -1388,6 +1418,11 @@ private:
 	 * @brief The timer handle used to cancel the buffered jump
 	 */
 	FTimerHandle JumpBufferTimerHandle;
+
+	/**
+	 * @brief The timer handle used to complete the execute sequence 
+	 */
+	FTimerHandle CompleteExecuteAnimationTimerHandle;
 
 	/**
 	 * @brief The current bunny hopping stacks

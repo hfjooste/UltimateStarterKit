@@ -25,6 +25,11 @@ The <code>USKEnemyCharacter</code> uses the following components:
 		<td>The component used to allow the actor to be attacked</td>
 		<td>UAttackableObjectComponent*</td>
 	</tr>
+	<tr>
+		<td>ExecuteCollider</td>
+		<td>The collider used to execute the enemy</td>
+		<td>UBoxComponent*</td>
+	</tr>
 </table>
 
 ## API Reference
@@ -316,6 +321,36 @@ The <code>USKEnemyCharacter</code> uses the following components:
 		<td></td>
 		<td><strong>bool</strong><br/>A boolean value indicating if the enemy can perform a rush attack</td>
 	</tr>
+	<tr>
+		<td>IsWaitingForExecution</td>
+		<td>Check if the enemy is waiting to be executed</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the enemy is waiting to be executed</td>
+	</tr>
+	<tr>
+		<td>StartWaitingForExecutionState</td>
+		<td>Start waiting for the execution</td>
+		<td><strong>Duration (float)</strong><br/>The duration to wait for the execution</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>EndWaitingForExecutionState</td>
+		<td>End waiting for the execution</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Execute</td>
+		<td>Execute the enemy</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>CompleteExecution</td>
+		<td>Complete the execution sequence</td>
+		<td><strong>BoneName (FName)</strong><br/>The name of the bone where the damage is applied<br/><br/><strong>HideBone (bool)</strong><br/>Should the bone be hidden?</td>
+		<td></td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -343,6 +378,11 @@ You can use the <code>USKEnemyCharacter</code> using Blueprints by adding one of
 	<li>Ultimate Starter Kit > AI > Stop Dodging</li>
 	<li>Ultimate Starter Kit > AI > Is Dodging</li>
 	<li>Ultimate Starter Kit > AI > Can Perform Rush Attack</li>
+	<li>Ultimate Starter Kit > AI > Is Waiting For Execution</li>
+	<li>Ultimate Starter Kit > AI > Start Waiting For Execution State</li>
+	<li>Ultimate Starter Kit > AI > End Waiting For Execution State</li>
+	<li>Ultimate Starter Kit > AI > Execute</li>
+	<li>Ultimate Starter Kit > AI > Complete Execution</li>
 </ul>
 
 ## C++ Usage
@@ -380,5 +420,10 @@ void ATestActor::Test()
 	USKEnemyCharacter->StopDodging();
 	bool IsDodgingValue = USKEnemyCharacter->IsDodging();
 	bool CanPerformRushAttackValue = USKEnemyCharacter->CanPerformRushAttack();
+	bool IsWaitingForExecutionValue = USKEnemyCharacter->IsWaitingForExecution();
+	USKEnemyCharacter->StartWaitingForExecutionState(Duration);
+	USKEnemyCharacter->EndWaitingForExecutionState();
+	USKEnemyCharacter->Execute();
+	USKEnemyCharacter->CompleteExecution(BoneName, HideBone);
 }
 ```

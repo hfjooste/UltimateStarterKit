@@ -3,17 +3,29 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "EnemyAttackEndAnimNotify.generated.h"
+#include "EnemyExecutionEndAnimNotify.generated.h"
 
 /**
- * @brief Animation notify used to end enemy attacks
+ * @brief Animation notify used to end enemy executions
  */
 UCLASS()
-class USK_API UEnemyAttackEndAnimNotify : public UAnimNotify
+class USK_API UEnemyExecutionEndAnimNotify : public UAnimNotify
 {
 	GENERATED_BODY()
 	
 public:
+	/**
+	 * @brief The name of the bone where the damage is applied
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit")
+	FName BoneName;
+
+	/**
+	 * @brief Should the bone be hidden after the execution?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit")
+	bool bHideBone;
+	
 	/**
 	 * @brief Called when the anim notify is triggered
 	 * @param MeshComp The mesh component that triggered the notify

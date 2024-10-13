@@ -15,9 +15,12 @@ AUSKEnemyCharacter::AUSKEnemyCharacter()
 {
 	AttackCollider = CreateDefaultSubobject<USphereComponent>(TEXT("Attack Collider"));
 	AttackableObjectComponent = CreateDefaultSubobject<UAttackableObjectComponent>(TEXT("Attackable Object Component"));
+	ExecuteCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("Execute Collider"));
 	
 	AttackCollider->SetupAttachment(GetMesh(), AttackColliderAttachBoneName);
+	ExecuteCollider->SetupAttachment(RootComponent, AttackColliderAttachBoneName);
 	AttackCollider->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+	ExecuteCollider->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 }
 
 /**
@@ -48,6 +51,7 @@ void AUSKEnemyCharacter::BeginDestroy()
 {
 	Super::BeginDestroy();
 	RushAttackCooldownTimerHandle.Invalidate();
+	EndWaitingForExecutionTimerHandle.Invalidate();
 }
 
 /**
@@ -300,6 +304,59 @@ bool AUSKEnemyCharacter::IsDodging() const
 bool AUSKEnemyCharacter::CanPerformRushAttack() const
 {
 	return bCanPerformRushAttack;
+}
+
+/**
+ * @brief Check if the enemy is waiting to be executed
+ * @return A boolean value indicating if the enemy is waiting to be executed
+ */
+bool AUSKEnemyCharacter::IsWaitingForExecution() const
+{
+	return bIsWaitingForExecution;
+}
+
+/**
+ * @brief Start waiting for the execution
+ * @param Duration The duration to wait for the execution
+ */
+void AUSKEnemyCharacter::StartWaitingForExecutionState(const float Duration)
+{
+	bWasExecutionStateStarted = true;
+	bIsWaitingForExecution = true;
+	ExecuteCollider->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+
+	GetOwner()->GetWorld()->GetTimerManager().SetTimer(EndWaitingForExecutionTimerHandle, this,
+		&AUSKEnemyCharacter::EndWaitingForExecutionState, Duration, false);
+}
+
+/**
+ * @brief End waiting for the execution
+ */
+void AUSKEnemyCharacter::EndWaitingForExecutionState()
+{
+	bIsWaitingForExecution = false;
+	ExecuteCollider->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+}
+
+/**
+ * @brief Execute the enemy
+ */
+void AUSKEnemyCharacter::Execute()
+{
+	GetWorld()->GetTimerManager().ClearTimer(EndWaitingForExecutionTimerHandle);
+}
+
+/**
+ * @brief Complete the execution sequence
+ * @param BoneName The name of the bone where the damage is applied
+ * @param HideBone Should the bone be hidden?
+ */
+void AUSKEnemyCharacter::CompleteExecution(const FName BoneName, const bool HideBone)
+{
+	if (HideBone)
+	{
+		GetMesh()->HideBoneByName(BoneName, PBO_Term);	
+	}
 }
 
 /**

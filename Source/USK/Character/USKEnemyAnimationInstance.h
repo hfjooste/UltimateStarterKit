@@ -42,6 +42,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations")
 	UAnimSequence* RunAnimation;
 
+	/**
+	 * @brief The animation played when the character is waiting to be executed
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Animations")
+	UAnimSequence* WaitingForExecutionAnimation;
+
 protected:	
 	/**
 	 * @brief Executed when begin play is called on the owning component
@@ -74,6 +80,13 @@ protected:
 	bool IsSpawning() const;
 
 	/**
+	 * @brief Check if the character is waiting to be executed
+	 * @return A boolean value indicating if the character is waiting to be executed
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (BlueprintThreadSafe), Category = "Animations")
+	bool IsWaitingForExecution() const;
+
+	/**
 	 * @brief Get the movement speed of the character
 	 * @return The movement speed of the character
 	 */
@@ -91,6 +104,11 @@ private:
 	 * @brief Is the character busy spawning?
 	 */
 	bool bIsSpawning;
+
+	/**
+	 * @brief Is the character waiting to be executed?
+	 */
+	bool bIsWaitingForExecution;
 
 	/**
 	 * @brief The movement speed of the character

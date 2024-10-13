@@ -27,6 +27,7 @@ void UUSKEnemyAnimationInstance::NativeUpdateAnimation(const float DeltaSeconds)
 	}
 
 	bIsSpawning = EnemyCharacter->IsSpawning();
+	bIsWaitingForExecution = EnemyCharacter->IsWaitingForExecution();
 	MovementSpeed = UKismetMathLibrary::VSizeXY(EnemyCharacter->GetVelocity());
 }
 
@@ -59,6 +60,15 @@ void UUSKEnemyAnimationInstance::SpawningCompleted() const
 bool UUSKEnemyAnimationInstance::IsSpawning() const
 {
 	return bIsSpawning;
+}
+
+/**
+ * @brief Check if the character is waiting to be executed
+ * @return A boolean value indicating if the character is waiting to be executed
+ */
+bool UUSKEnemyAnimationInstance::IsWaitingForExecution() const
+{
+	return bIsWaitingForExecution;
 }
 
 /**

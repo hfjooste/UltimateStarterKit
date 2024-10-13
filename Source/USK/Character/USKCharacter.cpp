@@ -20,6 +20,7 @@
 #include "USK/Audio/AudioUtils.h"
 #include "USK/Components/AttackableObjectComponent.h"
 #include "USK/Components/InteractTrigger.h"
+#include "ExecutionData.h"
 #include "USK/Data/StatsComponent.h"
 #include "USK/Logger/Log.h"
 #include "USK/Weapons/WeaponUtils.h"
@@ -123,6 +124,16 @@ void AUSKCharacter::BeginPlay()
 	DefaultCameraFov = GetCameraComponent()->FieldOfView;
 	StatsComponent = dynamic_cast<UStatsComponent*>(GetComponentByClass(UStatsComponent::StaticClass()));	
 	NotifyWeaponUpdated();
+}
+
+/**
+ * @brief Overridable native event for when the actor is being destroyed
+ */
+void AUSKCharacter::BeginDestroy()
+{
+	Super::BeginDestroy();
+	JumpBufferTimerHandle.Invalidate();
+	CompleteExecuteAnimationTimerHandle.Invalidate();
 }
 
 /**
@@ -577,6 +588,49 @@ void AUSKCharacter::UpdateDeadState(const bool NewValue)
 bool AUSKCharacter::IsDead() const
 {
 	return bIsDead;
+}
+
+/**
+ * @brief Start the execution sequence
+ * @param ExecutionData The data describing the execution sequence
+ * @param Enemy A reference to the enemy character that is being executed
+ */
+void AUSKCharacter::StartExecution(UExecutionData* ExecutionData, AActor* Enemy)
+{
+	const FVector TargetLocation = GetExecutionLocation(ExecutionData, Enemy);
+	const FRotator TargetRotation = UKismetMathLibrary::FindLookAtRotation(
+		TargetLocation, Enemy->GetActorLocation());
+	Controller->SetControlRotation(TargetRotation);
+	
+	DisableInput(PlayerController);
+	GetCameraComponent()->bUsePawnControlRotation = false;
+	PlayAnimMontage(ExecutionData->PlayerAnimation);
+
+	GetWorld()->GetTimerManager().SetTimer(CompleteExecuteAnimationTimerHandle, this,
+		&AUSKCharacter::CompleteExecution, ExecutionData->PlayerAnimation->GetPlayLength(), false);
+}
+
+/**
+ * @brief Complete the execution sequence
+ */
+void AUSKCharacter::CompleteExecution()
+{
+	EnableInput(PlayerController);
+	GetCameraComponent()->bUsePawnControlRotation = true;
+}
+
+/**
+ * @brief Get the location of the player during the execution sequence
+ * @param ExecutionData The data describing the execution sequence
+ * @param Enemy A reference to the enemy character that is being executed
+ * @return The location of the player during the execution sequence
+ */
+FVector AUSKCharacter::GetExecutionLocation(UExecutionData* ExecutionData, AActor* Enemy) const
+{
+	return Enemy->GetActorLocation() +
+		(Enemy->GetActorForwardVector() * ExecutionData->PlayerForwardOffset) +
+		(Enemy->GetActorRightVector() * ExecutionData->PlayerRightOffset) +
+		(Enemy->GetActorUpVector() * ExecutionData->PlayerUpOffset);
 }
 
 /**

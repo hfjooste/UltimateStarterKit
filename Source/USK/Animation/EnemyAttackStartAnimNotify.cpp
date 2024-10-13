@@ -1,4 +1,6 @@
-﻿#include "EnemyAttackStartAnimNotify.h"
+﻿// Created by Henry Jooste
+
+#include "EnemyAttackStartAnimNotify.h"
 
 #include "USK/Character/USKEnemyCharacter.h"
 

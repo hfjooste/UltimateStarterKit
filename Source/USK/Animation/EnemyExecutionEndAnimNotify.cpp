@@ -1,6 +1,6 @@
 ﻿// Created by Henry Jooste
 
-#include "EnemyAttackEndAnimNotify.h"
+#include "EnemyExecutionEndAnimNotify.h"
 
 #include "USK/Character/USKEnemyCharacter.h"
 
@@ -10,7 +10,7 @@
  * @param Animation The animation that triggered the notify
  * @param EventReference The reference to the notify event
  */
-void UEnemyAttackEndAnimNotify::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation,
+void UEnemyExecutionEndAnimNotify::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation,
 	const FAnimNotifyEventReference& EventReference)
 {
 	Super::Notify(MeshComp, Animation, EventReference);
@@ -18,6 +18,6 @@ void UEnemyAttackEndAnimNotify::Notify(USkeletalMeshComponent* MeshComp, UAnimSe
 	AUSKEnemyCharacter* EnemyCharacter = dynamic_cast<AUSKEnemyCharacter*>(MeshComp->GetOwner());
 	if (IsValid(EnemyCharacter))
 	{
-		EnemyCharacter->OnAttackStopped();
+		EnemyCharacter->CompleteExecution(BoneName, bHideBone);
 	}
 }

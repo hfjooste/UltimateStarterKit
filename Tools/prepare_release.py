@@ -7,6 +7,7 @@ os.system(f"python \"{docs}\" --input \"Character\\USKEnemyCharacter\" --output 
 os.system(f"python \"{docs}\" --input \"Character\\USKEnemyAnimationInstance\" --output enemyanimationinstance")
 os.system(f"python \"{docs}\" --input \"Animation\\EnemyAttackStartAnimNotify\" --output enemyattackstartanimnotify")
 os.system(f"python \"{docs}\" --input \"Animation\\EnemyAttackEndAnimNotify\" --output enemyattackendanimnotify")
+os.system(f"python \"{docs}\" --input \"Animation\\EnemyExecutionEndAnimNotify\" --output enemyexecutionendanimnotify")
 os.system(f"python \"{docs}\" --input \"Components\\AttackableObjectComponent\" --output attackableobjectcomponent")
 os.system(f"python \"{docs}\" --input \"AI\\EnemyWanderArea\" --output enemywanderarea")
 os.system(f"python \"{docs}\" --input \"AI\\EnemyPatrolPoint\" --output enemypatrolpoint")
@@ -26,6 +27,7 @@ os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskIsSpawning\" --output
 os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskIsStaggered\" --output btdecorator_isstaggered")
 os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskIsSummoningEnemy\" --output btdecorator_isssummoningenemy")
 os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskIsTargetDead\" --output btdecorator_istargetdead")
+os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskIsWaitingForExecution\" --output btdecorator_iswaitingforexecution")
 os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskIsWanderPaused\" --output btdecorator_iswanderpaused")
 os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskWasInitialized\" --output btdecorator_wasinitialized")
 os.system(f"python \"{docs}\" --input \"AI\\BTDecorator_UskWasTargetReached\" --output btdecorator_wastargetreached")
@@ -64,6 +66,7 @@ os.system(f"python \"{docs}\" --input \"Audio\\USKAudioComponent\" --output uska
 os.system(f"python \"{docs}\" --input \"Character\\USKCharacterAnimationInstance\" --output characteranimationinstance")
 os.system(f"python \"{docs}\" --input \"Character\\ShadowDecal\" --output platformershadow")
 os.system(f"python \"{docs}\" --input \"Character\\USKCharacter\" --output uskcharacter")
+os.system(f"python \"{docs}\" --input \"Character\\ExecutionData\" --output executiondata")
 
 os.system(f"python \"{docs}\" --input \"Core\\InputDevice\" --output inputdevice")
 os.system(f"python \"{docs}\" --input \"Core\\USKGameInstance\" --output gameinstance")

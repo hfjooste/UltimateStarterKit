@@ -6,9 +6,11 @@
 #include "DodgeConfig.h"
 #include "EnemyAttackType.h"
 #include "BehaviorTree/BehaviorTree.h"
+#include "Components/BoxComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/Character.h"
 #include "USK/AI/PatrolType.h"
+#include "USK/Animation/EnemyExecutionEndAnimNotify.h"
 #include "USKEnemyCharacter.generated.h"
 
 class AUSKCharacter;
@@ -37,6 +39,13 @@ class USK_API AUSKEnemyCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
 		meta=(AllowPrivateAccess = "true"))
 	UAttackableObjectComponent* AttackableObjectComponent;
+
+	/**
+	 * @brief The collider used to execute the enemy
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ultimate Starter Kit|Character",
+		meta=(AllowPrivateAccess = "true"))
+	UBoxComponent* ExecuteCollider;
 	
 public:
 	/**
@@ -336,7 +345,51 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|AI")
 	bool CanPerformRushAttack() const;
 
+	/**
+	 * @brief Check if the enemy is waiting to be executed
+	 * @return A boolean value indicating if the enemy is waiting to be executed
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|AI")
+	bool IsWaitingForExecution() const;
+
+	/**
+	 * @brief Start waiting for the execution
+	 * @param Duration The duration to wait for the execution
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	virtual void StartWaitingForExecutionState(float Duration);
+
+	/**
+	 * @brief End waiting for the execution
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	virtual void EndWaitingForExecutionState();
+
+	/**
+	 * @brief Execute the enemy
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	virtual void Execute();
+
+	/**
+	 * @brief Complete the execution sequence
+	 * @param BoneName The name of the bone where the damage is applied
+	 * @param HideBone Should the bone be hidden?
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|AI")
+	virtual void CompleteExecution(FName BoneName, bool HideBone);
+
 protected:
+	/**
+	 * @brief Was the execution state started?
+	 */
+	bool bWasExecutionStateStarted;
+
+	/**
+	 * @brief Is the enemy waiting to be executed?
+	 */
+	bool bIsWaitingForExecution;
+	
 	/**
 	 * @brief Overridable native event for when play begins for this actor
 	 */
@@ -398,6 +451,11 @@ private:
 	 * @brief The timer handle used to end the staggered state
 	 */
 	FTimerHandle StaggerTimerHandle;
+
+	/**
+	 * @brief The timer handle used to end the waiting for execution state
+	 */
+	FTimerHandle EndWaitingForExecutionTimerHandle;
 
 	/**
 	 * @brief Initialize the patrol points

@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿// Created by Henry Jooste
+
+#pragma once
 
 #include "CoreMinimal.h"
 #include "EnemyAttackStartAnimNotify.generated.h"
