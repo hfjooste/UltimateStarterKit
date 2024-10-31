@@ -233,6 +233,18 @@ public:
 	ESettingsFpsCounterType GraphicsFpsIndicatorType;
 
 	/**
+	 * @brief Was the visuals field of view setting modified?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	bool VisualsFieldOfViewModified;
+
+	/**
+	 * @brief The visuals field of view value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	int VisualsFieldOfView;
+
+	/**
 	 * @brief Was the visuals motion blur setting modified?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")

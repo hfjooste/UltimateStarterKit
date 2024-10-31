@@ -23,6 +23,7 @@
 #include "ExecutionData.h"
 #include "USK/Data/StatsComponent.h"
 #include "USK/Logger/Log.h"
+#include "USK/Settings/SettingsUtils.h"
 #include "USK/Weapons/WeaponUtils.h"
 
 /**
@@ -72,6 +73,7 @@ void AUSKCharacter::BeginPlay()
 	GetCharacterMovement()->MaxAcceleration = MaxAcceleration;
 
 	InitializeCameraPerspective();
+	InitializeCameraFieldOfView();
 
 	USK_LOG_TRACE("Initializing character jumping");
 	JumpMaxCount = 1;
@@ -121,7 +123,6 @@ void AUSKCharacter::BeginPlay()
 	}
 
 	DefaultMeshLocation = GetMesh()->GetRelativeLocation();
-	DefaultCameraFov = GetCameraComponent()->FieldOfView;
 	StatsComponent = dynamic_cast<UStatsComponent*>(GetComponentByClass(UStatsComponent::StaticClass()));	
 	NotifyWeaponUpdated();
 }
@@ -631,6 +632,32 @@ FVector AUSKCharacter::GetExecutionLocation(UExecutionData* ExecutionData, AActo
 		(Enemy->GetActorForwardVector() * ExecutionData->PlayerForwardOffset) +
 		(Enemy->GetActorRightVector() * ExecutionData->PlayerRightOffset) +
 		(Enemy->GetActorUpVector() * ExecutionData->PlayerUpOffset);
+}
+
+/**
+ * @brief Initialize the field of view of the camera
+ */
+void AUSKCharacter::InitializeCameraFieldOfView()
+{
+	const UUSKGameInstance* GameInstance = dynamic_cast<UUSKGameInstance*>(GetGameInstance());
+	if (!IsValid(GameInstance))
+	{
+		USK_LOG_ERROR("Unable to apply FOV. Game instance is not USKGameInstance");
+		return;
+	}
+
+	if (!IsValid(GameInstance->SettingsConfig))
+	{
+		USK_LOG_ERROR("Unable to apply FOV. Setting configuration not specified in game instance");
+		return;
+	}
+	
+	const USettingsData* Settings = USettingsUtils::LoadSettings();
+	const int Value = Settings->VisualsFieldOfViewModified
+			? Settings->VisualsFieldOfView
+			: GameInstance->SettingsConfig->VisualsFieldOfViewDefault;
+	GetCameraComponent()->SetFieldOfView(Value);
+	DefaultCameraFov = Value;
 }
 
 /**
@@ -1732,7 +1759,7 @@ void AUSKCharacter::UpdateSpeedFov(const float DeltaSeconds) const
 
 	const float CurrentSpeed = UKismetMathLibrary::VSizeXY(GetMovementComponent()->Velocity);
 	const float CurrentFov = GetCameraComponent()->FieldOfView;
-	const float TargetFov = SpeedFovCurve->GetFloatValue(CurrentSpeed);
+	const float TargetFov = DefaultCameraFov * SpeedFovCurve->GetFloatValue(CurrentSpeed);
 	const float NewFov = FMath::FInterpTo(CurrentFov, TargetFov, DeltaSeconds, SpeedFovInterpSpeed);
 	GetCameraComponent()->SetFieldOfView(NewFov);
 }

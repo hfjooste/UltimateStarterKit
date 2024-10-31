@@ -1046,6 +1046,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character")
 	FVector GetExecutionLocation(UExecutionData* ExecutionData, AActor* Enemy) const;
 
+	/**
+	 * @brief Initialize the field of view of the camera
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character")
+	void InitializeCameraFieldOfView();
+
 protected:
 	/**
 	 * @brief A reference to the player controller

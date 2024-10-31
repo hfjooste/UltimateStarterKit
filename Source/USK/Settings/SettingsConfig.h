@@ -14,6 +14,7 @@
 #include "Items/SettingsItemAudioUi.h"
 #include "Items/SettingsItemAudioVoice.h"
 #include "Items/SettingsItemControlsRemap.h"
+#include "Items/SettingsItemVisualsFieldOfView.h"
 #include "Items/SettingsItemGameplayDifficulty.h"
 #include "Items/SettingsItemGraphicsAntiAliasing.h"
 #include "Items/SettingsItemGraphicsFpsIndicator.h"
@@ -822,6 +823,41 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|FPS Indicator",
 		DisplayName = "Default Value")
 	ESettingsFpsCounterType GraphicsFpsIndicatorTypeDefault;
+
+	/**
+	 * @brief The implementation for the visuals field of view settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Visuals|Field of View",
+		DisplayName = "Implementation")
+	TSubclassOf<USettingsItem> VisualsFieldOfViewImplementation = USettingsItemVisualsFieldOfView::StaticClass();
+
+	/**
+	 * @brief The text displayed in the visuals field of view settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Visuals|Field of View",
+		DisplayName = "Title")
+	FText VisualsFieldOfViewText;
+
+	/**
+	 * @brief The minimum visuals field of view value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Visuals|Field of View",
+		DisplayName = "Min")
+	int VisualFieldOfViewMin = 50;
+
+	/**
+	 * @brief The maximum visuals field of view value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Visuals|Field of View",
+		DisplayName = "Max")
+	int VisualFieldOfViewMax = 130;
+
+	/**
+	 * @brief The default value of the visuals field of view setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Visuals|Field of View",
+		DisplayName = "Default Value")
+	int VisualsFieldOfViewDefault = 80;
 
 	/**
 	 * @brief The implementation for the visuals motion blur settings item
