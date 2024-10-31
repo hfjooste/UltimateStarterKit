@@ -13,6 +13,7 @@
 #include "USK/Character/USKEnemyCharacter.h"
 #include "USK/Components/InteractTrigger.h"
 #include "USK/Core/USKGameInstance.h"
+#include "USK/Core/USKPostProcessActor.h"
 #include "USK/Dialogue/Dialogue.h"
 #include "USK/Dialogue/DialogueManager.h"
 #include "USK/Dialogue/DialogueWidget.h"
@@ -64,6 +65,8 @@ void FUSKEditorModule::StartupModule()
 		FColor(10, 25, 175), UUSKSaveGame::StaticClass());
 	RegisterBlueprint(AssetTools, UskCategory, "Core", "Log Configuration",
 		FColor(10, 25, 175), ULogConfig::StaticClass());
+	RegisterBlueprint(AssetTools, UskCategory, "Core", "Post Process Actor",
+		FColor(10, 25, 175), AUSKPostProcessActor::StaticClass());
 
 	RegisterBlueprint(AssetTools, UskCategory, "Gameplay", "USK Character",
 		FColor(63, 126, 255), AUSKCharacter::StaticClass());

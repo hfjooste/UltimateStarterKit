@@ -295,6 +295,8 @@ USettingsItem* USettingsUtils::GetSettingsItem(const ESettingsItemType SettingsI
 	case ESettingsItemType::ControlsRemap:
 		return Config->ControlsRemapImplementation->GetDefaultObject<USettingsItem>();
 #endif
+	case ESettingsItemType::VisualsMotionBlur:
+		return Config->VisualsMotionBlurImplementation->GetDefaultObject<USettingsItem>();
 	default:
 		USK_LOG_WARNING("Settings item type not yet implemented");
 		return nullptr;

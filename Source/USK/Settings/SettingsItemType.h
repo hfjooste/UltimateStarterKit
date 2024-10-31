@@ -121,4 +121,9 @@ enum class ESettingsItemType : uint8
 	 * @brief Remap the controls
 	 */
 	ControlsRemap = 200,
+
+	/**
+	 * @brief The visuals motion blur setting
+	 */
+	VisualsMotionBlur = 251,
 };

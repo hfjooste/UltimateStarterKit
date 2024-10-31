@@ -233,6 +233,18 @@ public:
 	ESettingsFpsCounterType GraphicsFpsIndicatorType;
 
 	/**
+	 * @brief Was the visuals motion blur setting modified?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	bool VisualsMotionBlurModified;
+
+	/**
+	 * @brief The visuals motion blur value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	int VisualsMotionBlur;
+
+	/**
 	 * @brief The color blind mode
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")

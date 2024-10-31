@@ -378,6 +378,33 @@ void UUSKGameInstance::HideMessagePopup()
 }
 
 /**
+ * @brief Add a post process actor to the list of current post process actors
+ * @param Actor The actor to add to the list
+ */
+void UUSKGameInstance::AddPostProcessActor(AUSKPostProcessActor* Actor)
+{
+	PostProcessActors.AddUnique(Actor);
+}
+
+/**
+ * @brief Remove a post process actor from the list of current post process actors
+ * @param Actor The actor to remove from the list
+ */
+void UUSKGameInstance::RemovePostProcessActor(AUSKPostProcessActor* Actor)
+{
+	PostProcessActors.Remove(Actor);
+}
+
+/**
+ * @brief Get a list of all the current post process actors
+ * @return The list of post process actors
+ */
+TArray<AUSKPostProcessActor*> UUSKGameInstance::GetPostProcessActors() const
+{
+	return PostProcessActors;
+}
+
+/**
  * @brief Load data at the specified index
  * @param Index The save slot index to load data from
  */

@@ -9,6 +9,7 @@
 #include "USK/Widgets/MessagePopupData.h"
 #include "USKGameInstance.generated.h"
 
+class AUSKPostProcessActor;
 class UFpsCounter;
 class UMessagePopupWidget;
 class ULogConfig;
@@ -304,6 +305,27 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void HideMessagePopup();
 
+	/**
+	 * @brief Add a post process actor to the list of current post process actors
+	 * @param Actor The actor to add to the list
+	 */
+	UFUNCTION(BlueprintCallable)
+	void AddPostProcessActor(AUSKPostProcessActor* Actor);
+
+	/**
+	 * @brief Remove a post process actor from the list of current post process actors
+	 * @param Actor The actor to remove from the list
+	 */
+	UFUNCTION(BlueprintCallable)
+	void RemovePostProcessActor(AUSKPostProcessActor* Actor);
+
+	/**
+	 * @brief Get a list of all the current post process actors
+	 * @return The list of post process actors
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	TArray<AUSKPostProcessActor*> GetPostProcessActors() const;
+
 protected:
 	/**
 	 * @brief Virtual function to allow custom GameInstances an opportunity to set up what it needs
@@ -335,6 +357,12 @@ private:
 	 */
 	UPROPERTY()
 	UFpsCounter* FpsCounter;
+
+	/**
+	 * @brief A list of the current post process actors
+	 */
+	UPROPERTY()
+	TArray<AUSKPostProcessActor*> PostProcessActors;
 
 	/**
 	 * @brief A boolean flag used to check if the features of the game instance was initialized

@@ -27,6 +27,7 @@
 #include "Items/SettingsItemGraphicsViewDistance.h"
 #include "Items/SettingsItemGraphicsVisualEffects.h"
 #include "Items/SettingsItemGraphicsVsync.h"
+#include "Items/SettingsItemVisualsMotionBlur.h"
 #include "SettingsConfig.generated.h"
 
 /**
@@ -821,6 +822,34 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics|FPS Indicator",
 		DisplayName = "Default Value")
 	ESettingsFpsCounterType GraphicsFpsIndicatorTypeDefault;
+
+	/**
+	 * @brief The implementation for the visuals motion blur settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Visuals|Motion Blur",
+		DisplayName = "Implementation")
+	TSubclassOf<USettingsItem> VisualsMotionBlurImplementation = USettingsItemVisualsMotionBlur::StaticClass();
+
+	/**
+	 * @brief The text displayed in the visuals motion blur settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Visuals|Motion Blur",
+		DisplayName = "Title")
+	FText VisualsMotionBlurText;
+
+	/**
+	 * @brief The array of visuals motion blur values
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Visuals|Motion Blur",
+		DisplayName = "Options")
+	TMap<float, FText> VisualsMotionBlurValues;
+
+	/**
+	 * @brief The default value of the visuals motion blur setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Visuals|Motion Blur",
+		DisplayName = "Default Value")
+	int VisualsMotionBlurDefault;
 
 	/**
 	 * @brief The implementation for the accessibility color blind mode settings item
