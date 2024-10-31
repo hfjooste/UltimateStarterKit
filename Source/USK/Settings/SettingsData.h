@@ -245,6 +245,18 @@ public:
 	int VisualsFieldOfView;
 
 	/**
+	 * @brief Was the visuals adaptive field of view setting modified?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	bool VisualsAdaptiveFieldOfViewModified;
+
+	/**
+	 * @brief The visuals adaptive field of view value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	bool VisualsAdaptiveFieldOfView;
+
+	/**
 	 * @brief Was the visuals motion blur setting modified?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")

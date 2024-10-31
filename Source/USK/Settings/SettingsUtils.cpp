@@ -295,8 +295,10 @@ USettingsItem* USettingsUtils::GetSettingsItem(const ESettingsItemType SettingsI
 	case ESettingsItemType::ControlsRemap:
 		return Config->ControlsRemapImplementation->GetDefaultObject<USettingsItem>();
 #endif
-	case ESettingsItemType::FieldOfView:
+	case ESettingsItemType::VisualsFieldOfView:
 		return Config->VisualsFieldOfViewImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::VisualsAdaptiveFieldOfView:
+		return Config->VisualsAdaptiveFieldOfViewImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::VisualsMotionBlur:
 		return Config->VisualsMotionBlurImplementation->GetDefaultObject<USettingsItem>();
 	default:

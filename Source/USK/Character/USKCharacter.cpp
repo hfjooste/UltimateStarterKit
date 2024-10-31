@@ -74,6 +74,7 @@ void AUSKCharacter::BeginPlay()
 
 	InitializeCameraPerspective();
 	InitializeCameraFieldOfView();
+	UpdateAdaptiveFieldOfViewStatus();
 
 	USK_LOG_TRACE("Initializing character jumping");
 	JumpMaxCount = 1;
@@ -658,6 +659,31 @@ void AUSKCharacter::InitializeCameraFieldOfView()
 			: GameInstance->SettingsConfig->VisualsFieldOfViewDefault;
 	GetCameraComponent()->SetFieldOfView(Value);
 	DefaultCameraFov = Value;
+}
+
+/**
+ * @brief Update the adaptive field of view enabled/disable status
+ */
+void AUSKCharacter::UpdateAdaptiveFieldOfViewStatus()
+{
+	const UUSKGameInstance* GameInstance = dynamic_cast<UUSKGameInstance*>(GetGameInstance());
+	if (!IsValid(GameInstance))
+	{
+		USK_LOG_ERROR("Unable to update adaptive field of view. Game instance is not USKGameInstance");
+		return;
+	}
+
+	if (!IsValid(GameInstance->SettingsConfig))
+	{
+		USK_LOG_ERROR("Unable to update adaptive field of view. Setting configuration not specified in game instance");
+		return;
+	}
+	
+	const USettingsData* Settings = USettingsUtils::LoadSettings();
+	const bool Value = Settings->VisualsAdaptiveFieldOfViewModified
+			? Settings->VisualsAdaptiveFieldOfView
+			: GameInstance->SettingsConfig->VisualsAdaptiveFieldOfViewDefault;
+	bAdaptiveFieldOfView = Value;
 }
 
 /**
@@ -1752,14 +1778,15 @@ float AUSKCharacter::GetMaxLookAtCenterRotation() const
  */
 void AUSKCharacter::UpdateSpeedFov(const float DeltaSeconds) const
 {
-	if (!bAdjustFovBasedOnSpeed || !IsValid(SpeedFovCurve))
+	if (!bAdaptiveFieldOfView || !IsValid(AdaptiveFieldOfViewCurve))
 	{
 		return;
 	}
 
 	const float CurrentSpeed = UKismetMathLibrary::VSizeXY(GetMovementComponent()->Velocity);
 	const float CurrentFov = GetCameraComponent()->FieldOfView;
-	const float TargetFov = DefaultCameraFov * SpeedFovCurve->GetFloatValue(CurrentSpeed);
-	const float NewFov = FMath::FInterpTo(CurrentFov, TargetFov, DeltaSeconds, SpeedFovInterpSpeed);
+	const float TargetFov = DefaultCameraFov * AdaptiveFieldOfViewCurve->GetFloatValue(CurrentSpeed);
+	const float NewFov = FMath::FInterpTo(CurrentFov, TargetFov,
+		DeltaSeconds, AdaptiveFieldOfViewInterpSpeed);
 	GetCameraComponent()->SetFieldOfView(NewFov);
 }

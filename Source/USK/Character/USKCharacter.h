@@ -624,22 +624,22 @@ public:
 	/**
 	 * @brief Should the camera field of view be adjusted based on the speed of the character?
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Speed Effects")
-	bool bAdjustFovBasedOnSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Adaptive Field of View")
+	bool bAdaptiveFieldOfView;
 
 	/**
 	 * @brief The float curve used to determine the FOV based on the character's speed
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Speed Effects",
-		meta=(EditCondition = "bAdjustFovBasedOnSpeed", EditConditionHides))
-	UCurveFloat* SpeedFovCurve;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Adaptive Field of View",
+		meta=(EditCondition = "bAdaptiveFieldOfView", EditConditionHides))
+	UCurveFloat* AdaptiveFieldOfViewCurve;
 
 	/**
 	 * @brief The speed used to interpolate the FOV based on the character's speed
 	 */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Speed Effects",
-		meta=(EditCondition = "bAdjustFovBasedOnSpeed", EditConditionHides))
-	float SpeedFovInterpSpeed = 5.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Character|Movement|Adaptive Field of View",
+		meta=(EditCondition = "bAdaptiveFieldOfView", EditConditionHides))
+	float AdaptiveFieldOfViewInterpSpeed = 5.0f;
 
     /**
      * @brief Can the character lean? 
@@ -1051,6 +1051,12 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character")
 	void InitializeCameraFieldOfView();
+
+	/**
+	 * @brief Update the adaptive field of view enabled/disable status
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character")
+	void UpdateAdaptiveFieldOfViewStatus();
 
 protected:
 	/**

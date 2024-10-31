@@ -123,12 +123,17 @@ enum class ESettingsItemType : uint8
 	ControlsRemap = 200,
 
 	/**
-	 * @brief The field of view setting
+	 * @brief The visuals field of view setting
 	 */
-	FieldOfView = 250,
+	VisualsFieldOfView = 250,
+
+	/**
+	 * @brief The visuals adaptive field of view setting
+	 */
+	VisualsAdaptiveFieldOfView = 251,
 
 	/**
 	 * @brief The visuals motion blur setting
 	 */
-	VisualsMotionBlur = 251,
+	VisualsMotionBlur = 252,
 };

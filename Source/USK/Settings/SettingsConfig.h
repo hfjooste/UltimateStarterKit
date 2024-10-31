@@ -28,6 +28,7 @@
 #include "Items/SettingsItemGraphicsViewDistance.h"
 #include "Items/SettingsItemGraphicsVisualEffects.h"
 #include "Items/SettingsItemGraphicsVsync.h"
+#include "Items/SettingsItemVisualsAdaptiveFieldOfView.h"
 #include "Items/SettingsItemVisualsMotionBlur.h"
 #include "SettingsConfig.generated.h"
 
@@ -858,6 +859,41 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Visuals|Field of View",
 		DisplayName = "Default Value")
 	int VisualsFieldOfViewDefault = 80;
+
+	/**
+	 * @brief The implementation for the visuals adaptive field of view settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Visuals|Adaptive Field of View",
+		DisplayName = "Implementation")
+	TSubclassOf<USettingsItem> VisualsAdaptiveFieldOfViewImplementation = USettingsItemVisualsAdaptiveFieldOfView::StaticClass();
+
+	/**
+	 * @brief The text displayed in the visuals adaptive field of view settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Visuals|Adaptive Field of View",
+		DisplayName = "Title")
+	FText VisualsAdaptiveFieldOfViewText;
+
+	/**
+	 * @brief The text displayed when the visuals adaptive field of view setting is enabled
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Visuals|Adaptive Field of View",
+		DisplayName = "Enabled Text")
+	FText VisualsAdaptiveFieldOfViewEnabledText;
+
+	/**
+	 * @brief The text displayed when the visuals adaptive field of view setting is disabled
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Visuals|Adaptive Field of View",
+		DisplayName = "Disabled Text")
+	FText VisualsAdaptiveFieldOfViewDisabledText;
+
+	/**
+	 * @brief The default value of the visuals adaptive field of view setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Visuals|Adaptive Field of View",
+		DisplayName = "Default Value")
+	bool VisualsAdaptiveFieldOfViewDefault;
 
 	/**
 	 * @brief The implementation for the visuals motion blur settings item
