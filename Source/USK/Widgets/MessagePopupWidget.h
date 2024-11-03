@@ -8,6 +8,7 @@
 #include "Components/TextBlock.h"
 #include "MessagePopupWidget.generated.h"
 
+class UUSKGameInstance;
 class UMenuItem;
 class UMenu;
 
@@ -126,7 +127,19 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void Hide();
 
+protected:
+	/**
+	 * @brief Overridable native event for when the widget has been constructed
+	 */
+	virtual void NativeConstruct() override;
+
 private:
+	/**
+	 * @brief A reference to the game instance
+	 */
+	UPROPERTY()
+	UUSKGameInstance* GameInstance;
+	
 	/**
 	 * @brief A reference to the positive button
 	 */

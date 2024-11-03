@@ -55,6 +55,16 @@ class USK_API UUSKGameInstance : public UGameInstance
 	 * @param SaveGame The save game that was updated
 	 */
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGameInstanceSaveGameUpdatedDelegate, UUSKSaveGame*, SaveGame);
+
+	/**
+	 * @brief Event used to notify other classes when the message popup is shown
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameInstanceMessagePopupShownDelegate);
+
+	/**
+	 * @brief Event used to notify other classes when the message popup is dismissed
+	 */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameInstanceMessagePopupDismissedDelegate);
 	
 public:
 	/**
@@ -104,6 +114,18 @@ public:
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
 	FGameInstanceSaveGameUpdatedDelegate OnSaveGameUpdated;
+
+	/**
+	 * @brief Event used to notify other classes when the message popup is shown
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
+	FGameInstanceMessagePopupShownDelegate OnMessagePopupShown;
+
+	/**
+	 * @brief Event used to notify other classes when the message popup is dismissed
+	 */
+	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|Save Data|Events")
+	FGameInstanceMessagePopupDismissedDelegate OnMessagePopupDismissed;
 
 	/**
 	 * @brief Is the input indicators feature enabled?
@@ -304,6 +326,13 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void HideMessagePopup();
+
+	/**
+	 * @brief Check if the message popup is shown
+	 * @return A boolean value indicating if the message popup is shown
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|UI")
+	bool IsMessagePopupShown() const;
 
 	/**
 	 * @brief Add a post process actor to the list of current post process actors

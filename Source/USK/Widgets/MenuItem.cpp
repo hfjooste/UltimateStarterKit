@@ -110,6 +110,34 @@ void UMenuItem::NativeConstruct()
 }
 
 /**
+ * @brief Event called every frame, if ticking is enabled
+ * @param MyGeometry Represents the position, size, and absolute position of a widget
+ * @param InDeltaTime Game time elapsed during last frame modified by the time dilation 
+ */
+void UMenuItem::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+{
+	Super::NativeTick(MyGeometry, InDeltaTime);
+	if (!bCheckForKeyboardFocus)
+	{
+		return;
+	}
+
+	if (!HasKeyboardFocus() && (!IsValid(SelectButton) || !SelectButton->HasKeyboardFocus()))
+	{
+		SetHighlightedState(false, true, false);
+		return;
+	}
+
+	if (IsValid(Menu))
+	{
+		Menu->RequestHighlight(this);
+		return;
+	}
+
+	SetHighlightedState(true, true, true);
+}
+
+/**
  * @brief Overridable native event for when the cursor has entered the widget
  * @param InGeometry The Geometry of the widget receiving the event
  * @param InMouseEvent Information about the input event
@@ -117,9 +145,14 @@ void UMenuItem::NativeConstruct()
 void UMenuItem::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
 	Super::NativeOnMouseEnter(InGeometry, InMouseEvent);
-	if (Menu != nullptr)
+	if (IsValid(Menu))
 	{
 		Menu->RequestHighlight(this);
+	}
+
+	if (bCheckForKeyboardFocus && IsValid(SelectButton))
+	{
+		SelectButton->SetKeyboardFocus();
 	}
 }
 
@@ -130,7 +163,7 @@ void UMenuItem::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEv
 void UMenuItem::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
 {
 	Super::NativeOnMouseLeave(InMouseEvent);
-	if (Menu != nullptr)
+	if (IsValid(Menu))
 	{
 		Menu->RemoveHighlight(this);
 	}
@@ -199,9 +232,19 @@ void UMenuItem::SetTitle(const FText& Text) const
 void UMenuItem::SetHighlightedState(const bool IsHighlighted,
 	const bool PlayHighlightedAnimation, const bool PlayHighlightedSound)
 {
+	const bool NewHighlightedState = IsHighlighted || ShouldKeepHighlightedStyle();
+	if (bIsHighlighted == NewHighlightedState)
+	{
+		return;
+	}
+
 	USK_LOG_TRACE("Setting highlighted state");
+	bIsHighlighted = NewHighlightedState;
+	if (bIsHighlighted && bCheckForKeyboardFocus && IsValid(SelectButton))
+	{
+		SelectButton->SetKeyboardFocus();
+	}
 	
-	bIsHighlighted = IsHighlighted || ShouldKeepHighlightedStyle();
 	const FLinearColor BorderColor = bIsHighlighted ? BorderHighlightedColor : BorderNormalColor;
 	const FLinearColor BackgroundColor = bIsHighlighted ? BackgroundHighlightedColor : BackgroundNormalColor;
 

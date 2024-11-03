@@ -457,6 +457,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation",
 		meta=(EditCondition = "AllowSelection", EditConditionHides))
 	bool KeepHighlightStyleWhenSelected = false;
+
+	/**
+	 * @brief Should the item check for keyboard focus and update the state accordingly?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation")
+	bool bCheckForKeyboardFocus;
 	
 	/**
 	 * @brief The type of navigation used by the menu item when pressing the up or down key
@@ -653,6 +659,13 @@ protected:
 	 * @brief Overridable native event for when the widget has been constructed
 	 */
 	virtual void NativeConstruct() override;
+
+	/**
+	 * @brief Event called every frame, if ticking is enabled
+	 * @param MyGeometry Represents the position, size, and absolute position of a widget
+	 * @param InDeltaTime Game time elapsed during last frame modified by the time dilation 
+	 */
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
 	/**
 	 * @brief Overridable native event for when the cursor has entered the widget

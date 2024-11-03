@@ -5,16 +5,27 @@
 #include "Menu.h"
 #include "MenuItem.h"
 #include "Animation/WidgetAnimation.h"
+#include "Components/Button.h"
 #include "Components/PanelWidget.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "USK/Core/USKGameInstance.h"
 #include "USK/Logger/Log.h"
+
+/**
+ * @brief Overridable native event for when the widget has been constructed
+ */
+void UMessagePopupWidget::NativeConstruct()
+{
+	Super::NativeConstruct();
+	GameInstance = Cast<UUSKGameInstance>(GetGameInstance());
+}
 
 /**
  * @brief Show the message popup
  * @param Data The data used to display the popup
  */
 void UMessagePopupWidget::Show(const FMessagePopupData Data)
-{
+{	
 	TitleText->SetText(Data.Title);
 	TitleText->SetVisibility(Data.Title.IsEmpty() ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
 	MessageText->SetText(Data.Message);
@@ -34,8 +45,8 @@ void UMessagePopupWidget::Show(const FMessagePopupData Data)
 		NeutralButton = CreateButton(Data.NeutralButtonText);
 	}
 
-	UpdateButtonNavigation();
 	AddToViewport();
+	UpdateButtonNavigation();
 	
 	if (IsValid(ShowAnimation))
 	{
@@ -93,6 +104,7 @@ void UMessagePopupWidget::RemoveWidget()
 
 	ButtonMenu->Container->ClearChildren();
 	ButtonMenu->SetVisibility(ESlateVisibility::Collapsed);
+	GameInstance->OnMessagePopupDismissed.Broadcast();
 	RemoveFromParent();
 	USK_LOG_TRACE("Message popup removed");
 }
@@ -143,6 +155,23 @@ void UMessagePopupWidget::UpdateButtonNavigation()
 		NeutralButton->MenuItemRight = nullptr;
 		NeutralButton->OnSelected.AddDynamic(this, &UMessagePopupWidget::OnNeutralButtonClicked);
 	}
+
+	if (IsValid(PositiveButton) && IsValid(PositiveButton->SelectButton))
+	{
+		PositiveButton->SelectButton->SetKeyboardFocus();
+		return;
+	}
+
+	if (IsValid(NegativeButton) && IsValid(NegativeButton->SelectButton))
+	{
+		NegativeButton->SelectButton->SetKeyboardFocus();
+		return;
+	}
+
+	if (IsValid(NeutralButton) && IsValid(NeutralButton->SelectButton))
+	{
+		NeutralButton->SelectButton->SetKeyboardFocus();
+	}
 }
 
 /**
@@ -152,7 +181,7 @@ void UMessagePopupWidget::OnPositiveButtonClicked()
 {
 	USK_LOG_TRACE("Message popup positive button selected");
 	OnPositiveButtonSelected.Broadcast();
-	Hide();
+	GameInstance->HideMessagePopup();
 }
 
 /**
@@ -162,7 +191,7 @@ void UMessagePopupWidget::OnNegativeButtonClicked()
 {
 	USK_LOG_TRACE("Message popup negative button selected");
 	OnNegativeButtonSelected.Broadcast();
-	Hide();
+	GameInstance->HideMessagePopup();
 }
 
 /**
@@ -172,5 +201,5 @@ void UMessagePopupWidget::OnNeutralButtonClicked()
 {
 	USK_LOG_TRACE("Message popup neutral button selected");
 	OnNeutralButtonSelected.Broadcast();
-	Hide();
+	GameInstance->HideMessagePopup();
 }

@@ -254,7 +254,6 @@ void UMenu::RequestHighlight(UMenuItem* MenuItem)
 {
 	if (CurrentMenuItem == MenuItem)
 	{
-		USK_LOG_TRACE("Menu item already highlighted");
 		return;
 	}
 

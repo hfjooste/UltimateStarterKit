@@ -360,6 +360,7 @@ UMessagePopupWidget* UUSKGameInstance::ShowMessagePopup(const FMessagePopupData 
 	if (IsValid(MessagePopup))
 	{
 		MessagePopup->Show(Data);
+		OnMessagePopupShown.Broadcast();
 	}
 
 	return MessagePopup;
@@ -375,6 +376,15 @@ void UUSKGameInstance::HideMessagePopup()
 		MessagePopup->Hide();
 		MessagePopup = nullptr;
 	}
+}
+
+/**
+ * @brief Check if the message popup is shown
+ * @return A boolean value indicating if the message popup is shown
+ */
+bool UUSKGameInstance::IsMessagePopupShown() const
+{
+	return IsValid(MessagePopup);
 }
 
 /**
