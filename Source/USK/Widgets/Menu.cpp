@@ -351,6 +351,17 @@ void UMenu::ForceSelect(UMenuItem* MenuItem)
 }
 
 /**
+ * @brief Is input allowed for the menu?
+ * @return A boolean value indicating if input is allowed
+ */
+bool UMenu::IsInputAllowed() const
+{
+	return GetVisibility() != ESlateVisibility::Collapsed &&
+		GetVisibility() != ESlateVisibility::Hidden &&
+		!HasAnyFlags(RF_BeginDestroyed) && GetIsEnabled();
+}
+
+/**
  * @brief Called when the visibility of the menu is changed
  * @param NewVisibility The new visibility of the menu
  */
@@ -460,17 +471,6 @@ void UMenu::RemoveInputBindings() const
 
 	USK_LOG_TRACE("Removing menu input mapping context");
 	Subsystem->RemoveMappingContext(InputMappingContext);
-}
-
-/**
- * @brief Is input allowed for the menu?
- * @return A boolean value indicating if input is allowed
- */
-bool UMenu::IsInputAllowed() const
-{
-	return GetVisibility() != ESlateVisibility::Collapsed &&
-		GetVisibility() != ESlateVisibility::Hidden &&
-		!HasAnyFlags(RF_BeginDestroyed) && GetIsEnabled();
 }
 
 /**

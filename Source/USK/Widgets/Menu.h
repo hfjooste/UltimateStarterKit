@@ -232,6 +232,13 @@ protected:
 	 * @brief Overridable native event for when the widget has been initialized
 	 */
 	virtual void NativeOnInitialized() override;
+
+	/**
+	 * @brief Is input allowed for the menu?
+	 * @return A boolean value indicating if input is allowed
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	virtual bool IsInputAllowed() const;
 	
 private:	
 	/**
@@ -278,12 +285,6 @@ private:
 	 * @brief Remove the input bindings for the menu
 	 */
 	void RemoveInputBindings() const;
-
-	/**
-	 * @brief Is input allowed for the menu?
-	 * @return A boolean value indicating if input is allowed
-	 */
-	bool IsInputAllowed() const;
 
 	/**
 	 * @brief Initialize the action input bindings for the menu
