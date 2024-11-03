@@ -494,15 +494,15 @@ void UMenu::InitializeActionBindings(const APlayerController* PlayerController)
 
 	USK_LOG_TRACE("Adding input action bindings");
 	EnhancedInput->BindAction(MenuUpInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuUp);
-	EnhancedInput->BindAction(MenuUpInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuUpHold);
+	EnhancedInput->BindAction(MenuUpInputAction, ETriggerEvent::Triggered, this, &UMenu::OnMenuUpHold);
 	EnhancedInput->BindAction(MenuDownInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuDown);
-	EnhancedInput->BindAction(MenuDownInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuDownHold);
+	EnhancedInput->BindAction(MenuDownInputAction, ETriggerEvent::Triggered, this, &UMenu::OnMenuDownHold);
 	EnhancedInput->BindAction(MenuLeftInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuLeft);
 	EnhancedInput->BindAction(MenuLeftInputAction, ETriggerEvent::Triggered, this, &UMenu::OnMenuLeftHold);
 	EnhancedInput->BindAction(MenuRightInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuRight);
 	EnhancedInput->BindAction(MenuRightInputAction, ETriggerEvent::Triggered, this, &UMenu::OnMenuRightHold);
 	EnhancedInput->BindAction(MenuSelectInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuSelected);
-	EnhancedInput->BindAction(MenuBackInputAction, ETriggerEvent::Started, this, &UMenu::OnMenuBack);
+	EnhancedInput->BindAction(MenuBackInputAction, ETriggerEvent::Completed, this, &UMenu::OnMenuBack);
 	bIsActionBindingsInitialized = true;
 }
 
