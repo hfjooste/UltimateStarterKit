@@ -150,7 +150,6 @@ void UMenuItem::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 	if (IsValid(Menu))
 	{
 		Menu->RequestHighlight(this);
-		return;
 	}
 
 	SetHighlightedState(true, true, true);
