@@ -333,13 +333,13 @@ void UMenu::ForceSelect(UMenuItem* MenuItem)
 void UMenu::OnMenuVisibilityChanged(ESlateVisibility NewVisibility)
 {
 	USK_LOG_TRACE("Visibility changed");
-	if (NewVisibility == ESlateVisibility::Visible)
+	if (NewVisibility == ESlateVisibility::Hidden || NewVisibility == ESlateVisibility::Collapsed)
 	{
-		AddInputBindings();
+		RemoveInputBindings();
 		return;
 	}
 
-	RemoveInputBindings();
+	AddInputBindings();
 }
 
 /**
