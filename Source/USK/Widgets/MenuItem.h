@@ -97,6 +97,12 @@ public:
 	class USlider* ValueSlider;
 
 	/**
+	 * @brief The progress bar used to display the current value of the menu item
+	 */
+	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	class UProgressBar* ValueProgressBar;
+
+	/**
 	 * @brief The button used to increase the value of the menu item
 	 */
 	UPROPERTY(meta = (BindWidgetOptional), EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
@@ -414,6 +420,12 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value")
 	bool ShowValueSlider = false;
+
+	/**
+	 * @brief Should the value progress bar be shown for this menu item?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|Navigation|Value")
+	bool ShowValueProgressBar = false;
 
 	/**
 	 * @brief Should the increase/decrease value buttons be shown for this menu item?

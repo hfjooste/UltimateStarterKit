@@ -6,6 +6,7 @@
 #include "Menu.h"
 #include "Components/Button.h"
 #include "Components/Image.h"
+#include "Components/ProgressBar.h"
 #include "Components/Slider.h"
 #include "Components/TextBlock.h"
 #include "Kismet/GameplayStatics.h"
@@ -27,6 +28,13 @@ void UMenuItem::NativePreConstruct()
 	if (ValueSlider != nullptr)
 	{
 		ValueSlider->SetVisibility(CanValueChange() && ShowValueSlider
+			? ESlateVisibility::Visible
+			: ESlateVisibility::Collapsed);
+	}
+
+	if (ValueProgressBar != nullptr)
+	{
+		ValueProgressBar->SetVisibility(CanValueChange() && ShowValueProgressBar
 			? ESlateVisibility::Visible
 			: ESlateVisibility::Collapsed);
 	}
@@ -82,6 +90,17 @@ void UMenuItem::NativeConstruct()
 		ValueSlider->SetMaxValue(MaxValue);
 		ValueSlider->SetValue(GetValue());
 		ValueSlider->OnValueChanged.AddDynamic(this, &UMenuItem::OnSliderValueChanged);
+	}
+
+	if (ValueProgressBar != nullptr)
+	{
+		ValueProgressBar->SetVisibility(CanValueChange() && ShowValueProgressBar
+			? ESlateVisibility::Visible
+			: ESlateVisibility::Collapsed);
+		if (MaxValue > 0.0f)
+		{
+			ValueProgressBar->SetPercent(static_cast<float>(GetValue()) / static_cast<float>(MaxValue));
+		}
 	}
 
 	if (IncreaseValueButton != nullptr)
@@ -423,6 +442,17 @@ void UMenuItem::UpdateValue(const float Increment)
 			? ESlateVisibility::Visible
 			: ESlateVisibility::Collapsed);
 		ValueSlider->SetValue(GetValue());
+	}
+
+	if (ValueProgressBar != nullptr)
+	{
+		ValueProgressBar->SetVisibility(CanValueChange() && ShowValueProgressBar
+			? ESlateVisibility::Visible
+			: ESlateVisibility::Collapsed);
+		if (MaxValue > 0.0f)
+		{
+			ValueProgressBar->SetPercent(static_cast<float>(GetValue()) / static_cast<float>(MaxValue));
+		}
 	}
 
 	USK_LOG_TRACE("Menu item value updated. Notifying other classes");
