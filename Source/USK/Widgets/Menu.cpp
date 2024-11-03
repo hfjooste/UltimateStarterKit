@@ -75,9 +75,15 @@ void UMenu::OnMenuUp()
 
 	USK_LOG_TRACE("Navigating up");
 	UpdateHighlightedItemBeforeNavigation(true);
+	const UMenuItem* PreviousMenuItem = CurrentMenuItem;
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemUp,
 		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->VerticalNavigation,
 		true, false);
+
+	if (IsValid(CurrentMenuItem) && CurrentMenuItem != PreviousMenuItem && !CurrentMenuItem->IsVisible())
+	{
+		OnMenuUp();
+	}
 }
 
 /**
@@ -108,9 +114,15 @@ void UMenu::OnMenuDown()
 	
 	USK_LOG_TRACE("Navigating down");
 	UpdateHighlightedItemBeforeNavigation(true);
+	const UMenuItem* PreviousMenuItem = CurrentMenuItem;
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemDown,
 		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->VerticalNavigation,
 		false, false);
+
+	if (IsValid(CurrentMenuItem) && CurrentMenuItem != PreviousMenuItem && !CurrentMenuItem->IsVisible())
+	{
+		OnMenuDown();
+	}
 }
 
 /**
@@ -141,9 +153,15 @@ void UMenu::OnMenuLeft()
 	
 	USK_LOG_TRACE("Navigating left");
 	UpdateHighlightedItemBeforeNavigation(false);
+	const UMenuItem* PreviousMenuItem = CurrentMenuItem;
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemLeft,
 		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->HorizontalNavigation,
 		false, false);
+
+	if (IsValid(CurrentMenuItem) && CurrentMenuItem != PreviousMenuItem && !CurrentMenuItem->IsVisible())
+	{
+		OnMenuLeft();
+	}
 }
 
 /**
@@ -174,9 +192,15 @@ void UMenu::OnMenuRight()
 	
 	USK_LOG_TRACE("Navigating right");
 	UpdateHighlightedItemBeforeNavigation(false);
+	const UMenuItem* PreviousMenuItem = CurrentMenuItem;
 	UpdateHighlightedItem(CurrentMenuItem == nullptr ? nullptr : CurrentMenuItem->MenuItemRight,
 		CurrentMenuItem == nullptr ? EMenuNavigation::Disabled : CurrentMenuItem->HorizontalNavigation,
 		true, false);
+
+	if (IsValid(CurrentMenuItem) && CurrentMenuItem != PreviousMenuItem && !CurrentMenuItem->IsVisible())
+	{
+		OnMenuRight();
+	}
 }
 
 /**
@@ -546,7 +570,7 @@ void UMenu::UpdateHighlightedItem(UMenuItem* NewItem, const EMenuNavigation Menu
 	case EMenuNavigation::Disabled:
 		break;
 	case EMenuNavigation::HighlightItem:
-		if (!IsValid(NewItem) || !NewItem->IsVisible())
+		if (!IsValid(NewItem))
 		{
 			if (IsValid(CurrentMenuItem))
 			{
