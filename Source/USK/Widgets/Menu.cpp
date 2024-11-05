@@ -40,6 +40,8 @@ void UMenu::NativeConstruct()
 		GameInstance->OnGamePaused.AddDynamic(this, &UMenu::OnGamePaused);
 		GameInstance->OnGameUnpaused.AddDynamic(this, &UMenu::OnGameUnpaused);
 	}
+
+	ReloadItems();
 }
 
 /**
@@ -49,6 +51,37 @@ void UMenu::NativeDestruct()
 {
 	Super::NativeDestruct();
 	RemoveInputBindings();
+}
+
+/**
+ * @brief Event called every frame, if ticking is enabled
+ * @param MyGeometry Represents the position, size, and absolute position of a widget
+ * @param InDeltaTime Game time elapsed during last frame modified by the time dilation 
+ */
+void UMenu::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+{
+	Super::NativeTick(MyGeometry, InDeltaTime);
+	if (!CanForceHighlightedItem() || !IsValid(DefaultHighlightedItem) || IsItemHighlighted())
+	{
+		return;
+	}
+
+	if (!IsValid(HighlightedItem))
+	{
+		HighlightedItem = DefaultHighlightedItem;
+	}
+
+	if (!IsValid(HighlightedItem))
+	{
+		return;
+	}
+
+	if (HighlightedItem->bCheckForKeyboardFocus && IsValid(HighlightedItem->SelectButton))
+	{
+		HighlightedItem->SelectButton->SetKeyboardFocus();
+	}
+
+	RequestHighlight(HighlightedItem);
 }
 
 /**
@@ -351,6 +384,36 @@ void UMenu::ForceSelect(UMenuItem* MenuItem)
 }
 
 /**
+ * @brief Reload and initialize the list of menu items
+ */
+void UMenu::ReloadItems()
+{
+	if (!AlwaysHighlightItem || !IsValid(Container))
+	{
+		return;
+	}
+
+	Items.Empty();
+	const TArray<UWidget*> Children = Container->GetAllChildren();
+	for (UWidget* Child : Children)
+	{
+		UMenuItem* MenuItem = dynamic_cast<UMenuItem*>(Child);
+		if (IsValid(MenuItem))
+		{
+			MenuItem->OnHighlighted.RemoveDynamic(this, &UMenu::MenuItemHighlighted);
+			MenuItem->OnHighlighted.AddDynamic(this, &UMenu::MenuItemHighlighted);
+			Items.Add(MenuItem);
+		}
+	}
+
+	if (!Items.IsEmpty())
+	{
+		DefaultHighlightedItem = IsValid(CurrentMenuItem) ? CurrentMenuItem : Items[0];
+		HighlightedItem = nullptr;
+	}
+}
+
+/**
  * @brief Is input allowed for the menu?
  * @return A boolean value indicating if input is allowed
  */
@@ -362,6 +425,17 @@ bool UMenu::IsInputAllowed() const
 }
 
 /**
+ * @brief Check if a highlighted item can be forced
+ * @return A boolean value indicating if a highlighted item can be forced
+ */
+bool UMenu::CanForceHighlightedItem() const
+{
+	return AlwaysHighlightItem && GetVisibility() != ESlateVisibility::Collapsed &&
+		GetVisibility() != ESlateVisibility::Hidden &&
+			(!OnlyForceHighlightWhenMessagePopupIsHidden || !GameInstance->IsMessagePopupShown());
+}
+
+/**
  * @brief Called when the visibility of the menu is changed
  * @param NewVisibility The new visibility of the menu
  */
@@ -370,6 +444,11 @@ void UMenu::OnMenuVisibilityChanged(ESlateVisibility NewVisibility)
 	USK_LOG_TRACE("Visibility changed");
 	if (NewVisibility == ESlateVisibility::Hidden || NewVisibility == ESlateVisibility::Collapsed)
 	{
+		if (AlwaysHighlightItem)
+		{
+			HighlightedItem = nullptr;
+		}
+		
 		RemoveInputBindings();
 		return;
 	}
@@ -705,4 +784,41 @@ void UMenu::EnableMenuAfterUnpaused()
 {
 	USK_LOG_INFO("Enabling menu after game is unpaused");
 	SetIsEnabled(true);
+}
+
+/**
+ * @brief Check if a menu item is highlighted
+ * @return A boolean value indicating if a menu item is highlighted
+ */
+bool UMenu::IsItemHighlighted() const
+{
+	if (!IsValid(CurrentMenuItem))
+	{
+		return false;
+	}
+	
+	for (const UMenuItem* Item : Items)
+	{
+		if (Item->IsHighlighted())
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
+ * @brief Called when a menu item is highlighted
+ */
+void UMenu::MenuItemHighlighted()
+{
+	for (UMenuItem* Item : Items)
+	{
+		if (Item->IsHighlighted())
+		{
+			HighlightedItem = Item;
+			break;
+		}
+	}
 }

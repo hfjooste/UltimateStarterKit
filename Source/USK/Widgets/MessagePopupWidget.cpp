@@ -47,6 +47,7 @@ void UMessagePopupWidget::Show(const FMessagePopupData Data)
 
 	AddToViewport();
 	UpdateButtonNavigation();
+	ButtonMenu->ReloadItems();
 	
 	if (IsValid(ShowAnimation))
 	{

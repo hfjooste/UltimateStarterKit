@@ -6,6 +6,7 @@
 #include "InputAction.h"
 #include "Blueprint/UserWidget.h"
 #include "MenuNavigation.h"
+#include "Components/Button.h"
 #include "Menu.generated.h"
 
 class UUSKGameInstance;
@@ -62,6 +63,19 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|General")
 	bool DisableWhilePaused;
+
+	/**
+	 * @brief Should a menu item always be highlighted? 
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|General")
+	bool AlwaysHighlightItem = true;
+
+	/**
+	 * @brief Should a menu item highlight only be forced when the message popup is hidden? 
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|General",
+		meta=(EditCondition = "AlwaysHighlightItem", EditConditionHides))
+	bool OnlyForceHighlightWhenMessagePopupIsHidden = true;
 
 	/**
 	 * @brief The sound effect played when a menu item is selected
@@ -211,13 +225,19 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void ForceSelect(UMenuItem* MenuItem);
 
+	/**
+	 * @brief Reload and initialize the list of menu items
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	void ReloadItems();
+
 protected:
 	/**
 	 * @brief A reference to the game instance
 	 */
 	UPROPERTY()
 	UUSKGameInstance* GameInstance;
-	
+
 	/**
 	 * @brief Overridable native event for when the widget has been constructed
 	 */
@@ -229,6 +249,13 @@ protected:
 	virtual void NativeDestruct() override;
 
 	/**
+	 * @brief Event called every frame, if ticking is enabled
+	 * @param MyGeometry Represents the position, size, and absolute position of a widget
+	 * @param InDeltaTime Game time elapsed during last frame modified by the time dilation 
+	 */
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
+
+	/**
 	 * @brief Overridable native event for when the widget has been initialized
 	 */
 	virtual void NativeOnInitialized() override;
@@ -237,8 +264,15 @@ protected:
 	 * @brief Is input allowed for the menu?
 	 * @return A boolean value indicating if input is allowed
 	 */
-	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|UI")
 	virtual bool IsInputAllowed() const;
+
+	/**
+	 * @brief Check if a highlighted item can be forced
+	 * @return A boolean value indicating if a highlighted item can be forced
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|UI")
+	virtual bool CanForceHighlightedItem() const;
 	
 private:	
 	/**
@@ -258,6 +292,24 @@ private:
 	 */
 	UPROPERTY()
 	UMenuItem* HighlightedMenuItemBeforeRemoval;
+
+	/**
+	 * @brief The array of all menu items
+	 */
+	UPROPERTY()
+	TArray<UMenuItem*> Items;
+
+	/**
+	 * @brief The highlighted item
+	 */
+	UPROPERTY()
+	UMenuItem* HighlightedItem;
+
+	/**
+	 * @brief The default highlighted item
+	 */
+	UPROPERTY()
+	UMenuItem* DefaultHighlightedItem;
 
 	/**
 	 * @brief Has the action bindings been initialized?
@@ -342,4 +394,16 @@ private:
 	 */
 	UFUNCTION()
 	void EnableMenuAfterUnpaused();
+
+	/**
+	 * @brief Check if a menu item is highlighted
+	 * @return A boolean value indicating if a menu item is highlighted
+	 */
+	bool IsItemHighlighted() const;
+
+	/**
+	 * @brief Called when a menu item is highlighted
+	 */
+	UFUNCTION()
+	void MenuItemHighlighted();
 };
