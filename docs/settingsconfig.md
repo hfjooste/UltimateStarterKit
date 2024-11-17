@@ -35,6 +35,126 @@ The configuration used for managing settings
 		<td>0</td>
 	</tr>
 	<tr>
+		<td>GameplayMouseSensitivityXImplementation</td>
+		<td>The implementation for the gameplay mouse sensitivity X setting</td>
+		<td>TSubclassOf&lt;USettingsItem&gt;</td>
+		<td>USettingsItemGameplayMouseSensitivityX::StaticClas</td>
+	</tr>
+	<tr>
+		<td>GameplayMouseSensitivityXText</td>
+		<td>The text displayed in the gameplay mouse sensitivity X settings item</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GameplayMouseSensitivityXDefault</td>
+		<td>The default gameplay mouse sensitivity X value</td>
+		<td>int</td>
+		<td>100</td>
+	</tr>
+	<tr>
+		<td>GameplayMouseSensitivityXMin</td>
+		<td>The minimum gameplay mouse sensitivity X value</td>
+		<td>int</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>GameplayMouseSensitivityXMax</td>
+		<td>The maximum gameplay mouse sensitivity X value</td>
+		<td>int</td>
+		<td>200</td>
+	</tr>
+	<tr>
+		<td>GameplayMouseSensitivityYImplementation</td>
+		<td>The implementation for the gameplay mouse sensitivity Y setting</td>
+		<td>TSubclassOf&lt;USettingsItem&gt;</td>
+		<td>USettingsItemGameplayMouseSensitivityY::StaticClas</td>
+	</tr>
+	<tr>
+		<td>GameplayMouseSensitivityYText</td>
+		<td>The text displayed in the gameplay mouse sensitivity Y settings item</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GameplayMouseSensitivityYDefault</td>
+		<td>The default gameplay mouse sensitivity Y value</td>
+		<td>int</td>
+		<td>100</td>
+	</tr>
+	<tr>
+		<td>GameplayMouseSensitivityYMin</td>
+		<td>The minimum gameplay mouse sensitivity Y value</td>
+		<td>int</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>GameplayMouseSensitivityYMax</td>
+		<td>The maximum gameplay mouse sensitivity Y value</td>
+		<td>int</td>
+		<td>200</td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityXImplementation</td>
+		<td>The implementation for the gameplay controller sensitivity X setting</td>
+		<td>TSubclassOf&lt;USettingsItem&gt;</td>
+		<td>USettingsItemGameplayControllerSensitivityX::StaticClas</td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityXText</td>
+		<td>The text displayed in the gameplay controller sensitivity X settings item</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityXDefault</td>
+		<td>The default gameplay controller sensitivity X value</td>
+		<td>int</td>
+		<td>100</td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityXMin</td>
+		<td>The minimum gameplay controller sensitivity X value</td>
+		<td>int</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityXMax</td>
+		<td>The maximum gameplay controller sensitivity X value</td>
+		<td>int</td>
+		<td>200</td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityYImplementation</td>
+		<td>The implementation for the gameplay controller sensitivity Y setting</td>
+		<td>TSubclassOf&lt;USettingsItem&gt;</td>
+		<td>USettingsItemGameplayControllerSensitivityY::StaticClas</td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityYText</td>
+		<td>The text displayed in the gameplay controller sensitivity Y settings item</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityYDefault</td>
+		<td>The default gameplay controller sensitivity Y value</td>
+		<td>int</td>
+		<td>100</td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityYMin</td>
+		<td>The minimum gameplay controller sensitivity Y value</td>
+		<td>int</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityYMax</td>
+		<td>The maximum gameplay controller sensitivity Y value</td>
+		<td>int</td>
+		<td>200</td>
+	</tr>
+	<tr>
 		<td>AudioMasterImplementation</td>
 		<td>The implementation for the audio master settings item</td>
 		<td>TSubclassOf&lt;USettingsItem&gt;</td>
@@ -680,6 +800,90 @@ The configuration used for managing settings
 		<td>GraphicsFpsIndicatorTypeDefault</td>
 		<td>The default value of the FPS indicator setting</td>
 		<td>ESettingsFpsCounterType</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>VisualsFieldOfViewImplementation</td>
+		<td>The implementation for the visuals field of view settings item</td>
+		<td>TSubclassOf&lt;USettingsItem&gt;</td>
+		<td>USettingsItemVisualsFieldOfView::StaticClas</td>
+	</tr>
+	<tr>
+		<td>VisualsFieldOfViewText</td>
+		<td>The text displayed in the visuals field of view settings item</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>VisualFieldOfViewMin</td>
+		<td>The minimum visuals field of view value</td>
+		<td>int</td>
+		<td>50</td>
+	</tr>
+	<tr>
+		<td>VisualFieldOfViewMax</td>
+		<td>The maximum visuals field of view value</td>
+		<td>int</td>
+		<td>130</td>
+	</tr>
+	<tr>
+		<td>VisualsFieldOfViewDefault</td>
+		<td>The default value of the visuals field of view setting</td>
+		<td>int</td>
+		<td>80</td>
+	</tr>
+	<tr>
+		<td>VisualsAdaptiveFieldOfViewImplementation</td>
+		<td>The implementation for the visuals adaptive field of view settings item</td>
+		<td>TSubclassOf&lt;USettingsItem&gt;</td>
+		<td>USettingsItemVisualsAdaptiveFieldOfView::StaticClas</td>
+	</tr>
+	<tr>
+		<td>VisualsAdaptiveFieldOfViewText</td>
+		<td>The text displayed in the visuals adaptive field of view settings item</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>VisualsAdaptiveFieldOfViewEnabledText</td>
+		<td>The text displayed when the visuals adaptive field of view setting is enabled</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>VisualsAdaptiveFieldOfViewDisabledText</td>
+		<td>The text displayed when the visuals adaptive field of view setting is disabled</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>VisualsAdaptiveFieldOfViewDefault</td>
+		<td>The default value of the visuals adaptive field of view setting</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>VisualsMotionBlurImplementation</td>
+		<td>The implementation for the visuals motion blur settings item</td>
+		<td>TSubclassOf&lt;USettingsItem&gt;</td>
+		<td>USettingsItemVisualsMotionBlur::StaticClas</td>
+	</tr>
+	<tr>
+		<td>VisualsMotionBlurText</td>
+		<td>The text displayed in the visuals motion blur settings item</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>VisualsMotionBlurValues</td>
+		<td>The array of visuals motion blur values</td>
+		<td>TMap&lt;float, FText&gt;</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>VisualsMotionBlurDefault</td>
+		<td>The default value of the visuals motion blur setting</td>
+		<td>int</td>
 		<td></td>
 	</tr>
 	<tr>

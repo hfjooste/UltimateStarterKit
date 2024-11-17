@@ -338,22 +338,29 @@ public:
 	 * @brief Add a post process actor to the list of current post process actors
 	 * @param Actor The actor to add to the list
 	 */
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Settings")
 	void AddPostProcessActor(AUSKPostProcessActor* Actor);
 
 	/**
 	 * @brief Remove a post process actor from the list of current post process actors
 	 * @param Actor The actor to remove from the list
 	 */
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Settings")
 	void RemovePostProcessActor(AUSKPostProcessActor* Actor);
 
 	/**
 	 * @brief Get a list of all the current post process actors
 	 * @return The list of post process actors
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintPure)
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Settings")
 	TArray<AUSKPostProcessActor*> GetPostProcessActors() const;
+
+	/**
+	 * @brief Get the current input device used by the player
+	 * @return The current input device used by the player
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|Input")
+	EInputDevice GetCurrentInputDevice() const;
 
 protected:
 	/**

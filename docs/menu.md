@@ -63,6 +63,18 @@ You can add the following widgets to enable extra functionality:
 		<td>false</td>
 	</tr>
 	<tr>
+		<td>AlwaysHighlightItem</td>
+		<td>Should a menu item always be highlighted?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
+		<td>OnlyForceHighlightWhenMessagePopupIsHidden</td>
+		<td>Should a menu item highlight only be forced when the message popup is hidden?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
 		<td>SelectedSFX</td>
 		<td>The sound effect played when a menu item is selected</td>
 		<td>USoundBase*</td>
@@ -230,6 +242,24 @@ You can add the following widgets to enable extra functionality:
 		<td><strong>MenuItem (UMenuItem*)</strong><br/>The menu item to select</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>ReloadItems</td>
+		<td>Reload and initialize the list of menu items</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>IsInputAllowed</td>
+		<td>Is input allowed for the menu?</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if input is allowed</td>
+	</tr>
+	<tr>
+		<td>CanForceHighlightedItem</td>
+		<td>Check if a highlighted item can be forced</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if a highlighted item can be forced</td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -249,6 +279,9 @@ You can use the <code>Menu</code> using Blueprints by adding one of the followin
 	<li>Ultimate Starter Kit > UI > Remove Highlight</li>
 	<li>Ultimate Starter Kit > UI > Add Menu Item</li>
 	<li>Ultimate Starter Kit > UI > Force Select</li>
+	<li>Ultimate Starter Kit > UI > Reload Items</li>
+	<li>Ultimate Starter Kit > UI > Is Input Allowed</li>
+	<li>Ultimate Starter Kit > UI > Can Force Highlighted Item</li>
 </ul>
 
 ## C++ Usage
@@ -278,5 +311,8 @@ void ATestActor::Test()
 	Menu->RemoveHighlight(MenuItem);
 	Menu->AddMenuItem(MenuItem);
 	Menu->ForceSelect(MenuItem);
+	Menu->ReloadItems();
+	bool IsInputAllowedValue = Menu->IsInputAllowed();
+	bool CanForceHighlightedItemValue = Menu->CanForceHighlightedItem();
 }
 ```

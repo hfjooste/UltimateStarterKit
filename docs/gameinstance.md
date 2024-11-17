@@ -145,6 +145,16 @@ The Game Instance will automatically detect input events and update the current 
 		<td><strong>SaveGame (UUSKSaveGame*)</strong><br/>The save game that was updated</td>
 	</tr>
 	<tr>
+		<td>OnMessagePopupShown</td>
+		<td>Event used to notify other classes when the message popup is shown</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>OnMessagePopupDismissed</td>
+		<td>Event used to notify other classes when the message popup is dismissed</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>OnInputDeviceUpdated</td>
 		<td>Event used to notify other classes when the current input device is updated</td>
 		<td></td>
@@ -270,6 +280,36 @@ The Game Instance will automatically detect input events and update the current 
 		<td></td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>IsMessagePopupShown</td>
+		<td>Check if the message popup is shown</td>
+		<td></td>
+		<td><strong>bool</strong><br/>A boolean value indicating if the message popup is shown</td>
+	</tr>
+	<tr>
+		<td>AddPostProcessActor</td>
+		<td>Add a post process actor to the list of current post process actors</td>
+		<td><strong>Actor (AUSKPostProcessActor*)</strong><br/>The actor to add to the list</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>RemovePostProcessActor</td>
+		<td>Remove a post process actor from the list of current post process actors</td>
+		<td><strong>Actor (AUSKPostProcessActor*)</strong><br/>The actor to remove from the list</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GetPostProcessActors</td>
+		<td>Get a list of all the current post process actors</td>
+		<td></td>
+		<td><strong>TArray&lt;AUSKPostProcessActor*&gt;</strong><br/>The list of post process actors</td>
+	</tr>
+	<tr>
+		<td>GetCurrentInputDevice</td>
+		<td>Get the current input device used by the player</td>
+		<td></td>
+		<td><strong>EInputDevice</strong><br/>The current input device used by the player</td>
+	</tr>
 </table>
 
 ## Blueprint Usage
@@ -291,6 +331,11 @@ You can use the <code>USKGameInstance</code> using Blueprints by adding one of t
 	<li>Ultimate Starter Kit > Difficulty > Get Difficulty</li>
 	<li>Ultimate Starter Kit > UI > Show Message Popup</li>
 	<li>Ultimate Starter Kit > UI > Hide Message Popup</li>
+	<li>Ultimate Starter Kit > UI > Is Message Popup Shown</li>
+	<li>Ultimate Starter Kit > Settings > Add Post Process Actor</li>
+	<li>Ultimate Starter Kit > Settings > Remove Post Process Actor</li>
+	<li>Ultimate Starter Kit > Settings > Get Post Process Actors</li>
+	<li>Ultimate Starter Kit > Input > Get Current Input Device</li>
 </ul>
 
 ## C++ Usage
@@ -322,5 +367,10 @@ void ATestActor::Test()
 	int Difficulty = USKGameInstance->GetDifficulty();
 	UMessagePopupWidget* ShowMessagePopupValue = USKGameInstance->ShowMessagePopup(Data);
 	USKGameInstance->HideMessagePopup();
+	bool IsMessagePopupShownValue = USKGameInstance->IsMessagePopupShown();
+	USKGameInstance->AddPostProcessActor(Actor);
+	USKGameInstance->RemovePostProcessActor(Actor);
+	TArray<AUSKPostProcessActor*> PostProcessActors = USKGameInstance->GetPostProcessActors();
+	EInputDevice CurrentInputDevice = USKGameInstance->GetCurrentInputDevice();
 }
 ```

@@ -416,6 +416,15 @@ TArray<AUSKPostProcessActor*> UUSKGameInstance::GetPostProcessActors() const
 }
 
 /**
+ * @brief Get the current input device used by the player
+ * @return The current input device used by the player
+ */
+EInputDevice UUSKGameInstance::GetCurrentInputDevice() const
+{
+	return CurrentInputDevice;
+}
+
+/**
  * @brief Load data at the specified index
  * @param Index The save slot index to load data from
  */
@@ -569,8 +578,7 @@ void UUSKGameInstance::UpdateInputDevice(const FKey Key)
  * @return A boolean value indicating if we've finished extracting the required amount of input indicator icons
  */
 bool UUSKGameInstance::MapActionKeyToInputIndicator(TArray<UTexture2D*>& InputIndicators,
-                                                    const UInputAction* Action, const FKey Key,
-                                                    const UInputAction* RequiredAction, const int RequiredAmount)
+	const UInputAction* Action, const FKey Key, const UInputAction* RequiredAction, const int RequiredAmount)
 {
 	if (Action != RequiredAction || Key.IsGamepadKey() != bIsUsingGamepad)
 	{

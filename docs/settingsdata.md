@@ -23,6 +23,54 @@ The settings data that is saved/loaded
 		<td></td>
 	</tr>
 	<tr>
+		<td>GameplayMouseSensitivityXModified</td>
+		<td>Was the gameplay mouse sensitivity X setting modified?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>GameplayMouseSensitivityX</td>
+		<td>The gameplay mouse sensitivity X setting</td>
+		<td>float</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GameplayMouseSensitivityYModified</td>
+		<td>Was the gameplay mouse sensitivity Y setting modified?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>GameplayMouseSensitivityY</td>
+		<td>The gameplay mouse sensitivity Y setting</td>
+		<td>float</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityXModified</td>
+		<td>Was the gameplay controller sensitivity X setting modified?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityX</td>
+		<td>The gameplay controller sensitivity X setting</td>
+		<td>float</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityYModified</td>
+		<td>Was the gameplay controller sensitivity Y setting modified?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityY</td>
+		<td>The gameplay controller sensitivity Y setting</td>
+		<td>float</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>AudioMasterModified</td>
 		<td>Was the master audio volume modified?</td>
 		<td>bool</td>
@@ -224,6 +272,42 @@ The settings data that is saved/loaded
 		<td>GraphicsFpsIndicatorType</td>
 		<td>The graphics FPS indicator type</td>
 		<td>ESettingsFpsCounterType</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>VisualsFieldOfViewModified</td>
+		<td>Was the visuals field of view setting modified?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>VisualsFieldOfView</td>
+		<td>The visuals field of view value</td>
+		<td>int</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>VisualsAdaptiveFieldOfViewModified</td>
+		<td>Was the visuals adaptive field of view setting modified?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>VisualsAdaptiveFieldOfView</td>
+		<td>The visuals adaptive field of view value</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>VisualsMotionBlurModified</td>
+		<td>Was the visuals motion blur setting modified?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>VisualsMotionBlur</td>
+		<td>The visuals motion blur value</td>
+		<td>int</td>
 		<td></td>
 	</tr>
 	<tr>

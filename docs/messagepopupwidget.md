@@ -5,6 +5,7 @@ The widget used to display a message popup
 The <code>MessagePopupWidget</code> relies on other components of this plugin to work:
 <ul>
 	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+	<li><a href="../gameinstance">Game Instance</a>: Used to monitor for input device changes and handle saving/loading game data</li>
 </ul>
 
 ## Required Widgets

@@ -15,6 +15,7 @@
 #include "USK/Weapons/Weapon.h"
 #include "USKCharacter.generated.h"
 
+class UUSKGameInstance;
 class UAttackableObjectComponent;
 class UStatsComponent;
 class UInteractTrigger;
@@ -1058,6 +1059,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character")
 	void UpdateAdaptiveFieldOfViewStatus();
 
+	/**
+	 * @brief Initialize the sensitivity of the camera rotation
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Character")
+	void InitializeSensitivity();
+
 protected:
 	/**
 	 * @brief A reference to the player controller
@@ -1187,7 +1194,13 @@ protected:
 	 */
 	void ApplyStompVelocity();
 
-private:	
+private:
+	/**
+	 * @brief A reference to the game instance
+	 */
+	UPROPERTY()
+	UUSKGameInstance* GameInstance;
+	
 	/**
 	 * @brief A reference to the current weapons
 	 */
@@ -1425,6 +1438,16 @@ private:
 	 * @brief Is a jump buffered?
 	 */
 	bool JumpBuffered;
+
+	/**
+	 * @brief The mouse sensitivity of the camera rotation
+	 */
+	FVector2D MouseSensitivity;
+
+	/**
+	 * @brief The controller sensitivity of the camera rotation
+	 */
+	FVector2D ControllerSensitivity;
 
 	/**
 	 * @brief The timer handle used to cancel the buffered jump

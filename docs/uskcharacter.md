@@ -5,6 +5,7 @@ Base character class
 The <code>USKCharacter</code> relies on other components of this plugin to work:
 <ul>
 	<li><a href="../logger">Logger</a>: Used to log useful information to help you debug any issues you might experience</li>
+	<li><a href="../gameinstance">Game Instance</a>: Used to monitor for input device changes and handle saving/loading game data</li>
 	<li><a href="../audio">Audio</a>: Used to play sound effects either 2D or at a specified location</li>
 </ul>
 
@@ -558,19 +559,19 @@ The <code>USKCharacter</code> uses the following components:
 		<td></td>
 	</tr>
 	<tr>
-		<td>bAdjustFovBasedOnSpeed</td>
+		<td>bAdaptiveFieldOfView</td>
 		<td>Should the camera field of view be adjusted based on the speed of the character?</td>
 		<td>bool</td>
 		<td>false</td>
 	</tr>
 	<tr>
-		<td>SpeedFovCurve</td>
+		<td>AdaptiveFieldOfViewCurve</td>
 		<td>The float curve used to determine the FOV based on the character's speed</td>
 		<td>UCurveFloat*</td>
 		<td><code>nullptr</code></td>
 	</tr>
 	<tr>
-		<td>SpeedFovInterpSpeed</td>
+		<td>AdaptiveFieldOfViewInterpSpeed</td>
 		<td>The speed used to interpolate the FOV based on the character's speed</td>
 		<td>float</td>
 		<td>5.0f</td>
@@ -951,6 +952,24 @@ The <code>USKCharacter</code> uses the following components:
 		<td>Get the location of the player during the execution sequence</td>
 		<td><strong>ExecutionData (UExecutionData*)</strong><br/>The data describing the execution sequence<br/><br/><strong>Enemy (AActor*)</strong><br/>A reference to the enemy character that is being executed</td>
 		<td><strong>FVector</strong><br/>The location of the player during the execution sequence</td>
+	</tr>
+	<tr>
+		<td>InitializeCameraFieldOfView</td>
+		<td>Initialize the field of view of the camera</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>UpdateAdaptiveFieldOfViewStatus</td>
+		<td>Update the adaptive field of view enabled/disable status</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>InitializeSensitivity</td>
+		<td>Initialize the sensitivity of the camera rotation</td>
+		<td></td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>StartFiringWeapon</td>

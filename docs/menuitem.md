@@ -58,6 +58,11 @@ You can add the following widgets to enable extra functionality:
 		<td>USlider*</td>
 	</tr>
 	<tr>
+		<td>ValueProgressBar</td>
+		<td>The progress bar used to display the current value of the menu item</td>
+		<td>UProgressBar*</td>
+	</tr>
+	<tr>
 		<td>IncreaseValueButton</td>
 		<td>The button used to increase the value of the menu item</td>
 		<td>UButton*</td>
@@ -375,6 +380,12 @@ You can add the following widgets to enable extra functionality:
 		<td>false</td>
 	</tr>
 	<tr>
+		<td>ShowValueProgressBar</td>
+		<td>Should the value progress bar be shown for this menu item?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
 		<td>ShowValueButtons</td>
 		<td>Should the increase/decrease value buttons be shown for this menu item?</td>
 		<td>bool</td>
@@ -413,6 +424,12 @@ You can add the following widgets to enable extra functionality:
 	<tr>
 		<td>KeepHighlightStyleWhenSelected</td>
 		<td>Should the highlighted style be kept when the menu item is selected?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>bCheckForKeyboardFocus</td>
+		<td>Should the item check for keyboard focus and update the state accordingly?</td>
 		<td>bool</td>
 		<td>false</td>
 	</tr>

@@ -27,6 +27,54 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
 	int GameplayDifficulty;
+
+	/**
+	 * @brief Was the gameplay mouse sensitivity X setting modified?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	bool GameplayMouseSensitivityXModified;
+
+	/**
+	 * @brief The gameplay mouse sensitivity X setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	float GameplayMouseSensitivityX;
+
+	/**
+	 * @brief Was the gameplay mouse sensitivity Y setting modified?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	bool GameplayMouseSensitivityYModified;
+
+	/**
+	 * @brief The gameplay mouse sensitivity Y setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	float GameplayMouseSensitivityY;
+
+	/**
+	 * @brief Was the gameplay controller sensitivity X setting modified?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	bool GameplayControllerSensitivityXModified;
+
+	/**
+	 * @brief The gameplay controller sensitivity X setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	float GameplayControllerSensitivityX;
+
+	/**
+	 * @brief Was the gameplay controller sensitivity Y setting modified?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	bool GameplayControllerSensitivityYModified;
+
+	/**
+	 * @brief The gameplay controller sensitivity Y setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	float GameplayControllerSensitivityY;
 	
 	/**
 	 * @brief Was the master audio volume modified?

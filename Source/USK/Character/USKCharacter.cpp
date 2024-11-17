@@ -60,6 +60,7 @@ void AUSKCharacter::BeginPlay()
 	Super::BeginPlay();
 	
 	USK_LOG_TRACE("Initializing references");
+	GameInstance = dynamic_cast<UUSKGameInstance*>(GetGameInstance());
 	PlayerController = dynamic_cast<APlayerController*>(GetController());
 	PlayerController->SetAudioListenerOverride(CameraComponent,
 		FVector::ZeroVector, FRotator::ZeroRotator);
@@ -74,6 +75,7 @@ void AUSKCharacter::BeginPlay()
 
 	InitializeCameraPerspective();
 	InitializeCameraFieldOfView();
+	InitializeSensitivity();
 	UpdateAdaptiveFieldOfViewStatus();
 
 	USK_LOG_TRACE("Initializing character jumping");
@@ -640,7 +642,6 @@ FVector AUSKCharacter::GetExecutionLocation(UExecutionData* ExecutionData, AActo
  */
 void AUSKCharacter::InitializeCameraFieldOfView()
 {
-	const UUSKGameInstance* GameInstance = dynamic_cast<UUSKGameInstance*>(GetGameInstance());
 	if (!IsValid(GameInstance))
 	{
 		USK_LOG_ERROR("Unable to apply FOV. Game instance is not USKGameInstance");
@@ -666,7 +667,6 @@ void AUSKCharacter::InitializeCameraFieldOfView()
  */
 void AUSKCharacter::UpdateAdaptiveFieldOfViewStatus()
 {
-	const UUSKGameInstance* GameInstance = dynamic_cast<UUSKGameInstance*>(GetGameInstance());
 	if (!IsValid(GameInstance))
 	{
 		USK_LOG_ERROR("Unable to update adaptive field of view. Game instance is not USKGameInstance");
@@ -684,6 +684,42 @@ void AUSKCharacter::UpdateAdaptiveFieldOfViewStatus()
 			? Settings->VisualsAdaptiveFieldOfView
 			: GameInstance->SettingsConfig->VisualsAdaptiveFieldOfViewDefault;
 	bAdaptiveFieldOfView = Value;
+}
+
+/**
+ * @brief Initialize the sensitivity of the camera rotation
+ */
+void AUSKCharacter::InitializeSensitivity()
+{
+	if (!IsValid(GameInstance))
+	{
+		USK_LOG_ERROR("Unable to apply sensitivity. Game instance is not USKGameInstance");
+		return;
+	}
+
+	if (!IsValid(GameInstance->SettingsConfig))
+	{
+		USK_LOG_ERROR("Unable to apply sensitivity. Setting configuration not specified in game instance");
+		return;
+	}
+	
+	const USettingsData* Settings = USettingsUtils::LoadSettings();
+	const int MouseSensitivityX = Settings->GameplayMouseSensitivityXModified
+			? Settings->GameplayMouseSensitivityX
+			: GameInstance->SettingsConfig->GameplayMouseSensitivityXDefault;
+	const int MouseSensitivityY = Settings->GameplayMouseSensitivityYModified
+			? Settings->GameplayMouseSensitivityY
+			: GameInstance->SettingsConfig->GameplayMouseSensitivityYDefault;
+	const int ControllerSensitivityX = Settings->GameplayControllerSensitivityXModified
+			? Settings->GameplayControllerSensitivityX
+			: GameInstance->SettingsConfig->GameplayControllerSensitivityXDefault;
+	const int ControllerSensitivityY = Settings->GameplayControllerSensitivityYModified
+			? Settings->GameplayControllerSensitivityY
+			: GameInstance->SettingsConfig->GameplayControllerSensitivityYDefault;
+	MouseSensitivity = FVector2D(static_cast<float>(MouseSensitivityX) / 100.0f,
+		static_cast<float>(MouseSensitivityY) / 100.0f);
+	ControllerSensitivity = FVector2D(static_cast<float>(ControllerSensitivityX) / 100.0f,
+		static_cast<float>(ControllerSensitivityY) / 100.0f);
 }
 
 /**
@@ -1055,8 +1091,11 @@ void AUSKCharacter::RotateCamera(const FInputActionValue& Input)
 	{
 		return;
 	}
-	
-	const FVector2D InputValue = Input.Get<FVector2D>();
+
+	const FVector2D Sensitivity = GameInstance->GetCurrentInputDevice() == EInputDevice::KeyboardMouse
+		? MouseSensitivity
+		: ControllerSensitivity;
+	const FVector2D InputValue = Input.Get<FVector2D>() * Sensitivity;
 	if (bSmoothCameraRotation)
     {
 		TargetCameraInput = InputValue;

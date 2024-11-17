@@ -16,6 +16,22 @@ An enum of all supported settings items
 		<td>The game difficulty setting</td>
 	</tr>
 	<tr>
+		<td>GameplayMouseSensitivityX</td>
+		<td>The mouse sensitivity X setting</td>
+	</tr>
+	<tr>
+		<td>GameplayMouseSensitivityY</td>
+		<td>The mouse sensitivity Y setting</td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityX</td>
+		<td>The controller sensitivity X setting</td>
+	</tr>
+	<tr>
+		<td>GameplayControllerSensitivityY</td>
+		<td>The controller sensitivity Y setting</td>
+	</tr>
+	<tr>
 		<td>AudioMaster</td>
 		<td>The master audio volume setting</td>
 	</tr>
@@ -94,5 +110,17 @@ An enum of all supported settings items
 	<tr>
 		<td>ControlsRemap</td>
 		<td>Remap the controls</td>
+	</tr>
+	<tr>
+		<td>VisualsFieldOfView</td>
+		<td>The visuals field of view setting</td>
+	</tr>
+	<tr>
+		<td>VisualsAdaptiveFieldOfView</td>
+		<td>The visuals adaptive field of view setting</td>
+	</tr>
+	<tr>
+		<td>VisualsMotionBlur</td>
+		<td>The visuals motion blur setting</td>
 	</tr>
 </table>

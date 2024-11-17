@@ -14,8 +14,12 @@
 #include "Items/SettingsItemAudioUi.h"
 #include "Items/SettingsItemAudioVoice.h"
 #include "Items/SettingsItemControlsRemap.h"
+#include "Items/SettingsItemGameplayControllerSensitivityX.h"
+#include "Items/SettingsItemGameplayControllerSensitivityY.h"
 #include "Items/SettingsItemVisualsFieldOfView.h"
 #include "Items/SettingsItemGameplayDifficulty.h"
+#include "Items/SettingsItemGameplayMouseSensitivityX.h"
+#include "Items/SettingsItemGameplayMouseSensitivityY.h"
 #include "Items/SettingsItemGraphicsAntiAliasing.h"
 #include "Items/SettingsItemGraphicsFpsIndicator.h"
 #include "Items/SettingsItemGraphicsResolution.h"
@@ -68,6 +72,146 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Difficulty",
 		DisplayName = "Default Value")
 	int GameplayDifficultyDefault = 0;
+
+	/**
+	 * @brief The implementation for the gameplay mouse sensitivity X setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Mouse Sensitivity X",
+		DisplayName = "Implementation")
+	TSubclassOf<USettingsItem> GameplayMouseSensitivityXImplementation = USettingsItemGameplayMouseSensitivityX::StaticClass();
+
+	/**
+	 * @brief The text displayed in the gameplay mouse sensitivity X settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Mouse Sensitivity X",
+		DisplayName = "Title")
+	FText GameplayMouseSensitivityXText;
+
+	/**
+	 * @brief The default gameplay mouse sensitivity X value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Mouse Sensitivity X",
+		DisplayName = "Default Value")
+	int GameplayMouseSensitivityXDefault = 100;
+
+	/**
+	 * @brief The minimum gameplay mouse sensitivity X value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Mouse Sensitivity X",
+		DisplayName = "Minimum Value")
+	int GameplayMouseSensitivityXMin = 1;
+
+	/**
+	 * @brief The maximum gameplay mouse sensitivity X value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Mouse Sensitivity X",
+		DisplayName = "Maximum Value")
+	int GameplayMouseSensitivityXMax = 200;
+
+	/**
+	 * @brief The implementation for the gameplay mouse sensitivity Y setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Mouse Sensitivity Y",
+		DisplayName = "Implementation")
+	TSubclassOf<USettingsItem> GameplayMouseSensitivityYImplementation = USettingsItemGameplayMouseSensitivityY::StaticClass();
+
+	/**
+	 * @brief The text displayed in the gameplay mouse sensitivity Y settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Mouse Sensitivity Y",
+		DisplayName = "Title")
+	FText GameplayMouseSensitivityYText;
+
+	/**
+	 * @brief The default gameplay mouse sensitivity Y value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Mouse Sensitivity Y",
+		DisplayName = "Default Value")
+	int GameplayMouseSensitivityYDefault = 100;
+
+	/**
+	 * @brief The minimum gameplay mouse sensitivity Y value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Mouse Sensitivity Y",
+		DisplayName = "Minimum Value")
+	int GameplayMouseSensitivityYMin = 1;
+
+	/**
+	 * @brief The maximum gameplay mouse sensitivity Y value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Mouse Sensitivity Y",
+		DisplayName = "Maximum Value")
+	int GameplayMouseSensitivityYMax = 200;
+
+	/**
+	 * @brief The implementation for the gameplay controller sensitivity X setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Controller Sensitivity X",
+		DisplayName = "Implementation")
+	TSubclassOf<USettingsItem> GameplayControllerSensitivityXImplementation = USettingsItemGameplayControllerSensitivityX::StaticClass();
+
+	/**
+	 * @brief The text displayed in the gameplay controller sensitivity X settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Controller Sensitivity X",
+		DisplayName = "Title")
+	FText GameplayControllerSensitivityXText;
+
+	/**
+	 * @brief The default gameplay controller sensitivity X value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Controller Sensitivity X",
+		DisplayName = "Default Value")
+	int GameplayControllerSensitivityXDefault = 100;
+
+	/**
+	 * @brief The minimum gameplay controller sensitivity X value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Controller Sensitivity X",
+		DisplayName = "Minimum Value")
+	int GameplayControllerSensitivityXMin = 1;
+
+	/**
+	 * @brief The maximum gameplay controller sensitivity X value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Controller Sensitivity X",
+		DisplayName = "Maximum Value")
+	int GameplayControllerSensitivityXMax = 200;
+
+	/**
+	 * @brief The implementation for the gameplay controller sensitivity Y setting
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Controller Sensitivity Y",
+		DisplayName = "Implementation")
+	TSubclassOf<USettingsItem> GameplayControllerSensitivityYImplementation = USettingsItemGameplayControllerSensitivityY::StaticClass();
+
+	/**
+	 * @brief The text displayed in the gameplay controller sensitivity Y settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Controller Sensitivity Y",
+		DisplayName = "Title")
+	FText GameplayControllerSensitivityYText;
+
+	/**
+	 * @brief The default gameplay controller sensitivity Y value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Controller Sensitivity Y",
+		DisplayName = "Default Value")
+	int GameplayControllerSensitivityYDefault = 100;
+
+	/**
+	 * @brief The minimum gameplay controller sensitivity Y value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Controller Sensitivity Y",
+		DisplayName = "Minimum Value")
+	int GameplayControllerSensitivityYMin = 1;
+
+	/**
+	 * @brief The maximum gameplay controller sensitivity Y value
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Gameplay|Controller Sensitivity Y",
+		DisplayName = "Maximum Value")
+	int GameplayControllerSensitivityYMax = 200;
 	
 	/**
 	 * @brief The implementation for the audio master settings item

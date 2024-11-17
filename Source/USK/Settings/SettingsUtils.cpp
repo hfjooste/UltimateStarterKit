@@ -96,7 +96,7 @@ void USettingsUtils::ApplySettings(const UUSKGameInstance* GameInstance, const U
 
 	USK_LOG_INFO("Applying gameplay settings");
 	ApplySettingsInRange(GameInstance, Settings,
-		ESettingsItemType::GameplayDifficulty, ESettingsItemType::GameplayDifficulty);
+		ESettingsItemType::GameplayDifficulty, ESettingsItemType::GameplayControllerSensitivityY);
 
 	USK_LOG_INFO("Applying audio settings");
 	ApplySettingsInRange(GameInstance, Settings,
@@ -104,11 +104,15 @@ void USettingsUtils::ApplySettings(const UUSKGameInstance* GameInstance, const U
 
 	USK_LOG_INFO("Applying graphics settings");
 	ApplySettingsInRange(GameInstance, Settings,
-		ESettingsItemType::GraphicsResolution, ESettingsItemType::GraphicsFpsIndicator);
+		ESettingsItemType::GraphicsResolution, ESettingsItemType::GraphicsRayTracing);
 
 	USK_LOG_INFO("Applying accessibility settings");
 	ApplySettingsInRange(GameInstance, Settings,
 		ESettingsItemType::AccessibilityColorBlindMode, ESettingsItemType::AccessibilityColorBlindModeSeverity);
+
+	USK_LOG_INFO("Applying accessibility settings");
+	ApplySettingsInRange(GameInstance, Settings,
+		ESettingsItemType::VisualsFieldOfView, ESettingsItemType::VisualsMotionBlur);
 }
 
 /**
@@ -253,6 +257,14 @@ USettingsItem* USettingsUtils::GetSettingsItem(const ESettingsItemType SettingsI
 		return nullptr;
 	case ESettingsItemType::GameplayDifficulty:
 		return Config->GameplayDifficultyImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GameplayMouseSensitivityX:
+		return Config->GameplayMouseSensitivityXImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GameplayMouseSensitivityY:
+		return Config->GameplayMouseSensitivityYImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GameplayControllerSensitivityX:
+		return Config->GameplayControllerSensitivityXImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::GameplayControllerSensitivityY:
+		return Config->GameplayControllerSensitivityYImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::AudioMaster:
 		return Config->AudioMasterImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::AudioMusic:

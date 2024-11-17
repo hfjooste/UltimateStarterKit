@@ -23,6 +23,26 @@ enum class ESettingsItemType : uint8
 	GameplayDifficulty = 1,
 
 	/**
+	 * @brief The mouse sensitivity X setting
+	 */
+	GameplayMouseSensitivityX = 2,
+
+	/**
+	 * @brief The mouse sensitivity Y setting
+	 */
+	GameplayMouseSensitivityY = 3,
+
+	/**
+	 * @brief The controller sensitivity X setting
+	 */
+	GameplayControllerSensitivityX = 4,
+
+	/**
+	 * @brief The controller sensitivity Y setting
+	 */
+	GameplayControllerSensitivityY = 5,
+
+	/**
 	 * @brief The master audio volume setting
 	 */
 	AudioMaster = 50,
