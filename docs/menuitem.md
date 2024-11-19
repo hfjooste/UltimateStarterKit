@@ -164,6 +164,12 @@ You can add the following widgets to enable extra functionality:
 		<td>false</td>
 	</tr>
 	<tr>
+		<td>bRemoveFocusOnMouseLeave</td>
+		<td>Should the focus on the menu item be removed when the mouse leaves the widget?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
 		<td>HideOnConsoles</td>
 		<td>Should the menu item be hidden on consoles?</td>
 		<td>bool</td>

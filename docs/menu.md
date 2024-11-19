@@ -249,6 +249,18 @@ You can add the following widgets to enable extra functionality:
 		<td></td>
 	</tr>
 	<tr>
+		<td>GetItems</td>
+		<td>Get all the menu items in the menu</td>
+		<td></td>
+		<td><strong>TArray&lt;UMenuItem*&gt;</strong><br/>An array of all menu items</td>
+	</tr>
+	<tr>
+		<td>GetHighlightedItem</td>
+		<td>Get the current menu item</td>
+		<td></td>
+		<td><strong>UMenuItem*</strong><br/>A reference to the current menu item</td>
+	</tr>
+	<tr>
 		<td>IsInputAllowed</td>
 		<td>Is input allowed for the menu?</td>
 		<td></td>
@@ -280,6 +292,8 @@ You can use the <code>Menu</code> using Blueprints by adding one of the followin
 	<li>Ultimate Starter Kit > UI > Add Menu Item</li>
 	<li>Ultimate Starter Kit > UI > Force Select</li>
 	<li>Ultimate Starter Kit > UI > Reload Items</li>
+	<li>Ultimate Starter Kit > UI > Get Items</li>
+	<li>Ultimate Starter Kit > UI > Get Highlighted Item</li>
 	<li>Ultimate Starter Kit > UI > Is Input Allowed</li>
 	<li>Ultimate Starter Kit > UI > Can Force Highlighted Item</li>
 </ul>
@@ -312,6 +326,8 @@ void ATestActor::Test()
 	Menu->AddMenuItem(MenuItem);
 	Menu->ForceSelect(MenuItem);
 	Menu->ReloadItems();
+	TArray<UMenuItem*> Items = Menu->GetItems();
+	UMenuItem* HighlightedItem = Menu->GetHighlightedItem();
 	bool IsInputAllowedValue = Menu->IsInputAllowed();
 	bool CanForceHighlightedItemValue = Menu->CanForceHighlightedItem();
 }

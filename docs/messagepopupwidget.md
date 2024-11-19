@@ -77,6 +77,12 @@ You can add the following widgets to enable extra functionality:
 		<td>TSubclassOf&lt;UMenuItem&gt;</td>
 		<td></td>
 	</tr>
+	<tr>
+		<td>bHorizontalButtonNavigation</td>
+		<td>Should the buttons use horizontal navigation?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
 </table>
 
 ### Events
