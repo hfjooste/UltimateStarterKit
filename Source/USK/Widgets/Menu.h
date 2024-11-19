@@ -231,6 +231,20 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|UI")
 	void ReloadItems();
 
+	/**
+	 * @brief Get all the menu items in the menu
+	 * @return An array of all menu items
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|UI")
+	TArray<UMenuItem*> GetItems();
+
+	/**
+	 * @brief Get the current menu item
+	 * @return A reference to the current menu item
+	 */
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ultimate Starter Kit|UI")
+	UMenuItem* GetHighlightedItem() const;
+
 protected:
 	/**
 	 * @brief A reference to the game instance

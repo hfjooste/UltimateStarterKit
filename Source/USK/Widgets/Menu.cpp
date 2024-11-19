@@ -388,7 +388,7 @@ void UMenu::ForceSelect(UMenuItem* MenuItem)
  */
 void UMenu::ReloadItems()
 {
-	if (!AlwaysHighlightItem || !IsValid(Container))
+	if (!IsValid(Container))
 	{
 		return;
 	}
@@ -406,11 +406,29 @@ void UMenu::ReloadItems()
 		}
 	}
 
-	if (!Items.IsEmpty())
+	if (AlwaysHighlightItem && !Items.IsEmpty())
 	{
 		DefaultHighlightedItem = IsValid(CurrentMenuItem) ? CurrentMenuItem : Items[0];
 		HighlightedItem = nullptr;
 	}
+}
+
+/**
+ * @brief Get all the menu items in the menu
+ * @return An array of all menu items
+ */
+TArray<UMenuItem*> UMenu::GetItems()
+{
+	return Items;
+}
+
+/**
+ * @brief Get the current menu item
+ * @return A reference to the current menu item
+ */
+UMenuItem* UMenu::GetHighlightedItem() const
+{
+	return CurrentMenuItem;
 }
 
 /**
@@ -651,16 +669,10 @@ void UMenu::UpdateHighlightedItem(UMenuItem* NewItem, const EMenuNavigation Menu
 	case EMenuNavigation::HighlightItem:
 		if (!IsValid(NewItem))
 		{
-			if (IsValid(CurrentMenuItem))
-			{
-				CurrentMenuItem->SetHighlightedState(false, false, false);
-			}
-
-			CurrentMenuItem = nullptr;
 			break;
 		}
 
-		if (CurrentMenuItem != nullptr)
+		if (IsValid(CurrentMenuItem))
 		{
 			if (CurrentMenuItem->IsWaitingForKeyPress())
 			{
@@ -671,13 +683,10 @@ void UMenu::UpdateHighlightedItem(UMenuItem* NewItem, const EMenuNavigation Menu
 		}
 		
 		CurrentMenuItem = NewItem;
-		if (NewItem != nullptr)
+		NewItem->SetHighlightedState(true, true, true);
+		if (IsValid(ScrollContainer))
 		{
-			NewItem->SetHighlightedState(true, true, true);
-			if (ScrollContainer != nullptr)
-			{
-				ScrollContainer->ScrollWidgetIntoView(CurrentMenuItem);
-			}
+			ScrollContainer->ScrollWidgetIntoView(CurrentMenuItem);
 		}
 		break;
 	case EMenuNavigation::IncreaseDecreaseValue:
