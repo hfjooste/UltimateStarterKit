@@ -85,6 +85,12 @@ public:
 	TSubclassOf<UMenuItem> ButtonMenuItemClass;
 
 	/**
+	 * @brief Should the buttons use horizontal navigation?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI")
+	bool bHorizontalButtonNavigation = true;
+
+	/**
 	 * @brief Event used to notify other classes that the popup was shown
 	 */
 	UPROPERTY(BlueprintAssignable, Category = "Ultimate Starter Kit|UI|Events")

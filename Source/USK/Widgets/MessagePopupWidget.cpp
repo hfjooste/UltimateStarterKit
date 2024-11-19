@@ -123,8 +123,12 @@ UMenuItem* UMessagePopupWidget::CreateButton(const FText& ButtonText) const
 		return nullptr;
 	}
 
-	MenuItem->HorizontalNavigation = EMenuNavigation::HighlightItem;
-	MenuItem->VerticalNavigation = EMenuNavigation::Disabled;
+	MenuItem->HorizontalNavigation = bHorizontalButtonNavigation
+		? EMenuNavigation::HighlightItem
+		: EMenuNavigation::Disabled;
+	MenuItem->VerticalNavigation = bHorizontalButtonNavigation
+		? EMenuNavigation::Disabled
+		: EMenuNavigation::HighlightItem;
 	MenuItem->MenuItemText = ButtonText;
 	MenuItem->SetText(ButtonText);
 	ButtonMenu->AddMenuItem(MenuItem);
@@ -139,37 +143,51 @@ void UMessagePopupWidget::UpdateButtonNavigation()
 	if (IsValid(PositiveButton))
 	{
 		PositiveButton->MenuItemLeft = nullptr;
-		PositiveButton->MenuItemRight = IsValid(NegativeButton) ? NegativeButton : NeutralButton;
+		PositiveButton->MenuItemRight = bHorizontalButtonNavigation
+			? (IsValid(NegativeButton) ? NegativeButton : NeutralButton)
+			: nullptr;
+		PositiveButton->MenuItemUp = nullptr;
+		PositiveButton->MenuItemDown = !bHorizontalButtonNavigation
+			? (IsValid(NegativeButton) ? NegativeButton : NeutralButton)
+			: nullptr;
 		PositiveButton->OnSelected.AddDynamic(this, &UMessagePopupWidget::OnPositiveButtonClicked);
 	}
 
 	if (IsValid(NegativeButton))
 	{
-		NegativeButton->MenuItemLeft = PositiveButton;
-		NegativeButton->MenuItemRight = NeutralButton;
+		NegativeButton->MenuItemLeft = bHorizontalButtonNavigation ? PositiveButton : nullptr;
+		NegativeButton->MenuItemRight = bHorizontalButtonNavigation ? NeutralButton : nullptr;
+		NegativeButton->MenuItemUp = !bHorizontalButtonNavigation ? PositiveButton : nullptr;
+		NegativeButton->MenuItemDown = !bHorizontalButtonNavigation ? NeutralButton : nullptr;
 		NegativeButton->OnSelected.AddDynamic(this, &UMessagePopupWidget::OnNegativeButtonClicked);
 	}
 
 	if (IsValid(NeutralButton))
 	{
-		NeutralButton->MenuItemLeft = IsValid(NegativeButton) ? NegativeButton : PositiveButton;
+		NeutralButton->MenuItemLeft = bHorizontalButtonNavigation
+			? (IsValid(NegativeButton) ? NegativeButton : PositiveButton)
+			: nullptr;
 		NeutralButton->MenuItemRight = nullptr;
+		NeutralButton->MenuItemUp = !bHorizontalButtonNavigation
+			? (IsValid(NegativeButton) ? NegativeButton : PositiveButton)
+			: nullptr;
+		NeutralButton->MenuItemDown = nullptr;
 		NeutralButton->OnSelected.AddDynamic(this, &UMessagePopupWidget::OnNeutralButtonClicked);
 	}
 
-	if (IsValid(PositiveButton) && IsValid(PositiveButton->SelectButton))
+	if (IsValid(PositiveButton) && IsValid(PositiveButton->SelectButton) && PositiveButton->bCheckForKeyboardFocus)
 	{
 		PositiveButton->SelectButton->SetKeyboardFocus();
 		return;
 	}
 
-	if (IsValid(NegativeButton) && IsValid(NegativeButton->SelectButton))
+	if (IsValid(NegativeButton) && IsValid(NegativeButton->SelectButton) && NegativeButton->bCheckForKeyboardFocus)
 	{
 		NegativeButton->SelectButton->SetKeyboardFocus();
 		return;
 	}
 
-	if (IsValid(NeutralButton) && IsValid(NeutralButton->SelectButton))
+	if (IsValid(NeutralButton) && IsValid(NeutralButton->SelectButton) && NeutralButton->bCheckForKeyboardFocus)
 	{
 		NeutralButton->SelectButton->SetKeyboardFocus();
 	}
