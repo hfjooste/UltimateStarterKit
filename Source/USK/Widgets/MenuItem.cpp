@@ -181,7 +181,7 @@ void UMenuItem::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEv
 void UMenuItem::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
 {
 	Super::NativeOnMouseLeave(InMouseEvent);
-	if (IsValid(Menu))
+	if (IsValid(Menu) && bRemoveFocusOnMouseLeave)
 	{
 		Menu->RemoveHighlight(this);
 	}

@@ -194,6 +194,12 @@ public:
 	bool FocusByDefault;
 
 	/**
+	 * @brief Should the focus on the menu item be removed when the mouse leaves the widget?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|General")
+	bool bRemoveFocusOnMouseLeave = true;
+
+	/**
 	 * @brief Should the menu item be hidden on consoles?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|UI|General")
