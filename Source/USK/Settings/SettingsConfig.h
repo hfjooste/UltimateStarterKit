@@ -44,7 +44,7 @@ class USK_API USettingsConfig : public UDataAsset
 {
 	GENERATED_BODY()
 
-public:
+public:	
 	/**
 	 * @brief The implementation for the gameplay difficulty setting
 	 */
@@ -422,6 +422,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Audio|Voice",
 		DisplayName = "Default Value")
 	float AudioVoiceDefault = 100.0f;
+
+	/**
+	 * @brief Should a benchmark be run on the first launch to update the graphics settings?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Graphics")
+	bool bRunInitialBenchmark = true;
 
 	/**
 	 * @brief The implementation for the graphics resolution settings item

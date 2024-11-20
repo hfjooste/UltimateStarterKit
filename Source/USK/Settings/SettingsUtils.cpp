@@ -28,7 +28,7 @@ void USettingsUtils::Initialize(const UUSKGameInstance* GameInstance)
 	}
 
 	USettingsData* Settings = LoadSettings();
-	if (!Settings->bBenchmarkCompleted)
+	if (GameInstance->SettingsConfig->bRunInitialBenchmark && !Settings->bBenchmarkCompleted)
 	{
 		ApplyRecommendedGraphicsSettings(GameInstance);
 		Settings->bBenchmarkCompleted = true;
