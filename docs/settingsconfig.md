@@ -335,6 +335,42 @@ The configuration used for managing settings
 		<td>100.0f</td>
 	</tr>
 	<tr>
+		<td>AudioAmbienceImplementation</td>
+		<td>The implementation for the audio ambience settings item</td>
+		<td>TSubclassOf&lt;USettingsItem&gt;</td>
+		<td>USettingsItemAudioAmbience::StaticClas</td>
+	</tr>
+	<tr>
+		<td>AudioAmbienceSoundClass</td>
+		<td>The sound class used by all ambience</td>
+		<td>USoundClass*</td>
+		<td><code>nullptr</code></td>
+	</tr>
+	<tr>
+		<td>AudioAmbienceText</td>
+		<td>The text displayed in the ambience audio settings item</td>
+		<td>FText</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>AudioAmbienceMin</td>
+		<td>The minimum value for the ambience audio settings item</td>
+		<td>float</td>
+		<td>0.0f</td>
+	</tr>
+	<tr>
+		<td>AudioAmbienceMax</td>
+		<td>The maximum value for the ambience audio settings item</td>
+		<td>float</td>
+		<td>100.0f</td>
+	</tr>
+	<tr>
+		<td>AudioAmbienceDefault</td>
+		<td>The default value for the ambience audio settings item</td>
+		<td>float</td>
+		<td>100.0f</td>
+	</tr>
+	<tr>
 		<td>bRunInitialBenchmark</td>
 		<td>Should a benchmark be run on the first launch to update the graphics settings?</td>
 		<td>bool</td>

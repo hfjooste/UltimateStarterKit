@@ -145,7 +145,7 @@ void USettingsUtils::ApplySettings(const UUSKGameInstance* GameInstance, const U
 
 	USK_LOG_INFO("Applying audio settings");
 	ApplySettingsInRange(GameInstance, Settings,
-		ESettingsItemType::AudioMaster, ESettingsItemType::AudioVoice);
+		ESettingsItemType::AudioMaster, ESettingsItemType::AudioAmbience);
 
 	USK_LOG_INFO("Applying graphics settings");
 	ApplySettingsInRange(GameInstance, Settings,
@@ -320,6 +320,8 @@ USettingsItem* USettingsUtils::GetSettingsItem(const ESettingsItemType SettingsI
 		return Config->AudioUiImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::AudioVoice:
 		return Config->AudioVoiceImplementation->GetDefaultObject<USettingsItem>();
+	case ESettingsItemType::AudioAmbience:
+		return Config->AudioAmbienceImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::GraphicsResolution:
 		return Config->GraphicsResolutionImplementation->GetDefaultObject<USettingsItem>();
 	case ESettingsItemType::GraphicsWindowMode:

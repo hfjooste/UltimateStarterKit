@@ -8,6 +8,7 @@
 #include "Engine/DataAsset.h"
 #include "Items/SettingsItemAccessibilityColorBlindMode.h"
 #include "Items/SettingsItemAccessibilityColorBlindModeSeverity.h"
+#include "Items/SettingsItemAudioAmbience.h"
 #include "Items/SettingsItemAudioMaster.h"
 #include "Items/SettingsItemAudioMusic.h"
 #include "Items/SettingsItemAudioEffects.h"
@@ -422,6 +423,48 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Audio|Voice",
 		DisplayName = "Default Value")
 	float AudioVoiceDefault = 100.0f;
+
+	/**
+	 * @brief The implementation for the audio ambience settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Audio|Ambience",
+		DisplayName = "Implementation")
+	TSubclassOf<USettingsItem> AudioAmbienceImplementation = USettingsItemAudioAmbience::StaticClass();
+
+	/**
+	 * @brief The sound class used by all ambience
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Audio|Ambience",
+		DisplayName = "Sound Class")
+	USoundClass* AudioAmbienceSoundClass;
+
+	/**
+	 * @brief The text displayed in the ambience audio settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Audio|Ambience",
+		DisplayName = "Title")
+	FText AudioAmbienceText;
+
+	/**
+	 * @brief The minimum value for the ambience audio settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Audio|Ambience",
+		DisplayName = "Minimum Value")
+	float AudioAmbienceMin = 0.0f;
+
+	/**
+	 * @brief The maximum value for the ambience audio settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Audio|Ambience",
+		DisplayName = "Maximum Value")
+	float AudioAmbienceMax = 100.0f;
+
+	/**
+	 * @brief The default value for the ambience audio settings item
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings|Audio|Ambience",
+		DisplayName = "Default Value")
+	float AudioAmbienceDefault = 100.0f;
 
 	/**
 	 * @brief Should a benchmark be run on the first launch to update the graphics settings?

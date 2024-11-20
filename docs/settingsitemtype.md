@@ -52,6 +52,10 @@ An enum of all supported settings items
 		<td>The voice audio volume setting</td>
 	</tr>
 	<tr>
+		<td>AudioAmbience</td>
+		<td>The ambience audio volume setting</td>
+	</tr>
+	<tr>
 		<td>GraphicsResolution</td>
 		<td>The graphics resolution setting</td>
 	</tr>

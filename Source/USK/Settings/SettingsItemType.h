@@ -68,6 +68,11 @@ enum class ESettingsItemType : uint8
 	AudioVoice = 54,
 
 	/**
+	 * @brief The ambience audio volume setting
+	 */
+	AudioAmbience = 55,
+
+	/**
 	 * @brief The graphics resolution setting
 	 */
 	GraphicsResolution = 100,

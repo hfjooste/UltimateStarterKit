@@ -48,4 +48,5 @@ void USettingsItemAudioMaster::ApplySettings(UObject* World, const USettingsConf
 	USettingsUtils::GetSettingsItem(ESettingsItemType::AudioEffects, Config)->ApplySettings(World, Config, Settings);
 	USettingsUtils::GetSettingsItem(ESettingsItemType::AudioUi, Config)->ApplySettings(World, Config, Settings);
 	USettingsUtils::GetSettingsItem(ESettingsItemType::AudioVoice, Config)->ApplySettings(World, Config, Settings);
+	USettingsUtils::GetSettingsItem(ESettingsItemType::AudioAmbience, Config)->ApplySettings(World, Config, Settings);
 }

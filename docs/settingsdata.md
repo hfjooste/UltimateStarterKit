@@ -137,6 +137,18 @@ The settings data that is saved/loaded
 		<td></td>
 	</tr>
 	<tr>
+		<td>AudioAmbienceModified</td>
+		<td>Was the ambience volume modified?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
+		<td>AudioAmbience</td>
+		<td>The ambience volume</td>
+		<td>float</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>GraphicsResolutionX</td>
 		<td>The X value of the saved resolution</td>
 		<td>int</td>

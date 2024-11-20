@@ -143,6 +143,18 @@ public:
     float AudioVoice;
 
 	/**
+	 * @brief Was the ambience volume modified?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	bool AudioAmbienceModified;
+
+	/**
+	 * @brief The ambience volume
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	float AudioAmbience;
+
+	/**
 	 * @brief The X value of the saved resolution
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
