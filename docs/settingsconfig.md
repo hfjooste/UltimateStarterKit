@@ -335,6 +335,12 @@ The configuration used for managing settings
 		<td>100.0f</td>
 	</tr>
 	<tr>
+		<td>bRunInitialBenchmark</td>
+		<td>Should a benchmark be run on the first launch to update the graphics settings?</td>
+		<td>bool</td>
+		<td>true</td>
+	</tr>
+	<tr>
 		<td>GraphicsResolutionImplementation</td>
 		<td>The implementation for the graphics resolution settings item</td>
 		<td>TSubclassOf&lt;USettingsItem&gt;</td>
