@@ -29,6 +29,13 @@ public:
 	static void Initialize(const UUSKGameInstance* GameInstance);
 
 	/**
+	 * @brief Detect and apply the recommended graphics settings
+	 * @param GameInstance A reference to the game instance
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Ultimate Starter Kit|Settings")
+	static void ApplyRecommendedGraphicsSettings(const UUSKGameInstance* GameInstance);
+
+	/**
 	 * @brief Load the settings
 	 * @return The loaded settings data
 	 */

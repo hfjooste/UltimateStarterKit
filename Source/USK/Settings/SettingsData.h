@@ -17,6 +17,12 @@ class USK_API USettingsData : public USaveGame
 	
 public:
 	/**
+	 * @brief Was the initial benchmark completed?
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")
+	bool bBenchmarkCompleted;
+	
+	/**
 	 * @brief Was the gameplay difficulty setting modified?
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ultimate Starter Kit|Settings")

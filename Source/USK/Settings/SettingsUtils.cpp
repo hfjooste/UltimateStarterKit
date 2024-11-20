@@ -26,8 +26,53 @@ void USettingsUtils::Initialize(const UUSKGameInstance* GameInstance)
 		USK_LOG_ERROR("Unable to initialize settings. SettingsConfig is nullptr");
 		return;
 	}
+
+	USettingsData* Settings = LoadSettings();
+	if (!Settings->bBenchmarkCompleted)
+	{
+		ApplyRecommendedGraphicsSettings(GameInstance);
+		Settings->bBenchmarkCompleted = true;
+		SaveSettings(Settings);
+		return;
+	}
 	
-	ApplySettings(GameInstance, LoadSettings());
+	ApplySettings(GameInstance, Settings);
+}
+
+/**
+ * @brief Detect and apply the recommended graphics settings
+ * @param GameInstance A reference to the game instance
+ */
+void USettingsUtils::ApplyRecommendedGraphicsSettings(const UUSKGameInstance* GameInstance)
+{
+	UGameUserSettings* UserSettings = UGameUserSettings::GetGameUserSettings();
+	UserSettings->RunHardwareBenchmark();
+	UserSettings->ApplyHardwareBenchmarkResults();
+	UserSettings->ApplySettings(false);
+	UserSettings->SaveSettings();
+	
+	USettingsData* Settings = LoadSettings();
+	Settings->GraphicsResolutionX = UserSettings->GetScreenResolution().X;
+	Settings->GraphicsResolutionY = UserSettings->GetScreenResolution().Y;
+	Settings->GraphicsViewDistanceModified = true;
+	Settings->GraphicsViewDistance = UserSettings->GetViewDistanceQuality();
+	Settings->GraphicsAntiAliasingModified = true;
+	Settings->GraphicsAntiAliasing = UserSettings->GetAntiAliasingQuality();
+	Settings->GraphicsPostProcessingModified = true;
+	Settings->GraphicsPostProcessing = UserSettings->GetPostProcessingQuality();
+	Settings->GraphicsShadowQualityModified = true;
+	Settings->GraphicsShadowQuality = UserSettings->GetShadowQuality();
+	Settings->GraphicsTextureQualityModified = true;
+	Settings->GraphicsTextureQuality = UserSettings->GetTextureQuality();
+	Settings->GraphicsVisualEffectsModified = true;
+	Settings->GraphicsVisualEffects = UserSettings->GetVisualEffectQuality();
+	Settings->GraphicsShadingQualityModified = true;
+	Settings->GraphicsShadingQuality = UserSettings->GetShadingQuality();
+	Settings->GraphicsVsyncModified = true;
+	Settings->GraphicsVsync = UserSettings->IsVSyncEnabled();
+	
+	SaveSettings(Settings);
+	ApplySettings(GameInstance, Settings);
 }
 
 /**
