@@ -11,6 +11,12 @@ The settings data that is saved/loaded
 		<th>Default Value</th>
 	</tr>
 	<tr>
+		<td>bBenchmarkCompleted</td>
+		<td>Was the initial benchmark completed?</td>
+		<td>bool</td>
+		<td>false</td>
+	</tr>
+	<tr>
 		<td>GameplayDifficultyModified</td>
 		<td>Was the gameplay difficulty setting modified?</td>
 		<td>bool</td>

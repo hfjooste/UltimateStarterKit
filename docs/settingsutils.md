@@ -31,6 +31,12 @@ Before you can use the plugin to automatically handle the controls settings, you
 		<td></td>
 	</tr>
 	<tr>
+		<td>ApplyRecommendedGraphicsSettings</td>
+		<td>Detect and apply the recommended graphics settings</td>
+		<td><strong>GameInstance (UUSKGameInstance*)</strong><br/>A reference to the game instance</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>LoadSettings</td>
 		<td>Load the settings</td>
 		<td></td>
@@ -90,6 +96,7 @@ Before you can use the plugin to automatically handle the controls settings, you
 You can use the <code>SettingsUtils</code> using Blueprints by adding one of the following nodes:
 <ul>
 	<li>Ultimate Starter Kit > Settings > Initialize</li>
+	<li>Ultimate Starter Kit > Settings > Apply Recommended Graphics Settings</li>
 	<li>Ultimate Starter Kit > Settings > Load Settings</li>
 	<li>Ultimate Starter Kit > Settings > Save Settings</li>
 	<li>Ultimate Starter Kit > Settings > Apply Settings In World</li>
@@ -114,6 +121,7 @@ The <code>SettingsUtils</code> can now be used in any of your C++ files:
 void ATestActor::Test()
 {
 	USettingsUtils::Initialize(GameInstance);
+	USettingsUtils::ApplyRecommendedGraphicsSettings(GameInstance);
 	USettingsData* LoadSettingsValue = USettingsUtils::LoadSettings();
 	USettingsUtils::SaveSettings(Settings);
 	USettingsUtils::ApplySettingsInWorld(World, Settings);
